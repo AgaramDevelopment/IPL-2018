@@ -7,19 +7,62 @@
 //
 
 #import "AppDelegate.h"
+#import "Header.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+@synthesize window,viewController;
 
+@synthesize storyBoard;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
+
+    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];;
+    RearViewController *rearViewController = [[RearViewController alloc] init];
+    
+
+    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
+    UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+    
+    viewController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+    [frontNavigationController setNavigationBarHidden:YES];
+    [rearNavigationController setNavigationBarHidden:YES];
+    [viewController setFrontViewPosition:FrontViewPositionLeftSide animated:YES];
+    
+    window.rootViewController = viewController;
+    
+    [window setBackgroundColor:[UIColor yellowColor]];
+    [window makeKeyAndVisible];
+
     return YES;
 }
 
+#pragma mark - SWRevealViewDelegate
+
+- (id <UIViewControllerAnimatedTransitioning>)revealController:(SWRevealViewController *)revealController animationControllerForOperation:(SWRevealControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+{
+//    if ( operation != SWRevealControllerOperationReplaceRightController )
+//        return nil;
+//
+//    if ( [toVC isKindOfClass:[RightViewController class]] )
+//    {
+//        if ( [(RightViewController*)toVC wantsCustomAnimation] )
+//        {
+//            id<UIViewControllerAnimatedTransitioning> animationController = [[CustomAnimationController alloc] init];
+//            return animationController;
+//        }
+//    }
+    
+    return nil;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
