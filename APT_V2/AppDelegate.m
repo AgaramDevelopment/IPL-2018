@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Header.h"
+#import "MCOverViewVC.h"
 
 @interface AppDelegate ()
 
@@ -27,7 +28,8 @@
 
     UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];;
     RearViewController *rearViewController = [[RearViewController alloc] init];
-    
+   // MCOverViewVC *frontViewController = [[MCOverViewVC alloc] init];
+
 
     UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
     UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
