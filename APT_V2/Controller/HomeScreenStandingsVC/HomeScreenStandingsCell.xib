@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="standingsCell" rowHeight="40" id="mUV-bk-WWe" customClass="HomeScreenStandingsCell">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mUV-bk-WWe" id="H8q-GH-gEK">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1D-Wc-ArL">
+                        <rect key="frame" x="0.0" y="7" width="51" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwt-V4-TBV">
+                        <rect key="frame" x="51" y="7" width="50.5" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Played" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlC-wL-r2g">
+                        <rect key="frame" x="101.5" y="7" width="51" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Won" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrW-uE-Wwp">
+                        <rect key="frame" x="152.5" y="7" width="51" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CH-5j-eBT">
+                        <rect key="frame" x="203.5" y="7" width="51" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NRR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJR-J3-tKN">
+                        <rect key="frame" x="254.5" y="7" width="50.5" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCw-4Y-sQ1">
+                        <rect key="frame" x="305" y="7" width="51" height="25"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DlC-wL-r2g" firstAttribute="leading" secondItem="nwt-V4-TBV" secondAttribute="trailing" id="1Ea-os-X7z"/>
+                    <constraint firstAttribute="bottom" secondItem="o1D-Wc-ArL" secondAttribute="bottom" constant="7.5" id="2iI-Y0-dMo"/>
+                    <constraint firstAttribute="bottom" secondItem="LrW-uE-Wwp" secondAttribute="bottom" constant="7.5" id="5bI-CM-x2l"/>
+                    <constraint firstAttribute="bottom" secondItem="nwt-V4-TBV" secondAttribute="bottom" constant="7.5" id="7W5-8I-8OO"/>
+                    <constraint firstItem="o1D-Wc-ArL" firstAttribute="width" secondItem="nwt-V4-TBV" secondAttribute="width" id="9B4-Qn-cFL"/>
+                    <constraint firstItem="o1D-Wc-ArL" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="ABc-dF-Vqd"/>
+                    <constraint firstItem="LrW-uE-Wwp" firstAttribute="leading" secondItem="DlC-wL-r2g" secondAttribute="trailing" id="B4Q-am-MpX"/>
+                    <constraint firstAttribute="bottom" secondItem="DlC-wL-r2g" secondAttribute="bottom" constant="7.5" id="GJM-KL-nqV"/>
+                    <constraint firstAttribute="bottom" secondItem="EJR-J3-tKN" secondAttribute="bottom" constant="7.5" id="GLG-yu-2oQ"/>
+                    <constraint firstItem="DlC-wL-r2g" firstAttribute="width" secondItem="LrW-uE-Wwp" secondAttribute="width" id="IUP-RQ-72v"/>
+                    <constraint firstAttribute="bottom" secondItem="7CH-5j-eBT" secondAttribute="bottom" constant="7.5" id="OKv-Rj-rlW"/>
+                    <constraint firstItem="nwt-V4-TBV" firstAttribute="width" secondItem="DlC-wL-r2g" secondAttribute="width" id="PZZ-ed-H5A"/>
+                    <constraint firstItem="7CH-5j-eBT" firstAttribute="width" secondItem="EJR-J3-tKN" secondAttribute="width" id="XNm-OA-haJ"/>
+                    <constraint firstItem="EJR-J3-tKN" firstAttribute="width" secondItem="zCw-4Y-sQ1" secondAttribute="width" id="XeH-EZ-Fkk"/>
+                    <constraint firstItem="DlC-wL-r2g" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="aqz-AP-K8g"/>
+                    <constraint firstItem="EJR-J3-tKN" firstAttribute="leading" secondItem="7CH-5j-eBT" secondAttribute="trailing" id="ay1-ul-n2J"/>
+                    <constraint firstAttribute="trailing" secondItem="zCw-4Y-sQ1" secondAttribute="trailing" id="cnO-f5-wVL"/>
+                    <constraint firstAttribute="bottom" secondItem="zCw-4Y-sQ1" secondAttribute="bottom" constant="7.5" id="hcC-ea-Jqo"/>
+                    <constraint firstItem="zCw-4Y-sQ1" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="mIT-1F-4MX"/>
+                    <constraint firstItem="7CH-5j-eBT" firstAttribute="leading" secondItem="LrW-uE-Wwp" secondAttribute="trailing" id="oLL-hp-oBB"/>
+                    <constraint firstItem="zCw-4Y-sQ1" firstAttribute="leading" secondItem="EJR-J3-tKN" secondAttribute="trailing" id="pEO-Ub-Ks0"/>
+                    <constraint firstItem="EJR-J3-tKN" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="pkK-vP-7hp"/>
+                    <constraint firstItem="nwt-V4-TBV" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="qeU-O4-ulk"/>
+                    <constraint firstItem="LrW-uE-Wwp" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="rOD-rS-5g8"/>
+                    <constraint firstItem="LrW-uE-Wwp" firstAttribute="width" secondItem="7CH-5j-eBT" secondAttribute="width" id="tMF-xg-NfP"/>
+                    <constraint firstItem="7CH-5j-eBT" firstAttribute="top" secondItem="H8q-GH-gEK" secondAttribute="top" constant="7" id="vwh-ls-dt8"/>
+                    <constraint firstItem="nwt-V4-TBV" firstAttribute="leading" secondItem="o1D-Wc-ArL" secondAttribute="trailing" id="wiL-gO-HiE"/>
+                    <constraint firstItem="o1D-Wc-ArL" firstAttribute="leading" secondItem="H8q-GH-gEK" secondAttribute="leading" id="z9G-th-VCg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="lostLbl" destination="7CH-5j-eBT" id="Nc9-5u-O9Y"/>
+                <outlet property="nrrLbl" destination="EJR-J3-tKN" id="SPD-wl-4qO"/>
+                <outlet property="playedLbl" destination="DlC-wL-r2g" id="J6g-VS-sFl"/>
+                <outlet property="pointsLbl" destination="zCw-4Y-sQ1" id="9Qj-Gj-eNo"/>
+                <outlet property="rankLbl" destination="o1D-Wc-ArL" id="zU9-4y-mNc"/>
+                <outlet property="teamLbl" destination="nwt-V4-TBV" id="K1o-fv-936"/>
+                <outlet property="wonLbl" destination="LrW-uE-Wwp" id="Mh4-jd-VOY"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
