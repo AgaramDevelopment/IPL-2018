@@ -38,6 +38,7 @@
 +(UIColor*)colorWithHexString:(NSString*)hex;
 
 -(void)actionLogOut;
++ (NSString *)syncId;
 
 @end
 

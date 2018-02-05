@@ -163,5 +163,10 @@ AppCommon *sharedCommon = nil;
     return color;
 }
 
++ (NSString *)syncId
+{
+    return @"Sync";
+}
+
 @end
 

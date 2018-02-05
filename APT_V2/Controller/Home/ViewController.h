@@ -10,6 +10,11 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *tblAssesments;
+@property (weak, nonatomic) IBOutlet UITextField *txtModule;
+@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
+@property (strong, nonatomic) IBOutlet UITableView *tblDropDown;
 
 @end
+
 

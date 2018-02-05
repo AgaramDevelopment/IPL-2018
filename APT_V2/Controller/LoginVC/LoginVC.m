@@ -63,7 +63,7 @@
     
     [self validation];
     
-//    objpalyer.selectPlayerimg = [[NSUserDefaults standardUserDefaults]stringForKey:@"PhotoPath"];
+    //    objpalyer.selectPlayerimg = [[NSUserDefaults standardUserDefaults]stringForKey:@"PhotoPath"];
 }
 -(void)validation
 {
@@ -86,64 +86,65 @@
     if(![COMMON isInternetReachable])
         return;
     
-        [AppCommon showLoading];
-//        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
-        NSString *URLString =  URL_FOR_RESOURCE(LoginKey);
-
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [AppCommon showLoading];
+    //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
+    NSString *URLString =  URL_FOR_RESOURCE(LoginKey);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(username)   [dic    setObject:username     forKey:@"username"];
+    if(password)   [dic    setObject:password     forKey:@"password"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
         
-        manager.requestSerializer = requestSerializer;
-        
-        
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(username)   [dic    setObject:username     forKey:@"username"];
-        if(password)   [dic    setObject:password     forKey:@"password"];
-        
-        NSLog(@"parameters : %@",dic);
-        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
+        if([[responseObject valueForKey:@"Status"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Status"] != NULL)
+        {
+            NSDictionary * objRole =[responseObject valueForKey:@"Roles"];
             
-            if([[responseObject valueForKey:@"Status"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Status"] != NULL)
-            {
-                NSDictionary * objRole =[responseObject valueForKey:@"Roles"];
-                
-                NSString * objRoleCode =[[objRole valueForKey:@"Rolecode"] objectAtIndex:0];
-                
-                NSString * objRoleName =[[objRole valueForKey:@"RoleName"] objectAtIndex:0];
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"UserCode"] forKey:@"UserCode"];
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"ClientCode"] forKey:@"ClientCode"];
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"UserName"];
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"AssociationCode"]  forKey:@"AssociationCode"];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"PhotoPath"] forKey:@"PhotoPath"];
-                [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
-                
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                ViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"frontViewController"];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-            }
-            else{
-                [AppCommon showAlertWithMessage:@"Invalid Login"];
-            }
+            NSString * objRoleCode =[[objRole valueForKey:@"Rolecode"] objectAtIndex:0];
             
-            [AppCommon hideLoading];
+            NSString * objRoleName =[[objRole valueForKey:@"RoleName"] objectAtIndex:0];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"UserCode"] forKey:@"UserCode"];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"ClientCode"] forKey:@"ClientCode"];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"failed");
-            [COMMON webServiceFailureError:error];
-            [AppCommon hideLoading];
-
-        }];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"UserName"];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"AssociationCode"]  forKey:@"AssociationCode"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"PhotoPath"] forKey:@"PhotoPath"];
+            [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            //                ViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"frontViewController"];
+            ViewController* vc = [ViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else{
+            [AppCommon showAlertWithMessage:@"Invalid Login"];
+        }
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
     
 }
 
@@ -157,7 +158,7 @@
     [self.view resignFirstResponder];
     [_passwordTxt resignFirstResponder];
     [_userTxt resignFirstResponder];
-
+    
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -174,3 +175,4 @@
     return YES;
 }
 @end
+

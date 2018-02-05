@@ -18,13 +18,28 @@
 #import "MBProgressHUD.h"
 #import "AppCommon.h"
 
+// Rear view Menu
+#import "SKSTableView.h"
+#import "SKSTableViewCell.h"
+#import "SKSTableViewCellIndicator.h"
 
 #import "SWRevealViewController.h"
 #import "CustomAnimationController.h"
-
-#import "ViewController.h"
 #import "RearViewController.h"
+
+// Login screen
+
 #import "LoginVC.h"
 
+// Home screen
+
+#import "ViewController.h"
+#import "AssesmentTableViewCell.h"
+#import "DBAConnection.h"
+#import "DBMANAGERSYNC.h"
+#import "DropDownTableViewController.h"
+
+//#import "TestAssessmentEntryVC.h"
 
 #endif /* Header_h */
+
