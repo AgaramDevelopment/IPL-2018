@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254270202822FC0088B87B /* AssessmentPopupVC.m */; };
 		CE3E741020248BF100F10917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E740F20248BF100F10917 /* AppDelegate.m */; };
 		CE3E741620248BF100F10917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741420248BF100F10917 /* Main.storyboard */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
@@ -65,6 +66,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0425426F202822FC0088B87B /* AssessmentPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessmentPopupVC.h; sourceTree = "<group>"; };
+		04254270202822FC0088B87B /* AssessmentPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessmentPopupVC.m; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740E20248BF100F10917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -151,6 +154,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0425426B20281FEB0088B87B /* AssessmentPopupVC */ = {
+			isa = PBXGroup;
+			children = (
+				0425426F202822FC0088B87B /* AssessmentPopupVC.h */,
+				04254270202822FC0088B87B /* AssessmentPopupVC.m */,
+			);
+			name = AssessmentPopupVC;
+			path = APT_V2/Controller/AssessmentPopupVC;
+			sourceTree = SOURCE_ROOT;
+		};
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +324,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0425426B20281FEB0088B87B /* AssessmentPopupVC */,
 				CEB2B9C92025992700E7D5E4 /* Rear VC */,
 				CEB2B9D12025C55500E7D5E4 /* LoginVC */,
 				CEB2B9C5202598DB00E7D5E4 /* Home */,
@@ -556,6 +570,7 @@
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
+				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 			);
