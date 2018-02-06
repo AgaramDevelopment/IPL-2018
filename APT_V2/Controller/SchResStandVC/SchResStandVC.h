@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIView *resultView;
 @property (strong, nonatomic) IBOutlet UIView *commonView;
 
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 
 

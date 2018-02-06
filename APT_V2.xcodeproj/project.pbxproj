@@ -19,6 +19,10 @@
 		042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542B32028A1110088B87B /* HomeScreenStandingsVC.m */; };
 		042542B72028A1110088B87B /* HomeScreenStandingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */; };
 		042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */; };
+		1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */; };
+		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
+		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
+		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
 		18BAE29C202836100088178A /* MCOverViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29A202836100088178A /* MCOverViewVC.m */; };
 		18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BAE29B202836100088178A /* MCOverViewVC.xib */; };
 		18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29F202874070088178A /* MCOverViewResultCVC.m */; };
@@ -119,6 +123,12 @@
 		042542B32028A1110088B87B /* HomeScreenStandingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenStandingsVC.m; sourceTree = "<group>"; };
 		042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScreenStandingsVC.xib; sourceTree = "<group>"; };
 		042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScreenStandingsCell.xib; sourceTree = "<group>"; };
+		1850ECA42029E0FF00B48BA1 /* TabHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeVC.h; sourceTree = "<group>"; };
+		1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeVC.m; sourceTree = "<group>"; };
+		1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeVC.xib; sourceTree = "<group>"; };
+		1850ECA92029E1A200B48BA1 /* TabHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeCell.h; sourceTree = "<group>"; };
+		1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeCell.m; sourceTree = "<group>"; };
+		1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeCell.xib; sourceTree = "<group>"; };
 		18BAE299202836100088178A /* MCOverViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOverViewVC.h; sourceTree = "<group>"; };
 		18BAE29A202836100088178A /* MCOverViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCOverViewVC.m; sourceTree = "<group>"; };
 		18BAE29B202836100088178A /* MCOverViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MCOverViewVC.xib; sourceTree = "<group>"; };
@@ -280,6 +290,19 @@
 				042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */,
 			);
 			path = HomeScreenStandingsVC;
+			sourceTree = "<group>";
+		};
+		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				1850ECA42029E0FF00B48BA1 /* TabHomeVC.h */,
+				1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */,
+				1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */,
+				1850ECA92029E1A200B48BA1 /* TabHomeCell.h */,
+				1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */,
+				1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */,
+			);
+			path = TabHomeVC;
 			sourceTree = "<group>";
 		};
 		18BAE2982028335E0088178A /* MatchCenter */ = {
@@ -475,6 +498,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1850ECA32029E0D700B48BA1 /* TabHomeVC */,
 				18BBECC8202975BC00BAAFAA /* SchResStandVC */,
 				042542AF2028A1110088B87B /* HomeScreenStandingsVC */,
 				0425429D20289F370088B87B /* TrainingLoadVC */,
@@ -690,6 +714,7 @@
 				CEB2B99220257BBD00E7D5E4 /* MontserratAlternates-SemiBold.otf in Resources */,
 				CEB2B98720257BBD00E7D5E4 /* MontserratAlternates-BoldItalic.otf in Resources */,
 				CEB2B99020257BBD00E7D5E4 /* MontserratAlternates-MediumItalic.otf in Resources */,
+				1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */,
 				042542AA20289FA80088B87B /* TrainingLoadVC.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
@@ -728,6 +753,7 @@
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
 				18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
+				1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */,
 				CEB2B99520257BBD00E7D5E4 /* MontserratAlternates-ThinItalic.otf in Resources */,
 				CEB2B97520257BBD00E7D5E4 /* Montserrat-BoldItalic.otf in Resources */,
 				CE3E741620248BF100F10917 /* Main.storyboard in Resources */,
@@ -814,6 +840,7 @@
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
+				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
@@ -837,6 +864,7 @@
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
 				18BAE29C202836100088178A /* MCOverViewVC.m in Sources */,
+				1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "Header.h"
 #import "InjuryVC.h"
 #import "SchResStandVC.h"
+#import "TabHomeVC.h"
 
 @interface RearViewController ()
 {
@@ -25,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"Shedule/Result/Standings",@"Logout"];
+    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"TabHomeVC",@"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -108,7 +109,7 @@
     }
     else if(indexPath.row == 4)
     {
-        SchResStandVC *msObj = [SchResStandVC new];
+        TabHomeVC *msObj = [TabHomeVC new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
         [navigationController setNavigationBarHidden:YES];
         [appDel.viewController pushFrontViewController:navigationController animated:YES];

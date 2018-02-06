@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabHomeCell"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellid" id="cS1-d4-RAY">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIA-Js-Qd0">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="33"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Schedule/Results/Standings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap6-Uv-a13">
+                        <rect key="frame" x="5" y="5" width="190" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                        </variation>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.058823529409999999" green="0.1058823529" blue="0.42352941179999998" alpha="0.91018375880000002" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="sIA-Js-Qd0" firstAttribute="leading" secondItem="cS1-d4-RAY" secondAttribute="leading" id="L87-hH-Dpu"/>
+                <constraint firstAttribute="trailing" secondItem="sIA-Js-Qd0" secondAttribute="trailing" id="rRs-Mj-9qA"/>
+                <constraint firstItem="sIA-Js-Qd0" firstAttribute="top" secondItem="cS1-d4-RAY" secondAttribute="top" id="umL-NQ-uLb"/>
+                <constraint firstAttribute="bottom" secondItem="sIA-Js-Qd0" secondAttribute="bottom" constant="2" id="uxG-eJ-4Er"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="9WJ-5L-7eH"/>
+            <size key="customSize" width="200" height="39"/>
+            <point key="canvasLocation" x="99" y="-122.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -10,6 +10,8 @@
 #import "Config.h"
 #import "AppCommon.h"
 #import "HomeScreenStandingsVC.h"
+#import "CustomNavigation.h"
+#import "SWRevealViewController.h"
 
 
 @interface SchResStandVC ()
@@ -26,13 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    //[self customnavigationmethod];
 
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
     
     StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-    StandsVC.view.frame = CGRectMake(0, self.resultView.frame.origin.y+220, self.view.bounds.size.width, self.view.bounds.size.height);
+    StandsVC.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
     [self.commonView addSubview:StandsVC.view];
     
    
@@ -42,6 +46,8 @@
 
     
 }
+
+
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -120,23 +126,25 @@
     }
 }
 
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-//    return UIEdgeInsetsMake(10, 10, 10, 10);
-//}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   
     if(collectionView==self.scheduleCollectionView)
     {
     
         ScheduleCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    
-        cell.layer.borderWidth=0.5f;
-        cell.layer.borderColor=[UIColor blackColor].CGColor;
+
+        cell.contentView.layer.cornerRadius = 2.0f;
+        cell.contentView.layer.borderWidth = 1.0f;
+        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+        cell.contentView.layer.masksToBounds = YES;
         
-        cell.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        cell.contentView.layer.shadowOffset = CGSizeMake(1, 1);
-        cell.contentView.layer.shadowOpacity = 2.0;
-        cell.contentView.layer.shadowRadius = 6.0;
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowRadius = 2.0f;
+        cell.layer.shadowOpacity = 1.0f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
     return cell;
     }
@@ -145,12 +153,17 @@
         
        ResultCell* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
-        cell.layer.borderWidth=0.5f;
-        cell.layer.borderColor=[UIColor blackColor].CGColor;
-        cell.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-        cell.contentView.layer.shadowOffset = CGSizeMake(1, 1);
-        cell.contentView.layer.shadowOpacity = 2.0;
-        cell.contentView.layer.shadowRadius = 6.0;
+        cell.contentView.layer.cornerRadius = 2.0f;
+        cell.contentView.layer.borderWidth = 1.0f;
+        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+        cell.contentView.layer.masksToBounds = YES;
+        
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowRadius = 2.0f;
+        cell.layer.shadowOpacity = 1.0f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         return cell;
       }
 
