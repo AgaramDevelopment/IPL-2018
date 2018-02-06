@@ -14,5 +14,10 @@
     NSMutableArray *activityArray;
     NSMutableArray *valueArray;
 }
+@property (strong, nonatomic) IBOutlet UIButton *sessionBtn;
+@property (strong, nonatomic) IBOutlet UIView *countview;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewWidth;
 
 @end

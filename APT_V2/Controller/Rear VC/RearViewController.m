@@ -8,6 +8,7 @@
 
 #import "RearViewController.h"
 #import "Header.h"
+#import "InjuryVC.h"
 
 @interface RearViewController ()
 {
