@@ -13,7 +13,9 @@
 @end
 
 @implementation DropDownTableViewController
-@synthesize array;
+@synthesize array,key;
+
+@synthesize protocol;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,13 +63,19 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
-    cell.textLabel.text = array[indexPath.row];
+    cell.textLabel.text = [[array objectAtIndex:indexPath.row] valueForKey:key];
     // Configure the cell...
     
     return cell;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    [protocol selectedValue:[[array objectAtIndex:indexPath.row] valueForKey:key]andKey:key];
+    [protocol selectedValue:array andKey:key andIndex:indexPath];
+    [self close:nil];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

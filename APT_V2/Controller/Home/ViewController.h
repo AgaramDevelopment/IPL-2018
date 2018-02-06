@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
 
 @interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tblAssesments;
-@property (weak, nonatomic) IBOutlet UITextField *txtModule;
-@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
+//@property (weak, nonatomic) IBOutlet LineTextField *txtModule;
+//@property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
 @property (strong, nonatomic) IBOutlet UITableView *tblDropDown;
+@property (weak, nonatomic) IBOutlet LineTextField *txtModule;
+@property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
 
 @end
 

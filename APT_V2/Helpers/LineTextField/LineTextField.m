@@ -9,6 +9,7 @@
 #import "LineTextField.h"
 
 @implementation LineTextField
+@synthesize selectedCode,button;
 
 - (id)init
 {
@@ -51,6 +52,8 @@
     [self underLine];
     [self setBorderStyle:UITextBorderStyleNone];
     self.clipsToBounds = YES;
+    button.frame = self.frame;
+    button.backgroundColor = [UIColor redColor];
 
 }
 

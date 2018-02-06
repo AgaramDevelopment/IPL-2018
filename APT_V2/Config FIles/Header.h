@@ -27,6 +27,7 @@
 #import "CustomAnimationController.h"
 #import "RearViewController.h"
 
+#import "LineTextField.h"
 // Login screen
 
 #import "LoginVC.h"
@@ -39,6 +40,8 @@
 #import "DBMANAGERSYNC.h"
 #import "DropDownTableViewController.h"
 
+
+#import "InjuryVC.h"
 //#import "TestAssessmentEntryVC.h"
 
 #endif /* Header_h */

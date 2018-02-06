@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol selectedDropDown <NSObject>
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index;
+@end
+
+
+
 @interface DropDownTableViewController : UIViewController
+
+@property (strong, nonatomic)id<selectedDropDown> protocol;
 @property (weak, nonatomic) IBOutlet UITableView *tblDropDown;
 
 @property (strong,nonatomic)NSMutableArray* array;
+@property (strong, nonatomic) NSString* key;
 @end

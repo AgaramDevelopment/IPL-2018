@@ -10,4 +10,9 @@
 
 @interface LineTextField : UITextField //<UITextFieldDelegate>
 
+
+@property (nonatomic,weak) NSString* selectedCode;
+@property (nonatomic,weak) UIButton* button;
+-(void)setup;
+
 @end
