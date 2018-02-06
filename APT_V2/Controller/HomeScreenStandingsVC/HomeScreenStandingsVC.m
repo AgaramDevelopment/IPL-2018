@@ -61,7 +61,8 @@
     static NSString *cellIdentifier = @"standingsCell";
     
     HomeScreenStandingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"HomeScreenStandingsCell" owner:self options:nil];
+    cell = arr[0];
     cell.backgroundColor = [UIColor clearColor];
 //    cell.textLabel.textColor = [UIColor blackColor];
     

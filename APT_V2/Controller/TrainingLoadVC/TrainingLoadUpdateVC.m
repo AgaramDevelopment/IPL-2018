@@ -8,6 +8,7 @@
 
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingLoadUpdateCell.h"
+#import "Config.h"
 
 @interface TrainingLoadUpdateVC ()
 
@@ -18,9 +19,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    
+    
+
+    
     sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
     valueArray = [[NSMutableArray alloc] initWithObjects:@"245", @"124", @"342", nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (IS_IPAD) {
+        self.countViewWidth.constant = 100;
+        self.countViewHeight.constant = 100;
+    } else {
+        self.countViewWidth.constant = 70;
+        self.countViewHeight.constant = 70;
+    }
+    self.countview.layer.cornerRadius = self.countViewWidth.constant/2;
+    self.countview.layer.borderWidth = 1;
+    self.countview.layer.borderColor =[UIColor whiteColor].CGColor;
+    self.countview.clipsToBounds = true;
+
 }
 
 - (void)didReceiveMemoryWarning {
