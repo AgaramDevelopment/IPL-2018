@@ -23,6 +23,12 @@
 		18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BAE29B202836100088178A /* MCOverViewVC.xib */; };
 		18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29F202874070088178A /* MCOverViewResultCVC.m */; };
 		18BAE2A2202874070088178A /* MCOverViewResultCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BAE2A0202874070088178A /* MCOverViewResultCVC.xib */; };
+		18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBECCA2029760A00BAAFAA /* SchResStandVC.m */; };
+		18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECCB2029760A00BAAFAA /* SchResStandVC.xib */; };
+		18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBECCF20297D8900BAAFAA /* ScheduleCell.m */; };
+		18BBECD220297D8900BAAFAA /* ScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD020297D8900BAAFAA /* ScheduleCell.xib */; };
+		18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBECD420297DB100BAAFAA /* ResultCell.m */; };
+		18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD520297DB100BAAFAA /* ResultCell.xib */; };
 		CE3E741020248BF100F10917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E740F20248BF100F10917 /* AppDelegate.m */; };
 		CE3E741620248BF100F10917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741420248BF100F10917 /* Main.storyboard */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
@@ -119,6 +125,15 @@
 		18BAE29E202874070088178A /* MCOverViewResultCVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOverViewResultCVC.h; sourceTree = "<group>"; };
 		18BAE29F202874070088178A /* MCOverViewResultCVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCOverViewResultCVC.m; sourceTree = "<group>"; };
 		18BAE2A0202874070088178A /* MCOverViewResultCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MCOverViewResultCVC.xib; sourceTree = "<group>"; };
+		18BBECC92029760A00BAAFAA /* SchResStandVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SchResStandVC.h; sourceTree = "<group>"; };
+		18BBECCA2029760A00BAAFAA /* SchResStandVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchResStandVC.m; sourceTree = "<group>"; };
+		18BBECCB2029760A00BAAFAA /* SchResStandVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SchResStandVC.xib; sourceTree = "<group>"; };
+		18BBECCE20297D8900BAAFAA /* ScheduleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleCell.h; sourceTree = "<group>"; };
+		18BBECCF20297D8900BAAFAA /* ScheduleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleCell.m; sourceTree = "<group>"; };
+		18BBECD020297D8900BAAFAA /* ScheduleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCell.xib; sourceTree = "<group>"; };
+		18BBECD320297DB100BAAFAA /* ResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultCell.h; sourceTree = "<group>"; };
+		18BBECD420297DB100BAAFAA /* ResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultCell.m; sourceTree = "<group>"; };
+		18BBECD520297DB100BAAFAA /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740E20248BF100F10917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -278,6 +293,22 @@
 				18BAE2A0202874070088178A /* MCOverViewResultCVC.xib */,
 			);
 			path = MatchCenter;
+			sourceTree = "<group>";
+		};
+		18BBECC8202975BC00BAAFAA /* SchResStandVC */ = {
+			isa = PBXGroup;
+			children = (
+				18BBECC92029760A00BAAFAA /* SchResStandVC.h */,
+				18BBECCA2029760A00BAAFAA /* SchResStandVC.m */,
+				18BBECCB2029760A00BAAFAA /* SchResStandVC.xib */,
+				18BBECCE20297D8900BAAFAA /* ScheduleCell.h */,
+				18BBECCF20297D8900BAAFAA /* ScheduleCell.m */,
+				18BBECD020297D8900BAAFAA /* ScheduleCell.xib */,
+				18BBECD320297DB100BAAFAA /* ResultCell.h */,
+				18BBECD420297DB100BAAFAA /* ResultCell.m */,
+				18BBECD520297DB100BAAFAA /* ResultCell.xib */,
+			);
+			path = SchResStandVC;
 			sourceTree = "<group>";
 		};
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
@@ -444,6 +475,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18BBECC8202975BC00BAAFAA /* SchResStandVC */,
 				042542AF2028A1110088B87B /* HomeScreenStandingsVC */,
 				0425429D20289F370088B87B /* TrainingLoadVC */,
 				CEBD2A8E20289C96000AFD1B /* InjuryVC */,
@@ -663,6 +695,7 @@
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
+				18BBECD220297D8900BAAFAA /* ScheduleCell.xib in Resources */,
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
 				CEB2B98220257BBD00E7D5E4 /* Montserrat-Thin.otf in Resources */,
 				18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */,
@@ -687,11 +720,13 @@
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
 				CEB2B99420257BBD00E7D5E4 /* MontserratAlternates-Thin.otf in Resources */,
 				CE3E741820248BF100F10917 /* Assets.xcassets in Resources */,
+				18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				CEBD2A89202899DD000AFD1B /* AssesmentTableViewCell.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
+				18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
 				CEB2B99520257BBD00E7D5E4 /* MontserratAlternates-ThinItalic.otf in Resources */,
 				CEB2B97520257BBD00E7D5E4 /* Montserrat-BoldItalic.otf in Resources */,
@@ -779,6 +814,7 @@
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
+				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
@@ -790,8 +826,10 @@
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
 				CEBD2A88202899DD000AFD1B /* AssesmentTableViewCell.m in Sources */,
 				042542A720289F370088B87B /* TrainingLoadUpdateVC.m in Sources */,
+				18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
+				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
 				042542A520289F370088B87B /* TrainingLoadUpdateCell.m in Sources */,
 				042542A820289F370088B87B /* TrainingLoadVC.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,

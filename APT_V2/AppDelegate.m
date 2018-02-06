@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Header.h"
+#import "HomeScreenStandingsVC.h"
 
 @interface AppDelegate ()
 {
@@ -33,6 +34,7 @@
     
     //    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];;
     UIViewController *frontViewController = (isLogin ? [ViewController new] : [LoginVC new]);
+    //HomeScreenStandingsVC *frontViewController = [HomeScreenStandingsVC new];
     RearViewController *rearViewController = [[RearViewController alloc] init];
     
     

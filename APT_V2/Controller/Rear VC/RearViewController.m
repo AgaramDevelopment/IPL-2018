@@ -8,6 +8,8 @@
 
 #import "RearViewController.h"
 #import "Header.h"
+#import "InjuryVC.h"
+#import "SchResStandVC.h"
 
 @interface RearViewController ()
 {
@@ -23,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"Logout"];
+    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"Shedule/Result/Standings",@"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -99,6 +101,14 @@
     else if(indexPath.row == 3)
     {
         InjuryVC *msObj = [InjuryVC new];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+        [navigationController setNavigationBarHidden:YES];
+        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+        return;
+    }
+    else if(indexPath.row == 4)
+    {
+        SchResStandVC *msObj = [SchResStandVC new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
         [navigationController setNavigationBarHidden:YES];
         [appDel.viewController pushFrontViewController:navigationController animated:YES];
