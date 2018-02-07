@@ -33,6 +33,10 @@
 		18BBECD220297D8900BAAFAA /* ScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD020297D8900BAAFAA /* ScheduleCell.xib */; };
 		18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBECD420297DB100BAAFAA /* ResultCell.m */; };
 		18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD520297DB100BAAFAA /* ResultCell.xib */; };
+		18DF1850202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */; };
+		18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */; };
+		18DF1855202AF1D100AB9DCF /* AddWellnessRatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF1853202AF1D100AB9DCF /* AddWellnessRatingVC.m */; };
+		18DF1856202AF1D100AB9DCF /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DF1854202AF1D100AB9DCF /* AddWellnessRatingVC.xib */; };
 		CE3E741020248BF100F10917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E740F20248BF100F10917 /* AppDelegate.m */; };
 		CE3E741620248BF100F10917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741420248BF100F10917 /* Main.storyboard */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
@@ -144,6 +148,12 @@
 		18BBECD320297DB100BAAFAA /* ResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultCell.h; sourceTree = "<group>"; };
 		18BBECD420297DB100BAAFAA /* ResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultCell.m; sourceTree = "<group>"; };
 		18BBECD520297DB100BAAFAA /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
+		18DF184D202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WellnessTrainingBowlingVC.h; sourceTree = "<group>"; };
+		18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
+		18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
+		18DF1852202AF1D100AB9DCF /* AddWellnessRatingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddWellnessRatingVC.h; sourceTree = "<group>"; };
+		18DF1853202AF1D100AB9DCF /* AddWellnessRatingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddWellnessRatingVC.m; sourceTree = "<group>"; };
+		18DF1854202AF1D100AB9DCF /* AddWellnessRatingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWellnessRatingVC.xib; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740E20248BF100F10917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -334,6 +344,19 @@
 			path = SchResStandVC;
 			sourceTree = "<group>";
 		};
+		18DF184C202AC6A100AB9DCF /* WellnessTrainingBowlingVC */ = {
+			isa = PBXGroup;
+			children = (
+				18DF184D202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.h */,
+				18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */,
+				18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */,
+				18DF1852202AF1D100AB9DCF /* AddWellnessRatingVC.h */,
+				18DF1853202AF1D100AB9DCF /* AddWellnessRatingVC.m */,
+				18DF1854202AF1D100AB9DCF /* AddWellnessRatingVC.xib */,
+			);
+			path = WellnessTrainingBowlingVC;
+			sourceTree = "<group>";
+		};
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +521,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18DF184C202AC6A100AB9DCF /* WellnessTrainingBowlingVC */,
 				1850ECA32029E0D700B48BA1 /* TabHomeVC */,
 				18BBECC8202975BC00BAAFAA /* SchResStandVC */,
 				042542AF2028A1110088B87B /* HomeScreenStandingsVC */,
@@ -709,6 +733,7 @@
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
+				18DF1856202AF1D100AB9DCF /* AddWellnessRatingVC.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
 				CEB2B99220257BBD00E7D5E4 /* MontserratAlternates-SemiBold.otf in Resources */,
@@ -739,6 +764,7 @@
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				042542AC20289FEE0088B87B /* TrainingLoadUpdateVC.xib in Resources */,
+				18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */,
 				042542A620289F370088B87B /* TrainingLoadUpdateCell.xib in Resources */,
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
@@ -843,6 +869,7 @@
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
+				18DF1855202AF1D100AB9DCF /* AddWellnessRatingVC.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
@@ -864,6 +891,7 @@
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
 				18BAE29C202836100088178A /* MCOverViewVC.m in Sources */,
+				18DF1850202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m in Sources */,
 				1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

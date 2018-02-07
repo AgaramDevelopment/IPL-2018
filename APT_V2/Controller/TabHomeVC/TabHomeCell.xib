@@ -17,7 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabHomeCell"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellid" id="cS1-d4-RAY">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellid" id="cS1-d4-RAY" customClass="TabHomeCell">
             <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -49,6 +49,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="9WJ-5L-7eH"/>
             <size key="customSize" width="200" height="39"/>
+            <connections>
+                <outlet property="Title" destination="Ap6-Uv-a13" id="SdU-lM-iC2"/>
+            </connections>
             <point key="canvasLocation" x="99" y="-122.5"/>
         </collectionViewCell>
     </objects>
