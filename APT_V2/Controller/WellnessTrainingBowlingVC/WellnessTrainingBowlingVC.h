@@ -10,4 +10,8 @@
 
 @interface WellnessTrainingBowlingVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *topView;
+@property (strong, nonatomic) IBOutlet UIView *commonView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+
 @end

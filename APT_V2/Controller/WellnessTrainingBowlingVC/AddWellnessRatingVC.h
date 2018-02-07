@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RGSColorSlider.h"
 @interface AddWellnessRatingVC : UIViewController
+
+@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider;
+- (IBAction)sliderDidChange:(RGSColorSlider *)sender;
 
 @end

@@ -7,8 +7,13 @@
 //
 
 #import "WellnessTrainingBowlingVC.h"
+#import "AddWellnessRatingVC.h"
 
 @interface WellnessTrainingBowlingVC ()
+{
+    AddWellnessRatingVC * objWell;
+}
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topviewHeight;
 
 @end
 
@@ -18,20 +23,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)AddBtnAction:(id)sender {
+    
+    objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
+    objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
+    [self.topView addSubview:objWell.view];
+    
+    self.topviewHeight.constant = 578;
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

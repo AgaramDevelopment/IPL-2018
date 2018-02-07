@@ -5,6 +5,7 @@ target 'APT_V2' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
 
+    pod 'RGSColorSlider'
     pod 'AFNetworking', '~> 2.5.4'
     pod 'SDWebImage', '~> 4.0'
     pod 'MBProgressHUD', '~> 1.1.0'
