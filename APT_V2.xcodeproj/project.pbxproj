@@ -9,16 +9,22 @@
 /* Begin PBXBuildFile section */
 		04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254270202822FC0088B87B /* AssessmentPopupVC.m */; };
 		0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425429B20289EE70088B87B /* AssessmentPopupVC.xib */; };
-		042542A520289F370088B87B /* TrainingLoadUpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425429F20289F370088B87B /* TrainingLoadUpdateCell.m */; };
-		042542A620289F370088B87B /* TrainingLoadUpdateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542A020289F370088B87B /* TrainingLoadUpdateCell.xib */; };
-		042542A720289F370088B87B /* TrainingLoadUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542A220289F370088B87B /* TrainingLoadUpdateVC.m */; };
-		042542A820289F370088B87B /* TrainingLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542A420289F370088B87B /* TrainingLoadVC.m */; };
-		042542AA20289FA80088B87B /* TrainingLoadVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542A920289FA80088B87B /* TrainingLoadVC.xib */; };
-		042542AC20289FEE0088B87B /* TrainingLoadUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542AB20289FEE0088B87B /* TrainingLoadUpdateVC.xib */; };
 		042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542B12028A1110088B87B /* HomeScreenStandingsCell.m */; };
 		042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542B32028A1110088B87B /* HomeScreenStandingsVC.m */; };
 		042542B72028A1110088B87B /* HomeScreenStandingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */; };
 		042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */; };
+		043C2F17202AE41700EB3F8C /* TrainingLoadUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F0B202AE41600EB3F8C /* TrainingLoadUpdateVC.xib */; };
+		043C2F18202AE41700EB3F8C /* TrainingLoadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F0C202AE41600EB3F8C /* TrainingLoadVC.m */; };
+		043C2F19202AE41700EB3F8C /* TrainingLoadVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F0D202AE41600EB3F8C /* TrainingLoadVC.xib */; };
+		043C2F1A202AE41700EB3F8C /* TrainingLoadUpdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F0F202AE41600EB3F8C /* TrainingLoadUpdateCell.m */; };
+		043C2F1B202AE41700EB3F8C /* TrainingLoadUpdateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F10202AE41600EB3F8C /* TrainingLoadUpdateCell.xib */; };
+		043C2F1C202AE41700EB3F8C /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F13202AE41700EB3F8C /* PieChartView.m */; };
+		043C2F1D202AE41700EB3F8C /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F15202AE41700EB3F8C /* XYPieChart.m */; };
+		043C2F1E202AE41700EB3F8C /* TrainingLoadUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F16202AE41700EB3F8C /* TrainingLoadUpdateVC.m */; };
+		043C2F23202AF0F900EB3F8C /* MyStatsBattingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F21202AF0F900EB3F8C /* MyStatsBattingVC.m */; };
+		043C2F24202AF0F900EB3F8C /* MyStatsBattingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F22202AF0F900EB3F8C /* MyStatsBattingVC.xib */; };
+		043C2F28202AF13800EB3F8C /* MyStatsBattingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F26202AF13800EB3F8C /* MyStatsBattingCell.m */; };
+		043C2F29202AF13800EB3F8C /* MyStatsBattingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F27202AF13800EB3F8C /* MyStatsBattingCell.xib */; };
 		1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */; };
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
@@ -108,21 +114,31 @@
 		0425426F202822FC0088B87B /* AssessmentPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessmentPopupVC.h; sourceTree = "<group>"; };
 		04254270202822FC0088B87B /* AssessmentPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessmentPopupVC.m; sourceTree = "<group>"; };
 		0425429B20289EE70088B87B /* AssessmentPopupVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssessmentPopupVC.xib; sourceTree = "<group>"; };
-		0425429E20289F370088B87B /* TrainingLoadUpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadUpdateCell.h; sourceTree = "<group>"; };
-		0425429F20289F370088B87B /* TrainingLoadUpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadUpdateCell.m; sourceTree = "<group>"; };
-		042542A020289F370088B87B /* TrainingLoadUpdateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadUpdateCell.xib; sourceTree = "<group>"; };
-		042542A120289F370088B87B /* TrainingLoadUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadUpdateVC.h; sourceTree = "<group>"; };
-		042542A220289F370088B87B /* TrainingLoadUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadUpdateVC.m; sourceTree = "<group>"; };
-		042542A320289F370088B87B /* TrainingLoadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadVC.h; sourceTree = "<group>"; };
-		042542A420289F370088B87B /* TrainingLoadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadVC.m; sourceTree = "<group>"; };
-		042542A920289FA80088B87B /* TrainingLoadVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingLoadVC.xib; sourceTree = "<group>"; };
-		042542AB20289FEE0088B87B /* TrainingLoadUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingLoadUpdateVC.xib; sourceTree = "<group>"; };
 		042542B02028A1110088B87B /* HomeScreenStandingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenStandingsCell.h; sourceTree = "<group>"; };
 		042542B12028A1110088B87B /* HomeScreenStandingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenStandingsCell.m; sourceTree = "<group>"; };
 		042542B22028A1110088B87B /* HomeScreenStandingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenStandingsVC.h; sourceTree = "<group>"; };
 		042542B32028A1110088B87B /* HomeScreenStandingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenStandingsVC.m; sourceTree = "<group>"; };
 		042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScreenStandingsVC.xib; sourceTree = "<group>"; };
 		042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScreenStandingsCell.xib; sourceTree = "<group>"; };
+		043C2F09202AE41500EB3F8C /* TrainingLoadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadVC.h; sourceTree = "<group>"; };
+		043C2F0A202AE41500EB3F8C /* TrainingLoadUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadUpdateVC.h; sourceTree = "<group>"; };
+		043C2F0B202AE41600EB3F8C /* TrainingLoadUpdateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadUpdateVC.xib; sourceTree = "<group>"; };
+		043C2F0C202AE41600EB3F8C /* TrainingLoadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadVC.m; sourceTree = "<group>"; };
+		043C2F0D202AE41600EB3F8C /* TrainingLoadVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadVC.xib; sourceTree = "<group>"; };
+		043C2F0E202AE41600EB3F8C /* TrainingLoadUpdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadUpdateCell.h; sourceTree = "<group>"; };
+		043C2F0F202AE41600EB3F8C /* TrainingLoadUpdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadUpdateCell.m; sourceTree = "<group>"; };
+		043C2F10202AE41600EB3F8C /* TrainingLoadUpdateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadUpdateCell.xib; sourceTree = "<group>"; };
+		043C2F12202AE41700EB3F8C /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartView.h; sourceTree = "<group>"; };
+		043C2F13202AE41700EB3F8C /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartView.m; sourceTree = "<group>"; };
+		043C2F14202AE41700EB3F8C /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		043C2F15202AE41700EB3F8C /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		043C2F16202AE41700EB3F8C /* TrainingLoadUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadUpdateVC.m; sourceTree = "<group>"; };
+		043C2F20202AF0F900EB3F8C /* MyStatsBattingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatsBattingVC.h; sourceTree = "<group>"; };
+		043C2F21202AF0F900EB3F8C /* MyStatsBattingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatsBattingVC.m; sourceTree = "<group>"; };
+		043C2F22202AF0F900EB3F8C /* MyStatsBattingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyStatsBattingVC.xib; sourceTree = "<group>"; };
+		043C2F25202AF13800EB3F8C /* MyStatsBattingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyStatsBattingCell.h; sourceTree = "<group>"; };
+		043C2F26202AF13800EB3F8C /* MyStatsBattingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyStatsBattingCell.m; sourceTree = "<group>"; };
+		043C2F27202AF13800EB3F8C /* MyStatsBattingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStatsBattingCell.xib; sourceTree = "<group>"; };
 		1850ECA42029E0FF00B48BA1 /* TabHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeVC.h; sourceTree = "<group>"; };
 		1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeVC.m; sourceTree = "<group>"; };
 		1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeVC.xib; sourceTree = "<group>"; };
@@ -266,15 +282,16 @@
 		0425429D20289F370088B87B /* TrainingLoadVC */ = {
 			isa = PBXGroup;
 			children = (
-				0425429E20289F370088B87B /* TrainingLoadUpdateCell.h */,
-				0425429F20289F370088B87B /* TrainingLoadUpdateCell.m */,
-				042542A020289F370088B87B /* TrainingLoadUpdateCell.xib */,
-				042542A120289F370088B87B /* TrainingLoadUpdateVC.h */,
-				042542A220289F370088B87B /* TrainingLoadUpdateVC.m */,
-				042542AB20289FEE0088B87B /* TrainingLoadUpdateVC.xib */,
-				042542A320289F370088B87B /* TrainingLoadVC.h */,
-				042542A420289F370088B87B /* TrainingLoadVC.m */,
-				042542A920289FA80088B87B /* TrainingLoadVC.xib */,
+				043C2F11202AE41700EB3F8C /* PieChart */,
+				043C2F0E202AE41600EB3F8C /* TrainingLoadUpdateCell.h */,
+				043C2F0F202AE41600EB3F8C /* TrainingLoadUpdateCell.m */,
+				043C2F10202AE41600EB3F8C /* TrainingLoadUpdateCell.xib */,
+				043C2F0A202AE41500EB3F8C /* TrainingLoadUpdateVC.h */,
+				043C2F16202AE41700EB3F8C /* TrainingLoadUpdateVC.m */,
+				043C2F0B202AE41600EB3F8C /* TrainingLoadUpdateVC.xib */,
+				043C2F09202AE41500EB3F8C /* TrainingLoadVC.h */,
+				043C2F0C202AE41600EB3F8C /* TrainingLoadVC.m */,
+				043C2F0D202AE41600EB3F8C /* TrainingLoadVC.xib */,
 			);
 			path = TrainingLoadVC;
 			sourceTree = "<group>";
@@ -290,6 +307,30 @@
 				042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */,
 			);
 			path = HomeScreenStandingsVC;
+			sourceTree = "<group>";
+		};
+		043C2F11202AE41700EB3F8C /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				043C2F12202AE41700EB3F8C /* PieChartView.h */,
+				043C2F13202AE41700EB3F8C /* PieChartView.m */,
+				043C2F14202AE41700EB3F8C /* XYPieChart.h */,
+				043C2F15202AE41700EB3F8C /* XYPieChart.m */,
+			);
+			path = PieChart;
+			sourceTree = "<group>";
+		};
+		043C2F1F202AF0F900EB3F8C /* MyStatsBattingVC */ = {
+			isa = PBXGroup;
+			children = (
+				043C2F20202AF0F900EB3F8C /* MyStatsBattingVC.h */,
+				043C2F21202AF0F900EB3F8C /* MyStatsBattingVC.m */,
+				043C2F22202AF0F900EB3F8C /* MyStatsBattingVC.xib */,
+				043C2F25202AF13800EB3F8C /* MyStatsBattingCell.h */,
+				043C2F26202AF13800EB3F8C /* MyStatsBattingCell.m */,
+				043C2F27202AF13800EB3F8C /* MyStatsBattingCell.xib */,
+			);
+			path = MyStatsBattingVC;
 			sourceTree = "<group>";
 		};
 		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
@@ -502,6 +543,7 @@
 				18BBECC8202975BC00BAAFAA /* SchResStandVC */,
 				042542AF2028A1110088B87B /* HomeScreenStandingsVC */,
 				0425429D20289F370088B87B /* TrainingLoadVC */,
+				043C2F1F202AF0F900EB3F8C /* MyStatsBattingVC */,
 				CEBD2A8E20289C96000AFD1B /* InjuryVC */,
 				CEBD2A7C202899BB000AFD1B /* DBAConnection */,
 				CEBD2A79202899BB000AFD1B /* DBMANAGERSYNC */,
@@ -703,10 +745,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043C2F24202AF0F900EB3F8C /* MyStatsBattingVC.xib in Resources */,
 				042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
+				043C2F19202AE41700EB3F8C /* TrainingLoadVC.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
@@ -715,7 +759,6 @@
 				CEB2B98720257BBD00E7D5E4 /* MontserratAlternates-BoldItalic.otf in Resources */,
 				CEB2B99020257BBD00E7D5E4 /* MontserratAlternates-MediumItalic.otf in Resources */,
 				1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */,
-				042542AA20289FA80088B87B /* TrainingLoadVC.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
@@ -737,9 +780,9 @@
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
 				18BAE2A2202874070088178A /* MCOverViewResultCVC.xib in Resources */,
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
+				043C2F1B202AE41700EB3F8C /* TrainingLoadUpdateCell.xib in Resources */,
+				043C2F17202AE41700EB3F8C /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
-				042542AC20289FEE0088B87B /* TrainingLoadUpdateVC.xib in Resources */,
-				042542A620289F370088B87B /* TrainingLoadUpdateCell.xib in Resources */,
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
@@ -764,6 +807,7 @@
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
+				043C2F29202AF13800EB3F8C /* MyStatsBattingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,8 +882,11 @@
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
+				043C2F1E202AE41700EB3F8C /* TrainingLoadUpdateVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
+				043C2F28202AF13800EB3F8C /* MyStatsBattingCell.m in Sources */,
+				043C2F1C202AE41700EB3F8C /* PieChartView.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
@@ -847,18 +894,19 @@
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
+				043C2F1D202AE41700EB3F8C /* XYPieChart.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
+				043C2F1A202AE41700EB3F8C /* TrainingLoadUpdateCell.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
 				CEBD2A88202899DD000AFD1B /* AssesmentTableViewCell.m in Sources */,
-				042542A720289F370088B87B /* TrainingLoadUpdateVC.m in Sources */,
 				18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
+				043C2F18202AE41700EB3F8C /* TrainingLoadVC.m in Sources */,
+				043C2F23202AF0F900EB3F8C /* MyStatsBattingVC.m in Sources */,
 				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
-				042542A520289F370088B87B /* TrainingLoadUpdateCell.m in Sources */,
-				042542A820289F370088B87B /* TrainingLoadVC.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,

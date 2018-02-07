@@ -16,4 +16,9 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *todayViewWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *todayViewHeight;
 
+@property (strong, nonatomic) IBOutlet UIView *yesterdayMainView;
+@property (strong, nonatomic) IBOutlet UIView *todayMainView;
+
+//Donar Charts
+@property (strong, nonatomic) IBOutlet NSMutableArray *markers;
 @end

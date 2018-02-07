@@ -9,8 +9,18 @@
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingLoadUpdateCell.h"
 #import "Config.h"
+#import "XYPieChart.h"
+#import "PieChartView.h"
 
-@interface TrainingLoadUpdateVC ()
+@interface TrainingLoadUpdateVC ()<PieChartViewDelegate,PieChartViewDataSource>
+{
+    float num1;
+    float num2;
+    float num3;
+    float num4;
+    
+    PieChartView *pieChartView;
+}
 
 @end
 
@@ -19,11 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
-    
 
+    self.markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", @"63.22", @"31.43", nil];
     
     sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
@@ -45,6 +52,7 @@
     self.countview.layer.borderColor =[UIColor whiteColor].CGColor;
     self.countview.clipsToBounds = true;
 
+    [self samplePieChart];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,6 +60,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)samplePieChart
+{
+    if(IS_IPHONE_DEVICE) {
+        
+        pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
+        pieChartView.delegate = self;
+        pieChartView.datasource = self;
+        [self.todayMainView addSubview:pieChartView];
+        
+    } else {
+        
+        pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
+        pieChartView.delegate = self;
+        pieChartView.datasource = self;
+        [self.todayMainView addSubview:pieChartView];
+    }
+}
 
 #pragma mark - UITableViewDataSource
     // number of section(s), now I assume there is only 1 section
@@ -94,6 +119,110 @@
     
 }
 
+#pragma mark -    PieChartViewDelegate
+-(CGFloat)centerCircleRadius
+{
+    if(IS_IPHONE_DEVICE)
+        {
+        return 30;
+        }
+    else
+        {
+        return 30;
+        }
+    
+    
+}
+
+#pragma mark - PieChartViewDataSource
+-(int)numberOfSlicesInPieChartView:(PieChartView *)pieChartView
+{
+    NSUInteger  obj =  self.markers.count;
+    return (int)obj;
+}
+-(UIColor *)pieChartView:(PieChartView *)pieChartView colorForSliceAtIndex:(NSUInteger)index
+{
+    UIColor * color;
+    if(index==0)
+        {
+        color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
+        }
+    if(index==1)
+        {
+        color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
+        }
+    if(index==2)
+        {
+        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
+        }
+    if(index==3)
+        {
+        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        }
+    return color;
+        //return GetRandomUIColor();
+}
+
+-(double)pieChartView:(PieChartView *)pieChartView valueForSliceAtIndex:(NSUInteger)index
+{
+        //        NSUInteger  obj = [self.markers objectAtIndex:index];
+        //        NSString *s= [self.markers objectAtIndex:index];
+    float  obj = [[NSDecimalNumber decimalNumberWithString:[self.markers objectAtIndex:index]]floatValue] ;
+    
+    
+    if(obj==0)
+        {
+        return 0;
+        }
+    else
+        {
+        
+        if(index ==0)
+            {
+            return 100/obj;
+            }
+        if(index ==1)
+            {
+            return 100/obj;
+            }
+        if(index ==2)
+            {
+            return 100/obj;
+            }
+        if(index ==3)
+            {
+            return 100/obj;
+            }
+        }
+    
+    return 0;
+}
+
+-(NSString *)percentagevalue
+{
+    float a = num1;
+    float b = num2;
+    float c = num3;
+    float d = num4;
+    
+    float Total = a+b+c+d;
+    
+    float per = (Total *100/28);
+    
+    NSString * obj;
+    if(per == 0)
+        {
+        obj = @"";
+        }
+    else
+        {
+        
+        obj =[NSString stringWithFormat:@"%f",per];
+        
+        }
+    
+    return obj;
+}
 
 /*
 #pragma mark - Navigation

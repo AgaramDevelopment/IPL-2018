@@ -12,10 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainingLoadVC">
             <connections>
+                <outlet property="todayMainView" destination="jAC-2V-oAg" id="p1y-jF-BEi"/>
                 <outlet property="todayView" destination="qHo-eA-D3q" id="0hM-IS-K9v"/>
                 <outlet property="todayViewHeight" destination="b4b-QI-Unv" id="YtC-xB-4Zf"/>
                 <outlet property="todayViewWidth" destination="hwl-NB-5G1" id="WoK-FY-ztI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="khj-X1-Tok"/>
+                <outlet property="yesterdayMainView" destination="NAN-D7-6Dh" id="o5t-YL-rwM"/>
                 <outlet property="yesterdayView" destination="Dg3-sf-FYb" id="evV-Cp-E01"/>
                 <outlet property="yesterdayViewHeight" destination="b4b-QI-Unv" id="ufq-WD-KSz"/>
                 <outlet property="yesterdayViewWidth" destination="hwl-NB-5G1" id="kPC-CX-RWt"/>
@@ -87,7 +89,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             </variation>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dg3-sf-FYb">
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dg3-sf-FYb">
                                             <rect key="frame" x="57" y="55" width="70" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="760" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHV-lG-s4K">
@@ -228,7 +230,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             </variation>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHo-eA-D3q">
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHo-eA-D3q">
                                             <rect key="frame" x="58" y="55" width="70" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="145" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUx-lJ-PE7">

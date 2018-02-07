@@ -21,6 +21,7 @@
                 <outlet property="countViewWidth" destination="nu6-9L-yyc" id="hK7-jE-gT2"/>
                 <outlet property="countview" destination="mvs-bO-IDP" id="6eu-93-7QY"/>
                 <outlet property="sessionBtn" destination="Ylj-kR-ETI" id="98B-aP-mMj"/>
+                <outlet property="todayMainView" destination="Jc0-h5-YSU" id="g0s-Ob-Pep"/>
                 <outlet property="view" destination="B6k-VU-Wmf" id="ny6-3P-CJQ"/>
             </connections>
         </placeholder>
@@ -287,7 +288,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-h5-YSU">
                                     <rect key="frame" x="235" y="268" width="120" height="140"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvs-bO-IDP">
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvs-bO-IDP">
                                             <rect key="frame" x="25" y="5" width="70" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="760" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xll-8U-h9L">
