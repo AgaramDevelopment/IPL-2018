@@ -29,6 +29,7 @@
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
 		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
+		1897551D202C66010086B20C /* HorizontalXLblFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897551B202C66010086B20C /* HorizontalXLblFormatter.m */; };
 		18BAE29C202836100088178A /* MCOverViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29A202836100088178A /* MCOverViewVC.m */; };
 		18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BAE29B202836100088178A /* MCOverViewVC.xib */; };
 		18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29F202874070088178A /* MCOverViewResultCVC.m */; };
@@ -151,6 +152,8 @@
 		1850ECA92029E1A200B48BA1 /* TabHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeCell.h; sourceTree = "<group>"; };
 		1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeCell.m; sourceTree = "<group>"; };
 		1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeCell.xib; sourceTree = "<group>"; };
+		1897551B202C66010086B20C /* HorizontalXLblFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalXLblFormatter.m; sourceTree = "<group>"; };
+		1897551C202C66010086B20C /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
 		18BAE299202836100088178A /* MCOverViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOverViewVC.h; sourceTree = "<group>"; };
 		18BAE29A202836100088178A /* MCOverViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCOverViewVC.m; sourceTree = "<group>"; };
 		18BAE29B202836100088178A /* MCOverViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MCOverViewVC.xib; sourceTree = "<group>"; };
@@ -394,6 +397,8 @@
 		18DF184C202AC6A100AB9DCF /* WellnessTrainingBowlingVC */ = {
 			isa = PBXGroup;
 			children = (
+				1897551C202C66010086B20C /* HorizontalXLblFormatter.h */,
+				1897551B202C66010086B20C /* HorizontalXLblFormatter.m */,
 				18DF184D202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.h */,
 				18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */,
 				18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */,
@@ -881,6 +886,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -888,6 +894,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RGSColorSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -932,6 +939,7 @@
 				043C2F1E202AE41700EB3F8C /* TrainingLoadUpdateVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
+				1897551D202C66010086B20C /* HorizontalXLblFormatter.m in Sources */,
 				043C2F28202AF13800EB3F8C /* MyStatsBattingCell.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,

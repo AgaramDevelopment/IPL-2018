@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Charts;
+
 
 @interface WellnessTrainingBowlingVC : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UIView *commonView;
+@property (strong, nonatomic) IBOutlet UIView *trainingview;
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+
+@property (strong, nonatomic) IBOutlet UIView *bowlingLoadView;
 
 @end

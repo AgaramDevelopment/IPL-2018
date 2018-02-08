@@ -20,6 +20,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WellnessTrainingBowlingVC">
             <connections>
+                <outlet property="bowlingLoadView" destination="cAi-ZW-euW" id="c1P-N6-WYb"/>
+                <outlet property="chartView" destination="hhj-Vg-a9h" id="4Q0-WV-pBf"/>
                 <outlet property="commonView" destination="JTK-tk-VIg" id="U7l-nb-i4A"/>
                 <outlet property="topView" destination="gNd-Uf-p4R" id="3f5-fh-I8q"/>
                 <outlet property="topviewHeight" destination="73O-70-zrb" id="RqM-aV-bhi"/>
@@ -564,10 +566,83 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
-                                    <rect key="frame" x="5" y="625" width="365" height="200"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <rect key="frame" x="5" y="625" width="370" height="294"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW5-G4-aAS">
+                                            <rect key="frame" x="0.0" y="10" width="370" height="30"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UB-Gy-u3g">
+                                                    <rect key="frame" x="5" y="0.0" width="116.5" height="30"/>
+                                                    <color key="backgroundColor" red="0.78424429893493652" green="0.78435820341110229" blue="0.78421932458877563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="SV2-tC-oqZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                    <state key="normal" title="DailyView">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                    </variation>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPm-3y-M0v">
+                                                    <rect key="frame" x="126.5" y="0.0" width="117" height="30"/>
+                                                    <color key="backgroundColor" red="0.78424429893493652" green="0.78435820341110229" blue="0.78421932458877563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="SEy-WF-6vB"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                    <state key="normal" title="WeekView">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                    </variation>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-9G-Kcg">
+                                                    <rect key="frame" x="248.5" y="0.0" width="116.5" height="30"/>
+                                                    <color key="backgroundColor" red="0.78424429893493652" green="0.78435820341110229" blue="0.78421932458877563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="g3O-Nh-uJE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                    <state key="normal" title="MonthView">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                    </variation>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="jxf-9G-Kcg" firstAttribute="top" secondItem="QW5-G4-aAS" secondAttribute="top" id="5Pn-vF-Knn"/>
+                                                <constraint firstItem="jxf-9G-Kcg" firstAttribute="width" secondItem="7UB-Gy-u3g" secondAttribute="width" id="EcC-nS-nf9"/>
+                                                <constraint firstAttribute="height" constant="30" id="Ei2-sB-mh7"/>
+                                                <constraint firstItem="FPm-3y-M0v" firstAttribute="leading" secondItem="7UB-Gy-u3g" secondAttribute="trailing" constant="5" id="LbS-gD-vg2"/>
+                                                <constraint firstItem="FPm-3y-M0v" firstAttribute="top" secondItem="QW5-G4-aAS" secondAttribute="top" id="WZa-vo-oCj"/>
+                                                <constraint firstItem="jxf-9G-Kcg" firstAttribute="leading" secondItem="FPm-3y-M0v" secondAttribute="trailing" constant="5" id="XzB-Ol-Mxg"/>
+                                                <constraint firstAttribute="trailing" secondItem="jxf-9G-Kcg" secondAttribute="trailing" constant="5" id="agV-aN-qx0"/>
+                                                <constraint firstItem="7UB-Gy-u3g" firstAttribute="leading" secondItem="QW5-G4-aAS" secondAttribute="leading" constant="5" id="hra-M9-ruL"/>
+                                                <constraint firstItem="FPm-3y-M0v" firstAttribute="width" secondItem="7UB-Gy-u3g" secondAttribute="width" id="q3f-Cx-m8T"/>
+                                                <constraint firstItem="7UB-Gy-u3g" firstAttribute="top" secondItem="QW5-G4-aAS" secondAttribute="top" id="zMZ-HE-nBD"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhj-Vg-a9h" customClass="LineChartView" customModule="Charts">
+                                            <rect key="frame" x="5" y="45" width="360" height="244"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="200" id="8nd-T3-o4Q"/>
+                                        <constraint firstAttribute="height" constant="294" id="8nd-T3-o4Q"/>
+                                        <constraint firstItem="hhj-Vg-a9h" firstAttribute="top" secondItem="QW5-G4-aAS" secondAttribute="bottom" constant="5" id="BII-YR-Cyc"/>
+                                        <constraint firstAttribute="trailing" secondItem="hhj-Vg-a9h" secondAttribute="trailing" constant="5" id="M8w-zK-T2x"/>
+                                        <constraint firstItem="hhj-Vg-a9h" firstAttribute="leading" secondItem="4eC-M6-Jld" secondAttribute="leading" constant="5" id="POa-kE-UI1"/>
+                                        <constraint firstItem="QW5-G4-aAS" firstAttribute="leading" secondItem="4eC-M6-Jld" secondAttribute="leading" id="Pyc-d8-Fxb"/>
+                                        <constraint firstAttribute="trailing" secondItem="QW5-G4-aAS" secondAttribute="trailing" id="UO1-MS-ub9"/>
+                                        <constraint firstAttribute="bottom" secondItem="hhj-Vg-a9h" secondAttribute="bottom" constant="5" id="ovZ-XD-CCh"/>
+                                        <constraint firstItem="QW5-G4-aAS" firstAttribute="top" secondItem="4eC-M6-Jld" secondAttribute="top" constant="10" id="vix-rY-mKI"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -579,7 +654,7 @@
                                 <constraint firstItem="4eC-M6-Jld" firstAttribute="leading" secondItem="JTK-tk-VIg" secondAttribute="leading" constant="5" id="Irl-0d-cbn"/>
                                 <constraint firstAttribute="trailing" secondItem="7C5-g7-Bua" secondAttribute="trailing" constant="5" id="JG0-XL-PH1"/>
                                 <constraint firstItem="cAi-ZW-euW" firstAttribute="leading" secondItem="JTK-tk-VIg" secondAttribute="leading" constant="5" id="Kyn-ZU-OYu"/>
-                                <constraint firstAttribute="trailing" secondItem="4eC-M6-Jld" secondAttribute="trailing" constant="5" id="QMZ-7y-VRH"/>
+                                <constraint firstAttribute="trailing" secondItem="4eC-M6-Jld" secondAttribute="trailing" id="QMZ-7y-VRH"/>
                                 <constraint firstItem="4eC-M6-Jld" firstAttribute="top" secondItem="7C5-g7-Bua" secondAttribute="bottom" constant="5" id="Qg8-AI-q0j"/>
                                 <constraint firstAttribute="height" constant="1280" id="SrN-XT-iqd"/>
                                 <constraint firstItem="vxL-Zj-mMC" firstAttribute="top" secondItem="gNd-Uf-p4R" secondAttribute="bottom" constant="10" id="bD8-cq-00n"/>
