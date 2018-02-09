@@ -10,4 +10,7 @@
 
 @interface MyStatsBattingVC : UIViewController
 
+@property (assign, nonatomic) NSIndexPath *selectedRowIndex;
+@property (strong, nonatomic) IBOutlet UITableView *batttingTableView;
+
 @end
