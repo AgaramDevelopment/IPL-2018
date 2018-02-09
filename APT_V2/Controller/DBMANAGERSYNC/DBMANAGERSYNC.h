@@ -43,7 +43,7 @@
 
 
   
-
++ (id)sharedManager;
 -(void) copyDatabaseIfNotExist;
 
 

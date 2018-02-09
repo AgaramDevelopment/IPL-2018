@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface AssesmentTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *lblAssTitle;
 @property (weak, nonatomic) IBOutlet UIButton *btnAssTitle;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerBottomConstant;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *btnHeader1;
-@property (weak, nonatomic) IBOutlet UIView *subviews;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgCheck;
+@property (weak, nonatomic) IBOutlet UIButton *btnImgCheck;
+@property (weak, nonatomic) IBOutlet UILabel *lblTestName;
+@property (weak, nonatomic) IBOutlet UILabel *lblInference;
+@property (weak, nonatomic) IBOutlet UILabel *lblInjured;
+@property (weak, nonatomic) IBOutlet UIView *Shadowview;
 @end

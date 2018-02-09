@@ -17,6 +17,20 @@
 @property (strong, nonatomic) IBOutlet UITableView *tblDropDown;
 @property (weak, nonatomic) IBOutlet LineTextField *txtModule;
 @property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
+- (IBAction)actionOpenDate:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIViewController *popupVC;
+@property (weak, nonatomic) IBOutlet UILabel *lblAssessmentName;
+@property (weak, nonatomic) IBOutlet UICollectionView *assCollection;
+@property (weak, nonatomic) IBOutlet UILabel *lblRangeValue;
+@property (weak, nonatomic) IBOutlet UILabel *lblRangeName;
+@property (weak, nonatomic) IBOutlet UILabel *lblUnitValue;
+@property (weak, nonatomic) IBOutlet UIButton *btnIgnore;
+@property (weak, nonatomic) IBOutlet UITextField *txtRemarks;
+@property (weak, nonatomic) IBOutlet UIView *Shadowview;
+
+- (IBAction)actionAssessmentSave:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblNOData;
 
 @end
 
