@@ -14,11 +14,13 @@
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
 #import "WellnessTrainingBowlingVC.h"
+#import "VideoGalleryVC.h"
 
 @interface TabHomeVC ()
 {
     SchResStandVC *objSch;
     WellnessTrainingBowlingVC * objWell;
+    VideoGalleryVC * objVideo;
 }
 
 @end
@@ -60,7 +62,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-    return 2;
+    return 3;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
@@ -131,6 +133,10 @@
     {
         cell.Title.text = @"Wellness/TrainingLoad/BowlingLoad";
     }
+    if(indexPath.row==2)
+    {
+        cell.Title.text = @"VideoGallery";
+    }
     
         return cell;
     
@@ -154,6 +160,13 @@
         objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
         objWell.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
         [self.view addSubview:objWell.view];
+    }
+    
+    if(indexPath.row == 2)
+    {
+        objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
+        objVideo.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+        [self.view addSubview:objVideo.view];
     }
 }
 
