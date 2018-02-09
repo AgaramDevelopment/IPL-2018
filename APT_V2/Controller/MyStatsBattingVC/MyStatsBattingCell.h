@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MyStatsBattingCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *scoreView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreViewHeight;
 
 @end

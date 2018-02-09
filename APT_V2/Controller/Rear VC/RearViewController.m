@@ -11,6 +11,7 @@
 #import "InjuryVC.h"
 #import "SchResStandVC.h"
 #import "TabHomeVC.h"
+#import "MyStatsBattingVC.h"
 
 @interface RearViewController ()
 {
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"TabHomeVC",@"Logout"];
+    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"TabHomeVC", @"StatsBatting",@"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -110,6 +111,14 @@
     else if(indexPath.row == 4)
     {
         TabHomeVC *msObj = [TabHomeVC new];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+        [navigationController setNavigationBarHidden:YES];
+        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+        return;
+    }
+    else if(indexPath.row == 5)
+    {
+        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
         [navigationController setNavigationBarHidden:YES];
         [appDel.viewController pushFrontViewController:navigationController animated:YES];
