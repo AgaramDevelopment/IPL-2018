@@ -13,10 +13,12 @@
 #import "SchResStandVC.h"
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
+#import "WellnessTrainingBowlingVC.h"
 
 @interface TabHomeVC ()
 {
     SchResStandVC *objSch;
+    WellnessTrainingBowlingVC * objWell;
 }
 
 @end
@@ -58,7 +60,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-    return 4;
+    return 2;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
@@ -72,7 +74,7 @@
         else
         {
             
-                return CGSizeMake(310, 182);
+                return CGSizeMake(200, 35);
         }
     }
     else
@@ -119,7 +121,16 @@
     
         
         TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    if(indexPath.row==0)
+    {
+        cell.Title.text = @"Schedule/Results/Standings";
+    }
+    if(indexPath.row==1)
+    {
+        cell.Title.text = @"Wellness/TrainingLoad/BowlingLoad";
+    }
     
         return cell;
     
@@ -130,10 +141,20 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor blueColor];
+    cell.contentView.backgroundColor = [UIColor blueColor];
+    
+    if(indexPath.row == 0)
+    {
     objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
     objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
     [self.view addSubview:objSch.view];
+    }
+    if(indexPath.row == 1)
+    {
+        objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+        objWell.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+        [self.view addSubview:objWell.view];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
