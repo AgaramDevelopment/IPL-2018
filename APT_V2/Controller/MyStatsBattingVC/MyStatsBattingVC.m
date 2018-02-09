@@ -12,7 +12,6 @@
 
 @interface MyStatsBattingVC ()
 {
-    MyStatsBattingCell *cell;
     
     NSInteger selectedIndex;
     NSIndexPath *lastIndex;
@@ -53,12 +52,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString * cellIdentifier = (IS_IPAD)? @"battingCellIpad" : @"battingCell";
     
-    static NSString *cellIdentifier = @"battingCell";
+    //static NSString * cellIdentifier = identifier;
     
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MyStatsBattingCell * Battingcell =(MyStatsBattingCell *) [self.batttingTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    //ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanCell];
+    if (Battingcell == nil) {
+        
+        
+           [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
+        
+        
+        Battingcell = (IS_IPAD)?self.StatsBattingCell: self.StatsBattingCellIphone;
+        // self.batsmanCell = nil;
+        
+        
+    }
     
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
+    
+   // NSArray *arr= [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
     /*
     if (indexPath.row  == 0) {
         cell = arr[0];
@@ -67,95 +81,102 @@
 
     if (indexPath.row > 0 || indexPath.row <= 3) {
      */
-        if (IS_IPAD) {
-    
-            cell = arr[3];
-
-        } else {
-     
-            cell = arr[2];
-            
-//            UIView *scoreVV=(UIView*)[cell.contentView viewWithTag:10];
-//            scoreVV.hidden = YES;
-//            cell.scoreViewHeight.constant = 0;
-//            NSLog(@"scoreViewHeight:%f", cell.scoreViewHeight.constant);
-      }
+//        if (IS_IPAD) {
+//
+//            Battingcell = arr[3];
+//
+//        } else {
+//
+//            Battingcell = arr[2];
+//
+////            UIView *scoreVV=(UIView*)[cell.contentView viewWithTag:10];
+////            scoreVV.hidden = YES;
+////            cell.scoreViewHeight.constant = 0;
+////            NSLog(@"scoreViewHeight:%f", cell.scoreViewHeight.constant);
+//      }
 //    }
     
+   
+    Battingcell.backgroundColor = [UIColor clearColor];
     
-    cell.backgroundColor = [UIColor clearColor];
-    
-    return cell;
+    return Battingcell;
 }
 
 #pragma mark - UITableViewDelegate
     // when user tap the row, what action you want to perform
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellIdentifier = @"battingCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    static NSString *cellIdentifier = @"battingCell";
+//    MyStatsBattingCell * Battingcell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//
+//    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
+   // Battingcell = arr[2];
     
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
-    cell = arr[2];
+    MyStatsBattingCell * cell = [self.batttingTableView cellForRowAtIndexPath:indexPath];
+
     [self.batttingTableView beginUpdates];
-    
+
     if(indexPath.row == selectedIndex)
         {
         selectedIndex = -1;
         
+            //cell.scoreView.hidden = YES;
+
         lastIndex = NULL;
         
         } else
             {
             
+                //cell.scoreView.hidden = NO;
             if(lastIndex != nil){
                 
+               
                 [self.batttingTableView reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
+
                 
             }
             
             lastIndex = indexPath;
             selectedIndex = indexPath.row;
+                
+                
             
             }
+    //[self.batttingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+
     
-    
-    [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    //[self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
     [self.batttingTableView endUpdates];
-    
+
+    [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+   
     
     [self.batttingTableView reloadData];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableView == self.batttingTableView) {
+   // if (tableView == self.batttingTableView) {
         if(indexPath.row ==  selectedIndex)
             {
-            return 420;
+                return 420;
             }
         else
             {
-            if(IS_IPAD)
-                {
-                return 80;
-                }
-            else
-                {
-                
-                return 60;
-                }
+        
+                return (IS_IPAD)?80: 60;
+            
             }
-    } else return 0;
+    //} else return 0;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(MyStatsBattingCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if(tableView== self.batttingTableView  )
-        {
+    //if(tableView== self.batttingTableView  )
+       // {
         if (selectedIndex == indexPath.row)
             {
             
@@ -163,6 +184,7 @@
             [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
             CGFloat height = MIN(self.view.bounds.size.height, self.batttingTableView.contentSize.height);
             self.battingTableViewHeight.constant = height;
+                cell.scoreView.hidden = NO;
             [self.view layoutIfNeeded];
             
         
@@ -171,14 +193,16 @@
             {
             [cell setBackgroundColor:[UIColor clearColor]];
             [cell setAccessibilityTraits:0];
+                cell.scoreView.hidden = YES;
+
             CGFloat height = MIN(self.view.bounds.size.height, self.batttingTableView.contentSize.height);
             self.battingTableViewHeight.constant = height;
             [self.view layoutIfNeeded];
             
             
             }
-        
-        }
+    
+       // }
     
     
 }

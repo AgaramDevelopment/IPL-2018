@@ -16,7 +16,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStatsBattingVC">
+            <connections>
+                <outlet property="StatsBattingCell" destination="9hh-qu-vYJ" id="TPP-vj-g5i"/>
+                <outlet property="StatsBattingCellIphone" destination="Jru-Mg-bxO" id="T1Z-M6-bBl"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="293" id="c8U-PW-bLO" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="625" height="285"/>
@@ -800,15 +805,15 @@
             </tableViewCellContentView>
             <point key="canvasLocation" x="110" y="455"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="324" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="428"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="318" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="422"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jru-Mg-bxO" id="nxr-8u-mJO">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="427.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="421.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4M-Cl-9kx">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="427.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="421.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YX7-vp-aZg">
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="55"/>
@@ -1267,7 +1272,7 @@
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQl-4B-72z">
                                                                 <rect key="frame" x="24.5" y="0.0" width="1" height="18"/>
-                                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="NKR-Ib-HwK"/>
                                                                 </constraints>
@@ -1312,7 +1317,7 @@
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoJ-Do-Hxf">
                                                                 <rect key="frame" x="24.5" y="0.0" width="1" height="18"/>
-                                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="hAM-2i-h1N"/>
                                                                 </constraints>
@@ -1357,7 +1362,7 @@
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khu-aV-z4V">
                                                                 <rect key="frame" x="24.5" y="0.0" width="1" height="18"/>
-                                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="ilx-gt-vtn"/>
                                                                 </constraints>
@@ -1402,7 +1407,7 @@
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFL-AN-GH8">
                                                                 <rect key="frame" x="24.5" y="0.0" width="1" height="18"/>
-                                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="9WR-OT-Pix"/>
                                                                 </constraints>
@@ -1447,7 +1452,7 @@
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa7-JV-AYk">
                                                                 <rect key="frame" x="24.5" y="0.0" width="1" height="18"/>
-                                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="ODb-bJ-mUp"/>
                                                                 </constraints>
@@ -1514,7 +1519,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="YVL-EC-yMe" firstAttribute="leading" secondItem="Tb1-ug-Je5" secondAttribute="leading" id="6HI-r5-eZ9"/>
                                     <constraint firstItem="XXj-5W-I0B" firstAttribute="top" secondItem="Tb1-ug-Je5" secondAttribute="top" id="BS2-bO-6vG"/>
@@ -1546,9 +1551,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="6pU-Kk-879"/>
-            <point key="canvasLocation" x="110" y="776"/>
+            <connections>
+                <outlet property="scoreView" destination="Tb1-ug-Je5" id="KL3-5c-oOq"/>
+            </connections>
+            <point key="canvasLocation" x="109.5" y="773"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="247" id="9hh-qu-vYJ" customClass="MyStatsBattingCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellIpad" rowHeight="247" id="9hh-qu-vYJ" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="795" height="351"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9hh-qu-vYJ" id="The-7u-uIo">
@@ -1993,7 +2001,7 @@
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RfP-ee-5no">
                                                                         <rect key="frame" x="35" y="0.0" width="1" height="30"/>
-                                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="vve-Yw-vOC"/>
                                                                         </constraints>
@@ -2039,7 +2047,7 @@
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7S-pV-HZb">
                                                                         <rect key="frame" x="35" y="0.0" width="1" height="30"/>
-                                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="k6g-pj-Fuu"/>
                                                                         </constraints>
@@ -2085,7 +2093,7 @@
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1v-4g-tQa">
                                                                         <rect key="frame" x="35" y="0.0" width="1" height="30"/>
-                                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="rfE-o3-ujG"/>
                                                                         </constraints>
@@ -2131,7 +2139,7 @@
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOx-kM-rtx">
                                                                         <rect key="frame" x="35" y="0.0" width="1" height="30"/>
-                                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="pe4-4d-feT"/>
                                                                         </constraints>
@@ -2177,7 +2185,7 @@
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgv-7g-TDP">
                                                                         <rect key="frame" x="35" y="0.0" width="1" height="30"/>
-                                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="hCL-ZB-ug6"/>
                                                                         </constraints>
@@ -2296,6 +2304,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="PdR-5M-6f9"/>
+            <connections>
+                <outlet property="scoreView" destination="84q-aF-PfE" id="yVW-SJ-M6T"/>
+            </connections>
             <point key="canvasLocation" x="130" y="1275"/>
         </tableViewCell>
     </objects>
