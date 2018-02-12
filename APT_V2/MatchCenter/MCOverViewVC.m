@@ -9,6 +9,7 @@
 #import "MCOverViewVC.h"
 #import "MCOverViewResultCVC.h"
 #import "CustomNavigation.h"
+#import "SWRevealViewController.h"
 
 @interface MCOverViewVC ()
 
@@ -40,9 +41,16 @@
     objCustomNavigation.tittle_lbl.text=@"Overview";
     objCustomNavigation.btn_back.hidden = YES;
     objCustomNavigation.home_btn.hidden = YES;
-//    [objCustomNavigation.btn_back addTarget:self action:@selector(MenuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//
+    objCustomNavigation.menu_btn.hidden =NO;
+    
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void)didReceiveMemoryWarning {
