@@ -54,6 +54,11 @@
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.Titlecollview selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionBottom];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -123,19 +128,31 @@
     
         
         TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        cell.contentView.backgroundColor = [UIColor whiteColor];
+        //cell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor blueColor];
+    [cell setSelectedBackgroundView:bgColorView];
     
     if(indexPath.row==0)
     {
         cell.Title.text = @"Schedule/Results/Standings";
+        [cell setTag:indexPath.row];
+        
+        objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+        objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+        [self.view addSubview:objSch.view];
+        
     }
     if(indexPath.row==1)
     {
         cell.Title.text = @"Wellness/TrainingLoad/BowlingLoad";
+        [cell setTag:indexPath.row];
     }
     if(indexPath.row==2)
     {
         cell.Title.text = @"VideoGallery";
+        [cell setTag:indexPath.row];
     }
     
         return cell;
@@ -147,13 +164,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor blueColor];
     
     if(indexPath.row == 0)
     {
     objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
     objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
     [self.view addSubview:objSch.view];
+        
     }
     if(indexPath.row == 1)
     {
@@ -170,20 +187,6 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor blueColor];
-    
-    
-}
-
-
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor clearColor];
-}
 
 
 
