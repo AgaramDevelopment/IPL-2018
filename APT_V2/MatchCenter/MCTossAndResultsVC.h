@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PieChartView.h"
 @interface MCTossAndResultsVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *headderView;
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;

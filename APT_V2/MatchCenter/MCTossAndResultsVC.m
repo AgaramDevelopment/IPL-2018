@@ -11,14 +11,24 @@
 #import "PlayerListCollectionViewCell.h"
 #import "Config.h"
 #import "SWRevealViewController.h"
+@import Charts;
 
-@interface MCTossAndResultsVC ()
+@interface MCTossAndResultsVC () <PieChartViewDelegate,PieChartViewDataSource>
 {
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
 
-    
+    //Donar Charts
+     NSMutableArray *markers;
+    float num1;
+    float num2;
+    float num3;
+    float num4;
+
 }
+@property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
+@property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
+
 @end
 
 @implementation MCTossAndResultsVC
@@ -26,7 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
-    
+    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
+
     
     
     headingKeyArray =  @[@"Opponent",@"Toss Won",@"Elected To",@"Condition",@"Venue",@"Bat 1st Par\nScore",@"Bat 1st - Team",@"Bat 1st \nScore",@"Bat 2nd \nTeam",@"Bat 2nd \nScore",@"Won Team",@"Margin",@"Points"];
@@ -37,6 +48,17 @@
     
 
      [self.resultCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
+    
+    
+  //  [self setupPieChartView:_battingFstPie];
+    
+    self.battingFstPie.delegate = self;
+    self.battingFstPie.datasource = self;
+
+    
+    self.battingSecPie.delegate = self;
+    self.battingSecPie.datasource = self;
+
     
     
 }
@@ -219,4 +241,109 @@
 //
 //
 
+
+#pragma mark -    PieChartViewDelegate
+-(CGFloat)centerCircleRadius
+{
+    if(IS_IPHONE_DEVICE)
+    {
+        return 30;
+    }
+    else
+    {
+        return 30;
+    }
+    
+    
+}
+
+#pragma mark - PieChartViewDataSource
+-(int)numberOfSlicesInPieChartView:(PieChartView *)pieChartView
+{
+    NSUInteger  obj =  markers.count;
+    return (int)obj;
+}
+-(UIColor *)pieChartView:(PieChartView *)pieChartView colorForSliceAtIndex:(NSUInteger)index
+{
+    UIColor * color;
+    if(index==0)
+    {
+        color = [UIColor colorWithRed:(0/255.0f) green:(178/255.0f) blue:(235/255.0f) alpha:1.0f];
+    }
+    if(index==1)
+    {
+        color = [UIColor colorWithRed:(204/255.0f) green:(204/255.0f) blue:(204/255.0f) alpha:1.0f];
+    }
+    if(index==2)
+    {
+        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
+    }
+    if(index==3)
+    {
+        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    return color;
+    //return GetRandomUIColor();
+}
+
+-(double)pieChartView:(PieChartView *)pieChartView valueForSliceAtIndex:(NSUInteger)index
+{
+    //        NSUInteger  obj = [self.markers objectAtIndex:index];
+    //        NSString *s= [self.markers objectAtIndex:index];
+    float  obj = [[NSDecimalNumber decimalNumberWithString:[markers objectAtIndex:index]]floatValue] ;
+    
+    
+    if(obj==0)
+    {
+        return 0;
+    }
+    else
+    {
+        
+        if(index ==0)
+        {
+            return 100/obj;
+        }
+        if(index ==1)
+        {
+            return 100/obj;
+        }
+        if(index ==2)
+        {
+            return 100/obj;
+        }
+        if(index ==3)
+        {
+            return 100/obj;
+        }
+    }
+    
+    return 0;
+}
+
+-(NSString *)percentagevalue
+{
+    float a = num1;
+    float b = num2;
+    float c = num3;
+    float d = num4;
+    
+    float Total = a+b+c+d;
+    
+    float per = (Total *100/28);
+    
+    NSString * obj;
+    if(per == 0)
+    {
+        obj = @"";
+    }
+    else
+    {
+        
+        obj =[NSString stringWithFormat:@"%f",per];
+        
+    }
+    
+    return obj;
+}
 @end

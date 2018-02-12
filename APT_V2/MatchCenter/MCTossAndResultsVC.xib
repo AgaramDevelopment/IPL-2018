@@ -19,6 +19,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCTossAndResultsVC">
             <connections>
+                <outlet property="battingFstPie" destination="f4r-kA-R2t" id="Ors-Xj-mWx"/>
+                <outlet property="battingSecPie" destination="GLU-2i-dx0" id="mnh-2x-VyV"/>
                 <outlet property="headderView" destination="Tuh-8v-uDv" id="gl7-sI-fdi"/>
                 <outlet property="resultCollectionView" destination="xAS-Pb-QR2" id="92K-3R-31z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -63,9 +65,9 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                     </variation>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4r-kA-R2t">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4r-kA-R2t" customClass="PieChartView">
                                                                     <rect key="frame" x="20" y="25.5" width="95" height="95"/>
-                                                                    <color key="backgroundColor" red="0.98674970870000001" green="0.6440817714" blue="0.19003716109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="95" id="17b-rE-Tpr"/>
                                                                         <constraint firstAttribute="width" constant="95" id="Dbh-Lf-Xkr"/>
@@ -187,9 +189,9 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                     </variation>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLU-2i-dx0">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLU-2i-dx0" customClass="PieChartView">
                                                                     <rect key="frame" x="20" y="24" width="95" height="95"/>
-                                                                    <color key="backgroundColor" red="0.98674970870000001" green="0.6440817714" blue="0.19003716109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="95" id="b4n-fX-GY0"/>
                                                                         <constraint firstAttribute="height" constant="95" id="cY1-Wp-J3K"/>
