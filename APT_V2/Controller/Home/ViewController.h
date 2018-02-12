@@ -15,8 +15,8 @@
 //@property (weak, nonatomic) IBOutlet LineTextField *txtModule;
 //@property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
 @property (strong, nonatomic) IBOutlet UITableView *tblDropDown;
-@property (weak, nonatomic) IBOutlet LineTextField *txtModule;
-@property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
+@property (strong, nonatomic) IBOutlet LineTextField *txtModule;
+@property (strong, nonatomic) IBOutlet LineTextField *txtTitle;
 - (IBAction)actionOpenDate:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIViewController *popupVC;
@@ -31,6 +31,9 @@
 
 - (IBAction)actionAssessmentSave:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblNOData;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstant;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerY;
+- (IBAction)actionIgnore:(id)sender;
 
 @end
 

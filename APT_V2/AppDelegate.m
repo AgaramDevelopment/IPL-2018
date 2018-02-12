@@ -31,7 +31,7 @@
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
-    //    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];;
+    //    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];
     UIViewController *frontViewController = (isLogin ? [ViewController new] : [LoginVC new]);
     //HomeScreenStandingsVC *frontViewController = [HomeScreenStandingsVC new];
     RearViewController *rearViewController = [[RearViewController alloc] init];
@@ -220,7 +220,7 @@
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                             
-                            DBMANAGERSYNC * objCaptransactions = [[DBMANAGERSYNC alloc]init];
+                            DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
                             //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                             
                             NSString *SequenceNo = @"0";
@@ -295,7 +295,7 @@
                     NSMutableArray *Assessmentlist = [responseObject valueForKey:@"LstAssessmententry"];
                     for(int i = 0;i<Assessmentlist.count;i++)
                     {
-                        DBMANAGERSYNC * dbConnect = [[DBMANAGERSYNC alloc]init];
+                        DBMANAGERSYNC * dbConnect = [DBMANAGERSYNC sharedManager];
                         [dbConnect UPDATESyncStatus:[Assessmentlist objectAtIndex:i]];
                     }
                     

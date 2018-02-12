@@ -20,8 +20,11 @@
     
 }
 
+@property (nonatomic,strong) NSString * usercode;
+@property (nonatomic,strong) NSString * clientCode;
+
 @property (nonatomic,strong) NSMutableArray * objContenArray;
-@property (nonatomic,strong) NSString * SelectScreenId;;
+@property (nonatomic,strong) NSString * SelectScreenId;
 @property (nonatomic,strong) DBAConnection *objDBconnection;
 
 @property (nonatomic,strong) NSDictionary * SelectDetailDic;
@@ -67,6 +70,10 @@
     currentlySelectedHeader = -1;
     
     [assCollection registerNib:[UINib nibWithNibName:@"TestPropertyCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentCell"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidHideNotification object:nil];
 
     
 }
@@ -80,6 +87,31 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSLog(@"%f", [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height);
+    NSInteger keyboardHeight = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+//    [NSLayoutConstraint deactivateConstraints:self.centerY];
+//    [NSLayoutConstraint activateConstraints:self.centerY];
+//    [self.bottomConstant setActive:YES];
+//    [self.centerY setActive:NO];
+    if (notification == UIKeyboardDidHideNotification) {
+        self.bottomConstant.constant = self.view.frame.size.height - self.Shadowview.frame.size.height;
+    }
+    else
+    {
+        self.bottomConstant.constant = keyboardHeight+1;
+
+    }
+    
+    [self.Shadowview updateConstraintsIfNeeded];
+    
+    
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 
 -(void)customnavigationmethod
@@ -116,7 +148,10 @@
     self.objContenArray =[[NSMutableArray alloc]init];
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
     
-    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode];
+//    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode];
+    
+    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+
     
     NSLog(@"%@", TestAsseementArray);
     
@@ -132,7 +167,7 @@
         [tempDict setValue:[[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i] forKey:@"TestTypeName"];
         
         NSString *assessmentTestCode = [[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i];
-        NSString * Screenid =  [self.objDBconnection ScreenId:txtTitle.selectedCode :assessmentTestCode ];
+        NSString * Screenid =  [self.objDBconnection ScreenId:txtTitle.selectedCode :assessmentTestCode];
         NSLog(@" ScreenID %@", Screenid);
         [tempDict setValue:Screenid forKey:@"ScreenID"];
         
@@ -158,8 +193,8 @@
             
 //            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
             
-            currentlySelectedDate = [currentlySelectedDate stringByAppendingString:@" 12:00:00 AM"];
-            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
+//            currentlySelectedDate = [currentlySelectedDate stringByAppendingString:@" 12:00:00 AM"];
+//            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
             
             [AssessmentNameArray addObject:objDic];
             
@@ -321,7 +356,12 @@
         
     }
     
+//    [self.bottomConstant setActive:NO];
+//    [self.centerY setActive:YES];
     
+//    [NSLayoutConstraint deactivateConstraints:self.centerY];
+//    [NSLayoutConstraint activateConstraints:self.centerY];
+
     [self presentViewController:popupVC animated:YES completion:nil];
 }
 
@@ -535,8 +575,9 @@
         
     }
     CGFloat yposition = [sender superview].frame.origin.y + CGRectGetMaxY([sender frame]);
+    CGFloat maxHeight = (dropVC.array > 5 ? 44 * 5 : dropVC.array.count * 44);
     
-    dropVC.tblDropDown.frame = CGRectMake([sender frame].origin.x,yposition, 200, 200);
+    dropVC.tblDropDown.frame = CGRectMake([sender frame].origin.x,yposition, 200, maxHeight);
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
@@ -575,7 +616,7 @@
     
     CalendarViewController  * objTabVC = [CalendarViewController new];
 //    objTabVC.datePickerFormat = @"yyy-MM-dd"; // 2/9/2018 12:00:00 AM
-    objTabVC.datePickerFormat = @"d/MM/yyy";
+    objTabVC.datePickerFormat = @"dd/MM/yyy";
     objTabVC.datePickerDelegate = self;
     objTabVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     objTabVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -603,10 +644,31 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TestPropertyCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
+    cell.txtField.delegate = self;
     
     return cell;
 
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+- (IBAction)actionIgnore:(id)sender {
+    
+    if ([sender currentImage] == @"check" ) {
+        [sender setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+    }else
+    {
+        [sender setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+    }
+}
 @end
 

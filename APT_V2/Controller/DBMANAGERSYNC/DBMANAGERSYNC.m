@@ -3303,7 +3303,7 @@ static dispatch_once_t onceToken;
         
         //BOOL result = NO;
         
-        NSMutableDictionary *RootDic= [[NSMutableDictionary alloc]init];;
+        NSMutableDictionary *RootDic= [[NSMutableDictionary alloc]init];
         NSMutableArray *listAssessmentArray = [[NSMutableArray alloc]init];
         
         NSString *dbPath = [self getDBPath];

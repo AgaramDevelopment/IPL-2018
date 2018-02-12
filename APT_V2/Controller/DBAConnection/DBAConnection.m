@@ -117,7 +117,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     }
 }
 
--(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode{
+-(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode:(NSString *)SelectedDate{
     
     @synchronized ([AppCommon syncId])  {
         int retVal;
@@ -130,7 +130,10 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         if(retVal ==0){
     
             //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
-            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+//            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@' AND CREATEDDATE = '%@'",clientCode,moduleCode,AssessmentCode,SelectedDate];
+
             NSLog(@"%@",query);
             stmt=[query UTF8String];
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1815,11 +1818,13 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     NSString * playerCode   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                     NSString *    Remarks=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)];
                     NSString *    Inference=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)];
-                    
+                    NSString *    ignored=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 52)];
+
                     [dic setObject:AssessmentCode forKey:@"AssessmentEntryCode"];
                     [dic setObject:playerCode forKey:@"playerCode"];
                     [dic setObject:Remarks forKey:@"Remarks"];
                     [dic setObject:Inference forKey:@"Inference"];
+                    [dic setObject:ignored forKey:@"ignored"];
 
                     [assessment addObject:dic];
                 }
