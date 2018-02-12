@@ -52,6 +52,12 @@
 		18DF1856202AF1D100AB9DCF /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DF1854202AF1D100AB9DCF /* AddWellnessRatingVC.xib */; };
 		18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185A202B087200AB9DCF /* RGSPreviewView.m */; };
 		18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185B202B087200AB9DCF /* RGSColorSlider.m */; };
+		CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */; };
+		CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */; };
+		CE102818202DDBE400FA0B61 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102816202DDBE300FA0B61 /* CalendarViewController.m */; };
+		CE102819202DDBE400FA0B61 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102817202DDBE300FA0B61 /* CalendarViewController.xib */; };
+		CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */; };
+		CE10281F202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */; };
 		CE3E741020248BF100F10917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E740F20248BF100F10917 /* AppDelegate.m */; };
 		CE3E741620248BF100F10917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741420248BF100F10917 /* Main.storyboard */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
@@ -114,8 +120,6 @@
 		CEBD2A80202899BB000AFD1B /* DropDownTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A78202899BB000AFD1B /* DropDownTableViewController.xib */; };
 		CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A7B202899BB000AFD1B /* DBMANAGERSYNC.m */; };
 		CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A7E202899BB000AFD1B /* DBAConnection.m */; };
-		CEBD2A88202899DD000AFD1B /* AssesmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A86202899DD000AFD1B /* AssesmentTableViewCell.m */; };
-		CEBD2A89202899DD000AFD1B /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A87202899DD000AFD1B /* AssesmentTableViewCell.xib */; };
 		CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A8A20289B81000AFD1B /* LoginVC.xib */; };
 		CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A8C20289B8C000AFD1B /* ViewController.xib */; };
 		CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A9020289C96000AFD1B /* InjuryVC.m */; };
@@ -195,6 +199,15 @@
 		18DF185A202B087200AB9DCF /* RGSPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSPreviewView.m; sourceTree = "<group>"; };
 		18DF185B202B087200AB9DCF /* RGSColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSColorSlider.m; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE10280F202DDB7500FA0B61 /* AssesmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssesmentTableViewCell.h; sourceTree = "<group>"; };
+		CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssesmentTableViewCell.m; sourceTree = "<group>"; };
+		CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssesmentTableViewCell.xib; sourceTree = "<group>"; };
+		CE102815202DDBE300FA0B61 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		CE102816202DDBE300FA0B61 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		CE102817202DDBE300FA0B61 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		CE10281B202DDBF900FA0B61 /* TestPropertyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPropertyCollectionViewCell.h; sourceTree = "<group>"; };
+		CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPropertyCollectionViewCell.m; sourceTree = "<group>"; };
+		CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestPropertyCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740E20248BF100F10917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE3E740F20248BF100F10917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -278,9 +291,6 @@
 		CEBD2A7B202899BB000AFD1B /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		CEBD2A7D202899BB000AFD1B /* DBAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAConnection.h; sourceTree = "<group>"; };
 		CEBD2A7E202899BB000AFD1B /* DBAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAConnection.m; sourceTree = "<group>"; };
-		CEBD2A85202899DD000AFD1B /* AssesmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssesmentTableViewCell.h; sourceTree = "<group>"; };
-		CEBD2A86202899DD000AFD1B /* AssesmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssesmentTableViewCell.m; sourceTree = "<group>"; };
-		CEBD2A87202899DD000AFD1B /* AssesmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssesmentTableViewCell.xib; sourceTree = "<group>"; };
 		CEBD2A8A20289B81000AFD1B /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		CEBD2A8C20289B8C000AFD1B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		CEBD2A8F20289C96000AFD1B /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryVC.h; sourceTree = "<group>"; };
@@ -295,6 +305,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18129E7B202DAA0400A57405 /* AVKit.framework in Frameworks */,
+				18129E79202DA9FA00A57405 /* AVFoundation.framework in Frameworks */,
 				DA12ABDAE57C81EC118D504C /* Pods_APT_V2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +473,8 @@
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18129E7A202DAA0400A57405 /* AVKit.framework */,
+				18129E78202DA9FA00A57405 /* AVFoundation.framework */,
 				A341C632E084798C93714773 /* Pods_APT_V2.framework */,
 			);
 			name = Frameworks;
@@ -473,6 +487,36 @@
 				D2B0EB9CC9DCC379A1C41C4A /* Pods-APT_V2.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE10280E202DDB7500FA0B61 /* AssesmentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE10280F202DDB7500FA0B61 /* AssesmentTableViewCell.h */,
+				CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */,
+				CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */,
+			);
+			path = AssesmentTableViewCell;
+			sourceTree = "<group>";
+		};
+		CE102814202DDBE300FA0B61 /* CalendarVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE102815202DDBE300FA0B61 /* CalendarViewController.h */,
+				CE102816202DDBE300FA0B61 /* CalendarViewController.m */,
+				CE102817202DDBE300FA0B61 /* CalendarViewController.xib */,
+			);
+			path = CalendarVC;
+			sourceTree = "<group>";
+		};
+		CE10281A202DDBF900FA0B61 /* TestPropertiesCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE10281B202DDBF900FA0B61 /* TestPropertyCollectionViewCell.h */,
+				CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */,
+				CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */,
+			);
+			path = TestPropertiesCollectionCell;
 			sourceTree = "<group>";
 		};
 		CE3E740220248BF000F10917 = {
@@ -647,6 +691,7 @@
 		CEB2B9C5202598DB00E7D5E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CE10281A202DDBF900FA0B61 /* TestPropertiesCollectionCell */,
 				CEB2B9C6202598DB00E7D5E4 /* ViewController.h */,
 				CEBD2A8C20289B8C000AFD1B /* ViewController.xib */,
 				CEB2B9C7202598DB00E7D5E4 /* ViewController.m */,
@@ -746,19 +791,9 @@
 		CEBD2A83202899DD000AFD1B /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				CEBD2A84202899DD000AFD1B /* AssesmentTableViewCell */,
+				CE10280E202DDB7500FA0B61 /* AssesmentTableViewCell */,
 			);
 			path = Subviews;
-			sourceTree = "<group>";
-		};
-		CEBD2A84202899DD000AFD1B /* AssesmentTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				CEBD2A85202899DD000AFD1B /* AssesmentTableViewCell.h */,
-				CEBD2A86202899DD000AFD1B /* AssesmentTableViewCell.m */,
-				CEBD2A87202899DD000AFD1B /* AssesmentTableViewCell.xib */,
-			);
-			path = AssesmentTableViewCell;
 			sourceTree = "<group>";
 		};
 		CEBD2A8E20289C96000AFD1B /* InjuryVC */ = {
@@ -834,11 +869,14 @@
 			files = (
 				043C2F24202AF0F900EB3F8C /* MyStatsBattingVC.xib in Resources */,
 				042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */,
+				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
+				18129E69202D775600A57405 /* VideoGalleryCell.xib in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				043C2F19202AE41700EB3F8C /* TrainingLoadVC.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
+				18129E64202D756800A57405 /* VideoGalleryVC.xib in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
 				18DF1856202AF1D100AB9DCF /* AddWellnessRatingVC.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
@@ -870,6 +908,8 @@
 				18BAE2A2202874070088178A /* MCOverViewResultCVC.xib in Resources */,
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				043C2F1B202AE41700EB3F8C /* TrainingLoadUpdateCell.xib in Resources */,
+				CE102819202DDBE400FA0B61 /* CalendarViewController.xib in Resources */,
+				CE10281F202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.xib in Resources */,
 				043C2F17202AE41700EB3F8C /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */,
@@ -899,6 +939,7 @@
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
+				18129E77202DA27700A57405 /* VideoPlayerViewController.xib in Resources */,
 				043C2F29202AF13800EB3F8C /* MyStatsBattingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -974,16 +1015,22 @@
 			files = (
 				CEB2B9DC2025C85100E7D5E4 /* AppCommon.m in Sources */,
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
+				18129E84202DBBA000A57405 /* VideoPlayerUploadVC.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
+				CE102818202DDBE400FA0B61 /* CalendarViewController.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
+				18129E6D202D9A8D00A57405 /* VideoGalleryUploadCell.m in Sources */,
 				043C2F1E202AE41700EB3F8C /* TrainingLoadUpdateVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
+				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				1897551D202C66010086B20C /* HorizontalXLblFormatter.m in Sources */,
 				043C2F28202AF13800EB3F8C /* MyStatsBattingCell.m in Sources */,
+				18129E75202D9FDB00A57405 /* BallsInVideosCVC.m in Sources */,
+				18129E68202D775600A57405 /* VideoGalleryCell.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
@@ -992,14 +1039,16 @@
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
+				18129E72202D9F0100A57405 /* VideoPlayerViewController.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
+				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
+				18129E63202D756800A57405 /* VideoGalleryVC.m in Sources */,
 				043C2F1A202AE41700EB3F8C /* TrainingLoadUpdateCell.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
-				CEBD2A88202899DD000AFD1B /* AssesmentTableViewCell.m in Sources */,
 				18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,

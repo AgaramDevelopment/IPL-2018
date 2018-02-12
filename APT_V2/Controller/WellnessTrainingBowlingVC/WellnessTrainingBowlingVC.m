@@ -34,7 +34,7 @@
     
     
     objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-    objtraing.view.frame = CGRectMake(0,self.trainingview.frame.origin.y, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
     [self.trainingview addSubview:objtraing.view];
     
     //self.topviewHeight.constant = 578;
