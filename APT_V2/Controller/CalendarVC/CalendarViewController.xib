@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController">
+            <connections>
+                <outlet property="datePicker" destination="Mce-YR-W47" id="L7A-fb-9ZS"/>
+                <outlet property="view" destination="m5Y-re-Uu1" id="LnT-FI-WxD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="m5Y-re-Uu1">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQU-Lv-HVj">
+                    <rect key="frame" x="0.0" y="407" width="375" height="260"/>
+                    <subviews>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6jh-tY-X73">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <items>
+                                <barButtonItem systemItem="cancel" id="Mv3-KY-EH2">
+                                    <connections>
+                                        <action selector="ActionResignDatePicker:" destination="-1" id="D6O-hY-KHM"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="EUJ-pl-Xqt"/>
+                                <barButtonItem tag="1" systemItem="done" id="aLs-yf-8Ik">
+                                    <connections>
+                                        <action selector="ActionResignDatePicker:" destination="-1" id="gH9-SO-WBy"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mce-YR-W47">
+                            <rect key="frame" x="0.0" y="44" width="375" height="216"/>
+                            <date key="date" timeIntervalSinceReferenceDate="538554144.30520403">
+                                <!--2018-01-25 06:22:24 +0000-->
+                            </date>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                <!--1970-01-01 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="6jh-tY-X73" firstAttribute="top" secondItem="qQU-Lv-HVj" secondAttribute="top" id="2pB-pj-fUH"/>
+                        <constraint firstAttribute="trailing" secondItem="6jh-tY-X73" secondAttribute="trailing" id="7Jz-AD-5z2"/>
+                        <constraint firstItem="Mce-YR-W47" firstAttribute="top" secondItem="6jh-tY-X73" secondAttribute="bottom" id="FVw-gp-mKb"/>
+                        <constraint firstAttribute="bottom" secondItem="Mce-YR-W47" secondAttribute="bottom" id="IJG-lo-gOY"/>
+                        <constraint firstItem="6jh-tY-X73" firstAttribute="leading" secondItem="qQU-Lv-HVj" secondAttribute="leading" id="TJg-AE-Gw9"/>
+                        <constraint firstItem="Mce-YR-W47" firstAttribute="leading" secondItem="qQU-Lv-HVj" secondAttribute="leading" id="b0o-EY-qxh"/>
+                        <constraint firstAttribute="trailing" secondItem="Mce-YR-W47" secondAttribute="trailing" id="dC7-ej-qgC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="l7S-Cd-aqj" firstAttribute="bottom" secondItem="qQU-Lv-HVj" secondAttribute="bottom" id="2qo-H7-3ri"/>
+                <constraint firstAttribute="trailing" secondItem="qQU-Lv-HVj" secondAttribute="trailing" id="Bhn-kd-QMX"/>
+                <constraint firstItem="qQU-Lv-HVj" firstAttribute="leading" secondItem="m5Y-re-Uu1" secondAttribute="leading" id="fuV-5y-F5P"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="l7S-Cd-aqj"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="hyt-Dw-UA7" appends="YES" id="Up3-xh-Lap"/>
+            </connections>
+        </view>
+        <tapGestureRecognizer id="hyt-Dw-UA7">
+            <connections>
+                <action selector="dismissView:" destination="-1" id="bll-BD-1a1"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

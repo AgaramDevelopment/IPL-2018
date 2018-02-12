@@ -12,6 +12,7 @@
 #import "SchResStandVC.h"
 #import "TabHomeVC.h"
 #import "MyStatsBattingVC.h"
+#import "MatchCenterTBC.h"
 
 @interface RearViewController ()
 {
@@ -27,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"TabHomeVC", @"StatsBatting",@"Logout"];
+    arrItems = @[@"Team",@"Assments",@"Sync",@"Injury",@"TabHomeVC", @"StatsBatting",@"Match Center",@"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -120,6 +121,13 @@
     {
         MyStatsBattingVC *msObj = [MyStatsBattingVC new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+        [navigationController setNavigationBarHidden:YES];
+        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+        return;
+    }else if(indexPath.row == 6)
+    {
+        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
         [navigationController setNavigationBarHidden:YES];
         [appDel.viewController pushFrontViewController:navigationController animated:YES];
         return;

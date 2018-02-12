@@ -19,38 +19,42 @@
 static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 
 //Copy database to application document
--(void) copyDatabaseIfNotExist{
-    
-    //Using NSFileManager we can perform many file system operations.
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error;
-    
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    NSString *dbPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
-    
-    //NSString *dbPath = [self getDBPath];
-    BOOL success = [fileManager fileExistsAtPath:dbPath];
-    
-    if(!success) {//If file not exist
-        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SQLITE_FILE_NAME];
-        success = [fileManager copyItemAtPath:defaultDBPath toPath:dbPath error:&error];
-        
-        if (!success)
-        {
-            NSLog(@"Failed to create writable database file with message '%@'.", [error localizedDescription]);
-        }
-    }
-}
+//-(void) copyDatabaseIfNotExist{
+//
+//    //Using NSFileManager we can perform many file system operations.
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSError *error;
+//
+//
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
+//    NSString *dbPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//
+//    //NSString *dbPath = [self getDBPath];
+//    BOOL success = [fileManager fileExistsAtPath:dbPath];
+//
+//    if(!success) {//If file not exist
+//        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//        success = [fileManager copyItemAtPath:defaultDBPath toPath:dbPath error:&error];
+//
+//        if (!success)
+//        {
+//            NSLog(@"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+//        }
+//    }
+//}
 
 //Get database path
 -(NSString *) getDBPath
 {
-    [self copyDatabaseIfNotExist];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//    [self copyDatabaseIfNotExist];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
+//    return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+    
+    NSString* dbPath = [[DBMANAGERSYNC sharedManager] getDBPath];
+    
+    return  dbPath;
 }
 
 -(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
@@ -142,7 +146,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     
                     [dic setObject:setTestCode forKey:@"TestCode"];
                     [dic setObject:setTestName forKey:@"TestName"];
-                    
+
                     [assessment addObject:dic];
                 }
                 sqlite3_reset(statement);
@@ -174,8 +178,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             
             //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND  DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND  MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",AssessmentCode,Usercode,date,moduleCode,Clientcode];
-            
-            
             
             
             NSLog(@"%@",query);
@@ -393,9 +395,9 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                     
-                    NSString *	setTestTypeCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                    NSString *	setTestTypeName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                    
+                    NSString *	setTestTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *	setTestTypeName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+
                     
                     [dic setObject:setTestTypeCode forKey:@"TestTypeCode"];
                     [dic setObject:setTestTypeName forKey:@"TestTypeName"];
@@ -1811,10 +1813,14 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     
                     NSString * AssessmentCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,1)];
                     NSString * playerCode   =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                    NSString *    Remarks=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)];
+                    NSString *    Inference=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)];
                     
                     [dic setObject:AssessmentCode forKey:@"AssessmentEntryCode"];
                     [dic setObject:playerCode forKey:@"playerCode"];
-                    
+                    [dic setObject:Remarks forKey:@"Remarks"];
+                    [dic setObject:Inference forKey:@"Inference"];
+
                     [assessment addObject:dic];
                 }
                 sqlite3_reset(statement);

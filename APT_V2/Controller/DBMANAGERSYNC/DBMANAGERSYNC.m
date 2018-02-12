@@ -20,6 +20,31 @@
 
 static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 
+static NSString * DBPath;
+
+static DBMANAGERSYNC *sharedMyManager = nil;
+static dispatch_once_t onceToken;
+
++ (id)sharedManager {
+    
+    dispatch_once(&onceToken, ^{
+        sharedMyManager = [[self alloc] init];
+    });
+    return sharedMyManager;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        
+        [self copyDatabaseIfNotExist];
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//        NSString *documentsDir = [paths objectAtIndex:0];
+//        self.getDBPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//        NSLog(@"%@", self.getDBPath);
+    }
+    return self;
+}
+
 //Copy database to application document
 -(void) copyDatabaseIfNotExist{
     
@@ -30,14 +55,14 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
-    NSString *dbPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+    DBPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
     
     //NSString *dbPath = [self getDBPath];
-    BOOL success = [fileManager fileExistsAtPath:dbPath];
-    
+    BOOL success = [fileManager fileExistsAtPath:DBPath];
+    NSLog(@"Database path %@ ",DBPath);
     if(!success) {//If file not exist
         NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SQLITE_FILE_NAME];
-        success = [fileManager copyItemAtPath:defaultDBPath toPath:dbPath error:&error];
+        success = [fileManager copyItemAtPath:defaultDBPath toPath:DBPath error:&error];
         
         if (!success)
             NSLog(@"Failed to create writable database file with message '%@'.", [error localizedDescription]);
@@ -45,27 +70,29 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 }
 
 //Get database path
-//-(NSString *) getDBPath
-//{
+-(NSString *) getDBPath
+{
 //    [self copyDatabaseIfNotExist];
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
 //    NSString *documentsDir = [paths objectAtIndex:0];
 //    return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
-//}
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        [self copyDatabaseIfNotExist];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
-        NSString *documentsDir = [paths objectAtIndex:0];
-        self.getDBPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
-        NSLog(@"%@", self.getDBPath);
-    }
-    return self;
+    
+    return DBPath;
 }
+
+//- (id)init
+//{
+//    self = [super init];
+//    if (self)
+//    {
+//        [self copyDatabaseIfNotExist];
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//        NSString *documentsDir = [paths objectAtIndex:0];
+//        self.getDBPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//        NSLog(@"%@", self.getDBPath);
+//    }
+//    return self;
+//}
 -(void)getdetails
 {
     NSLog(@"%@", self.getDBPath);
@@ -94,7 +121,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENT WHERE ASSESSMENTCODE ='%@'",ASSESSMENTCODE];
@@ -132,7 +159,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENT(CLIENTCODE,MODULECODE,ASSESSMENTCODE,ASSESSMENTNAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,MODULECODE,ASSESEMENTCODE,ASSESSMENTNAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDATE];
@@ -167,7 +194,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -219,7 +246,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTTESTMASTER WHERE TESTCODE ='%@'",TESTCODE];
@@ -258,17 +285,21 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTTESTMASTER(CLIENTCODE,MODULECODE,ASSESSMENTCODE,TESTCODE,TESTNAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,MODULECODE,ASSESEMENTCODE,TESTCODE,TESTNAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDATE];
             
-            
+            NSLog(@"ASSESSMENTTESTMASTER sqlite3_open");
+
             const char *update_stmt = [INSERTSQL UTF8String];
             if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
             {
+                NSLog(@"ASSESSMENTTESTMASTER sqlite3_prepare");
+
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
+                    NSLog(@"ASSESSMENTTESTMASTER INSERT");
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -293,7 +324,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -352,7 +383,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTRANGEOFMOTION WHERE TESTCODE ='%@'",Testcode];
@@ -391,7 +422,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTRANGEOFMOTION(CLIENTCODE,TESTCODE,JOINT,MOVEMENT,SIDE,MINIMUMRANGE,MAXIMUMRANGE,UNIT,INPUTTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Joint,Movement,Side,Minimumrange,Maximumrange,Unit,Inputtype,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -426,7 +457,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -483,7 +514,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTSPECIAL WHERE TESTCODE ='%@'",Testcode];
@@ -525,7 +556,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTSPECIAL(CLIENTCODE,TESTCODE,REGION,TESTNAME,SIDE,RESULT,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Region,Testname,Side,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -561,7 +592,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -618,7 +649,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTMMT WHERE TESTCODE ='%@'",Testcode];
@@ -662,7 +693,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTMMT(CLIENTCODE,TESTCODE,JOINT,MOTION,MUSCLE,SIDE,RESULT,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Joint,Motion,Muscle,Side,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -699,7 +730,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -754,7 +785,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTGAINT WHERE TESTCODE ='%@'",Testcode];
@@ -799,7 +830,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTGAINT(CLIENTCODE,TESTCODE,PLANE,TESTNAME,SIDE,UNITS,RESULT,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Plane,Testname,Side,Units,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -836,7 +867,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
         
@@ -896,7 +927,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTPOSTURE WHERE TESTCODE ='%@'",Testcode];
@@ -941,7 +972,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTPOSTURE(CLIENTCODE,TESTCODE,VIEW,REGION,SIDE,UNITS,RESULT,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,View,Region,Side,Units,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -978,7 +1009,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1042,7 +1073,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTSC WHERE TESTCODE ='%@'",Testcode];
@@ -1088,7 +1119,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTSC(CLIENTCODE,TESTCODE,COMPONENT,TESTNAME,SIDE,NOOFTRIALS,UNITS,SCOREEVALUATION,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Component,Testname,Side,Nooftrials,Units,Scoreevaluation,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -1125,7 +1156,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1177,7 +1208,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TESTCOACHING WHERE TESTCODE ='%@'",Testcode];
@@ -1223,7 +1254,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TESTCOACHING(CLIENTCODE,TESTCODE,KPI,DESCRIPTION,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Testcode,Kpi,Description,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
@@ -1260,7 +1291,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1308,7 +1339,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM METADATA WHERE METASUBCODE ='%@'",Metasubcode];
@@ -1352,7 +1383,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO METADATA(METASUBCODE,METADATATYPECODE,METADATATYPEDESCRIPTION,METASUBCODEDESCRIPTION,METASUBCODEVALUE)VALUES('%@','%@','%@','%@','%@')",Metasubcode,Metadatatypecode,Metadatatypedescription,Metasubcodedescription,Metasubcodevalue];
@@ -1388,7 +1419,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1447,7 +1478,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ATHLETEINFO WHERE ATHLETECODE ='%@'",Athletecode];
@@ -1493,7 +1524,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1531,7 +1562,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1588,7 +1619,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTREGISTER WHERE ASSESSMENTREGISTERCODE ='%@'",Assessmentregistercode];
@@ -1634,7 +1665,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1671,7 +1702,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1759,7 +1790,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSOCIATIONMEMBERREGISTRATION WHERE ASSOCIATIONMEMBERID ='%@'",Associationmemberid];
@@ -1808,7 +1839,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1845,7 +1876,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1899,7 +1930,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ATHLETEINFOTEAM WHERE ATHLETECODE ='%@'",Athletecode];
@@ -1948,7 +1979,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -1985,7 +2016,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2035,7 +2066,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM SUPPORTSTAFFTEAMS WHERE CODE ='%@' AND TEAMCODE ='%@'",Athletecode,Teamcode];
@@ -2084,7 +2115,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2121,7 +2152,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2174,7 +2205,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ROLEMASTER WHERE ROLECODE ='%@'",Rolecode];
@@ -2223,7 +2254,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2260,7 +2291,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2336,7 +2367,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM USERDETAILS WHERE USERCODE ='%@'",Usercode];
@@ -2387,7 +2418,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2424,7 +2455,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2477,7 +2508,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM USERROLEMAPPING WHERE USERCODE ='%@' AND ROLECODE ='%@'",Usercode,Rolecode];
@@ -2526,7 +2557,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2563,7 +2594,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2603,7 +2634,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2643,7 +2674,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2683,7 +2714,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             NSString *databasePath = [self getDBPath];
             sqlite3_stmt *statement;
             sqlite3 *dataBase;
-            const char *dbPath = [databasePath UTF8String];
+            const char *dbPath = [DBPath UTF8String];
             if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
             {
                 
@@ -2722,7 +2753,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
         
@@ -2760,7 +2791,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             NSString *databasePath = [self getDBPath];
             sqlite3_stmt *statement;
             sqlite3 *dataBase;
-            const char *dbPath = [databasePath UTF8String];
+            const char *dbPath = [DBPath UTF8String];
             if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
             {
                 
@@ -2799,7 +2830,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2853,7 +2884,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM TEAMMASTER WHERE TEAMCODE='%@'",TEAMCODE];
@@ -2892,7 +2923,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -2928,7 +2959,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TEAMMASTER(CLIENTCODE,TEAMCODE,TEAMNAME,TEAMSHORTNAME,GAME,RECORDSTATUS,CREATEDBY,CREATEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,TEAMCODE,TEAMNAME,TEAMSHORTNAME,GAME,RECORDSTATUS,CREATEDBY,CREATEDDATE];
@@ -2979,7 +3010,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM SUPPORTSTAFF WHERE MEMBERCODE='%@'",MemberCode];
@@ -3018,7 +3049,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -3054,7 +3085,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO SUPPORTSTAFF(CLIENTCODE,MEMBERCODE,STAFFTYPE,LEVELS,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",CLIENTCODE,MEMBERCODE,STAFFTYPE,LEVEL,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
@@ -3148,7 +3179,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTTESTTYPECODE ='%@' And CLIENTCODE ='%@' And MODULECODE ='%@' And CREATEDBY ='%@' And ASSESSMENTTESTCODE ='%@' And PLAYERCODE ='%@' And VERSION ='%@' And ASSESSMENTENTRYDATE = '%@'   ",Assessmenttesttypecode,Clientcode,Modulecode,Createdby,Assessmenttestcode,Playercode,Version,Assessmententrydate];
@@ -3187,11 +3218,13 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 -(BOOL) UPDATEAssessmentEntry:(NSString*) Clientcode:(NSString*) Assessmententrycode:(NSString*) Modulecode:(NSString*) Assessmentcode:(NSString*) Assessmenttestcode:(NSString*)Assessmenttesttypecode:(NSString*)Assessmenttesttypescreencode :(NSString*) Version: (NSString*)Assessor :(NSString*) Playercode:(NSString*) Assessmententrydate:(NSNumber*) Left:(NSNumber*) Right:(NSNumber*) Central:(NSString*)Value:(NSString*)Remarks :(NSString*) Inference: (NSString*)Units  :(NSString*) Description:(NSString*) Recordstatus:(NSString*) Createdby:(NSString*) Createddate:(NSString*) Modifiedby:(NSString*)Modifieddate:(NSString*)isIgnored :(NSNumber*) Left1: (NSNumber*)Right1 :(NSNumber*) Central1:(NSNumber*) Left2:(NSNumber*) Right2:(NSNumber*) Central2:(NSNumber*) Left3:(NSNumber*)Right3:(NSNumber*)Central3 :(NSNumber*) Left4: (NSNumber*)Right4 :(NSNumber*) Central4:(NSNumber*) Left5:(NSNumber*) Right5:(NSNumber*) Central5:(NSNumber*) Left6:(NSNumber*)Right6:(NSNumber*)Central6 :(NSNumber*) Left7: (NSNumber*)Right7 :(NSNumber*) Central7:(NSNumber*) Left8:(NSNumber*) Right8:(NSNumber*) Central8:(NSNumber*) Left9:(NSNumber*)Right9:(NSNumber*)Central9 : (NSString*)issync
 {
     
+    NSLog(@"UPDATEAssessmentEntry called");
+    
     @synchronized ([AppCommon syncId])  {
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -3227,7 +3260,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             
@@ -3386,7 +3419,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
         sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
+        const char *dbPath = [DBPath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
             NSString * assementEntryCode = [entryDetailsList valueForKey:@"Assessmententrycode"];

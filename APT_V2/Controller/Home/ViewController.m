@@ -7,13 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "TestPropertyCollectionViewCell.h"
 
-
-@interface ViewController () <SKSTableViewDelegate,selectedDropDown>
+@interface ViewController () <SKSTableViewDelegate,selectedDropDown,DatePickerProtocol>
 {
     NSString * usercode;
     NSString *clientCode;
     BOOL isEdit;
+    NSInteger currentlySelectedHeader;
+    NSString* currentlySelectedDate;
+    NSArray* arrayTestName;
     
 }
 
@@ -35,15 +38,37 @@
 
 @synthesize txtTitle,txtModule;
 
+@synthesize assCollection,lblRangeName,lblRangeValue;
+
+@synthesize lblAssessmentName,lblUnitValue;
+
+@synthesize txtRemarks,popupVC,lblNOData;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
 //    tblAssesments.SKSTableViewDelegate = self;
+    
+    arrayTestName = @[
+                      @{@"TestName":@"Rom",@"TestCode":@"ASTT001"},
+                      @{@"TestName":@"Special",@"TestCode":@"ASTT002"},
+                      @{@"TestName":@"MMT",@"TestCode":@"ASTT003"},
+                      @{@"TestName":@"Gaint",@"TestCode":@"ASTT004"},
+                      @{@"TestName":@"Posture",@"TestCode":@"ASTT005"},
+                      @{@"TestName":@"Coaching",@"TestCode":@"ASTT006"},
+                      @{@"TestName":@"SC",@"TestCode":@"ASTT007"}
+                      ];
+    
     usercode = [AppCommon GetUsercode];
     clientCode = [AppCommon GetClientCode];
     
     [self customnavigationmethod];
+    currentlySelectedHeader = -1;
+    
+    [assCollection registerNib:[UINib nibWithNibName:@"TestPropertyCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentCell"];
+
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -81,6 +106,12 @@
 -(void)tableValuesMethod
 {
     
+    if (!txtTitle.hasText || !txtModule.hasText || !currentlySelectedDate.length) {
+        
+        NSLog(@"input required");
+        return;
+    }
+    
     self.objDBconnection = [[DBAConnection alloc]init];
     self.objContenArray =[[NSMutableArray alloc]init];
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
@@ -105,8 +136,6 @@
         NSLog(@" ScreenID %@", Screenid);
         [tempDict setValue:Screenid forKey:@"ScreenID"];
         
-//        [AssessmentNameArray addObject:MainDic];
-        
         NSString * Screencount =  [self.objDBconnection ScreenCount :txtTitle.selectedCode :assessmentTestCode];
         
         int count = [Screencount intValue];
@@ -127,10 +156,14 @@
             [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j] forKey:@"TestTypeName"];
             [objDic setValue:Screenid forKey:@"ScreenID"];
             
+//            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
+            
+            currentlySelectedDate = [currentlySelectedDate stringByAppendingString:@" 12:00:00 AM"];
+            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
+            
             [AssessmentNameArray addObject:objDic];
             
         }
-//        [ComArray addObject: AssessmentNameArray];
         [tempDict setObject:AssessmentNameArray forKey:@"TestValues"];
         [self.objContenArray addObject:tempDict];
 
@@ -140,17 +173,32 @@
     
 }
 
+-(void)assmentValues:(NSString *)TestTypeCode
+{
+//    NSString * TestTypeCode =[objDic valueForKey:@"TestTypeCode"];
+//    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
+
+}
+
 
 #pragma mark - UITableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
+    [lblNOData setHidden:self.objContenArray.count];
     return self.objContenArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return UITableViewAutomaticDimension;
+    if (currentlySelectedHeader == section) {
+        return 70;
+    }
+    else
+    {
+        return 45;
+    }
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -160,31 +208,152 @@
     NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"AssesmentTableViewCell" owner:self options:nil];
     if (nil == cell)
     {
-        cell = array[1];
+        cell = array[0];
     }
-
+    
+    NSString* title = [[self.objContenArray objectAtIndex:section] valueForKey:@"TestTypeName"];
+    [cell.btnAssTitle setTitle:title forState:UIControlStateNormal];
+    cell.btnAssTitle.tag = section;
+    [cell.btnAssTitle addTarget:self action:@selector(AssmentHeaderHeight:) forControlEvents:UIControlEventTouchUpInside];
+    NSLog(@"viewForHeaderInSection section %ld ",(long)section);
+    cell.translatesAutoresizingMaskIntoConstraints = NO;
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[self.objContenArray objectAtIndex:section] valueForKey:@"TestValues"] count];
+    if (currentlySelectedHeader == section) {
+        NSLog(@"numberOfRowsInSection open %ld ",(long)section);
+        return [[[self.objContenArray objectAtIndex:currentlySelectedHeader] valueForKey:@"TestValues"] count];
+    }
+    else
+    {
+        NSLog(@"numberOfRowsInSection close %ld ",(long)section);
+        return 0;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 35;
+    
+//    if (indexPath.row == 0) {
+//        height = 30;
+//    }
+//    else
+//    {
+//        height = 35;
+//    }
+
+    
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
     AssesmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"AssesmentTableViewCell" owner:self options:nil];
-    if (nil == cell)
+    NSArray* array;
+    
+    if(cell == nil)
     {
-        cell = array[(indexPath.row == 0 ? 1 : 2)];
+        array = [[NSBundle mainBundle] loadNibNamed:@"AssesmentTableViewCell" owner:self options:nil];
     }
+    
+    cell = array[3];
+    cell.lblTestName.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeName"];
+
+//    if (indexPath.row == 0) {
+//        cell = array[2];
+//    }
+//    else
+//    {
+//        cell = array[3];
+//
+//    }
+    
+    cell.translatesAutoresizingMaskIntoConstraints = NO;
 
 //    cell.textLabel.text = arrItems[indexPath.row];
     return cell;
 
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    lblAssessmentName.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeName"];
+    NSString* testCode = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"ScreenID"];
+//    NSInteger index = [arrayTestName indexOfObject:[arrayTestName valueForKeyPath:@"TestCode"]];
+//
+//    for (NSDictionary* ndict in arrayTestName) {
+//        if ([ndict valueForKey:testCode] == testCode) {
+//            NSInteger index = [arrayTestName indexOfObject:ndict];
+//        }
+//    }
+    
+    
+    self.Shadowview.layer.masksToBounds = NO;
+    self.Shadowview.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.Shadowview.layer.shadowOffset = CGSizeZero;
+    self.Shadowview.layer.shadowRadius = 10.0f;
+    self.Shadowview.layer.shadowOpacity = 1.0f;
+
+    
+    if ([testCode isEqualToString:@"ASTT001"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT002"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT003"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT004"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT005"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT006"]) {
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT007"]) {
+        
+    }
+    
+    
+    [self presentViewController:popupVC animated:YES completion:nil];
+}
+
+-(IBAction)closePopup:(id)sender
+{
+    [popupVC dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)AssmentHeaderHeight:(UIButton *)sender
+{
+    if (currentlySelectedHeader == sender.tag) {
+        currentlySelectedHeader = -1;
+    }
+    else
+    {
+        currentlySelectedHeader = sender.tag;
+
+    }
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+//        [tblAssesments reloadSections:[NSIndexSet indexSetWithIndex:currentlySelectedHeader] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+//        [tblAssesments reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.objContenArray.count-1)] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+        
+//        [tblAssesments beginUpdates];
+        [tblAssesments reloadData];
+//        [tblAssesments endUpdates];
+
+    });
+}
+
 
 //#pragma mark - UITableViewDataSource
 //
@@ -382,7 +551,6 @@
     {
         txtTitle.text = [[array objectAtIndex:Index.row] valueForKey:key];
         txtTitle.selectedCode = [[array objectAtIndex:Index.row] valueForKey:@"AssessmentCode"];
-        [self tableValuesMethod];
     }
     else
     {
@@ -391,7 +559,53 @@
         
     }
     
+    [self tableValuesMethod];
+
+}
+
+-(void)selectedDate:(NSString *)Date
+{
+    currentlySelectedDate = Date;
+    NSLog(@"selectedDate %@ ",Date);
+    [self tableValuesMethod];
+
+}
+
+- (IBAction)actionOpenDate:(id)sender {
     
+    CalendarViewController  * objTabVC = [CalendarViewController new];
+//    objTabVC.datePickerFormat = @"yyy-MM-dd"; // 2/9/2018 12:00:00 AM
+    objTabVC.datePickerFormat = @"d/MM/yyy";
+    objTabVC.datePickerDelegate = self;
+    objTabVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    objTabVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [objTabVC.view setBackgroundColor:[UIColor clearColor]];
+    [self presentViewController:objTabVC animated:YES completion:nil];
+
+}
+- (IBAction)actionAssessmentSave:(id)sender {
+    
+}
+
+
+
+#pragma mark UICOLLECTIONVIEW DELAGATES
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+    
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 3;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TestPropertyCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
+    
+    return cell;
+
 }
 
 @end
