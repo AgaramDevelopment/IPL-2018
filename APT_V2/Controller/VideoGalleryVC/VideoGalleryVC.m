@@ -18,6 +18,9 @@
 #import "VideoPlayerUploadVC.h"
 
 @interface VideoGalleryVC ()
+{
+    VideoPlayerViewController * videoPlayerVC;
+}
 
 @end
 
@@ -166,8 +169,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
 
+    if (videoPlayerVC != nil) {
+       
+    }
     
-    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+     videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
     videoPlayerVC.view.frame = CGRectMake(0,10, self.view.bounds.size.width, self.view.bounds.size.height);
     [self.view addSubview:videoPlayerVC.view];
 

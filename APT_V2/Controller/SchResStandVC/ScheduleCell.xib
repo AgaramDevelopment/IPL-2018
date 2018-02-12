@@ -34,7 +34,7 @@
                                     <constraint firstAttribute="height" constant="85" id="gPn-Yq-GQ7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-P6-NsP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-P6-NsP">
                                 <rect key="frame" x="106" y="20" width="113" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="hix-MF-qOi"/>
@@ -46,10 +46,10 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:30 to 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe4-0B-uHl">
-                                <rect key="frame" x="106" y="53" width="113" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe4-0B-uHl">
+                                <rect key="frame" x="106" y="53" width="113" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="u4w-2x-rrC"/>
+                                    <constraint firstAttribute="height" constant="30" id="u4w-2x-rrC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -58,7 +58,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue 1st Floor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAf-bi-NeA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAf-bi-NeA">
                                 <rect key="frame" x="5" y="95" width="214" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="N3M-5y-Yc9"/>
@@ -97,7 +97,10 @@
             <viewLayoutGuide key="safeArea" id="Pz8-5w-9rb"/>
             <size key="customSize" width="224" height="135"/>
             <connections>
+                <outlet property="eventNamelbl" destination="J6l-P6-NsP" id="dva-CX-mn7"/>
                 <outlet property="shadowview" destination="68R-M7-hfj" id="QPp-B3-2Zr"/>
+                <outlet property="timelbl" destination="xe4-0B-uHl" id="BNg-Sb-GfO"/>
+                <outlet property="venuelbl" destination="CAf-bi-NeA" id="7MY-F4-5BO"/>
             </connections>
             <point key="canvasLocation" x="62" y="-81.5"/>
         </collectionViewCell>

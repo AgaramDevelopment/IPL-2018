@@ -10,4 +10,12 @@
 
 @interface ResultCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIView *shadowview;
+@property (strong, nonatomic) IBOutlet UILabel *competitionNamelbl;
+@property (strong, nonatomic) IBOutlet UILabel *datelbl;
+@property (strong, nonatomic) IBOutlet UILabel *teamAlbl;
+@property (strong, nonatomic) IBOutlet UILabel *teamBlbl;
+@property (strong, nonatomic) IBOutlet UILabel *resultlbl;
+
+@property (strong, nonatomic) IBOutlet UIImageView *teamAlogo;
+@property (strong, nonatomic) IBOutlet UIImageView *teamBlogo;
 @end

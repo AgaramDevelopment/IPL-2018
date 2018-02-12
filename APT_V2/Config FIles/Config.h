@@ -233,3 +233,7 @@
 
 #define SendBroadCastMessageKey                @"SENDNEWMESSAGES_ANDROID"
 
+#define ScheduleKey                @"GETEVENTSSCHEDULE"
+
+
+
