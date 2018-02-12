@@ -17,6 +17,7 @@
     BOOL isSite;
     BOOL isType;
     BOOL isCasuse;
+    BOOL isSelectPop;
 }
 @property (nonatomic,weak) IBOutlet UITextField * compliant_Txt;
 @property (nonatomic,weak) IBOutlet UITextField * comfirmatory_Txt;
@@ -40,6 +41,9 @@
 @property (nonatomic,weak) IBOutlet UIView * type_view;
 @property (nonatomic,weak) IBOutlet UIView * casuse_view;
 
+@property (nonatomic,weak)IBOutlet UIView * filepopview;
+@property (nonatomic,weak) IBOutlet UIButton * selectFile;
+
 
 @end
 
@@ -49,6 +53,7 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     [self setBorderwidthMethod];
+    self.filepopview.hidden = YES;
 }
 
 -(void)customnavigationmethod
@@ -243,7 +248,47 @@
     isSite = NO;
 }
 
+-(IBAction)didClickDelayBtn:(id)sender
+{
+    [self setInningsBySelection:@"1"];
+}
 
+-(IBAction)didClickTramaticBtn:(id)sender
+{
+    [self setInningsBySelection:@"2"];
+}
+-(IBAction)didClicksideLeftBtn:(id)sender
+{
+    [self setInningsBySelection:@"3"];
+}
+-(IBAction)didClickSideRightBtn:(id)sender
+{
+    [self setInningsBySelection:@"4"];
+}
+-(IBAction)didClickExpectedLeftBtn:(id)sender
+{
+    [self setInningsBySelection:@"5"];
+}
+-(IBAction)didClickExpectedRightBtn:(id)sender
+{
+    [self setInningsBySelection:@"6"];
+}
+-(IBAction)didClickfilePopview:(id)sender
+{
+    if(isSelectPop == NO)
+    {
+        self.filepopview.hidden = NO;
+        isSelectPop = YES;
+        [self showAnimate];
+    }
+    else
+    {
+        self.filepopview.hidden = YES;
+        isSelectPop = NO;
+        [self removeAnimate];
+    }
+    
+}
 - (void)showAnimate
 {
     self.pop_Tbl.transform = CGAffineTransformMakeScale(1.3, 1.3);
@@ -266,6 +311,99 @@
         }
     }];
 }
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+//    [self setInningsButtonUnselect:self.delay_Btn];
+//    [self setInningsButtonUnselect:self.tur_Btn];
+//    [self setInningsButtonUnselect:self.right_Btn];
+//    [self setInningsButtonUnselect:self.left_Btn];
+//    [self setInningsButtonUnselect:self.expectedright_Btn];
+//    [self setInningsButtonUnselect:self.expectedLeft_Btn];
+
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonUnselect:self.tur_Btn];
+
+        [self setInningsButtonSelect:self.delay_Btn];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonUnselect:self.delay_Btn];
+
+        [self setInningsButtonSelect:self.tur_Btn];
+    }
+    else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonUnselect:self.right_Btn];
+
+        [self setInningsButtonSelect:self.left_Btn];
+    }
+    else if([innsNo isEqualToString:@"4"]){
+        
+        [self setInningsButtonUnselect:self.left_Btn];
+
+        [self setInningsButtonSelect:self.right_Btn];
+    }
+    else if([innsNo isEqualToString:@"5"]){
+        [self setInningsButtonUnselect:self.expectedright_Btn];
+
+        [self setInningsButtonSelect:self.expectedLeft_Btn];
+    }
+    else if([innsNo isEqualToString:@"6"]){
+        [self setInningsButtonUnselect:self.expectedLeft_Btn];
+
+        [self setInningsButtonSelect:self.expectedright_Btn];
+    }
+    
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#2CA7DB"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#FFFFFF"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
