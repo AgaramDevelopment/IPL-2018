@@ -25,6 +25,12 @@
 		043C2F29202AF13800EB3F8C /* MyStatsBattingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043C2F27202AF13800EB3F8C /* MyStatsBattingCell.xib */; };
 		043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2C202AF59E00EB3F8C /* PieChartView.m */; };
 		043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2E202AF59E00EB3F8C /* XYPieChart.m */; };
+		04B27F17202D784600ECB699 /* illnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F15202D784600ECB699 /* illnessVC.m */; };
+		04B27F18202D784600ECB699 /* illnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F16202D784600ECB699 /* illnessVC.xib */; };
+		04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */; };
+		04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F1B202D7DD100ECB699 /* illnessTableViewCell.xib */; };
+		04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */; };
+		04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */; };
 		1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */; };
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
@@ -146,6 +152,15 @@
 		043C2F2C202AF59E00EB3F8C /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartView.m; sourceTree = "<group>"; };
 		043C2F2D202AF59E00EB3F8C /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		043C2F2E202AF59E00EB3F8C /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		04B27F14202D784600ECB699 /* illnessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessVC.h; sourceTree = "<group>"; };
+		04B27F15202D784600ECB699 /* illnessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessVC.m; sourceTree = "<group>"; };
+		04B27F16202D784600ECB699 /* illnessVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessVC.xib; sourceTree = "<group>"; };
+		04B27F19202D7DD100ECB699 /* illnessTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessTableViewCell.h; sourceTree = "<group>"; };
+		04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessTableViewCell.m; sourceTree = "<group>"; };
+		04B27F1B202D7DD100ECB699 /* illnessTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessTableViewCell.xib; sourceTree = "<group>"; };
+		04B27F1F202DA48E00ECB699 /* PlayerProfileChartsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerProfileChartsVC.h; sourceTree = "<group>"; };
+		04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileChartsVC.m; sourceTree = "<group>"; };
+		04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerProfileChartsVC.xib; sourceTree = "<group>"; };
 		1850ECA42029E0FF00B48BA1 /* TabHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeVC.h; sourceTree = "<group>"; };
 		1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeVC.m; sourceTree = "<group>"; };
 		1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeVC.xib; sourceTree = "<group>"; };
@@ -350,6 +365,29 @@
 				043C2F2E202AF59E00EB3F8C /* XYPieChart.m */,
 			);
 			path = PieChart;
+			sourceTree = "<group>";
+		};
+		04B27F13202D781D00ECB699 /* illnessVC */ = {
+			isa = PBXGroup;
+			children = (
+				04B27F14202D784600ECB699 /* illnessVC.h */,
+				04B27F15202D784600ECB699 /* illnessVC.m */,
+				04B27F16202D784600ECB699 /* illnessVC.xib */,
+				04B27F19202D7DD100ECB699 /* illnessTableViewCell.h */,
+				04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */,
+				04B27F1B202D7DD100ECB699 /* illnessTableViewCell.xib */,
+			);
+			path = illnessVC;
+			sourceTree = "<group>";
+		};
+		04B27F1E202DA41700ECB699 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				04B27F1F202DA48E00ECB699 /* PlayerProfileChartsVC.h */,
+				04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */,
+				04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
@@ -585,6 +623,8 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04B27F1E202DA41700ECB699 /* Charts */,
+				04B27F13202D781D00ECB699 /* illnessVC */,
 				18DF184C202AC6A100AB9DCF /* WellnessTrainingBowlingVC */,
 				1850ECA32029E0D700B48BA1 /* TabHomeVC */,
 				18BBECC8202975BC00BAAFAA /* SchResStandVC */,
@@ -825,6 +865,7 @@
 				CEB2B97B20257BBD00E7D5E4 /* Montserrat-Light.otf in Resources */,
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
+				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
 				18BAE2A2202874070088178A /* MCOverViewResultCVC.xib in Resources */,
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
@@ -833,6 +874,7 @@
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */,
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
+				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
 				CEB2B99420257BBD00E7D5E4 /* MontserratAlternates-Thin.otf in Resources */,
@@ -841,6 +883,7 @@
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				CEBD2A89202899DD000AFD1B /* AssesmentTableViewCell.xib in Resources */,
+				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
 				18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */,
@@ -947,6 +990,7 @@
 				18DF1855202AF1D100AB9DCF /* AddWellnessRatingVC.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
+				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
@@ -959,11 +1003,13 @@
 				18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,
+				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
 				043C2F18202AE41700EB3F8C /* TrainingLoadVC.m in Sources */,
 				043C2F23202AF0F900EB3F8C /* MyStatsBattingVC.m in Sources */,
 				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
+				04B27F17202D784600ECB699 /* illnessVC.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
