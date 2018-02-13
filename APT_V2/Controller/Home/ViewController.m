@@ -6,6 +6,15 @@
 //  Copyright © 2018 user. All rights reserved.
 //
 
+#define  SCREEN_CODE_Rom  @"ASTT001"
+#define  SCREEN_CODE_SPECIAL  @"ASTT002"
+#define  SCREEN_CODE_MMT  @"ASTT003"
+#define  SCREEN_CODE_GAIT  @"ASTT004"
+#define  SCREEN_CODE_POSTURE  @"ASTT005"
+#define  SCREEN_CODE_COACHING  @"ASTT007"
+#define  SCREEN_CODE_S_C  @"ASTT006"
+
+
 #import "ViewController.h"
 #import "TestPropertyCollectionViewCell.h"
 
@@ -17,11 +26,19 @@
     NSInteger currentlySelectedHeader;
     NSString* currentlySelectedDate;
     NSArray* arrayTestName;
+    NSString* version;
+    NSString* currentlySelectedTest;
+    NSInteger CollectionItem;
+
     
 }
 
+
+@property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
+@property BOOL isEdit;
 @property (nonatomic,strong) NSString * usercode;
 @property (nonatomic,strong) NSString * clientCode;
+@property (nonatomic,strong) NSString * selectedPlayerCode;
 
 @property (nonatomic,strong) NSMutableArray * objContenArray;
 @property (nonatomic,strong) NSString * SelectScreenId;
@@ -73,7 +90,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
+    
+    version = @"1";
+    self.objDBconnection = [[DBAConnection alloc]init];
+    _ObjSelectTestArray = [NSMutableArray new];
+    _selectedPlayerCode = @"AMR0000010";
 
     
 }
@@ -96,8 +118,8 @@
 //    [NSLayoutConstraint activateConstraints:self.centerY];
 //    [self.bottomConstant setActive:YES];
 //    [self.centerY setActive:NO];
-    if (notification == UIKeyboardDidHideNotification) {
-        self.bottomConstant.constant = self.view.frame.size.height - self.Shadowview.frame.size.height;
+    if (notification.name == UIKeyboardWillHideNotification) {
+        self.bottomConstant.constant = self.Shadowview.frame.size.height - CGRectGetMidY(self.Shadowview.frame);
     }
     else
     {
@@ -138,20 +160,31 @@
 -(void)tableValuesMethod
 {
     
-    if (!txtTitle.hasText || !txtModule.hasText || !currentlySelectedDate.length) {
+//    if (!txtTitle.hasText || !txtModule.hasText || !currentlySelectedDate.length) {
+//
+//        NSLog(@"input required");
+//        return;
+//    }
+    if (!currentlySelectedDate) {
+        NSDateFormatter* format = [NSDateFormatter new];
+        [format setDateFormat:@"dd/MM/yyy"];
+        currentlySelectedDate = [format stringFromDate:[NSDate date]];
+    }
+    
+    
+    if (!txtTitle.hasText || !txtModule.hasText) {
         
         NSLog(@"input required");
         return;
     }
-    
-    self.objDBconnection = [[DBAConnection alloc]init];
+
     self.objContenArray =[[NSMutableArray alloc]init];
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
     
-//    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode];
+//    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode]; AssessmentTestType
     
-    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
-
+    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:nil];
+    
     
     NSLog(@"%@", TestAsseementArray);
     
@@ -184,12 +217,27 @@
         
         for(int j=0;j<AssessmentTypeTest.count;j++)
         {
-            
+            NSMutableDictionary* infoDictionary = [NSMutableDictionary new];
             NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
             
             [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeCode"] objectAtIndex:j] forKey:@"TestTypeCode"];
             [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j] forKey:@"TestTypeName"];
             [objDic setValue:Screenid forKey:@"ScreenID"];
+            
+//            [infoDictionary addEntriesFromDictionary:objDic];
+            [infoDictionary setObject:[tempDict valueForKey:@"TestTypeCode"] forKey:@"MainTypeCode"];
+            [infoDictionary setObject:[objDic valueForKey:@"TestTypeCode"] forKey:@"subTypeCode"];
+            [infoDictionary setObject:[objDic valueForKey:@"ScreenID"] forKey:@"ScreenID"];
+            
+            
+            NSDictionary* temp1 = [self getTestAttributesForScreenID:infoDictionary];
+            
+            if(temp1.count)
+            {
+                [objDic addEntriesFromDictionary:temp1];
+            }
+            
+            
             
 //            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
             
@@ -206,6 +254,73 @@
     
     [tblAssesments reloadData];
     
+}
+
+-(NSMutableDictionary *)getTestAttributesForScreenID:(NSDictionary *)infoDictionary
+{
+    
+//    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
+
+    
+    NSMutableArray* tempArray = [NSMutableArray new];
+    
+    NSString* MainTypeCode = [infoDictionary valueForKey:@"MainTypeCode"];
+    NSString* subTypeCode = [infoDictionary valueForKey:@"subTypeCode"];
+    NSString* testCode = [infoDictionary valueForKey:@"ScreenID"];
+    
+    
+//    self.ObjSelectTestArray = [self.objDBconnection GetRomWithEntry: version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+    
+    if ([testCode isEqualToString:@"ASTT001"]) {
+        
+        tempArray = [self.objDBconnection GetRomWithEntry: version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+        
+//        tempArray = [self.objDBconnection getRomWithoutEntry:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT002"]) {
+        
+        tempArray = [self.objDBconnection getSpecWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];  //
+
+//        tempArray = [self.objDBconnection getSpecWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT003"]) {
+        
+//        tempArray = [self.objDBconnection getMMTWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+        tempArray = [self.objDBconnection getMMTWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+        
+    }
+    else if ([testCode isEqualToString:@"ASTT004"]) {
+        
+//        tempArray = [self.objDBconnection getGaintWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+
+        tempArray = [self.objDBconnection getGaintWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+    }
+    else if ([testCode isEqualToString:@"ASTT005"]) {
+//        tempArray = [self.objDBconnection getPostureWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+        
+        tempArray = [self.objDBconnection getPostureWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+
+    }
+    else if ([testCode isEqualToString:@"ASTT006"]) {
+//        tempArray = [self.objDBconnection getSCWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+
+        tempArray = [self.objDBconnection getSCWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+    }
+    else if ([testCode isEqualToString:@"ASTT007"]) {
+     
+//        tempArray = [self.objDBconnection getTestCoachWithoutEnrty:version :txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :subTypeCode];
+
+        tempArray = [self.objDBconnection getTestCoachWithEnrty:version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+    }
+
+    NSMutableDictionary* resultDict = [NSMutableDictionary new];
+//    NSDictionary* temp = [tempArray firstObject];
+    [resultDict addEntriesFromDictionary:tempArray.firstObject];
+    
+    return resultDict;
 }
 
 -(void)assmentValues:(NSString *)TestTypeCode
@@ -298,7 +413,11 @@
     
     cell = array[3];
     cell.lblTestName.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeName"];
-
+    cell.tag = [[[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"ScreenID"] integerValue];
+    cell.lblInjured.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Remarks"];
+    cell.lblInference.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Inference"];
+    
+    
 //    if (indexPath.row == 0) {
 //        cell = array[2];
 //    }
@@ -318,6 +437,18 @@
 {
     lblAssessmentName.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeName"];
     NSString* testCode = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"ScreenID"];
+    
+    NSString* MainTypeCode = [[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestTypeCode"];
+    
+    NSString* subTypeCode = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeCode"];
+
+    currentlySelectedTest = testCode;
+    
+    
+    NSArray* currentIndexArray = [[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"];
+    
+//    NSMutableArray* arr = [NSMutableArray new];
+//    arr initkey
 //    NSInteger index = [arrayTestName indexOfObject:[arrayTestName valueForKeyPath:@"TestCode"]];
 //
 //    for (NSDictionary* ndict in arrayTestName) {
@@ -332,28 +463,73 @@
     self.Shadowview.layer.shadowOffset = CGSizeZero;
     self.Shadowview.layer.shadowRadius = 10.0f;
     self.Shadowview.layer.shadowOpacity = 1.0f;
+    
+    lblRangeValue.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    lblRangeValue.layer.borderWidth = 0.3;
+//    lblRangeValue.layer.masksToBounds = YES;
+    
+    lblUnitValue.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    lblUnitValue.layer.borderWidth = 0.3;
 
     
-    if ([testCode isEqualToString:@"ASTT001"]) {
+    if ([SCREEN_CODE_Rom isEqualToString:@"ASTT001"]) {
+        
+//        self.ObjSelectTestArray =[self.objDBconnection GetRomWithEntry: version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+
+        
+        
+//        if(isEdit == YES)
+//        {
+//            [self.saveBtn setTitle:@"Update" forState:UIControlStateNormal];
+////            self.ObjSelectTestArray =[self.objDBConnection GetRomWithEntry:version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr : self.SectionTestCodeStr :clientCode :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
+//
+//            self.ObjSelectTestArray =[self.objDBConnection GetRomWithEntry: version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
+//
+//        }
+//        else{
+//            [self.saveBtn setTitle:@"Save" forState:UIControlStateNormal];
+////            self.ObjSelectTestArray =[self.objDBConnection getRomWithoutEntry:version :nil:txtModule.selectedCode :self.SectionTestCodeStr :clientCode :self.SelectTestTypecode];
+//        }
+        NSString* romSideName = [currentIndexArray.firstObject valueForKey:@"romSideName"];
+        
+        if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
+            CollectionItem = 2;
+        }
+        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[currentIndexArray.firstObject valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
+        lblUnitValue.text = [currentIndexArray.firstObject valueForKey:@"romUnitName"];
+    }
+    else if ([SCREEN_CODE_SPECIAL isEqualToString:@"ASTT002"]) {
+        
+//        self.assessmentTestTypeSpecial =[self.objDBConnection getPositiveNegative];
+        CollectionItem = 1;
+
+
+    }
+    else if ([SCREEN_CODE_MMT isEqualToString:@"ASTT003"]) {
+//        self.AssessmentTypeMMT =[self.objDBConnection getWithMmtCombo];
+        
+        CollectionItem = 1;
         
     }
-    else if ([testCode isEqualToString:@"ASTT002"]) {
+    else if ([SCREEN_CODE_GAIT isEqualToString:@"ASTT004"]) {
+//        self.AssessmentTypeGaint =[self.objDBConnection getResultCombo];
+
+        CollectionItem = 1;
+
+    }
+    else if ([SCREEN_CODE_POSTURE isEqualToString:@"ASTT005"]) {
+        CollectionItem = 1;
+
+    }
+    else if ([SCREEN_CODE_S_C isEqualToString:@"ASTT006"]) {
+//        self.assessmentTestTypePosture =[self.objDBConnection getwithPostureRESULTS];
+
         
     }
-    else if ([testCode isEqualToString:@"ASTT003"]) {
+    else if ([SCREEN_CODE_COACHING isEqualToString:@"ASTT007"]) {
         
-    }
-    else if ([testCode isEqualToString:@"ASTT004"]) {
-        
-    }
-    else if ([testCode isEqualToString:@"ASTT005"]) {
-        
-    }
-    else if ([testCode isEqualToString:@"ASTT006"]) {
-        
-    }
-    else if ([testCode isEqualToString:@"ASTT007"]) {
-        
+        CollectionItem = 1;
+
     }
     
 //    [self.bottomConstant setActive:NO];
@@ -639,12 +815,34 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    return CollectionItem;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TestPropertyCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
     cell.txtField.delegate = self;
+    
+    if (indexPath.item == 0) {
+        cell.lblBottom.text = @"Left";
+    }
+    else
+    {
+        cell.lblBottom.text = @"Right";
+    }
+    
+    
+    if ([SCREEN_CODE_S_C isEqualToString:currentlySelectedTest] || [SCREEN_CODE_Rom isEqualToString:currentlySelectedTest]) {
+        cell.txtField.borderStyle = UITextBorderStyleRoundedRect;
+        [cell.txtField.rightView setHidden:YES];
+        cell.layer.borderColor = [UIColor clearColor].CGColor;
+
+    }
+    else
+    {
+        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        cell.txtField.borderStyle = UITextBorderStyleNone;
+        [cell.txtField.rightView setHidden:NO];
+    }
     
     return cell;
 
@@ -662,12 +860,15 @@
 
 
 - (IBAction)actionIgnore:(id)sender {
+    UIImage* check = [UIImage imageNamed:@"check"];
+    UIImage* uncheck = [UIImage imageNamed:@"uncheck"];
     
-    if ([sender currentImage] == @"check" ) {
-        [sender setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
-    }else
+    if ([[sender currentImage]isEqual:check]) {
+        [sender setImage:uncheck forState:UIControlStateNormal];
+    }
+    else
     {
-        [sender setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        [sender setImage:check forState:UIControlStateNormal];
     }
 }
 @end
