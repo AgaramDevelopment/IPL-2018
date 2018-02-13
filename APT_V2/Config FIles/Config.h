@@ -129,7 +129,9 @@
 
 #define dateValidation                    @"FETCH_WORKLOAD_WELLNESS_BYPLAYERNAME"
 
-#define recordInsert                      @"INSERT_WORKLOAD_WELLNESS_RATING"
+#define recordInsert                      @"MOBILE_INSERT_WORKLOAD_WELLNESS_RATING"
+
+#define FetchrecordWellness                     @"MOBILE_FETCH_WORKLOAD_WELLNESS"
 
 #define updateRecord                      @"UPDATE_WORKLOAD_WELLNESS_RATING"
 

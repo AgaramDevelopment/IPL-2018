@@ -10,9 +10,11 @@
 #import "Config.h"
 #import "XYPieChart.h"
 #import "PieChartView.h"
+#import "TrainingLoadUpdateVC.h"
 
 @interface TrainingLoadVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
+    TrainingLoadUpdateVC *objUpdate;
     float num1;
     float num2;
     float num3;
@@ -91,6 +93,12 @@
         pieChartView2.datasource = self;
         [self.todayMainView addSubview:pieChartView2];
     }
+}
+- (IBAction)AddtrainingBtnAction:(id)sender {
+    
+    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.view addSubview:objUpdate.view];
 }
 
 #pragma mark -    PieChartViewDelegate

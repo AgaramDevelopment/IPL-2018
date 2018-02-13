@@ -24,7 +24,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #pragma Testing Url 
 
 #define BASE_URL   @"http://192.168.0.151:8044/AGAPTService.svc/"
-#define IMAGE_URL   @"http://192.168.0.151:8030/"
+#define IMAGE_URL   @"http://192.168.0.151:8045/"
 
 //#define BASE_URL   @"http://192.168.1.84:8029/AGAPTService.svc/"
 //#define IMAGE_URL   @"http://192.168.1.84:8030/"
@@ -77,7 +77,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)getdatelist :(NSString *)codelist :(NSString *)playercode :(NSString *)date success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 
--(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 success:(WebserviceRequestSuccessHandler)success
+-(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin success:(WebserviceRequestSuccessHandler)success
        failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)getupdate :(NSString *)updatelist :(NSString *)usercode :(NSString *)wlcode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 success:(WebserviceRequestSuccessHandler)success
@@ -117,5 +117,8 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 -(void)GetPlayers:(NSString *)list :(NSString *)clientcode   success:(WebserviceRequestSuccessHandler)success
           failure:(WebserviceRequestFailureHandler)failure ;
+
+-(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure;
 
 @end

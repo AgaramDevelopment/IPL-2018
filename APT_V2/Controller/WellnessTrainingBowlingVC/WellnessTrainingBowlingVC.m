@@ -37,23 +37,10 @@
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextX;
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextY;
 
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topviewHeight;
 
 
-@property (strong, nonatomic) IBOutlet UISlider *sleepSlider;
-@property (strong, nonatomic) IBOutlet UISlider *fatiqueSlider;
-@property (strong, nonatomic) IBOutlet UISlider *muscleSlider;
-@property (strong, nonatomic) IBOutlet UISlider *stressSlider;
 
-@property (strong, nonatomic)  NSMutableArray *sleeplist;
-@property (strong, nonatomic)  NSMutableArray *fatiqlist;
-@property (strong, nonatomic)  NSMutableArray *sorelist;
-@property (strong, nonatomic)  NSMutableArray *stresslist;
 
-@property (strong, nonatomic)  NSMutableArray *sleeplist1;
-@property (strong, nonatomic)  NSMutableArray *fatiqlist1;
-@property (strong, nonatomic)  NSMutableArray *sorelist1;
-@property (strong, nonatomic)  NSMutableArray *stresslist1;
 
 
 @end
@@ -63,9 +50,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    objWebservice = [[WebService alloc]init];
     objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+    objtraing.view.frame = CGRectMake(0,0, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
     [self.trainingview addSubview:objtraing.view];
     
     //self.topviewHeight.constant = 578;
@@ -130,20 +117,24 @@
     
     [_chartView animateWithXAxisDuration:2.5];
     
-     //[self updateChartData];
+     [self FetchWebservice];
     
-    [self metacodeWebservice];
+   
 }
 - (IBAction)AddBtnAction:(id)sender {
     
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     [self.topView addSubview:objWell.view];
-    
     self.topviewHeight.constant = 578;
     
 }
 
+-(BOOL)setHeight
+{
+    self.topviewHeight.constant = 280;
+    return NO;
+}
 - (void)updateChartData
 {
 //    if (self.shouldHideData)
@@ -239,357 +230,179 @@
     NSLog(@"chartValueNothingSelected");
 }
 
--(void)SaveWebservice
+
+
+-(void)FetchWebservice
 {
     [AppCommon showLoading ];
     
-    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
-    NSString *sleepValue =[NSString stringWithFormat:@"%f" , self.sleepSlider.value];
-     NSString *fatiqueValue =[NSString stringWithFormat:@"%f" , self.fatiqueSlider.value];
-    NSString *sorenessValue =[NSString stringWithFormat:@"%f" , self.muscleSlider.value];
-    NSString *stressValue =[NSString stringWithFormat:@"%f" , self.fatiqueSlider.value];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
     
     
-    [objWebservice submit  :recordInsert :ClientCode :usercode:@"":playerCode:sleepValue:fatiqueValue:sorenessValue:stressValue success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
-            BOOL Status = [responseObject valueForKey:@"Status"];
-            if(Status == YES)
-            {
-                NSLog(@"success");
-                //[self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
+        
+                self.bodyWeightlbl.text = [responseObject valueForKey:@"BodyWeight"];
+                self.sleepHrlbl.text = [responseObject valueForKey:@"SleepHours"];
                 
-                // [self.pieChartRight reloadData];
+                NSString *sleepValue = [responseObject valueForKey:@"SleepRatingDescription"];
+                NSArray *component = [sleepValue componentsSeparatedByString:@" "];
+                self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
+            
+            if([component[0] isEqualToString:@"1"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"2"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"3"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"4"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"5"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"6"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+            }
+            if([component[0] isEqualToString:@"7"])
+            {
+                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+            }
+
+                
+                NSString *fatiqueValue = [responseObject valueForKey:@"FatigueRatingDescription"];
+                NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
+                self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
+            
+            if([component1[0] isEqualToString:@"1"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"2"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"3"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"4"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"5"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"6"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+            }
+            if([component1[0] isEqualToString:@"7"])
+            {
+                self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+            }
+
+                
+                NSString *muscleValue = [responseObject valueForKey:@"SoreNessRatingDescription"];
+                NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
+                self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
+            
+            if([component2[0] isEqualToString:@"1"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"2"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"3"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"4"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"5"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"6"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+            }
+            if([component2[0] isEqualToString:@"7"])
+            {
+                self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+            }
+
+                
+                NSString *stressValue = [responseObject valueForKey:@"StressRatingDescription"];
+                NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
+                self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
+            
+            if([component3[0] isEqualToString:@"1"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"2"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"3"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"4"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"5"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"6"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+            }
+            if([component3[0] isEqualToString:@"7"])
+            {
+                self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
             }
             
         }
-        
         [AppCommon hideLoading];
-
-        
         
     }
-                   failure:^(AFHTTPRequestOperation *operation, id error) {
-                       NSLog(@"failed");
-                       [COMMON webServiceFailureError:error];
-                       
-                   }];
-    
-}
-
-
--(void)metacodeWebservice
-{
-    
-    [AppCommon showLoading];
-    NSString *cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    NSString *Rc=@"RC14";
-    
-    
-    
-    [objWebservice getmetacodelist :metasubKey :cliendcode :Rc success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
-        if(responseObject >0)
-        {
-            self.sleeplist = [[NSMutableArray alloc]init];
-            self.fatiqlist = [[NSMutableArray alloc]init];
-            self.sorelist = [[NSMutableArray alloc]init];
-            self.stresslist = [[NSMutableArray alloc]init];
-            
-            
-            self.sleeplist = [responseObject valueForKey:@"Sleeps"];
-            self.fatiqlist = [responseObject valueForKey:@"Fatigues"];
-            self.sorelist = [responseObject valueForKey:@"MuscleSoreNesses"];
-            self.stresslist = [responseObject valueForKey:@"Stresses"];
-            
-            self.sleeplist1 = ([[self.sleeplist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.sleeplist valueForKey:@"MetaSubCode"];
-            
-            self.fatiqlist1 = ([[self.fatiqlist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.fatiqlist valueForKey:@"MetaSubCode"];
-            
-            self.sorelist1 = ([[self.sorelist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.sorelist valueForKey:@"MetaSubCode"];
-            
-            self.stresslist1 = ([[self.stresslist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.stresslist valueForKey:@"MetaSubCode"];
-            
-            
-        }
-        [AppCommon hideLoading];
-        
-        
-     
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-        NSLog(@"failed");
-        [COMMON webServiceFailureError:error];
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+    NSLog(@"failed");
+    [COMMON webServiceFailureError:error];
     }];
     
 }
 
-- (IBAction)SleepSliderAction:(id)sender {
-    
-    NSLog(@"%.f",self.sleepSlider.value);
-    // value1 = [NSString stringWithFormat:@"%.f",self.sleepSlider.value];
-    
-    num1 = [self.sleepSlider value];
-    
-    NSLog(@"%f",num1);
-    
-    if(num1 ==0)
-    {
-        
-    }
-    
-    if(num1 >0.1 && num1 <=1 )
-    {
-  
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:0];
-  
-        
-    }
-    if(num1 >1.1 && num1 <= 2)
-    {
-        
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:1];
-        
-    }
-    
-    if(num1 >2.1 && num1 <= 3)
-    {
-       
-        
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:2];
-        
-    }
-    
-    if(num1 > 3.1 && num1 <= 4 )
-    {
-        
-        
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:3];
-        
-    }
-    
-    if(num1 >4.1 && num1 <= 5 )
-    {
 
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:4];
-    
-    }
-    if(num1 >5.1 && num1 <= 6)
-    {
-       
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:5];
-       
-    }
-    if(num1 >6.1 && num1 <= 7)
-    {
-       
-        metaSubCode1 = [self.sleeplist1 objectAtIndex:6];
-        
-    }
-    
-   
-    
-    
-}
 
-- (IBAction)FatiqueSliderAction:(id)sender {
-    
-    
-    num2 = [self.fatiqueSlider value];
-    
-    
-    NSLog(@"%f",num2);
-    
-    if(num2 ==0)
-    {
-        
-    }
-    
-    if(num2 >0.1 && num2 <=1 )
-    {
-       
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:0];
-        
-        
-    }
-    if(num2 >1.1 && num2 <= 2)
-    {
-        
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:1];
-      
-    }
-    
-    if(num2 >2.1 && num2 <= 3)
-    {
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:2];
-      
-    }
-    
-    if(num2 > 3.1 && num2 <= 4 )
-    {
-        
-        
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:3];
-        
-    }
-    
-    if(num2 >4.1 && num2 <= 5 )
-    {
-        
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:4];
-        
-    }
-    if(num2 >5.1 && num2 <= 6)
-    {
-        
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:5];
-        
-    }
-    if(num2 >6.1 && num2 <= 7)
-    {
-        
-        metaSubCode2 = [self.fatiqlist1 objectAtIndex:6];
-        
-    }
-    
-    
-    
-    
-    
-}
 
-- (IBAction)MuscleSliderAction:(id)sender {
-    
-    
-    num3 = [self.muscleSlider value];
-    NSLog(@"%f",num2);
-    
-    if(num3 ==0)
-    {
-        
-    }
-    
-    if(num3 >0.1 && num3 <=1 )
-    {
-      
-        metaSubCode3 = [self.sorelist1 objectAtIndex:0];
-        
-    }
-    if(num3 >1.1 && num3 <= 2)
-    {
-        
-        metaSubCode3 = [self.sorelist1 objectAtIndex:1];
-        
-    }
-    
-    if(num3 >2.1 && num3 <= 3)
-    {
-       
-        metaSubCode3 = [self.sorelist1 objectAtIndex:2];
-        
-    }
-    
-    if(num3 > 3.1 && num3 <= 4 )
-    {
-        
-        
-        metaSubCode3 = [self.sorelist1 objectAtIndex:3];
-     
-    }
-    
-    if(num3 >4.1 && num3 <= 5 )
-    {
-        
-        metaSubCode3 = [self.sorelist1 objectAtIndex:4];
-      
-    }
-    if(num3 >5.1 && num3 <= 6)
-    {
-        
-        metaSubCode3 = [self.sorelist1 objectAtIndex:5];
-      
-    }
-    if(num3 >6.1 && num3 <= 7)
-    {
-        
-        metaSubCode3 = [self.sorelist1 objectAtIndex:6];
-        
-    }
-    
-    
-    
-    
-    
-}
 
-- (IBAction)StressSliderAction:(id)sender {
-    
-     num4 = [self.stressSlider value];
-    NSLog(@"%f",num4);
-    
-    if(num4 ==0)
-    {
-    
-    }
-    
-    if(num4 >0.1 && num4 <=1 )
-    {
-       
-        
-        metaSubCode4 = [self.stresslist1 objectAtIndex:0];
-        
-        
-        
-        
-    }
-    if(num4 >1.1 && num4 <= 2)
-    {
 
-        
-        metaSubCode4 = [self.stresslist1 objectAtIndex:1];
-       
-    }
-    
-    if(num4 >2.1 && num4 <= 3)
-    {
-        
-        
-        metaSubCode4 = [self.stresslist1 objectAtIndex:2];
-        
-    }
-    
-    if(num4 > 3.1 && num4 <= 4 )
-    {
- 
-        metaSubCode4 = [self.stresslist1 objectAtIndex:3];
-
-    }
-    
-    if(num4 >4.1 && num4 <= 5 )
-    {
-       
-        metaSubCode4 = [self.stresslist1 objectAtIndex:4];
-        
-    }
-    if(num4 >5.1 && num4 <= 6)
-    {
-       
-        metaSubCode4 = [self.stresslist1 objectAtIndex:5];
-        
-    }
-    if(num4 >6.1 && num4 <= 7)
-    {
-        
-        metaSubCode4 = [self.stresslist1 objectAtIndex:6];
-        
-    }
-    
-}
 
 
 @end
