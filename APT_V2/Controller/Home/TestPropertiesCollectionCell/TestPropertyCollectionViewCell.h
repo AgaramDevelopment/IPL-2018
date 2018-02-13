@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
 
 @interface TestPropertyCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblTopIndicator;
-@property (weak, nonatomic) IBOutlet UITextField *txtField;
+@property (weak, nonatomic) IBOutlet LineTextField *txtField;
 @property (weak, nonatomic) IBOutlet UILabel *lblBottom;
 
 @end

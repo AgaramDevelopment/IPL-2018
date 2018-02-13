@@ -37,7 +37,7 @@
     if (self) {
         [self layoutSubviews];
 //        self = [super initWithFrame:[self frame]];
-        [self setup];
+//        [self setup];
     }
     return self;
 }
@@ -62,7 +62,7 @@
     CALayer *border = [CALayer layer];
     CGFloat borderWidth = 1;
     border.borderColor = [UIColor lightGrayColor].CGColor;
-    border.frame = CGRectMake(0, self.frame.size.height - borderWidth, self.frame.size.width, self.frame.size.height);
+    border.frame = CGRectMake(0, self.frame.size.height - borderWidth, self.frame.size.width, 1);
     border.borderWidth = borderWidth;
     [self.layer addSublayer:border];
     self.layer.masksToBounds = YES;

@@ -15,6 +15,7 @@
     [super awakeFromNib];
     // Initialization code
     [self setup];
+    [self.txtField setup];
 }
 
 -(void)setup

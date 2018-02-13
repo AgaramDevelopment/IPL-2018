@@ -13,6 +13,7 @@
 #import "TabHomeVC.h"
 #import "MyStatsBattingVC.h"
 #import "MatchCenterTBC.h"
+#import "TrainingLoadUpdateVC.h"
 
 @interface RearViewController ()
 {
@@ -79,8 +80,14 @@
     SWRevealViewController *revealController = appDel.viewController;
     UIViewController* newFrontController;
     
-    if (indexPath.row == 0) {
-        newFrontController= [self.storyboard instantiateViewControllerWithIdentifier:@"frontViewController"];
+    
+    if (indexPath.row == 0) { // team
+        
+    }
+    else if(indexPath.row == 1) // Assessment
+    {
+        newFrontController= [ViewController new];
+
     }
     else if(indexPath.row == 2)
     {
@@ -103,34 +110,42 @@
     }
     else if(indexPath.row == 3)
     {
-        InjuryVC *msObj = [InjuryVC new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-        [navigationController setNavigationBarHidden:YES];
-        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-        return;
+//        InjuryVC *msObj = [InjuryVC new];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+//        [navigationController setNavigationBarHidden:YES];
+//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+//        return;
+        newFrontController= [InjuryVC new];
+
     }
     else if(indexPath.row == 4)
     {
-        TabHomeVC *msObj = [TabHomeVC new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-        [navigationController setNavigationBarHidden:YES];
-        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-        return;
+//        TabHomeVC *msObj = [TabHomeVC new];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+//        [navigationController setNavigationBarHidden:YES];
+//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+//        return;
+        newFrontController= [TabHomeVC new];
+
     }
     else if(indexPath.row == 5)
     {
-        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-        [navigationController setNavigationBarHidden:YES];
-        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-        return;
+//        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+//        [navigationController setNavigationBarHidden:YES];
+//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+//        return;
+        newFrontController= [MyStatsBattingVC new];
+
     }else if(indexPath.row == 6)
     {
-        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-        [navigationController setNavigationBarHidden:YES];
-        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-        return;
+//        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
+//        [navigationController setNavigationBarHidden:YES];
+//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+//        return;
+        newFrontController= [MatchCenterTBC new];
+
     }
     else if (indexPath.row == arrItems.count -1)
     {

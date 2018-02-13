@@ -13,12 +13,14 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
+#import "TrainingLoadUpdateVC.h"
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate>
 {
     AddWellnessRatingVC * objWell;
     TrainingLoadVC * objtraing;
     WebService *objWebservice;
+    TrainingLoadUpdateVC *objUpdate;
     
     float num1;
     float num2;
@@ -43,6 +45,7 @@
 
 
 
+
 @end
 
 @implementation WellnessTrainingBowlingVC
@@ -52,9 +55,10 @@
     
     objWebservice = [[WebService alloc]init];
     objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-    objtraing.view.frame = CGRectMake(0,0, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
     [self.trainingview addSubview:objtraing.view];
-    
+    [objtraing.AddBtn addTarget:self action:@selector(AddtrainingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+
     //self.topviewHeight.constant = 578;
     
     
@@ -120,6 +124,12 @@
      [self FetchWebservice];
     
    
+}
+- (IBAction)AddtrainingBtnAction:(id)sender {
+    
+    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.view.frame = CGRectMake(0,10, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.trainingview addSubview:objUpdate.view];
 }
 - (IBAction)AddBtnAction:(id)sender {
     

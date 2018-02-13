@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstant;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerY;
 - (IBAction)actionIgnore:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 @end
 

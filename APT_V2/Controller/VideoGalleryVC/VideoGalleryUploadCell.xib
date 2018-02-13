@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="90" id="1wl-gF-lnM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGc-hr-g9L">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGc-hr-g9L">
                                 <rect key="frame" x="5" y="100" width="90" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="UTs-wS-AQM"/>
@@ -45,7 +45,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virat Kohli" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paE-XY-zhI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virat Kohli" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paE-XY-zhI">
                                 <rect key="frame" x="5" y="128" width="90" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="ZUt-2y-Uv6"/>
@@ -57,7 +57,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07-02-2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kra-yS-61k">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07-02-2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kra-yS-61k">
                                 <rect key="frame" x="5" y="156" width="90" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="QrK-Ja-GIo"/>
@@ -96,6 +96,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="0yo-Rd-Yz5"/>
             <size key="customSize" width="101" height="206"/>
+            <connections>
+                <outlet property="batting_lbl" destination="jGc-hr-g9L" id="lDM-hI-pjU"/>
+                <outlet property="date_lbl" destination="Kra-yS-61k" id="Hz9-kt-IcN"/>
+                <outlet property="playername_lbl" destination="paE-XY-zhI" id="ecc-3c-8z9"/>
+            </connections>
             <point key="canvasLocation" x="0.0" y="-46"/>
         </collectionViewCell>
     </objects>
