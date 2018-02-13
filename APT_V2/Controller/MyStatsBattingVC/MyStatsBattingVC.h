@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "MyStatsBattingCell.h"
 @interface MyStatsBattingVC : UIViewController
+{
+    NSMutableArray *overAllArray;
+    NSMutableArray *recentMatchesArray;
+}
 
 @property (assign, nonatomic) NSIndexPath *selectedRowIndex;
 @property (strong, nonatomic) IBOutlet UITableView *batttingTableView;
 @property (nonatomic,strong) IBOutlet MyStatsBattingCell * StatsBattingCell;
 @property (nonatomic,strong) IBOutlet MyStatsBattingCell * StatsBattingCellIphone;
+@property (strong, nonatomic) IBOutlet UIView *navigationView;
+
 
 @end
