@@ -36,6 +36,7 @@
                 <outlet property="stresslbl" destination="9Gn-F8-Fbi" id="S4W-pz-BsD"/>
                 <outlet property="topView" destination="gNd-Uf-p4R" id="3f5-fh-I8q"/>
                 <outlet property="topviewHeight" destination="73O-70-zrb" id="RqM-aV-bhi"/>
+                <outlet property="traingViewHeight" destination="mVu-SE-pjv" id="6lS-IF-y0J"/>
                 <outlet property="trainingview" destination="cAi-ZW-euW" id="Dex-zW-9Bz"/>
                 <outlet property="view" destination="eok-5I-dGb" id="aLC-Gg-gpg"/>
             </connections>
@@ -537,14 +538,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAi-ZW-euW">
-                                    <rect key="frame" x="5" y="375" width="365" height="300"/>
+                                    <rect key="frame" x="5" y="375" width="365" height="350"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="300" id="mVu-SE-pjv"/>
+                                        <constraint firstAttribute="height" constant="350" id="mVu-SE-pjv"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C5-g7-Bua">
-                                    <rect key="frame" x="5" y="685" width="365" height="35"/>
+                                    <rect key="frame" x="5" y="735" width="365" height="35"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Load" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raC-eb-ULy">
                                             <rect key="frame" x="5" y="3" width="175" height="30"/>
@@ -578,7 +579,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
-                                    <rect key="frame" x="5" y="725" width="370" height="294"/>
+                                    <rect key="frame" x="5" y="775" width="370" height="294"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW5-G4-aAS">
                                             <rect key="frame" x="0.0" y="10" width="370" height="30"/>

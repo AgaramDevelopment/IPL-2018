@@ -18,7 +18,10 @@
 
 @property (strong, nonatomic) IBOutlet UIView *yesterdayMainView;
 @property (strong, nonatomic) IBOutlet UIView *todayMainView;
+@property (weak, nonatomic) IBOutlet UIView *traingView;
 
 //Donar Charts
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
+
+@property (strong, nonatomic) IBOutlet UIButton *AddBtn;
 @end

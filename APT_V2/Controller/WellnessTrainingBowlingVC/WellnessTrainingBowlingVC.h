@@ -28,6 +28,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *musclelbl;
 @property (strong, nonatomic) IBOutlet UILabel *stresslbl;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *traingViewHeight;
+
 
 
 @property (strong, nonatomic) IBOutlet UIView *SleepColorView;

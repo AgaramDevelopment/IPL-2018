@@ -35,6 +35,7 @@
     sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
     valueArray = [[NSMutableArray alloc] initWithObjects:@"245", @"124", @"342", nil];
+     self.popViewtable.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,6 +59,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)ActivityAction:(id)sender {
+    
+    self.popViewtable.hidden = NO;
 }
 
 -(void)samplePieChart

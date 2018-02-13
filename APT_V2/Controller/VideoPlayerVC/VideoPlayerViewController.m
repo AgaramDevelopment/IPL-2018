@@ -125,7 +125,7 @@
             //Video Player
            
             
-            NSString *url = @"https://s3.amazonaws.com/adplayer/colgate.mp4";
+            NSString *url = [NSString stringWithFormat:@"%@%@",IMAGE_URL,self.objSelectVideoLink];
             //https://s3.amazonaws.com/adplayer/colgate.mp4
             //http://www.cricbuzz.com/cricket-videos/21755/happy-birthday-glenn-mcgrath
             //    NSURL *videoURL = [NSURL URLWithString:url];
@@ -133,11 +133,11 @@
             NSURL *videoURL = [NSURL URLWithString:url];
             
             [self.avPlayer seekToTime:CMTimeMake(0, 1)];
-            [self.avPlayer pause];
+            [self.avPlayer play];
             self.avPlayer = [AVPlayer playerWithURL:videoURL];
             
             self.avPlayerViewController.player = self.avPlayer;
-            self.avPlayerViewController.view.frame = _videoView.bounds;
+           // self.avPlayerViewController.view.frame = self.rootVideoView.bounds;
             [_videoView addSubview:self.avPlayerViewController.view];
             
 //            [self playAndPause:@""];

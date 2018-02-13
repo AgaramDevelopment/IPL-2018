@@ -239,3 +239,5 @@
 
 #define playerMyStatsBatting               @"MOBILE_GETMYSTATSBATTING"
 
+#define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
+
