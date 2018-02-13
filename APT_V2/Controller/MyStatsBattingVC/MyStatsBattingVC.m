@@ -90,7 +90,6 @@
     MyStatsBattingCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"headerCell"];
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
      if (section == 0) {
-         //[headerCell sizeToFit];
          return nil;
      }
     if (section == 1) {
@@ -117,7 +116,7 @@
         return 0;
     }
     if (section == 1) {
-        return 60.0;
+        return (IS_IPAD)?65:55;
     }
     return 0;
 }
@@ -127,17 +126,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   /*
-    NSString * cellIdentifier = (IS_IPAD)? @"battingCellIpad" : @"battingCell";
-    MyStatsBattingCell * Battingcell =(MyStatsBattingCell *) [self.batttingTableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (Battingcell == nil) {
-           [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
-        Battingcell = (IS_IPAD)?self.StatsBattingCell: self.StatsBattingCellIphone;
-        // self.batsmanCell = nil;
-    }
-    Battingcell.backgroundColor = [UIColor clearColor];
-    return Battingcell;
-    */
     MyStatsBattingCell *cell;
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MyStatsBattingCell" owner:self options:nil];
    
@@ -152,7 +140,17 @@
         cell.overallBallsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Balls"];
         cell.overallAvgLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatAve"];
         cell.overallSRLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatSR"];
-        cell.overallHundredsLbl.text = @"0"; //[overAllArray valueForKey:@"hunderds"];
+//        if([[overAllArray valueForKey:@"hunderds"] isEqual:[NSNull null]] || [[overAllArray valueForKey:@"hunderds"] isEqual:@"<null>"] )
+//            {
+//                cell.overallHundredsLbl.text = @"0";
+//            } else {
+//
+//                cell.overallHundredsLbl.text = [overAllArray valueForKey:@"hunderds"];
+//            }
+        //[overAllArray valueForKey:@"hunderds"];
+        NSLog(@"S:%@", [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"hunderds"]);
+        cell.overallHundredsLbl.text = [self checkNull:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"hunderds"]];
+        NSLog(@"%@", cell.overallHundredsLbl.text);
         cell.overallFiftiesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"fifties"];
         cell.overallThirtiesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"thirties"];
         cell.overallFoursLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Fours"];
@@ -166,10 +164,7 @@
     }
     
     if (indexPath.section == 1) {
-//        NSString * cellIdentifier =  @"battingCellForiPhoneoriPad";
-//        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//        cell = arr[2];
-        
+
         NSString * cellIdentifier = (IS_IPAD)? @"battingCellForiPad" : @"battingCellForiPhone";
         cell =(MyStatsBattingCell *) [self.batttingTableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -178,34 +173,62 @@
                 // self.batsmanCell = nil;
         }
         cell.backgroundColor = [UIColor clearColor];
-//        return Battingcell;
+
         NSLog(@"recentMatchesArray:%@", recentMatchesArray);
-        cell.teamNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
-        cell.teamNameiPadLbl.text =  [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
-        cell.teamiPhoneImage.image = nil;
-        cell.teamiPadImage.image = nil;
-        cell.teamRunsiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-        cell.teamRunsiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-        cell.teamBallsiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"];
-        cell.teamBallsiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"];
-        cell.matchDateiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
-        cell.matchDateiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
-        cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
-        cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
-        /*
-        cell.matchSRiPhoneLbl.text = @"";
-        cell.matchSRiPadLbl.text = @"";
-        cell.matchDotiPhoneLbl.text = @"";
-        cell.matchDotiPadLbl.text = @"";
-        cell.matchBDYiPhoneLbl.text = @"";
-        cell.matchBDYiPadLbl.text = @"";
-        cell.matchFoursiPhoneLbl.text = @"";
-        cell.matchFoursiPadLbl.text = @"";
-        cell.matchSixsiPhoneLbl.text = @"";
-        cell.matchSixsiPadLbl.text = @"";
-        cell.matchBDYFqiPhoneLbl.text = @"";
-        cell.matchBDYFqiPadLbl.text = @"";
-        */
+        if (IS_IPAD) {
+            cell.teamNameiPadLbl.text =  [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
+//            cell.teamiPadImage.image = nil;
+            cell.teamRunsiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
+             NSString *runs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]];
+            cell.teamBallsiPadLbl.text = runs;
+            
+            // Match Date
+            NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"MM/dd/yyyy HH:mm:ss a";
+            NSDate *yourDate = [dateFormatter dateFromString:myString];
+            dateFormatter.dateFormat = @"dd MMM, yyyy";
+            NSLog(@"%@",[dateFormatter stringFromDate:yourDate]);
+
+            
+            cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
+            cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
+            /*
+            cell.matchSRiPadLbl.text = @"";
+            cell.matchDotiPadLbl.text = @"";
+            cell.matchBDYiPadLbl.text = @"";
+            cell.matchFoursiPadLbl.text = @"";
+            cell.matchSixsiPadLbl.text = @"";
+            cell.matchBDYFqiPadLbl.text = @"";
+            */
+        } else {
+            cell.teamNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
+            NSLog(@"OppTeamName:%@", cell.teamNameiPhoneLbl.text);
+//            cell.teamiPhoneImage.image = nil;
+            cell.teamRunsiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
+            NSString *runs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]];
+            cell.teamBallsiPhoneLbl.text = runs;
+            
+                // Match Date
+            NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"MM/dd/yyyy HH:mm:ss a";
+            NSDate *yourDate = [dateFormatter dateFromString:myString];
+            dateFormatter.dateFormat = @"dd MMM, yyyy";
+            NSLog(@"%@",[dateFormatter stringFromDate:yourDate]);
+            
+            cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
+            cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
+            /*
+            cell.matchSRiPhoneLbl.text = @"";
+            cell.matchDotiPhoneLbl.text = @"";
+            cell.matchBDYiPhoneLbl.text = @"";
+            cell.matchFoursiPhoneLbl.text = @"";
+            cell.matchSixsiPhoneLbl.text = @"";
+            cell.matchBDYFqiPhoneLbl.text = @"";
+             */
+        }
+    
         return cell;
     }
      return nil;
@@ -231,8 +254,7 @@
             selectedIndex = indexPath.row;
         }
             //[self.batttingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        
+    
             //[self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self.batttingTableView endUpdates];
@@ -245,16 +267,16 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        return 285;
+        return (IS_IPAD)?380:285;
     }
     
     if (indexPath.section == 1) {
         if(indexPath.row ==  selectedIndex)
-            {
-                return 420;
-            } else {
-                return (IS_IPAD)?80: 60;
-            }
+        {
+            return 420;
+        } else {
+            return (IS_IPAD)?80: 60;
+        }
     }
     return 0;
 }
@@ -338,6 +360,16 @@
 
 - (IBAction)battingAction:(id)sender {
     
+    
+}
+
+-(NSString *)checkNull:(NSString *)_value
+{
+    
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"0";
+    }
+    return _value;
     
 }
 

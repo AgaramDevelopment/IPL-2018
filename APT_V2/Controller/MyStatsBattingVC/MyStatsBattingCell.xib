@@ -45,7 +45,9 @@
                             <constraint firstAttribute="trailing" secondItem="DxB-HA-88b" secondAttribute="trailing" id="6Y8-dd-lXt"/>
                             <constraint firstItem="DxB-HA-88b" firstAttribute="top" secondItem="tOW-SM-igK" secondAttribute="top" id="Fiu-n0-Lfo"/>
                             <constraint firstAttribute="bottom" secondItem="DxB-HA-88b" secondAttribute="bottom" id="HOL-JK-KIf"/>
-                            <constraint firstAttribute="height" constant="35" id="lvr-lV-ak7"/>
+                            <constraint firstAttribute="height" constant="35" id="lvr-lV-ak7">
+                                <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                            </constraint>
                             <constraint firstItem="DxB-HA-88b" firstAttribute="leading" secondItem="tOW-SM-igK" secondAttribute="leading" constant="15" id="xT7-qh-kLI"/>
                         </constraints>
                     </view>
@@ -283,7 +285,7 @@
                                     <constraint firstItem="cfW-tw-Eee" firstAttribute="width" secondItem="RzM-M4-duW" secondAttribute="width" id="oko-47-7i0"/>
                                     <constraint firstItem="RzM-M4-duW" firstAttribute="height" secondItem="C57-et-8Sg" secondAttribute="height" id="x1O-yG-BbW"/>
                                 </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
+                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-5m-t3o">
                                 <rect key="frame" x="0.0" y="80" width="605" height="70"/>
@@ -512,7 +514,7 @@
                                     <constraint firstItem="g3V-YF-xPK" firstAttribute="width" secondItem="Op8-a6-rlm" secondAttribute="width" id="nJs-Sy-fTq"/>
                                     <constraint firstItem="5gQ-or-qDx" firstAttribute="height" secondItem="7e2-C7-4oO" secondAttribute="height" id="wUo-qQ-mbh"/>
                                 </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
+                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hw7-cB-dSK">
                                 <rect key="frame" x="0.0" y="160" width="605" height="70"/>
@@ -741,7 +743,7 @@
                                     <constraint firstItem="nkH-3x-Lcw" firstAttribute="width" secondItem="M8V-Bk-K8m" secondAttribute="width" id="sX3-LD-fX2"/>
                                     <constraint firstItem="OAS-f1-YVD" firstAttribute="height" secondItem="4m3-ql-iKI" secondAttribute="height" id="xu9-ST-g7Y"/>
                                 </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
+                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -751,9 +753,10 @@
                             <constraint firstItem="Xuj-gJ-vTF" firstAttribute="height" secondItem="HzR-WL-v1W" secondAttribute="height" id="sKs-dV-kZQ"/>
                             <constraint firstItem="Op8-a6-rlm" firstAttribute="width" secondItem="nkH-3x-Lcw" secondAttribute="width" id="sh7-pV-2rh"/>
                         </constraints>
-                        <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
+                        <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="aWl-6V-LB9" firstAttribute="top" secondItem="tOW-SM-igK" secondAttribute="bottom" constant="5" id="2yW-ER-Gal"/>
                     <constraint firstItem="tOW-SM-igK" firstAttribute="top" secondItem="OQF-OV-0bj" secondAttribute="top" id="GcD-k8-2ZR"/>
@@ -766,22 +769,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="jp5-5u-eqr"/>
             <connections>
-                <outlet property="groundNameiPadLbl" destination="Iie-RV-wrJ" id="BAY-I6-Cyv"/>
-                <outlet property="groundNameiPhoneLbl" destination="HXw-ZD-YXd" id="FXD-D0-WaU"/>
-                <outlet property="matchBDYFqiPadLbl" destination="azS-tC-Hch" id="KZr-9U-qkL"/>
-                <outlet property="matchBDYFqiPhoneLbl" destination="VL4-tY-so2" id="IGW-qT-FG2"/>
-                <outlet property="matchBDYiPadLbl" destination="hBP-Gd-nBD" id="o6C-6z-NgK"/>
-                <outlet property="matchBDYiPhoneLbl" destination="Igc-9u-awe" id="WJD-RE-HFs"/>
-                <outlet property="matchDateiPadLbl" destination="7td-G0-lgf" id="bf6-WW-xIF"/>
-                <outlet property="matchDateiPhoneLbl" destination="MjN-Zc-n34" id="hsd-xo-gNj"/>
-                <outlet property="matchDotiPadLbl" destination="A9I-gx-oHO" id="xO0-gl-S13"/>
-                <outlet property="matchDotiPhoneLbl" destination="6F8-RD-BgM" id="zbm-I4-bcb"/>
-                <outlet property="matchFoursiPadLbl" destination="vpz-Gr-Dcc" id="TIe-CI-AiV"/>
-                <outlet property="matchFoursiPhoneLbl" destination="GBX-eu-l3V" id="ls4-4N-RfZ"/>
-                <outlet property="matchSRiPadLbl" destination="gcW-ev-1iv" id="kug-cT-7zZ"/>
-                <outlet property="matchSRiPhoneLbl" destination="Uwe-Vf-bF9" id="n3p-uV-xWh"/>
-                <outlet property="matchSixsiPadLbl" destination="r6z-OZ-cyG" id="Ray-o5-VhA"/>
-                <outlet property="matchSixsiPhoneLbl" destination="vlj-0m-lhS" id="6S8-g2-bRa"/>
                 <outlet property="overallAvgLbl" destination="Ich-fZ-UvS" id="b5t-cr-h1H"/>
                 <outlet property="overallBDYPercentLbl" destination="571-m4-HMI" id="d2v-bs-NXj"/>
                 <outlet property="overallBallsLbl" destination="wLp-kp-9kn" id="3Mn-oU-HaF"/>
@@ -799,29 +786,21 @@
                 <outlet property="overallThirtiesLbl" destination="bma-c4-hwZ" id="MEC-Kb-PNS"/>
                 <outlet property="scoreView" destination="Tb1-ug-Je5" id="x3H-lW-jft"/>
                 <outlet property="scoreViewHeight" destination="j03-Se-Lzf" id="8xw-nY-ji8"/>
-                <outlet property="teamBallsiPadLbl" destination="r0A-kD-OXC" id="jrV-xL-X52"/>
-                <outlet property="teamBallsiPhoneLbl" destination="JmC-3E-JIm" id="vEa-g4-0GT"/>
-                <outlet property="teamNameiPadLbl" destination="hNi-T8-3CL" id="BCU-uX-LnC"/>
-                <outlet property="teamNameiPhoneLbl" destination="NN2-LT-Gol" id="Hl1-AV-sQF"/>
-                <outlet property="teamRunsiPadLbl" destination="fXG-Ka-LBB" id="gT3-MM-MVb"/>
-                <outlet property="teamRunsiPhoneLbl" destination="p6e-c8-K0f" id="u1t-mr-IYO"/>
-                <outlet property="teamiPadImage" destination="w94-Z7-Zjh" id="IWA-Tu-5EG"/>
-                <outlet property="teamiPhoneImage" destination="OjJ-vW-Rcn" id="hgN-rA-yAN"/>
             </connections>
             <point key="canvasLocation" x="110" y="206.5"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="50" id="iNR-DE-sYJ" customClass="MyStatsBattingCell">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="325" height="55"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNR-DE-sYJ" id="lri-20-Fxg">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILH-nY-nw8">
-                        <rect key="frame" x="0.0" y="11" width="325" height="40"/>
+                        <rect key="frame" x="0.0" y="11" width="325" height="35.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0HZ-dr-k6p">
-                                <rect key="frame" x="15" y="0.0" width="310" height="40"/>
+                                <rect key="frame" x="15" y="0.0" width="310" height="35.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -829,8 +808,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.050278909500000003" green="0.1695914268" blue="0.50483202930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="35.5" id="3ey-EU-fxg">
+                                <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                            </constraint>
                             <constraint firstItem="0HZ-dr-k6p" firstAttribute="top" secondItem="ILH-nY-nw8" secondAttribute="top" id="4Cb-MG-MEA"/>
-                            <constraint firstAttribute="height" constant="40" id="C4u-p3-Lh5"/>
                             <constraint firstItem="0HZ-dr-k6p" firstAttribute="leading" secondItem="ILH-nY-nw8" secondAttribute="leading" constant="15" id="I2R-1m-aoO"/>
                             <constraint firstAttribute="trailing" secondItem="0HZ-dr-k6p" secondAttribute="trailing" id="e1k-3r-auR"/>
                             <constraint firstAttribute="bottom" secondItem="0HZ-dr-k6p" secondAttribute="bottom" id="mw7-kK-xmO"/>
@@ -839,12 +820,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ILH-nY-nw8" firstAttribute="top" secondItem="lri-20-Fxg" secondAttribute="topMargin" id="4at-UG-9cw"/>
-                    <constraint firstAttribute="bottom" secondItem="ILH-nY-nw8" secondAttribute="bottom" constant="8.5" id="60s-NM-Mpa"/>
+                    <constraint firstAttribute="bottom" secondItem="ILH-nY-nw8" secondAttribute="bottom" constant="8" id="J7d-pP-4wp"/>
                     <constraint firstItem="ILH-nY-nw8" firstAttribute="leading" secondItem="lri-20-Fxg" secondAttribute="leading" id="klQ-WB-oBH"/>
                     <constraint firstAttribute="trailing" secondItem="ILH-nY-nw8" secondAttribute="trailing" id="spa-ue-FgA"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="110" y="455"/>
+            <point key="canvasLocation" x="109.5" y="454.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellForiPhone" rowHeight="318" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="325" height="422"/>
@@ -860,7 +841,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kolkata Knight Riders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NN2-LT-Gol">
-                                        <rect key="frame" x="10" y="0.0" width="170" height="35"/>
+                                        <rect key="frame" x="10" y="0.0" width="167" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="9AL-ua-0R4"/>
                                         </constraints>
@@ -869,7 +850,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home" translatesAutoresizingMaskIntoConstraints="NO" id="OjJ-vW-Rcn">
-                                        <rect key="frame" x="180" y="5" width="25" height="25"/>
+                                        <rect key="frame" x="177" y="5" width="25" height="25"/>
                                         <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="B8c-yz-aVL"/>
@@ -877,7 +858,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45*" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6e-c8-K0f">
-                                        <rect key="frame" x="205" y="0.0" width="45" height="35"/>
+                                        <rect key="frame" x="202" y="0.0" width="45" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="8x9-q5-WiA"/>
                                             <constraint firstAttribute="height" constant="35" id="bjW-rb-8zW"/>
@@ -935,7 +916,7 @@
                                     <constraint firstAttribute="height" constant="55" id="YLM-eW-6ta"/>
                                     <constraint firstItem="NN2-LT-Gol" firstAttribute="leading" secondItem="YX7-vp-aZg" secondAttribute="leading" constant="10" id="dzR-qM-R40"/>
                                     <constraint firstAttribute="trailing" secondItem="IKx-tA-Qbq" secondAttribute="trailing" constant="5" id="ngA-ar-2aC"/>
-                                    <constraint firstItem="JmC-3E-JIm" firstAttribute="leading" secondItem="p6e-c8-K0f" secondAttribute="trailing" id="qfM-sc-ECC"/>
+                                    <constraint firstItem="JmC-3E-JIm" firstAttribute="leading" secondItem="p6e-c8-K0f" secondAttribute="trailing" constant="3" id="qfM-sc-ECC"/>
                                     <constraint firstItem="p6e-c8-K0f" firstAttribute="leading" secondItem="OjJ-vW-Rcn" secondAttribute="trailing" id="sD7-fz-sx5"/>
                                     <constraint firstItem="JmC-3E-JIm" firstAttribute="top" secondItem="YX7-vp-aZg" secondAttribute="top" id="tIk-d7-gXj"/>
                                     <constraint firstItem="IKx-tA-Qbq" firstAttribute="leading" secondItem="JmC-3E-JIm" secondAttribute="trailing" id="tkS-z9-g3T"/>
@@ -1593,7 +1574,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="6pU-Kk-879"/>
             <connections>
+                <outlet property="groundNameiPhoneLbl" destination="HXw-ZD-YXd" id="AUx-48-lnT"/>
+                <outlet property="matchBDYFqiPhoneLbl" destination="VL4-tY-so2" id="CZ5-US-iXB"/>
+                <outlet property="matchBDYiPhoneLbl" destination="Igc-9u-awe" id="ccI-96-uJe"/>
+                <outlet property="matchDateiPhoneLbl" destination="MjN-Zc-n34" id="eSk-pn-fx7"/>
+                <outlet property="matchDotiPhoneLbl" destination="6F8-RD-BgM" id="lOX-cB-Evp"/>
+                <outlet property="matchFoursiPhoneLbl" destination="GBX-eu-l3V" id="cgh-ar-V5a"/>
+                <outlet property="matchSRiPhoneLbl" destination="Uwe-Vf-bF9" id="0As-ZP-1vc"/>
+                <outlet property="matchSixsiPhoneLbl" destination="vlj-0m-lhS" id="qtd-pt-lIE"/>
                 <outlet property="scoreView" destination="Tb1-ug-Je5" id="KL3-5c-oOq"/>
+                <outlet property="teamBallsiPhoneLbl" destination="JmC-3E-JIm" id="KJF-mK-Er8"/>
+                <outlet property="teamNameiPhoneLbl" destination="NN2-LT-Gol" id="W6I-wE-XO3"/>
+                <outlet property="teamRunsiPhoneLbl" destination="p6e-c8-K0f" id="mPG-ed-ziy"/>
+                <outlet property="teamiPhoneImage" destination="OjJ-vW-Rcn" id="edm-jY-H7R"/>
             </connections>
             <point key="canvasLocation" x="109.5" y="773"/>
         </tableViewCell>
@@ -1611,7 +1604,7 @@
                                 <rect key="frame" x="0.0" y="5" width="795" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kolkata Knight Riders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNi-T8-3CL">
-                                        <rect key="frame" x="10" y="0.0" width="480" height="35"/>
+                                        <rect key="frame" x="10" y="0.0" width="475" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Oao-aS-Ybv"/>
                                         </constraints>
@@ -1620,7 +1613,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home" translatesAutoresizingMaskIntoConstraints="NO" id="w94-Z7-Zjh">
-                                        <rect key="frame" x="490" y="0.0" width="35" height="35"/>
+                                        <rect key="frame" x="485" y="0.0" width="35" height="35"/>
                                         <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="1XG-85-fY9"/>
@@ -1628,7 +1621,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45*" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXG-Ka-LBB">
-                                        <rect key="frame" x="545" y="0.0" width="100" height="35"/>
+                                        <rect key="frame" x="540" y="0.0" width="100" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="9FS-gB-ajL"/>
                                             <constraint firstAttribute="width" constant="100" id="kE9-bh-Rbf"/>
@@ -1676,14 +1669,12 @@
                                 <color key="backgroundColor" red="0.99990183115005493" green="1" blue="0.99987989664077759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="06R-9Q-lBf" firstAttribute="top" secondItem="UWF-y8-56g" secondAttribute="top" id="0Bx-fO-7Pq"/>
-                                    <constraint firstItem="r0A-kD-OXC" firstAttribute="leading" secondItem="fXG-Ka-LBB" secondAttribute="trailing" id="4Rh-Ui-tst"/>
+                                    <constraint firstItem="r0A-kD-OXC" firstAttribute="leading" secondItem="fXG-Ka-LBB" secondAttribute="trailing" constant="5" id="4Rh-Ui-tst"/>
                                     <constraint firstItem="fXG-Ka-LBB" firstAttribute="leading" secondItem="w94-Z7-Zjh" secondAttribute="trailing" constant="20" id="6iJ-eH-6Yt"/>
                                     <constraint firstItem="06R-9Q-lBf" firstAttribute="leading" secondItem="r0A-kD-OXC" secondAttribute="trailing" id="8MQ-zX-OOC"/>
                                     <constraint firstItem="7td-G0-lgf" firstAttribute="leading" secondItem="UWF-y8-56g" secondAttribute="leading" constant="10" id="AcO-Si-HZ7"/>
                                     <constraint firstAttribute="bottom" secondItem="7td-G0-lgf" secondAttribute="bottom" id="Czz-5L-aZj"/>
                                     <constraint firstItem="fXG-Ka-LBB" firstAttribute="top" secondItem="UWF-y8-56g" secondAttribute="top" id="DBW-Jc-RqT"/>
-                                    <constraint firstItem="06R-9Q-lBf" firstAttribute="leading" secondItem="r0A-kD-OXC" secondAttribute="trailing" id="EtS-FK-H7v"/>
-                                    <constraint firstItem="r0A-kD-OXC" firstAttribute="leading" secondItem="fXG-Ka-LBB" secondAttribute="trailing" id="Fa6-Sw-Kzy"/>
                                     <constraint firstAttribute="height" constant="60" id="Flq-Rz-q47"/>
                                     <constraint firstItem="hNi-T8-3CL" firstAttribute="leading" secondItem="UWF-y8-56g" secondAttribute="leading" constant="10" id="Vhv-22-ukJ"/>
                                     <constraint firstAttribute="bottom" secondItem="Iie-RV-wrJ" secondAttribute="bottom" id="mbg-Nw-gco"/>
@@ -2346,7 +2337,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="PdR-5M-6f9"/>
             <connections>
+                <outlet property="groundNameiPadLbl" destination="Iie-RV-wrJ" id="KBb-2t-Wqu"/>
+                <outlet property="matchBDYFqiPadLbl" destination="azS-tC-Hch" id="1Nz-Jg-MCE"/>
+                <outlet property="matchBDYiPadLbl" destination="hBP-Gd-nBD" id="lK0-ux-8QA"/>
+                <outlet property="matchDateiPadLbl" destination="7td-G0-lgf" id="aGs-KN-bQC"/>
+                <outlet property="matchDotiPadLbl" destination="A9I-gx-oHO" id="rLY-8f-4xS"/>
+                <outlet property="matchFoursiPadLbl" destination="vpz-Gr-Dcc" id="GXY-45-ZLV"/>
+                <outlet property="matchSRiPadLbl" destination="gcW-ev-1iv" id="0Qa-hC-gNo"/>
+                <outlet property="matchSixsiPadLbl" destination="r6z-OZ-cyG" id="rFw-5g-9Ia"/>
                 <outlet property="scoreView" destination="84q-aF-PfE" id="yVW-SJ-M6T"/>
+                <outlet property="teamBallsiPadLbl" destination="r0A-kD-OXC" id="4dF-23-kHq"/>
+                <outlet property="teamNameiPadLbl" destination="hNi-T8-3CL" id="Aic-WI-e2w"/>
+                <outlet property="teamRunsiPadLbl" destination="fXG-Ka-LBB" id="wt5-Qj-8BS"/>
+                <outlet property="teamiPadImage" destination="w94-Z7-Zjh" id="zpb-u1-7a7"/>
             </connections>
             <point key="canvasLocation" x="130" y="1275"/>
         </tableViewCell>
