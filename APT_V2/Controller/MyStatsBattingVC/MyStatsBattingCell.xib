@@ -23,7 +23,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="293" id="c8U-PW-bLO" customClass="MyStatsBattingCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="285" id="c8U-PW-bLO" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="625" height="285"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c8U-PW-bLO" id="OQF-OV-0bj">
@@ -269,6 +269,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="cfW-tw-Eee" firstAttribute="height" secondItem="RzM-M4-duW" secondAttribute="height" id="4Ez-TY-glu"/>
                                     <constraint firstAttribute="height" constant="70" id="90A-lM-95R">
@@ -743,6 +744,7 @@
                                 <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
                             </stackView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Xuj-gJ-vTF" firstAttribute="width" secondItem="HzR-WL-v1W" secondAttribute="width" id="a2g-SB-sZZ"/>
                             <constraint firstItem="Op8-a6-rlm" firstAttribute="height" secondItem="nkH-3x-Lcw" secondAttribute="height" id="ifo-OI-T4e"/>
@@ -764,12 +766,51 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="jp5-5u-eqr"/>
             <connections>
+                <outlet property="groundNameiPadLbl" destination="Iie-RV-wrJ" id="BAY-I6-Cyv"/>
+                <outlet property="groundNameiPhoneLbl" destination="HXw-ZD-YXd" id="FXD-D0-WaU"/>
+                <outlet property="matchBDYFqiPadLbl" destination="azS-tC-Hch" id="KZr-9U-qkL"/>
+                <outlet property="matchBDYFqiPhoneLbl" destination="VL4-tY-so2" id="IGW-qT-FG2"/>
+                <outlet property="matchBDYiPadLbl" destination="hBP-Gd-nBD" id="o6C-6z-NgK"/>
+                <outlet property="matchBDYiPhoneLbl" destination="Igc-9u-awe" id="WJD-RE-HFs"/>
+                <outlet property="matchDateiPadLbl" destination="7td-G0-lgf" id="bf6-WW-xIF"/>
+                <outlet property="matchDateiPhoneLbl" destination="MjN-Zc-n34" id="hsd-xo-gNj"/>
+                <outlet property="matchDotiPadLbl" destination="A9I-gx-oHO" id="xO0-gl-S13"/>
+                <outlet property="matchDotiPhoneLbl" destination="6F8-RD-BgM" id="zbm-I4-bcb"/>
+                <outlet property="matchFoursiPadLbl" destination="vpz-Gr-Dcc" id="TIe-CI-AiV"/>
+                <outlet property="matchFoursiPhoneLbl" destination="GBX-eu-l3V" id="ls4-4N-RfZ"/>
+                <outlet property="matchSRiPadLbl" destination="gcW-ev-1iv" id="kug-cT-7zZ"/>
+                <outlet property="matchSRiPhoneLbl" destination="Uwe-Vf-bF9" id="n3p-uV-xWh"/>
+                <outlet property="matchSixsiPadLbl" destination="r6z-OZ-cyG" id="Ray-o5-VhA"/>
+                <outlet property="matchSixsiPhoneLbl" destination="vlj-0m-lhS" id="6S8-g2-bRa"/>
+                <outlet property="overallAvgLbl" destination="Ich-fZ-UvS" id="b5t-cr-h1H"/>
+                <outlet property="overallBDYPercentLbl" destination="571-m4-HMI" id="d2v-bs-NXj"/>
+                <outlet property="overallBallsLbl" destination="wLp-kp-9kn" id="3Mn-oU-HaF"/>
+                <outlet property="overallDotPercentLbl" destination="niJ-6s-fKh" id="9Jw-oz-uQH"/>
+                <outlet property="overallFiftiesLbl" destination="ZRh-WP-MwT" id="TpF-EY-3dE"/>
+                <outlet property="overallFoursLbl" destination="Dd6-h4-Xfm" id="oIG-4d-IUp"/>
+                <outlet property="overallHSLbl" destination="Rbg-O5-Jso" id="1Zx-Se-rCI"/>
+                <outlet property="overallHundredsLbl" destination="YDb-Sf-3wa" id="mDv-tJ-aDD"/>
+                <outlet property="overallInningsLbl" destination="sqw-sj-J1N" id="cIk-9w-Gb2"/>
+                <outlet property="overallMatchesLbl" destination="Fit-AT-GCe" id="rFg-Oa-YBh"/>
+                <outlet property="overallNOLbl" destination="aEA-c2-XQm" id="GYC-nG-Kpw"/>
+                <outlet property="overallRunsLbl" destination="AMS-Ia-Dmy" id="Mvi-sU-X3V"/>
+                <outlet property="overallSRLbl" destination="8hu-1C-B0v" id="Q3V-WC-Fl6"/>
+                <outlet property="overallSixsLbl" destination="2Uw-W5-aTy" id="uDv-Dd-9C5"/>
+                <outlet property="overallThirtiesLbl" destination="bma-c4-hwZ" id="MEC-Kb-PNS"/>
                 <outlet property="scoreView" destination="Tb1-ug-Je5" id="x3H-lW-jft"/>
                 <outlet property="scoreViewHeight" destination="j03-Se-Lzf" id="8xw-nY-ji8"/>
+                <outlet property="teamBallsiPadLbl" destination="r0A-kD-OXC" id="jrV-xL-X52"/>
+                <outlet property="teamBallsiPhoneLbl" destination="JmC-3E-JIm" id="vEa-g4-0GT"/>
+                <outlet property="teamNameiPadLbl" destination="hNi-T8-3CL" id="BCU-uX-LnC"/>
+                <outlet property="teamNameiPhoneLbl" destination="NN2-LT-Gol" id="Hl1-AV-sQF"/>
+                <outlet property="teamRunsiPadLbl" destination="fXG-Ka-LBB" id="gT3-MM-MVb"/>
+                <outlet property="teamRunsiPhoneLbl" destination="p6e-c8-K0f" id="u1t-mr-IYO"/>
+                <outlet property="teamiPadImage" destination="w94-Z7-Zjh" id="IWA-Tu-5EG"/>
+                <outlet property="teamiPhoneImage" destination="OjJ-vW-Rcn" id="hgN-rA-yAN"/>
             </connections>
             <point key="canvasLocation" x="110" y="206.5"/>
         </tableViewCell>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="50" id="iNR-DE-sYJ" customClass="MyStatsBattingCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="50" id="iNR-DE-sYJ" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="325" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNR-DE-sYJ" id="lri-20-Fxg">
@@ -805,7 +846,7 @@
             </tableViewCellContentView>
             <point key="canvasLocation" x="110" y="455"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCell" rowHeight="318" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellForiPhone" rowHeight="318" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="325" height="422"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jru-Mg-bxO" id="nxr-8u-mJO">
@@ -1556,7 +1597,7 @@
             </connections>
             <point key="canvasLocation" x="109.5" y="773"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellIpad" rowHeight="247" id="9hh-qu-vYJ" customClass="MyStatsBattingCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellForiPad" rowHeight="247" id="9hh-qu-vYJ" customClass="MyStatsBattingCell">
             <rect key="frame" x="0.0" y="0.0" width="795" height="351"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9hh-qu-vYJ" id="The-7u-uIo">

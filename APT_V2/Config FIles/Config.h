@@ -235,5 +235,5 @@
 
 #define ScheduleKey                @"GETEVENTSSCHEDULE"
 
-
+#define playerMyStatsBatting               @"MOBILE_GETMYSTATSBATTING"
 
