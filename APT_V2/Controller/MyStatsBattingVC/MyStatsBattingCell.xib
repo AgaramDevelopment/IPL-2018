@@ -849,9 +849,9 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home" translatesAutoresizingMaskIntoConstraints="NO" id="OjJ-vW-Rcn">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="matchHome" translatesAutoresizingMaskIntoConstraints="NO" id="OjJ-vW-Rcn">
                                         <rect key="frame" x="177" y="5" width="25" height="25"/>
-                                        <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="B8c-yz-aVL"/>
                                             <constraint firstAttribute="width" constant="25" id="WAC-4H-ra5"/>
@@ -877,7 +877,7 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="IKx-tA-Qbq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="IKx-tA-Qbq">
                                         <rect key="frame" x="295" y="5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="CoF-n9-Rvu"/>
@@ -1574,6 +1574,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="6pU-Kk-879"/>
             <connections>
+                <outlet property="dropDowniPhoneImage" destination="IKx-tA-Qbq" id="GhK-wb-cnS"/>
                 <outlet property="groundNameiPhoneLbl" destination="HXw-ZD-YXd" id="AUx-48-lnT"/>
                 <outlet property="matchBDYFqiPhoneLbl" destination="VL4-tY-so2" id="CZ5-US-iXB"/>
                 <outlet property="matchBDYiPhoneLbl" destination="Igc-9u-awe" id="ccI-96-uJe"/>
@@ -1612,9 +1613,9 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home" translatesAutoresizingMaskIntoConstraints="NO" id="w94-Z7-Zjh">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="matchHome" translatesAutoresizingMaskIntoConstraints="NO" id="w94-Z7-Zjh">
                                         <rect key="frame" x="485" y="0.0" width="35" height="35"/>
-                                        <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="1XG-85-fY9"/>
                                             <constraint firstAttribute="height" constant="35" id="KEu-23-ewa"/>
@@ -1640,7 +1641,7 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="06R-9Q-lBf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="06R-9Q-lBf">
                                         <rect key="frame" x="745" y="0.0" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="Ruo-iK-5PB"/>
@@ -2337,6 +2338,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="PdR-5M-6f9"/>
             <connections>
+                <outlet property="dropDowniPadImage" destination="06R-9Q-lBf" id="ZEO-3E-25X"/>
                 <outlet property="groundNameiPadLbl" destination="Iie-RV-wrJ" id="KBb-2t-Wqu"/>
                 <outlet property="matchBDYFqiPadLbl" destination="azS-tC-Hch" id="1Nz-Jg-MCE"/>
                 <outlet property="matchBDYiPadLbl" destination="hBP-Gd-nBD" id="lK0-ux-8QA"/>
@@ -2357,7 +2359,7 @@
     <resources>
         <image name="Pitchmap" width="485" height="470"/>
         <image name="WagonWheel" width="284" height="284"/>
-        <image name="down-arrow" width="21" height="21"/>
-        <image name="home" width="30" height="30"/>
+        <image name="downArrow" width="83" height="83"/>
+        <image name="matchHome" width="83" height="83"/>
     </resources>
 </document>

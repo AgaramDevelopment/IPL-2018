@@ -61,5 +61,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *matchBDYFqiPhoneLbl;
 @property (weak, nonatomic) IBOutlet UILabel *matchBDYFqiPadLbl;
 
+@property (weak, nonatomic) IBOutlet UIImageView *dropDowniPhoneImage;
+@property (weak, nonatomic) IBOutlet UIImageView *dropDowniPadImage;
 
 @end
