@@ -15,6 +15,8 @@
     NSMutableArray *valueArray;
 }
 @property (strong, nonatomic) IBOutlet UIButton *sessionBtn;
+@property (strong, nonatomic) IBOutlet UIButton *ActivityBtn;
+
 @property (strong, nonatomic) IBOutlet UIView *countview;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewHeight;
@@ -24,4 +26,6 @@
     //Donar Charts
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
 
+
+@property (strong, nonatomic) IBOutlet UITableView *popViewtable;
 @end

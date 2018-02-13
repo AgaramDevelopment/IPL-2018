@@ -10,9 +10,12 @@
 #import "Config.h"
 #import "XYPieChart.h"
 #import "PieChartView.h"
+#import "TrainingLoadUpdateVC.h"
+
 
 @interface TrainingLoadVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
+    TrainingLoadUpdateVC *objUpdate;
     float num1;
     float num2;
     float num3;
@@ -91,6 +94,15 @@
         pieChartView2.datasource = self;
         [self.todayMainView addSubview:pieChartView2];
     }
+}
+- (IBAction)AddtrainingBtnAction:(id)sender {
+    
+    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+     [self.traingView addSubview:objUpdate.view];
+    
+//        WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc]init];
+//        objWell.traingViewHeight.constant = objWell.traingViewHeight.constant+300;
 }
 
 #pragma mark -    PieChartViewDelegate
@@ -198,14 +210,6 @@
     return obj;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

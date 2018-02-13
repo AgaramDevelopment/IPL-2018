@@ -20,6 +20,9 @@
 
 @interface VideoPlayerViewController : UIViewController
 
+@property (nonatomic,strong) NSString * objSelectVideoLink;
+
+
 @property (strong, nonatomic) IBOutlet UIView *videoView;
 @property (strong, nonatomic) IBOutlet UIView *rootVideoView;
 @property (strong, nonatomic) IBOutlet UICollectionView *ballsColView;

@@ -94,10 +94,24 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 }
 
 
--(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 success:(WebserviceRequestSuccessHandler)success
+-(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin success:(WebserviceRequestSuccessHandler)success
        failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@/%@/%@/%@",codelist,clientCode,usercode,date,playercode,code1,code2,code3,code4]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",codelist,clientCode,usercode,date,playercode,code1,code2,code3,code4,bodyWeight,sleephr,fat,restinghr,restingbpMax,restingbpMin]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+       failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",codelist,playercode,date]];
     NSLog(@"urlString = %@",urlString);
     
     

@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoGalleryUploadCell : UICollectionViewCell
+@property (nonatomic,strong) IBOutlet UILabel * batting_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * playername_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * date_lbl;
 
 @end

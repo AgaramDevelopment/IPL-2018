@@ -13,6 +13,7 @@
 #import "TabHomeVC.h"
 #import "MyStatsBattingVC.h"
 #import "MatchCenterTBC.h"
+#import "TrainingLoadUpdateVC.h"
 
 @interface RearViewController ()
 {

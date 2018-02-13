@@ -19,4 +19,26 @@
 
 @property (strong, nonatomic) IBOutlet UIView *bowlingLoadView;
 
+@property (strong, nonatomic) IBOutlet UILabel *bodyWeightlbl;
+@property (strong, nonatomic) IBOutlet UILabel *sleepHrlbl;
+@property (strong, nonatomic) IBOutlet UILabel *ratinglbl;
+
+@property (strong, nonatomic) IBOutlet UILabel *sleeplbl;
+@property (strong, nonatomic) IBOutlet UILabel *fatiquelbl;
+@property (strong, nonatomic) IBOutlet UILabel *musclelbl;
+@property (strong, nonatomic) IBOutlet UILabel *stresslbl;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *traingViewHeight;
+
+
+
+@property (strong, nonatomic) IBOutlet UIView *SleepColorView;
+@property (strong, nonatomic) IBOutlet UIView *FatiqueColorView;
+@property (strong, nonatomic) IBOutlet UIView *MuscleColorView;
+@property (strong, nonatomic) IBOutlet UIView *StressColorView;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topviewHeight;
+
+-(BOOL)setHeight;
+
 @end
