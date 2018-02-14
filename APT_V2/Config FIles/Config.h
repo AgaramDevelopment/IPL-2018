@@ -243,6 +243,8 @@
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
+#define  TraingLoadDropKey              @"MOBILE_GETTRAININGLOAD"
 
 #define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
+#define  trainingSaveKey              @"MOBILE_INSERT_TRAININGLOAD_DETAILS"
 
