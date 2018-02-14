@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+        <array key="Montserrat-Thin.otf">
+            <string>Montserrat-Thin</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AssessmentSCCell" id="0qY-09-xbp" customClass="SCCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIg-Rp-Kcy">
+                        <rect key="frame" x="4.5" y="35" width="110" height="30"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LoX-po-H17">
+                                <rect key="frame" x="57.5" y="0.0" width="47.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dRG-kh-bMa">
+                                <rect key="frame" x="5" y="0.0" width="47.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-Pr-hAt">
+                                <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="17"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dRG-kh-bMa" firstAttribute="top" secondItem="lIg-Rp-Kcy" secondAttribute="top" id="7Ig-Fd-NsO"/>
+                            <constraint firstItem="LoX-po-H17" firstAttribute="leading" secondItem="dRG-kh-bMa" secondAttribute="trailing" constant="5" id="BLq-lC-cKT"/>
+                            <constraint firstAttribute="bottom" secondItem="DfV-Pr-hAt" secondAttribute="bottom" id="Dpf-D4-gE2"/>
+                            <constraint firstItem="dRG-kh-bMa" firstAttribute="leading" secondItem="lIg-Rp-Kcy" secondAttribute="leading" constant="5" id="E07-1L-bh1"/>
+                            <constraint firstAttribute="trailing" secondItem="LoX-po-H17" secondAttribute="trailing" constant="5" id="PeV-a9-RFc"/>
+                            <constraint firstAttribute="bottom" secondItem="dRG-kh-bMa" secondAttribute="bottom" id="UsR-Hj-lXt"/>
+                            <constraint firstAttribute="trailing" secondItem="DfV-Pr-hAt" secondAttribute="trailing" id="Uzj-lU-pdF"/>
+                            <constraint firstItem="DfV-Pr-hAt" firstAttribute="top" secondItem="lIg-Rp-Kcy" secondAttribute="top" id="XwE-cK-9zc"/>
+                            <constraint firstItem="LoX-po-H17" firstAttribute="width" secondItem="dRG-kh-bMa" secondAttribute="width" id="e30-TI-jOq"/>
+                            <constraint firstAttribute="bottom" secondItem="LoX-po-H17" secondAttribute="bottom" id="i4C-Ix-Qpi"/>
+                            <constraint firstItem="LoX-po-H17" firstAttribute="top" secondItem="lIg-Rp-Kcy" secondAttribute="top" id="qUA-kT-qq7"/>
+                            <constraint firstAttribute="height" constant="30" id="rc5-dL-cI0"/>
+                            <constraint firstItem="DfV-Pr-hAt" firstAttribute="leading" secondItem="lIg-Rp-Kcy" secondAttribute="leading" id="z3e-t4-Bpy"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbT-cA-rCI">
+                        <rect key="frame" x="49.5" y="5" width="22" height="25"/>
+                        <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="jKR-X3-Bha"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrE-OW-cFE">
+                        <rect key="frame" x="5" y="75" width="110" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="110" id="SeK-a9-6C0"/>
+                            <constraint firstAttribute="height" constant="20" id="wgB-j5-Tib"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="lIg-Rp-Kcy" firstAttribute="top" secondItem="jbT-cA-rCI" secondAttribute="bottom" constant="5" id="8tl-3T-v1J"/>
+                <constraint firstItem="CrE-OW-cFE" firstAttribute="width" secondItem="jbT-cA-rCI" secondAttribute="width" multiplier="5" id="Nxz-Ae-mwI"/>
+                <constraint firstAttribute="bottom" secondItem="CrE-OW-cFE" secondAttribute="bottom" constant="5" id="OhI-Ma-whR"/>
+                <constraint firstItem="lIg-Rp-Kcy" firstAttribute="width" secondItem="CrE-OW-cFE" secondAttribute="width" id="Rpc-yW-6Gl"/>
+                <constraint firstItem="jbT-cA-rCI" firstAttribute="centerX" secondItem="0qY-09-xbp" secondAttribute="centerX" id="Uym-32-Tar"/>
+                <constraint firstItem="jbT-cA-rCI" firstAttribute="top" secondItem="0qY-09-xbp" secondAttribute="top" constant="5" id="hL6-4A-uHd"/>
+                <constraint firstItem="CrE-OW-cFE" firstAttribute="centerX" secondItem="0qY-09-xbp" secondAttribute="centerX" id="hua-rQ-b2x"/>
+                <constraint firstItem="lIg-Rp-Kcy" firstAttribute="centerX" secondItem="0qY-09-xbp" secondAttribute="centerX" id="ipg-a8-XYv"/>
+                <constraint firstItem="CrE-OW-cFE" firstAttribute="top" secondItem="lIg-Rp-Kcy" secondAttribute="bottom" constant="10" id="sf5-62-neQ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="EY8-Ck-hnZ"/>
+            <size key="customSize" width="120" height="35"/>
+            <connections>
+                <outlet property="SCtxt1" destination="LoX-po-H17" id="AM1-u6-FeX"/>
+                <outlet property="SCtxt2" destination="dRG-kh-bMa" id="E35-V6-Tfj"/>
+                <outlet property="btnDropdown" destination="DfV-Pr-hAt" id="PdJ-ed-949"/>
+                <outlet property="lblBottom" destination="CrE-OW-cFE" id="w0e-7n-FDD"/>
+                <outlet property="lblTopIndicator" destination="jbT-cA-rCI" id="bEe-Gv-3hb"/>
+            </connections>
+            <point key="canvasLocation" x="69" y="46"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -28,6 +28,7 @@
 #import "RearViewController.h"
 
 #import "LineTextField.h"
+#import "UITextField+textCode.h"
 // Login screen
 
 #import "LoginVC.h"

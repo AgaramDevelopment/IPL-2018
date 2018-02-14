@@ -11,12 +11,13 @@
 #define  SCREEN_CODE_MMT  @"ASTT003"
 #define  SCREEN_CODE_GAIT  @"ASTT004"
 #define  SCREEN_CODE_POSTURE  @"ASTT005"
-#define  SCREEN_CODE_COACHING  @"ASTT007"
 #define  SCREEN_CODE_S_C  @"ASTT006"
+#define  SCREEN_CODE_COACHING  @"ASTT007"
 
 
 #import "ViewController.h"
 #import "TestPropertyCollectionViewCell.h"
+#import "SCCollectionViewCell.h"
 
 @interface ViewController () <SKSTableViewDelegate,selectedDropDown,DatePickerProtocol>
 {
@@ -29,6 +30,8 @@
     NSString* version;
     NSString* currentlySelectedTest;
     NSInteger CollectionItem;
+    NSArray* dropdownArray;
+    NSInteger textFieldIndexPath;
 
     
 }
@@ -64,6 +67,8 @@
 
 @synthesize txtRemarks,popupVC,lblNOData;
 
+@synthesize btnIgnore;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -87,7 +92,8 @@
     currentlySelectedHeader = -1;
     
     [assCollection registerNib:[UINib nibWithNibName:@"TestPropertyCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentCell"];
-    
+    [assCollection registerNib:[UINib nibWithNibName:@"SCCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentSCCell"];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
@@ -119,7 +125,9 @@
 //    [self.bottomConstant setActive:YES];
 //    [self.centerY setActive:NO];
     if (notification.name == UIKeyboardWillHideNotification) {
-        self.bottomConstant.constant = self.Shadowview.frame.size.height - CGRectGetMidY(self.Shadowview.frame);
+//        self.bottomConstant.constant = (CGRectGetMidY(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
+        self.bottomConstant.constant = (CGRectGetHeight(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
+
     }
     else
     {
@@ -424,7 +432,6 @@
 //    else
 //    {
 //        cell = array[3];
-//
 //    }
     
     cell.translatesAutoresizingMaskIntoConstraints = NO;
@@ -435,28 +442,17 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    lblAssessmentName.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeName"];
-    NSString* testCode = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"ScreenID"];
+    
+    NSArray* currentIndexArray = [[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"];
+
+    lblAssessmentName.text = [currentIndexArray.firstObject valueForKey:@"TestTypeName"];
+    NSString* testCode = [currentIndexArray.firstObject valueForKey:@"ScreenID"];
     
     NSString* MainTypeCode = [[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestTypeCode"];
     
-    NSString* subTypeCode = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"TestTypeCode"];
+    NSString* subTypeCode = [currentIndexArray.firstObject valueForKey:@"TestTypeCode"];
 
     currentlySelectedTest = testCode;
-    
-    
-    NSArray* currentIndexArray = [[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"];
-    
-//    NSMutableArray* arr = [NSMutableArray new];
-//    arr initkey
-//    NSInteger index = [arrayTestName indexOfObject:[arrayTestName valueForKeyPath:@"TestCode"]];
-//
-//    for (NSDictionary* ndict in arrayTestName) {
-//        if ([ndict valueForKey:testCode] == testCode) {
-//            NSInteger index = [arrayTestName indexOfObject:ndict];
-//        }
-//    }
-    
     
     self.Shadowview.layer.masksToBounds = NO;
     self.Shadowview.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -470,10 +466,13 @@
     
     lblUnitValue.layer.borderColor = [UIColor lightGrayColor].CGColor;
     lblUnitValue.layer.borderWidth = 0.3;
+    
 
     
-    if ([SCREEN_CODE_Rom isEqualToString:@"ASTT001"]) {
-        
+//    if ([SCREEN_CODE_Rom isEqualToString:testCode]) {
+    if ([testCode isEqualToString:@"ASTT001"]) {
+
+    
 //        self.ObjSelectTestArray =[self.objDBconnection GetRomWithEntry: version : txtTitle.selectedCode :txtModule.selectedCode :MainTypeCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :subTypeCode];
 
         
@@ -498,35 +497,41 @@
         lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[currentIndexArray.firstObject valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
         lblUnitValue.text = [currentIndexArray.firstObject valueForKey:@"romUnitName"];
     }
-    else if ([SCREEN_CODE_SPECIAL isEqualToString:@"ASTT002"]) {
-        
+    else if ([testCode isEqualToString:@"ASTT002"]) {
+
+    
 //        self.assessmentTestTypeSpecial =[self.objDBConnection getPositiveNegative];
         CollectionItem = 1;
 
 
     }
-    else if ([SCREEN_CODE_MMT isEqualToString:@"ASTT003"]) {
+    else if ([testCode isEqualToString:@"ASTT003"]) {
+
 //        self.AssessmentTypeMMT =[self.objDBConnection getWithMmtCombo];
         
         CollectionItem = 1;
         
     }
-    else if ([SCREEN_CODE_GAIT isEqualToString:@"ASTT004"]) {
+    else if ([testCode isEqualToString:@"ASTT004"]) {
+
 //        self.AssessmentTypeGaint =[self.objDBConnection getResultCombo];
 
         CollectionItem = 1;
 
     }
-    else if ([SCREEN_CODE_POSTURE isEqualToString:@"ASTT005"]) {
+    else if ([testCode isEqualToString:@"ASTT005"]) {
+
         CollectionItem = 1;
 
     }
-    else if ([SCREEN_CODE_S_C isEqualToString:@"ASTT006"]) {
+    else if ([testCode isEqualToString:@"ASTT006"]) {
+
 //        self.assessmentTestTypePosture =[self.objDBConnection getwithPostureRESULTS];
 
         
     }
-    else if ([SCREEN_CODE_COACHING isEqualToString:@"ASTT007"]) {
+    else if ([testCode isEqualToString:@"ASTT007"]) {
+
         
         CollectionItem = 1;
 
@@ -538,7 +543,16 @@
 //    [NSLayoutConstraint deactivateConstraints:self.centerY];
 //    [NSLayoutConstraint activateConstraints:self.centerY];
 
-    [self presentViewController:popupVC animated:YES completion:nil];
+    [self presentViewController:popupVC animated:YES completion:^{
+//        self.bottomConstant.constant = (CGRectGetMidY(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
+        
+        self.bottomConstant.constant = (CGRectGetHeight(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
+
+        /* (totalheight - shadowviewheight) / 2 */
+        [self.Shadowview updateConstraintsIfNeeded];
+        [self.assCollection reloadData];
+
+    }];
 }
 
 -(IBAction)closePopup:(id)sender
@@ -802,6 +816,107 @@
 }
 - (IBAction)actionAssessmentSave:(id)sender {
     
+    [self collectEnteredValues];
+    
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom]) { // ROM
+        
+//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+//
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL]) { // special
+//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+//
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+
+
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT]) { // MMT
+        //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+        //
+        //        if(IsEdit == YES)
+        //        {
+        //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"":@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        //        }
+        //        else
+        //        {
+        //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+        //        }
+
+        
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT]) { // Gait
+      
+//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+//
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"":@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE]) { // Posture
+//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+//
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C]) { // S & C
+        
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0" ];
+//        }
+
+        
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING]) { // coach
+        
+//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
+//
+//        if(IsEdit == YES)
+//        {
+//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+//        else
+//        {
+//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+//        }
+
+    }
+
+    
+    
 }
 
 
@@ -813,43 +928,131 @@
     return 1;
     
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return CollectionItem;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TestPropertyCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
-    cell.txtField.delegate = self;
     
-    if (indexPath.item == 0) {
-        cell.lblBottom.text = @"Left";
-    }
-    else
-    {
-        cell.lblBottom.text = @"Right";
-    }
-    
-    
-    if ([SCREEN_CODE_S_C isEqualToString:currentlySelectedTest] || [SCREEN_CODE_Rom isEqualToString:currentlySelectedTest]) {
-        cell.txtField.borderStyle = UITextBorderStyleRoundedRect;
-        [cell.txtField.rightView setHidden:YES];
-        cell.layer.borderColor = [UIColor clearColor].CGColor;
+        TestPropertyCollectionViewCell* cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
 
-    }
-    else
-    {
-        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        cell.txtField.borderStyle = UITextBorderStyleNone;
-        [cell.txtField.rightView setHidden:NO];
-    }
-    
-    return cell;
+        cell.txtField.delegate = self;
+
+        if (indexPath.item == 0) {
+            cell.lblBottom.text = @"Left";
+        }
+        else
+        {
+            cell.lblBottom.text = @"Right";
+        }
+
+        if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom]) {
+            [cell.SC_view setHidden:YES];
+            [cell.txtDropDown setHidden:YES];
+            [cell.txtField setHidden:NO];
+
+        }
+        else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
+        {
+            [cell.SC_view setHidden:NO];
+            [cell.txtDropDown setHidden:YES];
+            [cell.txtField setHidden:YES];
+            cell.txt1_SC.tag = indexPath.row;
+            cell.txt2_SC.tag = indexPath.row;
+
+        }
+        else
+        {
+            [cell.SC_view setHidden:YES];
+            [cell.txtDropDown setHidden:NO];
+            [cell.txtField setHidden:YES];
+            cell.txtDropDown.delegate = self;
+            [cell.txtDropDown setInputView:_pickerMainView];
+            cell.txtDropDown.tag = indexPath.row;
+
+        }
+        return cell;
 
 }
+
+-(void)AssessmentBtnDropDown:(UIButton *)sender
+{
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
+    {
+        dropdownArray =[self.objDBconnection getPositiveNegative];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
+    {
+        dropdownArray =[self.objDBconnection getWithMmtCombo];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
+    {
+        dropdownArray =[self.objDBconnection getResultCombo];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
+    {
+        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
+    {
+        
+    }
+    
+}
+
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
+    {
+        dropdownArray =[self.objDBconnection getPositiveNegative];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
+    {
+        dropdownArray =[self.objDBconnection getWithMmtCombo];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
+    {
+        dropdownArray =[self.objDBconnection getResultCombo];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
+    {
+        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
+    {
+        
+    }
+    textFieldIndexPath = textField.tag;
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
+
+    
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
+    {
+//        dropdownArray =[self.objDBconnection getPositiveNegative];
+//        cell.txtField.text = textField.text;
+        
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
+    {
+//        dropdownArray =[self.objDBconnection getWithMmtCombo];
+//        cell.txt1_SC.text = textField.text;
+    }
+
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -858,18 +1061,96 @@
     return YES;
 }
 
-
 - (IBAction)actionIgnore:(id)sender {
     UIImage* check = [UIImage imageNamed:@"check"];
     UIImage* uncheck = [UIImage imageNamed:@"uncheck"];
     
     if ([[sender currentImage]isEqual:check]) {
         [sender setImage:uncheck forState:UIControlStateNormal];
+        [sender setTag:0];
     }
     else
     {
         [sender setImage:check forState:UIControlStateNormal];
+        [sender setTag:1];
     }
+}
+
+-(void)collectEnteredValues
+{
+    NSArray* arr = @[@"Left",@"Right",@"Remark",@"Ignore"];
+    NSMutableDictionary* dict = [NSMutableDictionary new];
+    
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
+    {
+        for (NSInteger i = 0; i< CollectionItem; i++) {
+            TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            [dict setValue:cell.txtField.text forKey:arr[i]];
+            
+        }
+        [dict setValue:txtRemarks.text forKey:arr[2]];
+        NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
+        [dict setValue:ignoreValue forKey:arr[3]];
+        
+        
+    }
+    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
+    {
+        for (NSInteger i = 0; i< CollectionItem; i++) {
+            TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            
+            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
+            [dict setValue:trail forKey:arr[i]];
+
+        }
+        [dict setValue:txtRemarks.text forKey:arr[2]];
+        NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
+        [dict setValue:ignoreValue forKey:arr[3]];
+
+
+    }
+    else
+    {
+        
+    }
+
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return dropdownArray.count;
+}
+
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[dropdownArray objectAtIndex:row] valueForKey:@"ResultName"];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSLog(@"%@\n %@",[[dropdownArray objectAtIndex:row] valueForKey:@"Result"],[[dropdownArray objectAtIndex:row] valueForKey:@"ResultName"]);
+    
+    TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
+    cell.txtDropDown.text = [[dropdownArray objectAtIndex:row] valueForKey:@"ResultName"];
+//    cell.txtDropDown.testCode = [[dropdownArray objectAtIndex:row] valueForKey:@"Result"];
+    
+}
+
+
+- (IBAction)actionCancelDropDown:(id)sender {
+    
+    if ([sender tag]) // Done
+    {
+        
+    }
+    
+    [self.popupVC.view endEditing:YES];
+    [self.assCollection endEditing:YES];
 }
 @end
 

@@ -25,11 +25,14 @@
                 <outlet property="bottomConstant" destination="aw3-VV-145" id="hyY-hb-xiW"/>
                 <outlet property="btnIgnore" destination="h0T-be-cP0" id="sJz-b6-SC9"/>
                 <outlet property="centerY" destination="Vl6-XD-a5R" id="8gL-X0-SSZ"/>
+                <outlet property="dropdownPicker" destination="aaB-XF-FuC" id="2qz-zq-xNw"/>
                 <outlet property="lblAssessmentName" destination="LTa-YE-6sd" id="SqE-lA-2fW"/>
                 <outlet property="lblNOData" destination="V9k-bb-RKJ" id="4lO-A7-pof"/>
                 <outlet property="lblRangeName" destination="jDE-c7-4YM" id="v7t-LY-Kj6"/>
                 <outlet property="lblRangeValue" destination="set-ya-oLy" id="0EU-Oe-QZ7"/>
                 <outlet property="lblUnitValue" destination="osW-A0-zHZ" id="g8m-3X-L14"/>
+                <outlet property="pickerMainView" destination="rZP-LX-jRq" id="yaa-en-GMq"/>
+                <outlet property="pickerView" destination="Dny-to-f0z" id="bYq-a6-OIH"/>
                 <outlet property="popupVC" destination="dzA-bf-BIn" id="sdg-B8-Uan"/>
                 <outlet property="saveBtn" destination="UsG-Gf-m21" id="apL-E6-mi1"/>
                 <outlet property="tblAssesments" destination="9li-IZ-0mF" id="XXX-7Y-rVD"/>
@@ -199,7 +202,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="u3r-p9-H5X"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -246,7 +249,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="a4S-9W-iaT"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -256,7 +259,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="9IT-V6-38o"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -317,8 +320,8 @@
                                     </constraint>
                                     <constraint firstAttribute="height" constant="30" id="luE-zx-oou"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
-                                <state key="normal" title="save">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                <state key="normal" title="Save">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -386,16 +389,53 @@
             <view key="view" contentMode="scaleToFill" id="uf1-N2-VH9">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <subviews>
-                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaB-XF-FuC">
-                        <rect key="frame" x="0.0" y="406" width="320" height="162"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    </pickerView>
-                </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <viewLayoutGuide key="safeArea" id="6Xh-ra-xa3"/>
             </view>
+            <point key="canvasLocation" x="819" y="53"/>
         </viewController>
+        <view contentMode="scaleToFill" id="rZP-LX-jRq">
+            <rect key="frame" x="0.0" y="0.0" width="297" height="206"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vv-mR-XHB">
+                    <rect key="frame" x="0.0" y="0.0" width="297" height="44"/>
+                    <items>
+                        <barButtonItem title="Cancel" id="cwF-nP-CNl">
+                            <connections>
+                                <action selector="actionCancelDropDown:" destination="-1" id="ZeF-y6-d4W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="fyN-DT-yzU"/>
+                        <barButtonItem tag="1" title="Done" id="teO-J1-7pf">
+                            <connections>
+                                <action selector="actionCancelDropDown:" destination="-1" id="3up-k7-55s"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaB-XF-FuC">
+                    <rect key="frame" x="0.0" y="44" width="297" height="162"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="g8f-tM-4PO"/>
+                        <outlet property="delegate" destination="-1" id="eGQ-bX-4Kg"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="aaB-XF-FuC" firstAttribute="bottom" secondItem="8qF-6p-3OQ" secondAttribute="bottom" id="7qR-LC-7RL"/>
+                <constraint firstItem="5vv-mR-XHB" firstAttribute="leading" secondItem="8qF-6p-3OQ" secondAttribute="leading" id="IDl-GX-F8y"/>
+                <constraint firstItem="aaB-XF-FuC" firstAttribute="leading" secondItem="8qF-6p-3OQ" secondAttribute="leading" id="UOW-gG-qHj"/>
+                <constraint firstItem="aaB-XF-FuC" firstAttribute="trailing" secondItem="8qF-6p-3OQ" secondAttribute="trailing" id="c3Y-pa-Pzh"/>
+                <constraint firstItem="5vv-mR-XHB" firstAttribute="trailing" secondItem="8qF-6p-3OQ" secondAttribute="trailing" id="cIC-3A-Woh"/>
+                <constraint firstItem="5vv-mR-XHB" firstAttribute="top" secondItem="8qF-6p-3OQ" secondAttribute="top" id="jHj-rc-oXn"/>
+                <constraint firstItem="aaB-XF-FuC" firstAttribute="top" secondItem="5vv-mR-XHB" secondAttribute="bottom" id="vm0-9B-IZF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="8qF-6p-3OQ"/>
+            <point key="canvasLocation" x="530.5" y="-704"/>
+        </view>
     </objects>
     <resources>
         <image name="ico_calendar" width="14" height="14"/>

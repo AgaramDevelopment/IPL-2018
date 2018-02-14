@@ -1033,9 +1033,9 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     NSString *    setTeamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,0)];
                     NSString *    setTeamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,1)];
                     
-                    [dic setObject:setTeamCode forKey:@"RESULT"];
-                    [dic setObject:setTeamName forKey:@"RESULTNAME"];
-                    
+                    [dic setObject:setTeamCode forKey:@"Result"];
+                    [dic setObject:setTeamName forKey:@"ResultName"];
+
                     [assessment addObject:dic];
                 }
                 sqlite3_reset(statement);

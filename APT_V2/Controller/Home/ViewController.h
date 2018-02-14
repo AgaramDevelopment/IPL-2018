@@ -35,6 +35,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerY;
 - (IBAction)actionIgnore:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (strong, nonatomic) IBOutlet UIViewController *pickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *dropdownPicker;
+@property (strong, nonatomic) IBOutlet UIView *pickerMainView;
+
+- (IBAction)actionCancelDropDown:(id)sender;
 
 @end
 

@@ -11,7 +11,12 @@
 
 @interface TestPropertyCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblTopIndicator;
-@property (weak, nonatomic) IBOutlet LineTextField *txtField;
+@property (weak, nonatomic) IBOutlet UITextField *txtField;
 @property (weak, nonatomic) IBOutlet UILabel *lblBottom;
+@property (weak, nonatomic) IBOutlet UIView *SC_view;
+@property (weak, nonatomic) IBOutlet UIButton *btnDropDown;
+@property (weak, nonatomic) IBOutlet UITextField *txtDropDown;
+@property (weak, nonatomic) IBOutlet UITextField *txt1_SC;
+@property (weak, nonatomic) IBOutlet UITextField *txt2_SC;
 
 @end

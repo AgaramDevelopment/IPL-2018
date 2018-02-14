@@ -25,7 +25,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="phK-7x-ZSM" customClass="LineTextField">
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dg4-76-s6Y">
+                        <rect key="frame" x="5" y="35" width="110" height="35"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="phK-7x-ZSM">
                         <rect key="frame" x="5" y="35" width="110" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="9qQ-k2-I5P"/>
@@ -54,25 +60,65 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UC1-Bp-gyx">
+                        <rect key="frame" x="0.0" y="35" width="120" height="35"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SV6-ii-SEF">
+                                <rect key="frame" x="5" y="0.0" width="52.5" height="35"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DAD-cv-tL5">
+                                <rect key="frame" x="62.5" y="0.0" width="52.5" height="35"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SV6-ii-SEF" firstAttribute="leading" secondItem="UC1-Bp-gyx" secondAttribute="leading" constant="5" id="0z6-1N-Wlb"/>
+                            <constraint firstAttribute="bottom" secondItem="DAD-cv-tL5" secondAttribute="bottom" id="5QA-2c-OEJ"/>
+                            <constraint firstItem="DAD-cv-tL5" firstAttribute="leading" secondItem="SV6-ii-SEF" secondAttribute="trailing" constant="5" id="HVh-3z-ZC3"/>
+                            <constraint firstItem="DAD-cv-tL5" firstAttribute="top" secondItem="UC1-Bp-gyx" secondAttribute="top" id="Liy-2N-5ZL"/>
+                            <constraint firstItem="DAD-cv-tL5" firstAttribute="width" secondItem="SV6-ii-SEF" secondAttribute="width" id="UNO-Jd-Rc9"/>
+                            <constraint firstAttribute="bottom" secondItem="SV6-ii-SEF" secondAttribute="bottom" id="YfE-1f-EXf"/>
+                            <constraint firstAttribute="trailing" secondItem="DAD-cv-tL5" secondAttribute="trailing" constant="5" id="e8v-7h-OzT"/>
+                            <constraint firstItem="SV6-ii-SEF" firstAttribute="top" secondItem="UC1-Bp-gyx" secondAttribute="top" id="fEK-ky-uTf"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Dg4-76-s6Y" firstAttribute="top" secondItem="GFP-be-kdi" secondAttribute="bottom" constant="5" id="10Y-B9-DJ8"/>
+                <constraint firstAttribute="trailing" secondItem="Dg4-76-s6Y" secondAttribute="trailing" constant="5" id="8Xf-6F-qnS"/>
                 <constraint firstItem="aIs-EU-hng" firstAttribute="top" secondItem="phK-7x-ZSM" secondAttribute="bottom" constant="10" id="BXb-CX-c8r"/>
+                <constraint firstItem="aIs-EU-hng" firstAttribute="top" secondItem="Dg4-76-s6Y" secondAttribute="bottom" constant="5" id="HqL-Nx-4oK"/>
+                <constraint firstAttribute="trailing" secondItem="UC1-Bp-gyx" secondAttribute="trailing" id="LFc-vr-B4S"/>
                 <constraint firstItem="aIs-EU-hng" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Rie-sI-emg"/>
                 <constraint firstItem="GFP-be-kdi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="ShD-EU-fQf"/>
                 <constraint firstItem="GFP-be-kdi" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="b6D-j8-5tJ"/>
                 <constraint firstAttribute="bottom" secondItem="aIs-EU-hng" secondAttribute="bottom" constant="5" id="cly-U0-rTZ"/>
                 <constraint firstItem="phK-7x-ZSM" firstAttribute="top" secondItem="GFP-be-kdi" secondAttribute="bottom" constant="5" id="dhr-f3-ybB"/>
                 <constraint firstItem="phK-7x-ZSM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gIF-m9-Pgj"/>
+                <constraint firstItem="aIs-EU-hng" firstAttribute="top" secondItem="UC1-Bp-gyx" secondAttribute="bottom" constant="5" id="qKO-Z0-c9M"/>
                 <constraint firstItem="aIs-EU-hng" firstAttribute="width" secondItem="phK-7x-ZSM" secondAttribute="width" id="qYl-4G-18A"/>
+                <constraint firstItem="UC1-Bp-gyx" firstAttribute="top" secondItem="GFP-be-kdi" secondAttribute="bottom" constant="5" id="tSE-TI-bex"/>
+                <constraint firstItem="Dg4-76-s6Y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="yze-Az-vJg"/>
+                <constraint firstItem="UC1-Bp-gyx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zAD-cy-D1L"/>
                 <constraint firstItem="aIs-EU-hng" firstAttribute="width" secondItem="GFP-be-kdi" secondAttribute="width" multiplier="5" id="zLt-aS-2DD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="120" height="35"/>
             <connections>
+                <outlet property="SC_view" destination="UC1-Bp-gyx" id="UYn-Ir-NyG"/>
                 <outlet property="lblBottom" destination="aIs-EU-hng" id="7hf-50-cB1"/>
                 <outlet property="lblTopIndicator" destination="GFP-be-kdi" id="PJF-TH-oWF"/>
+                <outlet property="txt1_SC" destination="SV6-ii-SEF" id="xbM-hv-n7W"/>
+                <outlet property="txt2_SC" destination="DAD-cv-tL5" id="cnd-VV-jdb"/>
+                <outlet property="txtDropDown" destination="Dg4-76-s6Y" id="I1l-Wo-Waa"/>
                 <outlet property="txtField" destination="phK-7x-ZSM" id="YF3-GN-hQW"/>
             </connections>
             <point key="canvasLocation" x="69" y="46"/>
