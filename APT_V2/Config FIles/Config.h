@@ -241,3 +241,8 @@
 
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
 
+//Wagon Wheel And Pitch Map
+#define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
+
+#define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
+
