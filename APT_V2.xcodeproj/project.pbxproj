@@ -33,6 +33,8 @@
 		04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F1B202D7DD100ECB699 /* illnessTableViewCell.xib */; };
 		04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */; };
 		04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */; };
+		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
+		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
 		1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */; };
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
@@ -189,6 +191,9 @@
 		04B27F1F202DA48E00ECB699 /* PlayerProfileChartsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerProfileChartsVC.h; sourceTree = "<group>"; };
 		04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileChartsVC.m; sourceTree = "<group>"; };
 		04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerProfileChartsVC.xib; sourceTree = "<group>"; };
+		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
+		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
+		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
 		1850ECA42029E0FF00B48BA1 /* TabHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeVC.h; sourceTree = "<group>"; };
 		1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeVC.m; sourceTree = "<group>"; };
 		1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeVC.xib; sourceTree = "<group>"; };
@@ -391,6 +396,9 @@
 				043C2F0C202AE41600EB3F8C /* TrainingLoadVC.m */,
 				043C2F0D202AE41600EB3F8C /* TrainingLoadVC.xib */,
 				043C2F2A202AF59E00EB3F8C /* PieChart */,
+				182D854520342D1F005FFBF8 /* CategoryTableCell.h */,
+				182D854620342D1F005FFBF8 /* CategoryTableCell.m */,
+				182D854720342D1F005FFBF8 /* CategoryTableCell.xib */,
 			);
 			path = TrainingLoadVC;
 			sourceTree = "<group>";
@@ -1029,6 +1037,7 @@
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
 				CEB2B98220257BBD00E7D5E4 /* Montserrat-Thin.otf in Resources */,
 				18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */,
+				182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */,
 				CEB2B98B20257BBD00E7D5E4 /* MontserratAlternates-ExtraLightItalic.otf in Resources */,
 				CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */,
 				CEB2B97E20257BBD00E7D5E4 /* Montserrat-MediumItalic.otf in Resources */,
@@ -1172,6 +1181,7 @@
 				1897551D202C66010086B20C /* HorizontalXLblFormatter.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
+				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,

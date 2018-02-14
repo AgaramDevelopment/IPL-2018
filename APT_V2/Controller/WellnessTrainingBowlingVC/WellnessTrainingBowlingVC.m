@@ -57,7 +57,7 @@
     objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
     objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
     [self.trainingview addSubview:objtraing.view];
-    [objtraing.AddBtn addTarget:self action:@selector(AddtrainingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    //[objtraing.AddBtn addTarget:self action:@selector(AddtrainingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 
     //self.topviewHeight.constant = 578;
     
@@ -128,8 +128,9 @@
 - (IBAction)AddtrainingBtnAction:(id)sender {
     
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
-    objUpdate.view.frame = CGRectMake(0,10, self.view.bounds.size.width, self.view.bounds.size.height);
-    [self.trainingview addSubview:objUpdate.view];
+    objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+    [self.RootTrainingView addSubview:objUpdate.view];
+    self.traingViewHeight.constant = 600;
 }
 - (IBAction)AddBtnAction:(id)sender {
     
@@ -259,43 +260,53 @@
         if(responseObject >0)
         {
         
+            if( ![[responseObject valueForKey:@"BodyWeight"] isEqual:[NSNull null]])
+            {
                 self.bodyWeightlbl.text = [responseObject valueForKey:@"BodyWeight"];
+            }
+            if(! [[responseObject valueForKey:@"SleepHours"] isEqual:[NSNull null]])
+            {
                 self.sleepHrlbl.text = [responseObject valueForKey:@"SleepHours"];
-                
+            }
+            if( ![[responseObject valueForKey:@"SleepRatingDescription"] isEqual:[NSNull null]])
+            {
                 NSString *sleepValue = [responseObject valueForKey:@"SleepRatingDescription"];
                 NSArray *component = [sleepValue componentsSeparatedByString:@" "];
                 self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
             
-            if([component[0] isEqualToString:@"1"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"2"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"3"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"4"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"5"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"6"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-            }
-            if([component[0] isEqualToString:@"7"])
-            {
-                self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+            
+                if([component[0] isEqualToString:@"1"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"2"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"3"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"4"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"5"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"6"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"7"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
             }
 
-                
+        if( ![[responseObject valueForKey:@"FatigueRatingDescription"] isEqual:[NSNull null]])
+        {
                 NSString *fatiqueValue = [responseObject valueForKey:@"FatigueRatingDescription"];
                 NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
                 self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
@@ -328,7 +339,10 @@
             {
                 self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
             }
-
+        }
+            
+        if( ![[responseObject valueForKey:@"SoreNessRatingDescription"] isEqual:[NSNull null]])
+        {
                 
                 NSString *muscleValue = [responseObject valueForKey:@"SoreNessRatingDescription"];
                 NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
@@ -362,8 +376,10 @@
             {
                 self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
             }
+        }
 
-                
+        if( ![[responseObject valueForKey:@"StressRatingDescription"] isEqual:[NSNull null]])
+        {
                 NSString *stressValue = [responseObject valueForKey:@"StressRatingDescription"];
                 NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
                 self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
@@ -396,6 +412,7 @@
             {
                 self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
             }
+        }
             
         }
         [AppCommon hideLoading];

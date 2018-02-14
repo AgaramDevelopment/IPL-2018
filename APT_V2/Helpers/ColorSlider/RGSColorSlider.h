@@ -19,4 +19,5 @@
 @property (nonatomic, )float previewDismissAnimateDuration;
 
 @property (nonatomic)int colorTrackHeight;
+@property (nonatomic, strong)UIImageView *colorTrackImageView;
 @end
