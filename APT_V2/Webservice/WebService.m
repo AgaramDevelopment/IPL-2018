@@ -313,6 +313,20 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
+-(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@",codelist,playercode]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
 
 #pragma mark - Helpers
 

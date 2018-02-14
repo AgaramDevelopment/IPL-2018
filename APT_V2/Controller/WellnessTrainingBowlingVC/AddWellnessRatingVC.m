@@ -57,6 +57,12 @@ NSString *metaSubCode4;
     objWebservice = [[WebService alloc] init];
     [self.view_datepicker setHidden:YES];
     
+ 
+    _ColorSlider1.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
+    _ColorSlider2.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
+    _ColorSlider3.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
+    _ColorSlider4.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
+    
     [self metacodeWebservice];
 }
 

@@ -120,5 +120,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 -(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
+-(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
+                     failure:(WebserviceRequestFailureHandler)failure;
 
 @end

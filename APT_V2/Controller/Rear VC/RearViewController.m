@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"TabHomeVC", @"Stats",@"Match Center",@"Logout"];
+    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center",@"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];

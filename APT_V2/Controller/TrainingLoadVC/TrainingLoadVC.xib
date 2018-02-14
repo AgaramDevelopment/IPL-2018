@@ -77,7 +77,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlP-hc-Uvr">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
+                            <rect key="frame" x="0.0" y="10" width="375" height="602"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAN-D7-6Dh">
                                     <rect key="frame" x="0.0" y="15" width="185.5" height="250"/>
@@ -228,7 +228,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAC-2V-oAg">
                                     <rect key="frame" x="189" y="15" width="186" height="250"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ib-w5-MwL">
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ib-w5-MwL">
                                             <rect key="frame" x="97" y="200" width="79" height="30"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:3op-WN-OmA:image" translatesAutoresizingMaskIntoConstraints="NO" id="3op-WN-OmA">
@@ -390,15 +390,15 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="xlP-hc-Uvr" firstAttribute="leading" secondItem="lqI-Gp-SFy" secondAttribute="leading" id="4OL-1x-3Ma"/>
                         <constraint firstAttribute="trailing" secondItem="xlP-hc-Uvr" secondAttribute="trailing" id="679-Xh-vC5"/>
-                        <constraint firstAttribute="bottom" secondItem="xlP-hc-Uvr" secondAttribute="bottom" constant="45" id="HcT-5h-r6J"/>
+                        <constraint firstAttribute="bottom" secondItem="xlP-hc-Uvr" secondAttribute="bottom" constant="35" id="HcT-5h-r6J"/>
                         <constraint firstAttribute="trailing" secondItem="9LI-xg-WP7" secondAttribute="trailing" id="I04-bZ-FCH"/>
                         <constraint firstItem="9LI-xg-WP7" firstAttribute="top" secondItem="lqI-Gp-SFy" secondAttribute="top" constant="13" id="S5v-uy-twP"/>
                         <constraint firstItem="9LI-xg-WP7" firstAttribute="leading" secondItem="lqI-Gp-SFy" secondAttribute="leading" id="XdU-Pw-PCo"/>
-                        <constraint firstItem="xlP-hc-Uvr" firstAttribute="top" secondItem="9LI-xg-WP7" secondAttribute="bottom" constant="-48" id="tnI-ML-ClA"/>
+                        <constraint firstItem="xlP-hc-Uvr" firstAttribute="top" secondItem="9LI-xg-WP7" secondAttribute="bottom" constant="-38" id="tnI-ML-ClA"/>
                     </constraints>
                 </view>
             </subviews>

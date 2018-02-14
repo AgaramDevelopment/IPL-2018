@@ -241,3 +241,7 @@
 
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
 
+#define  TraingLoadDropKey              @"MOBILE_GETTRAININGLOAD"
+
+#define  trainingSaveKey              @"MOBILE_INSERT_TRAININGLOAD_DETAILS"
+
