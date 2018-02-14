@@ -12,7 +12,7 @@
 @interface RGSColorSlider ()
 
 
-@property (nonatomic, strong)UIImageView *colorTrackImageView;
+
 
 @property (nonatomic, strong)RGSPreviewView *previewView;
 
@@ -38,15 +38,25 @@
 }
 
 -(void)baseInit{
-    NSBundle *containerBundle = [NSBundle bundleForClass:RGSColorSlider.class];
-    NSString *path = [containerBundle pathForResource:@"RGSColorSlider" ofType:@"bundle"];
-    NSBundle *bundle = [NSBundle bundleWithPath:path];
+//    NSBundle *containerBundle = [NSBundle bundleForClass:RGSColorSlider.class];
+//    NSString *path = [containerBundle pathForResource:@"RGSColorSlider" ofType:@"bundle"];
+//    NSBundle *bundle = [NSBundle bundleWithPath:path];
+//    
+//    NSString *imagePath = [bundle pathForResource:@"colorTrack" ofType:@"png"];
+//    NSURL *url = [NSURL fileURLWithPath:imagePath];
+//    NSData *data = [NSData dataWithContentsOfURL:url];
+//    
+//    UIImage* image = [UIImage imageWithData:data];
     
-    NSString *imagePath = [bundle pathForResource:@"colorTrack" ofType:@"png"];
-    NSURL *url = [NSURL fileURLWithPath:imagePath];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+        NSBundle *containerBundle = [NSBundle bundleForClass:RGSColorSlider.class];
+        NSString *path = [containerBundle pathForResource:@"RGSColorSlider" ofType:@"bundle"];
+        NSBundle *bundle = [NSBundle bundleWithPath:path];
     
-    UIImage* image = [UIImage imageWithData:data];
+        NSString *imagePath = [bundle pathForResource:@"SliderBackground" ofType:@"png"];
+        NSURL *url = [NSURL fileURLWithPath:imagePath];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+    
+        UIImage* image = [UIImage imageWithData:data];
     
     _colorTrackImageView = [[UIImageView alloc] initWithImage:image];
     [self addSubview:_colorTrackImageView];

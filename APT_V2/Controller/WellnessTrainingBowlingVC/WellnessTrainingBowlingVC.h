@@ -41,4 +41,6 @@
 
 -(BOOL)setHeight;
 
+@property (strong, nonatomic) IBOutlet UIView *RootTrainingView;
+
 @end

@@ -10,7 +10,10 @@
 #import "RGSColorSlider.h"
 @interface AddWellnessRatingVC : UIViewController
 
-@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider;
+@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider1;
+@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider2;
+@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider3;
+@property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider4;
 - (IBAction)sliderDidChange:(RGSColorSlider *)sender;
 
 @property (strong,nonatomic) IBOutlet UIView * view_datepicker;

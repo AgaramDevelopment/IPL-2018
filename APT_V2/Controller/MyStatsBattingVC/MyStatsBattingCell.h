@@ -61,5 +61,29 @@
 @property (weak, nonatomic) IBOutlet UILabel *matchBDYFqiPhoneLbl;
 @property (weak, nonatomic) IBOutlet UILabel *matchBDYFqiPadLbl;
 
+@property (weak, nonatomic) IBOutlet UIImageView *dropDowniPhoneImage;
+@property (weak, nonatomic) IBOutlet UIImageView *dropDowniPadImage;
 
+
+@property (nonatomic,strong) IBOutlet UIButton * onesBtniPhone;
+@property (nonatomic,strong) IBOutlet UIButton * twoBtniPhone;
+@property (nonatomic,strong) IBOutlet UIButton * threeBtniPhone;
+@property (nonatomic,strong) IBOutlet UIButton * fourBtniPhone;
+@property (nonatomic,strong) IBOutlet UIButton * sixBtniPhone;
+@property (nonatomic,strong) IBOutlet UIButton * alllbliPhone;
+
+@property (nonatomic,strong) IBOutlet UIButton * onesBtniPad;
+@property (nonatomic,strong) IBOutlet UIButton * twoBtniPad;
+@property (nonatomic,strong) IBOutlet UIButton * threeBtniPad;
+@property (nonatomic,strong) IBOutlet UIButton * fourBtniPad;
+@property (nonatomic,strong) IBOutlet UIButton * sixBtniPad;
+@property (nonatomic,strong) IBOutlet UIButton * alllbliPad;
+
+@property (nonatomic,strong) IBOutlet UIImageView * WagonImgiPhone;
+
+@property (nonatomic,strong) IBOutlet UIImageView * PitchImgiPhone;
+
+@property (nonatomic,strong) IBOutlet UIImageView * WagonImgiPad;
+
+@property (nonatomic,strong) IBOutlet UIImageView * PitchImgiPad;
 @end
