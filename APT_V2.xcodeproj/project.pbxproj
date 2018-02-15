@@ -50,6 +50,8 @@
 		18BBECD220297D8900BAAFAA /* ScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD020297D8900BAAFAA /* ScheduleCell.xib */; };
 		18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BBECD420297DB100BAAFAA /* ResultCell.m */; };
 		18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BBECD520297DB100BAAFAA /* ResultCell.xib */; };
+		18CEBDFD20354D0C0047A98D /* SCCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CEBDFA20354D0C0047A98D /* SCCollectionViewCell.xib */; };
+		18CEBDFE20354D0C0047A98D /* SCCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CEBDFC20354D0C0047A98D /* SCCollectionViewCell.m */; };
 		18DF1850202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */; };
 		18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */; };
 		18DF1855202AF1D100AB9DCF /* AddWellnessRatingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF1853202AF1D100AB9DCF /* AddWellnessRatingVC.m */; };
@@ -217,6 +219,10 @@
 		18BBECD320297DB100BAAFAA /* ResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultCell.h; sourceTree = "<group>"; };
 		18BBECD420297DB100BAAFAA /* ResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultCell.m; sourceTree = "<group>"; };
 		18BBECD520297DB100BAAFAA /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
+		18CEBDF420354BFA0047A98D /* UITextField+textCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+textCode.h"; sourceTree = "<group>"; };
+		18CEBDFA20354D0C0047A98D /* SCCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SCCollectionViewCell.xib; sourceTree = "<group>"; };
+		18CEBDFB20354D0C0047A98D /* SCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCollectionViewCell.h; sourceTree = "<group>"; };
+		18CEBDFC20354D0C0047A98D /* SCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCollectionViewCell.m; sourceTree = "<group>"; };
 		18DF184D202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WellnessTrainingBowlingVC.h; sourceTree = "<group>"; };
 		18DF184E202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
 		18DF184F202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
@@ -598,6 +604,9 @@
 		CE10281A202DDBF900FA0B61 /* TestPropertiesCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				18CEBDFB20354D0C0047A98D /* SCCollectionViewCell.h */,
+				18CEBDFC20354D0C0047A98D /* SCCollectionViewCell.m */,
+				18CEBDFA20354D0C0047A98D /* SCCollectionViewCell.xib */,
 				CE10281B202DDBF900FA0B61 /* TestPropertyCollectionViewCell.h */,
 				CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */,
 				CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */,
@@ -833,6 +842,7 @@
 		CEB2B9C5202598DB00E7D5E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				18CEBDF420354BFA0047A98D /* UITextField+textCode.h */,
 				CE10281A202DDBF900FA0B61 /* TestPropertiesCollectionCell */,
 				CEB2B9C6202598DB00E7D5E4 /* ViewController.h */,
 				CEBD2A8C20289B8C000AFD1B /* ViewController.xib */,
@@ -1060,6 +1070,7 @@
 				043C2F17202AE41700EB3F8C /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				18DF1851202AC6CC00AB9DCF /* WellnessTrainingBowlingVC.xib in Resources */,
+				18CEBDFD20354D0C0047A98D /* SCCollectionViewCell.xib in Resources */,
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
 				043828CD2031DD2300B32899 /* MyStatsBattingVC.xib in Resources */,
 				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
@@ -1189,6 +1200,7 @@
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
+				18CEBDFE20354D0C0047A98D /* SCCollectionViewCell.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
 				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
