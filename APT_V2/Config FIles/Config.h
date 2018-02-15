@@ -239,7 +239,10 @@
 
 #define playerMyStatsBatting               @"MOBILE_GETMYSTATSBATTING"
 
+//Gallery Video
+
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
+#define FetchVideoUpload           @"FETCHVIDEOUPLOAD"
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"

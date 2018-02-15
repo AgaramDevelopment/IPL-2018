@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIView *sharetoUserView;
 @property (strong, nonatomic) IBOutlet UIView *keywordsView;
 
+@property (nonatomic,strong) IBOutlet UILabel * date_lbl;
+
 @end
