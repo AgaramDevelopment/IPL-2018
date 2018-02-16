@@ -271,28 +271,30 @@
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
-    NSString *urinecolor= @"0";
+   // NSString *urinecolor= @"0";
     
-    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate :urinecolor success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
-        if(responseObject >0)
-        {
         
-            if( ![[responseObject valueForKey:@"BodyWeight"] isEqual:[NSNull null]])
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
+        {
+            if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
             {
-                self.bodyWeightlbl.text = [responseObject valueForKey:@"BodyWeight"];
+                self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
                 
                 [self.fetchButton setTag:1];
                 self.fetchedArray = [[NSMutableArray alloc]init];
-                self.fetchedArray = responseObject;
+                self.fetchedArray = [responseObject objectAtIndex:0];
             }
-            if(! [[responseObject valueForKey:@"SleepHours"] isEqual:[NSNull null]])
+            if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
             {
-                self.sleepHrlbl.text = [responseObject valueForKey:@"SleepHours"];
+                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
             }
-            if( ![[responseObject valueForKey:@"SleepRatingDescription"] isEqual:[NSNull null]])
+            if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
             {
-                NSString *sleepValue = [responseObject valueForKey:@"SleepRatingDescription"];
+                NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
                 NSArray *component = [sleepValue componentsSeparatedByString:@" "];
                 self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
             
@@ -327,9 +329,9 @@
                 }
             }
 
-        if( ![[responseObject valueForKey:@"FatigueRatingDescription"] isEqual:[NSNull null]])
+        if( ![[[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
         {
-                NSString *fatiqueValue = [responseObject valueForKey:@"FatigueRatingDescription"];
+                NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
                 NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
                 self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
             
@@ -363,10 +365,10 @@
             }
         }
             
-        if( ![[responseObject valueForKey:@"SoreNessRatingDescription"] isEqual:[NSNull null]])
+        if( ![[[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
         {
                 
-                NSString *muscleValue = [responseObject valueForKey:@"SoreNessRatingDescription"];
+                NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
                 NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
                 self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
             
@@ -400,9 +402,9 @@
             }
         }
 
-        if( ![[responseObject valueForKey:@"StressRatingDescription"] isEqual:[NSNull null]])
+        if( ![[[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
         {
-                NSString *stressValue = [responseObject valueForKey:@"StressRatingDescription"];
+                NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
                 NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
                 self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
             

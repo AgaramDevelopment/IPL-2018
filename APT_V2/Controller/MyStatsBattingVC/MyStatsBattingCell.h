@@ -12,6 +12,26 @@
 @property (weak, nonatomic) IBOutlet UIView *scoreView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scoreViewHeight;
 
+//OverAll Reference Properties For Headers
+@property (strong, nonatomic) IBOutlet UILabel *matchNmatchLbl;
+@property (strong, nonatomic) IBOutlet UILabel *inningsNinningsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *noNoversLbl;
+@property (strong, nonatomic) IBOutlet UILabel *runsNwicketsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *ballsNrunsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *avgNecoLbl;
+@property (strong, nonatomic) IBOutlet UILabel *srNavgLbl;
+@property (strong, nonatomic) IBOutlet UILabel *hundredsNsrLbl;
+@property (strong, nonatomic) IBOutlet UILabel *fiftiesNthreewLbl;
+@property (strong, nonatomic) IBOutlet UILabel *thirtiesNfivewLbl;
+@property (strong, nonatomic) IBOutlet UILabel *foursNbbiLbl;
+@property (strong, nonatomic) IBOutlet UILabel *sixsNwideLbl;
+@property (strong, nonatomic) IBOutlet UILabel *bdyNnoBallLbl;
+@property (strong, nonatomic) IBOutlet UILabel *dotNdbLbl;
+@property (strong, nonatomic) IBOutlet UILabel *hsNbdryLbl;
+
+
+
+
 //OverAll Reference Properties
 @property (strong, nonatomic) IBOutlet UILabel *overallMatchesLbl;
 @property (strong, nonatomic) IBOutlet UILabel *overallInningsLbl;
@@ -86,4 +106,24 @@
 @property (nonatomic,strong) IBOutlet UIImageView * WagonImgiPad;
 
 @property (nonatomic,strong) IBOutlet UIImageView * PitchImgiPad;
+
+//Recent Matches Reference Properties For iPhone Headers
+@property (weak, nonatomic) IBOutlet UILabel *srNecoiPhoneLbl;
+@property (weak, nonatomic) IBOutlet UILabel *dotNnbiPhoneLbl;
+@property (weak, nonatomic) IBOutlet UILabel *bdyNwdiPhoneLbl;
+@property (weak, nonatomic) IBOutlet UILabel *foursNfoursiPhoneLbl;
+@property (weak, nonatomic) IBOutlet UILabel *sixsNsixsiPhoneLbl;
+@property (weak, nonatomic) IBOutlet UILabel *bdyFeqNdbiPhoneLbl;
+
+
+
+
+//Recent Matches Reference Properties For iPad Headers
+@property (weak, nonatomic) IBOutlet UILabel *srNecoiPadLbl;
+@property (weak, nonatomic) IBOutlet UILabel *dotNnbiPadLbl;
+@property (weak, nonatomic) IBOutlet UILabel *bdyNwdiPadLbl;
+@property (weak, nonatomic) IBOutlet UILabel *foursNfoursiPadLbl;
+@property (weak, nonatomic) IBOutlet UILabel *sixsNsixsiPadLbl;
+@property (weak, nonatomic) IBOutlet UILabel *bdyFeqNdbiPadLbl;
+
 @end

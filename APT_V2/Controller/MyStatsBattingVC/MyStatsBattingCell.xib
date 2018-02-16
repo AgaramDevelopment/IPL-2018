@@ -769,6 +769,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="jp5-5u-eqr"/>
             <connections>
+                <outlet property="avgNecoLbl" destination="IxM-wj-dVP" id="2Ey-wb-6h0"/>
+                <outlet property="ballsNrunsLbl" destination="jK6-uW-lSP" id="JIr-q1-dAV"/>
+                <outlet property="bdyNnoBallLbl" destination="n5z-Ta-0Vd" id="R8G-mD-Mu2"/>
+                <outlet property="dotNdbLbl" destination="FSe-LU-Q5T" id="X3E-Nc-uEI"/>
+                <outlet property="fiftiesNthreewLbl" destination="Exq-kE-cKl" id="NUf-yg-Nq3"/>
+                <outlet property="foursNbbiLbl" destination="Jad-IY-Fae" id="azY-n2-Zgi"/>
+                <outlet property="hsNbdryLbl" destination="f4p-dq-vyW" id="BnB-o6-RIw"/>
+                <outlet property="hundredsNsrLbl" destination="kQp-xz-xUb" id="sZt-nl-2vT"/>
+                <outlet property="inningsNinningsLbl" destination="V55-HA-as8" id="3U8-cm-SKv"/>
+                <outlet property="matchNmatchLbl" destination="Otb-R5-A1A" id="tAZ-cg-XkO"/>
+                <outlet property="noNoversLbl" destination="S9d-Aj-gT1" id="Iba-9l-O4b"/>
                 <outlet property="overallAvgLbl" destination="Ich-fZ-UvS" id="b5t-cr-h1H"/>
                 <outlet property="overallBDYPercentLbl" destination="571-m4-HMI" id="d2v-bs-NXj"/>
                 <outlet property="overallBallsLbl" destination="wLp-kp-9kn" id="3Mn-oU-HaF"/>
@@ -784,8 +795,12 @@
                 <outlet property="overallSRLbl" destination="8hu-1C-B0v" id="Q3V-WC-Fl6"/>
                 <outlet property="overallSixsLbl" destination="2Uw-W5-aTy" id="uDv-Dd-9C5"/>
                 <outlet property="overallThirtiesLbl" destination="bma-c4-hwZ" id="MEC-Kb-PNS"/>
+                <outlet property="runsNwicketsLbl" destination="xC4-AP-ymX" id="tYI-YP-JZ5"/>
                 <outlet property="scoreView" destination="Tb1-ug-Je5" id="x3H-lW-jft"/>
                 <outlet property="scoreViewHeight" destination="j03-Se-Lzf" id="8xw-nY-ji8"/>
+                <outlet property="sixsNwideLbl" destination="3gy-ie-KQx" id="1Uh-jT-WDN"/>
+                <outlet property="srNavgLbl" destination="Mfh-22-J2z" id="afK-Ln-Onk"/>
+                <outlet property="thirtiesNfivewLbl" destination="kiJ-gz-sLU" id="9Ph-mF-1aG"/>
             </connections>
             <point key="canvasLocation" x="110" y="206.5"/>
         </tableViewCell>
@@ -1601,8 +1616,12 @@
                 <outlet property="PitchImgiPhone" destination="sfh-r4-kRh" id="LDT-zi-gDB"/>
                 <outlet property="WagonImgiPhone" destination="Tpu-nh-CMY" id="ggM-TB-O7U"/>
                 <outlet property="alllbliPhone" destination="QRW-wy-Sy6" id="cDL-bU-Vhf"/>
+                <outlet property="bdyFeqNdbiPhoneLbl" destination="Z3e-Zk-I3R" id="m1C-cZ-oRi"/>
+                <outlet property="bdyNwdiPhoneLbl" destination="rk9-Rt-AVI" id="sDu-En-4NZ"/>
+                <outlet property="dotNnbiPhoneLbl" destination="cOV-h9-xH8" id="hRW-RS-aXX"/>
                 <outlet property="dropDowniPhoneImage" destination="IKx-tA-Qbq" id="GhK-wb-cnS"/>
                 <outlet property="fourBtniPhone" destination="pFj-kY-dfT" id="9ko-7l-lyw"/>
+                <outlet property="foursNfoursiPhoneLbl" destination="aPC-g4-6e0" id="Zyh-lH-6Dr"/>
                 <outlet property="groundNameiPhoneLbl" destination="HXw-ZD-YXd" id="AUx-48-lnT"/>
                 <outlet property="matchBDYFqiPhoneLbl" destination="VL4-tY-so2" id="CZ5-US-iXB"/>
                 <outlet property="matchBDYiPhoneLbl" destination="Igc-9u-awe" id="ccI-96-uJe"/>
@@ -1614,6 +1633,8 @@
                 <outlet property="onesBtniPhone" destination="lHS-Mp-Fpb" id="Grf-pY-gAR"/>
                 <outlet property="scoreView" destination="Tb1-ug-Je5" id="KL3-5c-oOq"/>
                 <outlet property="sixBtniPhone" destination="pZz-dT-Hu6" id="jHW-gd-dtk"/>
+                <outlet property="sixsNsixsiPhoneLbl" destination="dSe-3a-gXJ" id="Jmz-gc-oyZ"/>
+                <outlet property="srNecoiPhoneLbl" destination="hYe-8o-Joi" id="xYn-qN-821"/>
                 <outlet property="teamBallsiPhoneLbl" destination="JmC-3E-JIm" id="KJF-mK-Er8"/>
                 <outlet property="teamNameiPhoneLbl" destination="NN2-LT-Gol" id="W6I-wE-XO3"/>
                 <outlet property="teamRunsiPhoneLbl" destination="p6e-c8-K0f" id="mPG-ed-ziy"/>
@@ -1734,7 +1755,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9l-bO-wg0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28f-82-Zez">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28f-82-Zez">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="UIg-2o-nW8"/>
@@ -1779,7 +1800,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfP-sS-gP6">
                                                                 <rect key="frame" x="0.0" y="80" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOT %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aob-2h-zCw">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aob-2h-zCw">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="Fbc-PX-vEQ"/>
@@ -1824,7 +1845,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clA-UN-LWz">
                                                                 <rect key="frame" x="0.0" y="160" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BDY %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPJ-1V-qun">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPJ-1V-qun">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="yy6-FN-2tE"/>
@@ -1881,7 +1902,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZi-Rr-N7b">
                                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wf-u9-nZ3">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wf-u9-nZ3">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="Fyv-df-fC2"/>
@@ -1926,7 +1947,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ry3-4y-QmM">
                                                                 <rect key="frame" x="0.0" y="80" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8Y-ov-zg1">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8Y-ov-zg1">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="H3v-rC-9Gh"/>
@@ -1971,7 +1992,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlY-Ys-ghG">
                                                                 <rect key="frame" x="0.0" y="160" width="110" height="70"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BDY Fq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMD-bp-n0K">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMD-bp-n0K">
                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="pZw-nv-e0w"/>
@@ -2399,8 +2420,12 @@
                 <outlet property="PitchImgiPad" destination="Zpg-1N-ah7" id="Oud-sE-GTW"/>
                 <outlet property="WagonImgiPad" destination="iFD-uZ-hbr" id="mtS-8g-DAE"/>
                 <outlet property="alllbliPad" destination="uXh-sJ-yU8" id="tgW-Jr-7an"/>
+                <outlet property="bdyFeqNdbiPadLbl" destination="PMD-bp-n0K" id="BWv-hu-7tn"/>
+                <outlet property="bdyNwdiPadLbl" destination="aPJ-1V-qun" id="xUa-Rs-tbj"/>
+                <outlet property="dotNnbiPadLbl" destination="aob-2h-zCw" id="Y8w-3H-wjx"/>
                 <outlet property="dropDowniPadImage" destination="06R-9Q-lBf" id="ZEO-3E-25X"/>
                 <outlet property="fourBtniPad" destination="rou-sN-Gnc" id="Ksx-p6-ZWb"/>
+                <outlet property="foursNfoursiPadLbl" destination="7wf-u9-nZ3" id="TE2-cr-YWG"/>
                 <outlet property="groundNameiPadLbl" destination="Iie-RV-wrJ" id="KBb-2t-Wqu"/>
                 <outlet property="matchBDYFqiPadLbl" destination="azS-tC-Hch" id="1Nz-Jg-MCE"/>
                 <outlet property="matchBDYiPadLbl" destination="hBP-Gd-nBD" id="lK0-ux-8QA"/>
@@ -2412,6 +2437,8 @@
                 <outlet property="onesBtniPad" destination="912-4s-2F6" id="6pG-L1-6lC"/>
                 <outlet property="scoreView" destination="84q-aF-PfE" id="yVW-SJ-M6T"/>
                 <outlet property="sixBtniPad" destination="gDG-YX-hcV" id="Acn-IR-R2L"/>
+                <outlet property="sixsNsixsiPadLbl" destination="e8Y-ov-zg1" id="KgE-NJ-XWp"/>
+                <outlet property="srNecoiPadLbl" destination="28f-82-Zez" id="MqY-0Q-do4"/>
                 <outlet property="teamBallsiPadLbl" destination="r0A-kD-OXC" id="4dF-23-kHq"/>
                 <outlet property="teamNameiPadLbl" destination="hNi-T8-3CL" id="Aic-WI-e2w"/>
                 <outlet property="teamRunsiPadLbl" destination="fXG-Ka-LBB" id="wt5-Qj-8BS"/>

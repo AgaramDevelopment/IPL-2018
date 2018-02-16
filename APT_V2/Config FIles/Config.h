@@ -239,6 +239,7 @@
 
 #define playerMyStatsBatting               @"MOBILE_GETMYSTATSBATTING"
 
+#define playerMyStatsBowling               @"MOBILE_GETMYSTATSBOWLING"
 //Gallery Video
 
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
@@ -246,10 +247,17 @@
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
-#define  TraingLoadDropKey              @"MOBILE_GETTRAININGLOAD"
 
 #define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
+
+#define  TraingLoadDropKey              @"MOBILE_GETTRAININGLOAD"
+
+
 #define  trainingSaveKey              @"MOBILE_INSERT_TRAININGLOAD_DETAILS"
 
+#define  trainingUpdateKey              @"MOBILE_UPDATE_TRAININGLOAD_DETAILS"
+
 #define  fetchTrainingLoadKey              @"MOBILE_GETTRAININGLOADDETAILS"
+
+
 
