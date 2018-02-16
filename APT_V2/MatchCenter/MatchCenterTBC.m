@@ -9,6 +9,7 @@
 #import "MatchCenterTBC.h"
 #import "MCOverViewVC.h"
 #import "MCTossAndResultsVC.h"
+#import "MCTeamCompVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -32,19 +33,16 @@
     
     self.tabBar.barTintColor = [UIColor brownColor];
     
+    //MCOverViewVC
     MCOverViewVC *firstViewController = [[MCOverViewVC alloc]init];
     firstViewController.title = @"Overview";
     firstViewController.tabBarItem = self.overviewBarItem;
     
-  //  [firstViewController.tabBarItem  setTitleTextAttributes:@{NSForegroundColorAttributeName :[UIColor whiteColor]} forState:UIControlStateSelected];
-
     firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     firstViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 
-    
-    //[[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
-   // UINavigationController *firstNavController = [[UINavigationController alloc]initWithRootViewController:firstViewController];
-    
+   
+    //MCTossAndResultsVC
     MCTossAndResultsVC *secondViewController = [[MCTossAndResultsVC alloc]init];
     secondViewController.title = @"Toss & Result";
     secondViewController.tabBarItem = self.tossAndResultBarItem;
@@ -53,13 +51,22 @@
     secondViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 
     
-    //[[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:1];
-    //UINavigationController *secondNavController = [[UINavigationController alloc]initWithRootViewController:secondViewController];
+   
+    
+    //MCTeamCompVC
+    MCTeamCompVC *thirdViewController = [[MCTeamCompVC alloc]init];
+    thirdViewController.title = @"Team Composition";
+    thirdViewController.tabBarItem = self.tossAndResultBarItem;
+    
+    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
-    //tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController, nil];
-
+  
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController, nil];
+    
+    
+    
     
     self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];
     
