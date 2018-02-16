@@ -23,6 +23,7 @@
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
     BOOL isCategory;
+    VideoPlayerUploadVC * videouploadVC;
 }
 @property (nonatomic,strong) NSMutableArray * objFirstGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objSecondGalleryArray;
@@ -149,9 +150,21 @@
 
 - (IBAction)UploadVideoAction:(id)sender {
     
-    VideoPlayerUploadVC * videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
-    videouploadVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+    if(videouploadVC != nil)
+    {
+        [videouploadVC.view removeFromSuperview];
+    }
+    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+    videouploadVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height-50);
     [self.view addSubview:videouploadVC.view];
+}
+-(IBAction)didClickPlayerList:(id)sender
+{
+    //[videouploadVC.delegate playerBtnAction];
+}
+-(IBAction)didClickCategoryList:(id)sender
+{
+    //[videouploadVC.delegate categoryBtnAction];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -309,8 +322,8 @@
     }
      videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
-
     videoPlayerVC.view.frame = CGRectMake(0,10, self.view.bounds.size.width, self.view.bounds.size.height);
+
     [self.view addSubview:videoPlayerVC.view];
 
 }
@@ -531,5 +544,7 @@
     [self.videoCollectionview2 reloadData];
     
 }
+
+
 
 @end

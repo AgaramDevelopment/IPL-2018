@@ -18,19 +18,24 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerUploadVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerUploadVC" customModule="APT_V2" customModuleProvider="target">
             <connections>
                 <outlet property="CategoryView" destination="6f4-r7-g6J" id="NEu-dZ-YUB"/>
+                <outlet property="category_lbl" destination="P9E-wm-06B" id="m0B-di-rQX"/>
+                <outlet property="date_lbl" destination="yIz-Si-CJf" id="BbN-g1-JTc"/>
+                <outlet property="date_view" destination="dgB-dU-jgt" id="sCP-eU-LkM"/>
                 <outlet property="keywordsView" destination="7he-KE-YK3" id="bBg-4H-gQn"/>
                 <outlet property="playerView" destination="HMN-Xm-evM" id="wCn-zk-m5R"/>
+                <outlet property="player_lbl" destination="3Wi-a8-O75" id="bUg-Vr-QC1"/>
                 <outlet property="popTbl" destination="cEW-Qz-kwo" id="qOf-ab-IgT"/>
                 <outlet property="popTblYposition" destination="Yqs-LJ-Nxo" id="8Rm-mu-7iR"/>
                 <outlet property="popTblwidthposition" destination="4hx-HV-5Aj" id="N2U-23-8Mp"/>
                 <outlet property="shadowView" destination="cun-PD-mOD" id="lUD-nq-Dvt"/>
                 <outlet property="sharetoUserView" destination="E9K-Oq-U3b" id="jSu-bQ-YTl"/>
+                <outlet property="shareuser_lbl" destination="q2g-KH-JPX" id="WQX-Sp-eTk"/>
                 <outlet property="teamView" destination="aRT-oP-rm8" id="reQ-iV-F8K"/>
                 <outlet property="videoDateView" destination="DIU-Kw-G1M" id="SgK-EB-Rlo"/>
-                <outlet property="view" destination="zpW-1O-4dz" id="KGC-YM-16m"/>
+                <outlet property="view" destination="zpW-1O-4dz" id="9zM-km-i6X"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -91,6 +96,9 @@
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                     </variation>
+                                    <connections>
+                                        <action selector="didClickCameraBtn:" destination="-1" eventType="touchUpInside" id="yEp-RG-3VZ"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNB-sQ-LHq">
                                     <rect key="frame" x="180" y="10" width="160" height="30"/>
@@ -105,6 +113,9 @@
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                     </variation>
+                                    <connections>
+                                        <action selector="didClickGalleryBtn:" destination="-1" eventType="touchUpInside" id="EfE-yR-0JU"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,7 +154,7 @@
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-E7-OO6">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:Bo4-E7-OO6:image" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-E7-OO6">
                                             <rect key="frame" x="87.5" y="5" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="TN4-VG-Ver"/>
@@ -188,7 +199,7 @@
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-b5-LYy">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:Bo4-E7-OO6:image" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-b5-LYy">
                                             <rect key="frame" x="87.5" y="5" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="15" id="MxG-mz-FBc"/>
@@ -206,9 +217,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDm-DF-DCa">
-                                            <rect key="frame" x="0.0" y="0.0" width="107.5" height="30"/>
+                                            <rect key="frame" x="-0.5" y="0.0" width="107.5" height="30"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <action selector="didClickPlayerList:" destination="-1" eventType="touchUpInside" id="gSO-Lw-NFb"/>
+                                                <action selector="didClickPlayerList:" destination="-1" eventType="touchUpInside" id="agW-Qz-Y6m"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -243,7 +255,7 @@
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-Bx-zFi">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:Bo4-E7-OO6:image" translatesAutoresizingMaskIntoConstraints="NO" id="o2G-Bx-zFi">
                                             <rect key="frame" x="87.5" y="5" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="15" id="WJd-fk-d3E"/>
@@ -253,7 +265,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3PM-7A-SaY">
                                             <rect key="frame" x="0.0" y="0.0" width="107.5" height="30"/>
                                             <connections>
-                                                <action selector="didClickCategoryList:" destination="-1" eventType="touchUpInside" id="iKl-Hg-Yyb"/>
+                                                <action selector="didClickCategoryList:" destination="-1" eventType="touchUpInside" id="Pmv-i6-V7O"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -335,7 +347,7 @@
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="axW-A7-Cte">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:Bo4-E7-OO6:image" translatesAutoresizingMaskIntoConstraints="NO" id="axW-A7-Cte">
                                             <rect key="frame" x="145" y="5" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="15" id="K8o-i8-JCL"/>
@@ -344,9 +356,8 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3L-ky-Lm9">
                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
-                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="didClickShareUserList:" destination="-1" eventType="touchUpInside" id="mwC-ux-f6L"/>
+                                                <action selector="didClickShareUserList:" destination="-1" eventType="touchUpInside" id="RVK-Ua-S9U"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -396,9 +407,13 @@
                                         <constraint firstAttribute="width" constant="120" id="4hx-HV-5Aj"/>
                                         <constraint firstAttribute="height" constant="128" id="Khw-Zg-NAS"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="K5T-XV-ojI"/>
+                                        <outlet property="delegate" destination="-1" id="KwO-Vn-fEz"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="jR4-uY-yb0" firstAttribute="top" secondItem="cun-PD-mOD" secondAttribute="top" constant="10" id="17A-HU-GVb"/>
                                 <constraint firstAttribute="height" constant="216" id="9JL-y7-Xd7"/>
@@ -452,6 +467,9 @@
                             <state key="normal" title="Done">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="showSelecteddate:" destination="-1" eventType="touchUpInside" id="SI8-GR-LBm"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -481,6 +499,86 @@
     </objects>
     <resources>
         <image name="Video-Icon-crop" width="315" height="236"/>
-        <image name="down-arrow" width="21" height="21"/>
+        <image name="imageView:Bo4-E7-OO6:image" width="21" height="21">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MjEsIDIxfdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
+HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPEQ+CTU0AKgAABuwAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAA4ODihNTU1lAICAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEGMzMzjT8/P6wuLi6CXl5e/js7O58CAgIIAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQY2NjaWX19f
+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
+c0NaAAAAIgAAAv5oZUlMAAAAHgAAAyBpdElUAAAAKAAAAz5yb1JPAAAAJAAAA2ZkZURFAAAALAAAA4pr
+b0tSAAAAFgAAA7ZzdlNFAAAAJgAAAth6aENOAAAAFgAAA8xqYUpQAAAAGgAAA+JlbEdSAAAAIgAAA/xw
+dFBPAAAAJgAABB5ubE5MAAAAKAAABERlc0VTAAAAJgAABB50aFRIAAAAJAAABGx0clRSAAAAIgAABJBm
+aUZJAAAAKAAABLJockhSAAAAKAAABNpwbFBMAAAALAAABQJydVJVAAAAIgAABS5hckVHAAAAJgAABVBl
+blVTAAAAJgAABXYAVgFhAGUAbwBiAGUAYwBuAP0AIABSAEcAQgAgAHAAcgBvAGYAaQBsAEcAZQBuAGUA
+cgBlAGwAIABSAEcAQgAtAGIAZQBzAGsAcgBpAHYAZQBsAHMAZQBQAGUAcgBmAGkAbAAgAFIARwBCACAA
+ZwBlAG4A6AByAGkAYwBDHqUAdQAgAGgA7ABuAGgAIABSAEcAQgAgAEMAaAB1AG4AZwBQAGUAcgBmAGkA
+bAAgAFIARwBCACAARwBlAG4A6QByAGkAYwBvBBcEMAQzBDAEOwRMBD0EOAQ5ACAEPwRABD4ERAQwBDkE
+OwAgAFIARwBCAFAAcgBvAGYAaQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABSAFYAQgDBAGwAdABhAGwA
+4QBuAG8AcwAgAFIARwBCACAAcAByAG8AZgBpAGyQGnUoACAAUgBHAEIAIIJyX2ljz4/wAEcAZQBuAGUA
+cgBpAHMAawAgAFIARwBCAC0AcAByAG8AZgBpAGwATwBiAGUAYwBuAP0AIABSAEcAQgAgAHAAcgBvAGYA
+aQBsBeQF6AXVBeQF2QXcACAAUgBHAEIAIAXbBdwF3AXZAFAAcgBvAGYAaQBsAG8AIABSAEcAQgAgAGcA
+ZQBuAGUAcgBpAGMAbwBQAHIAbwBmAGkAbAAgAFIARwBCACAAZwBlAG4AZQByAGkAYwBBAGwAbABnAGUA
+bQBlAGkAbgBlAHMAIABSAEcAQgAtAFAAcgBvAGYAaQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfGZukBoA
+IABSAEcAQgAgY8+P8GWHTvZOAIIsACAAUgBHAEIAIDDXMO0w1TChMKQw6wOTA7UDvQO5A7oDzAAgA8AD
+wQO/A8YDrwO7ACAAUgBHAEIAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOkAcgBpAGMAbwBBAGwA
+ZwBlAG0AZQBlAG4AIABSAEcAQgAtAHAAcgBvAGYAaQBlAGwOQg4bDiMORA4fDiUOTAAgAFIARwBCACAO
+Fw4xDkgOJw5EDhsARwBlAG4AZQBsACAAUgBHAEIAIABQAHIAbwBmAGkAbABpAFkAbABlAGkAbgBlAG4A
+IABSAEcAQgAtAHAAcgBvAGYAaQBpAGwAaQBHAGUAbgBlAHIAaQENAGsAaQAgAFIARwBCACAAcAByAG8A
+ZgBpAGwAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBpAGwAIABSAEcAQgQeBDEESQQ4BDkA
+IAQ/BEAEPgREBDgEOwRMACAAUgBHAEIGRQZEBkEAIAYqBjkGMQZKBkEAIABSAEcAQgAgBicGRAY5BicG
+RQBHAGUAbgBlAHIAaQBjACAAUgBHAEIAIABQAHIAbwBmAGkAbABldGV4dAAAAABDb3B5cmlnaHQgMjAw
+NyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLgBYWVogAAAAAAAA81IAAQAAAAEWz1hZWiAA
+AAAAAAB0TQAAPe4AAAPQWFlaIAAAAAAAAFp1AACscwAAFzRYWVogAAAAAAAAKBoAABWfAAC4NmN1cnYA
+AAAAAAAAAQHNAABzZjMyAAAAAAABDEIAAAXe///zJgAAB5IAAP2R///7ov///aMAAAPcAADAbNIlJico
+WiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU0JpdG1hcEltYWdlUmVwoycpKlpOU0ltYWdlUmVwWE5TT2Jq
+ZWN00iUmLC1XTlNBcnJheaIsKtIlJi8wXk5TTXV0YWJsZUFycmF5oy8sKtMyMwo0NTZXTlNXaGl0ZVxO
+U0NvbG9yU3BhY2VEMCAwABADgAzSJSY4OVdOU0NvbG9yojgq0iUmOzxXTlNJbWFnZaI7Kl8QD05TS2V5
+ZWRBcmNoaXZlctE/QFRyb290gAEACAARABoAIwAtADIANwBGAEwAVwBeAGUAcgB5AIEAgwCFAIoAjACO
+AJcAnACnAKkAqwCtALIAtQC3ALkAuwC9AMIA2QDbAN0QYxBoEHMQfBCPEJMQnhCnEKwQtBC3ELwQyxDP
+ENYQ3hDrEPAQ8hD0EPkRAREEEQkREREUESYRKREuAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAA
+ETA
+</mutableData>
+        </image>
     </resources>
 </document>
