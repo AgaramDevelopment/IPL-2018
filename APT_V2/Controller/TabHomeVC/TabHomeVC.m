@@ -81,13 +81,13 @@
         else
         {
             
-                return CGSizeMake(200, 35);
+                return CGSizeMake(200, 40);
         }
     }
     else
     {
         
-            return CGSizeMake(200, 35);
+            return CGSizeMake(200, 40);
     }
 }
 #pragma mark collection view cell paddings

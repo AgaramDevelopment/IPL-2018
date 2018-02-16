@@ -28,10 +28,22 @@
 @property (strong,nonatomic) IBOutlet UITextField * restingBpMinTxt;
 
 @property (strong,nonatomic) IBOutlet UIButton * SaveBtn;
+@property (strong,nonatomic) IBOutlet UIButton * UpdateBtn;
 
 @property (strong,nonatomic) IBOutlet UILabel * SleepRatinglbl;
 @property (strong,nonatomic) IBOutlet UILabel * FatiqueRatinglbl;
 @property (strong,nonatomic) IBOutlet UILabel * MuscleRatinglbl;
 @property (strong,nonatomic) IBOutlet UILabel * StressRatinglbl;
+
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn1;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn2;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn3;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn4;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn5;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn6;
+@property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn7;
+
+@property (strong,nonatomic)  NSMutableArray * fetchArray;
+@property (strong,nonatomic)  NSString * isFetch;
 
 @end
