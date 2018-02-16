@@ -77,7 +77,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)getdatelist :(NSString *)codelist :(NSString *)playercode :(NSString *)date success:(WebserviceRequestSuccessHandler)success
             failure:(WebserviceRequestFailureHandler)failure;
 
--(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin success:(WebserviceRequestSuccessHandler)success
+-(void)submit :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin :(NSString *)urinecolor success:(WebserviceRequestSuccessHandler)success
        failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)getupdate :(NSString *)updatelist :(NSString *)usercode :(NSString *)wlcode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 success:(WebserviceRequestSuccessHandler)success
@@ -118,9 +118,13 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)GetPlayers:(NSString *)list :(NSString *)clientcode   success:(WebserviceRequestSuccessHandler)success
           failure:(WebserviceRequestFailureHandler)failure ;
 
--(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+-(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date :(NSString *)urinecolor  success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
--(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
+
+-(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
                      failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)fetchTrainingLoad :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure;
 
 @end

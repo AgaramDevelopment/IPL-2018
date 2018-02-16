@@ -42,5 +42,6 @@
 -(BOOL)setHeight;
 
 @property (strong, nonatomic) IBOutlet UIView *RootTrainingView;
+@property (strong, nonatomic) IBOutlet UIButton *fetchButton;
 
 @end

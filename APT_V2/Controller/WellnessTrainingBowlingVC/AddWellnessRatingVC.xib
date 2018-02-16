@@ -30,8 +30,17 @@
                 <outlet property="DateBtn" destination="GSk-cf-Zim" id="BNe-gU-IgU"/>
                 <outlet property="FatiqueRatinglbl" destination="Orj-F9-eV8" id="oNl-lI-FhM"/>
                 <outlet property="MuscleRatinglbl" destination="oY0-dP-pAf" id="dFe-5O-WQe"/>
+                <outlet property="SaveBtn" destination="YT5-z3-2fP" id="fmQ-dq-ui9"/>
                 <outlet property="SleepRatinglbl" destination="SpE-N1-d0e" id="Lug-wd-wFq"/>
                 <outlet property="StressRatinglbl" destination="Kh8-G0-Rx4" id="g2x-01-qHN"/>
+                <outlet property="UpdateBtn" destination="WfQ-zO-AzR" id="uG4-Xg-6y5"/>
+                <outlet property="UrineColorBtn1" destination="vDh-1G-hM7" id="2g5-JK-gqh"/>
+                <outlet property="UrineColorBtn2" destination="ISF-oC-TEe" id="0Fi-Cf-BAu"/>
+                <outlet property="UrineColorBtn3" destination="qmt-ny-bCd" id="86o-Pc-b0C"/>
+                <outlet property="UrineColorBtn4" destination="a6H-qc-FV8" id="y54-kz-vTo"/>
+                <outlet property="UrineColorBtn5" destination="MD9-F8-D6A" id="aSb-zH-W2m"/>
+                <outlet property="UrineColorBtn6" destination="QJB-f8-bYj" id="inc-R9-po3"/>
+                <outlet property="UrineColorBtn7" destination="S2v-df-faY" id="Bd2-Kw-F36"/>
                 <outlet property="bodyWeightTxt" destination="6lM-ej-AAZ" id="0Ih-Nb-JvX"/>
                 <outlet property="datelbl" destination="d5T-eK-4wy" id="g7v-rq-DE9"/>
                 <outlet property="fatTxt" destination="tvQ-dy-cPp" id="y72-58-yRO"/>
@@ -328,6 +337,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="GTD-yF-qgN"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn1Action:" destination="-1" eventType="touchUpInside" id="lHs-ND-61D"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISF-oC-TEe">
                                             <rect key="frame" x="30.5" y="8" width="26" height="14"/>
@@ -335,6 +347,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="ssY-RQ-GGg"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn2Action:" destination="-1" eventType="touchUpInside" id="B6E-0e-zNC"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-ny-bCd">
                                             <rect key="frame" x="58.5" y="8" width="26.5" height="14"/>
@@ -342,6 +357,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="ywe-3s-hAb"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn3Action:" destination="-1" eventType="touchUpInside" id="94Y-sB-DLK"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6H-qc-FV8">
                                             <rect key="frame" x="87" y="8" width="26" height="14"/>
@@ -349,6 +367,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="cYk-Xq-zkb"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn4Action:" destination="-1" eventType="touchUpInside" id="8sl-gl-Uog"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MD9-F8-D6A">
                                             <rect key="frame" x="115" y="8" width="26.5" height="14"/>
@@ -356,6 +377,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="PN6-UC-W8h"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn5Action:" destination="-1" eventType="touchUpInside" id="dJe-hV-hpT"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJB-f8-bYj">
                                             <rect key="frame" x="143.5" y="8" width="26" height="14"/>
@@ -363,6 +387,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="sNe-0s-Xse"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColor6BtnAction:" destination="-1" eventType="touchUpInside" id="AoA-el-YZI"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2v-df-faY">
                                             <rect key="frame" x="171.5" y="8" width="26.5" height="14"/>
@@ -370,6 +397,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="jFm-gT-IQE"/>
                                             </constraints>
+                                            <connections>
+                                                <action selector="urineColorBtn7Action:" destination="-1" eventType="touchUpInside" id="rYX-1G-Hks"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -904,14 +934,31 @@
                                                 <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="Kk4-16-DDh"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfQ-zO-AzR">
+                                            <rect key="frame" x="-0.5" y="0.0" width="100" height="30"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="11"/>
+                                            <state key="normal" title="Update">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="13"/>
+                                            </variation>
+                                            <connections>
+                                                <action selector="UpdateAction:" destination="-1" eventType="touchUpInside" id="gFy-5F-gfu"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstItem="WfQ-zO-AzR" firstAttribute="top" secondItem="53S-Pa-XrR" secondAttribute="top" id="7eW-YT-xMe"/>
                                         <constraint firstAttribute="width" constant="100" id="EdA-G7-e7F"/>
                                         <constraint firstAttribute="bottom" secondItem="YT5-z3-2fP" secondAttribute="bottom" id="Jv3-jk-y3X"/>
                                         <constraint firstAttribute="trailing" secondItem="YT5-z3-2fP" secondAttribute="trailing" id="MJ3-Ar-XIA"/>
+                                        <constraint firstAttribute="bottom" secondItem="WfQ-zO-AzR" secondAttribute="bottom" id="OG1-w6-Ap7"/>
+                                        <constraint firstAttribute="trailing" secondItem="WfQ-zO-AzR" secondAttribute="trailing" id="PJp-z8-W3d"/>
                                         <constraint firstAttribute="height" constant="30" id="U3r-zH-8Ec"/>
                                         <constraint firstItem="YT5-z3-2fP" firstAttribute="top" secondItem="53S-Pa-XrR" secondAttribute="top" id="bU3-G0-Kfv"/>
+                                        <constraint firstItem="WfQ-zO-AzR" firstAttribute="leading" secondItem="53S-Pa-XrR" secondAttribute="leading" id="oZX-dc-Cd0"/>
                                         <constraint firstItem="YT5-z3-2fP" firstAttribute="leading" secondItem="53S-Pa-XrR" secondAttribute="leading" id="qHT-J8-zGz"/>
                                     </constraints>
                                 </view>

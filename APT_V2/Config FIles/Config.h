@@ -133,7 +133,7 @@
 
 #define FetchrecordWellness                     @"MOBILE_FETCH_WORKLOAD_WELLNESS"
 
-#define updateRecord                      @"UPDATE_WORKLOAD_WELLNESS_RATING"
+#define updateRecord                      @"MOBILE_UPDATE_WORKLOAD_WELLNESS_RATING"
 
 #define removeRecord                      @"DELETE_WORKLOAD_WELLNESS_RATING"
 
@@ -239,7 +239,10 @@
 
 #define playerMyStatsBatting               @"MOBILE_GETMYSTATSBATTING"
 
+//Gallery Video
+
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
+#define FetchVideoUpload           @"FETCHVIDEOUPLOAD"
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
@@ -247,4 +250,6 @@
 
 #define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
 #define  trainingSaveKey              @"MOBILE_INSERT_TRAININGLOAD_DETAILS"
+
+#define  fetchTrainingLoadKey              @"MOBILE_GETTRAININGLOADDETAILS"
 

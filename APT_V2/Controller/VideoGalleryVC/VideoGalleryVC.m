@@ -18,7 +18,7 @@
 #import "VideoPlayerUploadVC.h"
 #import "WebService.h"
 
-@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate>
+@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 {
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
@@ -31,8 +31,12 @@
 
 @property (nonatomic,strong) IBOutlet UITableView * categoryTbl;
 @property (nonatomic,strong) IBOutlet UILabel * catagory_lbl;
-@property (nonatomic,strong) IBOutlet UISearchBar * searchBar;
+@property (nonatomic,strong) IBOutlet UILabel * date_lbl;
+@property (nonatomic,strong) IBOutlet UITextField * search_Txt;
 @property (nonatomic, strong) NSArray *searchResult;
+
+@property (nonatomic, strong) UIDatePicker * datePicker;
+@property (nonatomic,strong) IBOutlet UIView * view_datepicker;
 
 
 @end
@@ -54,8 +58,8 @@
     self.categoryTbl.layer.masksToBounds =YES;
     
     self.categoryTbl.hidden= YES;
-    
-    [self.searchBar setFrame:CGRectMake(0, 0,105, 30)];
+    [self.view_datepicker setHidden:YES];
+
 
 }
 
@@ -89,7 +93,6 @@
     
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    // *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
 
     
@@ -329,6 +332,11 @@
     
 }
 
+-(IBAction)didClickDatePicker:(id)sender
+{
+    [self DisplaydatePicker];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;    //count of section
@@ -392,7 +400,7 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"PLAYERNAME CONTAINS[c] %@", searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@", searchText];
     _searchResult = [self.objSecondGalleryArray filteredArrayUsingPredicate:resultPredicate];
     
     NSLog(@"searchResult:%@", _searchResult);
@@ -432,37 +440,31 @@
 -(void)textFieldDidChange :(UITextField *) textField
 {
     if (textField.text.length == 0) {
-        //_searchEnabled = NO;
-        //        [textField resignFirstResponder];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-           // self.playerTbl.hidden = NO;
+            
             [self.videoCollectionview2 reloadData];
         });
     }
     else {
-        //_searchEnabled = YES;
-        //self.playerTbl.hidden = NO;
+       
         [self filterContentForSearchText:textField.text];
     }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //    [textField resignFirstResponder];
-    //_searchEnabled = YES;
-    self.videoCollectionview2.hidden = NO;
-    [self filterContentForSearchText:textField.text];
+    
+    //self.videoCollectionview2.hidden = NO;
+  
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    //    [textField setText:@""];
-    //_searchEnabled = NO;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        // Update the UI
-        //self.playerTbl.hidden = NO;
+        
         [self.videoCollectionview2 reloadData];
     });
     return YES;
@@ -470,12 +472,64 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-    //self.playerTbl.hidden = NO;
-    //self.objVideoFilterArray = [[NSMutableArray alloc]init];
-    //self.objVideoFilterArray = playerArray;
-   // [self.videoCollectionview2 reloadData];
     [textField resignFirstResponder];
 }
 
+# pragma Date Picker
+
+-(void)DisplaydatePicker
+{
+    if(self.datePicker!= nil)
+    {
+        [self.datePicker removeFromSuperview];
+        
+    }
+    self.view_datepicker.hidden=NO;
+    //isStartDate =YES;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    
+    self.datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-200,self.view.frame.size.width,100)];
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [self.datePicker setLocale:locale];
+    
+    // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    [self.datePicker reloadInputViews];
+    [self.view_datepicker addSubview:self.datePicker];
+    
+}
+
+-(IBAction)showSelecteddate:(id)sender{
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+   // NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * actualDate = [dateFormat stringFromDate:self.datePicker.date];
+    
+    self.date_lbl.text = actualDate;
+    
+    [self.view_datepicker setHidden:YES];
+   
+    self.objVideoFilterArray =[[NSMutableArray alloc]init];
+    for(NSDictionary * objDic in self.objSecondGalleryArray)
+    {
+        NSString * objStr = [objDic valueForKey:@"videoName"];
+        NSArray *component3 = [objStr componentsSeparatedByString:@" "];
+        
+        NSString * filterStr =  [NSString stringWithFormat:@"%@",component3[2]];
+        if([filterStr isEqualToString:actualDate])
+        {
+            [self.objVideoFilterArray addObject:objDic];
+        }
+    }
+    [self.videoCollectionview2 reloadData];
+    
+}
 
 @end

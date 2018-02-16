@@ -17,6 +17,7 @@
 {
     WebService *objWebservice;
     WellnessTrainingBowlingVC *objWell;
+    NSString *fetchedDate;
 float num1;
 float num2;
 float num3;
@@ -28,6 +29,8 @@ NSString *metaSubCode3;
 NSString *metaSubCode4;
     
     UIDatePicker *datePicker;
+    
+    NSString *urineColorNum;
 }
 
 @property (strong, nonatomic) IBOutlet UISlider *sleepSlider;
@@ -63,7 +66,12 @@ NSString *metaSubCode4;
     _ColorSlider3.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
     _ColorSlider4.colorTrackImageView.image = [UIImage imageNamed:@"SliderBackground"];
     
+    self.SaveBtn.hidden = NO;
+    self.UpdateBtn.hidden = YES;
+    
     [self metacodeWebservice];
+    
+   
 }
 
 -(IBAction)sliderDidChange:(RGSColorSlider *)sender{
@@ -116,25 +124,135 @@ NSString *metaSubCode4;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    
-    
-    
-    //self.datelbl.text=[dateFormat stringFromDate:datePicker.date];
-    
-   
-    
+ 
     NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
-    
-
     self.datelbl.text = actualDate;
     
-    //NSLog(@"%@", actualDate);
+    
     
     [self.view_datepicker setHidden:YES];
    // [self dateWebservice];
     
 }
 
+
+- (IBAction)urineColorBtn1Action:(id)sender {
+    
+    urineColorNum = @"1";
+    self.UrineColorBtn1.tag =1;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+    
+//    self.UrineColorBtn1.layer.borderWidth = 2.0f;
+//    self.UrineColorBtn1.layer.borderColor = [UIColor blackColor].CGColor;
+}
+- (IBAction)urineColorBtn2Action:(id)sender {
+    
+    urineColorNum = @"2";
+    
+    
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =1;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+    
+//    self.UrineColorBtn1.layer.borderWidth = 2.0f;
+//    self.UrineColorBtn1.layer.borderColor = [UIColor blackColor].CGColor;
+    
+}
+
+- (IBAction)urineColorBtn3Action:(id)sender {
+    
+    urineColorNum = @"3";
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =1;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+}
+
+- (IBAction)urineColorBtn4Action:(id)sender {
+    
+    urineColorNum = @"4";
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =1;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+}
+
+- (IBAction)urineColorBtn5Action:(id)sender {
+    
+    urineColorNum = @"5";
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =1;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+}
+
+- (IBAction)urineColor6BtnAction:(id)sender {
+    
+    urineColorNum = @"6";
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =1;
+    self.UrineColorBtn7.tag =0;
+    [self setborder];
+}
+
+- (IBAction)urineColorBtn7Action:(id)sender {
+    
+    urineColorNum = @"7";
+    self.UrineColorBtn1.tag =0;
+    self.UrineColorBtn2.tag =0;
+    self.UrineColorBtn3.tag =0;
+    self.UrineColorBtn4.tag =0;
+    self.UrineColorBtn5.tag =0;
+    self.UrineColorBtn6.tag =0;
+    self.UrineColorBtn7.tag =1;
+    [self setborder];
+}
+
+-(void)setborder
+{
+    NSArray *arr = @[self.UrineColorBtn1,self.UrineColorBtn2,self.UrineColorBtn3,self.UrineColorBtn4,self.UrineColorBtn5,self.UrineColorBtn6,self.UrineColorBtn7];
+    
+    for (UIButton *btn in arr) {
+        if(btn.tag == 1)
+        {
+            btn.layer.borderWidth = 2.0f;
+            btn.layer.borderColor = [UIColor blackColor].CGColor;
+        }
+        else
+        {
+            btn.layer.borderWidth = 0.0f;
+            btn.layer.borderColor = [UIColor clearColor].CGColor;
+        }
+        
+    }
+}
 
 -(void)SaveWebservice
 {
@@ -145,7 +263,7 @@ NSString *metaSubCode4;
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
-    [objWebservice submit  :recordInsert :ClientCode :usercode:self.datelbl.text:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice submit  :recordInsert :ClientCode :usercode:self.datelbl.text:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -174,6 +292,45 @@ NSString *metaSubCode4;
         }];
     
 }
+
+-(void)UpdateWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    
+    [objWebservice submit  :updateRecord :ClientCode :usercode:fetchedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        if(responseObject >0)
+        {
+            BOOL Status = [responseObject valueForKey:@"Status"];
+            if(Status == YES)
+            {
+                NSLog(@"success");
+                [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
+                [self.view removeFromSuperview];
+                objWell = [[WellnessTrainingBowlingVC alloc] init];
+                [objWell setHeight];
+                
+            }
+            
+        }
+        
+        [AppCommon hideLoading];
+        
+        
+        
+    }
+                    failure:^(AFHTTPRequestOperation *operation, id error) {
+                        NSLog(@"failed");
+                        [COMMON webServiceFailureError:error];
+                    }];
+    
+}
+
 
 
 -(void)metacodeWebservice
@@ -208,7 +365,7 @@ NSString *metaSubCode4;
             self.sorelist1 = ([[self.sorelist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.sorelist valueForKey:@"MetaSubCode"];
             
             self.stresslist1 = ([[self.stresslist valueForKey:@"MetaSubCode"] isEqual:[NSNull null]])?@"":[self.stresslist valueForKey:@"MetaSubCode"];
-            
+            [self setFetch];
             
         }
         [AppCommon hideLoading];
@@ -221,6 +378,281 @@ NSString *metaSubCode4;
         [COMMON webServiceFailureError:error];
     }];
    
+}
+
+-(void)setFetch
+{
+    
+    
+    if([self.isFetch isEqualToString:@"yes"])
+    {
+        NSString *sleepValue = [self.fetchArray valueForKey:@"SleepRatingDescription"];
+        NSArray *component = [sleepValue componentsSeparatedByString:@" "];
+        
+        NSString *fatiqueRating = [self.fetchArray valueForKey:@"FatigueRatingDescription"];
+        NSArray *component1 = [fatiqueRating componentsSeparatedByString:@" "];
+        
+        NSString *muscleRating = [self.fetchArray valueForKey:@"SoreNessRatingDescription"];
+        NSArray *component2 = [muscleRating componentsSeparatedByString:@" "];
+        
+        NSString *stressRating = [self.fetchArray valueForKey:@"StressRatingDescription"];
+        NSArray *component3 = [stressRating componentsSeparatedByString:@" "];
+        
+        
+        self.sleepSlider.value =[component[0] intValue];
+        self.fatiqueSlider.value =[component1[0] intValue];
+        self.muscleSlider.value =[component2[0] intValue];
+        self.stressSlider.value =[component3[0] intValue];
+        
+        [self SleepSliderAction:0];
+        [self FatiqueSliderAction:0];
+        [self MuscleSliderAction:0];
+        [self StressSliderAction:0];
+        
+        if(self.sleepSlider.value ==1)
+        {
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:0];
+            
+        }
+        if(self.sleepSlider.value ==2)
+        {
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:1];
+            
+        }
+        
+        if(self.sleepSlider.value ==3)
+        {
+            
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:2];
+            
+        }
+        
+        if(self.sleepSlider.value ==4)
+        {
+            
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:3];
+            
+        }
+        
+        if(self.sleepSlider.value ==5)
+        {
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:4];
+            
+        }
+        if(self.sleepSlider.value ==6)
+        {
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:5];
+            
+        }
+       if(self.sleepSlider.value ==7)
+        {
+            
+            metaSubCode1 = [self.sleeplist1 objectAtIndex:6];
+            
+        }
+        
+        
+        
+        
+        if(self.fatiqueSlider.value ==1)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:0];
+            
+        }
+        if(self.fatiqueSlider.value ==2)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:1];
+            
+        }
+        if(self.fatiqueSlider.value ==3)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:2];
+            
+        }
+        if(self.fatiqueSlider.value ==4)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:3];
+            
+        }
+        if(self.fatiqueSlider.value ==5)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:4];
+            
+        }
+        if(self.fatiqueSlider.value ==6)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:5];
+            
+        }
+        if(self.fatiqueSlider.value ==7)
+        {
+            
+            metaSubCode2 = [self.fatiqlist1 objectAtIndex:6];
+            
+        }
+        
+        
+        
+        
+        if(self.muscleSlider.value ==1)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:0];
+            
+        }
+        if(self.muscleSlider.value ==2)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:1];
+            
+        }
+        if(self.muscleSlider.value ==3)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:2];
+            
+        }
+        if(self.muscleSlider.value ==4)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:3];
+            
+        }
+        if(self.muscleSlider.value ==5)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:4];
+            
+        }
+        if(self.muscleSlider.value ==6)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:5];
+            
+        }
+        if(self.muscleSlider.value ==7)
+        {
+            
+            metaSubCode3 = [self.sorelist1 objectAtIndex:6];
+            
+        }
+        
+        
+        
+        
+        if(self.stressSlider.value ==1)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:0];
+            
+        }
+        if(self.stressSlider.value ==2)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:1];
+            
+        }
+        if(self.stressSlider.value ==3)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:2];
+            
+        }
+        if(self.stressSlider.value ==4)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:3];
+            
+        }
+        if(self.stressSlider.value ==5)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:4];
+            
+        }
+        if(self.stressSlider.value ==6)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:5];
+            
+        }
+        if(self.stressSlider.value ==7)
+        {
+            
+            metaSubCode4 = [self.stresslist1 objectAtIndex:6];
+            
+        }
+        
+        
+        
+        NSString *urineColor = [self.fetchArray valueForKey:@"URINECOLOUR"];
+        if([urineColor isEqualToString:@"1"])
+        {
+            [self.UrineColorBtn1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"2"])
+        {
+            [self.UrineColorBtn2 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"3"])
+        {
+            [self.UrineColorBtn3 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"4"])
+        {
+            [self.UrineColorBtn4 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"5"])
+        {
+            [self.UrineColorBtn5 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"6"])
+        {
+            [self.UrineColorBtn6 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        if([urineColor isEqualToString:@"7"])
+        {
+            [self.UrineColorBtn7 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        self.bodyWeightTxt.text = [self.fetchArray valueForKey:@"BodyWeight"];
+        self.sleepHrTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
+        self.fatTxt.text = [self.fetchArray valueForKey:@"Fat"];
+        self.restingHrTxt.text = [self.fetchArray valueForKey:@"RestingGHR"];
+        self.restingBpMaxTxt.text = [self.fetchArray valueForKey:@"RestingBPMAX"];
+        self.restingBpMinTxt.text = [self.fetchArray valueForKey:@"RestingBPMIN"];
+        
+        
+        NSString *datee = [self.fetchArray valueForKey:@"WorkLoadDate"];
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd/MM/yyyy"];
+        NSDate *matchdate = [dateFormat dateFromString:datee];
+        self.datelbl.text = [dateFormat stringFromDate:matchdate];
+        
+        NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+        [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+        NSDate *matchdate1 = [dateFormat dateFromString:datee];
+        fetchedDate = [dateFormat1 stringFromDate:matchdate1];
+        
+        
+        self.SaveBtn.hidden = YES;
+        self.UpdateBtn.hidden = NO;
+        
+        
+    }
 }
 -(void)ShowAlterMsg:(NSString*) MsgStr
 {
@@ -255,6 +687,49 @@ NSString *metaSubCode4;
     else
     {
         [self SaveWebservice];
+        
+        self.sleepSlider.value =0;
+        self.fatiqueSlider.value =0;
+        self.muscleSlider.value =0;
+        self.stressSlider.value =0;
+        
+        [self SleepSliderAction:0];
+        [self FatiqueSliderAction:0];
+        [self MuscleSliderAction:0];
+        [self StressSliderAction:0];
+        
+        self.datelbl.text = @"";
+        
+    }
+    
+}
+
+- (IBAction)UpdateAction:(id)sender {
+    
+    
+//    if([self.datelbl.text isEqualToString:@""])
+//    {
+//        [self ShowAlterMsg:@"Please Select Date"];
+//    }
+     if(self.sleepSlider.value ==0)
+    {
+        [self ShowAlterMsg:@"Please Select Sleep"];
+    }
+    else if(self.fatiqueSlider.value ==0)
+    {
+        [self ShowAlterMsg:@"Please Select Fatique"];
+    }
+    else if(self.muscleSlider.value ==0)
+    {
+        [self ShowAlterMsg:@"Please Select MuscleSoreness"];
+    }
+    else if(self.stressSlider.value ==0)
+    {
+        [self ShowAlterMsg:@"Please Select Stress"];
+    }
+    else
+    {
+        [self UpdateWebservice];
         
         self.sleepSlider.value =0;
         self.fatiqueSlider.value =0;

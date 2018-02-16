@@ -372,9 +372,12 @@
     [AppCommon showLoading ];
     
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
     
-    
-    [objWebservice trainingLoadDropDown :TraingLoadDropKey : playerCode  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice trainingLoadDropDown :TraingLoadDropKey : playerCode  :actualDate  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -431,7 +434,7 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
     
     
     

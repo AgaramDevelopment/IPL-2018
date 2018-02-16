@@ -42,7 +42,7 @@
 
 
 
-
+@property (nonatomic, strong)  NSMutableArray *fetchedArray;
 
 
 
@@ -121,6 +121,7 @@
     
     [_chartView animateWithXAxisDuration:2.5];
     
+    [self.fetchButton setTag:0];
      [self FetchWebservice];
     
    
@@ -140,6 +141,23 @@
     self.topviewHeight.constant = 578;
     
 }
+
+- (IBAction)FetchBtnAction:(id)sender {
+    
+    
+    if(self.fetchButton.tag == 1)
+    {
+    
+    objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
+    objWell.isFetch= @"yes";
+        objWell.fetchArray = self.fetchedArray;
+    objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
+    [self.topView addSubview:objWell.view];
+    self.topviewHeight.constant = 578;
+    }
+    
+}
+
 
 -(BOOL)setHeight
 {
@@ -253,9 +271,9 @@
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    NSString *urinecolor= @"0";
     
-    
-    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate :urinecolor success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -263,6 +281,10 @@
             if( ![[responseObject valueForKey:@"BodyWeight"] isEqual:[NSNull null]])
             {
                 self.bodyWeightlbl.text = [responseObject valueForKey:@"BodyWeight"];
+                
+                [self.fetchButton setTag:1];
+                self.fetchedArray = [[NSMutableArray alloc]init];
+                self.fetchedArray = responseObject;
             }
             if(! [[responseObject valueForKey:@"SleepHours"] isEqual:[NSNull null]])
             {
