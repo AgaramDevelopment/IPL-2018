@@ -21,7 +21,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #pragma Local URL
 //#define BASE_URL  @"http://119.226.98.154:8002/FanZone/FanEngagement.svc/"     //@"http://www.dindiguldragons.com:8002/FanZone/FanEngagement.svc/"
 
-#pragma Testing Url 
+#pragma Testing Url
 
 #define BASE_URL   @"http://192.168.0.151:8044/AGAPTService.svc/"
 #define IMAGE_URL   @"http://192.168.0.151:8045/"
@@ -68,10 +68,10 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 
 -(void)getLogin :(NSString *) loginValue :(NSString *) userName:(NSString *)password success:(WebserviceRequestSuccessHandler)success
-            failure:(WebserviceRequestFailureHandler)failure;
+         failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)getAssesmentlist :(NSString *)asmtlist :(NSString *)clientCode :(NSString *)moduleCode :(NSString *)createdby success:(WebserviceRequestSuccessHandler)success
-         failure:(WebserviceRequestFailureHandler)failure;
+                 failure:(WebserviceRequestFailureHandler)failure;
 -(void)getmetacodelist :(NSString *)codelist :(NSString *)clientCode :(NSString *)rcCode success:(WebserviceRequestSuccessHandler)success
                 failure:(WebserviceRequestFailureHandler)failure;
 -(void)getdatelist :(NSString *)codelist :(NSString *)playercode :(NSString *)date success:(WebserviceRequestSuccessHandler)success
@@ -118,7 +118,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)GetPlayers:(NSString *)list :(NSString *)clientcode   success:(WebserviceRequestSuccessHandler)success
           failure:(WebserviceRequestFailureHandler)failure ;
 
--(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date :(NSString *)urinecolor  success:(WebserviceRequestSuccessHandler)success
+-(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
@@ -126,5 +126,8 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 -(void)fetchTrainingLoad :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure;
+-(void)UpdateWellness :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)workLoadCode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin :(NSString *)urinecolor success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure;
 
 @end
+

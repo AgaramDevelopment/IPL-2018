@@ -10,9 +10,23 @@
 #import "MyStatsBattingCell.h"
 @interface MyStatsBattingVC : UIViewController
 {
+    NSMutableArray *battingOverAllArray;
+    NSMutableArray *bowlingOverAllArray;
     NSMutableArray *overAllArray;
+    
+    NSMutableArray *battingRecentMatchesArray;
+    NSMutableArray *bowlingRecentMatchesArray;
     NSMutableArray *recentMatchesArray;
+    
+    NSMutableArray *battingmatchDetailsArray;
+    NSMutableArray *bowlingmatchDetailsArray;
     NSMutableArray *matchDetailsArray;
+    
+    NSMutableArray *battingWagonWheelDrawData;
+    NSMutableArray *bowlingWagonWheelDrawData;
+    
+    NSMutableArray *battingPitchData;
+    NSMutableArray *bowlingPitchData;
 }
 
 @property (assign, nonatomic) NSIndexPath *selectedRowIndex;

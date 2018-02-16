@@ -23,6 +23,9 @@
     float num3;
     float num4;
     
+    BOOL isActivity;
+    BOOL isRpe;
+    
     PieChartView *pieChartView;
     
     WebService *objWebservice;
@@ -33,9 +36,12 @@
 }
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableXposition;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableyposition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableWidth;
 
 @property (strong, nonatomic)  NSMutableArray *DropdownDataArray;
+@property (strong, nonatomic)  NSMutableArray *RpeDataArray;
+@property (strong, nonatomic)  NSMutableArray *ActivityDataArray;
 @end
 
 
@@ -53,13 +59,19 @@
     self.sessionBtn.hidden = NO;
     self.UpdateBtn.hidden = YES;
     
-    rpeCode = @"MSC062";
+    self.SaveBtn.hidden = NO;
+    self.FetchedUpdateBtn.hidden = YES;
+    
+   // rpeCode = @"MSC062";
     
     //sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     //activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
    // valueArray = [[NSMutableArray alloc] initWithObjects:@"245", @"124", @"342", nil];
      self.popViewtable.hidden = YES;
     [self DropDownWebservice];
+    
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,10 +99,31 @@
 
 - (IBAction)ActivityAction:(id)sender {
     
+    
+    isActivity = YES;
+    isRpe = NO;
     self.popViewtable.hidden = NO;
     self.poptableWidth.constant = self.ActivityFilterview.frame.size.width;
     self.poptableXposition.constant = self.ActivityFilterview.frame.origin.x;
+    self.poptableyposition.constant = self.ActivityFilterview.frame.origin.y;
     
+    self.DropdownDataArray = [[NSMutableArray alloc]init];
+    self.DropdownDataArray = self.ActivityDataArray;
+    [self.popViewtable reloadData];
+    
+}
+
+- (IBAction)RpeAction:(id)sender {
+    
+    isActivity = NO;
+    isRpe = YES;
+    self.popViewtable.hidden = NO;
+    self.poptableWidth.constant = self.RpeFilterview.frame.size.width;
+    self.poptableXposition.constant = self.RpeFilterview.frame.origin.x;
+    self.poptableyposition.constant = self.RpeFilterview.frame.origin.y;
+    self.DropdownDataArray = [[NSMutableArray alloc]init];
+    self.DropdownDataArray = self.RpeDataArray;
+    [self.popViewtable reloadData];
 }
 
 - (IBAction)AddSessionAction:(id)sender {
@@ -105,6 +138,7 @@
     [dic setObject:ActivityCode forKey:@"ActivityCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
     [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
+    [dic setObject:[NSString stringWithFormat:@"%@",rpeCode] forKey:@"rpeCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
     [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
    if(sessionArray.count >0)
@@ -162,6 +196,11 @@
 - (IBAction)SaveAction:(id)sender {
     
     [self SaveWebservice];
+}
+
+- (IBAction)UpdateAction:(id)sender {
+    
+    [self UpdateWebservice];
 }
 -(void)ShowAlterMsg:(NSString*) MsgStr
 {
@@ -245,9 +284,19 @@
 {
     if(tableView == self.popViewtable)
     {
+        if(isActivity==YES)
+        {
         self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         self.popViewtable.hidden = YES;
+        }
+        
+        if(isRpe==YES)
+        {
+            self.rpelbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
+            rpeCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
+            self.popViewtable.hidden = YES;
+        }
     }
     if(tableView == self.SessionTable)
     {
@@ -381,11 +430,16 @@
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
-            self.DropdownDataArray = [[NSMutableArray alloc]init];
+            self.ActivityDataArray = [[NSMutableArray alloc]init];
+            self.ActivityDataArray = [responseObject valueForKey:@"ActivityTypes"];
             
-            self.DropdownDataArray = [responseObject valueForKey:@"CategoryList"];
+            self.RpeDataArray = [[NSMutableArray alloc]init];
+            self.RpeDataArray = [responseObject valueForKey:@"Rpes"];
+            
             
             [self.popViewtable reloadData];
+            
+            [self setValuesUpdate];
         }
         [AppCommon hideLoading];
         
@@ -395,6 +449,102 @@
     [COMMON webServiceFailureError:error];
     }];
     
+}
+-(void)setValuesUpdate
+{
+if([_isToday isEqualToString:@"yes"])
+{
+    
+    self.SaveBtn.hidden = YES;
+    self.FetchedUpdateBtn.hidden = NO;
+    sessionArray = [[NSMutableArray alloc]init];
+    self.datelbl.text = [[self.TodayLoadArray valueForKey:@"WORKLOADDATE"] objectAtIndex:0];
+    
+    for(int i=0;i<self.TodayLoadArray.count;i++)
+    {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
+        [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
+        
+        int timecount = [[[self.TodayLoadArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+        int rpecount =  [[[self.TodayLoadArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+        int total = timecount * rpecount;
+        [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
+        [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
+        [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
+        [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
+        
+        [sessionArray addObject:dic];
+    }
+    [self.SessionTable reloadData];
+    if(sessionArray.count >0)
+    {
+        self.markers = [[NSMutableArray alloc]init];
+        for(int i=0;i<sessionArray.count;i++)
+        {
+            [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
+        }
+        [self samplePieChart];
+        [pieChartView reloadData];
+        
+        int total=0;
+        for(int i=0;i<self.markers.count;i++)
+        {
+            NSString *reqValue = [self.markers objectAtIndex:i];
+            int value = [reqValue intValue];
+            total=total+value;
+        }
+        self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+    }
+    
+    
+}
+    
+    if([_isYesterday isEqualToString:@"yes"])
+    {
+        self.SaveBtn.hidden = YES;
+        self.FetchedUpdateBtn.hidden = NO;
+        sessionArray = [[NSMutableArray alloc]init];
+        self.datelbl.text = [[self.YesterdayLoadArray valueForKey:@"WORKLOADDATE"] objectAtIndex:0];
+        
+        for(int i=0;i<self.YesterdayLoadArray.count;i++)
+        {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
+            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
+            
+            int timecount = [[[self.YesterdayLoadArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+            int rpecount =  [[[self.YesterdayLoadArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+            int total = timecount * rpecount;
+            [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
+            [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
+            [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
+            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
+            
+            [sessionArray addObject:dic];
+        }
+        [self.SessionTable reloadData];
+        
+        if(sessionArray.count >0)
+        {
+            self.markers = [[NSMutableArray alloc]init];
+            for(int i=0;i<sessionArray.count;i++)
+            {
+                [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
+            }
+            [self samplePieChart];
+            [pieChartView reloadData];
+            
+            int total=0;
+            for(int i=0;i<self.markers.count;i++)
+            {
+                NSString *reqValue = [self.markers objectAtIndex:i];
+                int value = [reqValue intValue];
+                total=total+value;
+            }
+            self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        }
+    }
 }
 
 - (IBAction)DateBtnAction:(id)sender {
@@ -451,6 +601,8 @@
     
     [self.view_datepicker setHidden:YES];
     // [self dateWebservice];
+    
+    [self DateWebservice];
     
 }
 
@@ -525,5 +677,159 @@
     }
     
 }
+
+-(void)UpdateWebservice
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",trainingUpdateKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        
+        NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        
+        NSMutableArray *traininglist = [[NSMutableArray alloc]init];
+        for(int i=0;i<sessionArray.count;i++)
+        {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+            [dic setObject:[[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:i] forKey:@"ACTIVITYTYPECODE"];
+            [dic setObject:[[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:i] forKey:@"RATEPERCEIVEDEXERTION"];
+            [dic setObject:[[sessionArray valueForKey:@"timeValue"] objectAtIndex:i] forKey:@"DURATION"];
+            [dic setObject:[[sessionArray valueForKey:@"ballsValue"] objectAtIndex:i] forKey:@"BALL"];
+            [traininglist addObject:dic];
+        }
+        
+        
+        NSString *datee = self.datelbl.text;
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd/MM/yyyy"];
+        NSDate *matchdate = [dateFormat dateFromString:datee];
+        
+        NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+        [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+        NSString *actualdate = [dateFormat1 stringFromDate:matchdate];
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(usercode)   [dic    setObject:usercode     forKey:@"USERCODE"];
+        if(playerCode)   [dic    setObject:playerCode     forKey:@"PLAYERCODE"];
+        if(actualdate )   [dic    setObject:actualdate     forKey:@"WORKLOADDATE"];
+        if(traininglist)   [dic    setObject:traininglist     forKey:@"Trainingloadlist"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                BOOL Status = [responseObject valueForKey:@"Status"];
+                if(Status == YES)
+                {
+                    NSLog(@"success");
+                    [self ShowAlterMsg:@"Training Load Updated Successfully"];
+                    [self.view removeFromSuperview];
+                    
+                    // [self.pieChartRight reloadData];
+                }
+                
+            }
+            
+            [AppCommon hideLoading];
+            [self.view setUserInteractionEnabled:YES];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            [self.view setUserInteractionEnabled:YES];
+            
+        }];
+    }
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+}
+
+-(BOOL) textFieldShouldReturn: (UITextField *) textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+-(void)DateWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    
+    
+    
+    [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
+        {
+            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            {
+                
+                NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+                reqArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
+                
+                self.TodayLoadArray = [[NSMutableArray alloc]init];
+                self.YesterdayLoadArray = [[NSMutableArray alloc]init];
+                //[self samplePieChart];
+                for(int i=0;i<reqArray.count;i++)
+                {
+                    
+                    if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:actualDate] )
+                    {
+                        
+                        [self.TodayLoadArray addObject:[reqArray  objectAtIndex:i]];
+                        
+                        self.SaveBtn.hidden = YES;
+                        self.FetchedUpdateBtn.hidden = NO;
+                        _isToday = @"yes";
+                        [self setValuesUpdate];
+                    }
+                    
+                }
+     
+            }
+        }
+        [AppCommon hideLoading];
+        
+    }
+  failure:^(AFHTTPRequestOperation *operation, id error) {
+    NSLog(@"failed");
+    [COMMON webServiceFailureError:error];
+     }];
+    
+}
+
+
+
 
 @end

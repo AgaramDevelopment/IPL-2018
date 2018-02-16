@@ -53,7 +53,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 -(void)getAssesmentlist :(NSString *)asmtlist :(NSString *)clientCode :(NSString *)moduleCode :(NSString *)createdby success:(WebserviceRequestSuccessHandler)success
-         failure:(WebserviceRequestFailureHandler)failure
+                 failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@",asmtlist,clientCode,moduleCode,createdby]];
     NSLog(@"urlString = %@",urlString);
@@ -108,10 +108,24 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
--(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  :(NSString *)urinecolor success:(WebserviceRequestSuccessHandler)success
-       failure:(WebserviceRequestFailureHandler)failure
+-(void)UpdateWellness :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)workLoadCode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin :(NSString *)urinecolor success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@",codelist,playercode,date,urinecolor]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",codelist,clientCode,usercode,workLoadCode,date,playercode,code1,code2,code3,code4,bodyWeight,sleephr,fat,restinghr,restingbpMax,restingbpMin,urinecolor]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)fetchWellness :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",codelist,playercode,date]];
     NSLog(@"urlString = %@",urlString);
     
     
@@ -300,7 +314,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 }
 
 -(void)GetPlayers:(NSString *)list :(NSString *)clientcode   success:(WebserviceRequestSuccessHandler)success
-                 failure:(WebserviceRequestFailureHandler)failure
+          failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@",list,clientcode]];
     NSLog(@"urlString = %@",urlString);
@@ -314,7 +328,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 }
 
 -(void)trainingLoadDropDown :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
-              failure:(WebserviceRequestFailureHandler)failure
+                     failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",codelist,playercode,date]];
     NSLog(@"urlString = %@",urlString);
@@ -328,7 +342,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 }
 
 -(void)fetchTrainingLoad :(NSString *)codelist :(NSString *)playercode  success:(WebserviceRequestSuccessHandler)success
-              failure:(WebserviceRequestFailureHandler)failure
+                  failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@",codelist,playercode]];
     NSLog(@"urlString = %@",urlString);
@@ -360,7 +374,7 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
          {
              if (sucesshandler){
                  //if([responseDict objectForKey:@"error"]){
-                // }
+                 // }
                  sucesshandler(operation,responseDict);
              }
          }
@@ -397,3 +411,4 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 
 
 @end
+

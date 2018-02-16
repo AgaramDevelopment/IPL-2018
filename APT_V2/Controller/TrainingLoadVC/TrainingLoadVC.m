@@ -13,6 +13,7 @@
 #import "TrainingLoadUpdateVC.h"
 #import "AppCommon.h"
 #import "WebService.h"
+//#import "WellnessTrainingBowlingVC.h"
 
 
 @interface TrainingLoadVC ()<PieChartViewDelegate,PieChartViewDataSource>
@@ -24,12 +25,16 @@
     float num3;
     float num4;
     
+    BOOL isToday;
+    BOOL isYesterday;
+    
      PieChartView *pieChartView1, *pieChartView2;
 }
 
 @property (strong, nonatomic) IBOutlet NSMutableArray *metaSubcodeArray;
 @property (strong, nonatomic) IBOutlet NSMutableArray *todaysLoadArray;
 @property (strong, nonatomic) IBOutlet NSMutableArray *yesterdayLoadArray;
+
 
 @end
 
@@ -41,6 +46,9 @@
     
    // self.markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", @"63.22", @"31.43", nil];
     objWebservice=[[WebService alloc]init];
+    
+    isToday =NO;
+    isYesterday = NO;
 
 }
 
@@ -75,6 +83,7 @@
     self.todayView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.todayView.clipsToBounds = true;
     
+    [self samplePieChart];
     [self FetchWebservice];
     
 }
@@ -114,6 +123,34 @@
 //        objWell.traingViewHeight.constant = objWell.traingViewHeight.constant+300;
 }
 
+- (IBAction)TodayBtnAction:(id)sender {
+    
+    if(isToday == YES)
+    {
+    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.TodayLoadArray = self.todaysLoadArray;
+    objUpdate.isToday = @"yes";
+    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+    [self.traingView addSubview:objUpdate.view];
+    }
+}
+
+- (IBAction)YesterdayBtnAction:(id)sender {
+    
+    if(isYesterday == YES)
+    {
+        
+        //[objWell.AddTrainingBtn addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    //WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+    //[objWell.AddTrainingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
+    objUpdate.isYesterday = @"yes";
+    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+    [self.traingView addSubview:objUpdate.view];
+    }
+}
+
 #pragma mark -    PieChartViewDelegate
 -(CGFloat)centerCircleRadius
 {
@@ -125,7 +162,6 @@
         {
         return 30;
         }
-    
     
 }
 
@@ -154,6 +190,76 @@
         {
         color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
         }
+    
+//    if(pieChartView == pieChartView1)
+//    {
+//    for(int i=0;i<self.yesterdayLoadArray.count;i++)
+//    {
+//        if(i==0)
+//        {
+//        self.yesterdayActivitynamelbl1.backgroundColor = color;
+//        }
+//        else if(i==1)
+//        {
+//            self.yesterdayActivitynamelbl2.backgroundColor = color;
+//        }
+//        else if(i==2)
+//        {
+//            self.yesterdayActivitynamelbl3.backgroundColor = color;
+//        }
+//        else if(i==3)
+//        {
+//            self.yesterdayActivitynamelbl4.backgroundColor = color;
+//        }
+//        else if(i==4)
+//        {
+//            self.yesterdayActivitynamelbl5.backgroundColor = color;
+//        }
+//        else if(i==5)
+//        {
+//            self.yesterdayActivitynamelbl6.backgroundColor = color;
+//        }
+//        else if(i==6)
+//        {
+//            self.yesterdayActivitynamelbl7.backgroundColor = color;
+//        }
+//    }
+//    }
+
+//    if(pieChartView == pieChartView2)
+//    {
+//    for(int i=0;i<self.todaysLoadArray.count;i++)
+//    {
+//        if(i==0)
+//        {
+//            self.todayActivitynamelbl1.backgroundColor = color;
+//        }
+//        else if(i==1)
+//        {
+//            self.todayActivitynamelbl2.backgroundColor = color;
+//        }
+//        else if(i==2)
+//        {
+//            self.todayActivitynamelbl3.backgroundColor = color;
+//        }
+//        else if(i==3)
+//        {
+//            self.todayActivitynamelbl4.backgroundColor = color;
+//        }
+//        else if(i==4)
+//        {
+//            self.todayActivitynamelbl5.backgroundColor = color;
+//        }
+//        else if(i==5)
+//        {
+//            self.todayActivitynamelbl6.backgroundColor = color;
+//        }
+//        else if(i==6)
+//        {
+//            self.todayActivitynamelbl7.backgroundColor = color;
+//        }
+//    }
+//    }
     return color;
         //return GetRandomUIColor();
 }
@@ -242,31 +348,39 @@
     
     [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
-        if(responseObject >0)
+        
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
         {
+            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            {
             NSMutableArray *reqArray = [[NSMutableArray alloc]init];
-            reqArray = responseObject;
+            reqArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
             
+            self.todaysLoadArray = [[NSMutableArray alloc]init];
+            self.yesterdayLoadArray = [[NSMutableArray alloc]init];
+            //[self samplePieChart];
             for(int i=0;i<reqArray.count;i++)
             {
-                if([[[responseObject valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:actualDate] )
+                
+                if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:actualDate] )
                 {
-                
-                    self.todaysLoadArray = [[NSMutableArray alloc]init];
-                    [self.todaysLoadArray addObject:[responseObject  objectAtIndex:i]];
+    
+                    [self.todaysLoadArray addObject:[reqArray  objectAtIndex:i]];
                 }
-                
-                if([[[responseObject valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:yesterdayDate] )
+                if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:yesterdayDate] )
                 {
                     
-                    self.yesterdayLoadArray = [[NSMutableArray alloc]init];
-                    [self.yesterdayLoadArray addObject:[responseObject objectAtIndex:i]];
+                    [self.yesterdayLoadArray addObject:[reqArray objectAtIndex:i]];
                 }
                 
             }
-            
+           
+            if(self.todaysLoadArray.count>0)
+            {
             self.markers = [[NSMutableArray alloc]init];
-            
+                isToday = YES;
              for(int i=0;i<self.todaysLoadArray.count;i++)
              {
                  //today view
@@ -389,10 +503,15 @@
                  [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
                  
              }
-            [self samplePieChart];
-            [pieChartView2 reloadData];
             
+            
+            [pieChartView2 reloadData];
+            }
+           
+            if(self.yesterdayLoadArray.count>0)
+            {
             self.markers = [[NSMutableArray alloc]init];
+                isYesterday = YES;
             
             for(int i=0;i<self.yesterdayLoadArray.count;i++)
             {
@@ -518,10 +637,8 @@
             }
             
             [pieChartView1 reloadData];
-            
-            
-            
-            
+            }
+        }
         }
         [AppCommon hideLoading];
         

@@ -18,6 +18,7 @@
     WebService *objWebservice;
     WellnessTrainingBowlingVC *objWell;
     NSString *fetchedDate;
+    NSString *FetchedWorkLoadCode;
 float num1;
 float num2;
 float num3;
@@ -127,11 +128,8 @@ NSString *metaSubCode4;
  
     NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
     self.datelbl.text = actualDate;
-    
-    
-    
     [self.view_datepicker setHidden:YES];
-   // [self dateWebservice];
+    [self DateWebservice];
     
 }
 
@@ -293,6 +291,73 @@ NSString *metaSubCode4;
     
 }
 
+-(void)DateWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    
+    // NSString *urinecolor= @"0";
+    
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :self.datelbl.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr=responseObject;
+        if(arr.count >0)
+        {
+            if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                self.fetchArray = [[NSMutableArray alloc]init];
+                self.fetchArray = [responseObject objectAtIndex:0];
+                if(self.fetchArray.count>0)
+                {
+                    self.isFetch = @"yes";
+                    [self setFetch];
+                }
+            }
+            
+        }
+        else
+        {
+            self.sleepSlider.value =0;
+            self.fatiqueSlider.value =0;
+            self.muscleSlider.value =0;
+            self.stressSlider.value =0;
+            
+            [self SleepSliderAction:0];
+            [self FatiqueSliderAction:0];
+            [self MuscleSliderAction:0];
+            [self StressSliderAction:0];
+            
+            self.bodyWeightTxt.text = @"";
+            self.sleepHrTxt.text = @"";
+            self.fatTxt.text = @"";
+            self.restingHrTxt.text = @"";
+            self.restingBpMaxTxt.text = @"";
+            self.restingBpMinTxt.text = @"";
+            
+            
+            self.UrineColorBtn1.tag =0;
+            self.UrineColorBtn2.tag =0;
+            self.UrineColorBtn3.tag =0;
+            self.UrineColorBtn4.tag =0;
+            self.UrineColorBtn5.tag =0;
+            self.UrineColorBtn6.tag =0;
+            self.UrineColorBtn7.tag =0;
+            [self setborder];
+            
+        }
+        [AppCommon hideLoading];
+        
+    }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              NSLog(@"failed");
+                              [COMMON webServiceFailureError:error];
+                          }];
+    
+}
+
 -(void)UpdateWebservice
 {
     [AppCommon showLoading ];
@@ -302,7 +367,7 @@ NSString *metaSubCode4;
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
-    [objWebservice submit  :updateRecord :ClientCode :usercode:fetchedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :fetchedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -647,6 +712,8 @@ NSString *metaSubCode4;
         NSDate *matchdate1 = [dateFormat dateFromString:datee];
         fetchedDate = [dateFormat1 stringFromDate:matchdate1];
         
+        
+        FetchedWorkLoadCode = [self.fetchArray valueForKey:@"WorkLoadCode"];
         
         self.SaveBtn.hidden = YES;
         self.UpdateBtn.hidden = NO;

@@ -20,6 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WellnessTrainingBowlingVC">
             <connections>
+                <outlet property="AddTrainingBtn" destination="pw2-vr-Xzh" id="vQ7-y1-nvd"/>
                 <outlet property="FatiqueColorView" destination="PRy-88-7lC" id="2KZ-wT-Wcq"/>
                 <outlet property="MuscleColorView" destination="LXa-VX-WTU" id="KHj-DO-egc"/>
                 <outlet property="RootTrainingView" destination="cAi-ZW-euW" id="WNS-la-mtm"/>
@@ -550,7 +551,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAi-ZW-euW">
-                                    <rect key="frame" x="5" y="375" width="365" height="350"/>
+                                    <rect key="frame" x="5" y="375" width="365" height="600"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRE-6H-20M">
                                             <rect key="frame" x="0.0" y="0.0" width="365" height="301"/>
@@ -560,7 +561,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vrh-kd-5HO">
-                                            <rect key="frame" x="266" y="315" width="79" height="30"/>
+                                            <rect key="frame" x="266" y="565" width="79" height="30"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:8na-VP-Txa:image" translatesAutoresizingMaskIntoConstraints="NO" id="8na-VP-Txa">
                                                     <rect key="frame" x="5" y="5" width="20" height="20"/>
@@ -608,12 +609,12 @@
                                         <constraint firstAttribute="trailing" secondItem="PRE-6H-20M" secondAttribute="trailing" id="FTK-ob-v6H"/>
                                         <constraint firstItem="PRE-6H-20M" firstAttribute="leading" secondItem="cAi-ZW-euW" secondAttribute="leading" id="d50-0b-c1Y"/>
                                         <constraint firstItem="PRE-6H-20M" firstAttribute="top" secondItem="cAi-ZW-euW" secondAttribute="top" id="iHv-JH-3oG"/>
-                                        <constraint firstAttribute="height" constant="350" id="mVu-SE-pjv"/>
+                                        <constraint firstAttribute="height" constant="600" id="mVu-SE-pjv"/>
                                         <constraint firstAttribute="trailing" secondItem="Vrh-kd-5HO" secondAttribute="trailing" constant="20" id="np6-vP-D8F"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C5-g7-Bua">
-                                    <rect key="frame" x="5" y="735" width="365" height="35"/>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C5-g7-Bua">
+                                    <rect key="frame" x="5" y="985" width="365" height="35"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Load" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raC-eb-ULy">
                                             <rect key="frame" x="5" y="3" width="175" height="30"/>
@@ -646,8 +647,8 @@
                                         <constraint firstItem="4kN-e5-DpN" firstAttribute="leading" secondItem="raC-eb-ULy" secondAttribute="trailing" constant="5" id="kvZ-up-Dae"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
-                                    <rect key="frame" x="5" y="775" width="370" height="294"/>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
+                                    <rect key="frame" x="5" y="1025" width="370" height="294"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW5-G4-aAS">
                                             <rect key="frame" x="0.0" y="10" width="370" height="30"/>
