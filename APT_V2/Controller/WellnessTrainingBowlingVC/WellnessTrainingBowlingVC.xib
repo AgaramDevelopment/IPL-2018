@@ -21,6 +21,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WellnessTrainingBowlingVC">
             <connections>
                 <outlet property="AddTrainingBtn" destination="pw2-vr-Xzh" id="vQ7-y1-nvd"/>
+                <outlet property="BowlingDailyBtn" destination="7UB-Gy-u3g" id="d2c-Da-Gyf"/>
+                <outlet property="BowlingMonthlyBtn" destination="jxf-9G-Kcg" id="XZH-pk-T33"/>
+                <outlet property="BowlingWeeklyBtn" destination="FPm-3y-M0v" id="ZVQ-8R-PuW"/>
                 <outlet property="FatiqueColorView" destination="PRy-88-7lC" id="2KZ-wT-Wcq"/>
                 <outlet property="MuscleColorView" destination="LXa-VX-WTU" id="KHj-DO-egc"/>
                 <outlet property="RootTrainingView" destination="cAi-ZW-euW" id="WNS-la-mtm"/>
@@ -613,7 +616,7 @@
                                         <constraint firstAttribute="trailing" secondItem="Vrh-kd-5HO" secondAttribute="trailing" constant="20" id="np6-vP-D8F"/>
                                     </constraints>
                                 </view>
-                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C5-g7-Bua">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7C5-g7-Bua">
                                     <rect key="frame" x="5" y="985" width="365" height="35"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Load" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raC-eb-ULy">
@@ -647,7 +650,7 @@
                                         <constraint firstItem="4kN-e5-DpN" firstAttribute="leading" secondItem="raC-eb-ULy" secondAttribute="trailing" constant="5" id="kvZ-up-Dae"/>
                                     </constraints>
                                 </view>
-                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eC-M6-Jld">
                                     <rect key="frame" x="5" y="1025" width="370" height="294"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW5-G4-aAS">
@@ -655,7 +658,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UB-Gy-u3g">
                                                     <rect key="frame" x="5" y="0.0" width="116.5" height="30"/>
-                                                    <color key="backgroundColor" red="0.78424429893493652" green="0.78435820341110229" blue="0.78421932458877563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="SV2-tC-oqZ"/>
                                                     </constraints>
@@ -666,6 +669,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="DailyAction:" destination="-1" eventType="touchUpInside" id="6gn-N3-kix"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPm-3y-M0v">
                                                     <rect key="frame" x="126.5" y="0.0" width="117" height="30"/>
@@ -680,6 +686,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="WeeklyAction:" destination="-1" eventType="touchUpInside" id="CWp-JX-H8y"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-9G-Kcg">
                                                     <rect key="frame" x="248.5" y="0.0" width="116.5" height="30"/>
@@ -694,6 +703,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="MonthlyAction:" destination="-1" eventType="touchUpInside" id="XgW-Un-IUI"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

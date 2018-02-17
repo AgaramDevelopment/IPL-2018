@@ -259,5 +259,11 @@
 
 #define  fetchTrainingLoadKey              @"MOBILE_GETTRAININGLOADDETAILS"
 
+#define  fetchTrainingLoadDateKey              @"MOBILE_GETTRAININGLOAD"
+
+#define  BowlingLoadKey              @"MOBILE_BOWLINGLOADDATECHANGE"
+
+#define  TeamsKey              @"MOBILE_FETCHTEAM"
+
 
 

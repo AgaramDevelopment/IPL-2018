@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamsVC">
+            <connections>
+                <outlet property="objProfilecell" destination="Y1F-mn-LbV" id="p3Q-9d-xzT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyIdentifier" id="Y1F-mn-LbV" customClass="ProfileVCCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y1F-mn-LbV" id="Mhr-ke-7jS">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUb-5e-vpb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3P-bj-KGZ">
+                                <rect key="frame" x="55" y="10" width="276" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="276" id="8vV-1C-RAZ"/>
+                                    <constraint firstAttribute="height" constant="21" id="F2s-7G-kMY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T7f-IP-sbA">
+                                <rect key="frame" x="10" y="3" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="MhN-LJ-kRk"/>
+                                    <constraint firstAttribute="width" constant="35" id="nxO-Fk-X3N"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.26990582190000001" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="g3P-bj-KGZ" firstAttribute="top" secondItem="nUb-5e-vpb" secondAttribute="top" constant="10" id="b7H-os-W4h"/>
+                            <constraint firstItem="T7f-IP-sbA" firstAttribute="top" secondItem="nUb-5e-vpb" secondAttribute="top" constant="3" id="gJf-Iq-58o"/>
+                            <constraint firstItem="T7f-IP-sbA" firstAttribute="leading" secondItem="nUb-5e-vpb" secondAttribute="leading" constant="10" id="uYA-74-70G"/>
+                            <constraint firstItem="g3P-bj-KGZ" firstAttribute="leading" secondItem="T7f-IP-sbA" secondAttribute="trailing" constant="10" id="zah-eL-Wdb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="nUb-5e-vpb" secondAttribute="bottom" constant="4" id="9Ef-EL-o6w"/>
+                    <constraint firstItem="nUb-5e-vpb" firstAttribute="leading" secondItem="Mhr-ke-7jS" secondAttribute="leading" id="Kks-ny-E7R"/>
+                    <constraint firstItem="nUb-5e-vpb" firstAttribute="top" secondItem="Mhr-ke-7jS" secondAttribute="top" id="iXa-om-5gy"/>
+                    <constraint firstAttribute="trailing" secondItem="nUb-5e-vpb" secondAttribute="trailing" id="wvd-sE-rI7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="Teamsname" destination="g3P-bj-KGZ" id="moZ-K3-fxP"/>
+                <outlet property="cellview" destination="nUb-5e-vpb" id="Ovm-mP-vug"/>
+                <outlet property="teamLogo" destination="T7f-IP-sbA" id="rN0-dk-DZU"/>
+            </connections>
+            <point key="canvasLocation" x="27.5" y="-92"/>
+        </tableViewCell>
+    </objects>
+</document>
