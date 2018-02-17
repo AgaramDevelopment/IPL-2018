@@ -14,6 +14,7 @@
 #import "MyStatsBattingVC.h"
 #import "MatchCenterTBC.h"
 #import "TrainingLoadUpdateVC.h"
+#import "FoodDiaryVC.h"
 
 @interface RearViewController ()
 {
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center",@"Logout"];
+    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center", @"Food Diary", @"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -146,6 +147,16 @@
 //        return;
         newFrontController= [MatchCenterTBC new];
 
+    }
+    else if(indexPath.row == 7)
+    {
+            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+        newFrontController= [FoodDiaryVC new];
+        
     }
     else if (indexPath.row == arrItems.count -1)
     {

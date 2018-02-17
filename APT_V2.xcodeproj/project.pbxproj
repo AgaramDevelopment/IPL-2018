@@ -18,6 +18,12 @@
 		043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2C202AF59E00EB3F8C /* PieChartView.m */; };
 		043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2E202AF59E00EB3F8C /* XYPieChart.m */; };
 		04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F7E2037E63600C22717 /* CRTableViewCell.m */; };
+		04534F8B2037EE9400C22717 /* FoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F892037EE9400C22717 /* FoodDiaryVC.m */; };
+		04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F8A2037EE9400C22717 /* FoodDiaryVC.xib */; };
+		04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F8E2037F44400C22717 /* FoodDiaryCell.m */; };
+		04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F8F2037F44400C22717 /* FoodDiaryCell.xib */; };
+		04534F9520383F0C00C22717 /* FoodDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F9320383F0C00C22717 /* FoodDescriptionCell.m */; };
+		04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */; };
 		04B27F17202D784600ECB699 /* illnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F15202D784600ECB699 /* illnessVC.m */; };
 		04B27F18202D784600ECB699 /* illnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F16202D784600ECB699 /* illnessVC.xib */; };
 		04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */; };
@@ -176,6 +182,15 @@
 		043C2F2E202AF59E00EB3F8C /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		04534F7D2037E63600C22717 /* CRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTableViewCell.h; sourceTree = "<group>"; };
 		04534F7E2037E63600C22717 /* CRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTableViewCell.m; sourceTree = "<group>"; };
+		04534F882037EE9400C22717 /* FoodDiaryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDiaryVC.h; sourceTree = "<group>"; };
+		04534F892037EE9400C22717 /* FoodDiaryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryVC.m; sourceTree = "<group>"; };
+		04534F8A2037EE9400C22717 /* FoodDiaryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryVC.xib; sourceTree = "<group>"; };
+		04534F8D2037F44400C22717 /* FoodDiaryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDiaryCell.h; sourceTree = "<group>"; };
+		04534F8E2037F44400C22717 /* FoodDiaryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryCell.m; sourceTree = "<group>"; };
+		04534F8F2037F44400C22717 /* FoodDiaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryCell.xib; sourceTree = "<group>"; };
+		04534F9220383F0C00C22717 /* FoodDescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDescriptionCell.h; sourceTree = "<group>"; };
+		04534F9320383F0C00C22717 /* FoodDescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDescriptionCell.m; sourceTree = "<group>"; };
+		04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDescriptionCell.xib; sourceTree = "<group>"; };
 		04B27F14202D784600ECB699 /* illnessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessVC.h; sourceTree = "<group>"; };
 		04B27F15202D784600ECB699 /* illnessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessVC.m; sourceTree = "<group>"; };
 		04B27F16202D784600ECB699 /* illnessVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessVC.xib; sourceTree = "<group>"; };
@@ -476,6 +491,22 @@
 				04534F7E2037E63600C22717 /* CRTableViewCell.m */,
 			);
 			path = MultiCell;
+			sourceTree = "<group>";
+		};
+		04534F872037EE6900C22717 /* FoodDiaryVC */ = {
+			isa = PBXGroup;
+			children = (
+				04534F882037EE9400C22717 /* FoodDiaryVC.h */,
+				04534F892037EE9400C22717 /* FoodDiaryVC.m */,
+				04534F8A2037EE9400C22717 /* FoodDiaryVC.xib */,
+				04534F8D2037F44400C22717 /* FoodDiaryCell.h */,
+				04534F8E2037F44400C22717 /* FoodDiaryCell.m */,
+				04534F8F2037F44400C22717 /* FoodDiaryCell.xib */,
+				04534F9220383F0C00C22717 /* FoodDescriptionCell.h */,
+				04534F9320383F0C00C22717 /* FoodDescriptionCell.m */,
+				04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */,
+			);
+			path = FoodDiaryVC;
 			sourceTree = "<group>";
 		};
 		04B27F13202D781D00ECB699 /* illnessVC */ = {
@@ -850,6 +881,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04534F872037EE6900C22717 /* FoodDiaryVC */,
 				043828CE2031DD6300B32899 /* TeamMembersVC */,
 				CEA420F3203161A800B2DAB5 /* CalendarVC */,
 				CEA420F7203161A800B2DAB5 /* VideoGalleryVC */,
@@ -1058,12 +1090,15 @@
 			files = (
 				042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */,
 				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
+				04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
 				18A68AC120371A2C00EBA479 /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
 				CEA4210C203161A900B2DAB5 /* VideoGalleryUploadCell.xib in Resources */,
 				043828D22031DD8300B32899 /* TeamMembersVC.xib in Resources */,
+				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
 				CEA42110203161A900B2DAB5 /* VideoPlayerUploadVC.xib in Resources */,
+				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				18A68ABD20371A2C00EBA479 /* TrainingLoadUpdateCell.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
@@ -1216,6 +1251,7 @@
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
+				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */,
@@ -1246,8 +1282,10 @@
 				18A68ABE20371A2C00EBA479 /* TrainingLoadUpdateVC.m in Sources */,
 				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
+				04534F8B2037EE9400C22717 /* FoodDiaryVC.m in Sources */,
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
+				04534F9520383F0C00C22717 /* FoodDescriptionCell.m in Sources */,
 				18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
 				CEA4210F203161A900B2DAB5 /* VideoPlayerUploadVC.m in Sources */,
