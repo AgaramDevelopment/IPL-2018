@@ -78,6 +78,13 @@ AppCommon *sharedCommon = nil;
     return userreference;
 }
 
++(NSString *)GetUserRoleName
+{
+    NSString * userreference =  [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleName"];
+    return userreference;
+}
+
+
 #pragma mark - Get Height of Control
 
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth {
