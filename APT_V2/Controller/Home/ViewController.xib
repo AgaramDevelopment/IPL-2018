@@ -32,7 +32,6 @@
                 <outlet property="lblRangeValue" destination="set-ya-oLy" id="0EU-Oe-QZ7"/>
                 <outlet property="lblUnitValue" destination="osW-A0-zHZ" id="g8m-3X-L14"/>
                 <outlet property="pickerMainView" destination="rZP-LX-jRq" id="yaa-en-GMq"/>
-                <outlet property="pickerView" destination="Dny-to-f0z" id="bYq-a6-OIH"/>
                 <outlet property="popupVC" destination="dzA-bf-BIn" id="sdg-B8-Uan"/>
                 <outlet property="saveBtn" destination="UsG-Gf-m21" id="apL-E6-mi1"/>
                 <outlet property="tblAssesments" destination="9li-IZ-0mF" id="XXX-7Y-rVD"/>
@@ -385,15 +384,6 @@
                 <action selector="closePopup:" destination="-1" id="il3-fX-Pqn"/>
             </connections>
         </tapGestureRecognizer>
-        <viewController modalPresentationStyle="overCurrentContext" id="Dny-to-f0z">
-            <view key="view" contentMode="scaleToFill" id="uf1-N2-VH9">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                <viewLayoutGuide key="safeArea" id="6Xh-ra-xa3"/>
-            </view>
-            <point key="canvasLocation" x="819" y="53"/>
-        </viewController>
         <view contentMode="scaleToFill" id="rZP-LX-jRq">
             <rect key="frame" x="0.0" y="0.0" width="297" height="206"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

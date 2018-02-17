@@ -342,11 +342,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         int re;
         if(retVal ==0){
             
-            
         NSString *query=[NSString stringWithFormat:@"SELECT COUNT(ASSESSMENTTESTTYPESCREENCODE) FROM ASSESSMENTREGISTER WHERE ASSESSMENTCODE ='%@' AND ASSESSMENTTESTCODE='%@'",AssessmentCode,AssessmentTestCode];
-            
-            
-            
             
             NSLog(@"%@",query);
             stmt=[query UTF8String];
@@ -1728,6 +1724,105 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 }
 #pragma Rom Insert
 
+-(BOOL)updateAssessmentEntry:(NSDictionary *)dict
+{
+    @synchronized ([AppCommon syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString* Modulecode = [dict valueForKey:@"Clientcode"];
+            NSString* Assessmententrycode = [dict valueForKey:@"Assessmententrycode"];
+            NSString* Modulecode = [dict valueForKey:@"Modulecode"];
+            NSString* Assessmentcode = [dict valueForKey:@"Assessmentcode"];
+            NSString* Assessmenttestcode = [dict valueForKey:@"Assessmenttestcode"];
+            NSString* Assessmenttesttypecode = [dict valueForKey:@"Assessmenttesttypecode"];
+            NSString* Assessmenttesttypescreencode = [dict valueForKey:@"Assessmenttesttypescreencode"];
+            NSString* Version = [dict valueForKey:@"Version"];
+            NSString* Assessor = [dict valueForKey:@"Assessor"];
+            NSString* Playercode = [dict valueForKey:@"Playercode"];
+            NSString* Assessmententrydate = [dict valueForKey:@"Assessmententrydate"];
+            
+            NSString* Left = [dict valueForKey:@"Left"];
+            NSString* Right = [dict valueForKey:@"Right"];
+            NSString* Central = [dict valueForKey:@"Central"];
+            NSString* Value = [dict valueForKey:@"Value"];
+            NSString* Remarks = [dict valueForKey:@"Remarks"];
+            NSString* Inference = [dict valueForKey:@"Inference"];
+            NSString* Assessor = [dict valueForKey:@"Assessor"];
+            NSString* Playercode = [dict valueForKey:@"Playercode"];
+            NSString* Units = [dict valueForKey:@"Units"];
+            
+            NSString* Description = [dict valueForKey:@"Description"];
+            NSString* Recordstatus = [dict valueForKey:@"Recordstatus"];
+            NSString* Createdby = [dict valueForKey:@"Createdby"];
+            NSString* Createddate = [dict valueForKey:@"Createddate"];
+            NSString* Modifiedby = [dict valueForKey:@"Modifiedby"];
+            NSString* Modifieddate = [dict valueForKey:@"Modifieddate"];
+            NSString* isIgnored = [dict valueForKey:@"isIgnored"];
+            
+            NSString* Left1 = [dict valueForKey:@"Left1"];
+            NSString* Right1 = [dict valueForKey:@"Right1"];
+            NSString* Central1 =  [dict valueForKey:@"Central1"];
+            NSString* Left2 = [dict valueForKey:@"Left2"];
+            NSString* Right2 = [dict valueForKey:@"Right2"];
+            NSString* Central2 = [dict valueForKey:@"Central2"];
+            NSString* Left3 = [dict valueForKey:@"Left3"];
+            NSString* Right3 = [dict valueForKey:@"Right3"];
+            NSString* Central3 = [dict valueForKey:@"Central3"];
+            
+            NSString* Left4 = [dict valueForKey:@"Left4"];
+            NSString* Right4 = [dict valueForKey:@"Right4"];
+            NSString* Central4 = [dict valueForKey:@"Central4"];
+            NSString* Left5 = [dict valueForKey:@"Left5"];
+            NSString* Right5 = [dict valueForKey:@"Right5"];
+            NSString* Central5 = [dict valueForKey:@"Central5"];
+            NSString* Left6 = [dict valueForKey:@"Left6"];
+            NSString* Right6 = [dict valueForKey:@"Right6"];
+            NSString* Central6 = [dict valueForKey:@"Central6"];
+            
+            NSString* Left7 = [dict valueForKey:@"Left7"];
+            NSString* Right7 = [dict valueForKey:@"Right7"];
+            NSString* Central7 = [dict valueForKey:@"Central7"];
+            NSString* Left8 = [dict valueForKey:@"Left8"];
+            NSString* Right8 = [dict valueForKey:@"Right8"];
+            NSString* Central8 = [dict valueForKey:@"Central8"];
+            NSString* Left9 = [dict valueForKey:@"Left9"];
+            NSString* Right9 = [dict valueForKey:@"Right9"];
+            NSString* Central9 = [dict valueForKey:@"Central9"];
+            NSString* issync = [dict valueForKey:@"issync"];
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE ASSESSMENTENTRY SET  Clientcode='%@',Modulecode='%@' ,Assessmentcode='%@' ,Assessmenttestcode='%@' ,Assessmenttesttypecode='%@' ,Assessmenttesttypescreencode='%@' ,Version ='%@',Assessor ='%@',Playercode='%@' ,Assessmententrydate='%@' ,Left='%@' ,Right='%@' ,Central='%@' ,Value='%@' ,Remarks='%@' ,Inference='%@' ,Units='%@' ,Description='%@' ,Recordstatus='%@' ,Createdby='%@' ,Createddate='%@' ,Modifiedby='%@' ,Modifieddate='%@' ,Ignored='%@' ,Left1='%@' ,Right1='%@' ,Central1='%@' ,Left2='%@' ,Right2='%@' ,Central2='%@' ,Left3='%@' ,Right3='%@' ,Central3='%@' ,Left4='%@' ,Right4='%@' ,Central4='%@' ,Left5='%@' ,Right5='%@' ,Central5='%@' ,Left6='%@' ,Right6='%@' ,Central6='%@' ,Left7='%@' ,Right7='%@' ,Central7='%@' ,Left8='%@' ,Right8='%@' ,Central8='%@' ,Left9='%@' ,Right9='%@' ,Central9='%@',issync='%@'",Clientcode,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9,issync];
+
+            
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+
+}
+
+
 -(BOOL) UPDATEAssessmentEntry:(NSString*) Clientcode:(NSString*) Assessmententrycode:(NSString*) Modulecode:(NSString*) Assessmentcode:(NSString*) Assessmenttestcode:(NSString*)Assessmenttesttypecode:(NSString*)Assessmenttesttypescreencode :(NSString*) Version: (NSString*)Assessor :(NSString*) Playercode:(NSString*) Assessmententrydate:(NSNumber*) Left:(NSString*) Right:(NSString*) Central:(NSString*)Value:(NSString*)Remarks :(NSString*) Inference: (NSString*)Units  :(NSString*) Description:(NSString*) Recordstatus:(NSString*) Createdby:(NSString*) Createddate:(NSString*) Modifiedby:(NSString*)Modifieddate:(NSString*)isIgnored :(NSNumber*) Left1: (NSNumber*)Right1 :(NSNumber*) Central1:(NSNumber*) Left2:(NSNumber*) Right2:(NSNumber*) Central2:(NSNumber*) Left3:(NSNumber*)Right3:(NSNumber*)Central3 :(NSNumber*) Left4: (NSNumber*)Right4 :(NSNumber*) Central4:(NSNumber*) Left5:(NSNumber*) Right5:(NSNumber*) Central5:(NSNumber*) Left6:(NSNumber*)Right6:(NSNumber*)Central6 :(NSNumber*) Left7: (NSNumber*)Right7 :(NSNumber*) Central7:(NSNumber*) Left8:(NSNumber*) Right8:(NSNumber*) Central8:(NSNumber*) Left9:(NSNumber*)Right9:(NSNumber*)Central9 : (NSString*)issync
 {
     
@@ -1766,6 +1861,107 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     }
 }
 
+
+-(BOOL)insertAssessmentEntry:(NSDictionary *)dict
+{
+    @synchronized ([AppCommon syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+//            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(Clientcode  ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,Ignored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9,issync];
+            
+            NSString* Modulecode = [dict valueForKey:@"Clientcode"];
+            NSString* Assessmententrycode = [dict valueForKey:@"Assessmententrycode"];
+            NSString* Modulecode = [dict valueForKey:@"Modulecode"];
+            NSString* Assessmentcode = [dict valueForKey:@"Assessmentcode"];
+            NSString* Assessmenttestcode = [dict valueForKey:@"Assessmenttestcode"];
+            NSString* Assessmenttesttypecode = [dict valueForKey:@"Assessmenttesttypecode"];
+            NSString* Assessmenttesttypescreencode = [dict valueForKey:@"Assessmenttesttypescreencode"];
+            NSString* Version = [dict valueForKey:@"Version"];
+            NSString* Assessor = [dict valueForKey:@"Assessor"];
+            NSString* Playercode = [dict valueForKey:@"Playercode"];
+            NSString* Assessmententrydate = [dict valueForKey:@"Assessmententrydate"];
+            
+            NSString* Left = [dict valueForKey:@"Left"];
+            NSString* Right = [dict valueForKey:@"Right"];
+            NSString* Central = [dict valueForKey:@"Central"];
+            NSString* Value = [dict valueForKey:@"Value"];
+            NSString* Remarks = [dict valueForKey:@"Remarks"];
+            NSString* Inference = [dict valueForKey:@"Inference"];
+            NSString* Assessor = [dict valueForKey:@"Assessor"];
+            NSString* Playercode = [dict valueForKey:@"Playercode"];
+            NSString* Units = [dict valueForKey:@"Units"];
+            
+            NSString* Description = [dict valueForKey:@"Description"];
+            NSString* Recordstatus = [dict valueForKey:@"Recordstatus"];
+            NSString* Createdby = [dict valueForKey:@"Createdby"];
+            NSString* Createddate = [dict valueForKey:@"Createddate"];
+            NSString* Modifiedby = [dict valueForKey:@"Modifiedby"];
+            NSString* Modifieddate = [dict valueForKey:@"Modifieddate"];
+            NSString* isIgnored = [dict valueForKey:@"isIgnored"];
+            
+            NSString* Left1 = [dict valueForKey:@"Left1"];
+            NSString* Right1 = [dict valueForKey:@"Right1"];
+            NSString* Central1 =  [dict valueForKey:@"Central1"];
+            NSString* Left2 = [dict valueForKey:@"Left2"];
+            NSString* Right2 = [dict valueForKey:@"Right2"];
+            NSString* Central2 = [dict valueForKey:@"Central2"];
+            NSString* Left3 = [dict valueForKey:@"Left3"];
+            NSString* Right3 = [dict valueForKey:@"Right3"];
+            NSString* Central3 = [dict valueForKey:@"Central3"];
+            
+            NSString* Left4 = [dict valueForKey:@"Left4"];
+            NSString* Right4 = [dict valueForKey:@"Right4"];
+            NSString* Central4 = [dict valueForKey:@"Central4"];
+            NSString* Left5 = [dict valueForKey:@"Left5"];
+            NSString* Right5 = [dict valueForKey:@"Right5"];
+            NSString* Central5 = [dict valueForKey:@"Central5"];
+            NSString* Left6 = [dict valueForKey:@"Left6"];
+            NSString* Right6 = [dict valueForKey:@"Right6"];
+            NSString* Central6 = [dict valueForKey:@"Central6"];
+            
+            NSString* Left7 = [dict valueForKey:@"Left7"];
+            NSString* Right7 = [dict valueForKey:@"Right7"];
+            NSString* Central7 = [dict valueForKey:@"Central7"];
+            NSString* Left8 = [dict valueForKey:@"Left8"];
+            NSString* Right8 = [dict valueForKey:@"Right8"];
+            NSString* Central8 = [dict valueForKey:@"Central8"];
+            NSString* Left9 = [dict valueForKey:@"Left9"];
+            NSString* Right9 = [dict valueForKey:@"Right9"];
+            NSString* Central9 = [dict valueForKey:@"Central9"];
+            NSString* issync = [dict valueForKey:@"issync"];
+
+            
+            
+            
+            const char *update_stmt = [INSERTSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+
+    
+}
 -(BOOL) INSERTAssessmentEntry:(NSString*) Clientcode:(NSString*) Assessmententrycode:(NSString*) Modulecode:(NSString*) Assessmentcode:(NSString*) Assessmenttestcode:(NSString*)Assessmenttesttypecode:(NSString*)Assessmenttesttypescreencode :(NSString*) Version: (NSString*)Assessor :(NSString*) Playercode:(NSString*) Assessmententrydate:(NSNumber*) Left:(NSString*) Right:(NSString*) Central:(NSString*)Value:(NSString*)Remarks :(NSString*) Inference: (NSString*)Units  :(NSString*) Description:(NSString*) Recordstatus:(NSString*) Createdby:(NSString*) Createddate:(NSString*) Modifiedby:(NSString*)Modifieddate:(NSString*)isIgnored :(NSNumber*) Left1: (NSNumber*)Right1 :(NSNumber*) Central1:(NSNumber*) Left2:(NSNumber*) Right2:(NSNumber*) Central2:(NSNumber*) Left3:(NSNumber*)Right3:(NSNumber*)Central3 :(NSNumber*) Left4: (NSNumber*)Right4 :(NSNumber*) Central4:(NSNumber*) Left5:(NSNumber*) Right5:(NSNumber*) Central5:(NSNumber*) Left6:(NSNumber*)Right6:(NSNumber*)Central6 :(NSNumber*) Left7: (NSNumber*)Right7 :(NSNumber*) Central7:(NSNumber*) Left8:(NSNumber*) Right8:(NSNumber*) Central8:(NSNumber*) Left9:(NSNumber*)Right9:(NSNumber*)Central9 : (NSString*)issync {
     @synchronized ([AppCommon syncId])  {
         NSString *databasePath = [self getDBPath];
@@ -1816,7 +2012,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         if(retVal ==0){
             
 //            NSString *query=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
-            NSString *query=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
+            NSString *query=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND ASSESSMENTENTRYDATE = '%@' AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
 
             
             NSLog(@"%@",query);
