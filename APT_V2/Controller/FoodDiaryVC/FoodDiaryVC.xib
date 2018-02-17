@@ -218,7 +218,9 @@
                                                     <rect key="frame" x="0.0" y="32.5" width="65" height="15.5"/>
                                                     <color key="backgroundColor" red="0.61498606204986572" green="0.76270115375518799" blue="0.90195602178573608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="65" id="rim-QF-NoB"/>
+                                                        <constraint firstAttribute="width" constant="65" id="rim-QF-NoB">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Breakfast">
@@ -229,7 +231,9 @@
                                                     <rect key="frame" x="67" y="33" width="50" height="15"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="XcC-ot-zv8"/>
+                                                        <constraint firstAttribute="width" constant="50" id="XcC-ot-zv8">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Snacks">
@@ -240,7 +244,9 @@
                                                     <rect key="frame" x="119" y="33" width="45" height="15"/>
                                                     <color key="backgroundColor" red="0.95748800039291382" green="0.69330209493637085" blue="0.51472389698028564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="EJX-i4-nbR"/>
+                                                        <constraint firstAttribute="width" constant="45" id="EJX-i4-nbR">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Lunch">
@@ -251,7 +257,9 @@
                                                     <rect key="frame" x="166" y="33" width="48" height="15"/>
                                                     <color key="backgroundColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="v3J-6d-xcO"/>
+                                                        <constraint firstAttribute="width" constant="48" id="v3J-6d-xcO">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="58"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Dinner">
@@ -262,7 +270,9 @@
                                                     <rect key="frame" x="216" y="33" width="82" height="15"/>
                                                     <color key="backgroundColor" red="0.78815680742263794" green="0.78829020261764526" blue="0.78813928365707397" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="82" id="Wtp-HL-i11"/>
+                                                        <constraint firstAttribute="width" constant="82" id="Wtp-HL-i11">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="92"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Supplements">
@@ -272,12 +282,20 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="U9L-70-N45" firstAttribute="leading" secondItem="U6F-ot-lh0" secondAttribute="trailing" constant="2" id="5b6-VV-tpV"/>
-                                                <constraint firstItem="h6a-Im-plj" firstAttribute="leading" secondItem="U9L-70-N45" secondAttribute="trailing" constant="2" id="6AR-WP-gDB"/>
-                                                <constraint firstItem="4xl-Ta-2P7" firstAttribute="leading" secondItem="mcs-pp-JOf" secondAttribute="trailing" constant="2" id="74Z-wI-SRJ"/>
+                                                <constraint firstItem="U9L-70-N45" firstAttribute="leading" secondItem="U6F-ot-lh0" secondAttribute="trailing" constant="2" id="5b6-VV-tpV">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="h6a-Im-plj" firstAttribute="leading" secondItem="U9L-70-N45" secondAttribute="trailing" constant="2" id="6AR-WP-gDB">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="4xl-Ta-2P7" firstAttribute="leading" secondItem="mcs-pp-JOf" secondAttribute="trailing" constant="2" id="74Z-wI-SRJ">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="U9L-70-N45" firstAttribute="bottom" secondItem="mcs-pp-JOf" secondAttribute="bottom" id="8ZX-Pz-Go2"/>
                                                 <constraint firstAttribute="trailing" secondItem="hBU-81-XSo" secondAttribute="trailing" id="B0g-p4-RDT"/>
-                                                <constraint firstItem="U6F-ot-lh0" firstAttribute="leading" secondItem="4xl-Ta-2P7" secondAttribute="trailing" constant="2" id="IW2-GA-WAF"/>
+                                                <constraint firstItem="U6F-ot-lh0" firstAttribute="leading" secondItem="4xl-Ta-2P7" secondAttribute="trailing" constant="2" id="IW2-GA-WAF">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="U9L-70-N45" firstAttribute="top" secondItem="mcs-pp-JOf" secondAttribute="top" id="ZJ9-xb-4Vn"/>
                                                 <constraint firstItem="U6F-ot-lh0" firstAttribute="bottom" secondItem="mcs-pp-JOf" secondAttribute="bottom" id="ble-MK-Gre"/>
                                                 <constraint firstItem="4xl-Ta-2P7" firstAttribute="bottom" secondItem="mcs-pp-JOf" secondAttribute="bottom" id="dTw-og-zje"/>
@@ -288,7 +306,7 @@
                                                 <constraint firstItem="hBU-81-XSo" firstAttribute="top" secondItem="OzQ-az-w7R" secondAttribute="bottom" constant="5" id="hIF-gk-AYY"/>
                                                 <constraint firstItem="4xl-Ta-2P7" firstAttribute="top" secondItem="mcs-pp-JOf" secondAttribute="top" id="iOG-i8-O8w"/>
                                                 <constraint firstAttribute="height" constant="48" id="kmU-N9-gVz">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="58"/>
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="65"/>
                                                 </constraint>
                                                 <constraint firstItem="U6F-ot-lh0" firstAttribute="top" secondItem="mcs-pp-JOf" secondAttribute="top" id="mmV-f0-e3T"/>
                                                 <constraint firstItem="OzQ-az-w7R" firstAttribute="top" secondItem="ZQz-HV-m5C" secondAttribute="top" id="myj-aX-grm"/>
@@ -412,7 +430,9 @@
                                                     <rect key="frame" x="0.0" y="32" width="60" height="15.5"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="l4J-33-tZa"/>
+                                                        <constraint firstAttribute="width" constant="60" id="l4J-33-tZa">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Team">
@@ -423,7 +443,9 @@
                                                     <rect key="frame" x="65" y="32" width="85" height="15"/>
                                                     <color key="backgroundColor" red="0.61498606204986572" green="0.76270115375518799" blue="0.90195602178573608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="85" id="tf2-Jy-xCb"/>
+                                                        <constraint firstAttribute="width" constant="85" id="tf2-Jy-xCb">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="95"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Restaurant">
@@ -434,7 +456,9 @@
                                                     <rect key="frame" x="215" y="32" width="50" height="15"/>
                                                     <color key="backgroundColor" red="0.95763355493545532" green="0.69719278812408447" blue="0.51876300573348999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="lup-8R-mAW"/>
+                                                        <constraint firstAttribute="width" constant="50" id="lup-8R-mAW">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Other">
@@ -445,7 +469,9 @@
                                                     <rect key="frame" x="155" y="32" width="55" height="15"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="rYS-iR-F4R"/>
+                                                        <constraint firstAttribute="width" constant="55" id="rYS-iR-F4R">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="65"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Home">
@@ -456,8 +482,12 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="C0U-ms-Vzn" firstAttribute="leading" secondItem="YXo-Ms-PDJ" secondAttribute="leading" id="1sV-jR-G1B"/>
-                                                <constraint firstItem="vaU-w4-Mna" firstAttribute="leading" secondItem="YId-YV-HBO" secondAttribute="trailing" constant="5" id="4tK-9E-kaD"/>
-                                                <constraint firstItem="YId-YV-HBO" firstAttribute="leading" secondItem="TYY-Su-ed6" secondAttribute="trailing" constant="5" id="BZx-TU-KOP"/>
+                                                <constraint firstItem="vaU-w4-Mna" firstAttribute="leading" secondItem="YId-YV-HBO" secondAttribute="trailing" constant="5" id="4tK-9E-kaD">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
+                                                <constraint firstItem="YId-YV-HBO" firstAttribute="leading" secondItem="TYY-Su-ed6" secondAttribute="trailing" constant="5" id="BZx-TU-KOP">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="f9M-m3-reK" firstAttribute="height" secondItem="TYY-Su-ed6" secondAttribute="height" id="Gas-Ow-lA0"/>
                                                 <constraint firstItem="st1-sf-Xgj" firstAttribute="top" secondItem="C0U-ms-Vzn" secondAttribute="bottom" constant="5" id="Gd3-tJ-ySb"/>
                                                 <constraint firstItem="TYY-Su-ed6" firstAttribute="top" secondItem="st1-sf-Xgj" secondAttribute="bottom" constant="4" id="Ku5-wB-ory"/>
@@ -467,12 +497,14 @@
                                                 <constraint firstAttribute="bottom" secondItem="YId-YV-HBO" secondAttribute="bottom" constant="1" id="MeZ-bf-969"/>
                                                 <constraint firstItem="TYY-Su-ed6" firstAttribute="top" secondItem="st1-sf-Xgj" secondAttribute="bottom" constant="4" id="X9a-8g-5Tj"/>
                                                 <constraint firstAttribute="height" constant="48" id="ZJr-3v-h3G">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="58"/>
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="65"/>
                                                 </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="TYY-Su-ed6" secondAttribute="bottom" constant="1" id="fmY-SO-VCY"/>
                                                 <constraint firstAttribute="bottom" secondItem="f9M-m3-reK" secondAttribute="bottom" constant="1" id="ghq-QZ-78X"/>
                                                 <constraint firstAttribute="trailing" secondItem="C0U-ms-Vzn" secondAttribute="trailing" id="hye-Of-VCs"/>
-                                                <constraint firstItem="f9M-m3-reK" firstAttribute="leading" secondItem="vaU-w4-Mna" secondAttribute="trailing" constant="5" id="iMJ-hA-Hir"/>
+                                                <constraint firstItem="f9M-m3-reK" firstAttribute="leading" secondItem="vaU-w4-Mna" secondAttribute="trailing" constant="5" id="iMJ-hA-Hir">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                </constraint>
                                                 <constraint firstItem="YId-YV-HBO" firstAttribute="height" secondItem="TYY-Su-ed6" secondAttribute="height" id="miK-LD-B5R"/>
                                                 <constraint firstItem="f9M-m3-reK" firstAttribute="top" secondItem="st1-sf-Xgj" secondAttribute="bottom" constant="4" id="mmT-B1-kWV"/>
                                                 <constraint firstAttribute="trailing" secondItem="st1-sf-Xgj" secondAttribute="trailing" id="qFg-3A-uNz"/>
