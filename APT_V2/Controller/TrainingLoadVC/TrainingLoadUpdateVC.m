@@ -138,7 +138,7 @@
     [dic setObject:ActivityCode forKey:@"ActivityCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
     [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
-    [dic setObject:[NSString stringWithFormat:@"%@",rpeCode] forKey:@"rpeCode"];
+    [dic setObject:rpeCode forKey:@"RpeCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
     [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
    if(sessionArray.count >0)
@@ -208,6 +208,11 @@
     [objAlter show];
     
 }
+
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    [UITextField resignFirstResponder];
+//}
 
 -(void)samplePieChart
 {
@@ -463,9 +468,10 @@ if([_isToday isEqualToString:@"yes"])
     for(int i=0;i<self.TodayLoadArray.count;i++)
     {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        [dic setObject:[[self.TodayLoadArray valueForKey:@"WORKLOADCODE"] objectAtIndex:i] forKey:@"WorkloadCode"];
         [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
         [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
-        
+        [dic setObject:[[self.TodayLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i] forKey:@"RpeCode"];
         int timecount = [[[self.TodayLoadArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
         int rpecount =  [[[self.TodayLoadArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
         int total = timecount * rpecount;
@@ -702,13 +708,13 @@ if([_isToday isEqualToString:@"yes"])
         {
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
             [dic setObject:[[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:i] forKey:@"ACTIVITYTYPECODE"];
-            [dic setObject:[[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:i] forKey:@"RATEPERCEIVEDEXERTION"];
+            [dic setObject:[[sessionArray valueForKey:@"RpeCode"] objectAtIndex:i] forKey:@"RATEPERCEIVEDEXERTION"];
             [dic setObject:[[sessionArray valueForKey:@"timeValue"] objectAtIndex:i] forKey:@"DURATION"];
             [dic setObject:[[sessionArray valueForKey:@"ballsValue"] objectAtIndex:i] forKey:@"BALL"];
             [traininglist addObject:dic];
         }
         
-        
+        NSString *WorkloadCode = [[sessionArray valueForKey:@"WorkloadCode"] objectAtIndex:0];
         NSString *datee = self.datelbl.text;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -723,6 +729,7 @@ if([_isToday isEqualToString:@"yes"])
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(usercode)   [dic    setObject:usercode     forKey:@"USERCODE"];
         if(playerCode)   [dic    setObject:playerCode     forKey:@"PLAYERCODE"];
+        if(WorkloadCode )   [dic    setObject:WorkloadCode     forKey:@"WORKLOADCODE"];
         if(actualdate )   [dic    setObject:actualdate     forKey:@"WORKLOADDATE"];
         if(traininglist)   [dic    setObject:traininglist     forKey:@"Trainingloadlist"];
         
@@ -778,14 +785,31 @@ if([_isToday isEqualToString:@"yes"])
     
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    
+//    NSString *selectedDate = self.datelbl.text;
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    NSDate *matchdate = [dateFormat dateFromString:selectedDate];
+//    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+//    //NSString * actualDate = [dateFormat stringFromDate:matchdate];
+//
+//
+//    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+//    [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+//    NSDate *matchdate1 = [dateFormat dateFromString:selectedDate];
+//    NSString * actualDate = [dateFormat stringFromDate:matchdate1];
     
     
+    NSString *dateString = self.datelbl.text;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *date = [dateFormatter dateFromString:dateString];
     
-    [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    // Convert date object into desired format
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSString *newDateString = [dateFormatter stringFromDate:date];
+    
+    
+    [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         NSMutableArray *arr = [[NSMutableArray alloc]init];
@@ -800,21 +824,23 @@ if([_isToday isEqualToString:@"yes"])
                 
                 self.TodayLoadArray = [[NSMutableArray alloc]init];
                 self.YesterdayLoadArray = [[NSMutableArray alloc]init];
+                
+                
                 //[self samplePieChart];
                 for(int i=0;i<reqArray.count;i++)
                 {
-                    
-                    if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:actualDate] )
+
+                    if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:newDateString] )
                     {
-                        
+
                         [self.TodayLoadArray addObject:[reqArray  objectAtIndex:i]];
-                        
+
                         self.SaveBtn.hidden = YES;
                         self.FetchedUpdateBtn.hidden = NO;
                         _isToday = @"yes";
                         [self setValuesUpdate];
                     }
-                    
+
                 }
      
             }

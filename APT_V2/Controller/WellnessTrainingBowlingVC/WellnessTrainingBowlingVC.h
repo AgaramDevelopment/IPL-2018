@@ -65,6 +65,10 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *AddBtn;
 
+@property (strong, nonatomic) IBOutlet UIButton *BowlingMonthlyBtn;
+@property (strong, nonatomic) IBOutlet UIButton *BowlingWeeklyBtn;
+@property (strong, nonatomic) IBOutlet UIButton *BowlingDailyBtn;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *todayActivitynamelbl1;
 @property (weak, nonatomic) IBOutlet UILabel *todayActivitynamelbl2;

@@ -10,11 +10,14 @@
 #import "HomeScreenStandingsVC.h"
 #import "MatchCenterTBC.h"
 #import "Header.h"
+#import "TeamsVC.h"
 @interface AppDelegate ()
 {
     BOOL IsTimer;
     BOOL isBackGroundTaskRunning;
     NSTimer* _timer;
+    
+    BOOL isCoach;
     
 }
 
@@ -33,7 +36,36 @@
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
     //    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];
-    UIViewController *frontViewController = (isLogin ? [ViewController new] : [LoginVC new]);
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        isCoach=NO;
+    }
+    else
+    {
+        isCoach=YES;
+    }
+    
+    
+    //UIViewController *frontViewController = (isLogin ? (isCoach ? [TeamsVC new]: [ViewController new]) : [LoginVC new]);
+    UIViewController *frontViewController;
+    if(isLogin==YES)
+    {
+        if(isCoach=YES)
+        {
+            frontViewController = [TeamsVC new];
+        }
+        else
+        {
+            frontViewController = [ViewController new];
+        }
+    }
+    else
+    {
+        frontViewController = [LoginVC new];
+    }
    // MatchCenterTBC *frontViewController = [HomeScreenStandingsVC new];
     RearViewController *rearViewController = [[RearViewController alloc] init];
     

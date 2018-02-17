@@ -355,6 +355,33 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
+-(void)fetchTrainingLoadDate :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",codelist,playercode,date]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)BowlingLoad :(NSString *)codelist :(NSString *)playercode  :(NSString *)date :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@",codelist,playercode,date,type]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
 
 #pragma mark - Helpers
 
