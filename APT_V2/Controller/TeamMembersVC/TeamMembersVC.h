@@ -11,7 +11,9 @@
 @interface TeamMembersVC : UIViewController
 
 @property (strong, nonatomic) IBOutlet UICollectionView *playesTable;
-@property (strong, nonatomic) IBOutlet UILabel *TeamName;
+@property (strong, nonatomic) IBOutlet UILabel *TeamNamelbl;
+@property (strong, nonatomic) IBOutlet UIButton *backBtn;
 @property (strong, nonatomic)  NSString *teamCode;
+@property (strong, nonatomic)  NSString *teamname;
 
 @end
