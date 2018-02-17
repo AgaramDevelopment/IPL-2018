@@ -33,6 +33,7 @@
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    self.lblName.text = [AppCommon GetUserRoleName];
     
 }
 
@@ -67,6 +68,7 @@
     }
     
     cell.textLabel.text = arrItems[indexPath.row];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
     
 }
@@ -752,8 +754,6 @@
                     NSString * Createddate =[arr1 valueForKey:@"Createddate"];
                     NSString * Modifiedby =[arr1 valueForKey:@"Modifiedby"];
                     NSString * Modifieddate =[arr1 valueForKey:@"Modifieddate"];
-                    
-                    
                     
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Usercode,Rolecode,Isdefaultrole,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];

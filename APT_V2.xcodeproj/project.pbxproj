@@ -93,6 +93,8 @@
 		CEA4210E203161A900B2DAB5 /* VideoGalleryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA42100203161A800B2DAB5 /* VideoGalleryVC.xib */; };
 		CEA4210F203161A900B2DAB5 /* VideoPlayerUploadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA42102203161A800B2DAB5 /* VideoPlayerUploadVC.m */; };
 		CEA42110203161A900B2DAB5 /* VideoPlayerUploadVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA42103203161A800B2DAB5 /* VideoPlayerUploadVC.xib */; };
+		CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAF5B6D20384D3200045C91 /* UITextField+testCode.m */; };
+		CEAF5B712038514300045C91 /* customTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAF5B702038514300045C91 /* customTextField.m */; };
 		CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEB2B94D20257BBC00E7D5E4 /* Montserrat-Black.otf */; };
 		CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEB2B94E20257BBC00E7D5E4 /* Montserrat-BlackItalic.otf */; };
 		CEB2B97420257BBD00E7D5E4 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEB2B94F20257BBC00E7D5E4 /* Montserrat-Bold.otf */; };
@@ -238,7 +240,6 @@
 		18C287D420355847006E6590 /* MCTeamCompVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTeamCompVC.h; sourceTree = "<group>"; };
 		18C287D520355847006E6590 /* MCTeamCompVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTeamCompVC.m; sourceTree = "<group>"; };
 		18C287D620355847006E6590 /* MCTeamCompVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTeamCompVC.xib; sourceTree = "<group>"; };
-		18CEBDF420354BFA0047A98D /* UITextField+textCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+textCode.h"; sourceTree = "<group>"; };
 		18CEBDFA20354D0C0047A98D /* SCCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SCCollectionViewCell.xib; sourceTree = "<group>"; };
 		18CEBDFB20354D0C0047A98D /* SCCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCollectionViewCell.h; sourceTree = "<group>"; };
 		18CEBDFC20354D0C0047A98D /* SCCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCollectionViewCell.m; sourceTree = "<group>"; };
@@ -295,6 +296,10 @@
 		CEA42101203161A800B2DAB5 /* VideoPlayerUploadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerUploadVC.h; sourceTree = "<group>"; };
 		CEA42102203161A800B2DAB5 /* VideoPlayerUploadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerUploadVC.m; sourceTree = "<group>"; };
 		CEA42103203161A800B2DAB5 /* VideoPlayerUploadVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerUploadVC.xib; sourceTree = "<group>"; };
+		CEAF5B6C20384D3200045C91 /* UITextField+testCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+testCode.h"; sourceTree = "<group>"; };
+		CEAF5B6D20384D3200045C91 /* UITextField+testCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+testCode.m"; sourceTree = "<group>"; };
+		CEAF5B6F2038514300045C91 /* customTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customTextField.h; sourceTree = "<group>"; };
+		CEAF5B702038514300045C91 /* customTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = customTextField.m; sourceTree = "<group>"; };
 		CEB2B94D20257BBC00E7D5E4 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		CEB2B94E20257BBC00E7D5E4 /* Montserrat-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.otf"; sourceTree = "<group>"; };
 		CEB2B94F20257BBC00E7D5E4 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
@@ -594,6 +599,8 @@
 			children = (
 				18EF9D0A20316C2D00CDA268 /* CustomButton.h */,
 				18EF9D0B20316C2D00CDA268 /* CustomButton.m */,
+				CEAF5B6F2038514300045C91 /* customTextField.h */,
+				CEAF5B702038514300045C91 /* customTextField.m */,
 			);
 			path = CustomButton;
 			sourceTree = "<group>";
@@ -878,7 +885,8 @@
 		CEB2B9C5202598DB00E7D5E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				18CEBDF420354BFA0047A98D /* UITextField+textCode.h */,
+				CEAF5B6C20384D3200045C91 /* UITextField+testCode.h */,
+				CEAF5B6D20384D3200045C91 /* UITextField+testCode.m */,
 				CE10281A202DDBF900FA0B61 /* TestPropertiesCollectionCell */,
 				CEB2B9C6202598DB00E7D5E4 /* ViewController.h */,
 				CEBD2A8C20289B8C000AFD1B /* ViewController.xib */,
@@ -1213,6 +1221,7 @@
 			files = (
 				CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */,
 				CEB2B9DC2025C85100E7D5E4 /* AppCommon.m in Sources */,
+				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
@@ -1266,6 +1275,7 @@
 				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
 				CEA42109203161A900B2DAB5 /* VideoGalleryCell.m in Sources */,
 				04B27F17202D784600ECB699 /* illnessVC.m in Sources */,
+				CEAF5B712038514300045C91 /* customTextField.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				18A68AC020371A2C00EBA479 /* TrainingLoadVC.m in Sources */,
 				18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */,
