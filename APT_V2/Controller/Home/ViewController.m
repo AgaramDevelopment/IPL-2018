@@ -39,7 +39,7 @@
 
 
 @property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
-@property BOOL isEdit;
+//@property BOOL isEdit;
 @property (nonatomic,strong) NSString * usercode;
 @property (nonatomic,strong) NSString * clientCode;
 @property (nonatomic,strong) NSString * selectedPlayerCode;
@@ -733,14 +733,14 @@
     
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom]) { // ROM
 //
-        if(IsEdit == YES)
+        if(isEdit == YES)
         {
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
         
         NSMutableDictionary* dict = [NSMutableDictionary new];
         [dict setValue:@"" forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Assessmententrycode"];
-        [dict setValue: forKey:@"Modulecode"];
+        [dict setValue:@"" forKey:@"Modulecode"];
         [dict setValue:@"" forKey:@"Assessmentcode"];
         [dict setValue:@"" forKey:@"Assessmenttestcode"];
         [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
@@ -874,7 +874,9 @@
 //        }
 
     }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL]) { // special
+     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
+        {
+            // special
 //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
 //
 //        if(IsEdit == YES)
@@ -953,7 +955,7 @@
 //        else
 //        {
 //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-//        }
+        }
 
     }
 

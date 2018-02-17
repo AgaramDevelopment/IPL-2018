@@ -1733,7 +1733,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         const char *dbPath = [databasePath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString* Modulecode = [dict valueForKey:@"Clientcode"];
+            NSString* Clientcode = [dict valueForKey:@"Clientcode"];
             NSString* Assessmententrycode = [dict valueForKey:@"Assessmententrycode"];
             NSString* Modulecode = [dict valueForKey:@"Modulecode"];
             NSString* Assessmentcode = [dict valueForKey:@"Assessmentcode"];
@@ -1751,8 +1751,8 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             NSString* Value = [dict valueForKey:@"Value"];
             NSString* Remarks = [dict valueForKey:@"Remarks"];
             NSString* Inference = [dict valueForKey:@"Inference"];
-            NSString* Assessor = [dict valueForKey:@"Assessor"];
-            NSString* Playercode = [dict valueForKey:@"Playercode"];
+//            NSString* Assessor = [dict valueForKey:@"Assessor"];
+//            NSString* Playercode = [dict valueForKey:@"Playercode"];
             NSString* Units = [dict valueForKey:@"Units"];
             
             NSString* Description = [dict valueForKey:@"Description"];
@@ -1873,7 +1873,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         {
 //            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(Clientcode  ,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,Ignored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",Clientcode,Modulecode ,Assessmentcode ,Assessmenttestcode ,Assessmenttesttypecode ,Assessmenttesttypescreencode ,Version ,Assessor ,Playercode ,Assessmententrydate ,Left ,Right ,Central ,Value ,Remarks ,Inference ,Units ,Description ,Recordstatus ,Createdby ,Createddate ,Modifiedby ,Modifieddate ,isIgnored ,Left1 ,Right1 ,Central1 ,Left2 ,Right2 ,Central2 ,Left3 ,Right3 ,Central3 ,Left4 ,Right4 ,Central4 ,Left5 ,Right5 ,Central5 ,Left6 ,Right6 ,Central6 ,Left7 ,Right7 ,Central7 ,Left8 ,Right8 ,Central8 ,Left9 ,Right9 ,Central9,issync];
             
-            NSString* Modulecode = [dict valueForKey:@"Clientcode"];
+            NSString* Clientcode = [dict valueForKey:@"Clientcode"];
             NSString* Assessmententrycode = [dict valueForKey:@"Assessmententrycode"];
             NSString* Modulecode = [dict valueForKey:@"Modulecode"];
             NSString* Assessmentcode = [dict valueForKey:@"Assessmentcode"];
@@ -1891,8 +1891,8 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             NSString* Value = [dict valueForKey:@"Value"];
             NSString* Remarks = [dict valueForKey:@"Remarks"];
             NSString* Inference = [dict valueForKey:@"Inference"];
-            NSString* Assessor = [dict valueForKey:@"Assessor"];
-            NSString* Playercode = [dict valueForKey:@"Playercode"];
+//            NSString* Assessor = [dict valueForKey:@"Assessor"];
+//            NSString* Playercode = [dict valueForKey:@"Playercode"];
             NSString* Units = [dict valueForKey:@"Units"];
             
             NSString* Description = [dict valueForKey:@"Description"];
@@ -1937,25 +1937,25 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             
             
             
-            const char *update_stmt = [INSERTSQL UTF8String];
-            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
-            {
-                if (sqlite3_step(statement) == SQLITE_DONE)
-                {
-                    sqlite3_reset(statement);
-                    sqlite3_finalize(statement);
-                    sqlite3_close(dataBase);
-                    return YES;
-                    
-                }
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
-            }
-            
-            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
-            
-            sqlite3_close(dataBase);
+//            const char *update_stmt = [INSERTSQL UTF8String];
+//            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+//            {
+//                if (sqlite3_step(statement) == SQLITE_DONE)
+//                {
+//                    sqlite3_reset(statement);
+//                    sqlite3_finalize(statement);
+//                    sqlite3_close(dataBase);
+//                    return YES;
+//
+//                }
+//                sqlite3_reset(statement);
+//                sqlite3_finalize(statement);
+//                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+//            }
+//
+//            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+//
+//            sqlite3_close(dataBase);
         }
         return NO;
     }
