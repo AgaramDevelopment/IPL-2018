@@ -14,7 +14,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FoodDiaryVC">
             <connections>
                 <outlet property="addBtn" destination="trB-GE-oAV" id="Fai-ry-Pwz"/>
+                <outlet property="breakfastBtn" destination="mcs-pp-JOf" id="jAn-S0-ThN"/>
+                <outlet property="dateTF" destination="ozX-HK-Uqp" id="kEu-jv-4nM"/>
+                <outlet property="dinnerBtn" destination="U9L-70-N45" id="bxd-8t-bDu"/>
                 <outlet property="foodDiaryCollectionView" destination="Ah9-02-FXV" id="P64-yD-Mej"/>
+                <outlet property="foodItemTF" destination="0Ed-Al-zYY" id="04X-Kd-UwA"/>
+                <outlet property="foodTableView" destination="tqd-9Q-kKT" id="Ftx-ao-ka1"/>
+                <outlet property="homeBtn" destination="vaU-w4-Mna" id="6gY-jy-SMv"/>
+                <outlet property="lunchBtn" destination="U6F-ot-lh0" id="gno-BB-EUW"/>
+                <outlet property="otherBtn" destination="f9M-m3-reK" id="04o-75-rgy"/>
+                <outlet property="quantityTF" destination="I9v-Kk-SnI" id="iCT-ho-2Of"/>
+                <outlet property="restaurantBtn" destination="YId-YV-HBO" id="0Uy-eB-hcG"/>
+                <outlet property="snacksBtn" destination="4xl-Ta-2P7" id="UCx-Ql-VZf"/>
+                <outlet property="supplementsBtn" destination="h6a-Im-plj" id="W2T-b8-6sL"/>
+                <outlet property="teamBtn" destination="TYY-Su-ed6" id="MtV-8t-qJ3"/>
+                <outlet property="timeTF" destination="E5V-yJ-es6" id="KjC-KX-fqZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -79,6 +93,9 @@
                                                 </constraint>
                                             </constraints>
                                             <state key="normal" title="Button" image="icon_plus"/>
+                                            <connections>
+                                                <action selector="addFoodDiaryButtonTapped:" destination="-1" eventType="touchUpInside" id="Qbn-64-BzN"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -134,23 +151,36 @@
                                                                 </constraint>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8o-0R-eyW">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ozX-HK-Uqp">
                                                             <rect key="frame" x="30" y="0.0" width="69" height="25"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <textInputTraits key="textInputTraits"/>
                                                             <variation key="heightClass=regular-widthClass=regular">
-                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             </variation>
-                                                        </label>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="-1" id="J5p-KL-jIw"/>
+                                                            </connections>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcr-Pa-oVB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="99" height="25"/>
+                                                            <connections>
+                                                                <action selector="dateButtonTapped:" destination="-1" eventType="touchUpInside" id="75O-pw-UuE"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.14349108934402466" green="0.68985170125961304" blue="0.94152849912643433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="H8o-0R-eyW" secondAttribute="trailing" id="22G-HZ-vpk"/>
-                                                        <constraint firstItem="H8o-0R-eyW" firstAttribute="leading" secondItem="MkC-Qx-QJn" secondAttribute="trailing" id="D4U-LE-lbU"/>
-                                                        <constraint firstAttribute="bottom" secondItem="H8o-0R-eyW" secondAttribute="bottom" id="bhG-za-WTO"/>
+                                                        <constraint firstItem="ozX-HK-Uqp" firstAttribute="top" secondItem="FaC-Nn-ebt" secondAttribute="top" id="29E-hs-fAu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ozX-HK-Uqp" secondAttribute="trailing" id="LUB-fK-wwY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Wcr-Pa-oVB" secondAttribute="trailing" id="b51-Gj-Aee"/>
+                                                        <constraint firstItem="Wcr-Pa-oVB" firstAttribute="leading" secondItem="FaC-Nn-ebt" secondAttribute="leading" id="f9Z-6l-kY0"/>
+                                                        <constraint firstItem="ozX-HK-Uqp" firstAttribute="leading" secondItem="MkC-Qx-QJn" secondAttribute="trailing" id="fcE-Rg-LxG"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ozX-HK-Uqp" secondAttribute="bottom" id="h1y-X9-7Fs"/>
                                                         <constraint firstAttribute="bottom" secondItem="MkC-Qx-QJn" secondAttribute="bottom" constant="2" id="heb-f3-b4e"/>
-                                                        <constraint firstItem="H8o-0R-eyW" firstAttribute="top" secondItem="FaC-Nn-ebt" secondAttribute="top" id="lPz-76-uLf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Wcr-Pa-oVB" secondAttribute="bottom" id="i1n-kv-Tbv"/>
+                                                        <constraint firstItem="Wcr-Pa-oVB" firstAttribute="top" secondItem="FaC-Nn-ebt" secondAttribute="top" id="n4T-TO-w1P"/>
                                                         <constraint firstItem="MkC-Qx-QJn" firstAttribute="leading" secondItem="FaC-Nn-ebt" secondAttribute="leading" constant="5" id="o4a-eD-CYx"/>
                                                         <constraint firstItem="MkC-Qx-QJn" firstAttribute="top" secondItem="FaC-Nn-ebt" secondAttribute="top" constant="2" id="yPp-yf-DEb"/>
                                                     </constraints>
@@ -175,24 +205,37 @@
                                                                 </constraint>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8t1-VX-drB">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5V-yJ-es6">
                                                             <rect key="frame" x="30" y="0.0" width="70" height="25"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <textInputTraits key="textInputTraits"/>
                                                             <variation key="heightClass=regular-widthClass=regular">
-                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             </variation>
-                                                        </label>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="-1" id="KgP-lE-Auq"/>
+                                                            </connections>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sen-CU-6CA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
+                                                            <connections>
+                                                                <action selector="timeButtonTapped:" destination="-1" eventType="touchUpInside" id="go9-gQ-WwO"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.14349108934402466" green="0.68985170125961304" blue="0.94152849912643433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="8t1-VX-drB" secondAttribute="bottom" id="4kU-LV-vdi"/>
+                                                        <constraint firstItem="E5V-yJ-es6" firstAttribute="leading" secondItem="xIN-5p-7Yy" secondAttribute="trailing" id="1kQ-o9-YAL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Sen-CU-6CA" secondAttribute="trailing" id="2Dd-Mh-iZJ"/>
+                                                        <constraint firstItem="E5V-yJ-es6" firstAttribute="top" secondItem="MmP-FT-eZV" secondAttribute="top" id="2FC-WQ-6ID"/>
                                                         <constraint firstItem="xIN-5p-7Yy" firstAttribute="leading" secondItem="MmP-FT-eZV" secondAttribute="leading" constant="5" id="7kF-pe-g5A"/>
-                                                        <constraint firstAttribute="trailing" secondItem="8t1-VX-drB" secondAttribute="trailing" id="Sw0-h5-Yf4"/>
+                                                        <constraint firstItem="Sen-CU-6CA" firstAttribute="top" secondItem="MmP-FT-eZV" secondAttribute="top" id="8Al-Ck-CCK"/>
+                                                        <constraint firstAttribute="bottom" secondItem="E5V-yJ-es6" secondAttribute="bottom" id="Iyi-kW-rwk"/>
                                                         <constraint firstAttribute="bottom" secondItem="xIN-5p-7Yy" secondAttribute="bottom" constant="2" id="bHj-tJ-8LF"/>
-                                                        <constraint firstItem="8t1-VX-drB" firstAttribute="top" secondItem="MmP-FT-eZV" secondAttribute="top" id="bMS-t5-abu"/>
-                                                        <constraint firstItem="8t1-VX-drB" firstAttribute="leading" secondItem="xIN-5p-7Yy" secondAttribute="trailing" id="qLv-8O-1Y1"/>
+                                                        <constraint firstItem="Sen-CU-6CA" firstAttribute="leading" secondItem="MmP-FT-eZV" secondAttribute="leading" id="bLk-X4-oba"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Sen-CU-6CA" secondAttribute="bottom" id="d7d-1r-l8p"/>
+                                                        <constraint firstAttribute="trailing" secondItem="E5V-yJ-es6" secondAttribute="trailing" id="xeT-J7-G6i"/>
                                                         <constraint firstItem="xIN-5p-7Yy" firstAttribute="top" secondItem="MmP-FT-eZV" secondAttribute="top" constant="2" id="zzg-Qf-KRd"/>
                                                     </constraints>
                                                 </view>
@@ -248,7 +291,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcs-pp-JOf">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcs-pp-JOf">
                                                     <rect key="frame" x="0.0" y="32.5" width="70.5" height="19.5"/>
                                                     <color key="backgroundColor" red="0.61498606204986572" green="0.76270115375518799" blue="0.90195602178573608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -258,8 +301,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="mealTypeBreakfastAction:" destination="-1" eventType="touchUpInside" id="Dcq-ly-qY2"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xl-Ta-2P7">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xl-Ta-2P7">
                                                     <rect key="frame" x="75.5" y="33" width="53" height="19"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -269,8 +315,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="mealTypeSnacksAction:" destination="-1" eventType="touchUpInside" id="eBO-iu-HrB"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6F-ot-lh0">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6F-ot-lh0">
                                                     <rect key="frame" x="133.5" y="33" width="53" height="19"/>
                                                     <color key="backgroundColor" red="0.95748800039291382" green="0.69330209493637085" blue="0.51472389698028564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -280,8 +329,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="mealTypeLunchAction:" destination="-1" eventType="touchUpInside" id="5VF-zw-ZK9"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9L-70-N45">
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9L-70-N45">
                                                     <rect key="frame" x="191.5" y="33" width="53" height="19"/>
                                                     <color key="backgroundColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -291,10 +343,13 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="mealTypeDinnerAction:" destination="-1" eventType="touchUpInside" id="m72-qd-9ac"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6a-Im-plj">
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6a-Im-plj">
                                                     <rect key="frame" x="249.5" y="33" width="105.5" height="19"/>
-                                                    <color key="backgroundColor" red="0.78815680742263794" green="0.78829020261764526" blue="0.78813928365707397" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Supplements">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -302,6 +357,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="mealTypeSupplementsAction:" destination="-1" eventType="touchUpInside" id="YTK-es-QlT"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -367,9 +425,9 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ed-Al-zYY">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ed-Al-zYY">
                                                     <rect key="frame" x="30" y="38" width="137.5" height="20"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2pP-BA-G5s">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="30"/>
@@ -378,13 +436,19 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="moU-eG-2Uc"/>
+                                                    </connections>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I9v-Kk-SnI">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I9v-Kk-SnI">
                                                     <rect key="frame" x="187.5" y="38" width="137.5" height="20"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="NKg-sX-Ney"/>
+                                                    </connections>
                                                 </textField>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tqd-9Q-kKT">
                                                     <rect key="frame" x="30" y="66" width="295" height="150"/>
@@ -399,7 +463,7 @@
                                                 </tableView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0E-t3-OVq">
                                                     <rect key="frame" x="330" y="38" width="20" height="20"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="7jv-tE-VhT">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="30"/>
@@ -409,6 +473,9 @@
                                                         </constraint>
                                                     </constraints>
                                                     <state key="normal" image="icon_plus1"/>
+                                                    <connections>
+                                                        <action selector="foodDescriptionButtonTapped:" destination="-1" eventType="touchUpInside" id="9sg-4A-hON"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -462,7 +529,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYY-Su-ed6">
+                                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYY-Su-ed6">
                                                     <rect key="frame" x="0.0" y="32" width="81.5" height="19.5"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -472,8 +539,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="locationTeamAction:" destination="-1" eventType="touchUpInside" id="eUR-aP-DyU"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YId-YV-HBO">
+                                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YId-YV-HBO">
                                                     <rect key="frame" x="91.5" y="32" width="81" height="19"/>
                                                     <color key="backgroundColor" red="0.61498606204986572" green="0.76270115375518799" blue="0.90195602178573608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -483,8 +553,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="locationRestaurantAction:" destination="-1" eventType="touchUpInside" id="PSg-IB-YCR"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaU-w4-Mna">
+                                                <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaU-w4-Mna">
                                                     <rect key="frame" x="182.5" y="32" width="81.5" height="19"/>
                                                     <color key="backgroundColor" red="0.66108804941177368" green="0.82082319259643555" blue="0.55679887533187866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -494,8 +567,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="locationHomeAction:" destination="-1" eventType="touchUpInside" id="lHT-lk-mHM"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9M-m3-reK">
+                                                <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9M-m3-reK">
                                                     <rect key="frame" x="274" y="32" width="81" height="19"/>
                                                     <color key="backgroundColor" red="0.95763355493545532" green="0.69719278812408447" blue="0.51876300573348999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -505,6 +581,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="locationOtherAction:" destination="-1" eventType="touchUpInside" id="ZAM-7S-6Et"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -548,7 +627,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg0-Ct-1fy">
-                                            <rect key="frame" x="127.5" y="429" width="120" height="25"/>
+                                            <rect key="frame" x="127.5" y="444" width="120" height="25"/>
                                             <color key="backgroundColor" red="0.14349108934402466" green="0.68985170125961304" blue="0.94152849912643433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="hhv-Km-stE">
@@ -564,6 +643,9 @@
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             </variation>
+                                            <connections>
+                                                <action selector="saveOrUpdateButtonTapped:" destination="-1" eventType="touchUpInside" id="Ggw-bc-0cM"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -579,7 +661,7 @@
                                         <constraint firstAttribute="trailing" secondItem="ZQz-HV-m5C" secondAttribute="trailing" constant="10" id="ZNc-fz-g8Q"/>
                                         <constraint firstItem="YXo-Ms-PDJ" firstAttribute="leading" secondItem="gpi-Ft-lO8" secondAttribute="leading" constant="10" id="d0u-7e-vSl"/>
                                         <constraint firstItem="Lg0-Ct-1fy" firstAttribute="centerX" secondItem="gpi-Ft-lO8" secondAttribute="centerX" id="do7-xi-QwI"/>
-                                        <constraint firstItem="Lg0-Ct-1fy" firstAttribute="top" secondItem="YXo-Ms-PDJ" secondAttribute="bottom" constant="15" id="kU3-KD-tyP"/>
+                                        <constraint firstItem="Lg0-Ct-1fy" firstAttribute="top" secondItem="YXo-Ms-PDJ" secondAttribute="bottom" constant="30" id="kU3-KD-tyP"/>
                                         <constraint firstItem="CiL-ki-yca" firstAttribute="leading" secondItem="gpi-Ft-lO8" secondAttribute="leading" constant="10" id="xdZ-A8-Y88"/>
                                     </constraints>
                                 </view>
@@ -599,7 +681,6 @@
                                 <constraint firstItem="MNo-iX-1Sn" firstAttribute="leading" secondItem="CXY-Ps-vyV" secondAttribute="leading" id="nI4-qI-r3g"/>
                                 <constraint firstItem="gpi-Ft-lO8" firstAttribute="leading" secondItem="CXY-Ps-vyV" secondAttribute="leading" id="pxj-rQ-Ks3"/>
                                 <constraint firstAttribute="trailing" secondItem="MNo-iX-1Sn" secondAttribute="trailing" id="rzM-Aq-Vt7"/>
-                                <constraint firstItem="gpi-Ft-lO8" firstAttribute="top" secondItem="DIV-yB-z8H" secondAttribute="bottom" constant="5" id="sj0-Zk-SaS"/>
                                 <constraint firstAttribute="trailing" secondItem="FTr-aK-mAY" secondAttribute="trailing" id="y2c-FO-lrA"/>
                             </constraints>
                         </view>
