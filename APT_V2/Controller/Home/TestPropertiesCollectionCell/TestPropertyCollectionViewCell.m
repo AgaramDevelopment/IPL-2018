@@ -9,7 +9,9 @@
 #import "TestPropertyCollectionViewCell.h"
 
 @implementation TestPropertyCollectionViewCell
-@synthesize lblTopIndicator;
+@synthesize lblTopIndicator,txtField;
+
+@synthesize txt1_SC,txt2_SC;
 
 @synthesize txtDropDown;
 

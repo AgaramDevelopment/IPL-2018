@@ -11,19 +11,26 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "CRTableViewCell.h"
 
-@interface VideoPlayerUploadVC () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface VideoPlayerUploadVC () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     WebService * objWebService;
     BOOL isPlayer;
     BOOL isCategory;
     BOOL isShare;
+    BOOL isModule;
     NSString *imgData,* imgFileName;
-     NSMutableArray* mainArray;
+    NSMutableArray* mainArray;
     NSMutableArray* chatArray;
     NSString *plyCode;
-
+    UIImagePickerController *videoPicker;
+    NSString * selectPlayer;
+    NSString * selectCategory;
+    NSString * selectModule;
+    NSString * selectTeamCode;
+    NSString * selectGameCode;
 
 }
 @property (nonatomic,strong) NSMutableArray * objPlayerArray;
@@ -34,8 +41,12 @@
 @property (nonatomic,strong) IBOutlet UIView * date_view;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblYposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblwidthposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblXposition;
+
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
+@property (strong,nonatomic) NSMutableArray * ModuleArray;
+
 
 
 
@@ -48,35 +59,68 @@
     
     objWebService = [[WebService alloc]init];
     [self FetchvideouploadWebservice];
+    [self.view setFrame:CGRectMake(0, 150, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
 
     // Do any additional setup after loading the view from its nib.
     
-//    self.shadowView.layer.cornerRadius = 2.0f;
-//    self.shadowView.layer.borderWidth = 1.0f;
-//    self.shadowView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.shadowView.layer.masksToBounds = YES;
-//
-//
-//    self.teamView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.teamView.layer.borderWidth = 1.0f;
-//    
-//    self.playerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.playerView.layer.borderWidth = 1.0f;
-//    
-//    self.videoDateView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.videoDateView.layer.borderWidth = 1.0f;
-//    
-//    self.CategoryView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.CategoryView.layer.borderWidth = 1.0f;
-//    
-//    self.keywordsView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.keywordsView.layer.borderWidth = 1.0f;
-//    
-//    self.sharetoUserView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//    self.sharetoUserView.layer.borderWidth = 1.0f;
+    self.shadowView.layer.cornerRadius = 2.0f;
+    self.shadowView.layer.borderWidth = 1.0f;
+    self.shadowView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.shadowView.layer.masksToBounds = YES;
+
+    self.commonView.layer.shadowRadius  = 1.5f;
+    self.commonView.layer.shadowColor   = [UIColor colorWithRed:176.f/255.f green:199.f/255.f blue:226.f/255.f alpha:1.f].CGColor;
+    self.commonView.layer.shadowOffset  = CGSizeMake(0.0f, 0.0f);
+    self.commonView.layer.shadowOpacity = 0.9f;
+    self.commonView.layer.masksToBounds = NO;
+    
+    UIEdgeInsets shadowInsets     = UIEdgeInsetsMake(0, 0, -1.5f, 0);
+    UIBezierPath *shadowPath      = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(self.commonView.bounds, shadowInsets)];
+    self.commonView.layer.shadowPath    = shadowPath.CGPath;
+
+    self.teamView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.teamView.layer.borderWidth = 1.0f;
+    
+    self.playerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.playerView.layer.borderWidth = 1.0f;
+    
+    self.videoDateView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.videoDateView.layer.borderWidth = 1.0f;
+    
+    self.CategoryView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.CategoryView.layer.borderWidth = 1.0f;
+    
+    self.keywordsView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.keywordsView.layer.borderWidth = 1.0f;
+    
+    self.sharetoUserView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.sharetoUserView.layer.borderWidth = 1.0f;
     [self.date_view setHidden:YES];
     self.popTbl.hidden = YES;
     self.selectedMarks = [[NSMutableArray alloc]init];
+    NSMutableDictionary *coachdict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    [coachdict setValue:@"Coach" forKey:@"ModuleName"];
+    [coachdict setValue:@"MSC084" forKey:@"ModuleCode"];
+    
+    NSMutableDictionary *physiodict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    [physiodict setValue:@"Physio" forKey:@"ModuleName"];
+    [physiodict setValue:@"MSC085" forKey:@"ModuleCode"];
+    
+    NSMutableDictionary *Sandcdict = [[NSMutableDictionary alloc]initWithCapacity:2];
+    
+    [Sandcdict setValue:@"S and C" forKey:@"ModuleName"];
+    [Sandcdict setValue:@"MSC086" forKey:@"ModuleCode"];
+    
+    
+    self.ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
+    
+    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
 
 }
 
@@ -134,12 +178,36 @@
     }];
 }
 
-
+-(IBAction)didClickModule:(id)sender
+{
+    self.popTblYposition.constant = self.teamView.frame.origin.y-20;
+    self.popTblwidthposition.constant = self.teamView.frame.size.width;
+    self.popTblXposition.constant = -310;
+    if(isModule== NO)
+    {
+        self.popTbl.hidden = NO;
+        self.commonArray = [[NSMutableArray alloc]init];
+        self.commonArray = self.ModuleArray;
+        [self.popTbl reloadData];
+        isModule = YES;
+    }
+    else
+    {
+        self.popTbl.hidden = YES;
+        isPlayer = NO;
+        isCategory = NO;
+        isShare = NO;
+        isModule = NO;
+        
+    }
+}
 
 -(IBAction)didClickPlayerList:(id)sender
 {
     self.popTblYposition.constant = self.playerView.frame.origin.y-20;
     self.popTblwidthposition.constant = self.playerView.frame.size.width;
+    self.popTblXposition.constant = 10;
+
     if(isPlayer== NO)
     {
         self.popTbl.hidden = NO;
@@ -154,14 +222,16 @@
         isPlayer = NO;
         isCategory = NO;
         isShare = NO;
-
+        isModule = NO;
     }
 }
 
 -(IBAction)didClickCategoryList:(id)sender
 {
-    self.popTblYposition.constant = self.CategoryView.frame.origin.y;
+    self.popTblYposition.constant = self.CategoryView.frame.origin.y-10;
     self.popTblwidthposition.constant = self.CategoryView.frame.size.width;
+    self.popTblXposition.constant = 10;
+
     if(isCategory== NO)
     {
         self.popTbl.hidden = NO;
@@ -176,14 +246,16 @@
         isCategory = NO;
         isPlayer = NO;
         isShare = NO;
-        
+        isModule = NO;
     }
 }
 
 -(IBAction)didClickShareUserList:(id)sender
 {
-    self.popTblYposition.constant = self.sharetoUserView.frame.origin.y-40;
+    self.popTblYposition.constant = self.sharetoUserView.frame.origin.y-20;
     self.popTblwidthposition.constant = self.sharetoUserView.frame.size.width;
+    self.popTblXposition.constant = -410;
+
     if(isShare== NO)
     {
         self.popTbl.hidden = NO;
@@ -198,6 +270,7 @@
         isCategory = NO;
         isPlayer = NO;
         isShare = NO;
+        isModule = NO;
         
     }
 }
@@ -223,7 +296,7 @@
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    self.datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.date_view.frame.origin.y-150,self.view.frame.size.width,100)];
+    self.datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.date_view.frame.origin.y-230,self.view.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [self.datePicker setLocale:locale];
@@ -251,45 +324,42 @@
 }
 -(IBAction)didClickCameraBtn:(id)sender
 {
-    NSLog(@"dfmkcv");
-    UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
-    videoPicker.delegate = self; // ensure you set the delegate so when a video is chosen the right method can be called
+   
+    videoPicker = [[UIImagePickerController alloc]init];
+    videoPicker.delegate = self;
+    videoPicker.allowsEditing = YES;
     
-    videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    // This code ensures only videos are shown to the end user
-    videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
-    
-    videoPicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    videoPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+    videoPicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+    videoPicker.videoMaximumDuration = 30;
     [self presentViewController:videoPicker animated:YES completion:nil];
+    
 }
 -(IBAction)didClickGalleryBtn:(id)sender
 {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
     
-    
-//    UIAlertController* alert =[UIAlertController alertControllerWithTitle:APP_NAME message:@"Choose Your Attachment" preferredStyle:UIAlertControllerStyleActionSheet];
-//    UIAlertAction* CameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        imagePickerController.sourceType =  UIImagePickerControllerSourceTypeCamera;
-//        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-//        
-//        [self presentViewController:imagePickerController animated:YES completion:nil];
-//        
-        
-  //  }];
-//    UIAlertAction* GalleryAction = [UIAlertAction actionWithTitle:@"Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        imagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-        [self presentViewController:imagePickerController animated:YES completion:nil];
-        
-        
-//    }];
-//    UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//    imagePicker.delegate = self;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
 //
-//    }];
-//
+//    [self presentModalViewController:imagePicker animated:YES];
     
+    UIImagePickerController *imagePicker =
+    [[UIImagePickerController alloc] init];
     
+    imagePicker.delegate = self;
+    
+    imagePicker.sourceType =
+    UIImagePickerControllerSourceTypeCamera;
+    
+    imagePicker.mediaTypes =
+    @[(NSString *) kUTTypeImage,
+      (NSString *) kUTTypeMovie];
+    
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker
+                       animated:YES completion:nil];
 }
 #pragma mark UIImagePickerController Delegates
 
@@ -328,21 +398,19 @@
         imgFileName = [self getFileName];
     }
     [self dismissViewControllerAnimated:YES completion:^{
-        _ImgViewBottomConst.constant = _imgView.frame.size.height;
+        //_ImgViewBottomConst.constant = _imgView.frame.size.height;
         [_imgView updateConstraintsIfNeeded];
         _currentlySelectedImage.image = image;
         
     }];
     
-    
-    
 }
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    self.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height-50);
-
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self.view setFrame:CGRectMake(0, 350, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
 }
+
 
 - (NSString *)encodeToBase64String:(UIImage *)image {
     return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -436,18 +504,18 @@
                                       reuseIdentifier:MyIdentifier];
     }
     NSString * selectStr;
-    if(isPlayer)
+    if(isModule)
     {
-        selectStr = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+        selectStr = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
     }
     else if (isCategory)
     {
         selectStr = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
 
     }
-    else if (isShare)
+    else if (isPlayer)
     {
-        selectStr = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:indexPath.row];
+        selectStr = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
 
     }
     cell.textLabel.text = selectStr;
@@ -467,11 +535,22 @@
     if(isPlayer == YES)
     {
         self.player_lbl.text = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+        selectPlayer = [[self.commonArray valueForKey:@"PlayerCode"] objectAtIndex:indexPath.row];
+        selectTeamCode = [[self.commonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
+        selectGameCode = [[self.commonArray valueForKey:@"GameCode"] objectAtIndex:indexPath.row];
+
         isPlayer = NO;
+    }
+    else if (isModule == YES)
+    {
+        self.module_lbl.text = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
+        selectModule = [[self.commonArray valueForKey:@"ModuleCode"] objectAtIndex:indexPath.row];
+        isModule = NO;
     }
     else if (isCategory == YES)
     {
         self.category_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+        selectCategory = [[self.commonArray valueForKey:@"CategoryCode"] objectAtIndex:indexPath.row];
         isCategory = NO;
     }
     if(isShare == YES)
@@ -526,40 +605,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
     
-    
-//    [dic setObject:_txtview.text forKey:@"newmessage"];
-//    [dic setObject:imgData forKey:@"newmessagephoto"];
-//    [dic setObject:imgFileName  forKey:@"fileName"];
-//
-//
-//    if([AppCommon GetClientCode])
-//    {
-//        [dic setObject:[AppCommon GetClientCode] forKey:@"Clientcode"];
-//    }
-//    else
-//    {
-//        [AppCommon showAlertWithMessage:@"Client code missing in loadMessage API"];
-//        return;
-//    }
-//
-//    if([AppCommon GetUsercode])
-//    {
-//        [dic setObject:[AppCommon GetUsercode] forKey:@"UserCode"];
-//    }
-//    else
-//    {
-//        [AppCommon showAlertWithMessage:@"UserCode missing in loadMessage API"];
-//        return;
-//    }
-//    if(self.CommID)
-//    {
-//        [dic setObject:_CommID forKey:@"commId"];
-//    }
-//    else
-//    {
-//        [AppCommon showAlertWithMessage:@"commId missing in loadMessage API"];
-//        return;
-//    }
+
     
     
     [AppCommon showLoading];
@@ -583,7 +629,7 @@
         chatArray = [NSMutableArray new];
         chatArray = [mainArray valueForKey:@"lstallmessages"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            _ImgViewBottomConst.constant = -_imgView.frame.size.height;
+           // _ImgViewBottomConst.constant = -_imgView.frame.size.height;
             [_imgView updateConstraintsIfNeeded];
             _currentlySelectedImage.image = nil;
             
@@ -612,9 +658,114 @@
 {
     imgData = @"";
     imgFileName = @"";
-    dispatch_async(dispatch_get_main_queue(), ^{
-       // _txtview.text = @"";
-    });
+   
     
+}
+-(IBAction)didClickUpload:(id)sender
+{
+    if([self.player_lbl.text isEqualToString:@""] || self.player_lbl.text == nil)
+    {
+        [self altermsg:@"Please select player"];
+    }
+    else if ([self.category_lbl.text isEqualToString:@""] || self.category_lbl.text == nil)
+    {
+        [self altermsg:@"Please select category"];
+
+    }
+    else if ([self.date_lbl.text isEqualToString:@""] || self.date_lbl.text == nil)
+    {
+        [self altermsg:@"Please select date"];
+
+    }
+    else if ([self.objKeyword_Txt.text isEqualToString:@""] || self.objKeyword_Txt.text == nil)
+    {
+        [self altermsg:@"Please Type keyword"];
+
+    }
+    else if ([self.shareuser_lbl.text isEqualToString:@""] || self.shareuser_lbl.text == nil)
+    {
+        [self altermsg:@"Please Select Shareuser"];
+
+    }
+    else
+    {
+    
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString * createdby = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    NSString *URLString =  URL_FOR_RESOURCE(VideoUpload);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+   
+        NSString * comments = @"";
+        NSString * videoCode= @"";
+        NSString * sharedUserID = [[self.selectedMarks valueForKey:@"sharedUserCode"] componentsJoinedByString:@","];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
+    if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
+    if(selectTeamCode)   [dic    setObject:selectTeamCode     forKey:@"teamCode"];
+    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
+    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"videoDate"];
+    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
+    if(selectCategory)   [dic    setObject:selectCategory     forKey:@"categoryCode"];
+    if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
+    if(comments)   [dic    setObject:@""    forKey:@"comments"];
+    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
+
+        if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
+    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
+        if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
+
+
+        NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+
+        [AppCommon showLoading];
+        NSLog(@"USED PARAMS %@ ",dic);
+        
+        [manager POST:URLString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileURL:filePath name:@"image" error:nil];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success: %@", responseObject);
+            [self resetImageData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                [AppCommon hideLoading];
+               [self.view removeFromSuperview];
+            });
+
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [AppCommon hideLoading];
+            [self resetImageData];
+            NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
+            [COMMON webServiceFailureError:error];
+        }];
+    }
+}
+-(void)altermsg:(NSString *)msg
+{
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@"Alert"
+                                message:msg
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction
+                                    actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+-(IBAction)didClickCancelBtnAction:(id)sender
+{
+    [self.view removeFromSuperview];
 }
 @end

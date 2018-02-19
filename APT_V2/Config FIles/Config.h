@@ -244,6 +244,7 @@
 
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
 #define FetchVideoUpload           @"FETCHVIDEOUPLOAD"
+#define VideoUpload                @"MOBILE_VIDEOUPLOADSAVE"
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
@@ -267,5 +268,10 @@
 
 #define  playersKey              @"MOBILE_FETCHTEAMPlayer"
 
+#define foodDiaryFetch         @"MOBILE_FETCHFOODDETAILS"
+
+#define foodDiaryInsert        @"MOBILE_INSERT_FOOD_DIARY"
+
+#define foodDiaryUpdate        @"MOBILE_UPDATE_FOOD_DIARY"
 
 

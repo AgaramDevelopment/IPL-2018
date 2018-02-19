@@ -10,5 +10,5 @@
 
 @interface customTextField : UITextField
 @property (readwrite,strong) NSString * strTestCode;
-
+@property (readwrite,strong) NSString * strParamName;
 @end
