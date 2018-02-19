@@ -9,7 +9,7 @@
 #import "customTextField.h"
 
 @implementation customTextField
-@synthesize strTestCode;
+@synthesize strTestCode,strParamName;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
