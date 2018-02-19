@@ -10,9 +10,11 @@
 #import "FoodDiaryCell.h"
 #import "FoodDescriptionCell.h"
 #import "Config.h"
-
-
-@interface FoodDiaryVC ()
+#import "AppCommon.h"
+#import "WebService.h"
+@interface FoodDiaryVC () {
+    NSString *clientCode;
+}
 
 @end
 
@@ -31,6 +33,8 @@
     
     [self.foodDiaryCollectionView registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
     
+    [self fetchFoodDetailsPostMethodWebService];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,4 +125,46 @@
     
 }
 
+- (void)fetchFoodDetailsPostMethodWebService {
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+        //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
+    NSString *URLString =  URL_FOR_RESOURCE(playerMyStatsBatting);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    //CLIENTCODE, PLAYERCODE, DATE
+    clientCode = [AppCommon GetClientCode];
+//    userCode = [AppCommon GetUsercode];
+//    userRefCode = [AppCommon GetuserReference];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
+//    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
+//    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"UserrefCode"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+//        battingOverAllArray = [NSMutableArray new];
+//        battingOverAllArray = [responseObject valueForKey:@"PlayerDetailsList"];
+        
+        [AppCommon hideLoading];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+    
+}
 @end
