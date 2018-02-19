@@ -738,6 +738,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Update the UI
                 [AppCommon hideLoading];
+               [self.view removeFromSuperview];
             });
 
             
