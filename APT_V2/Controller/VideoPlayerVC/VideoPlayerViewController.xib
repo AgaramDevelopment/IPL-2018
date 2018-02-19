@@ -17,7 +17,7 @@
                 <outlet property="progressView" destination="ET6-7Q-E0t" id="Mqq-hs-Qck"/>
                 <outlet property="rootVideoView" destination="ez9-tl-rb3" id="uBQ-XZ-C1G"/>
                 <outlet property="sliderVolume" destination="6C5-s2-OFR" id="26R-Og-7FF"/>
-                <outlet property="videoView" destination="LqJ-e8-kwG" id="uBe-uF-6FT"/>
+                <outlet property="videoView" destination="LqJ-e8-kwG" id="cnj-hd-onl"/>
                 <outlet property="view" destination="gLw-fZ-BkV" id="fvO-n9-dYV"/>
                 <outletCollection property="tappableViews" destination="9hC-iz-8Mn" id="zBI-m5-wMu"/>
                 <outletCollection property="tappableViews" destination="dLB-U3-S30" id="c3f-Nf-8qf"/>
@@ -39,7 +39,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqJ-e8-kwG">
                             <rect key="frame" x="8" y="40" width="692" height="500"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMj-J1-vug">
                             <rect key="frame" x="675" y="3" width="30" height="30"/>
@@ -223,7 +223,7 @@
                                     </constraints>
                                 </slider>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="Hhk-Jr-v55" firstAttribute="top" secondItem="ET6-7Q-E0t" secondAttribute="bottom" constant="3" id="1kp-W5-krG"/>
                                 <constraint firstItem="6C5-s2-OFR" firstAttribute="centerY" secondItem="RLu-YR-xTm" secondAttribute="centerY" id="3oC-2b-0Mf"/>
@@ -323,7 +323,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ez9-tl-rb3" firstAttribute="centerX" secondItem="gLw-fZ-BkV" secondAttribute="centerX" id="cih-zT-hdS"/>
                 <constraint firstItem="ez9-tl-rb3" firstAttribute="centerY" secondItem="gLw-fZ-BkV" secondAttribute="centerY" id="k8i-nO-SNJ"/>
