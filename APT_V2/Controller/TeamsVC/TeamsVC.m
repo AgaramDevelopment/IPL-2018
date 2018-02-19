@@ -165,7 +165,11 @@
         }
     }];
     
-    
+    cell.cellview.layer.shadowOffset = CGSizeMake(1, 0);
+    cell.cellview.layer.shadowColor = [[UIColor blackColor] CGColor];
+    cell.cellview.layer.shadowRadius = 5;
+    cell.cellview.layer.shadowOpacity = 1.0;
+    cell.cellview.layer.masksToBounds = YES;
     
     
     

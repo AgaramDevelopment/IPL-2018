@@ -28,7 +28,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUb-5e-vpb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3P-bj-KGZ">
                                 <rect key="frame" x="55" y="10" width="276" height="21"/>
@@ -42,7 +42,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T7f-IP-sbA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="T7f-IP-sbA">
                                 <rect key="frame" x="10" y="3" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="MhN-LJ-kRk"/>
@@ -50,7 +50,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.26990582190000001" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="g3P-bj-KGZ" firstAttribute="top" secondItem="nUb-5e-vpb" secondAttribute="top" constant="10" id="b7H-os-W4h"/>
                             <constraint firstItem="T7f-IP-sbA" firstAttribute="top" secondItem="nUb-5e-vpb" secondAttribute="top" constant="3" id="gJf-Iq-58o"/>
@@ -76,4 +76,7 @@
             <point key="canvasLocation" x="27.5" y="-92"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="no-image" width="300" height="300"/>
+    </resources>
 </document>

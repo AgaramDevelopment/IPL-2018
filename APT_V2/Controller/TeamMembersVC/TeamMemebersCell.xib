@@ -27,7 +27,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dh7-Uw-tsj">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="178"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vMv-6P-GQP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="vMv-6P-GQP">
                                 <rect key="frame" x="0.0" y="8" width="186" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -51,7 +51,7 @@
                                     <constraint firstAttribute="height" constant="21" id="xND-Br-yb7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
@@ -93,9 +93,18 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwQ-ov-Ci6">
+                                <rect key="frame" x="10" y="10" width="20" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="KRH-Je-gLd"/>
+                                    <constraint firstAttribute="width" constant="20" id="oNg-3q-bot"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="NwQ-ov-Ci6" firstAttribute="leading" secondItem="dh7-Uw-tsj" secondAttribute="leading" constant="10" id="0bA-V6-i9J"/>
                             <constraint firstItem="efH-j7-Mlz" firstAttribute="top" secondItem="rtv-52-0aH" secondAttribute="bottom" constant="10" id="17e-Yv-Lyq"/>
                             <constraint firstAttribute="trailing" secondItem="rtv-52-0aH" secondAttribute="trailing" id="3k3-gD-tsL"/>
                             <constraint firstItem="rtv-52-0aH" firstAttribute="top" secondItem="vMv-6P-GQP" secondAttribute="bottom" id="4Mp-k0-rnb"/>
@@ -114,6 +123,7 @@
                             <constraint firstItem="vMv-6P-GQP" firstAttribute="top" secondItem="dh7-Uw-tsj" secondAttribute="top" constant="8" id="b7w-Dn-d1x"/>
                             <constraint firstItem="vMv-6P-GQP" firstAttribute="leading" secondItem="dh7-Uw-tsj" secondAttribute="leading" id="fux-zP-U6c"/>
                             <constraint firstItem="umU-gx-nw5" firstAttribute="top" secondItem="efH-j7-Mlz" secondAttribute="bottom" constant="8" id="i1m-R3-dqI"/>
+                            <constraint firstItem="NwQ-ov-Ci6" firstAttribute="top" secondItem="dh7-Uw-tsj" secondAttribute="top" constant="10" id="j4l-Ud-hco"/>
                             <constraint firstItem="zqS-9b-iwh" firstAttribute="leading" secondItem="dh7-Uw-tsj" secondAttribute="leading" constant="5" id="mZ9-5h-gdk"/>
                             <constraint firstItem="umU-gx-nw5" firstAttribute="width" secondItem="zqS-9b-iwh" secondAttribute="width" id="oFj-wA-wjA"/>
                             <constraint firstItem="eBL-Ls-fqE" firstAttribute="top" secondItem="zqS-9b-iwh" secondAttribute="bottom" constant="5" id="s5H-uP-aGh"/>
@@ -123,7 +133,7 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="dh7-Uw-tsj" secondAttribute="bottom" id="K9n-Ib-HUr"/>
                 <constraint firstItem="dh7-Uw-tsj" firstAttribute="leading" secondItem="1w2-Qz-Fug" secondAttribute="leading" id="gt3-CX-wLN"/>
@@ -135,9 +145,13 @@
                 <outlet property="BattingStylelbl" destination="zqS-9b-iwh" id="UE1-fA-e24"/>
                 <outlet property="BowlingStylelbl" destination="umU-gx-nw5" id="8kn-jb-es2"/>
                 <outlet property="agelbl" destination="eBL-Ls-fqE" id="FIi-4k-etf"/>
+                <outlet property="availabilityView" destination="NwQ-ov-Ci6" id="S1z-jR-6xG"/>
                 <outlet property="playernamelbl" destination="efH-j7-Mlz" id="PZm-fd-wJc"/>
             </connections>
             <point key="canvasLocation" x="-45" y="-160"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="no-image" width="300" height="300"/>
+    </resources>
 </document>
