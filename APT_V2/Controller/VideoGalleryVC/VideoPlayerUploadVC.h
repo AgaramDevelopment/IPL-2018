@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+@protocol videoUploadDelegate
+
+-(void) removeImagePicker;
+
+@end
 
 
 @interface VideoPlayerUploadVC : UIViewController
+
+@property(nonatomic,strong) id<videoUploadDelegate>delegate;
+
 
 @property (strong, nonatomic) IBOutlet UIView *shadowView;
 @property (strong, nonatomic) IBOutlet UIView *teamView;
@@ -26,10 +34,12 @@
 @property (nonatomic,strong) IBOutlet UILabel * player_lbl;
 @property (nonatomic,strong) IBOutlet UILabel * category_lbl;
 @property (nonatomic,strong) IBOutlet UILabel * shareuser_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * module_lbl;
 
-@property (weak, nonatomic) IBOutlet UIView *imgView;
-@property (weak, nonatomic) IBOutlet UIImageView *currentlySelectedImage;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImgViewBottomConst;
+@property (strong, nonatomic) IBOutlet UIView *imgView;
+@property (strong, nonatomic) IBOutlet UIImageView *currentlySelectedImage;
+@property (strong,nonatomic) IBOutlet UIView * commonView;
+@property (nonatomic,strong) IBOutlet UITextField * objKeyword_Txt;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImgViewBottomConst;
 
 @end

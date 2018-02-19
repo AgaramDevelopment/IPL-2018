@@ -16,4 +16,10 @@
 @property (strong, nonatomic)  NSString *teamCode;
 @property (strong, nonatomic)  NSString *teamname;
 
+@property (strong, nonatomic) IBOutlet UIButton *AllBtn;
+@property (strong, nonatomic) IBOutlet UIButton *BatsmanBtn;
+@property (strong, nonatomic) IBOutlet UIButton *WktKeeperBtn;
+@property (strong, nonatomic) IBOutlet UIButton *AllrounderBtn;
+@property (strong, nonatomic) IBOutlet UIButton *BowlerBtn;
+
 @end

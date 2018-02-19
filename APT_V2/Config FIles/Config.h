@@ -244,6 +244,7 @@
 
 #define  GalleryVideo              @"MOBILE_VIDEOGALLERY"
 #define FetchVideoUpload           @"FETCHVIDEOUPLOAD"
+#define VideoUpload                @"MOBILE_VIDEOUPLOADSAVE"
 
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
