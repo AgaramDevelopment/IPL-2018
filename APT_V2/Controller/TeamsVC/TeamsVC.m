@@ -139,7 +139,7 @@
 {
     
     static NSString *MyIdentifier = @"MyIdentifier";
-    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:nil];
     if (cell == nil)
     {
         [[NSBundle mainBundle] loadNibNamed:@"ProfileVCCell" owner:self options:nil];
@@ -174,10 +174,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-//    objPlayersVC.view.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.height);
-//    objPlayersVC.teamCode = [[self.teamslist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
-//    [self.view addSubview:objPlayersVC.view];
+    objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+    objPlayersVC.teamCode = [[self.teamslist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
+    objPlayersVC.teamname = [[self.teamslist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
+    objPlayersVC.view.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.view addSubview:objPlayersVC.view];
 }
 
 

@@ -24,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+      [self.playesTable registerNib:[UINib nibWithNibName:@"TeamMemebersCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    [self TeamsWebservice];
+    self.TeamNamelbl.text = _teamname;
 }
 
 
@@ -47,7 +51,7 @@
         }
         else
         {
-                return CGSizeMake(310, 182);
+                return CGSizeMake(130, 178);
         }
     }
     else
@@ -94,12 +98,26 @@
     
         
         TeamMemebersCell* cell = [self.playesTable dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        
     
-        
-        
     
-        
+    NSString *playername = [self checkNull:[[self.PlayersArray valueForKey:@"AthleteName"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    
+    cell.playernamelbl.text = playername;
+    
+    NSString *bowlingStyle = [self checkNull:[[self.PlayersArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    cell.BowlingStylelbl.text = bowlingStyle;
+    
+    NSString *battingStyle = [self checkNull:[[self.PlayersArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    cell.BattingStylelbl.text = battingStyle;
+    
+    NSString *age = [self checkNull:[[self.PlayersArray valueForKey:@"Age"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    cell.agelbl.text = age ;
+    
+    
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
         cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
@@ -122,6 +140,64 @@
         _value=@"";
     }
     return _value;
+}
+
+-(void)TeamsWebservice
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",playersKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
+        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
+        if(self.teamCode)   [dic    setObject:self.teamCode     forKey:@"Teamcode"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                self.PlayersArray = [[NSMutableArray alloc]init];
+                self.PlayersArray = responseObject;
+                [self.playesTable reloadData];
+            }
+            
+            [AppCommon hideLoading];
+            [self.view setUserInteractionEnabled:YES];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            [self.view setUserInteractionEnabled:YES];
+            
+        }];
+    }
+    
+}
+
+- (IBAction)backBtnAction:(id)sender
+{
+    [self.view removeFromSuperview];
 }
 
 
