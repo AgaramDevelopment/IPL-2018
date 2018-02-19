@@ -17,6 +17,10 @@
 @interface TeamMembersVC ()
 
 @property (strong, nonatomic)  NSMutableArray *PlayersArray;
+@property (strong, nonatomic)  NSMutableArray *PlayerRoleArray;
+
+@property (strong, nonatomic)  NSMutableArray *CommonArray;
+
 @end
 
 @implementation TeamMembersVC
@@ -28,6 +32,24 @@
       [self.playesTable registerNib:[UINib nibWithNibName:@"TeamMemebersCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self TeamsWebservice];
     self.TeamNamelbl.text = _teamname;
+    
+    self.AllBtn.layer.cornerRadius = 5;
+    self.AllBtn.clipsToBounds = YES;
+    
+    self.BatsmanBtn.layer.cornerRadius = 5;
+    self.BatsmanBtn.clipsToBounds = YES;
+    
+    self.WktKeeperBtn.layer.cornerRadius = 5;
+    self.WktKeeperBtn.clipsToBounds = YES;
+    
+    self.AllrounderBtn.layer.cornerRadius = 5;
+    self.AllrounderBtn.clipsToBounds = YES;
+    
+    self.BowlerBtn.layer.cornerRadius = 5;
+    self.BowlerBtn.clipsToBounds = YES;
+    
+    
+    
 }
 
 
@@ -38,7 +60,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-    return _PlayersArray.count;
+    return _CommonArray.count;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
@@ -57,7 +79,7 @@
     else
     {
         
-            return CGSizeMake(310, 182);
+            return CGSizeMake(210, 178);
     }
 }
 #pragma mark collection view cell paddings
@@ -100,22 +122,45 @@
         TeamMemebersCell* cell = [self.playesTable dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
     
     
-    NSString *playername = [self checkNull:[[self.PlayersArray valueForKey:@"AthleteName"]objectAtIndex:indexPath.row]];
+    NSString *playername = [self checkNull:[[self.CommonArray valueForKey:@"AthleteName"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
     
     cell.playernamelbl.text = playername;
     
-    NSString *bowlingStyle = [self checkNull:[[self.PlayersArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
+    NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
     cell.BowlingStylelbl.text = bowlingStyle;
     
-    NSString *battingStyle = [self checkNull:[[self.PlayersArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
+    NSString *battingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
     cell.BattingStylelbl.text = battingStyle;
     
-    NSString *age = [self checkNull:[[self.PlayersArray valueForKey:@"Age"]objectAtIndex:indexPath.row]];
+    NSString *age = [self checkNull:[[self.CommonArray valueForKey:@"Age"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
-    cell.agelbl.text = age ;
+    cell.agelbl.text = [NSString stringWithFormat:@"%@ Years old",age] ;
+    
+    NSString *availability = [self checkNull:[[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    
+    if([availability isEqualToString:@"Available"])
+    {
+       cell.availabilityView.backgroundColor = [UIColor colorWithRed:(142/255.0f) green:(207/255.0f) blue:(100/255.0f) alpha:1.0f] ;
+        cell.availabilityView.layer.cornerRadius = 5;
+        cell.availabilityView.clipsToBounds = YES;
+    }
+    else if([availability isEqualToString:@"Not Available"])
+    {
+        cell.availabilityView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(23/255.0f) alpha:1.0f] ;
+        cell.availabilityView.layer.cornerRadius = 5;
+        cell.availabilityView.clipsToBounds = YES;
+    }
+    else if([availability isEqualToString:@"Rehab"])
+    {
+        cell.availabilityView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(190/255.0f) blue:(65/255.0f) alpha:1.0f] ;
+        cell.availabilityView.layer.cornerRadius = 5;
+        cell.availabilityView.clipsToBounds = YES;
+    }
+    
     
     
         cell.contentView.layer.cornerRadius = 2.0f;
@@ -176,8 +221,13 @@
             if(responseObject >0)
             {
                 self.PlayersArray = [[NSMutableArray alloc]init];
-                self.PlayersArray = responseObject;
+                self.PlayersArray = [responseObject valueForKey:@"lstPlayerDetails"];
+                
+                self.PlayerRoleArray = [[NSMutableArray alloc]init];
+                self.PlayerRoleArray = [responseObject valueForKey:@"lstPlayerRoles"];
                 [self.playesTable reloadData];
+                
+               [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             }
             
             [AppCommon hideLoading];
@@ -198,6 +248,155 @@
 - (IBAction)backBtnAction:(id)sender
 {
     [self.view removeFromSuperview];
+}
+
+- (IBAction)AllBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"1"];
+    
+    self.CommonArray = [[NSMutableArray alloc]init];
+    self.CommonArray = self.PlayersArray;
+    [self.playesTable reloadData];
+}
+- (IBAction)BatsmanBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"2"];
+    self.CommonArray = [[NSMutableArray alloc]init];
+    NSString *playerRole = @"MSC007";
+    
+    for(int i=0;i<self.PlayersArray.count;i++)
+    {
+        if([playerRole isEqualToString:[[self.PlayersArray valueForKey:@"PlayerRole"]objectAtIndex:i]])
+        {
+            [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
+        }
+    }
+    
+    [self.playesTable reloadData];
+}
+- (IBAction)WktKeeperBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"3"];
+    self.CommonArray = [[NSMutableArray alloc]init];
+    
+    NSString *playerRole = @"MSC010";
+    for(int i=0;i<self.PlayersArray.count;i++)
+    {
+        if([playerRole isEqualToString:[[self.PlayersArray valueForKey:@"PlayerRole"]objectAtIndex:i]])
+        {
+            [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
+        }
+    }
+    
+   
+    [self.playesTable reloadData];
+}
+- (IBAction)AllrounderBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"4"];
+    self.CommonArray = [[NSMutableArray alloc]init];
+    NSString *playerRole = @"MSC009";
+    for(int i=0;i<self.PlayersArray.count;i++)
+    {
+        if([playerRole isEqualToString:[[self.PlayersArray valueForKey:@"PlayerRole"]objectAtIndex:i]])
+        {
+            [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
+        }
+    }
+    
+    [self.playesTable reloadData];
+}
+- (IBAction)BowlerBtnAction:(id)sender
+{
+   [self setInningsBySelection:@"5"];
+    self.CommonArray = [[NSMutableArray alloc]init];
+    
+    NSString *playerRole = @"MSC008";
+    for(int i=0;i<self.PlayersArray.count;i++)
+    {
+        if([playerRole isEqualToString:[[self.PlayersArray valueForKey:@"PlayerRole"]objectAtIndex:i]])
+        {
+            [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
+        }
+    }
+    
+    [self.playesTable reloadData];
+}
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.AllBtn];
+    [self setInningsButtonUnselect:self.BatsmanBtn];
+    [self setInningsButtonUnselect:self.WktKeeperBtn];
+    [self setInningsButtonUnselect:self.AllrounderBtn];
+    [self setInningsButtonUnselect:self.BowlerBtn];
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.AllBtn];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.BatsmanBtn];
+    }
+    else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.WktKeeperBtn];
+    }
+    else if([innsNo isEqualToString:@"4"]){
+        
+        [self setInningsButtonSelect:self.AllrounderBtn];
+    }
+    else if([innsNo isEqualToString:@"5"]){
+        
+        [self setInningsButtonSelect:self.BowlerBtn];
+    }
+    
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
 }
 
 

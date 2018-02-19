@@ -18,7 +18,8 @@
 #import "VideoPlayerUploadVC.h"
 #import "WebService.h"
 
-@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
+
+@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate>
 {
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
@@ -47,7 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[WebService alloc]init];
-    // Do any additional setup after loading the view from its nib.
     [self videoGalleryWebservice];
     [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
@@ -150,21 +150,20 @@
 
 - (IBAction)UploadVideoAction:(id)sender {
     
+    [self callVideoUploadMethod];
+    [self.view layoutIfNeeded];
+    //videouploadVC.commonView.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+
+}
+-(void)callVideoUploadMethod
+{
     if(videouploadVC != nil)
     {
         [videouploadVC.view removeFromSuperview];
     }
     videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
-    videouploadVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height-50);
+    
     [self.view addSubview:videouploadVC.view];
-}
--(IBAction)didClickPlayerList:(id)sender
-{
-    //[videouploadVC.delegate playerBtnAction];
-}
--(IBAction)didClickCategoryList:(id)sender
-{
-    //[videouploadVC.delegate categoryBtnAction];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -320,9 +319,21 @@
         selectvideoStr =[[self.objVideoFilterArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
 
     }
+    
+//    NSString * url = [NSString stringWithFormat:@"%@%@",Video_URL,selectvideoStr];
+//
+//    NSURL *videoURL = [NSURL URLWithString:url];
+//    AVPlayer *player = [AVPlayer playerWithURL:videoURL];
+//
+//    // create a player view controller
+//    AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
+//    [self presentViewController:controller animated:YES completion:nil];
+//    controller.player = player;
+//    [player play];
+    
      videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
-    videoPlayerVC.view.frame = CGRectMake(0,10, self.view.bounds.size.width, self.view.bounds.size.height);
+    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
     [self.view addSubview:videoPlayerVC.view];
 
@@ -421,7 +432,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
         if (_searchResult.count == 0) {
-            
+          self.objVideoFilterArray = [self.searchResult copy];
+            [self.videoCollectionview2 reloadData];
         } else {
             
             
@@ -429,7 +441,7 @@
             self.objVideoFilterArray = [self.searchResult copy];
             [self.videoCollectionview2 reloadData];
         }
-    });
+   });
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -445,7 +457,7 @@
     [self filterContentForSearchText:searchString];
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
-        [self.videoCollectionview2 reloadData];
+        //[self.videoCollectionview2 reloadData];
     });
     return YES;
 }

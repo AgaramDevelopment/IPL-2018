@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *BowlingStylelbl;
 @property (strong, nonatomic) IBOutlet UILabel *BattingStylelbl;
 @property (strong, nonatomic) IBOutlet UILabel *agelbl;
+@property (strong, nonatomic) IBOutlet UIView *availabilityView;
 
 @end
