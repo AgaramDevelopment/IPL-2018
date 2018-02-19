@@ -254,9 +254,31 @@
         
         cell.competitionNamelbl.text = [[self.commonArray2 valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
         cell.datelbl.text = [[self.commonArray2 valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
-        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
-        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
+        //cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
+        //cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
+        
+        
+        
+        NSString *first = [self checkNull:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
+            NSLog(@"%ld",(long)indexPath.row);
+          cell.FirstInnScorelbl.text = first;
+       
+        
+        NSString *second = [self checkNull:[[self.commonArray2 valueForKey:@"SECONDINNINGSSCORE"]objectAtIndex:indexPath.row]];
+            NSLog(@"%ld",(long)indexPath.row);
+        cell.SecondInnScorelbl.text = second;
+       
+        
+        NSString *third = [self checkNull:[[self.commonArray2 valueForKey:@"THIRDINNINGSSCORE"]objectAtIndex:indexPath.row]];
+            NSLog(@"%ld",(long)indexPath.row);
+        cell.ThirdInnScorelbl.text = third;
+        
+        
+        NSString *fourth = [self checkNull:[[self.commonArray2 valueForKey:@"FOURTHINNINGSSCORE"]objectAtIndex:indexPath.row]];
+            NSLog(@"%ld",(long)indexPath.row);
+        cell.FouthInnScorelbl.text = fourth;
+        
         
         NSString * imgStr1 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"];
         NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
@@ -309,6 +331,14 @@
       }
 
     return nil;
+}
+
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock

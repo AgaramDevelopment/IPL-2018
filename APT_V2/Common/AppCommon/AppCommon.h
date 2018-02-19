@@ -29,6 +29,8 @@
 +(NSString *)GetUserName;
 +(NSString *) GetClientCode;
 +(NSString *) GetuserReference;
++(NSString *)GetUserRoleName;
+
 
 +(NSString *)getFileType:(NSString *)filePath;
 +(void)showAlertWithMessage:(NSString *)message;

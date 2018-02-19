@@ -14,6 +14,7 @@
 #import "MyStatsBattingVC.h"
 #import "MatchCenterTBC.h"
 #import "TrainingLoadUpdateVC.h"
+#import "FoodDiaryVC.h"
 
 @interface RearViewController ()
 {
@@ -29,10 +30,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center",@"Logout"];
+    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center", @"Food Diary", @"Logout"];
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    self.lblName.text = [AppCommon GetUserRoleName];
     
 }
 
@@ -67,6 +69,7 @@
     }
     
     cell.textLabel.text = arrItems[indexPath.row];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
     
 }
@@ -146,6 +149,16 @@
 //        return;
         newFrontController= [MatchCenterTBC new];
 
+    }
+    else if(indexPath.row == 7)
+    {
+            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+        newFrontController= [FoodDiaryVC new];
+        
     }
     else if (indexPath.row == arrItems.count -1)
     {
@@ -752,8 +765,6 @@
                     NSString * Createddate =[arr1 valueForKey:@"Createddate"];
                     NSString * Modifiedby =[arr1 valueForKey:@"Modifiedby"];
                     NSString * Modifieddate =[arr1 valueForKey:@"Modifieddate"];
-                    
-                    
                     
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Usercode,Rolecode,Isdefaultrole,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];

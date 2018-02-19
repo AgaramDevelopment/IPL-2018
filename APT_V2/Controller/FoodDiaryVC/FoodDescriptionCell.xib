@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodDescriptionCell" id="KGk-i7-Jjw" customClass="FoodDescriptionCell">
+            <rect key="frame" x="0.0" y="0.0" width="275" height="36"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="275" height="35.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-nY-XCk">
+                        <rect key="frame" x="0.0" y="8" width="127.5" height="19.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2t-B4-hNk">
+                        <rect key="frame" x="147" y="8" width="127.5" height="19.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPx-So-wkn">
+                        <rect key="frame" x="136.5" y="0.0" width="1" height="35.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="vzO-WO-KjM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IPx-So-wkn" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0L5-bh-HY2"/>
+                    <constraint firstItem="IPx-So-wkn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="30x-FD-UaC"/>
+                    <constraint firstItem="NOV-nY-XCk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4js-kd-ZNf"/>
+                    <constraint firstItem="IPx-So-wkn" firstAttribute="leading" secondItem="NOV-nY-XCk" secondAttribute="trailing" constant="9" id="8Yh-Lk-dPy"/>
+                    <constraint firstAttribute="trailing" secondItem="g2t-B4-hNk" secondAttribute="trailing" id="AyK-Od-IPf"/>
+                    <constraint firstItem="g2t-B4-hNk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="EDi-TG-jCu"/>
+                    <constraint firstAttribute="bottom" secondItem="NOV-nY-XCk" secondAttribute="bottom" constant="8" id="EKt-MO-vwf"/>
+                    <constraint firstItem="IPx-So-wkn" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="G3V-9f-TAe"/>
+                    <constraint firstItem="g2t-B4-hNk" firstAttribute="leading" secondItem="IPx-So-wkn" secondAttribute="trailing" constant="9.5" id="U5U-Og-upq"/>
+                    <constraint firstAttribute="bottom" secondItem="g2t-B4-hNk" secondAttribute="bottom" constant="8" id="gsX-mA-4HX"/>
+                    <constraint firstAttribute="bottom" secondItem="IPx-So-wkn" secondAttribute="bottom" id="iSU-SX-GZ7"/>
+                    <constraint firstItem="NOV-nY-XCk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="r2h-rB-JzR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="41.5" y="54"/>
+        </tableViewCell>
+    </objects>
+</document>

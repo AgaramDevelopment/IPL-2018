@@ -18,4 +18,11 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *teamAlogo;
 @property (strong, nonatomic) IBOutlet UIImageView *teamBlogo;
+
+
+@property (strong, nonatomic) IBOutlet UILabel *FirstInnScorelbl;
+@property (strong, nonatomic) IBOutlet UILabel *SecondInnScorelbl;
+@property (strong, nonatomic) IBOutlet UILabel *ThirdInnScorelbl;
+@property (strong, nonatomic) IBOutlet UILabel *FouthInnScorelbl;
+
 @end

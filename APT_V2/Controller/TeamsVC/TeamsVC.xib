@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamsVC">
+            <connections>
+                <outlet property="navi_View" destination="0kZ-mG-bnY" id="7cH-Af-rUk"/>
+                <outlet property="teamsTable" destination="51x-DZ-PKP" id="Sw8-fY-Ur5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0kZ-mG-bnY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="Pzq-fo-cIG"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IrM-nv-kpn">
+                    <rect key="frame" x="5" y="90" width="365" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S06-B0-HJN">
+                            <rect key="frame" x="20" y="0.0" width="108" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="108" id="Jb9-Vc-gGW"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="S06-B0-HJN" firstAttribute="leading" secondItem="IrM-nv-kpn" secondAttribute="leading" constant="20" id="74M-69-lOq"/>
+                        <constraint firstAttribute="bottom" secondItem="S06-B0-HJN" secondAttribute="bottom" id="Go0-sB-HHg"/>
+                        <constraint firstAttribute="height" constant="40" id="JGC-tk-eu6"/>
+                        <constraint firstItem="S06-B0-HJN" firstAttribute="top" secondItem="IrM-nv-kpn" secondAttribute="top" id="oDq-0V-PF0"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="51x-DZ-PKP">
+                    <rect key="frame" x="5" y="140" width="365" height="522"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="23P-2h-ncj"/>
+                        <outlet property="delegate" destination="-1" id="epN-Vf-viU"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="51x-DZ-PKP" secondAttribute="trailing" constant="5" id="1Qn-AY-lVS"/>
+                <constraint firstItem="0kZ-mG-bnY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="92A-UZ-Wlv"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="0kZ-mG-bnY" secondAttribute="trailing" id="Cd6-jg-foe"/>
+                <constraint firstItem="51x-DZ-PKP" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="GRc-j3-NWV"/>
+                <constraint firstItem="0kZ-mG-bnY" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="PVK-du-N1o"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="51x-DZ-PKP" secondAttribute="bottom" constant="5" id="YsU-wg-Mw4"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="IrM-nv-kpn" secondAttribute="trailing" constant="5" id="Z54-6E-IVB"/>
+                <constraint firstItem="IrM-nv-kpn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="b1x-Q1-KCl"/>
+                <constraint firstItem="51x-DZ-PKP" firstAttribute="top" secondItem="IrM-nv-kpn" secondAttribute="bottom" constant="10" id="ker-Ru-ctV"/>
+                <constraint firstItem="IrM-nv-kpn" firstAttribute="top" secondItem="0kZ-mG-bnY" secondAttribute="bottom" constant="20" id="qO1-6s-Aqq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+</document>

@@ -131,5 +131,11 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)UpdateWellness :(NSString *)codelist :(NSString *)clientCode :(NSString *)usercode :(NSString *)workLoadCode :(NSString *)date :(NSString *)playercode :(NSString *)code1 :(NSString *)code2 :(NSString *)code3 :(NSString *)code4 :(NSString *)bodyWeight :(NSString *)sleephr :(NSString *)fat :(NSString *)restinghr :(NSString *)restingbpMax :(NSString *)restingbpMin :(NSString *)urinecolor success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)fetchTrainingLoadDate :(NSString *)codelist :(NSString *)playercode :(NSString *)date  success:(WebserviceRequestSuccessHandler)success
+                      failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)BowlingLoad :(NSString *)codelist :(NSString *)playercode  :(NSString *)date :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
+            failure:(WebserviceRequestFailureHandler)failure;
+
 @end
 
