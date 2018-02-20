@@ -13,6 +13,8 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "SWRevealViewController.h"
+#import "CustomNavigation.h"
+
 @interface FoodDiaryVC () {
     NSString *clientCode;
     NSString *userCode;
