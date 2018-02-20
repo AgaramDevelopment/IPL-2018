@@ -383,6 +383,21 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
+-(void)trainingGraphFilter :(NSString *)codelist :(NSString *)clientcode  :(NSString *)playercode :(NSString *)barvalue :(NSString *)linevalue :(NSString *)workdate :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
+                    failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@/%@",codelist,clientcode,playercode,barvalue,linevalue,workdate,type]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+
 #pragma mark - Helpers
 
 - (void)sendRequestWithURLString:(NSString *)url

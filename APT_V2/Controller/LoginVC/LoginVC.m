@@ -128,9 +128,18 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            //                ViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"frontViewController"];
-            ViewController* vc = [ViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            UIViewController* VC;
+            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
+            {
+                VC = [ViewController new];
+            }
+            else
+            {
+                VC = [TeamsVC new];
+            }
+            
+            [self.navigationController pushViewController:VC animated:YES];
             
         }
         else{

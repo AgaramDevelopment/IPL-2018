@@ -39,28 +39,39 @@
     NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     NSString *plyRolecode = @"ROL0000002";
     
-    if([rolecode isEqualToString:plyRolecode])
-    {
-        isCoach=NO;
-    }
-    else
-    {
-        isCoach=YES;
-    }
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        isCoach=NO;
+//    }
+//    else
+//    {
+//        isCoach=YES;
+//    }
     
     
-    //UIViewController *frontViewController = (isLogin ? (isCoach ? [TeamsVC new]: [ViewController new]) : [LoginVC new]);
+//    UIViewController *frontViewController = (isLogin ? (isCoach ? [TeamsVC new]: [ViewController new]) : [LoginVC new]);
     UIViewController *frontViewController;
     if(isLogin==YES)
     {
-        if(isCoach=YES)
-        {
-            frontViewController = [TeamsVC new];
-        }
-        else
+//        if(isCoach=YES)
+//        {
+//            frontViewController = [TeamsVC new];
+//        }
+//        else
+//        {
+//            frontViewController = [ViewController new];
+//        }
+        
+        if([rolecode isEqualToString:plyRolecode])
         {
             frontViewController = [ViewController new];
         }
+        else
+        {
+            frontViewController = [TeamsVC new];
+
+        }
+
     }
     else
     {
@@ -80,7 +91,7 @@
     
     window.rootViewController = viewController;
     
-    [window setBackgroundColor:[UIColor yellowColor]];
+    [window setBackgroundColor:[UIColor whiteColor]];
     [window makeKeyAndVisible];
     
     return YES;

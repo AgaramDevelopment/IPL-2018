@@ -274,4 +274,6 @@
 
 #define foodDiaryUpdate        @"MOBILE_UPDATE_FOOD_DIARY"
 
+#define  dropdownActivityKey              @"MOBILE_GETTRAININGLOADGRAPH"
+
 

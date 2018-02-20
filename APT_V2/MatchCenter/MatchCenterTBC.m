@@ -10,6 +10,7 @@
 #import "MCOverViewVC.h"
 #import "MCTossAndResultsVC.h"
 #import "MCTeamCompVC.h"
+#import "MCBattingRootVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -62,8 +63,16 @@
     thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
+    //BattingVC
+    MCBattingRootVC *fourthViewController = [[MCBattingRootVC alloc]init];
+    fourthViewController.title = @"Batting";
+    fourthViewController.tabBarItem = self.tossAndResultBarItem;
+    
+    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
   
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController, nil];
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController, nil];
     
     
     
