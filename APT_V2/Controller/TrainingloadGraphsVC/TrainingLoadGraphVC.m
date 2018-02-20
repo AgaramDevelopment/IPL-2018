@@ -15,7 +15,6 @@
 @interface TrainingLoadGraphVC ()<ChartViewDelegate, IChartAxisValueFormatter>
 {
     NSMutableArray *months;
-    
     WebService *objWebservice;
     
     BOOL isBar;
@@ -23,11 +22,17 @@
     
     NSString *barValue;
     NSString *lineValue;
+    NSString *type;
+    NSString * actualDate;
 }
 
 @property (nonatomic, strong) IBOutlet CombinedChartView *chartView;
 
 @property (nonatomic, strong)  NSMutableArray *chartYvalues;
+@property (nonatomic, strong)  NSMutableArray *lineValuesArray;
+@property (nonatomic, strong)  NSMutableArray *BarValuesArray;
+
+
 @property (nonatomic, strong)  NSMutableArray *filterListNameArray;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
@@ -55,7 +60,14 @@
 //               ];
     
    
+    self.DailyBtn.layer.cornerRadius = 5;
+    self.DailyBtn.clipsToBounds = YES;
     
+    self.WeeklyBtn.layer.cornerRadius = 5;
+    self.WeeklyBtn.clipsToBounds = YES;
+    
+    self.MonthlyBtn.layer.cornerRadius = 5;
+    self.MonthlyBtn.clipsToBounds = YES;
     
     
     _chartView.delegate = self;
@@ -94,6 +106,8 @@
     xAxis.axisMinimum = 0.0;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
+    
+    [self.DailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     [self updateChartData];
     
@@ -166,12 +180,16 @@
     
     NSMutableArray *entries = [[NSMutableArray alloc] init];
     
-    for (int index = 0; index < ITEM_COUNT; index++)
+    for (int index = 0; index < self.lineValuesArray.count; index++)
     {
-        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(15) + 5)]];
+       // [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(15) + 5)]];
+        
+        int value = [[self.lineValuesArray objectAtIndex:index] intValue];
+        
+        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
     
-    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@"Line DataSet"];
+    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:self.linefilterlbl.text];
     [set setColor:[UIColor colorWithRed:240/255.f green:238/255.f blue:70/255.f alpha:1.f]];
     set.lineWidth = 2.5;
     [set setCircleColor:[UIColor colorWithRed:240/255.f green:238/255.f blue:70/255.f alpha:1.f]];
@@ -195,16 +213,19 @@
     NSMutableArray<BarChartDataEntry *> *entries1 = [[NSMutableArray alloc] init];
     NSMutableArray<BarChartDataEntry *> *entries2 = [[NSMutableArray alloc] init];
     
-    for (int index = 0; index < ITEM_COUNT; index++)
+    for (int index = 0; index < self.BarValuesArray.count; index++)
     {
-        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:(arc4random_uniform(25) + 25)]];
+        //[entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:(arc4random_uniform(25) + 25)]];
+        
+         int value = [[self.BarValuesArray objectAtIndex:index] intValue];
+        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
         
         // stacked
         
         //[entries2 addObject:[[BarChartDataEntry alloc] initWithX:0.0 yValues:@[@(arc4random_uniform(13) + 12), @(arc4random_uniform(13) + 12)]]];
     }
     
-    BarChartDataSet *set1 = [[BarChartDataSet alloc] initWithValues:entries1 label:@"Bar 1"];
+    BarChartDataSet *set1 = [[BarChartDataSet alloc] initWithValues:entries1 label:self.barfilterlbl.text];
     [set1 setColor:[UIColor colorWithRed:60/255.f green:220/255.f blue:78/255.f alpha:1.f]];
     set1.valueTextColor = [UIColor colorWithRed:60/255.f green:220/255.f blue:78/255.f alpha:1.f];
     set1.valueFont = [UIFont systemFontOfSize:10.f];
@@ -335,10 +356,10 @@
         self.barfilterlbl.text = [[self.filterListNameArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         barValue = [[self.filterListNameArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         self.PoplistTable.hidden = YES;
-            if([self.barfilterlbl.text isEqualToString:@""] || [self.barfilterlbl.text isEqualToString:@""] )
-            {
-                [self chartWebservice];
-            }
+        }
+        else
+        {
+            [AppCommon showAlertWithMessage:@"Please Select Another Activity"];
         }
     }
     if(isLine==YES)
@@ -349,13 +370,18 @@
         lineValue = [[self.filterListNameArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         
         self.PoplistTable.hidden = YES;
-            
-            if(![self.barfilterlbl.text isEqualToString:@""] || ![self.barfilterlbl.text isEqualToString:@""] )
-            {
-                [self chartWebservice];
-            }
+        }
+        else
+        {
+            [AppCommon showAlertWithMessage:@"Please Select Another Activity"];
         }
     }
+    
+    if(![self.barfilterlbl.text isEqualToString:@""] && ![self.linefilterlbl.text isEqualToString:@""] )
+    {
+    [self chartWebservice];
+    }
+
     
 }
 
@@ -373,22 +399,56 @@
     
     
     
-    [objWebservice trainingGraphFilter :dropdownActivityKey : clientCode :playerCode:barValue:lineValue:@"02-19-2018":@"WEEKLY" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice trainingGraphFilter :dropdownActivityKey : clientCode :playerCode:barValue:lineValue:actualDate:type success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         if(responseObject >0)
         {
+            months = [[NSMutableArray alloc]init];
             if(![[responseObject valueForKey:@"WorkloadTrainingDetails1"] isEqual:[NSNull null]])
                 {
-            NSMutableArray *reqArrayBar  = [responseObject valueForKey:@"WorkloadTrainingDetails1"];
-                    [self setChartValuesFromService:reqArrayBar];
+                    NSMutableArray *reqArrayBar  = [responseObject valueForKey:@"WorkloadTrainingDetails1"];
+                    //[self setChartValuesFromService:reqArrayBar];
+                    
+                    
+                    
+                    for(int i =0;i<reqArrayBar.count;i++)
+                    {
+                        [months addObject:[[reqArrayBar valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
+                    }
+                    
+                    self.BarValuesArray = [[NSMutableArray alloc]init];
+                    for(int i =0;i<reqArrayBar.count;i++)
+                    {
+                        int time = [[[reqArrayBar valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                        int rpe = [[[reqArrayBar valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                        int total = time * rpe;
+                        [self.BarValuesArray addObject:[NSString stringWithFormat:@"%d",total]];
+                    }
+                    
                 }
                 
                 if(![[responseObject valueForKey:@"WorkloadTrainingDetails2"] isEqual:[NSNull null]])
                     {
-            NSMutableArray *reqArrayLine  = [responseObject valueForKey:@"WorkloadTrainingDetails2"];
-                        [self setChartValuesFromService:reqArrayLine];
+                    NSMutableArray *reqArrayLine  = [responseObject valueForKey:@"WorkloadTrainingDetails2"];
+                        self.lineValuesArray = [[NSMutableArray alloc]init];
+                        for(int i =0;i<reqArrayLine.count;i++)
+                        {
+                            int time = [[[reqArrayLine valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                            int rpe = [[[reqArrayLine valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                            int total = time * rpe;
+                            [self.lineValuesArray addObject:[NSString stringWithFormat:@"%d",total]];
+                        }
+                        
+                        for(int i =0;i<reqArrayLine.count;i++)
+                        {
+                            [months addObject:[[reqArrayLine valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
+                        }
+                        
+                        
                     }
+            
+            [self setChartData];
         }
         [AppCommon hideLoading];
         
@@ -406,12 +466,126 @@
     
     for(int i =0;i<reqArray1.count;i++)
     {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-    [dic setValue:[reqArray1 valueForKey:@"WORKLOADDATE"] forKey:@"Value"];
-    [months addObject:dic];
+    [months addObject:[[reqArray1 valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
     }
     [self setChartData];
 }
+
+- (IBAction)DailyBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"1"];
+    type = @"DAILY";
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    actualDate = [dateFormat stringFromDate:matchdate];
+    
+    if(![self.barfilterlbl.text isEqualToString:@""] && ![self.linefilterlbl.text isEqualToString:@""] )
+    {
+    [self chartWebservice];
+    }
+}
+- (IBAction)WeeklyBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"2"];
+    type = @"WEEKLY";
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    actualDate = [dateFormat stringFromDate:matchdate];
+    if(![self.barfilterlbl.text isEqualToString:@""] && ![self.linefilterlbl.text isEqualToString:@""] )
+    {
+    [self chartWebservice];
+    }
+}
+- (IBAction)MonthlyBtnAction:(id)sender
+{
+    [self setInningsBySelection:@"3"];
+    type = @"MONTHLY";
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString * curdate = [dateFormat stringFromDate:matchdate];
+    
+    NSArray *arr = [curdate componentsSeparatedByString:@"-"];
+    NSString *month = arr[0];
+    NSString *year = arr[2];
+    actualDate = [NSString stringWithFormat:@"%@-01-%@",month,year];
+    
+    if(![self.barfilterlbl.text isEqualToString:@""] && ![self.linefilterlbl.text isEqualToString:@""] )
+    {
+    [self chartWebservice];
+    }
+}
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.DailyBtn];
+    [self setInningsButtonUnselect:self.WeeklyBtn];
+    [self setInningsButtonUnselect:self.MonthlyBtn];
+    
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.DailyBtn];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.WeeklyBtn];
+    }
+    else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.MonthlyBtn];
+    }
+    
+    
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+}
+
 
 
 

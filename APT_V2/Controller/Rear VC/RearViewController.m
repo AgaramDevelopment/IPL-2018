@@ -30,12 +30,48 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    arrItems = @[@"Team",@"Assessment",@"Sync",@"Injury",@"Home", @"Stats",@"Match Center", @"Food Diary", @"Logout"];
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        arrItems = [NSArray new];
+//        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+//    }
+//    else
+//    {
+//        arrItems = [NSArray new];
+//        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
+//    }
+    
+    
+    
+    
     //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-    self.lblName.text = [AppCommon GetUserRoleName];
+    //self.lblName.text = [AppCommon GetUserRoleName];
     
+    //self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        arrItems = [NSArray new];
+        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+    }
+    else
+    {
+        arrItems = [NSArray new];
+        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
+    }
+    [self.RearTableView reloadData];
+    self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,7 +105,7 @@
     }
     
     cell.textLabel.text = arrItems[indexPath.row];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    //[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
     
 }
@@ -84,87 +120,116 @@
     UIViewController* newFrontController;
     
     
-    if (indexPath.row == 0) { // team
-        
-    }
-    else if(indexPath.row == 1) // Assessment
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
     {
-        newFrontController= [ViewController new];
-
-    }
-    else if(indexPath.row == 2)
-    {
-        DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-        dic = [objCaptransactions AssessmentEntrySyncBackground];
-        NSMutableArray *reqList = [[NSMutableArray alloc]init];
-        reqList = [dic valueForKey:@"LstAssessmententry"];
-        if(reqList.count>0 ){
-            
-            [AppCommon showAlertWithMessage:@"Try After few seconds"];
-            
-        }else{
-            
-            [self synDataMethod];
+        if(indexPath.row == 0) // Assessment
+        {
+            newFrontController= [TabHomeVC new];
             
         }
-        
-    }
-    else if(indexPath.row == 3)
-    {
-//        InjuryVC *msObj = [InjuryVC new];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-//        [navigationController setNavigationBarHidden:YES];
-//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-//        return;
-        newFrontController= [InjuryVC new];
-
-    }
-    else if(indexPath.row == 4)
-    {
-//        TabHomeVC *msObj = [TabHomeVC new];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-//        [navigationController setNavigationBarHidden:YES];
-//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-//        return;
-        newFrontController= [TabHomeVC new];
-
-    }
-    else if(indexPath.row == 5)
-    {
-//        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-//        [navigationController setNavigationBarHidden:YES];
-//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-//        return;
-        newFrontController= [MyStatsBattingVC new];
-
-    }else if(indexPath.row == 6)
-    {
-//        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-//        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-//        [navigationController setNavigationBarHidden:YES];
-//        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-//        return;
-        newFrontController= [MatchCenterTBC new];
-
-    }
-    else if(indexPath.row == 7)
-    {
+        else if(indexPath.row == 1)
+        {
+            //        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+            newFrontController= [MyStatsBattingVC new];
+            
+        }
+        else if(indexPath.row == 2)
+        {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
             //        [navigationController setNavigationBarHidden:YES];
             //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
             //        return;
-        newFrontController= [FoodDiaryVC new];
+            newFrontController= [MatchCenterTBC new];
+            
+        }
         
+        else if(indexPath.row == 3)
+        {
+            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+            newFrontController= [FoodDiaryVC new];
+            
+        }
+        else if (indexPath.row == arrItems.count -1)
+        {
+            [self actionLogOut];
+            
+        }
     }
-    else if (indexPath.row == arrItems.count -1)
+    else
     {
-        [self actionLogOut];
         
+        
+        if(indexPath.row == 0)
+        {
+            newFrontController= [TeamsVC new];
+            
+        }
+        else if(indexPath.row == 1) // Assessment
+        {
+            newFrontController= [ViewController new];
+            
+        }
+        else if(indexPath.row == 2)
+        {
+            //        InjuryVC *msObj = [InjuryVC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+            newFrontController= [InjuryVC new];
+            
+        }
+        else if(indexPath.row == 3)
+        {
+            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
+            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
+            //        [navigationController setNavigationBarHidden:YES];
+            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
+            //        return;
+            newFrontController= [MatchCenterTBC new];
+            
+        }
+        else if(indexPath.row == 4)
+        {
+            DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
+            
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+            dic = [objCaptransactions AssessmentEntrySyncBackground];
+            NSMutableArray *reqList = [[NSMutableArray alloc]init];
+            reqList = [dic valueForKey:@"LstAssessmententry"];
+            if(reqList.count>0 ){
+                
+                [AppCommon showAlertWithMessage:@"Try After few seconds"];
+                
+            }else{
+                
+                [self synDataMethod];
+                
+            }
+            
+        }
+        else if (indexPath.row == arrItems.count -1)
+        {
+            
+            [self actionLogOut];
+            
+        }
     }
+    
+    
+     
     
     if (newFrontController == nil) {
         return;
@@ -182,6 +247,7 @@
     UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
+        arrItems=[NSArray new];
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 //        UIViewController* newFrontController= (LoginVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];

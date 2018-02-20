@@ -11,6 +11,7 @@
 #import "MatchCenterTBC.h"
 #import "Header.h"
 #import "TeamsVC.h"
+#import "TabHomeVC.h"
 @interface AppDelegate ()
 {
     BOOL IsTimer;
@@ -64,7 +65,7 @@
         
         if([rolecode isEqualToString:plyRolecode])
         {
-            frontViewController = [ViewController new];
+            frontViewController = [TabHomeVC new];
         }
         else
         {
@@ -157,13 +158,7 @@
         bgTask = UIBackgroundTaskInvalid;
     }];
     
-    //and create new timer with async call:
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //run function methodRunAfterBackground
-        //        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
-        //        [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
-        //        [[NSRunLoop currentRunLoop] run];
-    });
+
     
 }
 
@@ -183,7 +178,6 @@
     
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //run function methodRunAfterBackground
         NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
@@ -213,7 +207,6 @@
         
         //and create new timer with async call:
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            //run function methodRunAfterBackground
             NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
             [[NSRunLoop currentRunLoop] run];
@@ -244,18 +237,9 @@
 -(void)methodRunAfterBackground
 {
     
-    {
-        
-        //   return ;
-        
-        
         NSLog(@"background process method");
         if(IsTimer == YES)
         {
-            
-            //-----------------------------------
-            
-            //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
             
             if(isLogin)
@@ -265,8 +249,6 @@
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                             
                             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-                            //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                            
                             NSString *SequenceNo = @"0";
                             
                             if(![SequenceNo isEqualToString:@""] && ![SequenceNo isEqualToString:@"(null)"] ){
@@ -277,39 +259,25 @@
                                 reqList = [dic valueForKey:@"LstAssessmententry"];
                                 if(reqList.count>0 ){
                                     [self PushWebservice:dic];
-                                }else{
-                                    
-                                    
                                 }
-                                
                             }
                         });
                     });
                 }
                 
-                
-                else{
-                    //           IsTimer=NO;
-                    //            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    //            [altert show];
-                    //            [altert setTag:10405];
-                    
-                }
+
             }
             
-            //-----------------------------------
             
         }
         else if( IsTimer== NO)
         {
-            //NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
             if ([_timer isValid]) {
                 [_timer invalidate];
             }
             _timer = nil;
             
         }
-    }
 }
 
 -(void)PushWebservice :(NSMutableDictionary *)reqdic
@@ -344,10 +312,7 @@
                     }
                     
                 }
-                else
-                {
-                    
-                }
+               
             }
             
             
