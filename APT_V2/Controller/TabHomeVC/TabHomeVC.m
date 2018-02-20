@@ -141,7 +141,7 @@
     
     if(indexPath.row==0)
     {
-        cell.Title.text = @"Schedule/Results/Standings";
+        cell.Title.text = @"SCHEDULE/RESULTS/STANDINGS";
         [cell setTag:indexPath.row];
         
         objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
@@ -151,12 +151,12 @@
     }
     if(indexPath.row==1)
     {
-        cell.Title.text = @"Wellness/TrainingLoad/BowlingLoad";
+        cell.Title.text = @"WELLNESS/TRAININGLOAD/BOWLINGLOAD";
         [cell setTag:indexPath.row];
     }
     if(indexPath.row==2)
     {
-        cell.Title.text = @"VideoGallery";
+        cell.Title.text = @"VIDEOGALLERY";
         [cell setTag:indexPath.row];
     }
     
