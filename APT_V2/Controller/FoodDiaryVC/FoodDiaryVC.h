@@ -30,5 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *otherBtn;
 @property(strong, nonatomic) IBOutlet NSString *mealTypeTF;
 @property(strong, nonatomic) IBOutlet NSString *locationTF;
+@property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @end
