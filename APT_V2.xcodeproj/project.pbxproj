@@ -61,6 +61,8 @@
 		18B37F49203AA2C100F51511 /* MCBattingRootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B37F47203AA2C100F51511 /* MCBattingRootVC.xib */; };
 		18B37F54203AA77200F51511 /* BattingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B37F53203AA77200F51511 /* BattingView.xib */; };
 		18B37F57203AB02600F51511 /* BattingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B37F56203AB02600F51511 /* BattingView.m */; };
+		18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */; };
+		18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */; };
 		18BAE29C202836100088178A /* MCOverViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29A202836100088178A /* MCOverViewVC.m */; };
 		18BAE29D202836100088178A /* MCOverViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BAE29B202836100088178A /* MCOverViewVC.xib */; };
 		18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BAE29F202874070088178A /* MCOverViewResultCVC.m */; };
@@ -257,6 +259,9 @@
 		18B37F53203AA77200F51511 /* BattingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BattingView.xib; sourceTree = "<group>"; };
 		18B37F55203AB02600F51511 /* BattingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattingView.h; sourceTree = "<group>"; };
 		18B37F56203AB02600F51511 /* BattingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattingView.m; sourceTree = "<group>"; };
+		18B6D0EA203BDD570003CBA3 /* TrainingLoadGraphVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadGraphVC.h; sourceTree = "<group>"; };
+		18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadGraphVC.m; sourceTree = "<group>"; };
+		18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadGraphVC.xib; sourceTree = "<group>"; };
 		18BAE299202836100088178A /* MCOverViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCOverViewVC.h; sourceTree = "<group>"; };
 		18BAE29A202836100088178A /* MCOverViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCOverViewVC.m; sourceTree = "<group>"; };
 		18BAE29B202836100088178A /* MCOverViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MCOverViewVC.xib; sourceTree = "<group>"; };
@@ -623,6 +628,16 @@
 			path = BattingOverBlock;
 			sourceTree = "<group>";
 		};
+		18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */ = {
+			isa = PBXGroup;
+			children = (
+				18B6D0EA203BDD570003CBA3 /* TrainingLoadGraphVC.h */,
+				18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */,
+				18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */,
+			);
+			path = TrainingloadGraphsVC;
+			sourceTree = "<group>";
+		};
 		18BAE2982028335E0088178A /* MatchCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +974,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */,
 				18A5CAB120383F9400586896 /* TeamsVC */,
 				04534F872037EE6900C22717 /* FoodDiaryVC */,
 				043828CE2031DD6300B32899 /* TeamMembersVC */,
@@ -1234,6 +1250,7 @@
 				CEB2B99420257BBD00E7D5E4 /* MontserratAlternates-Thin.otf in Resources */,
 				CE3E741820248BF100F10917 /* Assets.xcassets in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
+				18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */,
 				18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */,
@@ -1387,6 +1404,7 @@
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,
 				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
+				18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
 				043828D32031DD8300B32899 /* TeamMembersVC.m in Sources */,
 				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
