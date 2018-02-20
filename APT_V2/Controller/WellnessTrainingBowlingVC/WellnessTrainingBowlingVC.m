@@ -14,6 +14,8 @@
 #import "WebService.h"
 #import "Config.h"
 #import "TrainingLoadUpdateVC.h"
+#import "TrainingLoadGraphVC.h"
+#import "SWRevealViewController.h"
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate>
 {
@@ -21,6 +23,8 @@
     TrainingLoadVC * objtraing;
     WebService *objWebservice;
     TrainingLoadUpdateVC *objUpdate;
+    
+    TrainingLoadGraphVC *objTrGraph;
     
     float num1;
     float num2;
@@ -68,6 +72,15 @@
     [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+    
 }
 - (IBAction)AddtrainingBtnAction:(id)sender {
     
@@ -141,6 +154,13 @@
 {
     self.topviewHeight.constant = 280;
     return NO;
+}
+
+- (IBAction)TraingLoadGraohBtnAction:(id)sender {
+    
+    objTrGraph = [[TrainingLoadGraphVC alloc] initWithNibName:@"TrainingLoadGraphVC" bundle:nil];
+    objTrGraph.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.view addSubview:objTrGraph.view];
 }
 
 
@@ -531,7 +551,6 @@
     NSLog(@"chartValueSelected");
     
     [_chartView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_chartView.data getDataSetByIndex:highlight.dataSetIndex].axisDependency duration:1.0];
-    
     
 }
 

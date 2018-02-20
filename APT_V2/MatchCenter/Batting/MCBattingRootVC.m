@@ -1,0 +1,156 @@
+//
+//  MCBattingRootVC.m
+//  APT_V2
+//
+//  Created by apple on 19/02/18.
+//  Copyright © 2018 user. All rights reserved.
+//
+
+#import "MCBattingRootVC.h"
+#import "CustomNavigation.h"
+#import "SWRevealViewController.h"
+#import "BattingView.h"
+
+@interface MCBattingRootVC ()
+{
+    BattingView *btView;
+}
+@end
+
+@implementation MCBattingRootVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self customnavigationmethod];
+    [self setInningsBySelection:@"1"];
+    
+    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
+
+    
+    btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+    btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self removePreviousView:btView FromSuperView: self.containerView];
+    [self.containerView addSubview:btView];
+    
+    [btView loadChart];
+
+}
+- (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
+    for (UIView *subView in view.subviews) {
+        if (![subView isKindOfClass:[previousView class]]) {
+            [subView removeFromSuperview];
+        }
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation;
+    
+    
+    objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    [self.headderView addSubview:objCustomNavigation.view];
+    objCustomNavigation.tittle_lbl.text=@"Batting";
+    objCustomNavigation.btn_back.hidden = YES;
+    objCustomNavigation.home_btn.hidden = YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.battingBtn];
+    [self setInningsButtonUnselect:self.overViewBtn];
+    [self setInningsButtonUnselect:self.overBlockBtn];
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.battingBtn];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.overViewBtn];
+    }
+    else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.overBlockBtn];
+    }
+    
+}
+
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+}
+- (IBAction)onClickBatting:(id)sender {
+    
+    [self setInningsBySelection:@"1"];
+}
+- (IBAction)onClickOverView:(id)sender {
+    [self setInningsBySelection:@"2"];
+
+}
+
+- (IBAction)onClickOverBlock:(id)sender {
+    [self setInningsBySelection:@"3"];
+
+}
+
+
+
+@end

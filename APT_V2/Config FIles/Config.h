@@ -268,5 +268,12 @@
 
 #define  playersKey              @"MOBILE_FETCHTEAMPlayer"
 
+#define foodDiaryFetch         @"MOBILE_FETCHFOODDETAILS"
+
+#define foodDiaryInsert        @"MOBILE_INSERT_FOOD_DIARY"
+
+#define foodDiaryUpdate        @"MOBILE_UPDATE_FOOD_DIARY"
+
+#define  dropdownActivityKey              @"MOBILE_GETTRAININGLOADGRAPH"
 
 

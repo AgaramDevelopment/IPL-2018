@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FoodDescriptionCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *foodItemLbl;
+@property (strong, nonatomic) IBOutlet UILabel *quantityLbl;
 
 @end

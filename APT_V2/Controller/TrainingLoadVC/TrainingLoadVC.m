@@ -132,6 +132,7 @@
     objUpdate.isToday = @"yes";
     objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
     [self.traingView addSubview:objUpdate.view];
+    
     }
 }
 

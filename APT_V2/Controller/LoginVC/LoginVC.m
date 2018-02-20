@@ -8,6 +8,7 @@
 
 #import "LoginVC.h"
 #import "Header.h"
+#import "TabHomeVC.h"
 
 @interface LoginVC ()
 {
@@ -21,12 +22,15 @@
 @property (weak,nonatomic) IBOutlet UITextField * passwordTxt;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewHeight;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewWidth;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * usernameyposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * paswordyposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * signBtnyposition;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * liftsidewidth;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * rightsidewidth;
+
+@property (nonatomic, assign) BOOL isVisible;
 
 @end
 
@@ -37,19 +41,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    _isVisible = false;
+    self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
+    self.passwordTxt.secureTextEntry= !_isVisible;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     if(!IS_IPHONE_DEVICE)
     {
-        self.commonViewHeight.constant =self.view.frame.size.height/2;
-        self.liftsidewidth.constant    =self.view.frame.size.width/7;
-        self.rightsidewidth.constant  =self.view.frame.size.width/7;
-        self.usernameyposition.constant =self.commonview.frame.size.height/4;
-        self.paswordyposition.constant  =self.usernameview.frame.origin.y+5;
-        self.signBtnyposition.constant  =self.passwordview.frame.origin.y-30;
+//        self.commonViewHeight.constant =self.view.frame.size.height/2;
+//        self.liftsidewidth.constant    =self.view.frame.size.width/7;
+//        self.rightsidewidth.constant  =self.view.frame.size.width/7;
+//        self.usernameyposition.constant =self.commonview.frame.size.height/4;
+//        self.paswordyposition.constant  =self.usernameview.frame.origin.y+5;
+//        self.signBtnyposition.constant  =self.passwordview.frame.origin.y-30;
+        
+        //self.commonViewWidth.constant = 
+        
     }
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:NO];
+    [revealController.tapGestureRecognizer setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,9 +143,21 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            //                ViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"frontViewController"];
-            ViewController* vc = [ViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+        
+            
+            UIViewController* VC;
+            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
+            {
+                VC = [TabHomeVC new];
+            }
+            else
+            {
+                VC = [TeamsVC new];
+            }
+            
+            [self.navigationController pushViewController:VC animated:YES];
+            
+           
             
         }
         else{
@@ -150,8 +177,21 @@
 
 - (IBAction)switchAction:(id)sender {
     
-    self.passwordTxt.secureTextEntry= ![sender isOn];
+    _isVisible = !_isVisible;
+    
+    if(!_isVisible){
+        self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
+    }else{
+        self.securityImage.image = [UIImage imageNamed:@"eye_show_icon"];
+    }
+   // self.passwordTxt.secureTextEntry= ![sender isOn];
+    self.passwordTxt.secureTextEntry= !_isVisible;
 }
+
+//- (IBAction)switchAction:(id)sender {
+//    
+//    self.passwordTxt.secureTextEntry= ![sender isOn];
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

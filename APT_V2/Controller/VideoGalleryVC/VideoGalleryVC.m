@@ -64,6 +64,14 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+}
+
 - (void)showAnimate
 {
     self.categoryTbl.transform = CGAffineTransformMakeScale(1.3, 1.3);

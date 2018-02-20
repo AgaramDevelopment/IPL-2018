@@ -11,6 +11,7 @@
 #import "WebService.h"
 #import "Config.h"
 #import "WellnessTrainingBowlingVC.h"
+#import "SWRevealViewController.h"
 
 
 @interface AddWellnessRatingVC ()
@@ -70,16 +71,32 @@ NSString *metaSubCode4;
     self.SaveBtn.hidden = NO;
     self.UpdateBtn.hidden = YES;
     
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    self.datelbl.text = actualDate;
+    
     [self metacodeWebservice];
     
    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+    
 }
 
 -(IBAction)sliderDidChange:(RGSColorSlider *)sender{
     //self.colorView.backgroundColor = sender.color;
     
     sender.showPreview = NO;
-    
+
 }
 
 - (CGRect)trackRectForBounds:(CGRect)bounds {

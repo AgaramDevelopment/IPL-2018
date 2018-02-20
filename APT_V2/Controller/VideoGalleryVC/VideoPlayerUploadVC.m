@@ -13,6 +13,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "CRTableViewCell.h"
+#import "SWRevealViewController.h"
 
 @interface VideoPlayerUploadVC () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -121,8 +122,14 @@
 {
     [super viewWillAppear:animated];
     
+   
+        
+        SWRevealViewController *revealController = [self revealViewController];
+        [revealController.panGestureRecognizer setEnabled:YES];
+        [revealController.tapGestureRecognizer setEnabled:YES];
 
 }
+
 
 -(void)FetchvideouploadWebservice
 {
@@ -738,6 +745,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Update the UI
                 [AppCommon hideLoading];
+               [self.view removeFromSuperview];
             });
 
             
