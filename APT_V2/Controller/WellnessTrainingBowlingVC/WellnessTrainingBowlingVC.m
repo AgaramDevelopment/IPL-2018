@@ -15,6 +15,7 @@
 #import "Config.h"
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingLoadGraphVC.h"
+#import "SWRevealViewController.h"
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate>
 {
@@ -71,6 +72,15 @@
     [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+    
 }
 - (IBAction)AddtrainingBtnAction:(id)sender {
     

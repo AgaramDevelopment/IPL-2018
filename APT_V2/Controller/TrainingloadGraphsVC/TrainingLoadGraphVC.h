@@ -21,4 +21,8 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *linefilterlbl;
 @property (nonatomic, strong) IBOutlet UILabel *barfilterlbl;
+
+@property (nonatomic, strong) IBOutlet UIButton *DailyBtn;
+@property (nonatomic, strong) IBOutlet UIButton *WeeklyBtn;
+@property (nonatomic, strong) IBOutlet UIButton *MonthlyBtn;
 @end

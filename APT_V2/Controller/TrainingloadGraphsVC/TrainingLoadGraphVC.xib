@@ -17,7 +17,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainingLoadGraphVC">
             <connections>
+                <outlet property="DailyBtn" destination="mii-II-mzx" id="1r2-7C-E9e"/>
+                <outlet property="MonthlyBtn" destination="wXb-Ug-UJy" id="EOD-fG-VOW"/>
                 <outlet property="PoplistTable" destination="C6g-Yd-Q95" id="KNH-PS-STJ"/>
+                <outlet property="WeeklyBtn" destination="BJX-FA-0rv" id="Y7s-6J-6Qh"/>
                 <outlet property="barfilterView" destination="V27-HC-Pma" id="I45-Vc-6Hf"/>
                 <outlet property="barfilterlbl" destination="dxl-8J-jXr" id="4bg-at-XBy"/>
                 <outlet property="chartView" destination="IbY-QN-KP3" id="Uk9-7k-K1z"/>
@@ -84,6 +87,9 @@
                             <variation key="heightClass=regular-widthClass=regular">
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                             </variation>
+                            <connections>
+                                <action selector="DailyBtnAction:" destination="-1" eventType="touchUpInside" id="UUo-2D-MHZ"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJX-FA-0rv">
                             <rect key="frame" x="125" y="0.0" width="115" height="30"/>
@@ -98,6 +104,9 @@
                             <variation key="heightClass=regular-widthClass=regular">
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                             </variation>
+                            <connections>
+                                <action selector="WeeklyBtnAction:" destination="-1" eventType="touchUpInside" id="LkD-iv-rh9"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXb-Ug-UJy">
                             <rect key="frame" x="245" y="0.0" width="115" height="30"/>
@@ -112,6 +121,9 @@
                             <variation key="heightClass=regular-widthClass=regular">
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                             </variation>
+                            <connections>
+                                <action selector="MonthlyBtnAction:" destination="-1" eventType="touchUpInside" id="V6L-dv-k1c"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

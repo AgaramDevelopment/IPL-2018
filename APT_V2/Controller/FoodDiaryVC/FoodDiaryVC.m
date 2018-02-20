@@ -12,6 +12,7 @@
 #import "Config.h"
 #import "AppCommon.h"
 #import "WebService.h"
+#import "SWRevealViewController.h"
 @interface FoodDiaryVC () {
     NSString *clientCode;
     NSString *userCode;
@@ -69,6 +70,15 @@
     
 //    [self foodDiaryFetchDetailsPostMethodWebService];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

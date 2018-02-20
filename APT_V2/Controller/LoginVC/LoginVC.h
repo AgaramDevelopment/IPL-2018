@@ -10,4 +10,6 @@
 
 @interface LoginVC : UIViewController
 @property (nonatomic,strong)IBOutlet UISwitch *swt;
+
+@property (nonatomic,strong)IBOutlet UIImageView *securityImage;
 @end

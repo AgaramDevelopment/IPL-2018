@@ -11,6 +11,7 @@
 #import "MatchCenterTBC.h"
 #import "Header.h"
 #import "TeamsVC.h"
+#import "TabHomeVC.h"
 @interface AppDelegate ()
 {
     BOOL IsTimer;
@@ -64,7 +65,7 @@
         
         if([rolecode isEqualToString:plyRolecode])
         {
-            frontViewController = [ViewController new];
+            frontViewController = [TabHomeVC new];
         }
         else
         {
