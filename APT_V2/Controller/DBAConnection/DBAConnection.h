@@ -20,7 +20,7 @@
 
 -(NSMutableArray *)PlayersByCoach:(NSString *) Clientcode:(NSString *) Usercode;
 
--(NSString *)ScreenId:(NSString *) AssessmentCode:(NSString *) AssessmentTestCode;
+-(NSDictionary *)ScreenId:(NSString *) AssessmentCode:(NSString *) AssessmentTestCode;
 -(NSString *)ScreenCount:(NSString *) AssessmentCode:(NSString *) AssessmentTestCode;
 
 -(NSMutableArray *)AssementForm:(NSString *) ScreenId:(NSString *) clientcode :(NSString *) modulecode:(NSString *) AssessmentCode :(NSString *) AssessmentTestCode;
