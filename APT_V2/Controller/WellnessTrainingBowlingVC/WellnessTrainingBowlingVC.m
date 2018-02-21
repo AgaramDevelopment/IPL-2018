@@ -16,6 +16,8 @@
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingLoadGraphVC.h"
 #import "SWRevealViewController.h"
+#import "TrainingLoadUpdateVC.h"
+#import "TrainingPiechart.h"
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate>
 {
@@ -25,31 +27,58 @@
     TrainingLoadUpdateVC *objUpdate;
     
     TrainingLoadGraphVC *objTrGraph;
+    TrainingPiechart *objpie;
     
-    float num1;
-    float num2;
-    float num3;
-    float num4;
+//    float num1;
+//    float num2;
+//    float num3;
+//    float num4;
     
     NSString *metaSubCode1;
     NSString *metaSubCode2;
     NSString *metaSubCode3;
     NSString *metaSubCode4;
+    
+    //training load
+    float num1;
+    float num2;
+    float num3;
+    float num4;
+    
+    BOOL isToday;
+    BOOL isYesterday;
+    
+    BOOL isWellnessExpand;
+    BOOL isTraingLoadExpand;
+    
+  
 }
 
 @property (nonatomic, strong) IBOutlet LineChartView *chartView;
+
+@property (nonatomic, strong) IBOutlet PieChartView *PiechartView;
+
+
+@property (nonatomic, strong) IBOutlet UISlider *sliderPieX;
+@property (nonatomic, strong) IBOutlet UISlider *sliderPieY;
+
 @property (nonatomic, strong) IBOutlet UISlider *sliderX;
 @property (nonatomic, strong) IBOutlet UISlider *sliderY;
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextX;
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextY;
-
-
-
-
 @property (nonatomic, strong)  NSMutableArray *fetchedArray;
 
 @property (nonatomic, strong)  NSMutableArray *BowlingloadXArray;
 @property (nonatomic, strong)  NSMutableArray *BowlingloadYArray;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *CommonViewHeight;
+
+
+//training Load
+
+@property (strong, nonatomic) IBOutlet NSMutableArray *metaSubcodeArray;
+@property (strong, nonatomic) IBOutlet NSMutableArray *todaysLoadArray;
+@property (strong, nonatomic) IBOutlet NSMutableArray *yesterdayLoadArray;
 
 
 
@@ -65,13 +94,28 @@
     objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
     [self.trainingview addSubview:objtraing.view];
     
+//        objpie = [[TrainingPiechart alloc] initWithNibName:@"TrainingPiechart" bundle:nil];
+//        objpie.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+//        [self.trainingview addSubview:objpie.view];
+    
     [self.fetchButton setTag:0];
     [self FetchWebservice];
+    [self FetchTrainingWebservice];
+    //[self trainingloadTodayChart];
    // [self BowlingLoadWebservice];
     
     [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
-   
+    
+    //traing load
+    
+    isToday =NO;
+    isYesterday = NO;
+    
+    isWellnessExpand =NO;
+    isTraingLoadExpand = NO;
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -82,22 +126,68 @@
     [revealController.tapGestureRecognizer setEnabled:YES];
     
 }
+
+- (IBAction)TodayBtnAction:(id)sender {
+    
+    if(isToday == YES)
+    {
+        
+        
+        objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+        objUpdate.TodayLoadArray = self.todaysLoadArray;
+        objUpdate.isToday = @"yes";
+        objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+        [self.RootTrainingView addSubview:objUpdate.view];
+        self.traingViewHeight.constant = 600;
+        
+    }
+}
+
+- (IBAction)YesterdayBtnAction:(id)sender {
+    
+    if(isYesterday == YES)
+    {
+        
+        //[objWell.AddTrainingBtn addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        //WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+        //[objWell.AddTrainingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+        objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
+        objUpdate.isYesterday = @"yes";
+        objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+        [self.RootTrainingView addSubview:objUpdate.view];
+        self.traingViewHeight.constant = 600;
+    }
+}
+
 - (IBAction)AddtrainingBtnAction:(id)sender {
     
+    isTraingLoadExpand = YES;
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
     objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
     [self.RootTrainingView addSubview:objUpdate.view];
     self.traingViewHeight.constant = 600;
+    [self setTotalScroll];
 }
 - (IBAction)AddBtnAction:(id)sender {
+    
+    isWellnessExpand = YES;
     
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     [self.topView addSubview:objWell.view];
     self.topviewHeight.constant = 578;
+    [self setTotalScroll];
     
 }
 
+-(void)setTotalScroll
+{
+    if(isWellnessExpand == YES && isTraingLoadExpand == YES)
+    {
+        self.CommonViewHeight.constant = 2000;
+    }
+}
 - (IBAction)FetchBtnAction:(id)sender {
     
     
@@ -626,6 +716,340 @@
     [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
+
+
+
+
+-(void)FetchTrainingWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    
+    NSDateComponents *components = [[NSDateComponents alloc] init] ;
+    [components setDay:-1];
+    NSDate *yesterday = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
+    
+    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"dd/MM/yyyy"];
+    NSString * yesterdayDate = [dateFormat1 stringFromDate:yesterday];
+    
+    
+    [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
+        {
+            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            {
+                NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+                reqArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
+                
+                self.todaysLoadArray = [[NSMutableArray alloc]init];
+                self.yesterdayLoadArray = [[NSMutableArray alloc]init];
+                //[self samplePieChart];
+                for(int i=0;i<reqArray.count;i++)
+                {
+                    
+                    if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:actualDate] )
+                    {
+                        
+                        [self.todaysLoadArray addObject:[reqArray  objectAtIndex:i]];
+                    }
+                    if([[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i] isEqualToString:yesterdayDate] )
+                    {
+                        
+                        [self.yesterdayLoadArray addObject:[reqArray objectAtIndex:i]];
+                    }
+                    
+                }
+                
+                if(self.todaysLoadArray.count>0)
+                {
+                    self.markers = [[NSMutableArray alloc]init];
+                    isToday = YES;
+                    for(int i=0;i<self.todaysLoadArray.count;i++)
+                    {
+                        //today view
+                        NSString *ActivityName;
+                        NSString *ActivityNameCode = [[self.todaysLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
+                        if([ActivityNameCode isEqualToString:@"MSC053"])
+                        {
+                            ActivityName = @"Match";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC054"])
+                        {
+                            ActivityName = @"Strengthening";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC055"])
+                        {
+                            ActivityName = @"Conditioning";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC056"])
+                        {
+                            ActivityName = @"Cardio";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC057"])
+                        {
+                            ActivityName = @"Net Session";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC058"])
+                        {
+                            ActivityName = @"Recovery";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC059"])
+                        {
+                            ActivityName = @"Bowling";
+                        }
+                        
+                        if(i==0)
+                        {
+                            self.todayActivitynamelbl1.text = ActivityName;
+                        }
+                        if(i==1)
+                        {
+                            self.todayActivitynamelbl2.text = ActivityName;
+                        }
+                        if(i==2)
+                        {
+                            self.todayActivitynamelbl3.text = ActivityName;
+                        }
+                        if(i==3)
+                        {
+                            self.todayActivitynamelbl4.text = ActivityName;
+                        }
+                        if(i==4)
+                        {
+                            self.todayActivitynamelbl5.text = ActivityName;
+                        }
+                        if(i==5)
+                        {
+                            self.todayActivitynamelbl6.text = ActivityName;
+                        }
+                        if(i==6)
+                        {
+                            self.todayActivitynamelbl7.text = ActivityName;
+                        }
+                        
+                        
+                        int RpeCount = 0;
+                        NSString *RpeCode = [[self.todaysLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i];
+                        if([RpeCode isEqualToString:@"MSC060"])
+                        {
+                            RpeCount = 0;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC061"])
+                        {
+                            RpeCount = 0.5;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC062"])
+                        {
+                            RpeCount = 1;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC063"])
+                        {
+                            RpeCount = 2;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC064"])
+                        {
+                            RpeCount = 3;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC065"])
+                        {
+                            RpeCount = 4;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC066"])
+                        {
+                            RpeCount = 5;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC067"])
+                        {
+                            RpeCount = 6;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC068"])
+                        {
+                            RpeCount = 7;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC069"])
+                        {
+                            RpeCount = 8;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC070"])
+                        {
+                            RpeCount = 9;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC071"])
+                        {
+                            RpeCount = 10;
+                        }
+                        
+                        NSString *timeDuration = [[self.todaysLoadArray valueForKey:@"DURATION"] objectAtIndex:i];
+                        int timecount = [timeDuration intValue];
+                        
+                        int totalCout = RpeCount * timecount;
+                        [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                if(self.yesterdayLoadArray.count>0)
+                {
+                    self.markers = [[NSMutableArray alloc]init];
+                    isYesterday = YES;
+                    
+                    for(int i=0;i<self.yesterdayLoadArray.count;i++)
+                    {
+                        //today view
+                        NSString *ActivityName;
+                        NSString *ActivityNameCode = [[self.yesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
+                        if([ActivityNameCode isEqualToString:@"MSC053"])
+                        {
+                            ActivityName = @"Match";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC054"])
+                        {
+                            ActivityName = @"Strengthening";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC055"])
+                        {
+                            ActivityName = @"Conditioning";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC056"])
+                        {
+                            ActivityName = @"Cardio";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC057"])
+                        {
+                            ActivityName = @"Net Session";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC058"])
+                        {
+                            ActivityName = @"Recovery";
+                        }
+                        else if([ActivityNameCode isEqualToString:@"MSC059"])
+                        {
+                            ActivityName = @"Bowling";
+                        }
+                        
+                        if(i==0)
+                        {
+                            self.yesterdayActivitynamelbl1.text = ActivityName;
+                        }
+                        if(i==1)
+                        {
+                            self.yesterdayActivitynamelbl2.text = ActivityName;
+                        }
+                        if(i==2)
+                        {
+                            self.yesterdayActivitynamelbl3.text = ActivityName;
+                        }
+                        if(i==3)
+                        {
+                            self.yesterdayActivitynamelbl4.text = ActivityName;
+                        }
+                        if(i==4)
+                        {
+                            self.yesterdayActivitynamelbl5.text = ActivityName;
+                        }
+                        if(i==5)
+                        {
+                            self.yesterdayActivitynamelbl6.text = ActivityName;
+                        }
+                        if(i==6)
+                        {
+                            self.yesterdayActivitynamelbl7.text = ActivityName;
+                        }
+                        
+                        
+                        int RpeCount = 0;
+                        NSString *RpeCode = [[self.yesterdayLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i];
+                        if([RpeCode isEqualToString:@"MSC060"])
+                        {
+                            RpeCount = 0;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC061"])
+                        {
+                            RpeCount = 0.5;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC062"])
+                        {
+                            RpeCount = 1;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC063"])
+                        {
+                            RpeCount = 2;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC064"])
+                        {
+                            RpeCount = 3;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC065"])
+                        {
+                            RpeCount = 4;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC066"])
+                        {
+                            RpeCount = 5;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC067"])
+                        {
+                            RpeCount = 6;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC068"])
+                        {
+                            RpeCount = 7;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC069"])
+                        {
+                            RpeCount = 8;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC070"])
+                        {
+                            RpeCount = 9;
+                        }
+                        else if([RpeCode isEqualToString:@"MSC071"])
+                        {
+                            RpeCount = 10;
+                        }
+                        
+                        NSString *timeDuration = [[self.yesterdayLoadArray valueForKey:@"DURATION"] objectAtIndex:i];
+                        int timecount = [timeDuration intValue];
+                        
+                        int totalCout = RpeCount * timecount;
+                        [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
+                        
+                    }
+                    
+                    
+                }
+                //[self trainingloadTodayChart];
+            }
+        }
+        [AppCommon hideLoading];
+        
+    }
+                              failure:^(AFHTTPRequestOperation *operation, id error) {
+                                  NSLog(@"failed");
+                                  [COMMON webServiceFailureError:error];
+                              }];
+    
+}
+
+
+
+
+
+
 
 
 

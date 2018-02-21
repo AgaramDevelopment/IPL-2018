@@ -14,6 +14,7 @@
 #import "WebService.h"
 #import "AppCommon.h"
 #import "CategoryTableCell.h"
+//#import "WellnessTrainingBowlingVC.h"
 
 @interface TrainingLoadUpdateVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
@@ -92,6 +93,29 @@
     
 }
 
+- (void)showAnimate
+{
+    self.popViewtable.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    self.popViewtable.alpha = 0;
+    [UIView animateWithDuration:.25 animations:^{
+        self.popViewtable.alpha = 1;
+        self.popViewtable.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)removeAnimate
+{
+    [UIView animateWithDuration:.25 animations:^{
+        self.popViewtable.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        self.popViewtable.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            // [self.popTblView removeFromSuperview];
+            self.popViewtable.hidden = YES;
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -109,6 +133,7 @@
     
     self.DropdownDataArray = [[NSMutableArray alloc]init];
     self.DropdownDataArray = self.ActivityDataArray;
+    [self showAnimate];
     [self.popViewtable reloadData];
     
 }
@@ -123,6 +148,7 @@
     self.poptableyposition.constant = self.RpeFilterview.frame.origin.y;
     self.DropdownDataArray = [[NSMutableArray alloc]init];
     self.DropdownDataArray = self.RpeDataArray;
+    [self showAnimate];
     [self.popViewtable reloadData];
 }
 
@@ -293,14 +319,16 @@
         {
         self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-        self.popViewtable.hidden = YES;
+        //self.popViewtable.hidden = YES;
+            [self removeAnimate];
         }
         
         if(isRpe==YES)
         {
             self.rpelbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
             rpeCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-            self.popViewtable.hidden = YES;
+            //self.popViewtable.hidden = YES;
+            [self removeAnimate];
         }
     }
     if(tableView == self.SessionTable)

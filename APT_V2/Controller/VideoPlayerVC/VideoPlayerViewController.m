@@ -134,9 +134,9 @@
     AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
     
     [self addChildViewController:controller];
-    [self.view addSubview:controller.view];
+    [self.rootVideoView addSubview:controller.view];
     
-    controller.view.frame = CGRectMake(0,50,width,height);
+    controller.view.frame = CGRectMake(0,40,self.rootVideoView.frame.size.width,self.rootVideoView.frame.size.height);
     controller.player = player;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(someMethod) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 

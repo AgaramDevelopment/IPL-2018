@@ -127,6 +127,8 @@
     
     if(isToday == YES)
     {
+        
+        
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
     objUpdate.TodayLoadArray = self.todaysLoadArray;
     objUpdate.isToday = @"yes";

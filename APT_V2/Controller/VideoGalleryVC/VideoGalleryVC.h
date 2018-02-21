@@ -13,4 +13,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionview1;
 @property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionview2;
 @property (nonatomic,strong) IBOutlet UIView * headerView;
+
+@property (nonatomic,strong) IBOutlet UIButton * clearBtn;
+@property (nonatomic,strong) IBOutlet UIImageView * CancelTextImg;
 @end
