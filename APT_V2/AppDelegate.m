@@ -26,6 +26,7 @@
 
 @implementation AppDelegate
 @synthesize window,viewController;
+@synthesize frontNavigationController;
 
 @synthesize storyBoard;
 
@@ -82,7 +83,7 @@
     RearViewController *rearViewController = [[RearViewController alloc] init];
     
     
-    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
+    frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
     UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
     
     viewController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];

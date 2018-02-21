@@ -1658,7 +1658,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [dic setObject:Remarks forKey:@"Remarks"];
                     [dic setObject:Version forKey:@"Version"];
                     [dic setObject:AssessmentEntryCode forKey:@"AssessmentEntryCode"];
-                    [dic setObject:Ignored forKey:@"Ignored"];
+                    [dic setObject:Ignored forKey:@"Ignore"];
                     [dic setObject:@"" forKey:@"CoachInference"];
                     
                     [assessment addObject:dic];

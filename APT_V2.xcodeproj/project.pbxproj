@@ -172,6 +172,10 @@
 		CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A8C20289B8C000AFD1B /* ViewController.xib */; };
 		CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A9020289C96000AFD1B /* InjuryVC.m */; };
 		CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A9120289C96000AFD1B /* InjuryVC.xib */; };
+		CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3831E203D419300FB5838 /* PlayerDetailViewController.m */; };
+		CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF3831F203D419300FB5838 /* PlayerDetailViewController.xib */; };
+		CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF38324203D6BC200FB5838 /* PlayerDetailTableViewCell.m */; };
+		CEF38327203D6BC200FB5838 /* PlayerDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF38325203D6BC200FB5838 /* PlayerDetailTableViewCell.xib */; };
 		DA12ABDAE57C81EC118D504C /* Pods_APT_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A341C632E084798C93714773 /* Pods_APT_V2.framework */; };
 /* End PBXBuildFile section */
 
@@ -420,6 +424,12 @@
 		CEBD2A8F20289C96000AFD1B /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryVC.h; sourceTree = "<group>"; };
 		CEBD2A9020289C96000AFD1B /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryVC.m; sourceTree = "<group>"; };
 		CEBD2A9120289C96000AFD1B /* InjuryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryVC.xib; sourceTree = "<group>"; };
+		CEF3831D203D419300FB5838 /* PlayerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailViewController.h; sourceTree = "<group>"; };
+		CEF3831E203D419300FB5838 /* PlayerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailViewController.m; sourceTree = "<group>"; };
+		CEF3831F203D419300FB5838 /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
+		CEF38323203D6BC200FB5838 /* PlayerDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailTableViewCell.h; sourceTree = "<group>"; };
+		CEF38324203D6BC200FB5838 /* PlayerDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailTableViewCell.m; sourceTree = "<group>"; };
+		CEF38325203D6BC200FB5838 /* PlayerDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailTableViewCell.xib; sourceTree = "<group>"; };
 		D2B0EB9CC9DCC379A1C41C4A /* Pods-APT_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APT_V2.release.xcconfig"; path = "Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2.release.xcconfig"; sourceTree = "<group>"; };
 		F768FE1F7DDD50DD60206473 /* Pods-APT_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APT_V2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -974,6 +984,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CEF3831C203D417900FB5838 /* PlayerDetailVC */,
 				18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */,
 				18A5CAB120383F9400586896 /* TeamsVC */,
 				04534F872037EE6900C22717 /* FoodDiaryVC */,
@@ -1123,6 +1134,27 @@
 			path = InjuryVC;
 			sourceTree = "<group>";
 		};
+		CEF3831C203D417900FB5838 /* PlayerDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38322203D6B9100FB5838 /* PlayerDetailTableCell */,
+				CEF3831D203D419300FB5838 /* PlayerDetailViewController.h */,
+				CEF3831E203D419300FB5838 /* PlayerDetailViewController.m */,
+				CEF3831F203D419300FB5838 /* PlayerDetailViewController.xib */,
+			);
+			path = PlayerDetailVC;
+			sourceTree = "<group>";
+		};
+		CEF38322203D6B9100FB5838 /* PlayerDetailTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38323203D6BC200FB5838 /* PlayerDetailTableViewCell.h */,
+				CEF38324203D6BC200FB5838 /* PlayerDetailTableViewCell.m */,
+				CEF38325203D6BC200FB5838 /* PlayerDetailTableViewCell.xib */,
+			);
+			path = PlayerDetailTableCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1198,6 +1230,7 @@
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				18A68ABD20371A2C00EBA479 /* TrainingLoadUpdateCell.xib in Resources */,
 				18B37F54203AA77200F51511 /* BattingView.xib in Resources */,
+				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
@@ -1230,6 +1263,7 @@
 				CEBD2A6A2028997B000AFD1B /* agapt_database.sqlite in Resources */,
 				CEB2B98C20257BBD00E7D5E4 /* MontserratAlternates-Italic.otf in Resources */,
 				CEB2B98D20257BBD00E7D5E4 /* MontserratAlternates-Light.otf in Resources */,
+				CEF38327203D6BC200FB5838 /* PlayerDetailTableViewCell.xib in Resources */,
 				CEB2B97B20257BBD00E7D5E4 /* Montserrat-Light.otf in Resources */,
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
@@ -1360,6 +1394,7 @@
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */,
+				CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */,
 				18A68AB0203719B700EBA479 /* MyStatsBattingVC.m in Sources */,
 				CEA4210D203161A900B2DAB5 /* VideoGalleryVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
@@ -1372,6 +1407,7 @@
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				18A68AB2203719B700EBA479 /* MyStatsBattingCell.m in Sources */,
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
+				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
 				18C287D920355847006E6590 /* MCTeamCompVC.m in Sources */,

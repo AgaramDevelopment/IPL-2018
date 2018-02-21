@@ -276,4 +276,5 @@
 
 #define  dropdownActivityKey              @"MOBILE_GETTRAININGLOADGRAPH"
 
+#define  playerDetailsKey       @"MOBILE_RECENTDETAILS"
 

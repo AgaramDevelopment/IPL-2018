@@ -353,10 +353,6 @@
                 
                 lstAssementEntryArray = [responseObject valueForKey:@"LstAssessmententryCurrDate"];
                 
-                
-                //NSMutableArray * listAssesmnt =[[NSMutableArray alloc]init];
-                
-                
                 for(int i= 0;i<lstAssessment.count;i++)
                 {
                     

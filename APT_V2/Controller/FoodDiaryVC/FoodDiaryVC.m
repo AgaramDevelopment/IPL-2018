@@ -9,10 +9,8 @@
 #import "FoodDiaryVC.h"
 #import "FoodDiaryCell.h"
 #import "FoodDescriptionCell.h"
-#import "Config.h"
-#import "AppCommon.h"
-#import "WebService.h"
-#import "SWRevealViewController.h"
+#import "Header.h"
+
 @interface FoodDiaryVC () {
     NSString *clientCode;
     NSString *userCode;

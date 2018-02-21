@@ -17,6 +17,7 @@
 #import <sqlite3.h>
 #import "MBProgressHUD.h"
 #import "AppCommon.h"
+#import <Charts/Charts-Swift.h>
 
 // Rear view Menu
 #import "SKSTableView.h"
@@ -45,6 +46,9 @@
 #import "TeamsVC.h"
 #import "InjuryVC.h"
 //#import "TestAssessmentEntryVC.h"
+
+#import "PlayerDetailViewController.h"
+#import "PlayerDetailTableViewCell.h"
 
 #endif /* Header_h */
 
