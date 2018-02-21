@@ -9,13 +9,13 @@
 import UIKit
 
 
-class CustomCollectionViewLayout: UICollectionViewLayout {
+class CustomCollectionPlayer: UICollectionViewLayout {
 //    let test = PlayerSelectorVC()
 
     
     
     
-    let numberOfColumns = 13
+    let numberOfColumns = 18
     var shouldPinFirstColumn = true
     var shouldPinFirstRow = true
 
@@ -88,7 +88,7 @@ class CustomCollectionViewLayout: UICollectionViewLayout {
 }
 
 // MARK: - Helpers
-extension CustomCollectionViewLayout {
+extension CustomCollectionPlayer {
 
     func generateItemAttributes(collectionView: UICollectionView) {
         if itemsSize.count != numberOfColumns {

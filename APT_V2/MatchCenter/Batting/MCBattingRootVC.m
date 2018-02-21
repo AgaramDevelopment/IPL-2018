@@ -33,6 +33,7 @@
     [self.containerView addSubview:btView];
     
     [btView loadChart];
+    [btView loadTableFreez];
 
 }
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{

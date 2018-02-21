@@ -165,7 +165,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="359" id="ppn-aE-bzh"/>
                                             </constraints>
-                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionViewLayout" customModule="APT_V2" customModuleProvider="target"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionPlayer" customModule="APT_V2" customModuleProvider="target"/>
                                         </collectionView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -211,6 +211,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="chartView" destination="eLn-1s-dRZ" id="VUH-6D-VfN"/>
+                <outlet property="resultCollectionView" destination="Gja-qt-GjI" id="f8V-6b-q3e"/>
             </connections>
             <point key="canvasLocation" x="-53" y="184"/>
         </view>
