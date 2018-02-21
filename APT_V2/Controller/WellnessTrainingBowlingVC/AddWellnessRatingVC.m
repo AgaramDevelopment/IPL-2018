@@ -287,9 +287,9 @@ NSString *metaSubCode4;
             {
                 NSLog(@"success");
                 [self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
-                [self.view removeFromSuperview];
                 objWell = [[WellnessTrainingBowlingVC alloc] init];
-                [objWell setHeight];
+                objWell.topviewHeight.constant = 280;
+                [self.view removeFromSuperview];
                 
                 // [self.pieChartRight reloadData];
             }

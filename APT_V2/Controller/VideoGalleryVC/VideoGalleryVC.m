@@ -31,6 +31,8 @@
 @property (nonatomic,strong) NSMutableArray * objCatoryArray;
 @property (nonatomic,strong) NSMutableArray * objVideoFilterArray;
 
+@property (nonatomic,strong) NSMutableArray * CommonArray;
+
 @property (nonatomic,strong) IBOutlet UITableView * categoryTbl;
 @property (nonatomic,strong) IBOutlet UILabel * catagory_lbl;
 @property (nonatomic,strong) IBOutlet UILabel * date_lbl;
@@ -59,6 +61,9 @@
     self.categoryTbl.layer.masksToBounds =YES;
     
     self.categoryTbl.hidden= YES;
+    
+    self.CancelTextImg.hidden = NO;
+    self.clearBtn.hidden = NO;
     [self.view_datepicker setHidden:YES];
 
 
@@ -139,6 +144,17 @@
             self.objFirstGalleryArray =[responseObject valueForKey:@"Firstlist"];
             self.objSecondGalleryArray =[responseObject valueForKey:@"Secondlist"];
             self.objCatoryArray = [responseObject valueForKey:@"Thirdlist"];
+            
+            self.CommonArray = [[NSMutableArray alloc]init];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+            [dic setValue:@"ALL" forKey:@"CategoryName"];
+            [self.CommonArray addObject:dic];
+            
+            for(int i=0;i<self.objCatoryArray.count;i++)
+            {
+                [self.CommonArray addObject:[self.objCatoryArray objectAtIndex:i]];
+            }
+            
             self.objVideoFilterArray =  self.objSecondGalleryArray;
             [self.videoCollectionview1 reloadData];
             [self.videoCollectionview2 reloadData];
@@ -377,7 +393,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.objCatoryArray count];    //count number of row from counting array hear cataGorry is An Array
+    return [self.CommonArray count];    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -398,7 +414,7 @@
     // Here we use the provided setImageWithURL: method to load the web image
     // Ensure you use a placeholder image otherwise cells will be initialized with no image
    
-    cell.textLabel.text = [[self.objCatoryArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -411,8 +427,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    self.catagory_lbl.text = [[self.objCatoryArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-    NSString * selectCategoryCode = [[self.objCatoryArray valueForKey:@"categoryCode"] objectAtIndex:indexPath.row];
+    if(indexPath.row == 0)
+    {
+        self.catagory_lbl.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+        self.objVideoFilterArray =  self.objSecondGalleryArray;
+    }
+    else
+    {
+    
+    self.catagory_lbl.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+    NSString * selectCategoryCode = [[self.CommonArray valueForKey:@"categoryCode"] objectAtIndex:indexPath.row];
     self.objVideoFilterArray =[[NSMutableArray alloc]init];
     for(NSDictionary * objDic in self.objSecondGalleryArray)
     {
@@ -421,6 +445,7 @@
         {
             [self.objVideoFilterArray addObject:objDic];
         }
+     }
     }
     [self.videoCollectionview2 reloadData];
     [self removeAnimate];
@@ -432,6 +457,8 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     
+    
+    
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@", searchText];
     _searchResult = [self.objSecondGalleryArray filteredArrayUsingPredicate:resultPredicate];
     
@@ -441,28 +468,45 @@
         // Update the UI
         if (_searchResult.count == 0) {
           self.objVideoFilterArray = [self.searchResult copy];
-            [self.videoCollectionview2 reloadData];
-        } else {
+          [self.videoCollectionview2 reloadData];
             
+        } else {
             
             self.objVideoFilterArray =[[NSMutableArray alloc]init];
             self.objVideoFilterArray = [self.searchResult copy];
             [self.videoCollectionview2 reloadData];
+            
         }
    });
+    
+    
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     //self.playerTbl.hidden = NO;
+    
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     //self.playerTbl.hidden = NO;
+    NSLog(@"%@",textField);
     NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
-    [self filterContentForSearchText:searchString];
+    
+    if (self.search_Txt.text.length!=1)
+    {
+        [self filterContentForSearchText:searchString];
+    }
+    else
+    {
+        self.objVideoFilterArray = [[NSMutableArray alloc]init];
+        self.objVideoFilterArray =  self.objSecondGalleryArray;
+        [self.videoCollectionview2 reloadData];
+    }
+    
+    //[self filterContentForSearchText:searchString];
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
         //[self.videoCollectionview2 reloadData];
@@ -505,6 +549,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
+    
     [textField resignFirstResponder];
 }
 
@@ -547,6 +592,12 @@
     
     self.date_lbl.text = actualDate;
     
+    if( ![self.date_lbl.text isEqualToString:@""])
+    {
+        self.CancelTextImg.hidden = NO;
+        self.clearBtn.hidden = NO;
+    }
+    
     [self.view_datepicker setHidden:YES];
    
     self.objVideoFilterArray =[[NSMutableArray alloc]init];
@@ -563,6 +614,18 @@
     }
     [self.videoCollectionview2 reloadData];
     
+}
+
+- (IBAction)ClearTextAction:(id)sender
+{
+    self.date_lbl.text = @"";
+    self.CancelTextImg.hidden = YES;
+    self.clearBtn.hidden = YES;
+    
+    self.objVideoFilterArray = [[NSMutableArray alloc]init];
+    self.objVideoFilterArray =  self.objSecondGalleryArray;
+    [self.videoCollectionview2 reloadData];
+   
 }
 
 
