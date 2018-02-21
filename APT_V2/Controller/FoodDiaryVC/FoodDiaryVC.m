@@ -137,13 +137,8 @@
 }
 
 - (IBAction)addFoodDiaryButtonTapped:(id)sender {
-    self.dateTF.text = @"";
-    self.timeTF.text = @"";
-    self.mealTypeTF = @"";
-    [foodDescriptionArray removeAllObjects];
-    self.locationTF = @"";
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.foodTableView reloadData];
         [self setClearBorderForMealTypeAndLocation];
     });
 }
@@ -368,8 +363,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (IS_IPAD) {
-//        return CGSizeMake(140, 160);
         return CGSizeMake(120, 140);
     } else {
         return CGSizeMake(120, 140);
@@ -497,10 +492,7 @@
              
              foodDiaryArray = [NSMutableArray new];
              foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
-             //Re-load Collection View
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.foodDiaryCollectionView reloadData];
-             });
+             [self setClearBorderForMealTypeAndLocation];
          }
         
         [AppCommon hideLoading];
@@ -671,6 +663,18 @@
 }
 
 -(void)setClearBorderForMealTypeAndLocation {
+    
+    self.dateTF.text = @"";
+    self.timeTF.text = @"";
+    self.mealTypeTF = @"";
+    [foodDescriptionArray removeAllObjects];
+    self.locationTF = @"";
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.foodTableView reloadData];
+        [self.foodDiaryCollectionView reloadData];
+    });
+    
     NSArray *arr = @[self.breakfastBtn,self.snacksBtn,self.lunchBtn,self.dinnerBtn,self.supplementsBtn, self.teamBtn,self.restaurantBtn,self.homeBtn,self.otherBtn];
     for (UIButton *btn in arr) {
             btn.layer.borderWidth = 0.0f;

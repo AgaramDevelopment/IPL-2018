@@ -86,13 +86,13 @@
         else
         {
             
-                return CGSizeMake(200, 40);
+                return CGSizeMake(240, 50);
         }
     }
     else
     {
         
-            return CGSizeMake(200, 40);
+            return CGSizeMake(240, 50);
     }
 }
 #pragma mark collection view cell paddings
@@ -102,7 +102,7 @@
         return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
     }
     else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
+        return UIEdgeInsetsMake(10, 10, 0, 10);
     }
 }
 
@@ -136,12 +136,12 @@
         //cell.contentView.backgroundColor = [UIColor whiteColor];
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor blueColor];
+    bgColorView.backgroundColor = [UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
     [cell setSelectedBackgroundView:bgColorView];
     
     if(indexPath.row==0)
     {
-        cell.Title.text = @"Schedule/Results/Standings";
+        cell.Title.text = @"SCHEDULE/RESULTS/STANDINGS";
         [cell setTag:indexPath.row];
         
         objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
@@ -151,12 +151,12 @@
     }
     if(indexPath.row==1)
     {
-        cell.Title.text = @"Wellness/TrainingLoad/BowlingLoad";
+        cell.Title.text = @"WELLNESS/TRAININGLOAD/BOWLINGLOAD";
         [cell setTag:indexPath.row];
     }
     if(indexPath.row==2)
     {
-        cell.Title.text = @"VideoGallery";
+        cell.Title.text = @"VIDEOGALLERY";
         [cell setTag:indexPath.row];
     }
     

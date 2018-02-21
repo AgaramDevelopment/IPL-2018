@@ -107,6 +107,8 @@
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
     
+    [self.DailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
     [self updateChartData];
     
     [self BarAndLineFilterWebservice];
@@ -239,7 +241,7 @@
     set2.valueFont = [UIFont systemFontOfSize:10.f];
     set2.axisDependency = AxisDependencyRight;
     
-    float groupSpace = 0.20f;
+    float groupSpace = 0.06f;
     float barSpace = 0.02f; // x2 dataset
     float barWidth = 0.45f; // x2 dataset
     // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
@@ -355,6 +357,10 @@
         barValue = [[self.filterListNameArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         self.PoplistTable.hidden = YES;
         }
+        else
+        {
+            [AppCommon showAlertWithMessage:@"Please Select Another Activity"];
+        }
     }
     if(isLine==YES)
     {
@@ -364,6 +370,10 @@
         lineValue = [[self.filterListNameArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         
         self.PoplistTable.hidden = YES;
+        }
+        else
+        {
+            [AppCommon showAlertWithMessage:@"Please Select Another Activity"];
         }
     }
     

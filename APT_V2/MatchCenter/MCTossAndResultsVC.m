@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSUserDefaults standardUserDefaults] setInteger: 13 forKey:@"requiredColumn"];
     [self customnavigationmethod];
     markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
 
