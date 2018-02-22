@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04249B78203D466200B13889 /* NutritionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04249B76203D466200B13889 /* NutritionVC.m */; };
+		04249B79203D466200B13889 /* NutritionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04249B77203D466200B13889 /* NutritionVC.xib */; };
+		04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04249B7B203D4AF000B13889 /* NutritionCell.m */; };
+		04249B7E203D4AF000B13889 /* NutritionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04249B7C203D4AF000B13889 /* NutritionCell.xib */; };
 		04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04254270202822FC0088B87B /* AssessmentPopupVC.m */; };
 		0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425429B20289EE70088B87B /* AssessmentPopupVC.xib */; };
 		042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542B12028A1110088B87B /* HomeScreenStandingsCell.m */; };
@@ -176,6 +180,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04249B75203D466200B13889 /* NutritionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NutritionVC.h; sourceTree = "<group>"; };
+		04249B76203D466200B13889 /* NutritionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NutritionVC.m; sourceTree = "<group>"; };
+		04249B77203D466200B13889 /* NutritionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NutritionVC.xib; sourceTree = "<group>"; };
+		04249B7A203D4AF000B13889 /* NutritionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
+		04249B7B203D4AF000B13889 /* NutritionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
+		04249B7C203D4AF000B13889 /* NutritionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NutritionCell.xib; sourceTree = "<group>"; };
 		0425426F202822FC0088B87B /* AssessmentPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessmentPopupVC.h; sourceTree = "<group>"; };
 		04254270202822FC0088B87B /* AssessmentPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessmentPopupVC.m; sourceTree = "<group>"; };
 		0425429B20289EE70088B87B /* AssessmentPopupVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssessmentPopupVC.xib; sourceTree = "<group>"; };
@@ -436,6 +446,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04249B74203D463E00B13889 /* NutritionVC */ = {
+			isa = PBXGroup;
+			children = (
+				04249B75203D466200B13889 /* NutritionVC.h */,
+				04249B76203D466200B13889 /* NutritionVC.m */,
+				04249B77203D466200B13889 /* NutritionVC.xib */,
+				04249B7A203D4AF000B13889 /* NutritionCell.h */,
+				04249B7B203D4AF000B13889 /* NutritionCell.m */,
+				04249B7C203D4AF000B13889 /* NutritionCell.xib */,
+			);
+			path = NutritionVC;
+			sourceTree = "<group>";
+		};
 		0425426B20281FEB0088B87B /* AssessmentPopupVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +997,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04249B74203D463E00B13889 /* NutritionVC */,
 				18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */,
 				18A5CAB120383F9400586896 /* TeamsVC */,
 				04534F872037EE6900C22717 /* FoodDiaryVC */,
@@ -1237,6 +1261,7 @@
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
 				18A68ABF20371A2C00EBA479 /* TrainingLoadVC.xib in Resources */,
+				04249B7E203D4AF000B13889 /* NutritionCell.xib in Resources */,
 				18BAE2A2202874070088178A /* MCOverViewResultCVC.xib in Resources */,
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				18EF9D1F20316EE000CDA268 /* MCTossAndResultsVC.xib in Resources */,
@@ -1245,6 +1270,7 @@
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
 				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
+				04249B79203D466200B13889 /* NutritionVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
 				CEB2B99420257BBD00E7D5E4 /* MontserratAlternates-Thin.otf in Resources */,
@@ -1353,6 +1379,7 @@
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
+				04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
@@ -1401,6 +1428,7 @@
 				CEA4210B203161A900B2DAB5 /* VideoGalleryUploadCell.m in Sources */,
 				18C287D720355847006E6590 /* MCTeamCompCVC.m in Sources */,
 				18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */,
+				04249B78203D466200B13889 /* NutritionVC.m in Sources */,
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,
 				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
