@@ -369,10 +369,10 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
--(void)BowlingLoad :(NSString *)codelist :(NSString *)playercode  :(NSString *)date :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
+-(void)BowlingLoad :(NSString *)codelist :(NSString *)clientcode :(NSString *)playercode  :(NSString *)date :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure
 {
-    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@",codelist,playercode,date,type]];
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@",codelist,clientcode,playercode,date,type]];
     NSLog(@"urlString = %@",urlString);
     
     

@@ -14,12 +14,14 @@
 #import "Config.h"
 #import "HorizontalXLblFormatter.h"
 #import "CoachTraingLoad.h"
+#import "CoachBowlingLoad.h"
 
 
 @interface ReportsVC () <ChartViewDelegate>
 {
     WebService *objWebservice;
     CoachTraingLoad *objtraing;
+    CoachBowlingLoad *objBowling;
 }
 
 @property (nonatomic, strong) IBOutlet BarChartView *chartView;
@@ -43,9 +45,22 @@
     [self customnavigationmethod];
     //[self chartWebservice];
     
+    self.DailyBtn.layer.cornerRadius = 5;
+    self.DailyBtn.clipsToBounds = YES;
+    
+    self.WeeklyBtn.layer.cornerRadius = 5;
+    self.WeeklyBtn.clipsToBounds = YES;
+    
+    self.MonthlyBtn.layer.cornerRadius = 5;
+    self.MonthlyBtn.clipsToBounds = YES;
+    
     objtraing = [[CoachTraingLoad alloc] initWithNibName:@"CoachTraingLoad" bundle:nil];
     objtraing.view.frame = CGRectMake(0,0, self.TraingLoadView.bounds.size.width, self.TraingLoadView.bounds.size.height);
     [self.TraingLoadView addSubview:objtraing.view];
+    
+    objBowling = [[CoachBowlingLoad alloc] initWithNibName:@"CoachBowlingLoad" bundle:nil];
+    objBowling.view.frame = CGRectMake(0,0, self.BowlingLoadView.bounds.size.width, self.BowlingLoadView.bounds.size.height);
+    [self.BowlingLoadView addSubview:objBowling.view];
     
     [self.DailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
