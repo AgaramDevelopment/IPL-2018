@@ -39,6 +39,7 @@ axis:(ChartAxisBase *)axis
         }else{
             return @"";
         }
+        
     }else{
         return @"";
 

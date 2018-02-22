@@ -279,3 +279,5 @@
 #define  playerDetailsKey       @"MOBILE_RECENTDETAILS"
 
 #define  coachWellnessKey              @"MOBILE_FETCH_WORKLOAD_WELLNESSCHART"
+
+#define  coachTrainingKey              @"MOBILE_GETTRAININGLOADCHART"
