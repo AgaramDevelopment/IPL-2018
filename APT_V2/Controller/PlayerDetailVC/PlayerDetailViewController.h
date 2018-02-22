@@ -34,4 +34,12 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tbl1Height;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tbl2Height;
+@property (weak, nonatomic) IBOutlet UILabel *lblNoHistory;
+@property (weak, nonatomic) IBOutlet UILabel *lblNoRecentPerformance;
+@property (strong, nonatomic) IBOutlet UITableViewController *tblpopup;
+- (IBAction)actionpopup:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableView *tblDateDropDown;
+
+- (IBAction)playerMultiActions:(id)sender;
+
 @end
