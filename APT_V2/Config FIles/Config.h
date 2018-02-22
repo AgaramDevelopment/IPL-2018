@@ -262,7 +262,7 @@
 
 #define  fetchTrainingLoadDateKey              @"MOBILE_GETTRAININGLOAD"
 
-#define  BowlingLoadKey              @"MOBILE_BOWLINGLOADDATECHANGE"
+#define  BowlingLoadKey              @"MOBILE_BOWLINGLOADCHART"
 
 #define  TeamsKey              @"MOBILE_FETCHTEAM"
 
@@ -279,3 +279,5 @@
 #define  playerDetailsKey       @"MOBILE_RECENTDETAILS"
 
 #define  coachWellnessKey              @"MOBILE_FETCH_WORKLOAD_WELLNESSCHART"
+
+#define  coachTrainingKey              @"MOBILE_GETTRAININGLOADCHART"

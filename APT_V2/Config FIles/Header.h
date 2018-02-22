@@ -64,7 +64,10 @@
 #import "AddWellnessRatingVC.h"
 
 
+#import "NutritionVC.h"
+#import "NutritionCell.h"
 
+#import "ReportsVC.h"
 
 #endif /* Header_h */
 

@@ -13,12 +13,14 @@
 #import "SWRevealViewController.h"
 #import "WebService.h"
 #import "AppCommon.h"
+#import "VideoGalleryVC.h"
 
 
 
 @interface SchResStandVC ()
 {
     HomeScreenStandingsVC *StandsVC;
+    VideoGalleryVC *objVideo;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -38,9 +40,13 @@
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
     
-    StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-    StandsVC.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
-    [self.commonView addSubview:StandsVC.view];
+//    StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+//    StandsVC.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
+//    [self.commonView addSubview:StandsVC.view];
+    
+    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
+    objVideo.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.commonView addSubview:objVideo.view];
     
    
      //self.scroll.contentSize = CGSizeMake(self.scroll.frame.size.width, self.commonView.frame.size.height);

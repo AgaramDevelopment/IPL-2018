@@ -98,7 +98,7 @@
     l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
     l.xEntrySpace = 7.0;
     l.yEntrySpace = 5.0;
-    l.textColor = UIColor.redColor;
+    l.textColor = UIColor.blackColor;
     
     [self updateChartData];
     
@@ -182,7 +182,7 @@
     [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(IBAction)actionBack
+-(void)actionBack
 {
     [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
@@ -313,13 +313,13 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if (!tblDateDropDown.isHidden && scrollView == self.scrollView) {
-        [tblDateDropDown setHidden:YES];
-        [scrollView setScrollEnabled:NO];
-    }else
-    {
-        [scrollView setScrollEnabled:YES];
-    }
+//    if (!tblDateDropDown.isHidden && scrollView == self.scrollView) {
+//        [tblDateDropDown setHidden:YES];
+//        [scrollView setScrollEnabled:NO];
+//    }else
+//    {
+//        [scrollView setScrollEnabled:YES];
+//    }
     
 }
 
@@ -466,25 +466,32 @@
 }
 
 - (IBAction)playerMultiActions:(id)sender {
+    UIViewController* selectedVC;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if ([sender tag] == 0) { // Assessment
         
+        selectedVC = [ViewController new];
     }
-    else if ([sender tag] == 1) // Nutrition
+    else if ([sender tag] == 1) // Illness
     {
-        
+        selectedVC = [illnessVC new];
     }
-    else if ([sender tag] == 2)  // Food Diary
+    else if ([sender tag] == 2)  // Nutrition
     {
-        
+        selectedVC = [NutritionVC new];
     }
     else if ([sender tag] == 3) // Reports
     {
-        
+        selectedVC = [ReportsVC new];
     }
     else if ([sender tag] == 4) // Wellness
     {
-        
+        selectedVC = [WellnessTrainingBowlingVC new];
     }
+    
+    [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
 }
 @end

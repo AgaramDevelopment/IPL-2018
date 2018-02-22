@@ -450,6 +450,7 @@
     [AppCommon showLoading ];
     
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
     objWebservice = [[WebService alloc]init];
     
@@ -457,7 +458,7 @@
     
     
     
-    [objWebservice BowlingLoad :BowlingLoadKey : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice BowlingLoad :BowlingLoadKey:ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         if(responseObject >0)
@@ -465,20 +466,22 @@
             
             NSMutableArray *reqArray = [[NSMutableArray alloc]init];
             reqArray = responseObject;
-            
+          if(reqArray.count>0)
+          {
             self.BowlingloadXArray= [[NSMutableArray alloc]init];
             self.BowlingloadYArray = [[NSMutableArray alloc]init];
             
             for(int i=0;i<reqArray.count;i++)
             {
-                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
-                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
-                int total = timecount * rpecount;
-                [self.BowlingloadYArray addObject:[NSString stringWithFormat:@"%d",total]];
+//                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+//                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+//                int total = timecount * rpecount;
+                [self.BowlingloadYArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
                 [self.BowlingloadXArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
             }
             
             [self BowlingLoadChart];
+          }
         }
         [AppCommon hideLoading];
         
@@ -492,8 +495,6 @@
 
 -(void)BowlingLoadChart
 {
-    
-    
     self.title = @"Line Chart 2";
     
     _chartView.delegate = self;
@@ -511,7 +512,7 @@
     
     ChartLegend *l = _chartView.legend;
     l.form = ChartLegendFormLine;
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
+    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
     l.textColor = UIColor.whiteColor;
     l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
     l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
