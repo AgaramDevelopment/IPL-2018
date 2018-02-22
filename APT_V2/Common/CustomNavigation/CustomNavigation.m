@@ -7,7 +7,6 @@
 //
 
 #import "CustomNavigation.h"
-#import "Config.h"
 
 @interface CustomNavigation ()
 
@@ -29,17 +28,6 @@
 - (BOOL)shouldAutorotate {
     return NO;
 }
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    //return (UIInterfaceOrientationPortrait);
-//    return nil;
-//}
-//- (IBAction)homeBtn:(id)sender
-//{
-//    HomeVC  * objTabVC=[[HomeVC alloc]init];
-//    objTabVC = (HomeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"HomeVC"];
-//    [self.navigationController popToRootViewControllerAnimated:true];
-//    
-//}
 
 
 - (void)didReceiveMemoryWarning {

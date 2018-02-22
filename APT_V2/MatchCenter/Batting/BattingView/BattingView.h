@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 @import Charts;
 
-@interface BattingView : UIView <ChartViewDelegate>
+@interface BattingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, strong) IBOutlet BarChartView *chartView;
 -(void) loadChart;
+-(void) loadTableFreez;
+@property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 
 @end

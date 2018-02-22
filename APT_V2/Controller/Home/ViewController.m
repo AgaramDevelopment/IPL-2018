@@ -500,15 +500,6 @@
 {
     CGFloat height = 35;
     
-//    if (indexPath.row == 0) {
-//        height = 30;
-//    }
-//    else
-//    {
-//        height = 35;
-//    }
-
-    
     return height;
 }
 
@@ -528,22 +519,31 @@
     cell.tag = [[[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"ScreenID"] integerValue];
     cell.lblInjured.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Remarks"];
     cell.lblInference.text = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Inference"];
-    
-    
-//    if (indexPath.row == 0) {
-//        cell = array[2];
-//    }
-//    else
-//    {
-//        cell = array[3];
-//    }
-    
     cell.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSString* ignore_str = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Ignore"];
 
-//    cell.textLabel.text = arrItems[indexPath.row];
+    if ([ignore_str.lowercaseString isEqualToString:@"false"] || ignore_str.length == 0) {
+        cell.imgCheck.image = uncheck;
+    }
+    else
+    {
+        cell.imgCheck.image = check;
+    }
+
     return cell;
 
 }
+
+-(BOOL)isIgnorePlayer:(NSString *)Value
+{
+    BOOL isCheck = NO;
+    
+    
+    return isCheck;
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -566,19 +566,17 @@
     
     lblRangeValue.layer.borderColor = [UIColor lightGrayColor].CGColor;
     lblRangeValue.layer.borderWidth = 0.3;
-//    lblRangeValue.layer.masksToBounds = YES;
-    
     lblUnitValue.layer.borderColor = [UIColor lightGrayColor].CGColor;
     lblUnitValue.layer.borderWidth = 0.3;
     
     NSMutableArray* array = [NSMutableArray new];
     
     currentlySelectedTestType = indexPath;
+    
     NSString* ignore_str = @"";
     if ([SCREEN_CODE_Rom isEqualToString:testCode]) {
 
         NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
 
         if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
             CollectionItem = 2;
@@ -591,72 +589,57 @@
         lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
         lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romUnitName"];
     }
-    else if ([SCREEN_CODE_SPECIAL isEqualToString:@"ASTT002"]) {
+    else if ([SCREEN_CODE_SPECIAL isEqualToString:testCode]) {
 
-    
-//        self.assessmentTestTypeSpecial =[self.objDBConnection getPositiveNegative];
         NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SpecialSideName"];
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
 
         if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
             CollectionItem = 2;
         }
-        else
-        {
+        else {
+            
             CollectionItem = 1;
         }
 
 
     }
-    else if ([SCREEN_CODE_MMT isEqualToString:@"ASTT003"]) {
+    else if ([SCREEN_CODE_MMT isEqualToString:testCode]) {
 
-//        self.AssessmentTypeMMT =[self.objDBConnection getWithMmtCombo];
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
 
         CollectionItem = 1;
         
     }
-    else if ([SCREEN_CODE_GAIT isEqualToString:@"ASTT004"]) {
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
+    else if ([SCREEN_CODE_GAIT isEqualToString:testCode]) {
 
-//        self.AssessmentTypeGaint =[self.objDBConnection getResultCombo];
 
         CollectionItem = 1;
 
     }
-    else if ([SCREEN_CODE_POSTURE isEqualToString:@"ASTT005"]) {
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
+    else if ([SCREEN_CODE_POSTURE isEqualToString:testCode]) {
 
         CollectionItem = 1;
 
     }
-    else if ([SCREEN_CODE_S_C isEqualToString:@"ASTT006"]) {
+    else if ([SCREEN_CODE_S_C isEqualToString:testCode]) {
 
-//        self.assessmentTestTypePosture =[self.objDBConnection getwithPostureRESULTS];
         ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
 
         NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SideName"];
         CollectionItem = [[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Nooftrials"] integerValue];
-//        if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
-//            CollectionItem = 2;
-//        }
-//        else
-//        {
-//            CollectionItem = 1;
-//        }
 
         lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
         lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitsName"];
+
         
     }
-    else if ([SCREEN_CODE_COACHING isEqualToString:@"ASTT007"]) {
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
-
+    else if ([SCREEN_CODE_COACHING isEqualToString:testCode]) {
         
         CollectionItem = 1;
 
     }
     
+    ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Ignore"];
+
     if ([ignore_str.lowercaseString isEqualToString:@"false"] || ignore_str.length == 0) {
         [btnIgnore setImage:uncheck forState:UIControlStateNormal];
         [btnIgnore setTag:0];
@@ -667,17 +650,16 @@
         [btnIgnore setTag:1];
     }
     
-//    [self.bottomConstant setActive:NO];
-//    [self.centerY setActive:YES];
     
-//    [NSLayoutConstraint deactivateConstraints:self.centerY];
-//    [NSLayoutConstraint activateConstraints:self.centerY];
-
     [self presentViewController:popupVC animated:YES completion:^{
         self.bottomConstant.constant = (CGRectGetHeight(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
         [self.Shadowview updateConstraintsIfNeeded];
-        [self.assCollection reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.assCollection reloadData];
+        });
+
     }];
+    
 }
 
 -(IBAction)closePopup:(id)sender
@@ -692,7 +674,6 @@
     else
     {
         currentlySelectedHeader = sender.tag;
-
     }
     
     
@@ -796,11 +777,8 @@
 
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
     {
-        if(isEdit)
-        {
+        
             
-//            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_Txt.text] :[NSString stringWithFormat:@"%@",self.right_Txt.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-
                 [dict setValue:clientCode forKey:@"Clientcode"];
                 [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
                 [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
@@ -859,72 +837,12 @@
                 [dict setValue:@0 forKey:@"Right9"];
                 [dict setValue:@0 forKey:@"Central9"];
                 [dict setValue:@0 forKey:@"issync"];
-            [self.objDBconnection updateAssessmentEntry:dict];
-
-        }
-        else
-        {
         
-                [dict setValue:clientCode forKey:@"Clientcode"];
-                [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-                [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-                [dict setValue:currentIndexArray[@"Testcode"] forKey:@"Assessmenttestcode"];
-                [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
-                [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
-                [dict setValue:@"" forKey:@"Version"];
-                [dict setValue:usercode forKey:@"Assessor"];
-                [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
-                [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
-
-                [dict setValue:collectionValues[@"left"] forKey:@"Left"];
-                [dict setValue:collectionValues[@"right"] forKey:@"Right"];
-                [dict setValue:collectionValues[@"center"] forKey:@"Central"];
-                [dict setValue:currentIndexArray[@"romValue"] forKey:@"Value"];
-                [dict setValue:collectionValues[@"remark"] forKey:@"Remarks"];
-                [dict setValue:@"" forKey:@"Inference"];
-                [dict setValue:currentIndexArray[@"romUnitName"] forKey:@"Units"];
-            
-                [dict setValue:@"" forKey:@"Description"];
-                [dict setValue:@"MSC001" forKey:@"Recordstatus"];
-                [dict setValue:usercode forKey:@"Createdby"];
-                [dict setValue:currentlySelectedDate forKey:@"Createddate"];
-                [dict setValue:usercode forKey:@"Modifiedby"];
-                [dict setValue:currentlySelectedDate forKey:@"Modifieddate"];
-                [dict setValue:collectionValues[@"ignore"]  forKey:@"isIgnored"];
-            
-                [dict setValue:@0 forKey:@"Left1"];
-                [dict setValue:@0 forKey:@"Right1"];
-                [dict setValue:@0 forKey:@"Central1"];
-                [dict setValue:@0 forKey:@"Left2"];
-                [dict setValue:@0 forKey:@"Right2"];
-                [dict setValue:@0 forKey:@"Central2"];
-                [dict setValue:@0 forKey:@"Left3"];
-                [dict setValue:@0 forKey:@"Right3"];
-                [dict setValue:@0 forKey:@"Central3"];
-            
-                [dict setValue:@0 forKey:@"Left4"];
-                [dict setValue:@0 forKey:@"Right4"];
-                [dict setValue:@0 forKey:@"Central4"];
-                [dict setValue:@0 forKey:@"Left5"];
-                [dict setValue:@0 forKey:@"Right5"];
-                [dict setValue:@0 forKey:@"Central5"];
-                [dict setValue:@0 forKey:@"Left6"];
-                [dict setValue:@0 forKey:@"Right6"];
-                [dict setValue:@0 forKey:@"Central6"];
-            
-                [dict setValue:@0 forKey:@"Left7"];
-                [dict setValue:@0 forKey:@"Right7"];
-                [dict setValue:@0 forKey:@"Central7"];
-                [dict setValue:@0 forKey:@"Left8"];
-                [dict setValue:@0 forKey:@"Right8"];
-                [dict setValue:@0 forKey:@"Central8"];
-                [dict setValue:@0 forKey:@"Left9"];
-                [dict setValue:@0 forKey:@"Right9"];
-                [dict setValue:@0 forKey:@"Central9"];
-                [dict setValue:@0 forKey:@"issync"];
-
-                [self.objDBconnection insertAssessmentEntry:dict];
-            
+        if(isEdit){
+            [self.objDBconnection updateAssessmentEntry:dict];
+        }
+        else{
+            [self.objDBconnection insertAssessmentEntry:dict];
         }
 
     }
@@ -1342,7 +1260,6 @@
 
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE]) { // Posture
-//        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
 //
         if(isEdit)
         {
@@ -1865,6 +1782,7 @@
 
 }
 
+#pragma mark UITextField DELAGATES
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -1895,20 +1813,20 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
-
-    
-    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
-    {
-//        dropdownArray =[self.objDBconnection getPositiveNegative];
-//        cell.txtField.text = textField.text;
-        
-    }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
-    {
-//        dropdownArray =[self.objDBconnection getWithMmtCombo];
-//        cell.txt1_SC.text = textField.text;
-    }
+//    TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
+//
+//
+//    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
+//    {
+////        dropdownArray =[self.objDBconnection getPositiveNegative];
+////        cell.txtField.text = textField.text;
+//
+//    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
+//    {
+////        dropdownArray =[self.objDBconnection getWithMmtCombo];
+////        cell.txt1_SC.text = textField.text;
+//    }
 
     return YES;
 }
@@ -2139,6 +2057,8 @@
     
     return dict;
 }
+
+#pragma mark UIPickerView DELAGATES
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {

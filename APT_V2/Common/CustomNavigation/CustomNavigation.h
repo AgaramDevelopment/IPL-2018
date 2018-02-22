@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
+#import "Config.h"
 
 @interface CustomNavigation : UIViewController
+
 @property (nonatomic,strong) IBOutlet UIView * common_view;
 @property (nonatomic,strong) IBOutlet UILabel * tittle_lbl;
 @property (nonatomic,strong) IBOutlet UIButton * btn_back;

@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SWRevealViewController *viewController;
 @property (strong, nonatomic) UIStoryboard *storyBoard;
-
+@property (strong, nonatomic) UINavigationController *frontNavigationController;
 
 @end
 

@@ -142,12 +142,11 @@
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     static NSString *MyIdentifier = @"MyIdentifier";
-    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:nil];
+    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
     {
         [[NSBundle mainBundle] loadNibNamed:@"ProfileVCCell" owner:self options:nil];
@@ -178,8 +177,6 @@
     cell.cellview.layer.shadowRadius = 5;
     cell.cellview.layer.shadowOpacity = 1.0;
     cell.cellview.layer.masksToBounds = YES;
-    
-    
     
     return cell;
     
