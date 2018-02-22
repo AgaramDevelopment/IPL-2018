@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "AppCommon.h"
 #import "WebService.h"
+#import "PopOverVC.h"
 
 @interface NutritionVC () {
     NSString *clientCode;
@@ -20,7 +21,11 @@
     NSString *userRefCode;
     NSMutableArray *foodDiaryArray;
     NSMutableArray *foodDiaryCodeArray;
-//    UIPopoverController *popOverController;
+     NSMutableArray *breakfastMoreArray;
+    NSMutableArray *snacksMoreArray;
+    NSMutableArray *lunchMoreArray;
+    NSMutableArray *dinnerMoreArray;
+    NSMutableArray *supplementsMoreArray;
 }
 
 @end
@@ -78,7 +83,7 @@
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return foodDiaryArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,10 +96,22 @@
     cell.layer.shadowRadius = 5;
     cell.layer.shadowOpacity = 0.8f;
     
-        //    cell.tag=indexPath.item;
-        //    [cell.breakfastBtn addTarget:self action:@selector(didClickBreakfastMore:) forControlEvents:UIControlEventTouchUpInside];
-        //    [cell.snacksBtn addTarget:self action:@selector(didClickSnacksMore:) forControlEvents:UIControlEventTouchUpInside];
+        //Target for More Details
+    [cell.breakfastBtn addTarget:self action:@selector(didClickBreakfastMore:) forControlEvents:UIControlEventTouchUpInside];
     
+    [cell.snacksBtn addTarget:self action:@selector(didClickSnacksMore:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.lunchBtn addTarget:self action:@selector(didClickLunchMore:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.dinnerBtn addTarget:self action:@selector(didClickDinnerMore:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell.supplementsBtn addTarget:self action:@selector(didClickSupplementsMore:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.breakfastBtn.hidden = YES;
+    cell.snacksBtn.hidden = YES;
+    cell.lunchBtn.hidden = YES;
+    cell.dinnerBtn.hidden = YES;
+    cell.supplementsBtn.hidden = YES;
     /*
      MSC342    BREAKFAST
      MSC343    SNACK
@@ -102,27 +119,182 @@
      MSC345    DINNER
      MSC412    Supplements
      */
-    /*
-    if ([[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"] isEqualToString:@"MSC342"]) {
+    NSMutableArray *foodDateArray = [NSMutableArray new];
+    foodDateArray = [foodDiaryArray objectAtIndex:indexPath.row];
+    
+    
+    for (id dateDict in foodDateArray) {
         
-        NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
-        cell.breakfastTimeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
-            //    cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
-        if (foodListArray.count == 1) {
-            cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.breakfast2Lbl.text = @"";
-            cell.breakfast3Lbl.text = @"";
-        } else if (foodListArray.count == 2) {
-            cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.breakfast3Lbl.text = @"";
-        } else if (foodListArray.count == 3) {
-            cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.breakfast3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+            //For  MSC342    BREAKFAST
+        if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC342"]) {
+            cell.breakfastTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
+            NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
+            
+            if (foodListArray.count == 1) {
+                cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.breakfast2Lbl.text = @"-";
+                cell.breakfast3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 2) {
+                cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.breakfast3Lbl.text = @"-";
+               
+            } else if (foodListArray.count == 3) {
+                cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.breakfast3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+                
+            } else if (foodListArray.count > 3) {
+                cell.breakfastBtn.hidden = NO;
+                breakfastMoreArray = [NSMutableArray new];
+                for (id listDict in foodListArray) {
+                    [breakfastMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                }
+            }
+        } 
+        else {
+//            Data is not available then Declare values with "-"
+            cell.breakfast1Lbl.text = @"-";
+            cell.breakfast2Lbl.text = @"-";
+            cell.breakfast3Lbl.text = @"-";
+        }
+        
+            //For  MSC343    SNACK
+        if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC343"]) {
+            cell.snacksTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
+            NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
+            
+            if (foodListArray.count == 1) {
+                cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.snacks2Lbl.text = @"-";
+                cell.snacks3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 2) {
+                cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.snacks2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.snacks3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 3) {
+                cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.snacks2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.snacks3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+                
+            } else if (foodListArray.count > 3) {
+                cell.snacksBtn.hidden = NO;
+                snacksMoreArray = [NSMutableArray new];
+                for (id listDict in foodListArray) {
+                    [snacksMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                }
+            }
+        } else {
+                //Data is not available then Declare values with "-"
+            cell.snacks1Lbl.text = @"-";
+            cell.snacks2Lbl.text = @"-";
+            cell.snacks3Lbl.text = @"-";
+        }
+        
+            //MSC344    LUNCH
+        if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC344"]) {
+            cell.lunchTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
+            NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
+            
+            if (foodListArray.count == 1) {
+                cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.lunch2Lbl.text = @"-";
+                cell.lunch3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 2) {
+                cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.lunch2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.lunch3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 3) {
+                cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.lunch2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.lunch3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+                
+            } else if (foodListArray.count > 3) {
+                cell.lunchBtn.hidden = NO;
+                lunchMoreArray = [NSMutableArray new];
+                for (id listDict in foodListArray) {
+                    [lunchMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                }
+            }
+        } else {
+            //Data is not available then Declare values with "-"
+            cell.lunch1Lbl.text = @"-";
+            cell.lunch2Lbl.text = @"-";
+            cell.lunch3Lbl.text = @"-";
+        }
+        
+            //MSC345    DINNER
+        if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC345"]) {
+            cell.dinnerTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
+            NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
+            
+            if (foodListArray.count == 1) {
+                cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.dinner2Lbl.text = @"-";
+                cell.dinner3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 2) {
+                cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.dinner2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.dinner3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 3) {
+                cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.dinner2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.dinner3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+                
+            } else if (foodListArray.count > 3) {
+                cell.dinnerBtn.hidden = NO;
+                dinnerMoreArray = [NSMutableArray new];
+                for (id listDict in foodListArray) {
+                    [dinnerMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                }
+            }
+        } else {
+            //Data is not available then Declare values with "-"
+            cell.dinner1Lbl.text = @"-";
+            cell.dinner2Lbl.text = @"-";
+            cell.dinner3Lbl.text = @"-";
+        }
+            //MSC412    Supplements
+        if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC412"]) {
+            cell.supplementsTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
+            NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
+            
+            if (foodListArray.count == 1) {
+                cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.supplements2Lbl.text = @"-";
+                cell.supplements3Lbl.text = @"-";
+                
+            } else if (foodListArray.count == 2) {
+                cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.supplements2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.supplements3Lbl.text = @"-";
+               
+            } else if (foodListArray.count == 3) {
+                cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.supplements2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.supplements3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+                
+            } else if (foodListArray.count > 3) {
+                cell.supplementsBtn.hidden = NO;
+                supplementsMoreArray = [NSMutableArray new];
+                for (id listDict in foodListArray) {
+                    [supplementsMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                }
+            }
+        } else {
+            //Data is not available then Declare values with "-"
+            cell.supplements1Lbl.text = @"-";
+            cell.supplements2Lbl.text = @"-";
+            cell.supplements3Lbl.text = @"-";
         }
     }
-    */
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -141,37 +313,44 @@
 
 -(IBAction)didClickBreakfastMore:(id)sender
 {
-//    NutritionCell *cell = (NutritionCell *)[self.nutritionCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:[sender tag] inSection:0]];
-//    CGRect rect = CGRectMake(cell.bounds.origin.x+600, cell.bounds.origin.y+10, 50, 30);
-//    [popOverController presentPopoverFromRect:rect inView:cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    [self.popView setModalPresentationStyle:UIModalPresentationPopover];
-    
-//    UIPopoverPresentationController *popPresenter =  [[UIPopoverPresentationController alloc] init];
-        //(UIPopoverPresentationController *)self.popView;
-//    popPresenter.sourceView = sender;
-//    popPresenter.sourceRect = [sender bounds]; // You can set position of popover
-    [self presentViewController:self.popView  animated:TRUE completion:nil];
-
+    [self popOverViewFuction:breakfastMoreArray andSender:sender];
 }
 
 -(IBAction)didClickSnacksMore:(id)sender
 {
-//    NutritionCell *cell = (NutritionCell *)[self.nutritionCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:[sender tag] inSection:0]];
-        //    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-//    CGRect rect = CGRectMake(cell.bounds.origin.x+600, cell.bounds.origin.y+10, 50, 30);
-//    [popOverController presentPopoverFromRect:rect inView:cell permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [self popOverViewFuction:snacksMoreArray andSender:sender];
+}
+
+-(IBAction)didClickLunchMore:(id)sender
+{
+    [self popOverViewFuction:lunchMoreArray andSender:sender];
+}
+
+-(IBAction)didClickDinnerMore:(id)sender
+{
+    [self popOverViewFuction:dinnerMoreArray andSender:sender];
+}
+
+-(IBAction)didClickSupplementsMore:(id)sender
+{
+    [self popOverViewFuction:supplementsMoreArray andSender:sender];
+}
+
+- (void)popOverViewFuction:(NSMutableArray *)array andSender:(id)sender
+{
     
+    PopOverVC *popOverObj = [[PopOverVC alloc] init];
+    popOverObj.listArray = array;
+    UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
+    CGSize size;
     if (IS_IPAD) {
-        NutritionVC *PopoverView =[[NutritionVC alloc] initWithNibName:@"NutritionVC" bundle:nil];
-        self.popOver =[[UIPopoverController alloc] initWithContentViewController:PopoverView];
-        [self.popOver presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
     } else {
-        NutritionVC *PopoverView =[[NutritionVC alloc] initWithNibName:@"NutritionVC" bundle:nil];
-        self.popOver =[[UIPopoverController alloc] initWithContentViewController:PopoverView];
-        [self.popOver presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
     }
-    
+    [popOver setPopoverContentSize:size];
+    [popOver setBackgroundColor:[UIColor whiteColor]];
+    [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)foodDiaryFetchDetailsPostMethodWebService {
@@ -221,14 +400,15 @@
                 NSArray *filteredData = [resultArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(DATE contains[c] %@)", [[resultArray objectAtIndex:i] valueForKey:@"DATE"]]];
                 
                 [filteredArray addObject:filteredData];
-                NSLog(@"filteredData:%d:%@", i, filteredData);
+//                NSLog(@"filteredData:%d:%@", i, filteredData);
             }
             
             foodDiaryArray = [NSMutableArray new];
             NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:filteredArray];
             foodDiaryArray = (NSMutableArray *)[orderedSet array];
-            NSLog(@"arrayWithoutDuplicates:%@", foodDiaryArray);
-            NSLog(@"count:%lu", (unsigned long)foodDiaryArray.count);
+//            NSLog(@"arrayWithoutDuplicates:%@", foodDiaryArray);
+//            NSLog(@"count:%lu", (unsigned long)foodDiaryArray.count);
+            [self.nutritionCollectionView reloadData];
         }
         
         [AppCommon hideLoading];

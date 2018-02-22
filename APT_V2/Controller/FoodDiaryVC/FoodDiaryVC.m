@@ -98,8 +98,8 @@
     if ([self.dateTF.text isEqualToString:selectedDate]) {
 //        [self foodDiaryUpdatePostMethodWebService];
     } else {
-        [self setClearForFoodDiaryDetails];
-        [self foodDiaryFetchDetailsPostMethodWebService];
+//        [self setClearForFoodDiaryDetails];
+//        [self foodDiaryFetchDetailsPostMethodWebService];
     }
     [self.view endEditing:true];
 }
@@ -520,13 +520,19 @@
         
          if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
              
+             foodDiaryArray = [NSMutableArray new];
+             foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.foodDiaryCollectionView reloadData];
+             });
+             
              if ([self.dateTF.text isEqualToString:selectedDate]) {
-                 foodDiaryArray = [NSMutableArray new];
-                 foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
-                 [self setClearBorderForMealTypeAndLocation];
+//                 foodDiaryArray = [NSMutableArray new];
+//                 foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+//                 [self setClearBorderForMealTypeAndLocation];
              } else {
-                 foodDiaryDateArray = [NSMutableArray new];
-                 [self foodDiarySelectedDateDetails];
+//                 foodDiaryDateArray = [NSMutableArray new];
+//                 [self foodDiarySelectedDateDetails];
              }
          }
         
@@ -542,6 +548,63 @@
     
 }
 
+
+
+- (void)foodDiaryFetchDetailsPostMethodWebServiceForNewDate:(NSString *)date {
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(foodDiaryFetch);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+        //CLIENTCODE, PLAYERCODE, DATE
+    clientCode = [AppCommon GetClientCode];
+    userRefCode = [AppCommon GetuserReference];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
+    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
+    [dic setObject:date forKey:@"DATE"];
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
+            
+            foodDiaryArray = [NSMutableArray new];
+            foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.foodDiaryCollectionView reloadData];
+            });
+            
+            if ([self.dateTF.text isEqualToString:selectedDate]) {
+                    //                 foodDiaryArray = [NSMutableArray new];
+                    //                 foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+                    //                 [self setClearBorderForMealTypeAndLocation];
+            } else {
+                    //                 foodDiaryDateArray = [NSMutableArray new];
+                    //                 [self foodDiarySelectedDateDetails];
+            }
+        }
+        
+        [AppCommon hideLoading];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+    
+}
 
 - (void)foodDiaryInsertPostMethodWebService {
     
