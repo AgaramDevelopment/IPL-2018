@@ -141,5 +141,8 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)trainingGraphFilter :(NSString *)codelist :(NSString *)clientcode  :(NSString *)playercode :(NSString *)barvalue :(NSString *)linevalue :(NSString *)workdate :(NSString *)type  success:(WebserviceRequestSuccessHandler)success
                     failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)CoachWellnessGraph :(NSString *)codelist :(NSString *)playercode  :(NSString *)date :(NSString *)charttype   success:(WebserviceRequestSuccessHandler)success
+                   failure:(WebserviceRequestFailureHandler)failure;
+
 @end
 

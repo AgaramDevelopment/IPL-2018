@@ -15,6 +15,7 @@
 #import "MatchCenterTBC.h"
 #import "TrainingLoadUpdateVC.h"
 #import "FoodDiaryVC.h"
+#import "ReportsVC.h"
 
 @interface RearViewController ()
 {
@@ -68,7 +69,7 @@
     else
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
+        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Reports",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -219,6 +220,11 @@
                 
             }
             
+        }
+        else if(indexPath.row == 5)
+        {
+            
+            newFrontController= [ReportsVC new];
         }
         else if (indexPath.row == arrItems.count -1)
         {
