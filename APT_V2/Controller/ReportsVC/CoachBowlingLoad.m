@@ -1,19 +1,19 @@
 //
-//  CoachTraingLoad.m
+//  CoachBowlingLoad.m
 //  APT_V2
 //
 //  Created by Apple on 22/02/18.
 //  Copyright © 2018 user. All rights reserved.
 //
 
-#import "CoachTraingLoad.h"
+#import "CoachBowlingLoad.h"
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
 #import "HorizontalXLblFormatter.h"
 #import "HorizontalXLblFormatter.h"
 
-@interface CoachTraingLoad () <ChartViewDelegate>
+@interface CoachBowlingLoad () <ChartViewDelegate>
 {
     WebService *objWebservice;
 }
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation CoachTraingLoad
+@implementation CoachBowlingLoad
 
 - (void)viewDidLoad
 {
@@ -64,7 +64,7 @@
     
     ChartLegend *l = _chartView.legend;
     l.form = ChartLegendFormLine;
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
+    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
     l.textColor = UIColor.whiteColor;
     l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
     l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
@@ -137,7 +137,7 @@
         //        double mult = range / 2.0;
         //        double val = (double) (arc4random_uniform(mult)) + 50;
         
-        double val = [[[self.ChartValuesArray valueForKey:@"RPE"]objectAtIndex:i] doubleValue];
+        double val = [[self.ChartValuesArray objectAtIndex:i] doubleValue];
         //double val1 = [array1[i] doubleValue];
         [yVals1 addObject:[[ChartDataEntry alloc] initWithX:i*spaceforbar y:val]];
     }
@@ -243,50 +243,54 @@
     [self chartWebservice:newDateString:@"DAILY"];
 }
 
-
 -(void)chartWebservice :(NSString *)date :(NSString *)type
 {
     [AppCommon showLoading ];
     
     NSString *playerCode = @"AMR0000010";
-    NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    //NSString *date = @"02-21-2018";
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
     objWebservice = [[WebService alloc]init];
     
     //NSString *dateString = self.datelbl.text;
     
     
     
-    [objWebservice CoachTrainingGraph :coachTrainingKey: clientCode :playerCode : date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice BowlingLoad :BowlingLoadKey:ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         if(responseObject >0)
         {
-          
-            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            
+            NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+            reqArray = responseObject;
+            if(reqArray.count>0)
             {
-            self.ChartValuesArray = [[NSMutableArray alloc]init];
-            self.ChartXaxisValuesArray = [[NSMutableArray alloc]init];
-            self.ChartValuesArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
-                for(int i=0;i<self.ChartValuesArray.count;i++)
+                self.ChartValuesArray = [[NSMutableArray alloc]init];
+                self.ChartXaxisValuesArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<reqArray.count;i++)
                 {
-                    NSString *value = [[self.ChartValuesArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i];
-                    NSArray *arr = [value componentsSeparatedByString:@""];
-                    NSString *xvalue = arr[0];
-                    [self.ChartXaxisValuesArray addObject:xvalue];
+                    //                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                    //                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                    //                int total = timecount * rpecount;
+                    [self.ChartValuesArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
+                    [self.ChartXaxisValuesArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
                 }
-            [self sethartData];
+                
+                [self sethartData];
             }
         }
         [AppCommon hideLoading];
         
     }
-failure:^(AFHTTPRequestOperation *operation, id error) {
-NSLog(@"failed");
-[COMMON webServiceFailureError:error];
-}];
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            NSLog(@"failed");
+                            [COMMON webServiceFailureError:error];
+                        }];
     
 }
+
 
 
 -(void) setInningsBySelection: (NSString*) innsNo{

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @property (strong, nonatomic) IBOutlet UIView *TraingLoadView;
+@property (strong, nonatomic) IBOutlet UIView *BowlingLoadView;
 
 @property (strong, nonatomic) IBOutlet UIButton *MonthlyBtn;
 @property (strong, nonatomic) IBOutlet UIButton *WeeklyBtn;
