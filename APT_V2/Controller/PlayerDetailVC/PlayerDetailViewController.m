@@ -22,13 +22,14 @@
 @end
 
 @implementation PlayerDetailViewController
-@synthesize scrollView,contentView;
+@synthesize scrollView,contentView,tblDateDropDown;
 
 @synthesize spiderChartView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     scrollView.contentSize = contentView.frame.size;
     [scrollView addSubview:contentView];
     [contentView.topAnchor constraintEqualToAnchor:scrollView.topAnchor];
@@ -69,7 +70,7 @@
     spiderChartView.webColor = UIColor.lightGrayColor;
     spiderChartView.innerWebColor = UIColor.lightGrayColor;
     spiderChartView.webAlpha = 1.0;
-    
+    spiderChartView.backgroundColor = UIColor.whiteColor;
 //    RadarMarkerView *marker = (RadarMarkerView *)[RadarMarkerView viewFromXib];
 //    marker.chartView = _chartView;
 //    spiderChartView.marker = marker;
@@ -79,7 +80,7 @@
     xAxis.xOffset = 0.0;
     xAxis.yOffset = 0.0;
     xAxis.valueFormatter = self;
-    xAxis.labelTextColor = UIColor.whiteColor;
+    xAxis.labelTextColor = UIColor.blackColor;
     
     ChartYAxis *yAxis = spiderChartView.yAxis;
     yAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
@@ -87,6 +88,7 @@
     yAxis.axisMinimum = 0.0;
     yAxis.axisMaximum = 80.0;
     yAxis.drawLabelsEnabled = NO;
+    yAxis.labelTextColor = UIColor.yellowColor;
     
     ChartLegend *l = spiderChartView.legend;
     l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
@@ -96,7 +98,7 @@
     l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
     l.xEntrySpace = 7.0;
     l.yEntrySpace = 5.0;
-    l.textColor = UIColor.whiteColor;
+    l.textColor = UIColor.redColor;
     
     [self updateChartData];
     
@@ -144,8 +146,9 @@
     }
     
     RadarChartDataSet *set1 = [[RadarChartDataSet alloc] initWithValues:entries1 label:@"Last Week"];
-    [set1 setColor:[UIColor colorWithRed:103/255.0 green:110/255.0 blue:129/255.0 alpha:1.0]];
-    set1.fillColor = [UIColor colorWithRed:103/255.0 green:110/255.0 blue:129/255.0 alpha:1.0];
+    [set1 setColor:[UIColor colorWithRed:193/255.0 green:255/255.0 blue:130/255.0 alpha:1.0]];
+    set1.fillColor = [UIColor colorWithRed:230/255.0 green:255/255.0 blue:214/255.0 alpha:1.0];
+
     set1.drawFilledEnabled = YES;
     set1.fillAlpha = 0.7;
     set1.lineWidth = 2.0;
@@ -153,8 +156,8 @@
     [set1 setDrawHighlightIndicators:NO];
     
     RadarChartDataSet *set2 = [[RadarChartDataSet alloc] initWithValues:entries2 label:@"This Week"];
-    [set2 setColor:[UIColor colorWithRed:121/255.0 green:162/255.0 blue:175/255.0 alpha:1.0]];
-    set2.fillColor = [UIColor colorWithRed:121/255.0 green:162/255.0 blue:175/255.0 alpha:1.0];
+    [set2 setColor:[UIColor colorWithRed:245/255.0 green:146/255.0 blue:159/255.0 alpha:1.0]];
+    set2.fillColor = [UIColor colorWithRed:251/255.0 green:217/255.0 blue:220/255.0 alpha:1.0];
     set2.drawFilledEnabled = YES;
     set2.fillAlpha = 0.7;
     set2.lineWidth = 2.0;
@@ -164,7 +167,7 @@
     RadarChartData *data = [[RadarChartData alloc] initWithDataSets:@[set1, set2]];
     [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:8.f]];
     [data setDrawValues:NO];
-    data.valueTextColor = UIColor.whiteColor;
+    data.valueTextColor = UIColor.greenColor;
     
     spiderChartView.data = data;
 }
@@ -203,12 +206,22 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (tableView == tblDateDropDown) {
+        return 0;
+    }
 
-    return (IS_IPAD ? 45 : 40);
+
+    return (IS_IPAD ? 40 : 35);
     
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (tableView == tblDateDropDown) {
+        return nil;
+        
+    }
+    
+    
     PlayerDetailTableViewCell* cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"Header"];
     NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"PlayerDetailTableViewCell" owner:self options:nil];
     if (!tableView.tag) {
@@ -225,12 +238,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger* cellCount = 0;
+    if (tableView == tblDateDropDown) {
+        cellCount = [[TableArray valueForKey:@"testDates"] count];
+        return cellCount;
+    }
+    
     if (!tableView.tag) {
         cellCount = [[TableArray valueForKey:@"homeRecentForm"] count];
+        [self.lblNoRecentPerformance setHidden:cellCount];
     }
     else
     {
         cellCount = [[TableArray valueForKey:@"homeHistory"] count];
+        [self.lblNoHistory setHidden:cellCount];
     }
     
     return  cellCount;
@@ -243,6 +263,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == tblDateDropDown) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"DropDown"];
+        
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DropDown"];
+        }
+        cell.textLabel.text =  [[[TableArray valueForKey:@"testDates"] objectAtIndex:indexPath.row] valueForKey:@"testDate"];
+        
+        
+        return cell;
+    }
+    
+    
+    
     PlayerDetailTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Content"];
     NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"PlayerDetailTableViewCell" owner:self options:nil];
     if (!tableView.tag) {
@@ -254,8 +288,6 @@
         cell.lblBowl.text = [[[TableArray valueForKey:@"homeRecentForm"] objectAtIndex:indexPath.row] valueForKey:@"bowls"];
         cell.lblCat.text = [[[TableArray valueForKey:@"homeRecentForm"] objectAtIndex:indexPath.row] valueForKey:@"catches"];
         cell.lblStump.text = [[[TableArray valueForKey:@"homeRecentForm"] objectAtIndex:indexPath.row] valueForKey:@"stumpings"];
-
-        
     }
     else
     {
@@ -269,8 +301,28 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == tblDateDropDown) {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        [self fitnessGraphWebservicebyDate:cell.textLabel.text];
+        
+    }
+    [scrollView setScrollEnabled:YES];
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (!tblDateDropDown.isHidden && scrollView == self.scrollView) {
+        [tblDateDropDown setHidden:YES];
+        [scrollView setScrollEnabled:NO];
+    }else
+    {
+        [scrollView setScrollEnabled:YES];
+    }
     
 }
+
 
 -(void)playerDetailWebservice
 {
@@ -321,30 +373,9 @@
                 
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-//                NSInteger* tbl1MaxCount = [[TableArray valueForKeyPath:@"homeRecentForm"] count];
-//                CGFloat height1;
-//                if (tbl1MaxCount > 3) {
-//                    height1 = (IS_IPAD ? 45 : 40) + ((IS_IPAD ? 35 : 30) * 3);
-//                }
-//                else {
-//                    height1 = (IS_IPAD ? 45 : 40) + ((IS_IPAD ? 35 : 30) * 1);
-//                }
-//
-//                NSInteger* tbl2MaxCount = [[TableArray valueForKeyPath:@"homeHistory"] count];
-//                CGFloat height2;
-//                if (tbl2MaxCount > 3) {
-//                    height2 = (IS_IPAD ? 45 : 40) + ((IS_IPAD ? 35 : 30) * 3);
-//                }
-//                else{
-//                    height2 = (IS_IPAD ? 45 : 40) + ((IS_IPAD ? 35 : 30) * 1);
-//                }
-//                self.tbl1Height.constant = height1;
-//                self.tbl2Height.constant = height2;
-//                [self.tblRecentPerformance updateFocusIfNeeded];
-//                [self.tblHistory updateFocusIfNeeded];
-                
                 [_tblHistory reloadData];
                 [_tblRecentPerformance reloadData];
+                [tblDateDropDown reloadData];
             });
             
             [AppCommon hideLoading];
@@ -355,7 +386,105 @@
             [COMMON webServiceFailureError:error];
             
         }];
+    
+    
 }
 
 
+-(void)fitnessGraphWebservicebyDate:(NSString *)strDate
+{
+    
+    /*
+     API URL        :
+     API NAME       : MOBILE_RECENTDETAILS
+     METHOD         : POST
+     INPUT FORMAT   : JSON
+     INPUT PARAMS   :
+     {
+     "ClientCode":"CLI0000001",
+     "UserrefCode":"AMR0000016",
+     "PlayerCode": "PYC0000002"
+     }
+     
+     
+     MOBILE_RECENTDETAILSFITNESS
+     
+     ClientCode
+     UserrefCode
+     AssessmentEntryDate
+     */
+    
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE("MOBILE_RECENTDETAILSFITNESS");
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString *UserrefCode = [AppCommon GetuserReference];
+    NSString *PlayerCode = [self PlayerCode];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
+    if(UserrefCode)  [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+    if(PlayerCode)   [dic    setObject:PlayerCode     forKey:@"PlayerCode"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            NSMutableDictionary* dict = TableArray.firstObject;
+//            dict = [NSMutableArray new];
+            
+        }
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+        [COMMON webServiceFailureError:error];
+        
+    }];
+   
+}
+
+- (IBAction)actionpopup:(id)sender {
+  
+    [tblDateDropDown setHidden:NO];
+    [self.contentView bringSubviewToFront:tblDateDropDown];
+    [tblDateDropDown reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (IBAction)playerMultiActions:(id)sender {
+    
+    if ([sender tag] == 0) { // Assessment
+        
+    }
+    else if ([sender tag] == 1) // Nutrition
+    {
+        
+    }
+    else if ([sender tag] == 2)  // Food Diary
+    {
+        
+    }
+    else if ([sender tag] == 3) // Reports
+    {
+        
+    }
+    else if ([sender tag] == 4) // Wellness
+    {
+        
+    }
+}
 @end
