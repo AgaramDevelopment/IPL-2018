@@ -16,6 +16,8 @@
     UIColor *originalBarBgColor;
     UIColor *originalBarTintColor;
     UIBarStyle originalBarStyle;
+    NSMutableArray* graphArray;
+    NSMutableDictionary* graphDict;
 
 }
 
@@ -30,13 +32,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    scrollView.contentSize = contentView.frame.size;
-    [scrollView addSubview:contentView];
-    [contentView.topAnchor constraintEqualToAnchor:scrollView.topAnchor];
-    [contentView.leadingAnchor constraintEqualToAnchor:scrollView.leadingAnchor];
-    [contentView.trailingAnchor constraintEqualToAnchor:scrollView.trailingAnchor];
-    [contentView.bottomAnchor constraintEqualToAnchor:scrollView.bottomAnchor];
-    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+//    scrollView.contentSize = contentView.frame.size;
+//    [scrollView addSubview:contentView];
+//    [contentView.topAnchor constraintEqualToAnchor:scrollView.topAnchor];
+//    [contentView.leadingAnchor constraintEqualToAnchor:scrollView.leadingAnchor];
+//    [contentView.trailingAnchor constraintEqualToAnchor:scrollView.trailingAnchor];
+//    [contentView.bottomAnchor constraintEqualToAnchor:scrollView.bottomAnchor];
+//    contentView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self customnavigationmethod];
 
@@ -44,8 +46,8 @@
     
     [self playerDetailWebservice];
     
-    activities = @[ @"Burger", @"Steak", @"Salad", @"Pasta", @"Pizza" ];
-    [self chatConfiguration];
+//    activities = @[ @"Burger", @"Steak", @"Salad", @"Pasta", @"Pizza" ];
+    graphDict = [NSMutableDictionary new];
 
 }
 
@@ -100,7 +102,7 @@
     l.yEntrySpace = 5.0;
     l.textColor = UIColor.blackColor;
     
-    [self updateChartData];
+//    [self updateChartData];
     
     [spiderChartView animateWithXAxisDuration:1.4 yAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
 
@@ -118,18 +120,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateChartData
-{
-//    if (self.shouldHideData)
-//    {
-//        spiderChartView.data = nil;
-//        return;
-//    }
-    
-    [self setChartData];
-}
+//- (void)updateChartData
+//{
+////    if (self.shouldHideData)
+////    {
+////        spiderChartView.data = nil;
+////        return;
+////    }
+//
+//    [self setChartData];
+//}
 
-- (void)setChartData
+- (void)setChartData:(NSDictionary *)DictValue
 {
     double mult = 80;
     double min = 20;
@@ -139,13 +141,29 @@
     NSMutableArray *entries2 = [[NSMutableArray alloc] init];
     
     // NOTE: The order of the entries when being added to the entries array determines their position around the center of the chart.
-    for (int i = 0; i < cnt; i++)
-    {
-        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+//    for (int i = 0; i < cnt; i++)
+//    {
+//        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+//        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+//    }
+    
+//    NSDictionary* mainDict = [Array valueForKey:@"set1"];
+//    NSDictionary* mainDict1 = [Array valueForKey:@"set2"];
+    for (NSDictionary* dict in [DictValue valueForKey:@"set1"]) {
+        
+        NSNumber* data1 = [dict valueForKey:@"value"];
+        [entries1 addObject:[[RadarChartDataEntry alloc]initWithValue:[data1 doubleValue]]];
     }
     
-    RadarChartDataSet *set1 = [[RadarChartDataSet alloc] initWithValues:entries1 label:@"Last Week"];
+    for (NSDictionary* dict in [DictValue valueForKey:@"set2"]) {
+
+        NSNumber* data2 = [dict valueForKey:@"value"];
+        [entries2 addObject:[[RadarChartDataEntry alloc]initWithValue:[data2 doubleValue]]];
+    }
+    
+    
+    NSString* set1Name = [[[DictValue valueForKey:@"set1"] firstObject] valueForKey:@"testDate"];
+    RadarChartDataSet *set1 = [[RadarChartDataSet alloc] initWithValues:entries1 label:set1Name];
     [set1 setColor:[UIColor colorWithRed:193/255.0 green:255/255.0 blue:130/255.0 alpha:1.0]];
     set1.fillColor = [UIColor colorWithRed:230/255.0 green:255/255.0 blue:214/255.0 alpha:1.0];
 
@@ -155,7 +173,9 @@
     set1.drawHighlightCircleEnabled = YES;
     [set1 setDrawHighlightIndicators:NO];
     
-    RadarChartDataSet *set2 = [[RadarChartDataSet alloc] initWithValues:entries2 label:@"This Week"];
+    NSString* set2Name = [[[DictValue valueForKey:@"set2"] firstObject] valueForKey:@"testDate"];
+
+    RadarChartDataSet *set2 = [[RadarChartDataSet alloc] initWithValues:entries2 label:set2Name];
     [set2 setColor:[UIColor colorWithRed:245/255.0 green:146/255.0 blue:159/255.0 alpha:1.0]];
     set2.fillColor = [UIColor colorWithRed:251/255.0 green:217/255.0 blue:220/255.0 alpha:1.0];
     set2.drawFilledEnabled = YES;
@@ -303,8 +323,9 @@
 {
     if (tableView == tblDateDropDown) {
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        
         [self fitnessGraphWebservicebyDate:cell.textLabel.text];
+        [tblDateDropDown setHidden:YES];
+
         
     }
     [scrollView setScrollEnabled:YES];
@@ -320,6 +341,10 @@
 //    {
 //        [scrollView setScrollEnabled:YES];
 //    }
+    
+    if (tblDateDropDown.tag != 4) {
+        [tblDateDropDown setHidden:YES];
+    }
     
 }
 
@@ -346,7 +371,7 @@
         
         [AppCommon showLoading];
     
-        NSString *URLString =  URL_FOR_RESOURCE(playerDetailsKey);
+        NSString *URLString =  URL_FOR_RESOURCE(RecentplayerDetailsKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -354,7 +379,7 @@
         manager.requestSerializer = requestSerializer;
     
         NSString *ClientCode = [AppCommon GetClientCode];
-        NSString *UserrefCode = [AppCommon GetuserReference];
+        NSString *UserrefCode = @"AMR0000016";//[AppCommon GetuserReference];
         NSString *PlayerCode = [self PlayerCode];
     
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -362,15 +387,35 @@
         if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
         if(PlayerCode)   [dic    setObject:PlayerCode     forKey:@"PlayerCode"];
     
-        NSLog(@"parameters : %@",dic);
+        NSLog(@"USED API URL %@ \n parameters %@",URLString,dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
             {
                 TableArray = [NSMutableArray new];
+                graphArray = [NSMutableArray new];
                 TableArray = responseObject;
+
+//                if ([[TableArray valueForKey:@"homeFitness"] count]) {
+                [graphDict setValue:[TableArray valueForKey:@"homeFitness"] forKey:@"set1"];
                 
+//                    NSDictionary* set1 = @{@"set1" : [TableArray valueForKey:@"homeFitness"]};
+////                    if (set1.count) {
+//                        [graphArray addObject:set1];
+////                    }
+                
+                if ([[TableArray valueForKey:@"homeFitness"] count]) {
+                    activities = [graphArray valueForKey:@"testName"];
+                    [self chatConfiguration];
+
+                }
+                
+
+                    [self setChartData:graphDict];
+//                }
+                
+
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_tblHistory reloadData];
@@ -420,7 +465,7 @@
     
     [AppCommon showLoading];
     
-    NSString *URLString =  URL_FOR_RESOURCE("MOBILE_RECENTDETAILSFITNESS");
+    NSString *URLString =  URL_FOR_RESOURCE(RecentplayerFitnessKey);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -428,22 +473,51 @@
     manager.requestSerializer = requestSerializer;
     
     NSString *ClientCode = [AppCommon GetClientCode];
-    NSString *UserrefCode = [AppCommon GetuserReference];
+    NSString *UserrefCode = @"AMR0000016";//[AppCommon GetuserReference];
     NSString *PlayerCode = [self PlayerCode];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
     if(UserrefCode)  [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
-    if(PlayerCode)   [dic    setObject:PlayerCode     forKey:@"PlayerCode"];
+    if(strDate)   [dic    setObject:strDate     forKey:@"AssessmentEntryDate"];
     
-    NSLog(@"parameters : %@",dic);
+    NSLog(@"USED API URL %@ \n parameters %@",URLString,dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
         if(responseObject >0)
         {
-            NSMutableDictionary* dict = TableArray.firstObject;
-//            dict = [NSMutableArray new];
+//            NSMutableDictionary* dict = TableArray.firstObject;
+////            dict = [NSMutableArray new];
+            
+            graphArray = [NSMutableArray new];
+//            graphArray = [responseObject valueForKey:@"homeFitness"];
+            
+//            if ([[responseObject valueForKey:@"homeFitness"] count]) {
+            
+//                activities = [graphArray valueForKey:@"testName"];
+
+//                if ([[TableArray valueForKey:@"homeFitness"] count]) {
+//                    NSDictionary* set1 = @{@"set1" : [TableArray valueForKey:@"homeFitness"]};
+//                    if (set1.count) {
+//                        [graphArray addObject:set1];
+//                    }
+//                }
+               
+//                NSDictionary* set2 = @{@"set2" : [responseObject valueForKey:@"homeFitness"]};
+//                if (set2.count) {
+//                    [graphArray addObject:set2];
+//                }
+//            }
+
+            if ([[responseObject valueForKey:@"homeFitness"] count]) {
+                activities = [[responseObject valueForKey:@"homeFitness"]valueForKey:@"testName"];
+                [self chatConfiguration];
+
+            }
+
+            [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
+            [self setChartData:graphDict];
             
         }
         
@@ -493,5 +567,13 @@
     }
     
     [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
+}
+
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 @end

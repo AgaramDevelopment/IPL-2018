@@ -276,8 +276,11 @@
 
 #define  dropdownActivityKey              @"MOBILE_GETTRAININGLOADGRAPH"
 
-#define  playerDetailsKey       @"MOBILE_RECENTDETAILS"
+#define  RecentplayerDetailsKey       @"MOBILE_RECENTDETAILS"
 
 #define  coachWellnessKey              @"MOBILE_FETCH_WORKLOAD_WELLNESSCHART"
 
 #define  coachTrainingKey              @"MOBILE_GETTRAININGLOADCHART"
+
+#define  RecentplayerFitnessKey       @"MOBILE_RECENTDETAILSFITNESS"
+

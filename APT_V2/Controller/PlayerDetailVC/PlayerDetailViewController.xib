@@ -311,7 +311,7 @@
                                             <rect key="frame" x="20" y="0.0" width="215" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-lY-DAl">
                                             <rect key="frame" x="20" y="0.0" width="187" height="30"/>
@@ -337,11 +337,6 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMk-vV-ZTi" customClass="RadarChartView" customModule="Charts">
                                     <rect key="frame" x="0.0" y="410" width="430" height="190"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="430" id="A8I-D7-1tu">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="630"/>
-                                        </constraint>
-                                    </constraints>
                                 </view>
                                 <tableView hidden="YES" clipsSubviews="YES" tag="4" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sni-6R-yPK">
                                     <rect key="frame" x="22" y="405" width="200" height="200"/>
