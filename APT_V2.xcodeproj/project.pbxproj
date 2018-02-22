@@ -36,7 +36,6 @@
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
 		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
-		18A2E711203D49CA00F91E73 /* TrainingPiechart.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
 		18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A5CAB420383FAD00586896 /* TeamsVC.xib */; };
@@ -59,6 +58,8 @@
 		18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC720371A7D00EBA479 /* AddWellnessRatingVC.xib */; };
 		18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */; };
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
+		18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3449203E812C003EE0F0 /* ReportsVC.m */; };
+		18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC344A203E812C003EE0F0 /* ReportsVC.xib */; };
 		18B37F48203AA2C100F51511 /* MCBattingRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B37F46203AA2C100F51511 /* MCBattingRootVC.m */; };
 		18B37F49203AA2C100F51511 /* MCBattingRootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B37F47203AA2C100F51511 /* MCBattingRootVC.xib */; };
 		18B37F54203AA77200F51511 /* BattingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B37F53203AA77200F51511 /* BattingView.xib */; };
@@ -263,6 +264,9 @@
 		18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
 		18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
 		18A68ACA20371A7D00EBA479 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		18AC3448203E812C003EE0F0 /* ReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsVC.h; sourceTree = "<group>"; };
+		18AC3449203E812C003EE0F0 /* ReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsVC.m; sourceTree = "<group>"; };
+		18AC344A203E812C003EE0F0 /* ReportsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportsVC.xib; sourceTree = "<group>"; };
 		18B37F45203AA2C100F51511 /* MCBattingRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCBattingRootVC.h; sourceTree = "<group>"; };
 		18B37F46203AA2C100F51511 /* MCBattingRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCBattingRootVC.m; sourceTree = "<group>"; };
 		18B37F47203AA2C100F51511 /* MCBattingRootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MCBattingRootVC.xib; sourceTree = "<group>"; };
@@ -608,11 +612,35 @@
 			path = TeamsVC;
 			sourceTree = "<group>";
 		};
+		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
+			isa = PBXGroup;
+			children = (
+				18AC3448203E812C003EE0F0 /* ReportsVC.h */,
+				18AC3449203E812C003EE0F0 /* ReportsVC.m */,
+				18AC344A203E812C003EE0F0 /* ReportsVC.xib */,
+			);
+			path = ReportsVC;
+			sourceTree = "<group>";
+		};
+		18AC344D203E8406003EE0F0 /* BattingOverBlock */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BattingOverBlock;
+			sourceTree = "<group>";
+		};
+		18AC344E203E8406003EE0F0 /* OverBlockOverVeiw */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OverBlockOverVeiw;
+			sourceTree = "<group>";
+		};
 		18B37F44203A958B00F51511 /* Batting */ = {
 			isa = PBXGroup;
 			children = (
-				18B37F4C203AA5EB00F51511 /* BattingOverBlock */,
-				18B37F4B203AA5AE00F51511 /* OverBlockOverVeiw */,
+				18AC344D203E8406003EE0F0 /* BattingOverBlock */,
+				18AC344E203E8406003EE0F0 /* OverBlockOverVeiw */,
 				18B37F4A203AA5A100F51511 /* BattingView */,
 				18B37F45203AA2C100F51511 /* MCBattingRootVC.h */,
 				18B37F46203AA2C100F51511 /* MCBattingRootVC.m */,
@@ -629,20 +657,6 @@
 				18B37F56203AB02600F51511 /* BattingView.m */,
 			);
 			path = BattingView;
-			sourceTree = "<group>";
-		};
-		18B37F4B203AA5AE00F51511 /* OverBlockOverVeiw */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = OverBlockOverVeiw;
-			sourceTree = "<group>";
-		};
-		18B37F4C203AA5EB00F51511 /* BattingOverBlock */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BattingOverBlock;
 			sourceTree = "<group>";
 		};
 		18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */ = {
@@ -995,6 +1009,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18AC3447203E812C003EE0F0 /* ReportsVC */,
 				CEF3831C203D417900FB5838 /* PlayerDetailVC */,
 				18B6D0E9203BDD570003CBA3 /* TrainingloadGraphsVC */,
 				18A5CAB120383F9400586896 /* TeamsVC */,
@@ -1318,6 +1333,7 @@
 				CEB2B97420257BBD00E7D5E4 /* Montserrat-Bold.otf in Resources */,
 				CEBD2A80202899BB000AFD1B /* DropDownTableViewController.xib in Resources */,
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
+				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
@@ -1411,6 +1427,7 @@
 				CEA4210D203161A900B2DAB5 /* VideoGalleryVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
+				18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				18EF9D1D20316EE000CDA268 /* MCTossAndResultsVC.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
