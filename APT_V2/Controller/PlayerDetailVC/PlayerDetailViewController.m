@@ -537,7 +537,10 @@
         selectedVC = [WellnessTrainingBowlingVC new];
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.PlayerCode forKey:@"SelectedPlayerCode"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.athletCode forKey:@"SelectedPlayerCode"];
+    NSString *userRefCode =  [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"SelectedPlayerCode"];
+    NSLog(@"userRefCode:%@", userRefCode);
     [[NSUserDefaults standardUserDefaults] synchronize];
     [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
 }

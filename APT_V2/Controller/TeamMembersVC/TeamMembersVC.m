@@ -196,7 +196,7 @@
 {
     PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
     NSString* Playercode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Playercode"];
-    
+    PlayerVC.athletCode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthleteCode"];
     NSString* age = [NSString stringWithFormat:@"%@ Years Old",[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Age"]];
     
     NSString *available = [[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row];
@@ -228,8 +228,10 @@
 //    [PlayerVC.playerDetails setValue:self.teamname forKey:@"TeamName"];
 //    [PlayerVC.playerDetails setValue:Playercode forKey:@"Playercode"];
 //    [PlayerVC.playerDetails setValue:[bowlingStyle stringByAppendingString:battingStyle] forKey:@"Playercode"];
-    
-    [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
+    NSLog(@"%@",appDel.frontNavigationController);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
+    });
 }
 
 

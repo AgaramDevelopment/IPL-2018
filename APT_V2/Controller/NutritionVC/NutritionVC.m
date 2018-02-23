@@ -46,6 +46,11 @@
      MSC345    DINNER
      */
     foodDiaryCodeArray = [[NSMutableArray alloc] initWithObjects:@"MSC342", @"MSC343", @"MSC344", @"MSC345", @"MSC412", nil];
+    snacksMoreArray = [NSMutableArray new];
+    breakfastMoreArray = [NSMutableArray new];
+    lunchMoreArray = [NSMutableArray new];
+    dinnerMoreArray = [NSMutableArray new];
+    supplementsMoreArray = [NSMutableArray new];
     
         //Fetch Service Call
     [self foodDiaryFetchDetailsPostMethodWebService];
@@ -58,27 +63,12 @@
 
 -(void)customnavigationmethod
 {
-    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
-    
-    SWRevealViewController *revealController = [self revealViewController];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
-    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
-    
-    if (isBackEnable) {
-        objCustomNavigation.menu_btn.hidden =YES;
-        objCustomNavigation.btn_back.hidden =NO;
-        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else
-        {
-        objCustomNavigation.menu_btn.hidden =NO;
-        objCustomNavigation.btn_back.hidden =YES;
-        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        }
+    CustomNavigation *objCustomNavigation=[CustomNavigation new];
     [self.navi_View addSubview:objCustomNavigation.view];
         //    objCustomNavigation.tittle_lbl.text=@"";
+    objCustomNavigation.btn_back.hidden =NO;
+    objCustomNavigation.menu_btn.hidden =YES;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)actionBack
@@ -111,6 +101,12 @@
     cell.lunchBtn.hidden = YES;
     cell.dinnerBtn.hidden = YES;
     cell.supplementsBtn.hidden = YES;
+    
+    cell.breakfastBtn.tag = indexPath.row;
+    cell.snacksBtn.tag = indexPath.row;
+    cell.lunchBtn.tag = indexPath.row;
+    cell.dinnerBtn.tag = indexPath.row;
+    cell.supplementsBtn.tag = indexPath.row;
     /*
      MSC342    BREAKFAST
      MSC343    SNACK
@@ -121,10 +117,30 @@
     NSMutableArray *foodDateArray = [NSMutableArray new];
     foodDateArray = [foodDiaryArray objectAtIndex:indexPath.row];
     
+    for (int i=0; i<foodDiaryArray.count; i++) {
+        [breakfastMoreArray addObject:@""];
+        [snacksMoreArray addObject:@""];
+        [lunchMoreArray addObject:@""];
+        [dinnerMoreArray addObject:@""];
+        [supplementsMoreArray addObject:@""];
+    }
+    
+    //Date Format
+    NSString *currentDate = [[foodDateArray objectAtIndex:0] valueForKey:@"DATE"];
+    NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+    [dateFormatters setDateFormat:@"MM-dd-yyyy"];
+    NSDate *dates = [dateFormatters dateFromString:currentDate];
+    
+    NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+    [dfs setDateFormat:@"E, d MMM yyyy"];
+    NSString * ondateStr = [dfs stringFromDate:dates];
+    cell.dateLbl.text = ondateStr;
+    NSLog(@"Date:%@", ondateStr);
     for (id dateDict in foodDateArray) {
-        
+    
             //For  MSC342    BREAKFAST
         if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC342"]) {
+
             cell.breakfastTimeLbl.text = [dateDict valueForKey:@"STARTTIME"];
             NSMutableArray *foodListArray = [dateDict valueForKey:@"FOODLIST"];
             
@@ -134,27 +150,28 @@
                     //                cell.breakfast3Lbl.text = @"-";
                 cell.breakfast2Lbl.text = @"";
                 cell.breakfast3Lbl.text = @"";
-                [breakfastMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 2) {
                 cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                     //                cell.breakfast3Lbl.text = @"-";
                 cell.breakfast3Lbl.text = @"";
-                [breakfastMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 3) {
                 cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                 cell.breakfast3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-                [breakfastMoreArray addObject:@""];
                 
             } else if (foodListArray.count > 3) {
+                cell.breakfast1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.breakfast2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.breakfast3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
                 cell.breakfastBtn.hidden = NO;
-                breakfastMoreArray = [NSMutableArray new];
+                NSMutableArray *breakfastArray = [NSMutableArray new];
                 for (id listDict in foodListArray) {
-                    [breakfastMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                    [breakfastArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
+                [breakfastMoreArray insertObject:breakfastArray atIndex:indexPath.row];
             }
         }
         else {
@@ -175,29 +192,38 @@
                     //                cell.snacks3Lbl.text = @"-";
                 cell.snacks2Lbl.text = @"";
                 cell.snacks3Lbl.text = @"";
-                [snacksMoreArray addObject:@""];
-                
+//                [snacksMoreArray addObject:@""];
+//                [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
+            
             } else if (foodListArray.count == 2) {
                 cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.snacks2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                     //                cell.snacks3Lbl.text = @"-";
                 cell.snacks3Lbl.text = @"";
-                [snacksMoreArray addObject:@""];
-                
+//                [snacksMoreArray addObject:@""];
+//                [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
             } else if (foodListArray.count == 3) {
                 cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.snacks2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                 cell.snacks3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-                [snacksMoreArray addObject:@""];
-                
+//                [snacksMoreArray addObject:@""];
+//                [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
             } else if (foodListArray.count > 3) {
+                cell.snacks1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.snacks2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.snacks3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
                 cell.snacksBtn.hidden = NO;
-                snacksMoreArray = [NSMutableArray new];
+                
+                NSMutableArray *snacksArray = [NSMutableArray new];
                 for (id listDict in foodListArray) {
-                    [snacksMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                    [snacksArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
+//                [snacksMoreArray addObject:snacksArray];
+                [snacksMoreArray insertObject:snacksArray atIndex:indexPath.row];
             }
         } else {
+//            [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
+//            [snacksMoreArray addObject:@""];
                 //Data is not available then Declare values with "-"
                 //            cell.snacks1Lbl.text = @"-";
                 //            cell.snacks2Lbl.text = @"-";
@@ -215,27 +241,29 @@
                     //                cell.lunch3Lbl.text = @"-";
                 cell.lunch2Lbl.text = @"";
                 cell.lunch3Lbl.text = @"";
-                [lunchMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 2) {
                 cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.lunch2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                     //                cell.lunch3Lbl.text = @"-";
                 cell.lunch3Lbl.text = @"";
-                [lunchMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 3) {
                 cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.lunch2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                 cell.lunch3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-                [lunchMoreArray addObject:@""];
                 
             } else if (foodListArray.count > 3) {
+                cell.lunch1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.lunch2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.lunch3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
                 cell.lunchBtn.hidden = NO;
-                lunchMoreArray = [NSMutableArray new];
+                
+                NSMutableArray *lunchArray = [NSMutableArray new];
                 for (id listDict in foodListArray) {
-                    [lunchMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                    [lunchArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
+                [lunchMoreArray insertObject:lunchArray atIndex:indexPath.row];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -255,13 +283,12 @@
                     //                cell.dinner3Lbl.text = @"-";
                 cell.dinner2Lbl.text = @"";
                 cell.dinner3Lbl.text = @"";
-                [dinnerMoreArray addObject:@""];
+               
             } else if (foodListArray.count == 2) {
                 cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.dinner2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                     //                cell.dinner3Lbl.text = @"-";
                 cell.dinner3Lbl.text = @"";
-                [dinnerMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 3) {
                 cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
@@ -270,11 +297,16 @@
                 [dinnerMoreArray addObject:@""];
                 
             } else if (foodListArray.count > 3) {
+                cell.dinner1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.dinner2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.dinner3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
                 cell.dinnerBtn.hidden = NO;
-                dinnerMoreArray = [NSMutableArray new];
+                
+                NSMutableArray *dinnerArray = [NSMutableArray new];
                 for (id listDict in foodListArray) {
-                    [dinnerMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                    [dinnerArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
+                [dinnerMoreArray insertObject:dinnerArray atIndex:indexPath.row];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -293,27 +325,29 @@
                     //                cell.supplements3Lbl.text = @"-";
                 cell.supplements2Lbl.text = @"";
                 cell.supplements3Lbl.text = @"";
-                [supplementsMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 2) {
                 cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.supplements2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                     //                cell.supplements3Lbl.text = @"-";
                 cell.supplements3Lbl.text = @"";
-                [supplementsMoreArray addObject:@""];
                 
             } else if (foodListArray.count == 3) {
                 cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
                 cell.supplements2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
                 cell.supplements3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-                [supplementsMoreArray addObject:@""];
                 
             } else if (foodListArray.count > 3) {
+                cell.supplements1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.supplements2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.supplements3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
                 cell.supplementsBtn.hidden = NO;
-                supplementsMoreArray = [NSMutableArray new];
+                
+                NSMutableArray *supplementsArray = [NSMutableArray new];
                 for (id listDict in foodListArray) {
-                    [supplementsMoreArray addObject:[listDict valueForKey:@"FOOD"]];
+                    [supplementsArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
+                [supplementsMoreArray insertObject:supplementsArray atIndex:indexPath.row];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -323,11 +357,7 @@
         }
     }
     
-    cell.breakfastBtn.tag = indexPath.row;
-    cell.snacksBtn.tag = indexPath.row;
-    cell.lunchBtn.tag = indexPath.row;
-    cell.dinnerBtn.tag = indexPath.row;
-    cell.supplementsBtn.tag = indexPath.row;
+    
         //Target for More Details
     [cell.breakfastBtn addTarget:self action:@selector(didClickBreakfastMore:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -362,6 +392,7 @@
 
 -(IBAction)didClickSnacksMore:(id)sender
 {
+    NSLog(@"snacksMoreArray:%@", snacksMoreArray);
     [self popOverViewFuction:snacksMoreArray andSender:sender];
 }
 
@@ -425,11 +456,14 @@
     manager.requestSerializer = requestSerializer;
         //CLIENTCODE, PLAYERCODE, DATE
     clientCode = [AppCommon GetClientCode];
-    userRefCode = [AppCommon GetuserReference];
+//    userRefCode = [AppCommon GetuserReference];
+    userRefCode =  [[NSUserDefaults standardUserDefaults]
+                    stringForKey:@"SelectedPlayerCode"];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
-    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
+//    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
+    [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
     [dic setObject:date forKey:@"DATE"];
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -450,8 +484,7 @@
             foodDiaryArray = [NSMutableArray new];
             NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:filteredArray];
             foodDiaryArray = (NSMutableArray *)[orderedSet array];
-                //            NSLog(@"arrayWithoutDuplicates:%@", foodDiaryArray);
-                //            NSLog(@"count:%lu", (unsigned long)foodDiaryArray.count);
+            
             [self.nutritionCollectionView reloadData];
         }
         
