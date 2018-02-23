@@ -12,6 +12,8 @@
 
 @interface ViewController : UIViewController
 
+@property (strong,nonatomic) NSString* playerCode;
+
 @property (weak, nonatomic) IBOutlet UITableView *tblAssesments;
 //@property (weak, nonatomic) IBOutlet LineTextField *txtModule;
 //@property (weak, nonatomic) IBOutlet LineTextField *txtTitle;
