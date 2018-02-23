@@ -15,12 +15,15 @@
 #import "SWRevealViewController.h"
 #import "WellnessTrainingBowlingVC.h"
 #import "VideoGalleryVC.h"
+#import "HomeScreenStandingsVC.h"
+#import "SwipeView.h"
 
 @interface TabHomeVC ()
 {
     SchResStandVC *objSch;
     WellnessTrainingBowlingVC * objWell;
     VideoGalleryVC * objVideo;
+    HomeScreenStandingsVC *StandsVC;
 }
 
 @end
@@ -86,7 +89,7 @@
         else
         {
             
-                return CGSizeMake(240, 50);
+                return CGSizeMake(100, 30);
         }
     }
     else
@@ -141,7 +144,7 @@
     
     if(indexPath.row==0)
     {
-        cell.Title.text = @"SCHEDULE/RESULTS/STANDINGS";
+        cell.Title.text = @"SCHEDULE/RESULTS/VIDEOS";
         [cell setTag:indexPath.row];
         
         objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
@@ -156,7 +159,7 @@
     }
     if(indexPath.row==2)
     {
-        cell.Title.text = @"VIDEOGALLERY";
+        cell.Title.text = @"STANDINGS";
         [cell setTag:indexPath.row];
     }
     
@@ -186,11 +189,76 @@
     
     if(indexPath.row == 2)
     {
-        objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
-        objVideo.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self.view addSubview:objVideo.view];
+        StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+        StandsVC.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+        [self.view addSubview:StandsVC.view];
     }
 }
+
+
+
+//- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
+//{
+//    //return the total number of items in the carousel
+//    return 3;
+//}
+//
+//- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+//{
+//    UILabel *label = nil;
+//
+//    //create new view if no view is available for recycling
+//    if (view == nil)
+//    {
+//        view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
+//        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//
+//        if(index == 0)
+//        {
+//            objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+//            objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+//
+//        }
+//        else if(index == 1)
+//        {
+//            objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+//            objWell.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+//            [view addSubview:objWell.view];
+//        }
+//        else if(index == 2)
+//        {
+//            StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+//            StandsVC.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+//            [view addSubview:StandsVC.view];
+//        }
+//        [view addSubview:objSch.view];
+//
+//        //[view addSubview:Fix.view];
+//    }
+//    else
+//    {
+//        //get a reference to the label in the recycled view
+//        label = (UILabel *)[view viewWithTag:1];
+//    }
+//
+//
+//    return view;
+//}
+//
+//- (CGSize)swipeViewItemSize:(SwipeView *)swipeView
+//{
+//    return self.swipeView.bounds.size;
+//}
+//
+//- (void)swipeViewDidScroll:(SwipeView *)swipeView
+//{
+//
+//}
+//- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
+//{
+//   // self.page_control.currentPage = self.swipeView.currentItemIndex;
+//}
+
 
 
 

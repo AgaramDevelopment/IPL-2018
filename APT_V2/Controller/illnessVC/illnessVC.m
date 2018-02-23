@@ -7,8 +7,7 @@
 //
 
 #import "illnessVC.h"
-#import "illnessTableViewCell.h"
-#import "Config.h"
+#import "Header.h"
 
 @interface illnessVC ()
 
@@ -23,12 +22,52 @@
     illnessArray = [NSMutableArray new];
     
     self.illnessTableView.tableFooterView = [UIView new];
+    [self customnavigationmethod];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    UIView* view= self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.navBarView addSubview:objCustomNavigation.view];
+//    objCustomNavigation.tittle_lbl.text=@"";
+
+    
+}
+
+-(void)actionBack
+{
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    
 }
 
 #pragma mark - UITableViewDataSource

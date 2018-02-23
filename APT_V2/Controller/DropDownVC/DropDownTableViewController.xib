@@ -28,13 +28,10 @@
                         <outletCollection property="gestureRecognizers" destination="YOj-d1-qe1" appends="YES" id="Fnt-DI-c51"/>
                     </connections>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kij-6C-weu">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kij-6C-weu">
                     <rect key="frame" x="40" y="140" width="294" height="388"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="294" id="L9e-aR-BhB"/>
-                        <constraint firstAttribute="height" constant="388" id="XcI-mB-yub"/>
-                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="4RJ-92-VJN"/>
                         <outlet property="delegate" destination="-1" id="Fl7-Ye-hNx"/>
@@ -44,10 +41,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="zbH-PY-qut" firstAttribute="top" secondItem="mH3-l8-7Nv" secondAttribute="top" constant="20" id="2jK-3k-B61"/>
-                <constraint firstItem="kij-6C-weu" firstAttribute="centerY" secondItem="0bJ-O5-uzu" secondAttribute="centerY" id="46a-Mm-h40"/>
                 <constraint firstItem="zbH-PY-qut" firstAttribute="bottom" secondItem="mH3-l8-7Nv" secondAttribute="bottom" id="NLx-Ja-JyX"/>
                 <constraint firstItem="zbH-PY-qut" firstAttribute="trailing" secondItem="mH3-l8-7Nv" secondAttribute="trailing" id="cH4-Gb-oBf"/>
-                <constraint firstItem="kij-6C-weu" firstAttribute="centerX" secondItem="0bJ-O5-uzu" secondAttribute="centerX" id="dbC-QD-9vI"/>
                 <constraint firstItem="mH3-l8-7Nv" firstAttribute="leading" secondItem="zbH-PY-qut" secondAttribute="leading" id="yTF-lg-cQf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

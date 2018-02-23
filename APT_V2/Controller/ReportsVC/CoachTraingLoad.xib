@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CoachTraingLoad">
+            <connections>
+                <outlet property="DailyBtn" destination="cao-we-nhQ" id="ZaB-73-Z8P"/>
+                <outlet property="MonthlyBtn" destination="5Yk-Bc-lJA" id="LId-gj-e2V"/>
+                <outlet property="WeeklyBtn" destination="COB-qx-uf5" id="7JA-HV-qno"/>
+                <outlet property="chartView" destination="ign-2c-3C2" id="ccG-Pu-qvd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPS-dd-OKE">
+                    <rect key="frame" x="5" y="30" width="365" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cao-we-nhQ">
+                            <rect key="frame" x="5" y="0.0" width="115" height="30"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="cha-RK-uhX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                            <state key="normal" title="DailyView">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                            </variation>
+                            <connections>
+                                <action selector="DailyAction:" destination="-1" eventType="touchUpInside" id="VfT-5m-zIY"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COB-qx-uf5">
+                            <rect key="frame" x="125" y="0.0" width="115" height="30"/>
+                            <color key="backgroundColor" red="0.78424429890000003" green="0.78435820339999995" blue="0.78421932459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="lHQ-yL-stY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                            <state key="normal" title="WeekView">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                            </variation>
+                            <connections>
+                                <action selector="WeeklyAction:" destination="-1" eventType="touchUpInside" id="Exf-GN-SAK"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-Bc-lJA">
+                            <rect key="frame" x="245" y="0.0" width="115" height="30"/>
+                            <color key="backgroundColor" red="0.78424429890000003" green="0.78435820339999995" blue="0.78421932459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="eUk-3Z-Sq2"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                            <state key="normal" title="MonthView">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                            </variation>
+                            <connections>
+                                <action selector="MonthlyAction:" destination="-1" eventType="touchUpInside" id="mSo-7H-Q80"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="5Yk-Bc-lJA" firstAttribute="width" secondItem="cao-we-nhQ" secondAttribute="width" id="EHI-5U-yem"/>
+                        <constraint firstItem="COB-qx-uf5" firstAttribute="leading" secondItem="cao-we-nhQ" secondAttribute="trailing" constant="5" id="M3S-fb-vKb"/>
+                        <constraint firstAttribute="height" constant="30" id="OBN-jr-xie"/>
+                        <constraint firstItem="5Yk-Bc-lJA" firstAttribute="top" secondItem="aPS-dd-OKE" secondAttribute="top" id="PJp-iL-DT2"/>
+                        <constraint firstItem="cao-we-nhQ" firstAttribute="top" secondItem="aPS-dd-OKE" secondAttribute="top" id="UQC-n2-A74"/>
+                        <constraint firstItem="COB-qx-uf5" firstAttribute="width" secondItem="cao-we-nhQ" secondAttribute="width" id="daP-5a-jIx"/>
+                        <constraint firstItem="COB-qx-uf5" firstAttribute="top" secondItem="aPS-dd-OKE" secondAttribute="top" id="eiS-Wf-Tv8"/>
+                        <constraint firstItem="5Yk-Bc-lJA" firstAttribute="leading" secondItem="COB-qx-uf5" secondAttribute="trailing" constant="5" id="jEb-85-Hnm"/>
+                        <constraint firstAttribute="trailing" secondItem="5Yk-Bc-lJA" secondAttribute="trailing" constant="5" id="pcX-L8-HbX"/>
+                        <constraint firstItem="cao-we-nhQ" firstAttribute="leading" secondItem="aPS-dd-OKE" secondAttribute="leading" constant="5" id="rt2-77-F8u"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ign-2c-3C2" customClass="LineChartView" customModule="Charts">
+                    <rect key="frame" x="0.0" y="70" width="375" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="p1l-Jb-qMQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="aPS-dd-OKE" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="10" id="C1m-fw-Gyg"/>
+                <constraint firstItem="aPS-dd-OKE" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="Q7S-np-pmo"/>
+                <constraint firstItem="ign-2c-3C2" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="RaG-Nl-oKz"/>
+                <constraint firstItem="ign-2c-3C2" firstAttribute="top" secondItem="aPS-dd-OKE" secondAttribute="bottom" constant="10" id="jJa-rZ-lxU"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="aPS-dd-OKE" secondAttribute="trailing" constant="5" id="uYD-SR-cad"/>
+                <constraint firstItem="ign-2c-3C2" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="yje-gS-xLe"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="81.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

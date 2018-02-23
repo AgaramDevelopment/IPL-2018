@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) IBOutlet UITableView *illnessTableView;
+@property (weak, nonatomic) IBOutlet UIView *navBarView;
 
 @end

@@ -50,5 +50,24 @@
 #import "PlayerDetailViewController.h"
 #import "PlayerDetailTableViewCell.h"
 
+
+#import "FoodDiaryVC.h"
+#import "FoodDiaryCell.h"
+#import "FoodDescriptionCell.h"
+
+#import "InjuryVC.h"
+
+#import "illnessVC.h"
+#import "illnessTableViewCell.h"
+
+#import "WellnessTrainingBowlingVC.h"
+#import "AddWellnessRatingVC.h"
+
+
+#import "NutritionVC.h"
+#import "NutritionCell.h"
+
+#import "ReportsVC.h"
+
 #endif /* Header_h */
 
