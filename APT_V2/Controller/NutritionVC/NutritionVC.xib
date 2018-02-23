@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="navi_View" destination="ZEA-uw-dR3" id="aOg-Wm-EU4"/>
                 <outlet property="nutritionCollectionView" destination="uIo-Vb-1Yg" id="r6z-Y6-EY8"/>
-                <outlet property="popView" destination="etW-9y-4Q1" id="iSA-6Y-gst"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -122,31 +121,5 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="137.5" y="116.5"/>
         </view>
-        <viewController id="etW-9y-4Q1">
-            <view key="view" contentMode="scaleToFill" id="c0G-c5-9np">
-                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eGT-57-DVg">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="-1" id="0p5-g1-MtQ"/>
-                            <outlet property="delegate" destination="-1" id="MJd-sr-vTj"/>
-                        </connections>
-                    </tableView>
-                </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                <constraints>
-                    <constraint firstItem="eGT-57-DVg" firstAttribute="top" secondItem="mDu-zI-lUZ" secondAttribute="top" id="9KT-f7-SyI"/>
-                    <constraint firstItem="mDu-zI-lUZ" firstAttribute="trailing" secondItem="eGT-57-DVg" secondAttribute="trailing" id="CsF-ba-d9t"/>
-                    <constraint firstItem="mDu-zI-lUZ" firstAttribute="bottom" secondItem="eGT-57-DVg" secondAttribute="bottom" id="DQJ-3I-7mW"/>
-                    <constraint firstItem="eGT-57-DVg" firstAttribute="leading" secondItem="mDu-zI-lUZ" secondAttribute="leading" id="IAt-jG-L0F"/>
-                </constraints>
-                <viewLayoutGuide key="safeArea" id="mDu-zI-lUZ"/>
-            </view>
-            <size key="freeformSize" width="300" height="300"/>
-            <point key="canvasLocation" x="153" y="929"/>
-        </viewController>
     </objects>
 </document>

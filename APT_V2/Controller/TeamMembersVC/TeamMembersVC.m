@@ -196,7 +196,7 @@
 {
     PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
     NSString* Playercode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Playercode"];
-    
+    PlayerVC.athletCode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthleteCode"];
     NSString* age = [NSString stringWithFormat:@"%@ Years Old",[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Age"]];
     
     NSString *available = [[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row];

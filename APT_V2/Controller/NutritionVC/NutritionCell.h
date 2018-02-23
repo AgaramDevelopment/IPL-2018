@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NutritionCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UILabel *dateLbl;
 @property (strong, nonatomic) IBOutlet UILabel *breakfastTimeLbl;
 @property (strong, nonatomic) IBOutlet UILabel *breakfast1Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *breakfast2Lbl;

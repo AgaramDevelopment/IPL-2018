@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIView *navBarView;
 
 @property (strong, readwrite) NSString* PlayerCode;
+@property (strong, readwrite) NSString* athletCode;
+
 @property (strong, readwrite) NSString* PlayerAge;
 @property (strong, readwrite) NSString* TeamName;
 @property (strong, readwrite) NSString* PlaerDesignation;
