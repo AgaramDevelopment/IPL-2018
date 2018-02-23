@@ -141,14 +141,18 @@
     NSMutableArray *entries2 = [[NSMutableArray alloc] init];
     
     // NOTE: The order of the entries when being added to the entries array determines their position around the center of the chart.
-//    for (int i = 0; i < cnt; i++)
-//    {
-//        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-//        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-//    }
+    for (int i = 0; i < cnt; i++)
+    {
+        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+    }
+    
+    [entries1 removeAllObjects];
+    [entries2 removeAllObjects];
     
 //    NSDictionary* mainDict = [Array valueForKey:@"set1"];
 //    NSDictionary* mainDict1 = [Array valueForKey:@"set2"];
+    
     for (NSDictionary* dict in [DictValue valueForKey:@"set1"]) {
         
         NSNumber* data1 = [dict valueForKey:@"value"];
@@ -397,26 +401,15 @@
                 graphArray = [NSMutableArray new];
                 TableArray = responseObject;
 
-//                if ([[TableArray valueForKey:@"homeFitness"] count]) {
                 [graphDict setValue:[TableArray valueForKey:@"homeFitness"] forKey:@"set1"];
-                
-//                    NSDictionary* set1 = @{@"set1" : [TableArray valueForKey:@"homeFitness"]};
-////                    if (set1.count) {
-//                        [graphArray addObject:set1];
-////                    }
                 
                 if ([[TableArray valueForKey:@"homeFitness"] count]) {
                     activities = [graphArray valueForKey:@"testName"];
                     [self chatConfiguration];
-
+                    [self setChartData:graphDict];
                 }
                 
-
-                    [self setChartData:graphDict];
-//                }
-                
-
-            }
+        }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_tblHistory reloadData];
                 [_tblRecentPerformance reloadData];
@@ -487,37 +480,15 @@
         
         if(responseObject >0)
         {
-//            NSMutableDictionary* dict = TableArray.firstObject;
-////            dict = [NSMutableArray new];
-            
             graphArray = [NSMutableArray new];
-//            graphArray = [responseObject valueForKey:@"homeFitness"];
-            
-//            if ([[responseObject valueForKey:@"homeFitness"] count]) {
-            
-//                activities = [graphArray valueForKey:@"testName"];
-
-//                if ([[TableArray valueForKey:@"homeFitness"] count]) {
-//                    NSDictionary* set1 = @{@"set1" : [TableArray valueForKey:@"homeFitness"]};
-//                    if (set1.count) {
-//                        [graphArray addObject:set1];
-//                    }
-//                }
-               
-//                NSDictionary* set2 = @{@"set2" : [responseObject valueForKey:@"homeFitness"]};
-//                if (set2.count) {
-//                    [graphArray addObject:set2];
-//                }
-//            }
-
             if ([[responseObject valueForKey:@"homeFitness"] count]) {
                 activities = [[responseObject valueForKey:@"homeFitness"]valueForKey:@"testName"];
                 [self chatConfiguration];
+                [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
+                [self setChartData:graphDict];
 
             }
 
-            [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
-            [self setChartData:graphDict];
             
         }
         
@@ -566,6 +537,8 @@
         selectedVC = [WellnessTrainingBowlingVC new];
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:self.PlayerCode forKey:@"SelectedPlayerCode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
 }
 
