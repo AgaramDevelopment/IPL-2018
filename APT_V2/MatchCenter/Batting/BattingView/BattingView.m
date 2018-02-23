@@ -15,12 +15,140 @@
 
 NSArray* headingKeyArray;
 NSArray* headingButtonNames;
+BOOL isOverview;
+BOOL isRun;
+
+/* Filter */
 
 
+#pragma mark - UITableViewDataSource
+// number of section(s), now I assume there is only 1 section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+// number of row in the section, I assume there is only 1 row
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    if(isOverview==YES)
+    {
+        return 7;
+    }
+    if(isRun==YES)
+    {
+        return 3;
+
+    }else{
+        return 0;
+    }
+    
+}
+// the cell will be returned to the tableView
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    static NSString *MyIdentifier = @"cellid";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    }
+    
+    if(isOverview==YES)
+    {
+        cell.textLabel.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
+
+    }else if(isRun==YES)
+    {
+        cell.textLabel.text = indexPath.row == 0 ? @"Runs" : (indexPath.row == 1 ? @"Strike Rate" : @"Average");
+
+    }else{
+        cell.textLabel.text = @"";
+    }
+
+    
+    cell.selectionStyle = UIAccessibilityTraitNone;
+    
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+    
+    
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(isOverview==YES)
+    {
+        self.overViewlbl.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
+        
+    }else if(isRun==YES)
+    {
+        self.runslbl.text = indexPath.row == 0 ? @"Runs" : (indexPath.row == 1 ? @"Strike Rate" : @"Average");
+        
+    }
+    
+    isOverview = NO;
+    isRun = NO;
+    self.PoplistTable.hidden = YES;
+
+}
+
+- (IBAction)onClickOverViewDD:(id)sender
+{
+    
+    if(isOverview){
+        
+        isOverview = NO;
+        isRun = NO;
+        self.PoplistTable.hidden = YES;
+
+        
+    }else{
+
+    isOverview = YES;
+    isRun = NO;
+    
+    self.PoplistTable.hidden = NO;
+    
+    self.tableWidth.constant = 142;
+    self.tableXposition.constant = self.filterView.frame.origin.x+8;
+        [self.PoplistTable reloadData];
+    }
+}
+
+- (IBAction)onClickRunsDD:(id)sender
+{
+    if(isRun){
+        
+        isOverview = NO;
+        isRun = NO;
+        self.PoplistTable.hidden = YES;
+
+        
+    }else{
+    isOverview = NO;
+    isRun = YES;
+    self.PoplistTable.hidden = NO;
+    self.tableWidth.constant = 142;
+    self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        [self.PoplistTable reloadData];
+    }
+}
+
+
+
+
+/* Table Freez */
 -(void) loadTableFreez{
     
 
-    [[NSUserDefaults standardUserDefaults] setInteger: 18 forKey:@"requiredColumn"];
+    self.PoplistTable.delegate = self;
+    self.PoplistTable.dataSource = self;
 
     
     headingKeyArray =  @[@"Player",@"Style",@"Order",@"Mat",@"Inns",@"NO",@"Runs",@"BF",@"HS",@"Ave",@"SR",@"DB %",@"Bdry %",@"100",@"50",@"0",@"4s",@"6s"];
@@ -177,6 +305,8 @@ NSArray* headingButtonNames;
     _chartView.drawValueAboveBarEnabled = YES;
     
     _chartView.maxVisibleCount = 60;
+
+    _chartView.chartDescription.enabled = NO;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
@@ -189,8 +319,8 @@ NSArray* headingButtonNames;
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.minimumFractionDigits = 0;
     leftAxisFormatter.maximumFractionDigits = 1;
-    leftAxisFormatter.negativeSuffix = @" $";
-    leftAxisFormatter.positiveSuffix = @" $";
+    leftAxisFormatter.negativeSuffix = @"";
+    leftAxisFormatter.positiveSuffix = @"";
     
     ChartYAxis *leftAxis = _chartView.leftAxis;
     leftAxis.labelFont = [UIFont systemFontOfSize:10.f];

@@ -10,10 +10,12 @@
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
 #import "BattingView.h"
+#import "OverviewView.h"
 
 @interface MCBattingRootVC ()
 {
     BattingView *btView;
+    OverviewView *overView;
 }
 @end
 
@@ -24,16 +26,17 @@
     [self customnavigationmethod];
     [self setInningsBySelection:@"1"];
     
-    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
-
-    
-    btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
-    btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self removePreviousView:btView FromSuperView: self.containerView];
-    [self.containerView addSubview:btView];
-    
-    [btView loadChart];
-    [btView loadTableFreez];
+    [self loadContainerView:@"1"];
+//    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
+//
+//
+//    btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+//    btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    [self removePreviousView:btView FromSuperView: self.containerView];
+//    [self.containerView addSubview:btView];
+//
+//    [btView loadChart];
+//    [btView loadTableFreez];
 
 }
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
@@ -43,6 +46,48 @@
         }
     }
 }
+
+
+-(void) loadContainerView : (NSString *) position{
+    
+    if([position isEqualToString:@"1"]){
+
+        if(btView == nil){
+            btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
+        }
+        
+        btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self removePreviousView:btView FromSuperView: self.containerView];
+        [self.containerView addSubview:btView];
+        
+        [btView loadChart];
+        [btView loadTableFreez];
+
+    }else if([position isEqualToString:@"2"]){
+       
+        if(overView == nil){
+        
+        overView = [[[NSBundle mainBundle] loadNibNamed:@"OverviewView" owner:self options:nil] objectAtIndex:0];
+        
+        }
+        
+        overView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        overView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self removePreviousView:overView FromSuperView: self.containerView];
+        [self.containerView addSubview:overView];
+        
+        [overView loadChart];
+       
+    }
+    else if([position isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.overBlockBtn];
+    }
+
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -141,14 +186,19 @@
 - (IBAction)onClickBatting:(id)sender {
     
     [self setInningsBySelection:@"1"];
+    
+    [self loadContainerView : @"1"];
+    
 }
 - (IBAction)onClickOverView:(id)sender {
     [self setInningsBySelection:@"2"];
+    [self loadContainerView : @"2"];
 
 }
 
 - (IBAction)onClickOverBlock:(id)sender {
     [self setInningsBySelection:@"3"];
+    [self loadContainerView : @"3"];
 
 }
 
