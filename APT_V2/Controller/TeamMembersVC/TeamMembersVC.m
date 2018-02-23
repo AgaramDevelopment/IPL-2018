@@ -229,6 +229,7 @@
 //    [PlayerVC.playerDetails setValue:Playercode forKey:@"Playercode"];
 //    [PlayerVC.playerDetails setValue:[bowlingStyle stringByAppendingString:battingStyle] forKey:@"Playercode"];
     
+    
     [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
 }
 

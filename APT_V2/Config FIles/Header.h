@@ -56,7 +56,7 @@
 #import "FoodDescriptionCell.h"
 
 #import "InjuryVC.h"
-
+#import "InjurySelectionViewController.h"
 #import "illnessVC.h"
 #import "illnessTableViewCell.h"
 
