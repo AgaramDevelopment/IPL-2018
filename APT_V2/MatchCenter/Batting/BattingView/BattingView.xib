@@ -37,6 +37,9 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZz-Nf-CAe">
                                                             <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                            <connections>
+                                                                <action selector="onClickOverViewDD:" destination="iN0-l3-epB" eventType="touchUpInside" id="NzG-z7-zzT"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-g9-9CW">
                                                             <rect key="frame" x="5" y="3" width="109" height="25"/>
@@ -91,6 +94,9 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-Nh-sST">
                                                             <rect key="frame" x="0.0" y="0.0" width="142" height="30"/>
+                                                            <connections>
+                                                                <action selector="onClickRunsDD:" destination="iN0-l3-epB" eventType="touchUpInside" id="okC-7d-1Vw"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xl-Hi-xFz">
                                                             <rect key="frame" x="5" y="3" width="109" height="25"/>
@@ -181,11 +187,21 @@
                                         <constraint firstAttribute="trailing" secondItem="Gja-qt-GjI" secondAttribute="trailing" constant="8" id="wI1-je-0xv"/>
                                     </constraints>
                                 </view>
+                                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OL0-2K-WHD">
+                                    <rect key="frame" x="10" y="44" width="239" height="128"/>
+                                    <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="128" id="4ty-yL-B3M"/>
+                                        <constraint firstAttribute="width" constant="239" id="InJ-Le-6Yd"/>
+                                    </constraints>
+                                </tableView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="SfD-Sy-xdp" firstAttribute="top" secondItem="At2-Sh-lIK" secondAttribute="top" id="FwI-z1-EQP"/>
                                 <constraint firstAttribute="bottom" secondItem="SfD-Sy-xdp" secondAttribute="bottom" id="O8z-J0-mfL"/>
+                                <constraint firstItem="OL0-2K-WHD" firstAttribute="top" secondItem="At2-Sh-lIK" secondAttribute="top" constant="44" id="U9y-yI-Cfb"/>
+                                <constraint firstItem="OL0-2K-WHD" firstAttribute="leading" secondItem="At2-Sh-lIK" secondAttribute="leading" constant="10" id="Wb5-Qp-eMU"/>
                                 <constraint firstAttribute="trailing" secondItem="SfD-Sy-xdp" secondAttribute="trailing" id="f0x-Mt-geX"/>
                                 <constraint firstItem="SfD-Sy-xdp" firstAttribute="leading" secondItem="At2-Sh-lIK" secondAttribute="leading" id="sjj-aC-LsP"/>
                             </constraints>
@@ -210,8 +226,14 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="PoplistTable" destination="OL0-2K-WHD" id="5oi-V6-cyC"/>
                 <outlet property="chartView" destination="eLn-1s-dRZ" id="VUH-6D-VfN"/>
+                <outlet property="filterView" destination="ueH-RG-T5f" id="Xr0-vb-aAI"/>
+                <outlet property="overViewlbl" destination="Nzo-g9-9CW" id="clH-YC-Ufp"/>
                 <outlet property="resultCollectionView" destination="Gja-qt-GjI" id="f8V-6b-q3e"/>
+                <outlet property="runslbl" destination="6Xl-Hi-xFz" id="6iq-1L-Gzw"/>
+                <outlet property="tableWidth" destination="InJ-Le-6Yd" id="PSH-Tc-EYm"/>
+                <outlet property="tableXposition" destination="Wb5-Qp-eMU" id="aHW-Qv-4vJ"/>
             </connections>
             <point key="canvasLocation" x="-53" y="184"/>
         </view>

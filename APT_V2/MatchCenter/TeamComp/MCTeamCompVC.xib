@@ -29,17 +29,17 @@
                         <constraint firstAttribute="height" constant="60" id="1Vw-db-Ajj"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-De-msy">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-De-msy">
                     <rect key="frame" x="0.0" y="60" width="375" height="873"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-EV-s7t">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="873"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ra0-aC-fGH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="825"/>
+                                    <rect key="frame" x="8" y="8" width="367" height="825"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="825" id="1Sg-7V-pNO"/>
+                                        <constraint firstAttribute="height" constant="825" id="oFC-1a-Mz9"/>
                                     </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Tb-pN-ckh">
                                         <size key="itemSize" width="300" height="825"/>
@@ -53,33 +53,34 @@
                                     </connections>
                                 </collectionView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="ra0-aC-fGH" firstAttribute="top" secondItem="tAi-EV-s7t" secondAttribute="top" id="8l6-8O-rTl"/>
-                                <constraint firstAttribute="height" constant="873" id="StB-18-A5C"/>
-                                <constraint firstItem="ra0-aC-fGH" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" id="aSZ-cF-Rhs"/>
-                                <constraint firstAttribute="trailing" secondItem="ra0-aC-fGH" secondAttribute="trailing" id="nhU-Hx-hJ4"/>
+                                <constraint firstItem="ra0-aC-fGH" firstAttribute="top" secondItem="tAi-EV-s7t" secondAttribute="top" constant="8" id="7eO-du-xW5"/>
+                                <constraint firstItem="ra0-aC-fGH" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="8" id="Ewg-z8-M4E"/>
+                                <constraint firstAttribute="height" constant="873" id="N9p-95-jab"/>
+                                <constraint firstAttribute="trailing" secondItem="ra0-aC-fGH" secondAttribute="trailing" id="gy1-yR-gY6"/>
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="tAi-EV-s7t" firstAttribute="top" secondItem="qWM-De-msy" secondAttribute="top" id="MTb-z6-lgC"/>
-                        <constraint firstItem="tAi-EV-s7t" firstAttribute="width" secondItem="qWM-De-msy" secondAttribute="width" id="bmE-Ta-9yk"/>
-                        <constraint firstAttribute="trailing" secondItem="tAi-EV-s7t" secondAttribute="trailing" id="lWu-3q-un0"/>
-                        <constraint firstItem="tAi-EV-s7t" firstAttribute="leading" secondItem="qWM-De-msy" secondAttribute="leading" id="nkf-at-usJ"/>
-                        <constraint firstAttribute="bottom" secondItem="tAi-EV-s7t" secondAttribute="bottom" id="rDM-gs-rtD"/>
+                        <constraint firstAttribute="trailing" secondItem="tAi-EV-s7t" secondAttribute="trailing" id="VRC-PH-MFd"/>
+                        <constraint firstItem="tAi-EV-s7t" firstAttribute="top" secondItem="qWM-De-msy" secondAttribute="top" id="Zqo-s7-G6K"/>
+                        <constraint firstAttribute="bottom" secondItem="tAi-EV-s7t" secondAttribute="bottom" id="d5x-Td-8KF"/>
+                        <constraint firstItem="tAi-EV-s7t" firstAttribute="leading" secondItem="qWM-De-msy" secondAttribute="leading" id="rFU-zJ-wu1"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="tAi-EV-s7t" firstAttribute="width" secondItem="wcD-8H-5nu" secondAttribute="width" id="5Gk-xY-Bjr"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="top" secondItem="wcD-8H-5nu" secondAttribute="bottom" id="EKj-Jq-BEy"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="F4q-eg-wii"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Fcr-7Q-JsL"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Fgb-6g-qpP"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Hv3-bY-5pj"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Rvs-Wr-CZy"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="QBd-c5-goF"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U7y-cd-jAo"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="ZNl-h0-2jn"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="top" secondItem="wcD-8H-5nu" secondAttribute="bottom" id="zzX-cr-d7s"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="cpS-Ns-PyY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
