@@ -102,17 +102,16 @@
     
     if(result==NSOrderedAscending)
     {
-        [self altermsg:@"Future date not allowed"];
+        [self altermsg:@"Future date is not allowed"];
     } else {
             if ([self.dateTF.text isEqualToString:selectedDate]) {
                 [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
                     //        [self foodDiaryUpdatePostMethodWebService];
             } else if(self.dateTF.text) {
+                [self setClearForFoodDiaryDetails];
                 [self foodDiaryFetchDetailsPostMethodWebServiceForNewDate:self.dateTF.text];
             }
         }
-    
-    
     
     [self.view endEditing:true];
 }
@@ -129,7 +128,6 @@
         for (id key in foodListArray) {
             NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
             [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
-                //        [foodDescriptionDict setObject:[[key objectAtIndex:indexPath.row] valueForKey:@"FOOD"] forKey:@"FOOD"];
             [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
             [foodDescriptionArray addObject:foodDescriptionDict];
         }
@@ -241,31 +239,22 @@
 }
 
 - (IBAction)mealTypeBreakfastAction:(id)sender {
-//        self.mealTypeTF = @"Breakfast";
-//        self.mealTypeTF = @"MSC342";
         [self setBorderForMealType:1];
 }
 
 - (IBAction)mealTypeSnacksAction:(id)sender {
-//        self.mealTypeTF = @"Snacks";
-//        self.mealTypeTF = @"MSC343";
         [self setBorderForMealType:2];
 }
 
 - (IBAction)mealTypeLunchAction:(id)sender {
-//    self.mealTypeTF = @"Lunch";
-//    self.mealTypeTF = @"MSC344";
     [self setBorderForMealType:3];
 }
 
 - (IBAction)mealTypeDinnerAction:(id)sender {
-//    self.mealTypeTF = @"Dinner";
-//    self.mealTypeTF = @"MSC345";
     [self setBorderForMealType:4];
 }
 
 - (IBAction)mealTypeSupplementsAction:(id)sender {
-//    self.mealTypeTF = @"Supplements";
     [self setBorderForMealType:5];
 }
 
@@ -587,9 +576,10 @@
                     NSString *date = [[foodDiarys objectAtIndex:i] valueForKey:@"DATE"];
                     
                     if ([self.dateTF.text isEqualToString:date]) {
+
                         [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
                         selectedDate = self.dateTF.text;
-                        [self setClearForFoodDiaryDetails];
+                        
                         self.timeTF.text = [[foodDiarys objectAtIndex:0] valueForKey:@"STARTTIME"];
                         foodDiaryCode = [[foodDiarys objectAtIndex:0] valueForKey:@"FOODDIARYCODE"];
                         
@@ -613,9 +603,6 @@
                     }
                 }
                 
-            } else {
-                
-                [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
             }
         }
         NSLog(@"foodDescriptionArray:%@", foodDescriptionArray);
@@ -808,6 +795,8 @@
 
 - (void)setClearForFoodDiaryDetails {
     
+    [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
+    selectedDate = @"";
     self.timeTF.text = @"";
     self.mealTypeTF = @"";
     [foodDescriptionArray removeAllObjects];
