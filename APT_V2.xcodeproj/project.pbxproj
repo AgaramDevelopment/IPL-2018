@@ -109,6 +109,11 @@
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
 		CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741920248BF100F10917 /* LaunchScreen.storyboard */; };
 		CE3E741E20248BF100F10917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E741D20248BF100F10917 /* main.m */; };
+		CE76ECDC20413A2000E183EA /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECD920413A2000E183EA /* OverviewView.m */; };
+		CE76ECDD20413A2000E183EA /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE76ECDA20413A2000E183EA /* OverviewView.xib */; };
+		CE76ECE02041498D00E183EA /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECDF2041498D00E183EA /* TTView.m */; };
+		CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */; };
+		CE76ECE52041715D00E183EA /* shape1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76ECE42041715B00E183EA /* shape1.png */; };
 		CE8DE370203ED87A0097BF66 /* PopOverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DE36D203ED8790097BF66 /* PopOverVC.m */; };
 		CE8DE371203ED87A0097BF66 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8DE36F203ED87A0097BF66 /* PopOverVC.xib */; };
 		CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */; };
@@ -361,6 +366,14 @@
 		CE3E741A20248BF100F10917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE3E741C20248BF100F10917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3E741D20248BF100F10917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE76ECD920413A2000E183EA /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
+		CE76ECDA20413A2000E183EA /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
+		CE76ECDB20413A2000E183EA /* OverviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewView.h; sourceTree = "<group>"; };
+		CE76ECDE2041498D00E183EA /* TTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
+		CE76ECDF2041498D00E183EA /* TTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
+		CE76ECE120416A3800E183EA /* UIImage+GetPoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetPoints.h"; sourceTree = "<group>"; };
+		CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GetPoints.m"; sourceTree = "<group>"; };
+		CE76ECE42041715B00E183EA /* shape1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shape1.png; sourceTree = "<group>"; };
 		CE8DE36D203ED8790097BF66 /* PopOverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverVC.m; sourceTree = "<group>"; };
 		CE8DE36E203ED87A0097BF66 /* PopOverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverVC.h; sourceTree = "<group>"; };
 		CE8DE36F203ED87A0097BF66 /* PopOverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopOverVC.xib; sourceTree = "<group>"; };
@@ -693,6 +706,9 @@
 		18AC344E203E8406003EE0F0 /* OverBlockOverVeiw */ = {
 			isa = PBXGroup;
 			children = (
+				CE76ECDB20413A2000E183EA /* OverviewView.h */,
+				CE76ECD920413A2000E183EA /* OverviewView.m */,
+				CE76ECDA20413A2000E183EA /* OverviewView.xib */,
 			);
 			path = OverBlockOverVeiw;
 			sourceTree = "<group>";
@@ -924,9 +940,14 @@
 		CE8DE372203FDE930097BF66 /* InjurySelectionVC */ = {
 			isa = PBXGroup;
 			children = (
+				CE76ECE42041715B00E183EA /* shape1.png */,
 				CE8DE373203FDEC70097BF66 /* InjurySelectionViewController.h */,
 				CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */,
 				CE8DE375203FDEC70097BF66 /* InjurySelectionViewController.xib */,
+				CE76ECDE2041498D00E183EA /* TTView.h */,
+				CE76ECDF2041498D00E183EA /* TTView.m */,
+				CE76ECE120416A3800E183EA /* UIImage+GetPoints.h */,
+				CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */,
 			);
 			path = InjurySelectionVC;
 			sourceTree = "<group>";
@@ -1326,6 +1347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */,
+				CE76ECE52041715D00E183EA /* shape1.png in Resources */,
 				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
 				04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
@@ -1342,6 +1364,7 @@
 				18B37F54203AA77200F51511 /* BattingView.xib in Resources */,
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
+				CE76ECDD20413A2000E183EA /* OverviewView.xib in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
@@ -1513,11 +1536,13 @@
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */,
+				CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */,
 				CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */,
 				18A68AB0203719B700EBA479 /* MyStatsBattingVC.m in Sources */,
 				CEA4210D203161A900B2DAB5 /* VideoGalleryVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
+				CE76ECE02041498D00E183EA /* TTView.m in Sources */,
 				18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				18EF9D1D20316EE000CDA268 /* MCTossAndResultsVC.m in Sources */,
@@ -1551,6 +1576,7 @@
 				18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
 				CEA4210F203161A900B2DAB5 /* VideoPlayerUploadVC.m in Sources */,
+				CE76ECDC20413A2000E183EA /* OverviewView.m in Sources */,
 				18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */,
 				18EF9D1C20316EE000CDA268 /* MatchCenterTBC.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,

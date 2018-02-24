@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTView.h"
 
 @interface InjurySelectionViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *navBarView;
 @property (weak, nonatomic) IBOutlet UIButton *btn1;
 @property (weak, nonatomic) IBOutlet UIImageView *img1;
+@property (weak, nonatomic) IBOutlet UILabel *lblVertical;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFront;
+@property (weak, nonatomic) IBOutlet TTView *gridView;
+@property (weak, nonatomic) IBOutlet UILabel *lbl1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTemp;
 
 @end

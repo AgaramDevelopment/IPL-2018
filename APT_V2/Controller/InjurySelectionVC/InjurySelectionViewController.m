@@ -8,6 +8,7 @@
 
 #import "InjurySelectionViewController.h"
 #import "Header.h"
+#import "UIImage+GetPoints.h"
 
 @interface InjurySelectionViewController ()
 {
@@ -20,11 +21,66 @@
 @end
 
 @implementation InjurySelectionViewController
+@synthesize lblVertical,imgFront;
+@synthesize lbl1;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
+    
+    
+//    CAShapeLayer* shape1= [CAShapeLayer new];
+//    CGPoint p1 = CGPointMake(lbl1.frame.origin.x, lbl1.frame.origin.y);
+//    CGPoint p2 = CGPointMake(lbl1.frame.origin.x+lbl1.frame.size.width, lbl1.frame.origin.y);
+//    CGPoint p3 = CGPointMake(lbl1.frame.origin.x+lbl1.frame.size.width, lbl1.frame.origin.y+lbl1.frame.size.height);
+//    CGPoint p4 = CGPointMake(lbl1.frame.origin.x, lbl1.frame.origin.y+lbl1.frame.size.height);
+//    UIBezierPath* path1 = [UIBezierPath bezierPath];
+//    [path1 moveToPoint:p1];
+//    [path1 addLineToPoint:p2];
+//    [path1 addLineToPoint:p3];
+//    [path1 addLineToPoint:p4];
+//    [path1 closePath];
+//    UIImage
+//
+//    UIBezierPath* path = [UIBezierPath bezierPathWithRect:lbl1.frame];
+//    [shape1 setPath:lbl1.layer.path];
+    
+//    let image = UIImage(named: "yourImage.png")
+//    let pointsOfColor = image?.getPoints(displayP3Red: 204.0/255.0, green: 33.0/255.0, blue: 50.0/255.0, alpha: 1.0)
+    
+//    UIImage* img = [UIImage imageNamed:@"shape1"];
+    NSMutableArray* arr = [_imgTemp.image getPointsfromRGB:0.0 :0.0 :0.0 andAlpha:1.0];
+    NSLog(@"%@",arr);
+    
+    UIBezierPath* path = [UIBezierPath bezierPath];
+    for (NSValue* value in arr) {
+        if (arr[0] == value) {
+            [path moveToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
+        }
+     
+        [path addLineToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
+    }
+    [path closePath];
+    
+    //    CALayer* layer1 = [CALayer new];
+    //    layer1.accessibilityPath = trianglePath;
+    //    layer1.backgroundColor = [UIColor greenColor].CGColor;
+    //    [imgFront.layer addSublayer:layer1];
+//    CALayer* cal1 = [CALayer layer];
+//    cal1.accessibilityPath.CGPath = path.CGPath;
+//    cal1.backgroundColor = [UIColor yellowColor].CGColor;
+//    cal1.borderWidth = 10.0;
+//    [self.view.layer addSublayer:cal1];
+    
+    CAShapeLayer* shape1 = [CAShapeLayer layer];
+    shape1.path = path.CGPath;
+    shape1.backgroundColor = [UIColor yellowColor].CGColor;
+    shape1.borderWidth = 1.0;
+    shape1.borderColor = [UIColor redColor].CGColor;
+    [self.view.layer addSublayer:shape1];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,13 +100,13 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     blueLayer = [[CALayer alloc] init];
     blueLayer.frame = CGRectMake(100, 100, 100, 100);
     blueLayer.backgroundColor = [UIColor blueColor].CGColor;
     blueLayer.name = @"Blue";
 //    [self.view.layer addSublayer:blueLayer];
     
-//    UIBezierPath* trianglePath = [UIBezierPath bezierPath];
     
 //    blueLayer.accessibilityPath.bezierPath;
     redLayer = [[CALayer alloc] init];
@@ -70,6 +126,46 @@
     greenLayer.backgroundColor = [UIColor greenColor].CGColor;
     greenLayer.name=@"Green";
 //    [self.view.layer addSublayer:greenLayer];
+    
+    
+    /*
+     
+     var path = UIBezierPath()
+     path.moveToPoint(CGPointMake(20, 30))
+     path.addLineToPoint(CGPointMake(40, 30))
+     
+     // add as many coordinates you need...
+     
+     path.closePath()
+     
+     var layer = CAShapeLayer()
+     layer.path = path.CGPath
+     layer.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.5).CGColor
+     layer.hidden = true
+     
+     bodyImage.layer.addSublayer(layer)
+     
+     CAShapeLayer *shapeView = [[CAShapeLayer alloc] init];
+     And set its path:
+     
+     [shapeView setPath:[self createPath].CGPath];
+     Finally add it:
+     
+     [[self.view layer] addSublayer:shapeView];
+     */
+    
+   
+    
+//    UIBezierPath* trianglePath = [UIBezierPath bezierPath];
+//    [trianglePath moveToPoint:lblVertical.frame.origin];
+//    [trianglePath addLineToPoint:CGPointMake(lblVertical.frame.origin.x, lblVertical.frame.origin.y+20)];
+//    [trianglePath addLineToPoint:CGPointMake(lblVertical.frame.origin.x-20, lblVertical.frame.origin.y+20)];
+//    [trianglePath closePath];
+//    CALayer* layer1 = [CALayer new];
+//    layer1.accessibilityPath = trianglePath;
+//    layer1.backgroundColor = [UIColor greenColor].CGColor;
+//    [imgFront.layer addSublayer:layer1];
+    
     
     
 }
@@ -134,6 +230,8 @@
     
     
 }
+
+
 
 -(void)actionBack
 {
