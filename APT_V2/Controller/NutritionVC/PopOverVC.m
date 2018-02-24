@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSLog(@"listArray:Count:%lu", (unsigned long)self.listArray.count);
     NSLog(@"listArray:%@", self.listArray);
 }
 
