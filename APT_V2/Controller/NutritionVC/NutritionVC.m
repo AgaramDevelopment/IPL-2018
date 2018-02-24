@@ -117,14 +117,6 @@
     NSMutableArray *foodDateArray = [NSMutableArray new];
     foodDateArray = [foodDiaryArray objectAtIndex:indexPath.row];
     
-    for (int i=0; i<foodDiaryArray.count; i++) {
-        [breakfastMoreArray addObject:@""];
-        [snacksMoreArray addObject:@""];
-        [lunchMoreArray addObject:@""];
-        [dinnerMoreArray addObject:@""];
-        [supplementsMoreArray addObject:@""];
-    }
-    
     //Date Format
     NSString *currentDate = [[foodDateArray objectAtIndex:0] valueForKey:@"DATE"];
     NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
@@ -171,7 +163,7 @@
                 for (id listDict in foodListArray) {
                     [breakfastArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
-                [breakfastMoreArray insertObject:breakfastArray atIndex:indexPath.row];
+                [breakfastMoreArray replaceObjectAtIndex:indexPath.row withObject:breakfastArray];
             }
         }
         else {
@@ -219,7 +211,8 @@
                     [snacksArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
 //                [snacksMoreArray addObject:snacksArray];
-                [snacksMoreArray insertObject:snacksArray atIndex:indexPath.row];
+//                [snacksMoreArray insertObject:snacksArray atIndex:indexPath.row];
+                [snacksMoreArray replaceObjectAtIndex:indexPath.row withObject:snacksArray];
             }
         } else {
 //            [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
@@ -263,7 +256,8 @@
                 for (id listDict in foodListArray) {
                     [lunchArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
-                [lunchMoreArray insertObject:lunchArray atIndex:indexPath.row];
+                
+                [lunchMoreArray replaceObjectAtIndex:indexPath.row withObject:lunchArray];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -306,7 +300,8 @@
                 for (id listDict in foodListArray) {
                     [dinnerArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
-                [dinnerMoreArray insertObject:dinnerArray atIndex:indexPath.row];
+                
+                [dinnerMoreArray replaceObjectAtIndex:indexPath.row withObject:dinnerArray];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -347,7 +342,8 @@
                 for (id listDict in foodListArray) {
                     [supplementsArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
-                [supplementsMoreArray insertObject:supplementsArray atIndex:indexPath.row];
+                
+                [supplementsMoreArray replaceObjectAtIndex:indexPath.row withObject:supplementsArray];
             }
         } else {
                 //Data is not available then Declare values with "-"
@@ -414,6 +410,8 @@
 - (void)popOverViewFuction:(NSMutableArray *)array andSender:(id)sender
 {
     
+    NSLog(@"array:%@", array);
+    NSLog(@"array:tag:%@", array [[sender tag]]);
     PopOverVC *popOverObj = [[PopOverVC alloc] init];
     popOverObj.listArray = array [[sender tag]];
     UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
@@ -484,7 +482,16 @@
             foodDiaryArray = [NSMutableArray new];
             NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:filteredArray];
             foodDiaryArray = (NSMutableArray *)[orderedSet array];
-            
+            NSLog(@"Count:%ld", foodDiaryArray.count);
+            NSLog(@"foodDiaryArray:%@", foodDiaryArray);
+            for (int i=0; i<foodDiaryArray.count; i++) {
+                [breakfastMoreArray addObject:@""];
+                [snacksMoreArray addObject:@""];
+                [lunchMoreArray addObject:@""];
+                [dinnerMoreArray addObject:@""];
+                [supplementsMoreArray addObject:@""];
+            }
+            NSLog(@"sample:%@", breakfastMoreArray);
             [self.nutritionCollectionView reloadData];
         }
         

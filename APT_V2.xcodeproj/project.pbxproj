@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042381C72041539100212684 /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C42041539100212684 /* OverviewView.xib */; };
+		042381C82041539100212684 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381C62041539100212684 /* OverviewView.m */; };
+		042381CC204173F900212684 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C9204173F800212684 /* PopOverVC.xib */; };
+		042381CD204173F900212684 /* PopOverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381CB204173F900212684 /* PopOverVC.m */; };
 		04249B78203D466200B13889 /* NutritionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04249B76203D466200B13889 /* NutritionVC.m */; };
 		04249B79203D466200B13889 /* NutritionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04249B77203D466200B13889 /* NutritionVC.xib */; };
 		04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04249B7B203D4AF000B13889 /* NutritionCell.m */; };
@@ -202,6 +206,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042381C42041539100212684 /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
+		042381C52041539100212684 /* OverviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewView.h; sourceTree = "<group>"; };
+		042381C62041539100212684 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
+		042381C9204173F800212684 /* PopOverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopOverVC.xib; sourceTree = "<group>"; };
+		042381CA204173F900212684 /* PopOverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverVC.h; sourceTree = "<group>"; };
+		042381CB204173F900212684 /* PopOverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverVC.m; sourceTree = "<group>"; };
 		04249B75203D466200B13889 /* NutritionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NutritionVC.h; sourceTree = "<group>"; };
 		04249B76203D466200B13889 /* NutritionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NutritionVC.m; sourceTree = "<group>"; };
 		04249B77203D466200B13889 /* NutritionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NutritionVC.xib; sourceTree = "<group>"; };
@@ -294,9 +304,6 @@
 		18AC344F203EC0D9003EE0F0 /* CoachTraingLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachTraingLoad.h; sourceTree = "<group>"; };
 		18AC3450203EC0D9003EE0F0 /* CoachTraingLoad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachTraingLoad.m; sourceTree = "<group>"; };
 		18AC3451203EC0D9003EE0F0 /* CoachTraingLoad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoachTraingLoad.xib; sourceTree = "<group>"; };
-		18AC3455203ECE4F003EE0F0 /* PopOverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopOverVC.xib; sourceTree = "<group>"; };
-		18AC3456203ECE4F003EE0F0 /* PopOverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverVC.h; sourceTree = "<group>"; };
-		18AC3457203ECE4F003EE0F0 /* PopOverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverVC.m; sourceTree = "<group>"; };
 		18AC345A203EE50C003EE0F0 /* CoachBowlingLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachBowlingLoad.h; sourceTree = "<group>"; };
 		18AC345B203EE50C003EE0F0 /* CoachBowlingLoad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachBowlingLoad.m; sourceTree = "<group>"; };
 		18AC345C203EE50C003EE0F0 /* CoachBowlingLoad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoachBowlingLoad.xib; sourceTree = "<group>"; };
@@ -509,18 +516,15 @@
 		04249B74203D463E00B13889 /* NutritionVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE8DE36E203ED87A0097BF66 /* PopOverVC.h */,
-				CE8DE36D203ED8790097BF66 /* PopOverVC.m */,
-				CE8DE36F203ED87A0097BF66 /* PopOverVC.xib */,
 				04249B75203D466200B13889 /* NutritionVC.h */,
 				04249B76203D466200B13889 /* NutritionVC.m */,
 				04249B77203D466200B13889 /* NutritionVC.xib */,
 				04249B7A203D4AF000B13889 /* NutritionCell.h */,
 				04249B7B203D4AF000B13889 /* NutritionCell.m */,
 				04249B7C203D4AF000B13889 /* NutritionCell.xib */,
-				18AC3456203ECE4F003EE0F0 /* PopOverVC.h */,
-				18AC3457203ECE4F003EE0F0 /* PopOverVC.m */,
-				18AC3455203ECE4F003EE0F0 /* PopOverVC.xib */,
+				042381CA204173F900212684 /* PopOverVC.h */,
+				042381CB204173F900212684 /* PopOverVC.m */,
+				042381C9204173F800212684 /* PopOverVC.xib */,
 			);
 			path = NutritionVC;
 			sourceTree = "<group>";
@@ -1374,7 +1378,6 @@
 				CEB2B99020257BBD00E7D5E4 /* MontserratAlternates-MediumItalic.otf in Resources */,
 				CEA4210E203161A900B2DAB5 /* VideoGalleryVC.xib in Resources */,
 				1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */,
-				CE8DE371203ED87A0097BF66 /* PopOverVC.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				18C287DA20355847006E6590 /* MCTeamCompVC.xib in Resources */,
@@ -1442,6 +1445,7 @@
 				CE3E741620248BF100F10917 /* Main.storyboard in Resources */,
 				CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */,
 				CEB2B98920257BBD00E7D5E4 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */,
+				042381CC204173F900212684 /* PopOverVC.xib in Resources */,
 				CEB2B97420257BBD00E7D5E4 /* Montserrat-Bold.otf in Resources */,
 				CEBD2A80202899BB000AFD1B /* DropDownTableViewController.xib in Resources */,
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
@@ -1568,7 +1572,6 @@
 				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				04534F8B2037EE9400C22717 /* FoodDiaryVC.m in Sources */,
-				CE8DE370203ED87A0097BF66 /* PopOverVC.m in Sources */,
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
 				18A5CABF2038600D00586896 /* TeamMemebersCell.m in Sources */,
@@ -1602,6 +1605,7 @@
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				18A68AC020371A2C00EBA479 /* TrainingLoadVC.m in Sources */,
 				18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */,
+				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
