@@ -228,9 +228,10 @@
 //    [PlayerVC.playerDetails setValue:self.teamname forKey:@"TeamName"];
 //    [PlayerVC.playerDetails setValue:Playercode forKey:@"Playercode"];
 //    [PlayerVC.playerDetails setValue:[bowlingStyle stringByAppendingString:battingStyle] forKey:@"Playercode"];
-    
-    
-    [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
+    NSLog(@"%@",appDel.frontNavigationController);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
+    });
 }
 
 
