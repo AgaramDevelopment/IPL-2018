@@ -136,6 +136,10 @@
 		18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC720371A7D00EBA479 /* AddWellnessRatingVC.xib */; };
 		18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */; };
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
+		18A7D6CF2043790E000B6DD2 /* BattingOverBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7D6CE2043790E000B6DD2 /* BattingOverBlockView.m */; };
+		18A7D6D120437937000B6DD2 /* BattingOverBlockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A7D6D020437937000B6DD2 /* BattingOverBlockView.xib */; };
+		18A7D6D520437DDA000B6DD2 /* BattingOverBlockCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A7D6D320437DDA000B6DD2 /* BattingOverBlockCVC.m */; };
+		18A7D6D620437DDA000B6DD2 /* BattingOverBlockCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A7D6D420437DDA000B6DD2 /* BattingOverBlockCVC.xib */; };
 		18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3449203E812C003EE0F0 /* ReportsVC.m */; };
 		18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC344A203E812C003EE0F0 /* ReportsVC.xib */; };
 		18AC3452203EC0D9003EE0F0 /* CoachTraingLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3450203EC0D9003EE0F0 /* CoachTraingLoad.m */; };
@@ -502,6 +506,12 @@
 		18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
 		18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
 		18A68ACA20371A7D00EBA479 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		18A7D6CD2043790E000B6DD2 /* BattingOverBlockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattingOverBlockView.h; sourceTree = "<group>"; };
+		18A7D6CE2043790E000B6DD2 /* BattingOverBlockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattingOverBlockView.m; sourceTree = "<group>"; };
+		18A7D6D020437937000B6DD2 /* BattingOverBlockView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BattingOverBlockView.xib; sourceTree = "<group>"; };
+		18A7D6D220437DDA000B6DD2 /* BattingOverBlockCVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BattingOverBlockCVC.h; sourceTree = "<group>"; };
+		18A7D6D320437DDA000B6DD2 /* BattingOverBlockCVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattingOverBlockCVC.m; sourceTree = "<group>"; };
+		18A7D6D420437DDA000B6DD2 /* BattingOverBlockCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BattingOverBlockCVC.xib; sourceTree = "<group>"; };
 		18AC3448203E812C003EE0F0 /* ReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsVC.h; sourceTree = "<group>"; };
 		18AC3449203E812C003EE0F0 /* ReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsVC.m; sourceTree = "<group>"; };
 		18AC344A203E812C003EE0F0 /* ReportsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportsVC.xib; sourceTree = "<group>"; };
@@ -1366,6 +1376,12 @@
 		18AC344D203E8406003EE0F0 /* BattingOverBlock */ = {
 			isa = PBXGroup;
 			children = (
+				18A7D6CD2043790E000B6DD2 /* BattingOverBlockView.h */,
+				18A7D6CE2043790E000B6DD2 /* BattingOverBlockView.m */,
+				18A7D6D020437937000B6DD2 /* BattingOverBlockView.xib */,
+				18A7D6D220437DDA000B6DD2 /* BattingOverBlockCVC.h */,
+				18A7D6D320437DDA000B6DD2 /* BattingOverBlockCVC.m */,
+				18A7D6D420437DDA000B6DD2 /* BattingOverBlockCVC.xib */,
 			);
 			path = BattingOverBlock;
 			sourceTree = "<group>";
@@ -2022,6 +2038,7 @@
 				CE76ECE52041715D00E183EA /* shape1.png in Resources */,
 				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
 				04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */,
+				18A7D6D620437DDA000B6DD2 /* BattingOverBlockCVC.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
 				18A68AC120371A2C00EBA479 /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
@@ -2128,6 +2145,7 @@
 				CEBD2A80202899BB000AFD1B /* DropDownTableViewController.xib in Resources */,
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
 				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
+				18A7D6D120437937000B6DD2 /* BattingOverBlockView.xib in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
@@ -2215,6 +2233,7 @@
 				18A647842043DC89008A4221 /* FFSearchBarWithAutoComplete.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
+				18A7D6D520437DDA000B6DD2 /* BattingOverBlockCVC.m in Sources */,
 				18AC3462203EF453003EE0F0 /* SwipeView.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18A6475C2043DC89008A4221 /* FFDayCollectionViewFlowLayout.m in Sources */,
@@ -2264,6 +2283,7 @@
 				18A647562043DC89008A4221 /* FFDayCalendarView.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
+				18A7D6CF2043790E000B6DD2 /* BattingOverBlockView.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
 				18A647862043DC89008A4221 /* FFEventDetailView.m in Sources */,
 				18A646AB2043DC2E008A4221 /* PlannerListVC.m in Sources */,
