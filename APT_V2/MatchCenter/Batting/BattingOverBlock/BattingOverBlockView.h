@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BattingOverBlockView : UIView
+@interface BattingOverBlockView : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UICollectionView *pp1CollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *pp2CollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *pp3CollectionView;
+-(void) loadPowerPlayDetails ;
+
 
 @end
