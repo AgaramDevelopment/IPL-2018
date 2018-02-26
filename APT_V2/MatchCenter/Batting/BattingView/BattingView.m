@@ -300,7 +300,7 @@ BOOL isRun;
 //    [self setupBarLineChartView:_chartView];
     
     _chartView.delegate = self;
-    
+
     _chartView.drawBarShadowEnabled = NO;
     _chartView.drawValueAboveBarEnabled = YES;
     
@@ -348,7 +348,7 @@ BOOL isRun;
     l.formSize = 9.0;
     l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
     l.xEntrySpace = 4.0;
-    
+    l.enabled = NO;
     [self setDataCount: 10 range: 20];
 
     
