@@ -214,8 +214,8 @@
             objSch.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objSch.view];
             
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
 
         }
          if(index == 1)
@@ -224,8 +224,8 @@
             objWell.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objWell.view];
             
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
          if(index == 2)
         {
@@ -233,8 +233,8 @@
             StandsVC.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:StandsVC.view];
             
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
         
 
@@ -258,6 +258,21 @@
 - (void)swipeViewDidScroll:(SwipeView *)swipeView
 {
 
+    if(self.swipeView.currentItemIndex == 0)
+    {
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    }
+    if(self.swipeView.currentItemIndex == 1)
+    {
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    }
+    if(self.swipeView.currentItemIndex == 2)
+    {
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    }
 }
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {

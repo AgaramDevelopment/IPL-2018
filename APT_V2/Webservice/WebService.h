@@ -26,6 +26,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
 #define IMAGE_URL   @"http://192.168.0.151:8045/"
 #define Video_URL   @"http://192.168.0.151:8044/"
+#define BASE_Image_URL @"http://192.168.0.151:8045/bcciapp/"
 
 
 //#define BASE_URL   @"http://192.168.0.151:8029/AGAPTService.svc/"
@@ -146,6 +147,26 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 -(void)CoachTrainingGraph :(NSString *)codelist :(NSString *)clientcode :(NSString *)playercode  :(NSString *)date :(NSString *)charttype   success:(WebserviceRequestSuccessHandler)success
                    failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)Battingpitchmap :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)BattingWagonWheel :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                  failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)GetVideoPathFile :(NSString *)list : (NSString *) batsmanCode : (NSString *) matchCode: (NSString *) inns: (NSString *) value: (NSString *) batOrBowl success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure;
+-(void)LoadFieldingSummaryByInnins :(NSString *)list :(NSString *)matchStatus  :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                            failure:(WebserviceRequestFailureHandler)failure;
+-(void)matchtypesummary :(NSString *)list :(NSString *)matchcode :(NSString *)matchstatus success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)SingledaySession :(NSString *)list :(NSString *)matchcode :(NSString *)matchtype :(NSString *)sessionNo :(NSString *)innNo success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)sessionsummary :(NSString *)list :(NSString *)matchcode :(NSString *)matchstatus:(NSString *)dayno:(NSString *)sessionno:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+               failure:(WebserviceRequestFailureHandler)failure;
+
 
 @end
 
