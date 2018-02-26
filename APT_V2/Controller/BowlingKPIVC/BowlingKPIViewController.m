@@ -15,6 +15,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "BallsInVideosCVC.h"
 #import "VideoPlayerViewController.h"
+#import "ScoreCardVideoPlayer.h"
 
 
 @interface BowlingKPIViewController ()
@@ -926,8 +927,8 @@
     
     //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
     
-    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
-    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
+    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+    videoPlayerVC = (ScoreCardVideoPlayer *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.MatchCode = self.SelectedMatchCode;
     videoPlayerVC.PlayerCode = playercode;
     videoPlayerVC.VideoValue = value;

@@ -13,6 +13,7 @@
 #import "CustomNavigation.h"
 #import "BallsInVideosCVC.h"
 #import "VideoPlayerViewController.h"
+#import "ScoreCardVideoPlayer.h"
 
 @interface FieldSummaryVC ()
 {
@@ -113,7 +114,7 @@ int headdingCount = 0;
         objCustomNavigation.menu_btn.hidden =YES;
         objCustomNavigation.btn_back.hidden =NO;
         
-        [objCustomNavigation.btn_back addTarget:self action:@selector(BackBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
         
         
     }
@@ -1208,8 +1209,8 @@ int headdingCount = 0;
 {
     //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
     
-    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
-    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
+    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+    videoPlayerVC = (ScoreCardVideoPlayer *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.MatchCode = self.matchcode;
     videoPlayerVC.PlayerCode = playercode;
     videoPlayerVC.VideoValue = value;

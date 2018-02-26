@@ -20,7 +20,7 @@
 #import "FieldSummaryVC.h"
 #import "BallsInVideosCVC.h"
 #import "AppDelegate.h"
-//#import "VideoPlayerViewController.h"
+#import "ScoreCardVideoPlayer.h"
 
 
 
@@ -4145,14 +4145,14 @@
 {
     //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
     
-//    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
-//    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
-//    videoPlayerVC.MatchCode = self.matchCode;
-//    videoPlayerVC.PlayerCode = playercode;
-//    videoPlayerVC.VideoValue = value;
-//    videoPlayerVC.Innings = innNo;
-//    videoPlayerVC.Type = batOrBowl;
-//    [self.navigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+    videoPlayerVC = (ScoreCardVideoPlayer *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+    videoPlayerVC.MatchCode = self.matchCode;
+    videoPlayerVC.PlayerCode = playercode;
+    videoPlayerVC.VideoValue = value;
+    videoPlayerVC.Innings = innNo;
+    videoPlayerVC.Type = batOrBowl;
+    [self.navigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 }
 
 
