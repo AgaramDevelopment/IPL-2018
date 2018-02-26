@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlannerAddEvent">
+            <connections>
+                <outlet property="participantCell" destination="KGk-i7-Jjw" id="FdI-rE-M5G"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddParticipant" id="KGk-i7-Jjw" customClass="AddParticipantCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSe-h4-5yS">
+                        <rect key="frame" x="5" y="4" width="110" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="BtD-t7-Bhw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXR-fv-rU1">
+                        <rect key="frame" x="95" y="4" width="110" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="Lqi-wc-hXe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCV-gn-pYC">
+                        <rect key="frame" x="185" y="4" width="110" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="pzL-df-Kcu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-cA-fRg">
+                        <rect key="frame" x="285" y="10" width="15" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="D8Z-m4-Aa3"/>
+                            <constraint firstAttribute="height" constant="20" id="Waz-2a-p1O"/>
+                        </constraints>
+                        <state key="normal" image="ico_delete"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QXR-fv-rU1" firstAttribute="leading" secondItem="jSe-h4-5yS" secondAttribute="trailing" constant="-20" id="CAW-fa-Wth"/>
+                    <constraint firstAttribute="trailing" secondItem="ir7-cA-fRg" secondAttribute="trailing" constant="20" id="LN0-ws-Qgt"/>
+                    <constraint firstItem="jSe-h4-5yS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="TWk-xv-Bxq"/>
+                    <constraint firstItem="QXR-fv-rU1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Xfw-Xx-P1T"/>
+                    <constraint firstItem="ir7-cA-fRg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZYm-lP-TTg"/>
+                    <constraint firstItem="jSe-h4-5yS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="fRp-8y-ket"/>
+                    <constraint firstItem="QXR-fv-rU1" firstAttribute="width" secondItem="jSe-h4-5yS" secondAttribute="width" id="hoi-eF-HwH"/>
+                    <constraint firstItem="iCV-gn-pYC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="jBx-ch-7MV"/>
+                    <constraint firstItem="iCV-gn-pYC" firstAttribute="leading" secondItem="QXR-fv-rU1" secondAttribute="trailing" constant="-20" id="qBQ-SI-KH6"/>
+                    <constraint firstItem="ir7-cA-fRg" firstAttribute="leading" secondItem="iCV-gn-pYC" secondAttribute="trailing" constant="-10" id="zMT-8h-TPe"/>
+                    <constraint firstItem="iCV-gn-pYC" firstAttribute="width" secondItem="jSe-h4-5yS" secondAttribute="width" id="zuU-iG-dVr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="availableLbl" destination="iCV-gn-pYC" id="rK1-6Z-WjS"/>
+                <outlet property="deleteBtn" destination="ir7-cA-fRg" id="zn5-oH-fOq"/>
+                <outlet property="participantLbl" destination="QXR-fv-rU1" id="dab-RD-Pqy"/>
+                <outlet property="participationTypeLbl" destination="jSe-h4-5yS" id="kaH-lz-X3g"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ico_delete" width="32" height="32"/>
+    </resources>
+</document>

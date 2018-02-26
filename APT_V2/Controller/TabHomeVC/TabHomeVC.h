@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SwipeView.h"
 
 @interface TabHomeVC : UIViewController
 
 @property (strong, nonatomic) IBOutlet UICollectionView *Titlecollview;
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
-@property (strong, nonatomic) IBOutlet UIView *swipeView;
+@property (strong, nonatomic) IBOutlet SwipeView *swipeView;
 
 
 

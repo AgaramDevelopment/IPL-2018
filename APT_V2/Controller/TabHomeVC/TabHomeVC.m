@@ -102,10 +102,10 @@
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if(!IS_IPHONE_DEVICE)
     {
-        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+        return UIEdgeInsetsMake(20, 0, 30, 20); // top, left, bottom, right
     }
     else{
-        return UIEdgeInsetsMake(10, 10, 0, 10);
+        return UIEdgeInsetsMake(10, 0, 0, 10);
     }
 }
 
@@ -147,9 +147,9 @@
         cell.Title.text = @"SCHEDULE/RESULTS/VIDEOS";
         [cell setTag:indexPath.row];
         
-        objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
-        objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self.view addSubview:objSch.view];
+//        objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+//        objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
+//        [self.view addSubview:objSch.view];
         
     }
     if(indexPath.row==1)
@@ -171,93 +171,98 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-    
+   // TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+
     if(indexPath.row == 0)
     {
-    objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
-    objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-    [self.view addSubview:objSch.view];
+
+        [self.swipeView scrollToItemAtIndex:0 duration:0];
         
     }
     if(indexPath.row == 1)
     {
-        objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-        objWell.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self.view addSubview:objWell.view];
+        [self.swipeView scrollToItemAtIndex:1 duration:0];
     }
-    
+
     if(indexPath.row == 2)
     {
-        StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-        StandsVC.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self.view addSubview:StandsVC.view];
+       [self.swipeView scrollToItemAtIndex:2 duration:0];
     }
 }
 
 
 
-//- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
-//{
-//    //return the total number of items in the carousel
-//    return 3;
-//}
-//
-//- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
-//{
-//    UILabel *label = nil;
-//
-//    //create new view if no view is available for recycling
+- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
+{
+    //return the total number of items in the carousel
+    return 3;
+}
+
+- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    UILabel *label = nil;
+
+    //create new view if no view is available for recycling
 //    if (view == nil)
 //    {
-//        view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
-//        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//
-//        if(index == 0)
-//        {
-//            objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
-//            objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-//
-//        }
-//        else if(index == 1)
-//        {
-//            objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-//            objWell.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-//            [view addSubview:objWell.view];
-//        }
-//        else if(index == 2)
-//        {
-//            StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-//            StandsVC.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-//            [view addSubview:StandsVC.view];
-//        }
-//        [view addSubview:objSch.view];
-//
-//        //[view addSubview:Fix.view];
+        view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
+        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+        if(index == 0)
+        {
+            objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+            objSch.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            [view addSubview:objSch.view];
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+
+        }
+         if(index == 1)
+        {
+            objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+            objWell.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            [view addSubview:objWell.view];
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        }
+         if(index == 2)
+        {
+            StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+            StandsVC.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            [view addSubview:StandsVC.view];
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        }
+        
+
+        //[view addSubview:Fix.view];
 //    }
 //    else
 //    {
 //        //get a reference to the label in the recycled view
 //        label = (UILabel *)[view viewWithTag:1];
 //    }
-//
-//
-//    return view;
-//}
-//
-//- (CGSize)swipeViewItemSize:(SwipeView *)swipeView
-//{
-//    return self.swipeView.bounds.size;
-//}
-//
-//- (void)swipeViewDidScroll:(SwipeView *)swipeView
-//{
-//
-//}
-//- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
-//{
-//   // self.page_control.currentPage = self.swipeView.currentItemIndex;
-//}
+
+
+    return view;
+}
+
+- (CGSize)swipeViewItemSize:(SwipeView *)swipeView
+{
+    return self.swipeView.bounds.size;
+}
+
+- (void)swipeViewDidScroll:(SwipeView *)swipeView
+{
+
+}
+- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
+{
+   // self.page_control.currentPage = self.swipeView.currentItemIndex;
+}
 
 
 

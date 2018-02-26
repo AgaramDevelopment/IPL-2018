@@ -16,6 +16,7 @@
 #import "TrainingLoadUpdateVC.h"
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
+#import "PlannerVC.h"
 
 @interface RearViewController ()
 {
@@ -69,7 +70,7 @@
     else
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Reports",@"Logout"];
+       arrItems = @[@"Team",@"Planner",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Reports",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -179,10 +180,15 @@
         }
         else if(indexPath.row == 1) // Assessment
         {
+            newFrontController= [PlannerVC new];
+            
+        }
+        else if(indexPath.row == 2) // Assessment
+        {
             newFrontController= [ViewController new];
             
         }
-        else if(indexPath.row == 2)
+        else if(indexPath.row == 3)
         {
             //        InjuryVC *msObj = [InjuryVC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
@@ -192,7 +198,7 @@
             newFrontController= [InjuryVC new];
             
         }
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 4)
         {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
@@ -202,7 +208,7 @@
             newFrontController= [MatchCenterTBC new];
             
         }
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 5)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
@@ -221,7 +227,7 @@
             }
             
         }
-        else if(indexPath.row == 5)
+        else if(indexPath.row == 6)
         {
             
             newFrontController= [ReportsVC new];
@@ -235,7 +241,7 @@
     }
     
     
-     
+    
     
     if (newFrontController == nil) {
         return;
