@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet TTView *gridView;
 @property (weak, nonatomic) IBOutlet UILabel *lbl1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTemp;
+@property (weak, nonatomic) IBOutlet UIButton *img123;
 
 @end

@@ -51,18 +51,18 @@
 //    let pointsOfColor = image?.getPoints(displayP3Red: 204.0/255.0, green: 33.0/255.0, blue: 50.0/255.0, alpha: 1.0)
     
 //    UIImage* img = [UIImage imageNamed:@"shape1"];
-    NSMutableArray* arr = [_imgTemp.image getPointsfromRGB:0.0 :0.0 :0.0 andAlpha:1.0];
-    NSLog(@"%@",arr);
-    
-    UIBezierPath* path = [UIBezierPath bezierPath];
-    for (NSValue* value in arr) {
-        if (arr[0] == value) {
-            [path moveToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
-        }
-     
-        [path addLineToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
-    }
-    [path closePath];
+//    NSMutableArray* arr = [_imgTemp.image getPointsfromRGB:0.0 :0.0 :0.0 andAlpha:1.0];
+//    NSLog(@"%@",arr);
+//
+//    UIBezierPath* path = [UIBezierPath bezierPath];
+//    for (NSValue* value in arr) {
+//        if (arr[0] == value) {
+//            [path moveToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
+//        }
+//
+//        [path addLineToPoint:CGPointMake([value CGPointValue].x, [value CGPointValue].y)];
+//    }
+//    [path closePath];
     
     //    CALayer* layer1 = [CALayer new];
     //    layer1.accessibilityPath = trianglePath;
@@ -74,12 +74,12 @@
 //    cal1.borderWidth = 10.0;
 //    [self.view.layer addSublayer:cal1];
     
-    CAShapeLayer* shape1 = [CAShapeLayer layer];
-    shape1.path = path.CGPath;
-    shape1.backgroundColor = [UIColor yellowColor].CGColor;
-    shape1.borderWidth = 1.0;
-    shape1.borderColor = [UIColor redColor].CGColor;
-    [self.view.layer addSublayer:shape1];
+//    CAShapeLayer* shape1 = [CAShapeLayer layer];
+//    shape1.path = path.CGPath;
+//    shape1.backgroundColor = [UIColor yellowColor].CGColor;
+//    shape1.borderWidth = 1.0;
+//    shape1.borderColor = [UIColor redColor].CGColor;
+//    [self.view.layer addSublayer:shape1];
     
 }
 
@@ -101,30 +101,30 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    blueLayer = [[CALayer alloc] init];
-    blueLayer.frame = CGRectMake(100, 100, 100, 100);
-    blueLayer.backgroundColor = [UIColor blueColor].CGColor;
-    blueLayer.name = @"Blue";
+//    blueLayer = [[CALayer alloc] init];
+//    blueLayer.frame = CGRectMake(100, 100, 100, 100);
+//    blueLayer.backgroundColor = [UIColor blueColor].CGColor;
+//    blueLayer.name = @"Blue";
 //    [self.view.layer addSublayer:blueLayer];
     
     
 //    blueLayer.accessibilityPath.bezierPath;
-    redLayer = [[CALayer alloc] init];
-    redLayer.frame = CGRectMake(200, 200, 100, 100);
-    redLayer.backgroundColor = [UIColor redColor].CGColor;
-    redLayer.name=@"Red";
+//    redLayer = [[CALayer alloc] init];
+//    redLayer.frame = CGRectMake(200, 200, 100, 100);
+//    redLayer.backgroundColor = [UIColor redColor].CGColor;
+//    redLayer.name=@"Red";
 //    [self.view.layer addSublayer:redLayer];
     
-    yellowLayer = [[CALayer alloc] init];
-    yellowLayer.frame = CGRectMake(300, 300, 100, 100);
-    yellowLayer.backgroundColor = [UIColor yellowColor].CGColor;
-    yellowLayer.name = @"Yellow";
+//    yellowLayer = [[CALayer alloc] init];
+//    yellowLayer.frame = CGRectMake(300, 300, 100, 100);
+//    yellowLayer.backgroundColor = [UIColor yellowColor].CGColor;
+//    yellowLayer.name = @"Yellow";
 //    [self.view.layer addSublayer:yellowLayer];
     
-    greenLayer = [[CALayer alloc] init];
-    greenLayer.frame = CGRectMake(400, 400, 100, 100);
-    greenLayer.backgroundColor = [UIColor greenColor].CGColor;
-    greenLayer.name=@"Green";
+//    greenLayer = [[CALayer alloc] init];
+//    greenLayer.frame = CGRectMake(400, 400, 100, 100);
+//    greenLayer.backgroundColor = [UIColor greenColor].CGColor;
+//    greenLayer.name=@"Green";
 //    [self.view.layer addSublayer:greenLayer];
     
     
@@ -154,36 +154,23 @@
      [[self.view layer] addSublayer:shapeView];
      */
     
-   
-    
-//    UIBezierPath* trianglePath = [UIBezierPath bezierPath];
-//    [trianglePath moveToPoint:lblVertical.frame.origin];
-//    [trianglePath addLineToPoint:CGPointMake(lblVertical.frame.origin.x, lblVertical.frame.origin.y+20)];
-//    [trianglePath addLineToPoint:CGPointMake(lblVertical.frame.origin.x-20, lblVertical.frame.origin.y+20)];
-//    [trianglePath closePath];
-//    CALayer* layer1 = [CALayer new];
-//    layer1.accessibilityPath = trianglePath;
-//    layer1.backgroundColor = [UIColor greenColor].CGColor;
-//    [imgFront.layer addSublayer:layer1];
-    
-    
     
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
 {
-    
+
 }
 
 //The next step is to use the UIViewController's inheritance from the UIResponder class to take advantage of the touchesEnded: method.
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-    
+
 //    [super touchesBegan:touches withEvent:event];
 //    [self.nextResponder touchesBegan:touches withEvent:event];
-    
+
     CGPoint location = [[touches anyObject] locationInView:self.view];
     CALayer *hitLayer = [self.view.layer hitTest:[self.view convertPoint:location fromView:nil]];
-    
+
     [self displayInfo:hitLayer.name];
 }
 
@@ -201,12 +188,6 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    //    [self.view addSubview:objCustomNavigation.view];
-    //    objCustomNavigation.tittle_lbl.text=@"";
-    
-    UIView* view= self.view.subviews.firstObject;
-    [view addSubview:objCustomNavigation.view];
-    
     BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
     
     if (isBackEnable) {
@@ -221,14 +202,8 @@
         [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    //    objCustomNavigation.btn_back.hidden =isBackEnable;
-    //
-    //    objCustomNavigation.menu_btn.hidden = objCustomNavigation.btn_back.isHidden;
-    //    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
-    //
-    //    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+    [self.navBarView addSubview:objCustomNavigation.view];
+
 }
 
 
@@ -238,6 +213,13 @@
     [appDel.frontNavigationController popViewControllerAnimated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
     
+}
+
+-(IBAction)imageSelection:(id)sender
+{
+//    CGPoint location = [[touches anyObject] locationInView:self.view];
+//    CALayer *hitLayer = [self.view.layer hitTest:[self.view convertPoint:location fromView:nil]];
+
 }
 
 @end

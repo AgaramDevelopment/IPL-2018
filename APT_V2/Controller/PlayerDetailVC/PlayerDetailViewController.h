@@ -22,6 +22,7 @@
 @property (strong, readwrite) NSString* PlaerDesignation;
 
 @property (strong, nonatomic) UIColor* availableColor;
+@property (strong, nonatomic) NSMutableArray* selectedPlayerArray;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgViewPlayer;
 @property (weak, nonatomic) IBOutlet UILabel *lblTeamName;

@@ -55,7 +55,26 @@
 {
     self.lblAvailability.backgroundColor = self.availableColor;
     self.lblTeamName.text = [self TeamName];
-    self.lblPlayerAge.text = [self PlayerAge];
+    
+    NSString* age = [NSString stringWithFormat:@"%@ Years Old",[self.selectedPlayerArray valueForKey:@"Age"]];
+    
+    self.lblPlayerAge.text = age;
+    
+    NSString *available = [self.selectedPlayerArray valueForKey:@"PlayerAvailability"];
+    
+    if([available isEqualToString:@"Available"])
+    {
+        _lblAvailability.backgroundColor = avail;
+    }
+    else if([available isEqualToString:@"Not Available"])
+    {
+        _lblAvailability.backgroundColor = notavail;
+    }
+    else if([available isEqualToString:@"Rehab"])
+    {
+        _lblAvailability.backgroundColor = rehab;
+    }
+
     
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:NO];
@@ -383,8 +402,10 @@
         manager.requestSerializer = requestSerializer;
     
         NSString *ClientCode = [AppCommon GetClientCode];
-        NSString *UserrefCode = @"AMR0000016";//[AppCommon GetuserReference];
-        NSString *PlayerCode = [self PlayerCode];
+        NSString *UserrefCode =[AppCommon GetuserReference];
+//    NSString *UserrefCode = @"AMR0000016";
+
+        NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];
     
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
@@ -466,9 +487,11 @@
     manager.requestSerializer = requestSerializer;
     
     NSString *ClientCode = [AppCommon GetClientCode];
-    NSString *UserrefCode = @"AMR0000016";//[AppCommon GetuserReference];
-    NSString *PlayerCode = [self PlayerCode];
+    NSString *UserrefCode =[AppCommon GetuserReference];
+    //    NSString *UserrefCode = @"AMR0000016";
     
+    NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];
+
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
     if(UserrefCode)  [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
@@ -538,7 +561,8 @@
         selectedVC = [WellnessTrainingBowlingVC new];
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.athletCode forKey:@"SelectedPlayerCode"];
+    NSString *athletCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
+    [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
     NSString *userRefCode =  [[NSUserDefaults standardUserDefaults]
                               stringForKey:@"SelectedPlayerCode"];
     NSLog(@"userRefCode:%@", userRefCode);
