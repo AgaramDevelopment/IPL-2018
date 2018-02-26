@@ -284,3 +284,22 @@
 
 #define  RecentplayerFitnessKey       @"MOBILE_RECENTDETAILSFITNESS"
 
+#define ScorecardKey                               @"FETCHSCORECARD"
+
+#define ScorecardWagonKey                             @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
+
+#define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
+#define ScorecardPitchbowlmapKey                           @"FETCH_SCORECARD_PITCHMAP_BOWLING"
+
+#define GetVideoFilePath       @"GETSCORECARDVIDEOSFILEPATH"
+
+#define LoadFieldSummary       @"LOADFIELDSUMMARY"
+
+#define MatchTypeKey                             @"LOADSESSIONSUMMARY"
+#define SingledayKey                             @"LOADSESSIONSUMMARYSINGLEDAYDETAILS"
+
+#define SessionKey                             @"LOADSESSIONSUMMARYDETAILS"
+
+
+
+

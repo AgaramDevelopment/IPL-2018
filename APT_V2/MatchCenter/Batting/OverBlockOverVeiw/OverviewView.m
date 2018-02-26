@@ -13,8 +13,9 @@
 
 BOOL isXAxis;
 BOOL isYAxis;
+NSMutableArray *months;
 
-/* Filter */
+/* ----------------------------------Filter----------------------------------------- */
 
 
 #pragma mark - UITableViewDataSource
@@ -127,268 +128,171 @@ BOOL isYAxis;
     }
 }
 
-/*  Chart  */
+/*  ---------------------------------------------------------Chart --------------------------------------- */
 -(void) loadChart{
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
     
-    [self chartPP1];
+    months = [[NSMutableArray alloc]init];
 
+       months = @[
+                   @"Match1", @"Match2", @"Match3",
+                   @"Match4", @"Match5"
+                   ];
+    
+    
+    
+    [self chartPP1];
     [self chartPP2];
+    [self chartPP3];
+    
 }
+/*  ---------------------------------------------------------Chart PP1--------------------------------------- */
 -(void) chartPP1
 {
     
     
-    
-    
-    //    [self setupBarLineChartView:_chartView];
-    
     self.barChartPP1.delegate = self;
     
+    self.barChartPP1.chartDescription.enabled = NO;
+    
+    self.barChartPP1.drawGridBackgroundEnabled = NO;
     self.barChartPP1.drawBarShadowEnabled = NO;
-    self.barChartPP1.drawValueAboveBarEnabled = YES;
+    self.barChartPP1.highlightFullBarEnabled = NO;
     
-    self.barChartPP1.maxVisibleCount = 60;
-    
-    ChartXAxis *xAxis = self.barChartPP1.xAxis;
-    xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    xAxis.drawGridLinesEnabled = NO;
-    xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
-    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
-    
-    NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
-    leftAxisFormatter.minimumFractionDigits = 0;
-    leftAxisFormatter.maximumFractionDigits = 1;
-    leftAxisFormatter.negativeSuffix = @"";
-    leftAxisFormatter.positiveSuffix = @"";
-    
-    ChartYAxis *leftAxis = self.barChartPP1.leftAxis;
-    leftAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    leftAxis.labelCount = 8;
-    leftAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:leftAxisFormatter];
-    leftAxis.labelPosition = YAxisLabelPositionOutsideChart;
-    leftAxis.spaceTop = 0.15;
-    leftAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
-    
-    ChartYAxis *rightAxis = self.barChartPP1.rightAxis;
-    rightAxis.enabled = YES;
-    rightAxis.drawGridLinesEnabled = NO;
-    rightAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    rightAxis.labelCount = 8;
-    rightAxis.valueFormatter = leftAxis.valueFormatter;
-    rightAxis.spaceTop = 0.15;
-    rightAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
+    self.barChartPP1.drawOrder = @[
+                             @(CombinedChartDrawOrderBar),
+                             @(CombinedChartDrawOrderBubble),
+                             @(CombinedChartDrawOrderCandle),
+                             @(CombinedChartDrawOrderLine),
+                             @(CombinedChartDrawOrderScatter)
+                             ];
     
     ChartLegend *l = self.barChartPP1.legend;
-    l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
+    l.wordWrapEnabled = YES;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
     l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
     l.orientation = ChartLegendOrientationHorizontal;
     l.drawInside = NO;
-    l.form = ChartLegendFormSquare;
-    l.formSize = 9.0;
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
-    l.xEntrySpace = 4.0;
     
-    [self setDataCount2: 10 range: 20];
-    
-    
-    //    XYMarkerView *marker = [[XYMarkerView alloc]
-    //                            initWithColor: [UIColor colorWithWhite:180/255. alpha:1.0]
-    //                            font: [UIFont systemFontOfSize:12.0]
-    //                            textColor: UIColor.whiteColor
-    //                            insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)
-    //                            xAxisValueFormatter: _chartView.xAxis.valueFormatter];
-    //    marker.chartView = _chartView;
-    //    marker.minimumSize = CGSizeMake(80.f, 40.f);
-    //    _chartView.marker = marker;
-    //
-    //    _sliderX.value = 12.0;
-    //    _sliderY.value = 50.0;
-    //   [self slidersValueChanged:nil];
-}
-
-
-
-
-- (void)setDataCount2:(int)count range:(double)range
-{
-    double start = 1.0;
-    
-    NSMutableArray *yVals = [[NSMutableArray alloc] init];
-    
-    for (int i = start; i < start + count + 1; i++)
-    {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
-    }
-    
-    BarChartDataSet *set1 = nil;
-    if (self.barChartPP1.data.dataSetCount > 0)
-    {
-        set1 = (BarChartDataSet *)self.barChartPP1.data.dataSets[0];
-        set1.values = yVals;
-        [self.barChartPP1.data notifyDataChanged];
-        [self.barChartPP1 notifyDataSetChanged];
-    }
-    else
-    {
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@"The year 2017"];
-        [set1 setColors:ChartColorTemplates.material];
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:10.f]];
-        
-        data.barWidth = 0.9f;
-        
-        self.barChartPP1.data = data;
-    }
-}
-
-
--(void) chartPP2
-{
-    
-    
-    
-    
-    //    [self setupBarLineChartView:_chartView];
-    
-    self.barChartPP2.delegate = self;
-    
-    self.barChartPP2.drawBarShadowEnabled = NO;
-    self.barChartPP2.drawValueAboveBarEnabled = YES;
-    
-    self.barChartPP2.maxVisibleCount = 60;
-    
-    ChartXAxis *xAxis = self.barChartPP2.xAxis;
-    xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    xAxis.drawGridLinesEnabled = NO;
-    xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
-    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
-    
-    NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
-    leftAxisFormatter.minimumFractionDigits = 0;
-    leftAxisFormatter.maximumFractionDigits = 1;
-    leftAxisFormatter.negativeSuffix = @"";
-    leftAxisFormatter.positiveSuffix = @"";
-    
-    ChartYAxis *leftAxis = self.barChartPP2.leftAxis;
-    leftAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    leftAxis.labelCount = 8;
-    leftAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:leftAxisFormatter];
-    leftAxis.labelPosition = YAxisLabelPositionOutsideChart;
-    leftAxis.spaceTop = 0.15;
-    leftAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
-    
-    ChartYAxis *rightAxis = self.barChartPP2.rightAxis;
-    rightAxis.enabled = YES;
+    ChartYAxis *rightAxis = self.barChartPP1.rightAxis;
     rightAxis.drawGridLinesEnabled = NO;
-    rightAxis.labelFont = [UIFont systemFontOfSize:10.f];
-    rightAxis.labelCount = 8;
-    rightAxis.valueFormatter = leftAxis.valueFormatter;
-    rightAxis.spaceTop = 0.15;
     rightAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
     
-    ChartLegend *l = self.barChartPP2.legend;
-    l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
-    l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
-    l.orientation = ChartLegendOrientationHorizontal;
-    l.drawInside = NO;
-    l.form = ChartLegendFormSquare;
-    l.formSize = 9.0;
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
-    l.xEntrySpace = 4.0;
+    ChartYAxis *leftAxis = self.barChartPP1.leftAxis;
+    leftAxis.drawGridLinesEnabled = NO;
+    leftAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
     
-    [self setDataCount: 10 range: 20];
+    ChartXAxis *xAxis = self.barChartPP1.xAxis;
+    xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.axisMinimum = 0.0;
+    xAxis.granularity = 1.0;
+    xAxis.valueFormatter = self;
     
     
-    //    XYMarkerView *marker = [[XYMarkerView alloc]
-    //                            initWithColor: [UIColor colorWithWhite:180/255. alpha:1.0]
-    //                            font: [UIFont systemFontOfSize:12.0]
-    //                            textColor: UIColor.whiteColor
-    //                            insets: UIEdgeInsetsMake(8.0, 8.0, 20.0, 8.0)
-    //                            xAxisValueFormatter: _chartView.xAxis.valueFormatter];
-    //    marker.chartView = _chartView;
-    //    marker.minimumSize = CGSizeMake(80.f, 40.f);
-    //    _chartView.marker = marker;
-    //
-    //    _sliderX.value = 12.0;
-    //    _sliderY.value = 50.0;
-    //   [self slidersValueChanged:nil];
+    [self setChartData];
+
 }
 
 
 
-- (void)updateChartData
+- (void)setChartData
 {
-    //    if (self.shouldHideData)
-    //    {
-    //        _chartView.data = nil;
-    //        return;
-    //    }
+    CombinedChartData *data = [[CombinedChartData alloc] init];
+    data.barData = [self generateBarData];
+    data.lineData = [self generateLineData];
+    //data.bubbleData = [self generateBubbleData];
+    //data.scatterData = [self generateScatterData];
+    //data.candleData = [self generateCandleData];
     
-    //  [self setDataCount:_sliderX.value + 1 range:_sliderY.value];
+    self.barChartPP1.xAxis.axisMaximum = data.xMax + 0.25;
+    
+    self.barChartPP1.data = data;
 }
 
-- (void)setDataCount:(int)count range:(double)range
+
+- (LineChartData *)generateLineData
 {
-    double start = 1.0;
+    LineChartData *d = [[LineChartData alloc] init];
     
-    NSMutableArray *yVals = [[NSMutableArray alloc] init];
+    NSMutableArray *entries = [[NSMutableArray alloc] init];
     
-    for (int i = start; i < start + count + 1; i++)
+    
+    for (int index = 0; index < 5; index++)
     {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
+        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(65) + 5)]];
+
+//        int value = [[self.lineValuesArray objectAtIndex:index] intValue];
+//
+//        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
     
-    BarChartDataSet *set1 = nil;
-    if (self.barChartPP2.data.dataSetCount > 0)
-    {
-        set1 = (BarChartDataSet *)self.barChartPP2.data.dataSets[0];
-        set1.values = yVals;
-        [self.barChartPP2.data notifyDataChanged];
-        [self.barChartPP2 notifyDataSetChanged];
-    }
-    else
-    {
-        set1 = [[BarChartDataSet alloc] initWithValues:yVals label:@"The year 2017"];
-        [set1 setColors:ChartColorTemplates.material];
-        set1.drawIconsEnabled = NO;
-        
-        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
-        [dataSets addObject:set1];
-        
-        BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
-        [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:10.f]];
-        
-        data.barWidth = 0.9f;
-        
-        self.barChartPP2.data = data;
-    }
+    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@"Axis 2"];
+    [set setColor:[UIColor colorWithRed:240/255.f green:0/255.f blue:0/255.f alpha:1.f]];
+    set.lineWidth = 2.5;
+    [set setCircleColor:[UIColor colorWithRed:240/255.f green:0/255.f blue:0/255.f alpha:1.f]];
+    set.circleRadius = 5.0;
+    set.circleHoleRadius = 2.5;
+    set.fillColor = [UIColor colorWithRed:240/255.f green:0/255.f blue:0/255.f alpha:1.f];
+    set.mode = LineChartModeCubicBezier;
+    set.drawValuesEnabled = YES;
+    set.valueFont = [UIFont systemFontOfSize:10.f];
+    set.valueTextColor = [UIColor colorWithRed:240/255.f green:0/255.f blue:0/255.f alpha:1.f];
+    
+    set.axisDependency = AxisDependencyLeft;
+    
+    [d addDataSet:set];
+    
+    return d;
 }
 
+- (BarChartData *)generateBarData
+{
+    NSMutableArray<BarChartDataEntry *> *entries1 = [[NSMutableArray alloc] init];
+    NSMutableArray<BarChartDataEntry *> *entries2 = [[NSMutableArray alloc] init];
+    
+    for (int index = 0; index < 5; index++)
+    {
+        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(15) + 5)]];
 
-#pragma mark - Actions
+        
+//        int value = [[self.BarValuesArray objectAtIndex:index] intValue];
+//        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
+//
+        // stacked
+        
+        //[entries2 addObject:[[BarChartDataEntry alloc] initWithX:0.0 yValues:@[@(arc4random_uniform(13) + 12), @(arc4random_uniform(13) + 12)]]];
+    }
+    
+    BarChartDataSet *set1 = [[BarChartDataSet alloc] initWithValues:entries1 label:@"Axis 1"];
+    [set1 setColor:[UIColor colorWithRed:60/255.f green:220/255.f blue:78/255.f alpha:1.f]];
+    set1.valueTextColor = [UIColor colorWithRed:60/255.f green:220/255.f blue:78/255.f alpha:1.f];
+    set1.valueFont = [UIFont systemFontOfSize:10.f];
+    set1.axisDependency = AxisDependencyRight;
+    
+    BarChartDataSet *set2 = [[BarChartDataSet alloc] initWithValues:entries2 label:@""];
+    set2.stackLabels = @[@"Stack 1", @"Stack 2"];
+    set2.colors = @[
+                    [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f],
+                    [UIColor colorWithRed:23/255.f green:197/255.f blue:255/255.f alpha:1.f]
+                    ];
+    set2.valueTextColor = [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f];
+    set2.valueFont = [UIFont systemFontOfSize:10.f];
+    set2.axisDependency = AxisDependencyRight;
+    
+    float groupSpace = 0.06f;
+    float barSpace = 0.02f; // x2 dataset
+    float barWidth = 0.45f; // x2 dataset
+    // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+    
+    BarChartData *d = [[BarChartData alloc] initWithDataSets:@[set1,set2]];
+    d.barWidth = barWidth;
+    
+    // make this BarData object grouped
+    [d groupBarsFromX:0.0 groupSpace:groupSpace barSpace:barSpace]; // start at x = 0
+    
+    return d;
+}
 
 
 
@@ -402,6 +306,325 @@ BOOL isYAxis;
 - (void)chartValueNothingSelected:(ChartViewBase * __nonnull)chartView
 {
     NSLog(@"chartValueNothingSelected");
+}
+
+#pragma mark - IAxisValueFormatter
+
+- (NSString *)stringForValue:(double)value
+                        axis:(ChartAxisBase *)axis
+{
+    return months[(int)value % months.count];
+}
+
+
+
+
+
+
+
+
+/*  ---------------------------------------------------------Chart PP2--------------------------------------- */
+
+-(void) chartPP2
+{
+    
+    
+   
+    self.barChartPP2.delegate = self;
+    
+    self.barChartPP2.chartDescription.enabled = NO;
+    
+    self.barChartPP2.drawGridBackgroundEnabled = NO;
+    self.barChartPP2.drawBarShadowEnabled = NO;
+    self.barChartPP2.highlightFullBarEnabled = NO;
+    
+    self.barChartPP2.drawOrder = @[
+                                   @(CombinedChartDrawOrderBar),
+                                   @(CombinedChartDrawOrderBubble),
+                                   @(CombinedChartDrawOrderCandle),
+                                   @(CombinedChartDrawOrderLine),
+                                   @(CombinedChartDrawOrderScatter)
+                                   ];
+    
+    ChartLegend *l = self.barChartPP2.legend;
+    l.wordWrapEnabled = YES;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
+    l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
+    l.orientation = ChartLegendOrientationHorizontal;
+    l.drawInside = NO;
+    
+    ChartYAxis *rightAxis = self.barChartPP2.rightAxis;
+    rightAxis.drawGridLinesEnabled = NO;
+    rightAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
+    
+    ChartYAxis *leftAxis = self.barChartPP2.leftAxis;
+    leftAxis.drawGridLinesEnabled = NO;
+    leftAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
+    
+    ChartXAxis *xAxis = self.barChartPP2.xAxis;
+    xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.axisMinimum = 0.0;
+    xAxis.granularity = 1.0;
+    xAxis.valueFormatter = self;
+    
+    
+    [self setChartData2];
+    
+}
+
+
+
+- (void)setChartData2
+{
+    CombinedChartData *data = [[CombinedChartData alloc] init];
+    data.barData = [self generateBarData2];
+    data.lineData = [self generateLineData2];
+    //data.bubbleData = [self generateBubbleData];
+    //data.scatterData = [self generateScatterData];
+    //data.candleData = [self generateCandleData];
+    
+    self.barChartPP2.xAxis.axisMaximum = data.xMax + 0.25;
+    
+    self.barChartPP2.data = data;
+}
+
+
+
+- (LineChartData *)generateLineData2
+{
+    LineChartData *d = [[LineChartData alloc] init];
+    
+    NSMutableArray *entries = [[NSMutableArray alloc] init];
+    
+    
+    for (int index = 0; index < 5; index++)
+    {
+        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(35) + 5)]];
+        
+        //        int value = [[self.lineValuesArray objectAtIndex:index] intValue];
+        //
+        //        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
+    }
+    
+    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@"Axis 2"];
+    [set setColor:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
+    set.lineWidth = 2.5;
+    [set setCircleColor:[UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f]];
+    set.circleRadius = 5.0;
+    set.circleHoleRadius = 2.5;
+    set.fillColor = [UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f];
+    set.mode = LineChartModeCubicBezier;
+    set.drawValuesEnabled = YES;
+    set.valueFont = [UIFont systemFontOfSize:10.f];
+    set.valueTextColor = [UIColor colorWithRed:0/255.f green:255/255.f blue:255/255.f alpha:1.f];
+    
+    set.axisDependency = AxisDependencyLeft;
+    
+    [d addDataSet:set];
+    
+    return d;
+}
+
+- (BarChartData *)generateBarData2
+{
+    NSMutableArray<BarChartDataEntry *> *entries1 = [[NSMutableArray alloc] init];
+    NSMutableArray<BarChartDataEntry *> *entries2 = [[NSMutableArray alloc] init];
+    
+    for (int index = 0; index < 5; index++)
+    {
+        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(45) + 5)]];
+        
+        
+        //        int value = [[self.BarValuesArray objectAtIndex:index] intValue];
+        //        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
+        //
+        // stacked
+        
+        //[entries2 addObject:[[BarChartDataEntry alloc] initWithX:0.0 yValues:@[@(arc4random_uniform(13) + 12), @(arc4random_uniform(13) + 12)]]];
+    }
+    
+    BarChartDataSet *set1 = [[BarChartDataSet alloc] initWithValues:entries1 label:@"Axis 1"];
+    [set1 setColor:[UIColor colorWithRed:255/255.f green:128/255.f blue:0/255.f alpha:1.f]];
+    set1.valueTextColor = [UIColor colorWithRed:255/255.f green:128/255.f blue:0/255.f alpha:1.f];
+    set1.valueFont = [UIFont systemFontOfSize:10.f];
+    set1.axisDependency = AxisDependencyRight;
+    
+    BarChartDataSet *set2 = [[BarChartDataSet alloc] initWithValues:entries2 label:@""];
+    set2.stackLabels = @[@"Stack 1", @"Stack 2"];
+    set2.colors = @[
+                    [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f],
+                    [UIColor colorWithRed:23/255.f green:197/255.f blue:255/255.f alpha:1.f]
+                    ];
+    set2.valueTextColor = [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f];
+    set2.valueFont = [UIFont systemFontOfSize:10.f];
+    set2.axisDependency = AxisDependencyRight;
+    
+    float groupSpace = 0.06f;
+    float barSpace = 0.02f; // x2 dataset
+    float barWidth = 0.45f; // x2 dataset
+    // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+    
+    BarChartData *d = [[BarChartData alloc] initWithDataSets:@[set1,set2]];
+    d.barWidth = barWidth;
+    
+    // make this BarData object grouped
+    [d groupBarsFromX:0.0 groupSpace:groupSpace barSpace:barSpace]; // start at x = 0
+    
+    return d;
+}
+
+
+
+
+/*  ---------------------------------------------------------Chart PP3--------------------------------------- */
+
+-(void) chartPP3
+{
+    
+    
+    
+    self.barChartPP3.delegate = self;
+    
+    self.barChartPP3.chartDescription.enabled = NO;
+    
+    self.barChartPP3.drawGridBackgroundEnabled = NO;
+    self.barChartPP3.drawBarShadowEnabled = NO;
+    self.barChartPP3.highlightFullBarEnabled = NO;
+    
+    self.barChartPP3.drawOrder = @[
+                                   @(CombinedChartDrawOrderBar),
+                                   @(CombinedChartDrawOrderBubble),
+                                   @(CombinedChartDrawOrderCandle),
+                                   @(CombinedChartDrawOrderLine),
+                                   @(CombinedChartDrawOrderScatter)
+                                   ];
+    
+    ChartLegend *l = self.barChartPP3.legend;
+    l.wordWrapEnabled = YES;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
+    l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
+    l.orientation = ChartLegendOrientationHorizontal;
+    l.drawInside = NO;
+    
+    ChartYAxis *rightAxis = self.barChartPP3.rightAxis;
+    rightAxis.drawGridLinesEnabled = NO;
+    rightAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
+    
+    ChartYAxis *leftAxis = self.barChartPP3.leftAxis;
+    leftAxis.drawGridLinesEnabled = NO;
+    leftAxis.axisMinimum = 0.0; // this replaces startAtZero = YES
+    
+    ChartXAxis *xAxis = self.barChartPP3.xAxis;
+    xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.axisMinimum = 0.0;
+    xAxis.granularity = 1.0;
+    xAxis.valueFormatter = self;
+    
+    
+    [self setChartData3];
+    
+}
+
+
+
+- (void)setChartData3
+{
+    CombinedChartData *data = [[CombinedChartData alloc] init];
+    data.barData = [self generateBarData3];
+    data.lineData = [self generateLineData3];
+
+    //data.bubbleData = [self generateBubbleData];
+    //data.scatterData = [self generateScatterData];
+    //data.candleData = [self generateCandleData];
+    
+    self.barChartPP3.xAxis.axisMaximum = data.xMax + 0.25;
+    
+    self.barChartPP3.data = data;
+}
+
+
+
+- (LineChartData *)generateLineData3
+{
+    LineChartData *d = [[LineChartData alloc] init];
+    
+    NSMutableArray *entries = [[NSMutableArray alloc] init];
+    
+    
+    for (int index = 0; index < 5; index++)
+    {
+        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(135) + 5)]];
+        
+        //        int value = [[self.lineValuesArray objectAtIndex:index] intValue];
+        //
+        //        [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
+    }
+    
+    LineChartDataSet *set = [[LineChartDataSet alloc] initWithValues:entries label:@"Axis 2"];
+    [set setColor:[UIColor colorWithRed:51/255.f green:51/255.f blue:255/255.f alpha:1.f]];
+    set.lineWidth = 2.5;
+    [set setCircleColor:[UIColor colorWithRed:51/255.f green:51/255.f blue:255/255.f alpha:1.f]];
+    set.circleRadius = 5.0;
+    set.circleHoleRadius = 2.5;
+    set.fillColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:255/255.f alpha:1.f];
+    set.mode = LineChartModeCubicBezier;
+    set.drawValuesEnabled = YES;
+    set.valueFont = [UIFont systemFontOfSize:10.f];
+    set.valueTextColor = [UIColor colorWithRed:51/255.f green:51/255.f blue:255/255.f alpha:1.f];
+    
+    set.axisDependency = AxisDependencyLeft;
+    
+    [d addDataSet:set];
+    
+    return d;
+}
+
+- (BarChartData *)generateBarData3
+{
+    NSMutableArray<BarChartDataEntry *> *entries1 = [[NSMutableArray alloc] init];
+    NSMutableArray<BarChartDataEntry *> *entries2 = [[NSMutableArray alloc] init];
+    
+    for (int index = 0; index < 5; index++)
+    {
+        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(85) + 5)]];
+        
+        
+        //        int value = [[self.BarValuesArray objectAtIndex:index] intValue];
+        //        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
+        //
+        // stacked
+        
+        //[entries2 addObject:[[BarChartDataEntry alloc] initWithX:0.0 yValues:@[@(arc4random_uniform(13) + 12), @(arc4random_uniform(13) + 12)]]];
+    }
+    
+    BarChartDataSet *set1 = [[BarChartDataSet alloc] initWithValues:entries1 label:@"Axis 1"];
+    [set1 setColor:[UIColor colorWithRed:255/255.f green:51/255.f blue:153/255.f alpha:1.f]];
+    set1.valueTextColor = [UIColor colorWithRed:255/255.f green:51/255.f blue:153/255.f alpha:1.f];
+    set1.valueFont = [UIFont systemFontOfSize:10.f];
+    set1.axisDependency = AxisDependencyRight;
+    
+    BarChartDataSet *set2 = [[BarChartDataSet alloc] initWithValues:entries2 label:@""];
+    set2.stackLabels = @[@"Stack 1", @"Stack 2"];
+    set2.colors = @[
+                    [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f],
+                    [UIColor colorWithRed:23/255.f green:197/255.f blue:255/255.f alpha:1.f]
+                    ];
+    set2.valueTextColor = [UIColor colorWithRed:61/255.f green:165/255.f blue:255/255.f alpha:1.f];
+    set2.valueFont = [UIFont systemFontOfSize:10.f];
+    set2.axisDependency = AxisDependencyRight;
+    
+    float groupSpace = 0.06f;
+    float barSpace = 0.02f; // x2 dataset
+    float barWidth = 0.45f; // x2 dataset
+    // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+    
+    BarChartData *d = [[BarChartData alloc] initWithDataSets:@[set1,set2]];
+    d.barWidth = barWidth;
+    
+    // make this BarData object grouped
+    [d groupBarsFromX:0.0 groupSpace:groupSpace barSpace:barSpace]; // start at x = 0
+    
+    return d;
 }
 
 @end
