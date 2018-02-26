@@ -1,19 +1,23 @@
 //
-//  VideoPlayerViewController.h
-//  NewSportsProject
+//  ScoreCardVideoPlayer.h
+//  APT_V2
 //
-//  Created by user on 04/01/18.
-//  Copyright © 2018 agaraminfotech. All rights reserved.
+//  Created by Apple on 26/02/18.
+//  Copyright © 2018 user. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface VideoPlayerViewController : UIViewController
+@class TappabbleView;
+@protocol TappabbleViewDelegate<NSObject>
+-(void)didTapView:(TappabbleView *)view;
+@end
+@interface TappabbleView: UIView
+@property (nonatomic) id<TappabbleViewDelegate> delegate;
+@end
 
-@property (nonatomic,strong) NSString * objSelectVideoLink;
-
+@interface ScoreCardVideoPlayer : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *videoView;
 @property (strong, nonatomic) IBOutlet UIView *rootVideoView;
@@ -36,6 +40,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *playAndPauseBtn;
 
 - (IBAction)closeVideo:(id)sender;
-- (IBAction)closeBtn:(id)sender;
 
 @end

@@ -16,7 +16,7 @@
 #import "AppCommon.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "BallsInVideosCVC.h"
-#import "VideoPlayerViewController.h"
+#import "ScoreCardVideoPlayer.h"
 
 
 #define DarkBlue = [UIColor colorWithRed:16.0/255.0 green:45.0/255.0 blue:124.0/255.0 alpha:1.0]
@@ -529,8 +529,8 @@
     NSLog(@"%@",selectedValue);
 //    [self loadVideoPathsForPlayer:self.SelectedPlayerCode andValue:selectedValue type:@"BATTING" inningsCount:InningsCount];
     
-    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
-    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
+    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+    videoPlayerVC = (ScoreCardVideoPlayer *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.MatchCode = self.SelectedMatchCode;
     videoPlayerVC.PlayerCode = self.SelectedPlayerCode;
     videoPlayerVC.VideoValue = selectedValue;

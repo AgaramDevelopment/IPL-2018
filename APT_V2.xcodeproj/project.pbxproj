@@ -138,6 +138,7 @@
 		18A647C120441BA2008A4221 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A647C020441BA2008A4221 /* SessionSummaryVC.m */; };
 		18A647C820441BDF008A4221 /* SessionDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A647C420441BDF008A4221 /* SessionDayCell.m */; };
 		18A647C920441BDF008A4221 /* SessionPartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A647C720441BDF008A4221 /* SessionPartCell.m */; };
+		18A647CE204431DC008A4221 /* ScoreCardVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A647CD204431DC008A4221 /* ScoreCardVideoPlayer.m */; };
 		18A68AB0203719B700EBA479 /* MyStatsBattingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AAA203719B600EBA479 /* MyStatsBattingVC.m */; };
 		18A68AB1203719B700EBA479 /* MyStatsBattingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AAB203719B600EBA479 /* MyStatsBattingVC.xib */; };
 		18A68AB2203719B700EBA479 /* MyStatsBattingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AAC203719B600EBA479 /* MyStatsBattingCell.m */; };
@@ -531,6 +532,8 @@
 		18A647C420441BDF008A4221 /* SessionDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDayCell.m; sourceTree = "<group>"; };
 		18A647C620441BDF008A4221 /* SessionPartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionPartCell.h; sourceTree = "<group>"; };
 		18A647C720441BDF008A4221 /* SessionPartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionPartCell.m; sourceTree = "<group>"; };
+		18A647CC204431DC008A4221 /* ScoreCardVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardVideoPlayer.h; sourceTree = "<group>"; };
+		18A647CD204431DC008A4221 /* ScoreCardVideoPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardVideoPlayer.m; sourceTree = "<group>"; };
 		18A68AAA203719B600EBA479 /* MyStatsBattingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatsBattingVC.m; sourceTree = "<group>"; };
 		18A68AAB203719B600EBA479 /* MyStatsBattingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyStatsBattingVC.xib; sourceTree = "<group>"; };
 		18A68AAC203719B600EBA479 /* MyStatsBattingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatsBattingCell.m; sourceTree = "<group>"; };
@@ -1520,6 +1523,15 @@
 			path = SessionPartCell;
 			sourceTree = "<group>";
 		};
+		18A647CB204431B9008A4221 /* ScoreCardVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				18A647CC204431DC008A4221 /* ScoreCardVideoPlayer.h */,
+				18A647CD204431DC008A4221 /* ScoreCardVideoPlayer.m */,
+			);
+			path = ScoreCardVideoPlayer;
+			sourceTree = "<group>";
+		};
 		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1959,6 +1971,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18A647CB204431B9008A4221 /* ScoreCardVideoPlayer */,
 				18A647BE20441BA2008A4221 /* SessionSummaryVC */,
 				18A647B52044150D008A4221 /* FieldSumary */,
 				18A647B1204410E2008A4221 /* BowlingKPIVC */,
@@ -2450,6 +2463,7 @@
 				18B37F57203AB02600F51511 /* BattingView.m in Sources */,
 				18A647A0204404F4008A4221 /* PlayersCell.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
+				18A647CE204431DC008A4221 /* ScoreCardVideoPlayer.m in Sources */,
 				18A647682043DC89008A4221 /* FFViewWithHourLines.m in Sources */,
 				18A647732043DC89008A4221 /* FFYearCollectionViewFlowLayout.m in Sources */,
 				18A647642043DC89008A4221 /* FFWeekCalendarView.m in Sources */,

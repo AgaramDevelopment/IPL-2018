@@ -17,6 +17,7 @@
 #import "VideoPlayerViewController.h"
 #import "VideoPlayerUploadVC.h"
 #import "WebService.h"
+#import "SchResStandVC.h"
 
 
 @interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate>
@@ -359,8 +360,10 @@
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
     videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
-    [self.view addSubview:videoPlayerVC.view];
+//    SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    
 
+    [self.view addSubview:videoPlayerVC.view];
 }
 -(IBAction)didClickcategoryPopView:(id)sender
 {
