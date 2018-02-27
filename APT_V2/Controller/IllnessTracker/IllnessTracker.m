@@ -537,7 +537,8 @@
 {
 //    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
@@ -655,8 +656,8 @@
 {
 //    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
-        
+    {
+        [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
         if(userCode)   [dic    setObject:userCode     forKey:@"CREATEDBY"];
@@ -896,7 +897,8 @@
 {
         //[COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         [objWebservice getFetchMetadataList :illnessFetchload success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
@@ -1007,7 +1009,8 @@
 {
 //    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         [objWebservice getinjuryDelete:deleteIllness :selectillnessCode :Usercode success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             

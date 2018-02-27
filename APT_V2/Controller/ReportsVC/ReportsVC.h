@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
+@property (strong, nonatomic) IBOutlet UIView *RecentFitnessView;
 @property (strong, nonatomic) IBOutlet UIView *TraingLoadView;
 @property (strong, nonatomic) IBOutlet UIView *BowlingLoadView;
 

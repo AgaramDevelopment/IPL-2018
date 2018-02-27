@@ -15,6 +15,7 @@
 #import "HorizontalXLblFormatter.h"
 #import "CoachTraingLoad.h"
 #import "CoachBowlingLoad.h"
+#import "RecentFitnessGraph.h"
 
 
 @interface ReportsVC () <ChartViewDelegate>
@@ -22,6 +23,7 @@
     WebService *objWebservice;
     CoachTraingLoad *objtraing;
     CoachBowlingLoad *objBowling;
+    RecentFitnessGraph *objRecent;
 }
 
 @property (nonatomic, strong) IBOutlet BarChartView *chartView;
@@ -61,6 +63,10 @@
     objBowling = [[CoachBowlingLoad alloc] initWithNibName:@"CoachBowlingLoad" bundle:nil];
     objBowling.view.frame = CGRectMake(0,0, self.BowlingLoadView.bounds.size.width, self.BowlingLoadView.bounds.size.height);
     [self.BowlingLoadView addSubview:objBowling.view];
+    
+    objRecent = [[RecentFitnessGraph alloc] initWithNibName:@"RecentFitnessGraph" bundle:nil];
+    objRecent.view.frame = CGRectMake(0,0, self.RecentFitnessView.bounds.size.width, self.RecentFitnessView.bounds.size.height);
+    [self.RecentFitnessView addSubview:objRecent.view];
     
     [self.DailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
