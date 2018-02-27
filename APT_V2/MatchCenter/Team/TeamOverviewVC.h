@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TeamOverviewVC : UIViewController
+@interface TeamOverviewVC : UIViewController {
+    NSMutableArray *teamArray;
+}
 @property (strong, nonatomic) IBOutlet UIView *navigationView;
+@property (strong, nonatomic) IBOutlet UITextField *selectTeamTF;
 @property (strong, nonatomic) IBOutlet UICollectionView *teamCollectionView;
+@property (strong, nonatomic) IBOutlet UIView *selectTeamView;
 
 @end
