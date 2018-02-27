@@ -19,15 +19,31 @@
 @property (strong, nonatomic) IBOutlet UITextField *causeOfIllnessTF;
 @property (strong, nonatomic) IBOutlet UIButton *expertYesBtn;
 @property (strong, nonatomic) IBOutlet UIButton *expertNoBtn;
+
+@property (strong, nonatomic) IBOutlet UIView *illnessNameView;
+@property (strong, nonatomic) IBOutlet UIView *chiefCompliantView;
 @property (strong, nonatomic) IBOutlet UIView *affectSystemView;
 @property (strong, nonatomic) IBOutlet UIView *mainSymptomView;
 @property (strong, nonatomic) IBOutlet UIView *causeIllnessView;
+@property (strong, nonatomic) IBOutlet UIView *investigationsUploadView;
+
+
 @property (strong, nonatomic) IBOutlet UIView *filePopView;
+
 @property (strong, nonatomic) IBOutlet UIButton *affectSystemBtn;
 @property (strong, nonatomic) IBOutlet UIButton *mainSymptomBtn;
 @property (strong, nonatomic) IBOutlet UIButton *causeBtn;
 
+@property (nonatomic,assign)  BOOL isUpdate;
+@property (nonatomic,strong) NSMutableArray * objSelectobjIllnessArray;
 
+@property (strong, nonatomic) IBOutlet UILabel *xrayLbl;
+@property (strong, nonatomic) IBOutlet UILabel *CTScanLbl;
+@property (strong, nonatomic) IBOutlet UILabel *MRILbl;
+@property (strong, nonatomic) IBOutlet UILabel *BloodTestLbl;
 
+@property (strong, nonatomic) IBOutlet UIButton *updateBtn;
+@property (strong, nonatomic) IBOutlet UIButton *saveBtn;
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @end
