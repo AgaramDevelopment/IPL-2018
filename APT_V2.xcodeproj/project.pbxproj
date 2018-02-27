@@ -21,6 +21,8 @@
 		042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042542B32028A1110088B87B /* HomeScreenStandingsVC.m */; };
 		042542B72028A1110088B87B /* HomeScreenStandingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */; };
 		042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */; };
+		042699CD2043DB06001AB09F /* IllnessTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 042699CB2043DB06001AB09F /* IllnessTracker.m */; };
+		042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042699CC2043DB06001AB09F /* IllnessTracker.xib */; };
 		043828D22031DD8300B32899 /* TeamMembersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043828D02031DD8200B32899 /* TeamMembersVC.xib */; };
 		043828D32031DD8300B32899 /* TeamMembersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043828D12031DD8300B32899 /* TeamMembersVC.m */; };
 		043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2C202AF59E00EB3F8C /* PieChartView.m */; };
@@ -220,6 +222,9 @@
 		042542B32028A1110088B87B /* HomeScreenStandingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenStandingsVC.m; sourceTree = "<group>"; };
 		042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeScreenStandingsVC.xib; sourceTree = "<group>"; };
 		042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScreenStandingsCell.xib; sourceTree = "<group>"; };
+		042699CA2043DB06001AB09F /* IllnessTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IllnessTracker.h; sourceTree = "<group>"; };
+		042699CB2043DB06001AB09F /* IllnessTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IllnessTracker.m; sourceTree = "<group>"; };
+		042699CC2043DB06001AB09F /* IllnessTracker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IllnessTracker.xib; sourceTree = "<group>"; };
 		043828CF2031DD8200B32899 /* TeamMembersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMembersVC.h; sourceTree = "<group>"; };
 		043828D02031DD8200B32899 /* TeamMembersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamMembersVC.xib; sourceTree = "<group>"; };
 		043828D12031DD8300B32899 /* TeamMembersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMembersVC.m; sourceTree = "<group>"; };
@@ -553,6 +558,16 @@
 				042542B42028A1110088B87B /* HomeScreenStandingsVC.xib */,
 			);
 			path = HomeScreenStandingsVC;
+			sourceTree = "<group>";
+		};
+		042699C42043D698001AB09F /* IllnessTracker */ = {
+			isa = PBXGroup;
+			children = (
+				042699CA2043DB06001AB09F /* IllnessTracker.h */,
+				042699CB2043DB06001AB09F /* IllnessTracker.m */,
+				042699CC2043DB06001AB09F /* IllnessTracker.xib */,
+			);
+			path = IllnessTracker;
 			sourceTree = "<group>";
 		};
 		043828CE2031DD6300B32899 /* TeamMembersVC */ = {
@@ -1092,6 +1107,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				042699C42043D698001AB09F /* IllnessTracker */,
 				CE8DE372203FDE930097BF66 /* InjurySelectionVC */,
 				04249B74203D463E00B13889 /* NutritionVC */,
 				18AC3447203E812C003EE0F0 /* ReportsVC */,
@@ -1407,6 +1423,7 @@
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
+				042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
 				18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */,
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
@@ -1549,6 +1566,7 @@
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
 				18A5CABF2038600D00586896 /* TeamMemebersCell.m in Sources */,
+				042699CD2043DB06001AB09F /* IllnessTracker.m in Sources */,
 				04534F9520383F0C00C22717 /* FoodDescriptionCell.m in Sources */,
 				18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
