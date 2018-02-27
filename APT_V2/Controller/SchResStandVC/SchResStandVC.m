@@ -14,6 +14,7 @@
 #import "WebService.h"
 #import "AppCommon.h"
 #import "VideoGalleryVC.h"
+#import "ScoreCardVC.h"
 
 
 
@@ -21,6 +22,7 @@
 {
     HomeScreenStandingsVC *StandsVC;
     VideoGalleryVC *objVideo;
+    NSString *displayMatchCode;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -337,6 +339,55 @@
       }
 
     return nil;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if(collectionView==self.resultCollectionView)
+    {
+        displayMatchCode = [[self.commonArray2 valueForKey:@"MATCHCODE"] objectAtIndex:indexPath.row];
+        NSMutableArray *scoreArray = [[NSMutableArray alloc]init];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        
+        NSString *ground = [[self.commonArray2 valueForKey:@"Ground"]objectAtIndex:indexPath.row];
+        NSString *place = [[self.commonArray2 valueForKey:@"GroundCode"]objectAtIndex:indexPath.row];
+        
+        [dic setValue:[NSString stringWithFormat:@"%@,%@",ground,place] forKey:@"ground"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"TeamA"] objectAtIndex:indexPath.row] forKey:@"team1"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row] forKey:@"team2"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row] forKey:@"Inn1Score"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"SECONDINNINGSSCORE"]objectAtIndex:indexPath.row] forKey:@"Inn2Score"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"THIRDINNINGSSCORE"]objectAtIndex:indexPath.row] forKey:@"Inn3Score"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"FOURTHINNINGSSCORE"]objectAtIndex:indexPath.row] forKey:@"Inn4Score"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row] forKey:@"result"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row] forKey:@"Competition"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"TeamALogo"]objectAtIndex:indexPath.row] forKey:@"TeamALogo"];
+        [dic setValue:[[self.commonArray2 valueForKey:@"TeamBLogo"]objectAtIndex:indexPath.row] forKey:@"TeamBLogo"];
+        
+        [scoreArray addObject:dic];
+        
+                ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objFix = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+                objFix.matchCode = displayMatchCode;
+                objFix.matchDetails = scoreArray;
+                objFix.backkey = @"yes";
+                //[self.navigationController pushViewController:objFix animated:YES];
+                [appDel.frontNavigationController pushViewController:objFix animated:NO];
+        
+                //[self.view addSubview:objFix];
+          //[self displayContentController:objFix];
+        
+    }
+    
+}
+
+- (void) displayContentController: (UIViewController*) content;
+{
+    [self addChildViewController:content];                 // 1
+    content.view.bounds = self.view.bounds;                 //2
+    [self.view addSubview:content.view];
+    [content didMoveToParentViewController:self];          // 3
 }
 
 -(NSString *)checkNull:(NSString *)_value

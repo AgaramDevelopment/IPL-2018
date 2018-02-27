@@ -10,14 +10,6 @@
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class TappabbleView;
-@protocol TappabbleViewDelegate<NSObject>
--(void)didTapView:(TappabbleView *)view;
-@end
-@interface TappabbleView: UIView
-@property (nonatomic) id<TappabbleViewDelegate> delegate;
-@end
-
 @interface VideoPlayerViewController : UIViewController
 
 @property (nonatomic,strong) NSString * objSelectVideoLink;

@@ -14,10 +14,6 @@
 #import "WebService.h"
 #import "TeamMemebersCell.h"
 
-#define avail [UIColor colorWithRed:(142/255.0f) green:(207/255.0f) blue:(100/255.0f) alpha:1.0f];
-#define notavail [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(23/255.0f) alpha:1.0f];
-#define rehab [UIColor colorWithRed:(255/255.0f) green:(190/255.0f) blue:(65/255.0f) alpha:1.0f];
-
 @interface TeamMembersVC ()
 
 @property (strong, nonatomic)  NSMutableArray *PlayersArray;
@@ -195,39 +191,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
-    NSString* Playercode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Playercode"];
-    PlayerVC.athletCode = [[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthleteCode"];
-    NSString* age = [NSString stringWithFormat:@"%@ Years Old",[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"Age"]];
+    PlayerVC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
     
-    NSString *available = [[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row];
-    
-    if([available isEqualToString:@"Available"])
-    {
-        PlayerVC.availableColor = avail;
-    }
-    else if([available isEqualToString:@"Not Available"])
-    {
-        PlayerVC.availableColor = notavail;
-    }
-    else if([available isEqualToString:@"Rehab"])
-    {
-        PlayerVC.availableColor = rehab;
-    }
-
-    
-    NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
-    
-    NSString *battingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
-    PlayerVC.PlayerAge = age;
-    PlayerVC.PlaerDesignation = [bowlingStyle stringByAppendingString:battingStyle];
-    PlayerVC.PlayerCode = Playercode;
     PlayerVC.TeamName = self.teamname;
-    
-    
-//    [PlayerVC.playerDetails setValue:age forKey:@"Age"];
-//    [PlayerVC.playerDetails setValue:self.teamname forKey:@"TeamName"];
-//    [PlayerVC.playerDetails setValue:Playercode forKey:@"Playercode"];
-//    [PlayerVC.playerDetails setValue:[bowlingStyle stringByAppendingString:battingStyle] forKey:@"Playercode"];
     NSLog(@"%@",appDel.frontNavigationController);
     dispatch_async(dispatch_get_main_queue(), ^{
         [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];

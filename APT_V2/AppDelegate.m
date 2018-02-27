@@ -90,7 +90,9 @@
     [frontNavigationController setNavigationBarHidden:YES];
     [rearNavigationController setNavigationBarHidden:YES];
     [viewController setFrontViewPosition:FrontViewPositionLeftSide animated:YES];
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     window.rootViewController = viewController;
     
     [window setBackgroundColor:[UIColor whiteColor]];

@@ -186,8 +186,9 @@
 
 -(void)actionBack
 {
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 
 }
 
@@ -337,7 +338,7 @@
         }
         
     }
-    else if ([ScreenID isEqualToString:@"ASTT002"]) {
+    else if ([SCREEN_CODE_SPECIAL isEqualToString:ScreenID]) {
         
         if (isEdit) {
             
@@ -354,7 +355,7 @@
         }
         
     }
-    else if ([ScreenID isEqualToString:@"ASTT003"]) {
+    else if ([SCREEN_CODE_MMT isEqualToString:ScreenID]) {
         
         if (isEdit) {
             
@@ -373,7 +374,7 @@
         
         
     }
-    else if ([ScreenID isEqualToString:@"ASTT004"]) {
+    else if ([SCREEN_CODE_GAIT isEqualToString:ScreenID]) {
         
         if (isEdit) {
             
@@ -391,7 +392,7 @@
         
 
     }
-    else if ([ScreenID isEqualToString:@"ASTT005"]) {
+    else if ([SCREEN_CODE_POSTURE isEqualToString:ScreenID]) {
         
         
         if (isEdit) {
@@ -411,7 +412,7 @@
         
 
     }
-    else if ([ScreenID isEqualToString:@"ASTT006"]) {
+    else if ([SCREEN_CODE_S_C isEqualToString:ScreenID]) {
         if (isEdit) {
             
 //            -(NSMutableArray *) getSCWithEnrty:(NSString*) version:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString *)clientCode:(NSString *) assessmentCode:(NSString *) createdBy:(NSString*) assessmentDate:(NSString*) player:(NSString*) testTypeCode
@@ -432,7 +433,7 @@
         
 
     }
-    else if ([ScreenID isEqualToString:@"ASTT007"]) {
+    else if ([SCREEN_CODE_COACHING isEqualToString:ScreenID]) {
      
         if (isEdit) {
 //            -(NSMutableArray*) getTestCoachWithEnrty:(NSString*) version:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString *) clientCode:(NSString*) assessmentCode:(NSString*) createdBy:(NSString*) player:(NSString*) assessmentDate:(NSString *) testTypeCode
@@ -455,7 +456,6 @@
     }
 
     NSMutableDictionary* resultDict = [NSMutableDictionary new];
-//    NSDictionary* temp = [tempArray firstObject];
     [resultDict addEntriesFromDictionary:tempArray.firstObject];
     
     return resultDict;
@@ -601,7 +601,7 @@
     NSString* ignore_str = @"";
     if ([SCREEN_CODE_Rom isEqualToString:testCode]) {
 
-        NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
+        NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SideName"];
 
         if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
             CollectionItem = 2;
@@ -611,12 +611,12 @@
             CollectionItem = 1;
         }
         
-        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
-        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romUnitName"];
+        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
     }
     else if ([SCREEN_CODE_SPECIAL isEqualToString:testCode]) {
 
-        NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SpecialSideName"];
+        NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SideName"];
 
         if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
             CollectionItem = 2;
@@ -647,7 +647,6 @@
     }
     else if ([SCREEN_CODE_S_C isEqualToString:testCode]) {
 
-        ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romSideName"];
 
         NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SideName"];
         CollectionItem = [[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Nooftrials"] integerValue];
@@ -803,7 +802,6 @@
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
     {
         
-            
                 [dict setValue:clientCode forKey:@"Clientcode"];
                 [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
                 [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
@@ -863,12 +861,6 @@
                 [dict setValue:@0 forKey:@"Central9"];
                 [dict setValue:@0 forKey:@"issync"];
         
-        if(isEdit){
-            [self.objDBconnection updateAssessmentEntry:dict];
-        }
-        else{
-            [self.objDBconnection insertAssessmentEntry:dict];
-        }
 
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
@@ -876,8 +868,6 @@
             // special
 //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
 //
-            if(isEdit)
-        {
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
             
             [dict setValue:@"" forKey:@"Clientcode"];
@@ -940,83 +930,19 @@
             [dict setValue:@"" forKey:@"Right9"];
             [dict setValue:@"" forKey:@"Central9"];
             [dict setValue:@"" forKey:@"issync"];
-
-        }
-        else
-        {
-//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-            
-            [dict setValue:@"" forKey:@"Clientcode"];
-            [dict setValue:@"" forKey:@"Assessmententrycode"];
-            [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-            [dict setValue:@"" forKey:@"Assessmentcode"];
-            [dict setValue:@"" forKey:@"Assessmenttestcode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-            [dict setValue:@"" forKey:@"Version"];
-            //        [dict setValue: forKey:@"userCode"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Playercode"];
-            [dict setValue:@"" forKey:@"Assessmententrydate"];
-            
-            [dict setValue:@"" forKey:@"Left"];
-            [dict setValue:@"" forKey:@"Right"];
-            [dict setValue:@"" forKey:@"Central"];
-            [dict setValue:@"" forKey:@"Value"];
-            [dict setValue:@"" forKey:@"Remarks"];
-            [dict setValue:@"" forKey:@"Inference"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Units"];
-            
-            [dict setValue:@"" forKey:@"Description"];
-            [dict setValue:@"" forKey:@"Recordstatus"];
-            [dict setValue:@"" forKey:@"Createdby"];
-            [dict setValue:@"" forKey:@"Createddate"];
-            [dict setValue:@"" forKey:@"Modifiedby"];
-            [dict setValue:@"" forKey:@"Modifieddate"];
-            [dict setValue:@"" forKey:@"isIgnored"];
-            
-            [dict setValue:@"" forKey:@"Left1"];
-            [dict setValue:@"" forKey:@"Right1"];
-            [dict setValue:@"" forKey:@"Central1"];
-            [dict setValue:@"" forKey:@"Left2"];
-            [dict setValue:@"" forKey:@"Right2"];
-            [dict setValue:@"" forKey:@"Central2"];
-            [dict setValue:@"" forKey:@"Left3"];
-            [dict setValue:@"" forKey:@"Right3"];
-            [dict setValue:@"" forKey:@"Central3"];
-            
-            [dict setValue:@"" forKey:@"Left4"];
-            [dict setValue:@"" forKey:@"Right4"];
-            [dict setValue:@"" forKey:@"Central4"];
-            [dict setValue:@"" forKey:@"Left5"];
-            [dict setValue:@"" forKey:@"Right5"];
-            [dict setValue:@"" forKey:@"Central5"];
-            [dict setValue:@"" forKey:@"Left6"];
-            [dict setValue:@"" forKey:@"Right6"];
-            [dict setValue:@"" forKey:@"Central6"];
-            
-            [dict setValue:@"" forKey:@"Left7"];
-            [dict setValue:@"" forKey:@"Right7"];
-            [dict setValue:@"" forKey:@"Central7"];
-            [dict setValue:@"" forKey:@"Left8"];
-            [dict setValue:@"" forKey:@"Right8"];
-            [dict setValue:@"" forKey:@"Central8"];
-            [dict setValue:@"" forKey:@"Left9"];
-            [dict setValue:@"" forKey:@"Right9"];
-            [dict setValue:@"" forKey:@"Central9"];
-            [dict setValue:@"" forKey:@"issync"];
-
-        }
+         
+         
+         //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
 
 
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT]) { // MMT
         //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
         //
-        if(isEdit)
-                {
         //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"":@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+                    
+    //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+
                     [dict setValue:@"" forKey:@"Clientcode"];
                     [dict setValue:@"" forKey:@"Assessmententrycode"];
                     [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
@@ -1078,72 +1004,7 @@
                     [dict setValue:@"" forKey:@"Central9"];
                     [dict setValue:@"" forKey:@"issync"];
 
-                }
-                else
-                {
-        //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-                    [dict setValue:@"" forKey:@"Clientcode"];
-                    [dict setValue:@"" forKey:@"Assessmententrycode"];
-                    [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-                    [dict setValue:@"" forKey:@"Assessmentcode"];
-                    [dict setValue:@"" forKey:@"Assessmenttestcode"];
-                    [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-                    [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-                    [dict setValue:@"" forKey:@"Version"];
-                    //        [dict setValue: forKey:@"userCode"];
-                    [dict setValue:@"" forKey:@"Assessor"];
-                    [dict setValue:@"" forKey:@"Playercode"];
-                    [dict setValue:@"" forKey:@"Assessmententrydate"];
-                    
-                    [dict setValue:@"" forKey:@"Left"];
-                    [dict setValue:@"" forKey:@"Right"];
-                    [dict setValue:@"" forKey:@"Central"];
-                    [dict setValue:@"" forKey:@"Value"];
-                    [dict setValue:@"" forKey:@"Remarks"];
-                    [dict setValue:@"" forKey:@"Inference"];
-                    [dict setValue:@"" forKey:@"Assessor"];
-                    [dict setValue:@"" forKey:@"Units"];
-                    
-                    [dict setValue:@"" forKey:@"Description"];
-                    [dict setValue:@"" forKey:@"Recordstatus"];
-                    [dict setValue:@"" forKey:@"Createdby"];
-                    [dict setValue:@"" forKey:@"Createddate"];
-                    [dict setValue:@"" forKey:@"Modifiedby"];
-                    [dict setValue:@"" forKey:@"Modifieddate"];
-                    [dict setValue:@"" forKey:@"isIgnored"];
-                    
-                    [dict setValue:@"" forKey:@"Left1"];
-                    [dict setValue:@"" forKey:@"Right1"];
-                    [dict setValue:@"" forKey:@"Central1"];
-                    [dict setValue:@"" forKey:@"Left2"];
-                    [dict setValue:@"" forKey:@"Right2"];
-                    [dict setValue:@"" forKey:@"Central2"];
-                    [dict setValue:@"" forKey:@"Left3"];
-                    [dict setValue:@"" forKey:@"Right3"];
-                    [dict setValue:@"" forKey:@"Central3"];
-                    
-                    [dict setValue:@"" forKey:@"Left4"];
-                    [dict setValue:@"" forKey:@"Right4"];
-                    [dict setValue:@"" forKey:@"Central4"];
-                    [dict setValue:@"" forKey:@"Left5"];
-                    [dict setValue:@"" forKey:@"Right5"];
-                    [dict setValue:@"" forKey:@"Central5"];
-                    [dict setValue:@"" forKey:@"Left6"];
-                    [dict setValue:@"" forKey:@"Right6"];
-                    [dict setValue:@"" forKey:@"Central6"];
-                    
-                    [dict setValue:@"" forKey:@"Left7"];
-                    [dict setValue:@"" forKey:@"Right7"];
-                    [dict setValue:@"" forKey:@"Central7"];
-                    [dict setValue:@"" forKey:@"Left8"];
-                    [dict setValue:@"" forKey:@"Right8"];
-                    [dict setValue:@"" forKey:@"Central8"];
-                    [dict setValue:@"" forKey:@"Left9"];
-                    [dict setValue:@"" forKey:@"Right9"];
-                    [dict setValue:@"" forKey:@"Central9"];
-                    [dict setValue:@"" forKey:@"issync"];
-
-                }
+               
 
         
     }
@@ -1151,75 +1012,11 @@
       
 //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
 //
-        if(isEdit)
-        {
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-            
-            [dict setValue:@"" forKey:@"Clientcode"];
-            [dict setValue:@"" forKey:@"Assessmententrycode"];
-            [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-            [dict setValue:@"" forKey:@"Assessmentcode"];
-            [dict setValue:@"" forKey:@"Assessmenttestcode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-            [dict setValue:@"" forKey:@"Version"];
-            //        [dict setValue: forKey:@"userCode"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Playercode"];
-            [dict setValue:@"" forKey:@"Assessmententrydate"];
-            
-            [dict setValue:@"" forKey:@"Left"];
-            [dict setValue:@"" forKey:@"Right"];
-            [dict setValue:@"" forKey:@"Central"];
-            [dict setValue:@"" forKey:@"Value"];
-            [dict setValue:@"" forKey:@"Remarks"];
-            [dict setValue:@"" forKey:@"Inference"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Units"];
-            
-            [dict setValue:@"" forKey:@"Description"];
-            [dict setValue:@"" forKey:@"Recordstatus"];
-            [dict setValue:@"" forKey:@"Createdby"];
-            [dict setValue:@"" forKey:@"Createddate"];
-            [dict setValue:@"" forKey:@"Modifiedby"];
-            [dict setValue:@"" forKey:@"Modifieddate"];
-            [dict setValue:@"" forKey:@"isIgnored"];
-            
-            [dict setValue:@"" forKey:@"Left1"];
-            [dict setValue:@"" forKey:@"Right1"];
-            [dict setValue:@"" forKey:@"Central1"];
-            [dict setValue:@"" forKey:@"Left2"];
-            [dict setValue:@"" forKey:@"Right2"];
-            [dict setValue:@"" forKey:@"Central2"];
-            [dict setValue:@"" forKey:@"Left3"];
-            [dict setValue:@"" forKey:@"Right3"];
-            [dict setValue:@"" forKey:@"Central3"];
-            
-            [dict setValue:@"" forKey:@"Left4"];
-            [dict setValue:@"" forKey:@"Right4"];
-            [dict setValue:@"" forKey:@"Central4"];
-            [dict setValue:@"" forKey:@"Left5"];
-            [dict setValue:@"" forKey:@"Right5"];
-            [dict setValue:@"" forKey:@"Central5"];
-            [dict setValue:@"" forKey:@"Left6"];
-            [dict setValue:@"" forKey:@"Right6"];
-            [dict setValue:@"" forKey:@"Central6"];
-            
-            [dict setValue:@"" forKey:@"Left7"];
-            [dict setValue:@"" forKey:@"Right7"];
-            [dict setValue:@"" forKey:@"Central7"];
-            [dict setValue:@"" forKey:@"Left8"];
-            [dict setValue:@"" forKey:@"Right8"];
-            [dict setValue:@"" forKey:@"Central8"];
-            [dict setValue:@"" forKey:@"Left9"];
-            [dict setValue:@"" forKey:@"Right9"];
-            [dict setValue:@"" forKey:@"Central9"];
-            [dict setValue:@"" forKey:@"issync"];
-
-        }
-        else
-        {
+        
 //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"":@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+
+            
             [dict setValue:@"" forKey:@"Clientcode"];
             [dict setValue:@"" forKey:@"Assessmententrycode"];
             [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
@@ -1281,79 +1078,15 @@
             [dict setValue:@"" forKey:@"Central9"];
             [dict setValue:@"" forKey:@"issync"];
 
-        }
+      
+    
 
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE]) { // Posture
 //
-        if(isEdit)
-        {
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-            [dict setValue:@"" forKey:@"Clientcode"];
-            [dict setValue:@"" forKey:@"Assessmententrycode"];
-            [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-            [dict setValue:@"" forKey:@"Assessmentcode"];
-            [dict setValue:@"" forKey:@"Assessmenttestcode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-            [dict setValue:@"" forKey:@"Version"];
-            //        [dict setValue: forKey:@"userCode"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Playercode"];
-            [dict setValue:@"" forKey:@"Assessmententrydate"];
-            
-            [dict setValue:@"" forKey:@"Left"];
-            [dict setValue:@"" forKey:@"Right"];
-            [dict setValue:@"" forKey:@"Central"];
-            [dict setValue:@"" forKey:@"Value"];
-            [dict setValue:@"" forKey:@"Remarks"];
-            [dict setValue:@"" forKey:@"Inference"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Units"];
-            
-            [dict setValue:@"" forKey:@"Description"];
-            [dict setValue:@"" forKey:@"Recordstatus"];
-            [dict setValue:@"" forKey:@"Createdby"];
-            [dict setValue:@"" forKey:@"Createddate"];
-            [dict setValue:@"" forKey:@"Modifiedby"];
-            [dict setValue:@"" forKey:@"Modifieddate"];
-            [dict setValue:@"" forKey:@"isIgnored"];
-            
-            [dict setValue:@"" forKey:@"Left1"];
-            [dict setValue:@"" forKey:@"Right1"];
-            [dict setValue:@"" forKey:@"Central1"];
-            [dict setValue:@"" forKey:@"Left2"];
-            [dict setValue:@"" forKey:@"Right2"];
-            [dict setValue:@"" forKey:@"Central2"];
-            [dict setValue:@"" forKey:@"Left3"];
-            [dict setValue:@"" forKey:@"Right3"];
-            [dict setValue:@"" forKey:@"Central3"];
-            
-            [dict setValue:@"" forKey:@"Left4"];
-            [dict setValue:@"" forKey:@"Right4"];
-            [dict setValue:@"" forKey:@"Central4"];
-            [dict setValue:@"" forKey:@"Left5"];
-            [dict setValue:@"" forKey:@"Right5"];
-            [dict setValue:@"" forKey:@"Central5"];
-            [dict setValue:@"" forKey:@"Left6"];
-            [dict setValue:@"" forKey:@"Right6"];
-            [dict setValue:@"" forKey:@"Central6"];
-            
-            [dict setValue:@"" forKey:@"Left7"];
-            [dict setValue:@"" forKey:@"Right7"];
-            [dict setValue:@"" forKey:@"Central7"];
-            [dict setValue:@"" forKey:@"Left8"];
-            [dict setValue:@"" forKey:@"Right8"];
-            [dict setValue:@"" forKey:@"Central8"];
-            [dict setValue:@"" forKey:@"Left9"];
-            [dict setValue:@"" forKey:@"Right9"];
-            [dict setValue:@"" forKey:@"Central9"];
-            [dict setValue:@"" forKey:@"issync"];
-
-        }
-        else
-        {
 //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
+
             [dict setValue:@"" forKey:@"Clientcode"];
             [dict setValue:@"" forKey:@"Assessmententrycode"];
             [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
@@ -1415,80 +1148,15 @@
             [dict setValue:@"" forKey:@"Central9"];
             [dict setValue:@"" forKey:@"issync"];
 
-        }
+    
 
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C]) { // S & C
-        
-        if(isEdit)
-        {
+ 
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0"];
             
-            [dict setValue:@"" forKey:@"Clientcode"];
-            [dict setValue:@"" forKey:@"Assessmententrycode"];
-            [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-            [dict setValue:@"" forKey:@"Assessmentcode"];
-            [dict setValue:@"" forKey:@"Assessmenttestcode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-            [dict setValue:@"" forKey:@"Version"];
-            //        [dict setValue: forKey:@"userCode"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Playercode"];
-            [dict setValue:@"" forKey:@"Assessmententrydate"];
-            
-            [dict setValue:@"" forKey:@"Left"];
-            [dict setValue:@"" forKey:@"Right"];
-            [dict setValue:@"" forKey:@"Central"];
-            [dict setValue:@"" forKey:@"Value"];
-            [dict setValue:@"" forKey:@"Remarks"];
-            [dict setValue:@"" forKey:@"Inference"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Units"];
-            
-            [dict setValue:@"" forKey:@"Description"];
-            [dict setValue:@"" forKey:@"Recordstatus"];
-            [dict setValue:@"" forKey:@"Createdby"];
-            [dict setValue:@"" forKey:@"Createddate"];
-            [dict setValue:@"" forKey:@"Modifiedby"];
-            [dict setValue:@"" forKey:@"Modifieddate"];
-            [dict setValue:@"" forKey:@"isIgnored"];
-            
-            [dict setValue:@"" forKey:@"Left1"];
-            [dict setValue:@"" forKey:@"Right1"];
-            [dict setValue:@"" forKey:@"Central1"];
-            [dict setValue:@"" forKey:@"Left2"];
-            [dict setValue:@"" forKey:@"Right2"];
-            [dict setValue:@"" forKey:@"Central2"];
-            [dict setValue:@"" forKey:@"Left3"];
-            [dict setValue:@"" forKey:@"Right3"];
-            [dict setValue:@"" forKey:@"Central3"];
-            
-            [dict setValue:@"" forKey:@"Left4"];
-            [dict setValue:@"" forKey:@"Right4"];
-            [dict setValue:@"" forKey:@"Central4"];
-            [dict setValue:@"" forKey:@"Left5"];
-            [dict setValue:@"" forKey:@"Right5"];
-            [dict setValue:@"" forKey:@"Central5"];
-            [dict setValue:@"" forKey:@"Left6"];
-            [dict setValue:@"" forKey:@"Right6"];
-            [dict setValue:@"" forKey:@"Central6"];
-            
-            [dict setValue:@"" forKey:@"Left7"];
-            [dict setValue:@"" forKey:@"Right7"];
-            [dict setValue:@"" forKey:@"Central7"];
-            [dict setValue:@"" forKey:@"Left8"];
-            [dict setValue:@"" forKey:@"Right8"];
-            [dict setValue:@"" forKey:@"Central8"];
-            [dict setValue:@"" forKey:@"Left9"];
-            [dict setValue:@"" forKey:@"Right9"];
-            [dict setValue:@"" forKey:@"Central9"];
-            [dict setValue:@"" forKey:@"issync"];
+            //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0" ];
 
-        }
-        else
-        {
-//            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[objDic valueForKey:@"left"] :[objDic valueForKey:@"Right"] :[objDic valueForKey:@"Center"] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :[objDic valueForKey:@"left1"] :[objDic valueForKey:@"Right1"] :[objDic valueForKey:@"Center1"] :[objDic valueForKey:@"left2"] :[objDic valueForKey:@"Right2"] :[objDic valueForKey:@"Center2"] :[objDic valueForKey:@"left3"] :[objDic valueForKey:@"Right3"] :[objDic valueForKey:@"Center3"] :[objDic valueForKey:@"left4"] :[objDic valueForKey:@"Right4"] :[objDic valueForKey:@"Center4"] :[objDic valueForKey:@"left5"] :[objDic valueForKey:@"Right5"] :[objDic valueForKey:@"Center5"] :[objDic valueForKey:@"left6"] :[objDic valueForKey:@"Right6"] :[objDic valueForKey:@"Center6"] :[objDic valueForKey:@"left7"] :[objDic valueForKey:@"Right7"] :[objDic valueForKey:@"Center7"] :[objDic valueForKey:@"left8"] :[objDic valueForKey:@"Right8"] :[objDic valueForKey:@"Center8"] :[objDic valueForKey:@"left9"] :[objDic valueForKey:@"Right9"] :[objDic valueForKey:@"Center9"] :@"0" ];
             
             [dict setValue:@"" forKey:@"Clientcode"];
             [dict setValue:@"" forKey:@"Assessmententrycode"];
@@ -1550,8 +1218,6 @@
             [dict setValue:@"" forKey:@"Right9"];
             [dict setValue:@"" forKey:@"Central9"];
             [dict setValue:@"" forKey:@"issync"];
-
-        }
 
         
     }
@@ -1559,75 +1225,10 @@
         
 //        NSDictionary * objDic = [self.ObjSelectTestArray objectAtIndex:0];
 //
-        if(isEdit)
-        {
 //            [self.objDBConnection UPDATEAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"]  :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-            [dict setValue:@"" forKey:@"Clientcode"];
-            [dict setValue:@"" forKey:@"Assessmententrycode"];
-            [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
-            [dict setValue:@"" forKey:@"Assessmentcode"];
-            [dict setValue:@"" forKey:@"Assessmenttestcode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypecode"];
-            [dict setValue:@"" forKey:@"Assessmenttesttypescreencode"];
-            [dict setValue:@"" forKey:@"Version"];
-            //        [dict setValue: forKey:@"userCode"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Playercode"];
-            [dict setValue:@"" forKey:@"Assessmententrydate"];
-            
-            [dict setValue:@"" forKey:@"Left"];
-            [dict setValue:@"" forKey:@"Right"];
-            [dict setValue:@"" forKey:@"Central"];
-            [dict setValue:@"" forKey:@"Value"];
-            [dict setValue:@"" forKey:@"Remarks"];
-            [dict setValue:@"" forKey:@"Inference"];
-            [dict setValue:@"" forKey:@"Assessor"];
-            [dict setValue:@"" forKey:@"Units"];
-            
-            [dict setValue:@"" forKey:@"Description"];
-            [dict setValue:@"" forKey:@"Recordstatus"];
-            [dict setValue:@"" forKey:@"Createdby"];
-            [dict setValue:@"" forKey:@"Createddate"];
-            [dict setValue:@"" forKey:@"Modifiedby"];
-            [dict setValue:@"" forKey:@"Modifieddate"];
-            [dict setValue:@"" forKey:@"isIgnored"];
-            
-            [dict setValue:@"" forKey:@"Left1"];
-            [dict setValue:@"" forKey:@"Right1"];
-            [dict setValue:@"" forKey:@"Central1"];
-            [dict setValue:@"" forKey:@"Left2"];
-            [dict setValue:@"" forKey:@"Right2"];
-            [dict setValue:@"" forKey:@"Central2"];
-            [dict setValue:@"" forKey:@"Left3"];
-            [dict setValue:@"" forKey:@"Right3"];
-            [dict setValue:@"" forKey:@"Central3"];
-            
-            [dict setValue:@"" forKey:@"Left4"];
-            [dict setValue:@"" forKey:@"Right4"];
-            [dict setValue:@"" forKey:@"Central4"];
-            [dict setValue:@"" forKey:@"Left5"];
-            [dict setValue:@"" forKey:@"Right5"];
-            [dict setValue:@"" forKey:@"Central5"];
-            [dict setValue:@"" forKey:@"Left6"];
-            [dict setValue:@"" forKey:@"Right6"];
-            [dict setValue:@"" forKey:@"Central6"];
-            
-            [dict setValue:@"" forKey:@"Left7"];
-            [dict setValue:@"" forKey:@"Right7"];
-            [dict setValue:@"" forKey:@"Central7"];
-            [dict setValue:@"" forKey:@"Left8"];
-            [dict setValue:@"" forKey:@"Right8"];
-            [dict setValue:@"" forKey:@"Central8"];
-            [dict setValue:@"" forKey:@"Left9"];
-            [dict setValue:@"" forKey:@"Right9"];
-            [dict setValue:@"" forKey:@"Central9"];
-            [dict setValue:@"" forKey:@"issync"];
-
-        }
-        else
-        {
+        
 //            [self.objDBConnection INSERTAssessmentEntry:clientCode :@"" :self.ModuleStr :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.SectionTestCodeStr :self.SelectTestTypecode :self.SelectScreenId :self.version :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :[NSString stringWithFormat:@"%@",self.left_lbl.text] :[NSString stringWithFormat:@"%@",self.right_lbl.text] :[NSString stringWithFormat:@"%@",self.centeral_Txt.text] :self.valueTxt.text :self.remark_Txt.text :@"" :@"" :self.description_lbl.text :@"MSC001" :usercode :[objDic valueForKey:@"CreatedDate"] :usercode :[objDic valueForKey:@"ModifiedDate"] :self.ingnoreStatus :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@0 :@"0"];
-            
+
             [dict setValue:@"" forKey:@"Clientcode"];
             [dict setValue:@"" forKey:@"Assessmententrycode"];
             [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
@@ -1688,10 +1289,16 @@
             [dict setValue:@"" forKey:@"Right9"];
             [dict setValue:@"" forKey:@"Central9"];
             [dict setValue:@"" forKey:@"issync"];
-
-        }
 
     }
+    
+    if(isEdit){
+        [self.objDBconnection updateAssessmentEntry:dict];
+    }
+    else{
+        [self.objDBconnection insertAssessmentEntry:dict];
+    }
+
 
     [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -1720,6 +1327,10 @@
         cell.txtField.delegate = self;
         NSString* SideCode = @"";
         NSArray* currentIndexArray = [[self.objContenArray objectAtIndex:currentlySelectedTestType.section] valueForKey:@"TestValues"];
+        cell.txt1_SC.text = @"";
+        cell.txt2_SC.text = @"";
+        cell.txtField.text = @"";
+        cell.txtDropDown.text = @"";
     
 
         if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
@@ -1731,7 +1342,7 @@
             cell.txt2_SC.tag = indexPath.row;
             cell.txt1_SC.keyboardType = UIKeyboardTypeNumberPad;
             cell.txt2_SC.keyboardType = UIKeyboardTypeNumberPad;
-            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+//            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
             
             cell.lblBottom.text = [NSString stringWithFormat:@"Trail %ld",(long)indexPath.item+1];
         
@@ -1750,36 +1361,37 @@
                 [cell.txtDropDown setHidden:YES];
                 [cell.txtField setHidden:NO];
                 cell.txtField.keyboardType = UIKeyboardTypeNumberPad;
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"romSide"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"romSide"];
                 
             }
             else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
             {
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"SpecialSide"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"SpecialSide"];
 
             }
             else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
             {
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"MmtSide"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"MmtSide"];
 
             }
             else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
             {
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
 
             }
             else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
             {
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
 
             }
             else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
             {
-                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+//                SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
                 
             }
             
-            
+            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+
             if([SideCode isEqualToString:@"MSC004"])
             {
                 cell.lblBottom.text = @"Center";

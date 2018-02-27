@@ -11,11 +11,14 @@
 #import "SWRevealViewController.h"
 #import "BattingView.h"
 #import "OverviewView.h"
+#import "BattingOverBlockView.h"
 
 @interface MCBattingRootVC ()
 {
     BattingView *btView;
     OverviewView *overView;
+    BattingOverBlockView *battingOverBlockView;
+
 }
 @end
 
@@ -82,7 +85,23 @@
     }
     else if([position isEqualToString:@"3"]){
         
-        [self setInningsButtonSelect:self.overBlockBtn];
+      //  [self setInningsButtonSelect:self.overBlockBtn];
+        
+        
+        
+        if(battingOverBlockView == nil){
+            
+            battingOverBlockView = [[[NSBundle mainBundle] loadNibNamed:@"BattingOverBlockView" owner:self options:nil] objectAtIndex:0];
+            
+        }
+        
+        battingOverBlockView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        battingOverBlockView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self removePreviousView:battingOverBlockView FromSuperView: self.containerView];
+        [self.containerView addSubview:battingOverBlockView];
+        
+        [battingOverBlockView loadPowerPlayDetails];
+                
     }
 
     

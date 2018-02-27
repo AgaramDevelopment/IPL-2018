@@ -14,63 +14,20 @@
 #import "BallsInVideosCVC.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface VideoPlayerViewController () <TappabbleViewDelegate>
+@interface VideoPlayerViewController ()
 {
     NSMutableArray  *videoURLArray;
     int selectedVideo;
     AVPlayerItem* videoItem;
 }
 
-@property (strong, nonatomic) IBOutletCollection(TappabbleView) NSArray *tappableViews;
 @end
 
-@implementation TappabbleView
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-  //  [_delegate didTapView:self];
-}
-@end
+
 
 @implementation VideoPlayerViewController
 @synthesize PlayerCode,VideoValue,Innings,Type;
 @synthesize MatchCode;
-
--(void)didTapView:(TappabbleView *)view
-{
-//    if (view.tag == 1)
-//    {
-//        // Play And Pause
-//        [self playAndPause:nil];
-//    } else if (view.tag == 2)
-//    {
-//        // Previous Frame
-//        [self previousFrame:nil];
-//    } else if (view.tag == 3)
-//    {
-//        // Next Frame
-//        [self nextFrame:nil];
-//    } else if (view.tag == 4)
-//    {
-//        // Slow Forward
-//        [self slowForward:nil];
-//    } else if (view.tag == 5)
-//    {
-//        // Fast Forward
-//        [self fastForward:nil];
-//    } else if (view.tag == 6)
-//    {
-//        // Previous
-//        [self previous:nil];
-//    } else if (view.tag == 7)
-//    {
-//        // Next
-//        [self next:nil];
-//    } else if (view.tag == 8)
-//    {
-//        // Full Screen
-//        [self fullScreen:nil];
-//    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
