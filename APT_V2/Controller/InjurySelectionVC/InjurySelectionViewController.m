@@ -16,6 +16,7 @@
     CALayer *redLayer;
     CALayer *yellowLayer;
     CALayer *greenLayer;
+    NSArray* tagArray;
 }
 
 @end
@@ -28,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
+//    tagArray = @[@""];
+    
+    
 //    [self customnavigationmethod];
     
     
@@ -222,4 +228,21 @@
 
 }
 
+- (IBAction)injurySelectionAction:(UIButton *)sender {
+    
+    NSLog(@"injurySelectionAction called");
+    if ([sender currentImage]) {
+        
+        NSLog(@"DE SELECT");
+        [sender setImage:nil forState:UIControlStateNormal];
+    }
+    else {
+        
+        NSLog(@"SELECT");
+        // Human outline-25.png
+        NSString* imgName = [NSString stringWithFormat:@"Human outline-%ld",[sender tag]];
+        [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    }
+    
+}
 @end

@@ -15,9 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img1;
 @property (weak, nonatomic) IBOutlet UILabel *lblVertical;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFront;
-@property (weak, nonatomic) IBOutlet TTView *gridView;
+@property (weak, nonatomic) IBOutlet UIView *gridView;
 @property (weak, nonatomic) IBOutlet UILabel *lbl1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTemp;
 @property (weak, nonatomic) IBOutlet UIButton *img123;
+- (IBAction)injurySelectionAction:(UIButton *)sender;
 
 @end
