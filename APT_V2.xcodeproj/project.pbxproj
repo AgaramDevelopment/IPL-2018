@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */; };
-		041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */; };
 		042381C72041539100212684 /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C42041539100212684 /* OverviewView.xib */; };
 		042381C82041539100212684 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381C62041539100212684 /* OverviewView.m */; };
 		042381CC204173F900212684 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C9204173F800212684 /* PopOverVC.xib */; };
@@ -85,6 +83,10 @@
 		18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC720371A7D00EBA479 /* AddWellnessRatingVC.xib */; };
 		18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */; };
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
+		18AAC6B82045F9A200D5495A /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAC6B32045F9A200D5495A /* BowlTypeCell.m */; };
+		18AAC6B92045F9A200D5495A /* BowlTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AAC6B42045F9A200D5495A /* BowlTypeCell.xib */; };
+		18AAC6BA2045F9A200D5495A /* GroundVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAC6B62045F9A200D5495A /* GroundVC.m */; };
+		18AAC6BB2045F9A200D5495A /* GroundVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AAC6B72045F9A200D5495A /* GroundVC.xib */; };
 		18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3449203E812C003EE0F0 /* ReportsVC.m */; };
 		18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC344A203E812C003EE0F0 /* ReportsVC.xib */; };
 		18AC3452203EC0D9003EE0F0 /* CoachTraingLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3450203EC0D9003EE0F0 /* CoachTraingLoad.m */; };
@@ -114,10 +116,6 @@
 		18C287DA20355847006E6590 /* MCTeamCompVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C287D620355847006E6590 /* MCTeamCompVC.xib */; };
 		18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185A202B087200AB9DCF /* RGSPreviewView.m */; };
 		18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185B202B087200AB9DCF /* RGSColorSlider.m */; };
-		18E070F3204690610020D8EE /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E070EE204690610020D8EE /* BowlTypeCell.m */; };
-		18E070F4204690610020D8EE /* BowlTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E070EF204690610020D8EE /* BowlTypeCell.xib */; };
-		18E070F5204690610020D8EE /* GroundVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E070F1204690610020D8EE /* GroundVC.m */; };
-		18E070F6204690610020D8EE /* GroundVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E070F2204690610020D8EE /* GroundVC.xib */; };
 		18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */; };
 		18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0B20316C2D00CDA268 /* CustomButton.m */; };
 		18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0E20316C2E00CDA268 /* CustomCollectionViewLayout.swift */; };
@@ -315,7 +313,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamOverviewVC.h; sourceTree = "<group>"; };
 		041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewVC.m; sourceTree = "<group>"; };
 		041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamOverviewVC.xib; sourceTree = "<group>"; };
 		042381C42041539100212684 /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
@@ -397,8 +394,6 @@
 		1851440020458C1100CEE288 /* MCTeamPlayersCompCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTeamPlayersCompCell.xib; sourceTree = "<group>"; };
 		1851440120458C1200CEE288 /* MCTeamPlayersCompCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTeamPlayersCompCell.m; sourceTree = "<group>"; };
 		1851440220458C1200CEE288 /* MCTeamPlayersCompCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTeamPlayersCompCell.h; sourceTree = "<group>"; };
-		1851442720458D2300CEE288 /* GroundVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundVC.m; sourceTree = "<group>"; };
-		1851442820458D2300CEE288 /* GroundVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroundVC.xib; sourceTree = "<group>"; };
 		189D0AEE20466D4C009D1AC8 /* RecentFitnessGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentFitnessGraph.h; sourceTree = "<group>"; };
 		189D0AEF20466D4C009D1AC8 /* RecentFitnessGraph.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentFitnessGraph.m; sourceTree = "<group>"; };
 		189D0AF020466D4C009D1AC8 /* RecentFitnessGraph.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentFitnessGraph.xib; sourceTree = "<group>"; };
@@ -437,6 +432,12 @@
 		18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
 		18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
 		18A68ACA20371A7D00EBA479 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		18AAC6B22045F9A200D5495A /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
+		18AAC6B32045F9A200D5495A /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
+		18AAC6B42045F9A200D5495A /* BowlTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlTypeCell.xib; sourceTree = "<group>"; };
+		18AAC6B52045F9A200D5495A /* GroundVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundVC.h; sourceTree = "<group>"; };
+		18AAC6B62045F9A200D5495A /* GroundVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundVC.m; sourceTree = "<group>"; };
+		18AAC6B72045F9A200D5495A /* GroundVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroundVC.xib; sourceTree = "<group>"; };
 		18AC3448203E812C003EE0F0 /* ReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsVC.h; sourceTree = "<group>"; };
 		18AC3449203E812C003EE0F0 /* ReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsVC.m; sourceTree = "<group>"; };
 		18AC344A203E812C003EE0F0 /* ReportsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportsVC.xib; sourceTree = "<group>"; };
@@ -482,12 +483,6 @@
 		18DF1859202B087100AB9DCF /* RGSPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGSPreviewView.h; sourceTree = "<group>"; };
 		18DF185A202B087200AB9DCF /* RGSPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSPreviewView.m; sourceTree = "<group>"; };
 		18DF185B202B087200AB9DCF /* RGSColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSColorSlider.m; sourceTree = "<group>"; };
-		18E070ED204690610020D8EE /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
-		18E070EE204690610020D8EE /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
-		18E070EF204690610020D8EE /* BowlTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlTypeCell.xib; sourceTree = "<group>"; };
-		18E070F0204690610020D8EE /* GroundVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundVC.h; sourceTree = "<group>"; };
-		18E070F1204690610020D8EE /* GroundVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundVC.m; sourceTree = "<group>"; };
-		18E070F2204690610020D8EE /* GroundVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroundVC.xib; sourceTree = "<group>"; };
 		18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionPlayer.swift; sourceTree = "<group>"; };
 		18EF9D0A20316C2D00CDA268 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		18EF9D0B20316C2D00CDA268 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -824,16 +819,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		041B9DD820467F4700ECFDD8 /* Team */ = {
-			isa = PBXGroup;
-			children = (
-				041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */,
-				041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */,
-				041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */,
-			);
-			path = Team;
-			sourceTree = "<group>";
-		};
 		04249B74203D463E00B13889 /* NutritionVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,6 +1023,19 @@
 			path = TeamsVC;
 			sourceTree = "<group>";
 		};
+		18AAC6B12045F9A200D5495A /* GroundVC */ = {
+			isa = PBXGroup;
+			children = (
+				18AAC6B22045F9A200D5495A /* BowlTypeCell.h */,
+				18AAC6B32045F9A200D5495A /* BowlTypeCell.m */,
+				18AAC6B42045F9A200D5495A /* BowlTypeCell.xib */,
+				18AAC6B52045F9A200D5495A /* GroundVC.h */,
+				18AAC6B62045F9A200D5495A /* GroundVC.m */,
+				18AAC6B72045F9A200D5495A /* GroundVC.xib */,
+			);
+			path = GroundVC;
+			sourceTree = "<group>";
+		};
 		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1125,8 +1123,8 @@
 		18BAE2982028335E0088178A /* MatchCenter */ = {
 			isa = PBXGroup;
 			children = (
+				18AAC6B12045F9A200D5495A /* GroundVC */,
 				183A9CAC2045D45900E1B32B /* Standing */,
-				1851442620458D0300CEE288 /* GroundVC */,
 				18B37F44203A958B00F51511 /* Batting */,
 				18C287D020355847006E6590 /* TeamComp */,
 				18EF9D1620316EDE00CDA268 /* MatchCenterTBC.h */,
@@ -1204,19 +1202,6 @@
 				18DF185A202B087200AB9DCF /* RGSPreviewView.m */,
 			);
 			path = ColorSlider;
-			sourceTree = "<group>";
-		};
-		18E070EC204690610020D8EE /* GroundVC */ = {
-			isa = PBXGroup;
-			children = (
-				18E070ED204690610020D8EE /* BowlTypeCell.h */,
-				18E070EE204690610020D8EE /* BowlTypeCell.m */,
-				18E070EF204690610020D8EE /* BowlTypeCell.xib */,
-				18E070F0204690610020D8EE /* GroundVC.h */,
-				18E070F1204690610020D8EE /* GroundVC.m */,
-				18E070F2204690610020D8EE /* GroundVC.xib */,
-			);
-			path = GroundVC;
 			sourceTree = "<group>";
 		};
 		18EF9D0920316C2D00CDA268 /* CustomButton */ = {
@@ -1924,8 +1909,8 @@
 			isa = PBXGroup;
 			children = (
 				CE102817202DDBE300FA0B61 /* CalendarViewController.xib */,
-				1851442720458D2300CEE288 /* GroundVC.m */,
-				1851442820458D2300CEE288 /* GroundVC.xib */,
+				041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */,
+				041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -2337,7 +2322,6 @@
 				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
 				CE6C173C2045217A00672253 /* DailyCalendar.png in Resources */,
 				04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */,
-				18E070F6204690610020D8EE /* GroundVC.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
 				18A68AC120371A2C00EBA479 /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
@@ -2349,8 +2333,6 @@
 				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				18A68ABD20371A2C00EBA479 /* TrainingLoadUpdateCell.xib in Resources */,
-				041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */,
-				18E070F4204690610020D8EE /* BowlTypeCell.xib in Resources */,
 				18B37F54203AA77200F51511 /* BattingView.xib in Resources */,
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
@@ -2366,6 +2348,7 @@
 				1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */,
 				0429FC00204560D00002B30B /* BattingOverBlockView.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
+				18AAC6BB2045F9A200D5495A /* GroundVC.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				18C287DA20355847006E6590 /* MCTeamCompVC.xib in Resources */,
 				18B37F49203AA2C100F51511 /* MCBattingRootVC.xib in Resources */,
@@ -2421,6 +2404,7 @@
 				CE3E741820248BF100F10917 /* Assets.xcassets in Resources */,
 				CE6C173B2045217A00672253 /* blackCircle.png in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
+				18AAC6B92045F9A200D5495A /* BowlTypeCell.xib in Resources */,
 				18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */,
 				0429FC13204582B20002B30B /* InjuryAndIllnessCell.xib in Resources */,
 				CE6C166E2045216100672253 /* PlannerCell.xib in Resources */,
@@ -2589,7 +2573,6 @@
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
 				CE6C17322045217A00672253 /* FFButtonWithHourPopover.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
-				041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */,
 				CE6C172E2045217A00672253 /* FFDateManager.m in Sources */,
@@ -2640,9 +2623,9 @@
 				CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */,
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
 				CE6C16142045207400672253 /* ScoreCardCell.m in Sources */,
-				18E070F3204690610020D8EE /* BowlTypeCell.m in Sources */,
 				CE6C172C2045217A00672253 /* UIImage+FFCustomMethods.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
+				18AAC6B82045F9A200D5495A /* BowlTypeCell.m in Sources */,
 				CE6C17272045217A00672253 /* FFYearCollectionViewFlowLayout.m in Sources */,
 				CE6C17192045217A00672253 /* FFWeekHeaderCell.m in Sources */,
 				1851440420458C1200CEE288 /* MCTeamPlayersCompCell.m in Sources */,
@@ -2706,7 +2689,7 @@
 				CE6C172B2045217A00672253 /* UIColor+FFMoreColors.m in Sources */,
 				CE6C170C2045217A00672253 /* FFDayHeaderCell.m in Sources */,
 				18B37F48203AA2C100F51511 /* MCBattingRootVC.m in Sources */,
-				18E070F5204690610020D8EE /* GroundVC.m in Sources */,
+				18AAC6BA2045F9A200D5495A /* GroundVC.m in Sources */,
 				CE6C170F2045217A00672253 /* FFDayCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
