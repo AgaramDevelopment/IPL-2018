@@ -247,24 +247,31 @@
 
 - (IBAction)actionFlipSelection:(id)sender {
     
-//    [self.]
+    [self.BackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
+    
     if (![sender tag]) {
         // show Back side
-        [UIView transitionWithView:FrontView
+        [UIView transitionWithView:self.BackView
                           duration:1.0
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
                             [FrontView addSubview:self.BackView];
                         }
-                        completion:NULL];
+                        completion:^(BOOL finished) {
+                            [self.BackView.topAnchor constraintEqualToAnchor:FrontView.topAnchor];
+                            [self.BackView.leadingAnchor constraintEqualToAnchor:FrontView.leadingAnchor];
+                            [self.BackView.bottomAnchor constraintEqualToAnchor:FrontView.bottomAnchor];
+                            [self.BackView.trailingAnchor constraintEqualToAnchor:FrontView.trailingAnchor];
+                        }];
 
         
     }
     else // show front side
     {
-        [UIView transitionWithView:BackView
+        [UIView transitionWithView:self.FrontView
                           duration:1.0
-                           options:UIViewAnimationOptionTransitionFlipFromRight
+                           options:UIViewAnimationOptionTransitionFlipFromLeft
                         animations:^{
                             [self.BackView removeFromSuperview];
                         }
