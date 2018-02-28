@@ -45,6 +45,9 @@
     [self customnavigationmethod];
     
     
+    
+    
+    
     markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
     
     self.battingFstPie.delegate = self;
@@ -63,6 +66,20 @@
     
     [self barchart];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    UIBezierPath *path = [UIBezierPath new];
+    
+    [path moveToPoint:(CGPoint){self.ColorView.frame.size.width-25,0 }];//w0
+    [path addLineToPoint:(CGPoint){0, 0}];//00
+    [path addLineToPoint:(CGPoint){0,self.ColorView.frame.size.height }];//0h
+    [path addLineToPoint:(CGPoint){self.ColorView.frame.size.width, self.ColorView.frame.size.height}];//wh20
+    
+    CAShapeLayer *mask = [CAShapeLayer new];
+    mask.frame = self.ColorView.bounds;
+    mask.path = path.CGPath;
+    self.ColorView.layer.mask = mask;
+}
 
 -(void)customnavigationmethod
 {
@@ -72,7 +89,7 @@
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
     [self.headerView addSubview:objCustomNavigation.view];
-    objCustomNavigation.tittle_lbl.text=@"Overview";
+    objCustomNavigation.tittle_lbl.text=@"Ground";
     objCustomNavigation.btn_back.hidden = YES;
     objCustomNavigation.home_btn.hidden = YES;
     objCustomNavigation.menu_btn.hidden =NO;
