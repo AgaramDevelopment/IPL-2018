@@ -17,7 +17,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamHeadToHead">
             <connections>
+                <outlet property="Poptable" destination="yiM-7k-djn" id="TRQ-FO-V5R"/>
+                <outlet property="groundView" destination="6fE-Xq-nCK" id="vkI-ru-AFJ"/>
+                <outlet property="groundlbl" destination="b7k-cc-rAM" id="Gdl-AX-HZS"/>
                 <outlet property="headerView" destination="hDd-eW-Jic" id="Sp6-dP-AJ2"/>
+                <outlet property="tableWidth" destination="zG9-ef-gKn" id="omS-9h-4rb"/>
+                <outlet property="tableXposition" destination="0Ht-gX-92I" id="hTM-RW-R54"/>
+                <outlet property="tableYposition" destination="TwP-dT-JfP" id="Ewj-na-Gmx"/>
+                <outlet property="team1View" destination="ylh-Uj-ybZ" id="qT0-eb-kgV"/>
+                <outlet property="team1lbl" destination="WCP-Bt-Djo" id="h35-kK-Gz9"/>
+                <outlet property="team2View" destination="Jth-yg-Toq" id="4QZ-Iy-5rf"/>
+                <outlet property="team2lbl" destination="h4R-kR-B9U" id="612-bD-dPj"/>
                 <outlet property="view" destination="SeD-w8-XhN" id="gnJ-mk-6rC"/>
             </connections>
         </placeholder>
@@ -82,15 +92,25 @@
                                                                                 <constraint firstAttribute="height" constant="15" id="mBU-U3-Zxf"/>
                                                                             </constraints>
                                                                         </imageView>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsy-Mx-rbB">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                            <connections>
+                                                                                <action selector="Team1BtnAction:" destination="-1" eventType="touchUpInside" id="RVS-DF-sJF"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="bottom" secondItem="WCP-Bt-Djo" secondAttribute="bottom" id="1ED-CW-4yb"/>
+                                                                        <constraint firstItem="56p-oT-rp8" firstAttribute="leading" secondItem="Vsy-Mx-rbB" secondAttribute="trailing" id="8EN-HZ-y76"/>
                                                                         <constraint firstItem="56p-oT-rp8" firstAttribute="leading" secondItem="WCP-Bt-Djo" secondAttribute="trailing" id="Bhb-m0-lYE"/>
+                                                                        <constraint firstItem="Vsy-Mx-rbB" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" id="VUG-wN-WKe"/>
                                                                         <constraint firstAttribute="width" constant="167" id="Vpq-On-mig">
                                                                             <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                         </constraint>
+                                                                        <constraint firstAttribute="bottom" secondItem="Vsy-Mx-rbB" secondAttribute="bottom" id="buw-WV-J8M"/>
                                                                         <constraint firstAttribute="height" constant="30" id="gnJ-Su-La6"/>
+                                                                        <constraint firstItem="Vsy-Mx-rbB" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" id="h4X-Sg-cwU"/>
                                                                         <constraint firstItem="56p-oT-rp8" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" constant="8" id="lX5-ts-94I"/>
                                                                         <constraint firstItem="WCP-Bt-Djo" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" id="sGo-Yd-ebg"/>
                                                                         <constraint firstItem="WCP-Bt-Djo" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" constant="5" id="uWI-ie-yen"/>
@@ -126,18 +146,28 @@
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                             </variation>
                                                                         </label>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1E-yk-mRA">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                            <connections>
+                                                                                <action selector="Team2BtnAction:" destination="-1" eventType="touchUpInside" id="8SP-Fi-Tab"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="8eE-gD-shK"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="T1E-yk-mRA" secondAttribute="bottom" id="9am-P3-GRQ"/>
                                                                         <constraint firstAttribute="width" constant="167" id="EoW-hS-YqT">
                                                                             <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                         </constraint>
+                                                                        <constraint firstItem="T1E-yk-mRA" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" id="Uef-ZI-UxH"/>
                                                                         <constraint firstItem="h4R-kR-B9U" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" constant="5" id="XMv-1V-adQ"/>
                                                                         <constraint firstAttribute="bottom" secondItem="h4R-kR-B9U" secondAttribute="bottom" id="YXm-1s-3cf"/>
                                                                         <constraint firstItem="GHO-cd-jYx" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" constant="8" id="Zcb-G0-NNg"/>
                                                                         <constraint firstAttribute="trailing" secondItem="GHO-cd-jYx" secondAttribute="trailing" constant="5" id="bAo-Rg-AM1"/>
                                                                         <constraint firstItem="GHO-cd-jYx" firstAttribute="leading" secondItem="h4R-kR-B9U" secondAttribute="trailing" id="e0G-jW-3Yx"/>
+                                                                        <constraint firstItem="GHO-cd-jYx" firstAttribute="leading" secondItem="T1E-yk-mRA" secondAttribute="trailing" id="hy9-In-Ajq"/>
+                                                                        <constraint firstItem="T1E-yk-mRA" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" id="lYm-fg-A58"/>
                                                                         <constraint firstItem="h4R-kR-B9U" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" id="nWK-9W-KPX"/>
                                                                     </constraints>
                                                                 </view>
@@ -200,11 +230,19 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                     </variation>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVY-ev-fek">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                    <connections>
+                                                                        <action selector="GroundBtnAction:" destination="-1" eventType="touchUpInside" id="Iqh-pq-e4Q"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="fIu-Yi-2yJ" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" constant="8" id="06R-Ck-xDo"/>
+                                                                <constraint firstItem="aVY-ev-fek" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" id="42t-ek-W2f"/>
                                                                 <constraint firstAttribute="height" constant="30" id="4br-18-Qaj"/>
+                                                                <constraint firstItem="aVY-ev-fek" firstAttribute="leading" secondItem="6fE-Xq-nCK" secondAttribute="leading" id="JA3-ie-v9r"/>
                                                                 <constraint firstItem="fIu-Yi-2yJ" firstAttribute="leading" secondItem="b7k-cc-rAM" secondAttribute="trailing" id="LaY-Ie-pAs"/>
                                                                 <constraint firstAttribute="bottom" secondItem="b7k-cc-rAM" secondAttribute="bottom" id="Lvr-9R-wLo"/>
                                                                 <constraint firstItem="b7k-cc-rAM" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" id="ObG-uL-lnG"/>
@@ -212,7 +250,9 @@
                                                                 <constraint firstAttribute="width" constant="167" id="inF-IL-VoY">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                 </constraint>
+                                                                <constraint firstItem="fIu-Yi-2yJ" firstAttribute="leading" secondItem="aVY-ev-fek" secondAttribute="trailing" id="kt5-IH-rlj"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fIu-Yi-2yJ" secondAttribute="trailing" constant="5" id="qQ6-Np-0bW"/>
+                                                                <constraint firstAttribute="bottom" secondItem="aVY-ev-fek" secondAttribute="bottom" id="ulN-UG-6Rf"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1415,14 +1455,28 @@
                                                         <constraint firstItem="V9m-RP-hMo" firstAttribute="centerX" secondItem="mjp-js-gyG" secondAttribute="centerX" id="wfV-rU-mhx"/>
                                                     </constraints>
                                                 </view>
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yiM-7k-djn">
+                                                    <rect key="frame" x="5" y="41" width="238" height="200"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="WJJ-MR-jHl"/>
+                                                        <constraint firstAttribute="width" constant="238" id="zG9-ef-gKn"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="-1" id="z4c-5h-ypN"/>
+                                                        <outlet property="delegate" destination="-1" id="FKi-13-ZBj"/>
+                                                    </connections>
+                                                </tableView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
+                                                <constraint firstItem="yiM-7k-djn" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="0Ht-gX-92I"/>
                                                 <constraint firstItem="mjp-js-gyG" firstAttribute="top" secondItem="WAX-cg-fmv" secondAttribute="bottom" constant="20" id="2Tf-5m-9po"/>
                                                 <constraint firstItem="iIO-Zd-6iU" firstAttribute="top" secondItem="C2H-ZE-80P" secondAttribute="top" constant="10" id="D0W-Jf-uaV"/>
                                                 <constraint firstAttribute="trailing" secondItem="LAW-a5-nq3" secondAttribute="trailing" constant="5" id="D6o-jz-YAP"/>
                                                 <constraint firstAttribute="trailing" secondItem="WAX-cg-fmv" secondAttribute="trailing" constant="5" id="FqO-WN-bYD"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="OSu-re-hlc"/>
+                                                <constraint firstItem="yiM-7k-djn" firstAttribute="top" secondItem="iIO-Zd-6iU" secondAttribute="bottom" constant="1" id="TwP-dT-JfP"/>
                                                 <constraint firstAttribute="height" constant="1900" id="USA-Ku-p1u"/>
                                                 <constraint firstItem="iIO-Zd-6iU" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="Wh4-kr-gqg"/>
                                                 <constraint firstAttribute="trailing" secondItem="iIO-Zd-6iU" secondAttribute="trailing" constant="5" id="Xff-J9-30h"/>
