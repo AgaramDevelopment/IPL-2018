@@ -76,7 +76,7 @@
         }
         
         
-//        dropDownTblView.backgroundColor=[UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
+        dropDownTblView.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:dropDownTblView];
         [dropDownTblView reloadData];
     } else {
@@ -143,13 +143,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    TeamOverviewVC *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"teamOverviewCell" forIndexPath:indexPath];
+    TeamOverviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"teamOverviewCell" forIndexPath:indexPath];
 
-    cell.layer.masksToBounds = NO;
-    cell.layer.shadowColor = [UIColor blackColor].CGColor;
-    cell.layer.shadowOffset = CGSizeMake(-5.0f, -5.0f);
-    cell.layer.shadowRadius = 5;
-    cell.layer.shadowOpacity = 0.8f;
+    cell.headerView.layer.masksToBounds = NO;
+    cell.headerView.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.headerView.layer.shadowOffset = CGSizeMake(-2.0f, -2.0f);
+    cell.headerView.layer.shadowRadius = 5;
+    cell.headerView.layer.shadowOpacity = 0.8f;
     
 /*
         //Target for More Details
