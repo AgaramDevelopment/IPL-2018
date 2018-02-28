@@ -247,7 +247,7 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = @"AMR0000010";
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
     objWebservice = [[WebService alloc]init];
