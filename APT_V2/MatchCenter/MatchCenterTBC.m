@@ -14,6 +14,7 @@
 #import "GroundVC.h"
 #import "StandingVC.h"
 #import "MCBowlingRootVC.h"
+#import "TeamHeadToHead.h"
 
 @interface MatchCenterTBC ()
 
@@ -105,7 +106,16 @@
     sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController,fifthViewController,sixthViewController, nil];
+    //H2H
+    TeamHeadToHead *headtoheadController = [[TeamHeadToHead alloc]init];
+    headtoheadController.title = @"H2H";
+    headtoheadController.tabBarItem = self.tossAndResultBarItem;
+    
+    headtoheadController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    headtoheadController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController,fifthViewController,sixthViewController,headtoheadController, nil];
     
     
     self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];

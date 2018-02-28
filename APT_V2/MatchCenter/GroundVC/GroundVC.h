@@ -15,6 +15,7 @@
 @interface GroundVC : UIViewController
 
 
+@property (strong, nonatomic) IBOutlet UIButton *ColorView;
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *rootView;

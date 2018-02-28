@@ -100,6 +100,10 @@
 		18C287DA20355847006E6590 /* MCTeamCompVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C287D620355847006E6590 /* MCTeamCompVC.xib */; };
 		18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185A202B087200AB9DCF /* RGSPreviewView.m */; };
 		18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185B202B087200AB9DCF /* RGSColorSlider.m */; };
+		18E071072046CAE90020D8EE /* TeamHeadToHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E071052046CAE90020D8EE /* TeamHeadToHead.m */; };
+		18E071082046CAE90020D8EE /* TeamHeadToHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E071062046CAE90020D8EE /* TeamHeadToHead.xib */; };
+		18E0710C2046CBEC0020D8EE /* MCTeamPlayersCompCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E0710A2046CBEB0020D8EE /* MCTeamPlayersCompCell.xib */; };
+		18E0710D2046CBEC0020D8EE /* MCTeamPlayersCompCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0710B2046CBEB0020D8EE /* MCTeamPlayersCompCell.m */; };
 		18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */; };
 		18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0B20316C2D00CDA268 /* CustomButton.m */; };
 		18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0E20316C2E00CDA268 /* CustomCollectionViewLayout.swift */; };
@@ -467,6 +471,12 @@
 		18DF1859202B087100AB9DCF /* RGSPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGSPreviewView.h; sourceTree = "<group>"; };
 		18DF185A202B087200AB9DCF /* RGSPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSPreviewView.m; sourceTree = "<group>"; };
 		18DF185B202B087200AB9DCF /* RGSColorSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSColorSlider.m; sourceTree = "<group>"; };
+		18E071042046CAE90020D8EE /* TeamHeadToHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamHeadToHead.h; sourceTree = "<group>"; };
+		18E071052046CAE90020D8EE /* TeamHeadToHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamHeadToHead.m; sourceTree = "<group>"; };
+		18E071062046CAE90020D8EE /* TeamHeadToHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamHeadToHead.xib; sourceTree = "<group>"; };
+		18E071092046CBEB0020D8EE /* MCTeamPlayersCompCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTeamPlayersCompCell.h; sourceTree = "<group>"; };
+		18E0710A2046CBEB0020D8EE /* MCTeamPlayersCompCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTeamPlayersCompCell.xib; sourceTree = "<group>"; };
+		18E0710B2046CBEB0020D8EE /* MCTeamPlayersCompCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTeamPlayersCompCell.m; sourceTree = "<group>"; };
 		18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionPlayer.swift; sourceTree = "<group>"; };
 		18EF9D0A20316C2D00CDA268 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		18EF9D0B20316C2D00CDA268 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -1104,6 +1114,7 @@
 		18BAE2982028335E0088178A /* MatchCenter */ = {
 			isa = PBXGroup;
 			children = (
+				18E071032046CAE90020D8EE /* TeamHeadToHead */,
 				CEC34C372046B8470058ACC3 /* Bowling */,
 				CEC34C162046B1830058ACC3 /* GroundVC */,
 				CEC34C1D2046B1830058ACC3 /* Standing */,
@@ -1145,6 +1156,9 @@
 		18C287D020355847006E6590 /* TeamComp */ = {
 			isa = PBXGroup;
 			children = (
+				18E071092046CBEB0020D8EE /* MCTeamPlayersCompCell.h */,
+				18E0710B2046CBEB0020D8EE /* MCTeamPlayersCompCell.m */,
+				18E0710A2046CBEB0020D8EE /* MCTeamPlayersCompCell.xib */,
 				18C287D120355847006E6590 /* MCTeamCompCVC.h */,
 				18C287D220355847006E6590 /* MCTeamCompCVC.m */,
 				18C287D320355847006E6590 /* MCTeamCompCVC.xib */,
@@ -1182,6 +1196,16 @@
 				18DF185A202B087200AB9DCF /* RGSPreviewView.m */,
 			);
 			path = ColorSlider;
+			sourceTree = "<group>";
+		};
+		18E071032046CAE90020D8EE /* TeamHeadToHead */ = {
+			isa = PBXGroup;
+			children = (
+				18E071042046CAE90020D8EE /* TeamHeadToHead.h */,
+				18E071052046CAE90020D8EE /* TeamHeadToHead.m */,
+				18E071062046CAE90020D8EE /* TeamHeadToHead.xib */,
+			);
+			path = TeamHeadToHead;
 			sourceTree = "<group>";
 		};
 		18EF9D0920316C2D00CDA268 /* CustomButton */ = {
@@ -2471,6 +2495,7 @@
 				18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */,
+				18E0710C2046CBEC0020D8EE /* MCTeamPlayersCompCell.xib in Resources */,
 				CEC34C4D2046B8470058ACC3 /* BowlingOverBlockView.xib in Resources */,
 				CEC34C222046B1830058ACC3 /* TeamOverviewCell.xib in Resources */,
 				CEC34C352046B2A10058ACC3 /* RecentFitnessGraph.xib in Resources */,
@@ -2498,6 +2523,7 @@
 				CE3E741620248BF100F10917 /* Main.storyboard in Resources */,
 				CEC34C4B2046B8470058ACC3 /* BowlingOverBlockCVC.xib in Resources */,
 				CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */,
+				18E071082046CAE90020D8EE /* TeamHeadToHead.xib in Resources */,
 				CEB2B98920257BBD00E7D5E4 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */,
 				042381CC204173F900212684 /* PopOverVC.xib in Resources */,
 				CEB2B97420257BBD00E7D5E4 /* Montserrat-Bold.otf in Resources */,
@@ -2603,6 +2629,7 @@
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
+				18E071072046CAE90020D8EE /* TeamHeadToHead.m in Sources */,
 				CE6C17362045217A00672253 /* FFGuestsTableView.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */,
@@ -2642,6 +2669,7 @@
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */,
+				18E0710D2046CBEC0020D8EE /* MCTeamPlayersCompCell.m in Sources */,
 				CE6C172E2045217A00672253 /* FFDateManager.m in Sources */,
 				CEC34C4C2046B8470058ACC3 /* BowlingOverBlockView.m in Sources */,
 				CEB2B9D82025C77700E7D5E4 /* WebService.m in Sources */,
