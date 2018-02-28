@@ -12,4 +12,10 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *teamCompCollectionView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
+
+@property (strong, nonatomic) IBOutlet UICollectionView *BowlerCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *BatsmenCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *AllrounderCollectionView;
+
+
 @end
