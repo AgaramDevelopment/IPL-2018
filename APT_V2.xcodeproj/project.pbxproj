@@ -117,6 +117,7 @@
 		CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */; };
 		CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */; };
 		CE10281F202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */; };
+		CE367C872046D72300A94B28 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CE367C862046D72300A94B28 /* StepSlider.m */; };
 		CE3E741020248BF100F10917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E740F20248BF100F10917 /* AppDelegate.m */; };
 		CE3E741620248BF100F10917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741420248BF100F10917 /* Main.storyboard */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
@@ -499,6 +500,8 @@
 		CE10281B202DDBF900FA0B61 /* TestPropertyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPropertyCollectionViewCell.h; sourceTree = "<group>"; };
 		CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPropertyCollectionViewCell.m; sourceTree = "<group>"; };
 		CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestPropertyCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE367C852046D72300A94B28 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepSlider.h; sourceTree = "<group>"; };
+		CE367C862046D72300A94B28 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepSlider.m; sourceTree = "<group>"; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E740E20248BF100F10917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE3E740F20248BF100F10917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1271,6 +1274,15 @@
 			path = TestPropertiesCollectionCell;
 			sourceTree = "<group>";
 		};
+		CE367C842046D72300A94B28 /* StepSlider */ = {
+			isa = PBXGroup;
+			children = (
+				CE367C852046D72300A94B28 /* StepSlider.h */,
+				CE367C862046D72300A94B28 /* StepSlider.m */,
+			);
+			path = StepSlider;
+			sourceTree = "<group>";
+		};
 		CE3E740220248BF000F10917 = {
 			isa = PBXGroup;
 			children = (
@@ -2037,6 +2049,7 @@
 		CEB2B9B92025938E00E7D5E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE367C842046D72300A94B28 /* StepSlider */,
 				CE6C16702045217A00672253 /* PlannerGraphs */,
 				CE6C164C2045213C00672253 /* Calendar */,
 				18AC345F203EF452003EE0F0 /* SwipeView */,
@@ -2633,6 +2646,7 @@
 				CE6C17362045217A00672253 /* FFGuestsTableView.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
 				CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */,
+				CE367C872046D72300A94B28 /* StepSlider.m in Sources */,
 				CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */,
 				CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */,
 				CE6C17072045217A00672253 /* FFAddEventPopoverController.m in Sources */,

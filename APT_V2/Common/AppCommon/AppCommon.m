@@ -84,6 +84,11 @@ AppCommon *sharedCommon = nil;
     return userreference;
 }
 
++(NSString *)GetUserRoleCode
+{
+    NSString * userreference =  [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    return userreference;
+}
 
 #pragma mark - Get Height of Control
 

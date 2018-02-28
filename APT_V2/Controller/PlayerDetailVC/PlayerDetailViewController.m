@@ -545,8 +545,7 @@
     }
     else if ([sender tag] == 1) // Illness
     {
-//        selectedVC = [illnessVC new];
-        selectedVC = [InjurySelectionViewController new];
+        selectedVC = [InjuryVC new];
     }
     else if ([sender tag] == 2)  // Nutrition
     {

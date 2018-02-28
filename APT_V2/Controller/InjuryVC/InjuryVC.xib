@@ -26,6 +26,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InjuryVC">
             <connections>
+                <outlet property="Slider1" destination="3fH-8J-7MK" id="k7Z-s5-MQE"/>
                 <outlet property="comfirmatory_Txt" destination="1cj-AV-tZx" id="LMN-bx-WIo"/>
                 <outlet property="compliant_Txt" destination="wMm-ae-HOU" id="Moc-6L-vzf"/>
                 <outlet property="date_lbl" destination="cNr-6G-pGG" id="O1p-S6-kVi"/>
@@ -34,6 +35,10 @@
                 <outlet property="expectedLeft_Btn" destination="xpN-JL-6lE" id="7eu-gS-eui"/>
                 <outlet property="expectedright_Btn" destination="kkc-wt-Gbs" id="X73-nh-Oz2"/>
                 <outlet property="filepopview" destination="ugn-Kq-acS" id="Qjw-ll-FkI"/>
+                <outlet property="lblFIle4" destination="SdV-Aa-TkV" id="D2B-ef-NYo"/>
+                <outlet property="lblFile1" destination="UMX-0c-wMi" id="1Hc-BD-ZKc"/>
+                <outlet property="lblFile2" destination="GSQ-UH-zLw" id="1GX-Rx-gxZ"/>
+                <outlet property="lblFile3" destination="smk-Wg-Cqr" id="y1h-yU-Zzt"/>
                 <outlet property="left_Btn" destination="Jl8-zM-3vF" id="COh-HN-Qsn"/>
                 <outlet property="location_view" destination="zz2-8g-mgx" id="cPg-cz-nU7"/>
                 <outlet property="navigation_view" destination="60R-xc-wgx" id="tw0-9K-iOy"/>
@@ -87,15 +92,20 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhN-pH-biT">
                             <rect key="frame" x="0.0" y="120" width="320" height="45"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRA-Ud-IU6">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRA-Ud-IU6" customClass="CustomButton">
                                     <rect key="frame" x="25" y="5" width="140.5" height="35"/>
                                     <color key="backgroundColor" red="0.17254901959999999" green="0.65490196079999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                     <state key="normal" title="Assessment Date" image="ico_calendar"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-Nw-n8W">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-Nw-n8W" customClass="CustomButton">
                                     <rect key="frame" x="170.5" y="5" width="140.5" height="35"/>
                                     <color key="backgroundColor" red="0.17254901959999999" green="0.65490196079999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                     <state key="normal" title="Onset Date" image="ico_calendar">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -354,6 +364,9 @@
                                                         <constraint firstAttribute="width" constant="35" id="Du9-5W-YDE"/>
                                                     </constraints>
                                                     <state key="normal" image="down-arrow"/>
+                                                    <connections>
+                                                        <action selector="actionVisualSelection:" destination="-1" eventType="touchUpInside" id="iyp-2g-NUl"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -537,22 +550,30 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQM-Xd-yMw">
                                     <rect key="frame" x="0.0" y="300" width="320" height="45"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfc-f4-GcA">
-                                            <rect key="frame" x="5" y="2" width="150" height="40"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfc-f4-GcA">
+                                            <rect key="frame" x="5" y="2" width="28" height="40"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fH-8J-7MK">
-                                            <rect key="frame" x="160" y="2" width="150" height="40"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fH-8J-7MK" customClass="StepSlider">
+                                            <rect key="frame" x="43" y="2" width="267" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="getSliderValue_VAS:" destination="-1" eventType="valueChanged" id="J0H-Nb-Eft"/>
+                                            </connections>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="3fH-8J-7MK" secondAttribute="bottom" constant="3" id="0ai-re-HUR"/>
+                                        <constraint firstItem="mfc-f4-GcA" firstAttribute="leading" secondItem="MQM-Xd-yMw" secondAttribute="leading" constant="5" id="9SA-bN-Odn"/>
+                                        <constraint firstAttribute="bottom" secondItem="mfc-f4-GcA" secondAttribute="bottom" constant="3" id="FpE-pc-bMn"/>
                                         <constraint firstAttribute="height" constant="45" id="Miw-Rt-fwQ"/>
+                                        <constraint firstItem="3fH-8J-7MK" firstAttribute="top" secondItem="MQM-Xd-yMw" secondAttribute="top" constant="2" id="QGm-o8-zFy"/>
+                                        <constraint firstAttribute="trailing" secondItem="3fH-8J-7MK" secondAttribute="trailing" constant="10" id="faR-cP-etj"/>
+                                        <constraint firstItem="3fH-8J-7MK" firstAttribute="leading" secondItem="mfc-f4-GcA" secondAttribute="trailing" constant="10" id="vDu-N9-O2x"/>
+                                        <constraint firstItem="mfc-f4-GcA" firstAttribute="top" secondItem="MQM-Xd-yMw" secondAttribute="top" constant="2" id="vHT-wb-pwn"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiD-wV-lUU">
@@ -775,13 +796,20 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXh-le-c3z">
+                                                    <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="OXh-le-c3z" firstAttribute="leading" secondItem="N5d-TB-zAQ" secondAttribute="leading" id="1h4-Qz-GtD"/>
                                                 <constraint firstItem="cNr-6G-pGG" firstAttribute="top" secondItem="N5d-TB-zAQ" secondAttribute="top" constant="5" id="7m1-7z-R1H"/>
+                                                <constraint firstItem="OXh-le-c3z" firstAttribute="top" secondItem="N5d-TB-zAQ" secondAttribute="top" id="HsT-rs-1W5"/>
                                                 <constraint firstItem="AEE-N2-imv" firstAttribute="leading" secondItem="N5d-TB-zAQ" secondAttribute="leading" id="Rzf-Bw-KLD"/>
                                                 <constraint firstItem="cNr-6G-pGG" firstAttribute="leading" secondItem="AEE-N2-imv" secondAttribute="trailing" constant="5" id="aUd-bk-xxA"/>
+                                                <constraint firstAttribute="bottom" secondItem="OXh-le-c3z" secondAttribute="bottom" id="fAH-ek-EiT"/>
                                                 <constraint firstItem="AEE-N2-imv" firstAttribute="top" secondItem="N5d-TB-zAQ" secondAttribute="top" constant="10" id="fuZ-6Q-Sfs"/>
+                                                <constraint firstAttribute="trailing" secondItem="OXh-le-c3z" secondAttribute="trailing" id="kyd-FV-nyC"/>
                                                 <constraint firstAttribute="bottom" secondItem="cNr-6G-pGG" secondAttribute="bottom" constant="5" id="qJa-EC-35w"/>
                                             </constraints>
                                         </view>
@@ -976,7 +1004,7 @@
                             </constraints>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugn-Kq-acS">
-                            <rect key="frame" x="10" y="288.5" width="300" height="253"/>
+                            <rect key="frame" x="10" y="288" width="300" height="253"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3b-Xv-cQ9">
                                     <rect key="frame" x="5" y="5" width="142.5" height="45"/>
@@ -1323,7 +1351,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="104" y="408"/>
+            <point key="canvasLocation" x="84" y="421"/>
         </view>
     </objects>
     <resources>

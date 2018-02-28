@@ -11,6 +11,8 @@
 @interface CustomButton : UIButton
 
 @property (readwrite) NSInteger secondTag;
+@property (strong,nonatomic) NSString* SelctedDate;
+@property (strong,nonatomic) NSString* SelctedCode;
 
 
 @end

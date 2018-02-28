@@ -38,6 +38,12 @@
 #import "LineTextField.h"
 #import "UITextField+testCode.h"
 #import "customTextField.h"
+
+// Step slider
+
+#import "StepSlider.h"
+
+
 // Login screen
 
 #import "LoginVC.h"

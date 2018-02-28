@@ -32,7 +32,6 @@
 //    tagArray = @[@""];
     
     
-    [self customnavigationmethod];
     
     
 //    CAShapeLayer* shape1= [CAShapeLayer new];
@@ -105,6 +104,8 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self customnavigationmethod];
+
 //    blueLayer = [[CALayer alloc] init];
 //    blueLayer.frame = CGRectMake(100, 100, 100, 100);
 //    blueLayer.backgroundColor = [UIColor blueColor].CGColor;
@@ -247,9 +248,6 @@
 
 - (IBAction)actionFlipSelection:(id)sender {
     
-    [self.BackView setTranslatesAutoresizingMaskIntoConstraints:NO];
-
-    
     if (![sender tag]) {
         // show Back side
         [UIView transitionWithView:self.BackView
@@ -263,6 +261,7 @@
                             [self.BackView.leadingAnchor constraintEqualToAnchor:FrontView.leadingAnchor];
                             [self.BackView.bottomAnchor constraintEqualToAnchor:FrontView.bottomAnchor];
                             [self.BackView.trailingAnchor constraintEqualToAnchor:FrontView.trailingAnchor];
+                            [self.BackView setTranslatesAutoresizingMaskIntoConstraints:NO];
                         }];
 
         

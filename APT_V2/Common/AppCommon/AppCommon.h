@@ -30,6 +30,7 @@
 +(NSString *) GetClientCode;
 +(NSString *) GetuserReference;
 +(NSString *)GetUserRoleName;
++(NSString *)GetUserRoleCode;
 
 
 +(NSString *)getFileType:(NSString *)filePath;
