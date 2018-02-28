@@ -7,7 +7,6 @@
 //
 
 #import "InjurySelectionViewController.h"
-#import "Header.h"
 #import "UIImage+GetPoints.h"
 
 @interface InjurySelectionViewController ()
@@ -22,8 +21,7 @@
 @end
 
 @implementation InjurySelectionViewController
-@synthesize lblVertical,imgFront;
-@synthesize lbl1;
+@synthesize FrontView,BackView;
 
 
 - (void)viewDidLoad {
@@ -34,7 +32,7 @@
 //    tagArray = @[@""];
     
     
-//    [self customnavigationmethod];
+    [self customnavigationmethod];
     
     
 //    CAShapeLayer* shape1= [CAShapeLayer new];
@@ -228,13 +226,14 @@
 
 }
 
-- (IBAction)injurySelectionAction:(UIButton *)sender {
+- (IBAction)injurySelectionAction:(CustomButton *)sender {
     
     NSLog(@"injurySelectionAction called");
     if ([sender currentImage]) {
         
         NSLog(@"DE SELECT");
         [sender setImage:nil forState:UIControlStateNormal];
+        
     }
     else {
         
@@ -244,5 +243,33 @@
         [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     }
     
+}
+
+- (IBAction)actionFlipSelection:(id)sender {
+    
+//    [self.]
+    if (![sender tag]) {
+        // show Back side
+        [UIView transitionWithView:FrontView
+                          duration:1.0
+                           options:UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^{
+                            [FrontView addSubview:self.BackView];
+                        }
+                        completion:NULL];
+
+        
+    }
+    else // show front side
+    {
+        [UIView transitionWithView:BackView
+                          duration:1.0
+                           options:UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^{
+                            [self.BackView removeFromSuperview];
+                        }
+                        completion:NULL];
+        
+    }
 }
 @end
