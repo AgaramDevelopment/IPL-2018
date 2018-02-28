@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TeamOverviewCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UILabel *availableLbl;
+@property (strong, nonatomic) IBOutlet UIView *headerView;
 
 @end
