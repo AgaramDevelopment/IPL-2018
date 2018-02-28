@@ -96,11 +96,11 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-6X-wb7">
                     <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                     <color key="backgroundColor" red="0.91363531351089478" green="0.91378861665725708" blue="0.91361522674560547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1uG-5e-Pg1">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="1uG-5e-Pg1">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="10" minY="5" maxX="10" maxY="5"/>
+                        <inset key="sectionInset" minX="40" minY="5" maxX="40" maxY="5"/>
                     </collectionViewFlowLayout>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="mmm-CW-rya"/>
