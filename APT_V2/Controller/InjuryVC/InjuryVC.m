@@ -79,9 +79,10 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *lblFIle4;
 @property (weak, nonatomic) IBOutlet CustomButton *btnAssment;
 @property (weak, nonatomic) IBOutlet CustomButton *btnOnsetDate;
+//@property (nonatomic,strong)IBOutlet StepSlider * StSlider;
 
 
-@property (weak, nonatomic) IBOutlet StepSlider *Slider1;
+@property (strong, nonatomic) IBOutlet StepSlider *Slider1;
 @property (nonatomic,strong)NSMutableArray  * InjuryListArray;
 @property (nonatomic,weak) IBOutlet UITextField * compliant_Txt;
 @property (nonatomic,weak) IBOutlet UITextField * comfirmatory_Txt;
@@ -188,18 +189,20 @@ typedef enum {
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    
-    //    [self.view addSubview:objCustomNavigation.view];
-    //    objCustomNavigation.tittle_lbl.text=@"";
-    
-    //UIView* view= self.navigation_view.subviews.firstObject;
     [self.navigation_view addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
-    //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.btn_back.hidden =NO;
+    objCustomNavigation.menu_btn.hidden =YES;
+            [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    
 }
 
 -(void)setBorderwidthMethod
@@ -2025,16 +2028,11 @@ typedef enum {
     return YES;
 }
 - (IBAction)actionFileUpload:(id)sender {
-}
-
-
-- (IBAction)actionUPDATE:(id)sender {
     if ([sender tag] == 0) { // File type 1
         isXray =NO;
         isCT =YES;
         isMRI =NO;
         isBlood =NO;
-
         
     }
     else if ([sender tag] == 1) { // File type 2
@@ -2042,7 +2040,6 @@ typedef enum {
         isCT =NO;
         isMRI =YES;
         isBlood =NO;
-
         
     }
     else if ([sender tag] == 2) { // File type 3
@@ -2050,7 +2047,6 @@ typedef enum {
         isCT =NO;
         isMRI =NO;
         isBlood =YES;
-
         
     }
     else if ([sender tag] == 3) { // File type 4
@@ -2058,6 +2054,14 @@ typedef enum {
     }
     
     [self opengallery];
+
+    
+}
+
+
+- (IBAction)actionUPDATE:(id)sender {
+    
+    [self InsertWebservice];
     
 }
 @end

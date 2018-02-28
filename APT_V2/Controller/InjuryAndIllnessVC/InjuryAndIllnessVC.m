@@ -58,7 +58,7 @@
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden =NO;
         //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(reveaFlToggle:) forControlEvents:UIControlEventTouchUpInside];
         //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (IBAction)injuriesAction:(id)sender {
