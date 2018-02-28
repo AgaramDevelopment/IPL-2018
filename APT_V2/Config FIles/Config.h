@@ -304,4 +304,6 @@
 
 #define fetchLoadIllness         @"FETCHLOADILLNESSWEB"
 
+#define recentFitnessKey         @"MOBILE_RECENTDETAILSFITNESSCHART"
+
 
