@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */; };
+		041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */; };
 		042381C72041539100212684 /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C42041539100212684 /* OverviewView.xib */; };
 		042381C82041539100212684 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381C62041539100212684 /* OverviewView.m */; };
 		042381CC204173F900212684 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C9204173F800212684 /* PopOverVC.xib */; };
@@ -302,6 +304,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamOverviewVC.h; sourceTree = "<group>"; };
+		041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewVC.m; sourceTree = "<group>"; };
+		041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamOverviewVC.xib; sourceTree = "<group>"; };
 		042381C42041539100212684 /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
 		042381C52041539100212684 /* OverviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewView.h; sourceTree = "<group>"; };
 		042381C62041539100212684 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
@@ -790,6 +795,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041B9DD820467F4700ECFDD8 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */,
+				041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */,
+				041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */,
+			);
+			path = Team;
+			sourceTree = "<group>";
+		};
 		04249B74203D463E00B13889 /* NutritionVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1083,7 @@
 		18BAE2982028335E0088178A /* MatchCenter */ = {
 			isa = PBXGroup;
 			children = (
+				041B9DD820467F4700ECFDD8 /* Team */,
 				18B37F44203A958B00F51511 /* Batting */,
 				18C287D020355847006E6590 /* TeamComp */,
 				18EF9D1620316EDE00CDA268 /* MatchCenterTBC.h */,
@@ -2270,6 +2286,7 @@
 				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				18A68ABD20371A2C00EBA479 /* TrainingLoadUpdateCell.xib in Resources */,
+				041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */,
 				18B37F54203AA77200F51511 /* BattingView.xib in Resources */,
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
@@ -2505,6 +2522,7 @@
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
 				CE6C17322045217A00672253 /* FFButtonWithHourPopover.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
+				041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */,
 				CE6C172E2045217A00672253 /* FFDateManager.m in Sources */,
