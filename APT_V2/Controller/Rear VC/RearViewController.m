@@ -65,12 +65,12 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+        arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
     }
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"Team",@"Planner",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Reports",@"Logout"];
+       arrItems = @[@"Team",@"Planner",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -132,7 +132,12 @@
             newFrontController= [TabHomeVC new];
             
         }
-        else if(indexPath.row == 1)
+        if(indexPath.row == 1) // Assessment
+        {
+            newFrontController= [PlannerVC new];
+            
+        }
+        else if(indexPath.row == 2)
         {
             //        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
@@ -142,7 +147,7 @@
             newFrontController= [MyStatsBattingVC new];
             
         }
-        else if(indexPath.row == 2)
+        else if(indexPath.row == 3)
         {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
@@ -153,7 +158,7 @@
             
         }
         
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 4)
         {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
@@ -226,11 +231,6 @@
                 
             }
             
-        }
-        else if(indexPath.row == 6)
-        {
-            
-            newFrontController= [ReportsVC new];
         }
         else if (indexPath.row == arrItems.count -1)
         {

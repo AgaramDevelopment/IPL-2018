@@ -262,7 +262,7 @@
         
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = @"AMR0000010";
+        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
         NSString *barTestCode = @"";
         NSString *lineTestCode = @"";
         NSString *Years = @"1";
@@ -455,9 +455,7 @@
         
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = @"AMR0000010";
-        NSString *barTestCode = @"";
-        NSString *lineTestCode = @"";
+        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
         NSString *Years = @"1";
         
         
