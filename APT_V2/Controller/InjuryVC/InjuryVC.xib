@@ -27,6 +27,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InjuryVC">
             <connections>
                 <outlet property="Slider1" destination="3fH-8J-7MK" id="k7Z-s5-MQE"/>
+                <outlet property="btnAssment" destination="TRA-Ud-IU6" id="kTS-zk-Jas"/>
+                <outlet property="btnOnsetDate" destination="ldH-Nw-n8W" id="zve-UI-f2S"/>
                 <outlet property="comfirmatory_Txt" destination="1cj-AV-tZx" id="LMN-bx-WIo"/>
                 <outlet property="compliant_Txt" destination="wMm-ae-HOU" id="Moc-6L-vzf"/>
                 <outlet property="date_lbl" destination="cNr-6G-pGG" id="O1p-S6-kVi"/>
@@ -41,7 +43,9 @@
                 <outlet property="lblFile3" destination="smk-Wg-Cqr" id="y1h-yU-Zzt"/>
                 <outlet property="left_Btn" destination="Jl8-zM-3vF" id="COh-HN-Qsn"/>
                 <outlet property="location_view" destination="zz2-8g-mgx" id="cPg-cz-nU7"/>
+                <outlet property="locationlbl" destination="EUI-Bx-oFg" id="4Gp-qA-Oju"/>
                 <outlet property="navigation_view" destination="60R-xc-wgx" id="tw0-9K-iOy"/>
+                <outlet property="occurancelbl" destination="RfY-r5-9Xl" id="3pP-KF-OZp"/>
                 <outlet property="occurrence_view" destination="OM6-sd-qxX" id="58u-GD-UHz"/>
                 <outlet property="pop_Tbl" destination="WeV-k9-4Mk" id="Xiy-XG-ZuG"/>
                 <outlet property="popviewWidth" destination="vbE-IJ-OEE" id="nfo-t7-z9c"/>
@@ -99,8 +103,11 @@
                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                     <state key="normal" title="Assessment Date" image="ico_calendar"/>
+                                    <connections>
+                                        <action selector="actionOpenDate:" destination="-1" eventType="touchUpInside" id="FdT-cT-p09"/>
+                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-Nw-n8W" customClass="CustomButton">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-Nw-n8W" customClass="CustomButton">
                                     <rect key="frame" x="170.5" y="5" width="140.5" height="35"/>
                                     <color key="backgroundColor" red="0.17254901959999999" green="0.65490196079999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -109,6 +116,9 @@
                                     <state key="normal" title="Onset Date" image="ico_calendar">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="actionOpenDate:" destination="-1" eventType="touchUpInside" id="PQo-su-J8s"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -551,13 +561,13 @@
                                     <rect key="frame" x="0.0" y="300" width="320" height="45"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfc-f4-GcA">
-                                            <rect key="frame" x="5" y="2" width="28" height="40"/>
+                                            <rect key="frame" x="5" y="2" width="30.5" height="40"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fH-8J-7MK" customClass="StepSlider">
-                                            <rect key="frame" x="43" y="2" width="267" height="40"/>
+                                            <rect key="frame" x="45.5" y="2" width="264.5" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="getSliderValue_VAS:" destination="-1" eventType="valueChanged" id="J0H-Nb-Eft"/>
@@ -796,8 +806,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXh-le-c3z">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXh-le-c3z">
                                                     <rect key="frame" x="0.0" y="0.0" width="140" height="40"/>
+                                                    <connections>
+                                                        <action selector="actionOpenDate:" destination="-1" eventType="touchUpInside" id="3qR-Zc-3Kk"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -954,6 +967,10 @@
                                         <constraint firstAttribute="width" constant="150" id="vbE-IJ-OEE"/>
                                         <constraint firstAttribute="height" constant="120" id="xeT-iO-aWr"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="7tg-Qx-xfQ"/>
+                                        <outlet property="delegate" destination="-1" id="eoc-t4-lgu"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1053,6 +1070,9 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NjK-TZ-OlZ">
                                             <rect key="frame" x="0.0" y="0.0" width="142.5" height="45"/>
+                                            <connections>
+                                                <action selector="actionFileUpload:" destination="-1" eventType="touchUpInside" id="ZVH-Bz-Dm9"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1118,8 +1138,11 @@
                                                 <constraint firstAttribute="height" constant="20" id="tdM-FP-7eo"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icj-2o-mju">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icj-2o-mju">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="45"/>
+                                            <connections>
+                                                <action selector="actionFileUpload:" destination="-1" eventType="touchUpInside" id="8av-AX-5nY"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1185,8 +1208,11 @@
                                                 <constraint firstAttribute="height" constant="20" id="P2M-iC-67y"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bv-qj-mJz">
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bv-qj-mJz">
                                             <rect key="frame" x="0.0" y="0.0" width="142.5" height="45"/>
+                                            <connections>
+                                                <action selector="actionFileUpload:" destination="-1" eventType="touchUpInside" id="rpE-06-AJn"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1252,8 +1278,11 @@
                                                 <constraint firstAttribute="width" constant="20" id="U6W-Xd-Vs8"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LY-b6-DiD">
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LY-b6-DiD">
                                             <rect key="frame" x="0.0" y="0.0" width="142.5" height="45"/>
+                                            <connections>
+                                                <action selector="actionFileUpload:" destination="-1" eventType="touchUpInside" id="9dg-rN-nCI"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1285,6 +1314,9 @@
                                     <state key="normal" title="Update">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="actionUPDATE:" destination="-1" eventType="touchUpInside" id="hGm-d5-zuz"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
