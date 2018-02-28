@@ -13,6 +13,7 @@
 #import "MCBattingRootVC.h"
 #import "GroundVC.h"
 #import "StandingVC.h"
+#import "MCBowlingRootVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -73,6 +74,18 @@
     fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
+    //BowlingVC
+    MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
+    bowlingViewController.title = @"Bowling";
+    bowlingViewController.tabBarItem = self.tossAndResultBarItem;
+    
+    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    
+  
+    
+    
   
     //GroundVC
     GroundVC *fifthViewController = [[GroundVC alloc]init];
@@ -92,8 +105,7 @@
     sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,fifthViewController,sixthViewController, nil];
-    
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController,fifthViewController,sixthViewController, nil];
     
     
     self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];

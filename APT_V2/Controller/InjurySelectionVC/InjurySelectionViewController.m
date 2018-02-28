@@ -247,13 +247,14 @@
 
 - (IBAction)actionFlipSelection:(id)sender {
     
+//    [self.]
     if (![sender tag]) {
         // show Back side
         [UIView transitionWithView:FrontView
                           duration:1.0
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            [FrontView addSubview:BackView];
+                            [FrontView addSubview:self.BackView];
                         }
                         completion:NULL];
 
@@ -261,11 +262,11 @@
     }
     else // show front side
     {
-        [UIView transitionWithView:FrontView
+        [UIView transitionWithView:BackView
                           duration:1.0
                            options:UIViewAnimationOptionTransitionFlipFromRight
                         animations:^{
-                            [BackView removeFromSuperview];
+                            [self.BackView removeFromSuperview];
                         }
                         completion:NULL];
         

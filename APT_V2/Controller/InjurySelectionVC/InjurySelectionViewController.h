@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIView *navBarView;
 - (IBAction)injurySelectionAction:(CustomButton *)sender;
 @property (weak, nonatomic) IBOutlet UIView *FrontView;
-@property (weak, nonatomic) IBOutlet UIView *BackView;
+@property (strong, nonatomic) IBOutlet UIView *BackView;
 
 - (IBAction)actionFlipSelection:(id)sender;
 
