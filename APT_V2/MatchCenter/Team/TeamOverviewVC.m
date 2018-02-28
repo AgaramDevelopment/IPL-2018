@@ -173,9 +173,19 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (IS_IPAD) {
-        return CGSizeMake(250, 435);
+        return CGSizeMake(350, 435);
     } else {
         return CGSizeMake(250, 435);
+    }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if(!IS_IPHONE_DEVICE)
+    {
+        return UIEdgeInsetsMake(10, 20, 10, 20); // top, left, bottom, right
+    }
+    else{
+        return UIEdgeInsetsMake(10, 10, 10, 10);
     }
 }
 

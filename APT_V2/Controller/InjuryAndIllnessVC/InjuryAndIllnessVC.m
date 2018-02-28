@@ -11,6 +11,8 @@
 #import "Config.h"
 #import "Header.h"
 #import "AppCommon.h"
+#import "InjuryVC.h"
+#import "IllnessTracker.h"
 
 @interface InjuryAndIllnessVC () {
     NSString * clientCode ;
@@ -59,6 +61,16 @@
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+- (IBAction)injuriesAction:(id)sender {
+    InjuryVC *injuryObj = [InjuryVC new];
+    [self.navigationController pushViewController:injuryObj animated:YES];
+}
+
+- (IBAction)illnessAction:(id)sender {
+    IllnessTracker *illnessObj = [IllnessTracker new];
+    [self.navigationController pushViewController:illnessObj animated:YES];
+}
+
 
 - (void)fetchLoadInjuryPostMethodService {
     

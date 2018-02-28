@@ -15,7 +15,7 @@
 #import "AppCommon.h"
 #import "VideoGalleryVC.h"
 #import "ScoreCardVC.h"
-
+#import "VideoPlayerViewController.h"
 
 
 @interface SchResStandVC ()
@@ -23,6 +23,7 @@
     HomeScreenStandingsVC *StandsVC;
     VideoGalleryVC *objVideo;
     NSString *displayMatchCode;
+    VideoPlayerViewController * videoPlayerVC;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -59,6 +60,7 @@
 
     
 }
+
 
 
 -(void)ScheduleWebservice

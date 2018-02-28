@@ -70,7 +70,7 @@
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"Team",@"Planner",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
+       arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -193,17 +193,8 @@
             newFrontController= [ViewController new];
             
         }
+        
         else if(indexPath.row == 3)
-        {
-            //        InjuryVC *msObj = [InjuryVC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
-            newFrontController= [InjuryVC new];
-            
-        }
-        else if(indexPath.row == 4)
         {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
@@ -213,7 +204,7 @@
             newFrontController= [MatchCenterTBC new];
             
         }
-        else if(indexPath.row == 5)
+        else if(indexPath.row == 4)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
