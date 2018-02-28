@@ -300,6 +300,10 @@
 
 #define SessionKey                             @"LOADSESSIONSUMMARYDETAILS"
 
+#define fetchLoadInjury         @"FETCHLOADINJURYWEB"
 
+#define fetchLoadIllness         @"FETCHLOADILLNESSWEB"
+
+#define recentFitnessKey         @"MOBILE_RECENTDETAILSFITNESSCHART"
 
 

@@ -411,7 +411,6 @@
                     //[self setChartValuesFromService:reqArrayBar];
                     
                     
-                    
                     for(int i =0;i<reqArrayBar.count;i++)
                     {
                         [months addObject:[[reqArrayBar valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];

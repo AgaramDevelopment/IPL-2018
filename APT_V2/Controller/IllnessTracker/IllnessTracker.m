@@ -96,7 +96,7 @@
         //setting toolbar as inputAccessoryView
     self.expectedDateTF.inputAccessoryView = toolbar;
     self.onsetDateTF.inputAccessoryView = toolbar;
-    [self loadSelectedData];
+//    [self loadSelectedData];
     [self Fetchillnessloadingwebservice];
 }
 
@@ -131,7 +131,6 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
 }
 
-
 -(void)allViewSetBorderMethod
 {
     self.illnessNameView.layer.borderWidth =0.5;
@@ -145,6 +144,9 @@
     
     self.mainSymptomView.layer.borderWidth =0.5;
     self.mainSymptomView.layer.masksToBounds=YES;
+    
+    self.causeIllnessView.layer.borderWidth =0.5;
+    self.causeIllnessView.layer.masksToBounds=YES;
     
     self.investigationsUploadView.layer.borderWidth =0.5;
     self.investigationsUploadView.layer.masksToBounds=YES;
@@ -330,7 +332,7 @@
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.affectSystemView.frame.origin.x, self.affectSystemView.frame.origin.y+self.affectSystemView.frame.size.height+288, self.affectSystemView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         } else {
-            dropDownTblView.frame = CGRectMake(self.affectSystemView.frame.origin.x, self.affectSystemView.frame.origin.y+self.affectSystemView.frame.size.height+288, self.affectSystemView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
+            dropDownTblView.frame = CGRectMake(self.affectSystemView.frame.origin.x, self.affectSystemView.frame.origin.y+self.affectSystemView.frame.size.height+270, self.affectSystemView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         }
         
         
@@ -358,7 +360,7 @@
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.mainSymptomView.frame.origin.x, self.mainSymptomView.frame.origin.y+self.mainSymptomView.frame.size.height+335, self.mainSymptomView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         } else {
-            dropDownTblView.frame = CGRectMake(self.mainSymptomView.frame.origin.x, self.mainSymptomView.frame.origin.y+self.mainSymptomView.frame.size.height+335, self.mainSymptomView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
+            dropDownTblView.frame = CGRectMake(self.mainSymptomView.frame.origin.x, self.mainSymptomView.frame.origin.y+self.mainSymptomView.frame.size.height+318, self.mainSymptomView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         }
         
         
@@ -385,7 +387,7 @@
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.causeIllnessView.frame.origin.x, self.causeIllnessView.frame.origin.y+self.causeIllnessView.frame.size.height+385, self.causeIllnessView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         } else {
-            dropDownTblView.frame = CGRectMake(self.causeIllnessView.frame.origin.x, self.causeIllnessView.frame.origin.y+self.causeIllnessView.frame.size.height, self.causeIllnessView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
+            dropDownTblView.frame = CGRectMake(self.causeIllnessView.frame.origin.x, self.causeIllnessView.frame.origin.y+self.causeIllnessView.frame.size.height+367, self.causeIllnessView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         }
         
         dropDownTblView.backgroundColor=[UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
@@ -415,6 +417,12 @@
         {
         self.filePopView.hidden = YES;
         isSelectPop = NO;
+        /*
+        self.xrayLbl = @"";
+        self.CTScanLbl = @"";
+        self.MRILbl = @"";
+        self.BloodTestLbl = @"";
+         */
 //        [self removeAnimate];
         }
     
@@ -527,9 +535,10 @@
 
 -(void)UpdateWebservice
 {
-    [COMMON loadingIcon:self.view];
+//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
@@ -634,21 +643,21 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         }];
         }
 }
 
 -(void)InsertWebservice
 {
-    [COMMON loadingIcon:self.view];
+//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
-        
+    {
+        [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
         if(userCode)   [dic    setObject:userCode     forKey:@"CREATEDBY"];
@@ -756,11 +765,11 @@
                 }
                 }
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         }];
         
     }
@@ -888,7 +897,8 @@
 {
         //[COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         [objWebservice getFetchMetadataList :illnessFetchload success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
@@ -937,10 +947,10 @@
                 */
                 }
              [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         }];
         
         }
@@ -961,7 +971,7 @@
         }
     else if (alertView.tag == 300)
         {
-        [self startDeleteInjuryService:usercode :selectIllnessCode];
+        [self startDeleteInjuryService:userCode :selectIllnessCode];
         }
     else if (alertView.tag == 301)
         {
@@ -997,9 +1007,10 @@
 
 -(void)startDeleteInjuryService :(NSString *) Usercode :(NSString *)selectillnessCode
 {
-    [COMMON loadingIcon:self.view];
+//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
+        [AppCommon showLoading];
         [objWebservice getinjuryDelete:deleteIllness :selectillnessCode :Usercode success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
@@ -1021,10 +1032,10 @@
                 
                 }
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+//            [self.view setUserInteractionEnabled:YES];
         }];
         
     }

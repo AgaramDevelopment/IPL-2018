@@ -11,6 +11,8 @@
 #import "MCTossAndResultsVC.h"
 #import "MCTeamCompVC.h"
 #import "MCBattingRootVC.h"
+#import "GroundVC.h"
+#import "StandingVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -72,8 +74,25 @@
     fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
   
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController, nil];
+    //GroundVC
+    GroundVC *fifthViewController = [[GroundVC alloc]init];
+    fifthViewController.title = @"Ground";
+    fifthViewController.tabBarItem = self.tossAndResultBarItem;
     
+    fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fifthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    
+    //Standings
+    StandingVC *sixthViewController = [[StandingVC alloc]init];
+    sixthViewController.title = @"Standings";
+    sixthViewController.tabBarItem = self.tossAndResultBarItem;
+    
+    sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,fifthViewController,sixthViewController, nil];
     
     
     
