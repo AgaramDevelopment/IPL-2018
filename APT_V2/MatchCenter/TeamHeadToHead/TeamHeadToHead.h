@@ -22,4 +22,13 @@
 @property (nonatomic, strong) IBOutlet UILabel *team2lbl;
 @property (nonatomic, strong) IBOutlet UILabel *groundlbl;
 
+
+@property (nonatomic, strong) IBOutlet UIButton *firstInn;
+@property (nonatomic, strong) IBOutlet UIButton *secondInn;
+@property (nonatomic, strong) IBOutlet UIButton *team1win;
+@property (nonatomic, strong) IBOutlet UIButton *team2win;
+@property (nonatomic, strong) IBOutlet UIButton *spell1Inn;
+@property (nonatomic, strong) IBOutlet UIButton *spell2Inn;
+@property (nonatomic, strong) IBOutlet UIButton *spell3Inn;
+
 @end

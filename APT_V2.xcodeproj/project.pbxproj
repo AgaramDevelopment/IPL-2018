@@ -104,6 +104,10 @@
 		18E071082046CAE90020D8EE /* TeamHeadToHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E071062046CAE90020D8EE /* TeamHeadToHead.xib */; };
 		18E0710C2046CBEC0020D8EE /* MCTeamPlayersCompCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E0710A2046CBEB0020D8EE /* MCTeamPlayersCompCell.xib */; };
 		18E0710D2046CBEC0020D8EE /* MCTeamPlayersCompCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0710B2046CBEB0020D8EE /* MCTeamPlayersCompCell.m */; };
+		18E07115204702930020D8EE /* InjuryAndIllnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E07110204702920020D8EE /* InjuryAndIllnessCell.m */; };
+		18E07116204702930020D8EE /* InjuryAndIllnessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E07111204702920020D8EE /* InjuryAndIllnessCell.xib */; };
+		18E07117204702930020D8EE /* InjuryAndIllnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E07113204702920020D8EE /* InjuryAndIllnessVC.m */; };
+		18E07118204702930020D8EE /* InjuryAndIllnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E07114204702920020D8EE /* InjuryAndIllnessVC.xib */; };
 		18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */; };
 		18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0B20316C2D00CDA268 /* CustomButton.m */; };
 		18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0E20316C2E00CDA268 /* CustomCollectionViewLayout.swift */; };
@@ -478,6 +482,12 @@
 		18E071092046CBEB0020D8EE /* MCTeamPlayersCompCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTeamPlayersCompCell.h; sourceTree = "<group>"; };
 		18E0710A2046CBEB0020D8EE /* MCTeamPlayersCompCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTeamPlayersCompCell.xib; sourceTree = "<group>"; };
 		18E0710B2046CBEB0020D8EE /* MCTeamPlayersCompCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTeamPlayersCompCell.m; sourceTree = "<group>"; };
+		18E0710F204702920020D8EE /* InjuryAndIllnessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryAndIllnessCell.h; sourceTree = "<group>"; };
+		18E07110204702920020D8EE /* InjuryAndIllnessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryAndIllnessCell.m; sourceTree = "<group>"; };
+		18E07111204702920020D8EE /* InjuryAndIllnessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryAndIllnessCell.xib; sourceTree = "<group>"; };
+		18E07112204702920020D8EE /* InjuryAndIllnessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryAndIllnessVC.h; sourceTree = "<group>"; };
+		18E07113204702920020D8EE /* InjuryAndIllnessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryAndIllnessVC.m; sourceTree = "<group>"; };
+		18E07114204702920020D8EE /* InjuryAndIllnessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryAndIllnessVC.xib; sourceTree = "<group>"; };
 		18EF3A30203D0491000A7638 /* CustomCollectionPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionPlayer.swift; sourceTree = "<group>"; };
 		18EF9D0A20316C2D00CDA268 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
 		18EF9D0B20316C2D00CDA268 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
@@ -1209,6 +1219,19 @@
 				18E071062046CAE90020D8EE /* TeamHeadToHead.xib */,
 			);
 			path = TeamHeadToHead;
+			sourceTree = "<group>";
+		};
+		18E0710E204702920020D8EE /* InjuryAndIllnessVC */ = {
+			isa = PBXGroup;
+			children = (
+				18E0710F204702920020D8EE /* InjuryAndIllnessCell.h */,
+				18E07110204702920020D8EE /* InjuryAndIllnessCell.m */,
+				18E07111204702920020D8EE /* InjuryAndIllnessCell.xib */,
+				18E07112204702920020D8EE /* InjuryAndIllnessVC.h */,
+				18E07113204702920020D8EE /* InjuryAndIllnessVC.m */,
+				18E07114204702920020D8EE /* InjuryAndIllnessVC.xib */,
+			);
+			path = InjuryAndIllnessVC;
 			sourceTree = "<group>";
 		};
 		18EF9D0920316C2D00CDA268 /* CustomButton */ = {
@@ -2086,6 +2109,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18E0710E204702920020D8EE /* InjuryAndIllnessVC */,
 				CE6C165A2045216000672253 /* PlaneerAddEvent */,
 				CE6C16632045216000672253 /* PlannerListVC */,
 				CE6C163C2045211300672253 /* BattingKpiVC */,
@@ -2437,6 +2461,7 @@
 				CEC34C532046B8470058ACC3 /* OverviewBowlingView.xib in Resources */,
 				18B37F54203AA77200F51511 /* BattingView.xib in Resources */,
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
+				18E07116204702930020D8EE /* InjuryAndIllnessCell.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
 				CEC34C282046B1830058ACC3 /* GroundVC.xib in Resources */,
 				CEC34C2A2046B1830058ACC3 /* StandingVC.xib in Resources */,
@@ -2533,6 +2558,7 @@
 				1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */,
 				CEB2B99520257BBD00E7D5E4 /* MontserratAlternates-ThinItalic.otf in Resources */,
 				CEB2B97520257BBD00E7D5E4 /* Montserrat-BoldItalic.otf in Resources */,
+				18E07118204702930020D8EE /* InjuryAndIllnessVC.xib in Resources */,
 				CE3E741620248BF100F10917 /* Main.storyboard in Resources */,
 				CEC34C4B2046B8470058ACC3 /* BowlingOverBlockCVC.xib in Resources */,
 				CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */,
@@ -2629,6 +2655,7 @@
 				CE6C166F2045216100672253 /* PlannerListVC.m in Sources */,
 				CE6C17232045217A00672253 /* FFMonthCellForYearCell.m in Sources */,
 				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,
+				18E07117204702930020D8EE /* InjuryAndIllnessVC.m in Sources */,
 				CEC34C502046B8470058ACC3 /* MCBowlingRootVC.m in Sources */,
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
@@ -2763,6 +2790,7 @@
 				CEC34C522046B8470058ACC3 /* OverviewBowlingView.m in Sources */,
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,
 				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
+				18E07115204702930020D8EE /* InjuryAndIllnessCell.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
 				18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */,
 				CE6C17342045217A00672253 /* FFEditEventPopoverController.m in Sources */,

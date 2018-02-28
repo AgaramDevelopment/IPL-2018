@@ -34,6 +34,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.firstInn.layer.borderWidth = 1.0f;
+    self.firstInn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.firstInn.layer.cornerRadius = 2.0f;
+    
+    self.secondInn.layer.borderWidth = 1.0f;
+    self.secondInn.layer.borderColor = [UIColor blackColor].CGColor;
+     self.secondInn.layer.cornerRadius = 2.0f;
+    
+    self.team1win.layer.borderWidth = 1.0f;
+    self.team1win.layer.borderColor = [UIColor blackColor].CGColor;
+     self.team1win.layer.cornerRadius = 2.0f;
+    
+    self.team2win.layer.borderWidth = 1.0f;
+    self.team2win.layer.borderColor = [UIColor blackColor].CGColor;
+     self.team2win.layer.cornerRadius = 2.0f;
+    
+    self.spell1Inn.layer.borderWidth = 1.0f;
+    self.spell1Inn.layer.borderColor = [UIColor blackColor].CGColor;
+     self.spell1Inn.layer.cornerRadius = 2.0f;
+    
+    self.spell2Inn.layer.borderWidth = 1.0f;
+    self.spell2Inn.layer.borderColor = [UIColor blackColor].CGColor;
+     self.spell2Inn.layer.cornerRadius = 2.0f;
+    
+    self.spell3Inn.layer.borderWidth = 1.0f;
+    self.spell3Inn.layer.borderColor = [UIColor blackColor].CGColor;
+     self.spell3Inn.layer.cornerRadius = 2.0f;
+    
+    
+    
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = @[@"1",@"2",@"3"];
     self.Poptable.hidden = YES;

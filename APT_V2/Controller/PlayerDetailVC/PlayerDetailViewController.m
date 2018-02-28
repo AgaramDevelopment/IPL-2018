@@ -8,6 +8,7 @@
 
 #import "PlayerDetailViewController.h"
 #import "Header.h"
+#import "InjuryAndIllnessVC.h"
 
 @interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter>
 {
@@ -545,7 +546,7 @@
     }
     else if ([sender tag] == 1) // Illness
     {
-        selectedVC = [InjuryVC new];
+        selectedVC = [InjuryAndIllnessVC new];
     }
     else if ([sender tag] == 2)  // Nutrition
     {
