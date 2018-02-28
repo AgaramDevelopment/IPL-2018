@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */; };
-		041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */; };
 		041B9DE12046867200ECFDD8 /* TeamOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */; };
 		041B9DE22046867200ECFDD8 /* TeamOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */; };
+		041B9DE62046A4D700ECFDD8 /* TeamOverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DE42046A4D700ECFDD8 /* TeamOverviewVC.m */; };
+		041B9DE72046A4D700ECFDD8 /* TeamOverviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DE52046A4D700ECFDD8 /* TeamOverviewVC.xib */; };
 		042381C72041539100212684 /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C42041539100212684 /* OverviewView.xib */; };
 		042381C82041539100212684 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381C62041539100212684 /* OverviewView.m */; };
 		042381CC204173F900212684 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C9204173F800212684 /* PopOverVC.xib */; };
@@ -322,6 +322,9 @@
 		041B9DDE2046867200ECFDD8 /* TeamOverviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamOverviewCell.h; sourceTree = "<group>"; };
 		041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewCell.m; sourceTree = "<group>"; };
 		041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamOverviewCell.xib; sourceTree = "<group>"; };
+		041B9DE32046A4D700ECFDD8 /* TeamOverviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamOverviewVC.h; sourceTree = "<group>"; };
+		041B9DE42046A4D700ECFDD8 /* TeamOverviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewVC.m; sourceTree = "<group>"; };
+		041B9DE52046A4D700ECFDD8 /* TeamOverviewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamOverviewVC.xib; sourceTree = "<group>"; };
 		042381C42041539100212684 /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
 		042381C52041539100212684 /* OverviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewView.h; sourceTree = "<group>"; };
 		042381C62041539100212684 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
@@ -829,9 +832,9 @@
 		041B9DD820467F4700ECFDD8 /* Team */ = {
 			isa = PBXGroup;
 			children = (
-				041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */,
-				041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */,
-				041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */,
+				041B9DE32046A4D700ECFDD8 /* TeamOverviewVC.h */,
+				041B9DE42046A4D700ECFDD8 /* TeamOverviewVC.m */,
+				041B9DE52046A4D700ECFDD8 /* TeamOverviewVC.xib */,
 				041B9DDE2046867200ECFDD8 /* TeamOverviewCell.h */,
 				041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */,
 				041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */,
@@ -1144,7 +1147,8 @@
 			isa = PBXGroup;
 			children = (
 				041B9DD820467F4700ECFDD8 /* Team */,
-				1851442620458D0300CEE288 /* GroundVC */,
+				18AAC6B12045F9A200D5495A /* GroundVC */,
+				183A9CAC2045D45900E1B32B /* Standing */,
 				18B37F44203A958B00F51511 /* Batting */,
 				18C287D020355847006E6590 /* TeamComp */,
 				18EF9D1620316EDE00CDA268 /* MatchCenterTBC.h */,
@@ -2459,6 +2463,7 @@
 				CEBD2A80202899BB000AFD1B /* DropDownTableViewController.xib in Resources */,
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
 				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
+				041B9DE72046A4D700ECFDD8 /* TeamOverviewVC.xib in Resources */,
 				CE6C173D2045217A00672253 /* MonthlyCalendar.png in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
@@ -2584,6 +2589,7 @@
 				18EF9D1D20316EE000CDA268 /* MCTossAndResultsVC.m in Sources */,
 				1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */,
 				CE6C171F2045217A00672253 /* FFWeekCollectionViewFlowLayout.m in Sources */,
+				041B9DE62046A4D700ECFDD8 /* TeamOverviewVC.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
 				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
 				18AC345D203EE50C003EE0F0 /* CoachBowlingLoad.m in Sources */,
