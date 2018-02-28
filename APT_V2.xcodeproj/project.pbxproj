@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		041B9DDC20467FBD00ECFDD8 /* TeamOverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */; };
 		041B9DDD20467FBD00ECFDD8 /* TeamOverviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */; };
+		041B9DE12046867200ECFDD8 /* TeamOverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */; };
+		041B9DE22046867200ECFDD8 /* TeamOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */; };
 		042381C72041539100212684 /* OverviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C42041539100212684 /* OverviewView.xib */; };
 		042381C82041539100212684 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042381C62041539100212684 /* OverviewView.m */; };
 		042381CC204173F900212684 /* PopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042381C9204173F800212684 /* PopOverVC.xib */; };
@@ -313,6 +315,9 @@
 		041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamOverviewVC.h; sourceTree = "<group>"; };
 		041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewVC.m; sourceTree = "<group>"; };
 		041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamOverviewVC.xib; sourceTree = "<group>"; };
+		041B9DDE2046867200ECFDD8 /* TeamOverviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamOverviewCell.h; sourceTree = "<group>"; };
+		041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamOverviewCell.m; sourceTree = "<group>"; };
+		041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamOverviewCell.xib; sourceTree = "<group>"; };
 		042381C42041539100212684 /* OverviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OverviewView.xib; sourceTree = "<group>"; };
 		042381C52041539100212684 /* OverviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewView.h; sourceTree = "<group>"; };
 		042381C62041539100212684 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
@@ -816,6 +821,9 @@
 				041B9DD920467FBD00ECFDD8 /* TeamOverviewVC.h */,
 				041B9DDA20467FBD00ECFDD8 /* TeamOverviewVC.m */,
 				041B9DDB20467FBD00ECFDD8 /* TeamOverviewVC.xib */,
+				041B9DDE2046867200ECFDD8 /* TeamOverviewCell.h */,
+				041B9DDF2046867200ECFDD8 /* TeamOverviewCell.m */,
+				041B9DE02046867200ECFDD8 /* TeamOverviewCell.xib */,
 			);
 			path = Team;
 			sourceTree = "<group>";
@@ -1112,6 +1120,7 @@
 			isa = PBXGroup;
 			children = (
 				041B9DD820467F4700ECFDD8 /* Team */,
+				1851442620458D0300CEE288 /* GroundVC */,
 				18B37F44203A958B00F51511 /* Batting */,
 				18C287D020355847006E6590 /* TeamComp */,
 				18EF9D1620316EDE00CDA268 /* MatchCenterTBC.h */,
@@ -2380,6 +2389,7 @@
 				CEBD2A8B20289B81000AFD1B /* LoginVC.xib in Resources */,
 				1851440320458C1200CEE288 /* MCTeamPlayersCompCell.xib in Resources */,
 				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
+				041B9DE22046867200ECFDD8 /* TeamOverviewCell.xib in Resources */,
 				04249B79203D466200B13889 /* NutritionVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
@@ -2656,6 +2666,7 @@
 				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				0429FC0D204579420002B30B /* InjuryAndIllnessVC.m in Sources */,
 				0429FC12204582B20002B30B /* InjuryAndIllnessCell.m in Sources */,
+				041B9DE12046867200ECFDD8 /* TeamOverviewCell.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				CE6C166D2045216100672253 /* PlannerCell.m in Sources */,
 				CE6C17332045217A00672253 /* FFHourPopoverController.m in Sources */,

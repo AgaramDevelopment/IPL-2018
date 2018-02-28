@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TeamOverviewVC : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *navigationView;
+@property (strong, nonatomic) IBOutlet UICollectionView *teamCollectionView;
 
 @end
