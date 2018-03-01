@@ -10,11 +10,18 @@
 #import "PlayerListCollectionViewCell.h"
 #import "Config.h"
 #import "CustomNavigation.h"
+#import "WebService.h"
+
 
 @interface StandingVC (){
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
     BOOL isYear;
+    WebService *objWebservice;
+    NSMutableArray *competitionArray;
+    NSString *competitionCode;
+    
+    NSMutableArray *DetailsArray;
 
 }
 
@@ -29,8 +36,12 @@
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
     
+    self.standingsCollectionView.hidden = YES;
     
-    headingKeyArray =  @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
+    
+    //headingKeyArray =  @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
+    
+    headingKeyArray =  @[@"Rank",@"TeamName",@"Played",@"Won",@"Lost",@"Tied",@"NoResults",@"NETRUNRESULT",@"For",@"Against",@"Points"];
     
     
     headingButtonNames = @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
@@ -40,6 +51,8 @@
     
     self.standingsCollectionView.delegate = self;
     self.standingsCollectionView.dataSource = self;
+    
+    [self StandingsWebservice];
 
 }
 
@@ -89,7 +102,7 @@
     
     if(isYear==YES)
     {
-        return 5;
+        return competitionArray.count;
     }
     else{
         return 0;
@@ -113,7 +126,9 @@
     
     if(isYear==YES)
     {
-        cell.textLabel.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
+        //cell.textLabel.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
+        
+        cell.textLabel.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
         
     }else{
         cell.textLabel.text = @"";
@@ -125,14 +140,17 @@
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
-    
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(isYear==YES)
     {
-        self.yearlbl.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
+       // self.yearlbl.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
+        self.yearlbl.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        competitionCode = [[competitionArray valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
+        self.standingsCollectionView.hidden = NO;
+        self.popTableView.hidden = YES;
+        [self StandingsTeamTableWebservice];
         
     }
     
@@ -148,6 +166,7 @@
         
         isYear = NO;
         self.PoplistTable.hidden = YES;
+        self.popTableView.hidden = YES;
         
         
     }else{
@@ -155,11 +174,18 @@
         isYear = YES;
         
         self.PoplistTable.hidden = NO;
+        self.popTableView.hidden = NO;
         
-        self.tableWidth.constant = 142;
-        self.tableXposition.constant = self.filterView.frame.origin.x;
+        self.tableWidth.constant = self.standingsCollectionView.frame.size.width;
+        self.tableXposition.constant = self.standingsCollectionView.frame.origin.x;
         [self.PoplistTable reloadData];
     }
+}
+
+- (IBAction)dismissview:(id)sender
+{
+        self.popTableView.hidden = YES;
+        self.PoplistTable.hidden = YES;
 }
 
 
@@ -169,8 +195,16 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    if(DetailsArray.count>0)
+    {
+        return DetailsArray.count+1;
+        //return headingButtonNames.count;
+    }
+    else
+    {
+        return 0;
+    }
     
-    return headingButtonNames.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -249,7 +283,18 @@
         
         for (id temp in headingKeyArray) {
             if ([headingKeyArray indexOfObject:temp] == indexPath.row) {
-                // NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                
+                NSString *str;
+                if([[[DetailsArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                {
+
+                    NSNumber *vv = [self checkNull:[[DetailsArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                    str = [vv stringValue];
+                }
+                else
+                {
+                    str = [self checkNull:[[DetailsArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                }
                 if([temp isEqualToString:@"Rank"])
                 {
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -261,7 +306,9 @@
                     cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                 }
-                [cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
+                //[cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
+                
+                    [cell.btnName setTitle:str forState:UIControlStateNormal];
                 break;
             }
         }
@@ -269,6 +316,13 @@
     }
     
     return cell;
+}
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -289,6 +343,74 @@
     
 }
 
+
+-(void)StandingsWebservice
+{
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    
+    
+    NSString *CompetitionCode = @"UCC0000001";
+    objWebservice = [[WebService alloc]init];
+    
+    
+    [objWebservice TeamStandings:StandingsKey :CompetitionCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            competitionArray = [[NSMutableArray alloc]init];
+            competitionArray = [responseObject valueForKey:@"CompetitionResult"];
+            
+            [self.PoplistTable reloadData];
+            
+        }
+        [AppCommon hideLoading];
+        
+    }
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+    NSLog(@"failed");
+    [COMMON webServiceFailureError:error];
+    }];
+    
+}
+
+-(void)StandingsTeamTableWebservice
+{
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    
+    
+    //NSString *CompetitionCode = @"UCC0000001";
+    objWebservice = [[WebService alloc]init];
+    
+    
+    [objWebservice TeamStandings:StandingsKey :competitionCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            DetailsArray = [[NSMutableArray alloc]init];
+            DetailsArray = [responseObject valueForKey:@"TeamResult"];
+            
+            [self.standingsCollectionView reloadData];
+            
+        }
+        [AppCommon hideLoading];
+        
+    }
+                         failure:^(AFHTTPRequestOperation *operation, id error) {
+                             NSLog(@"failed");
+                             [COMMON webServiceFailureError:error];
+                         }];
+    
+}
 
 
 

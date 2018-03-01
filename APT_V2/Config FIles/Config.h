@@ -306,4 +306,6 @@
 
 #define recentFitnessKey         @"MOBILE_RECENTDETAILSFITNESSCHART"
 
+#define StandingsKey         @"APT_TEAMRESULTS"
+
 
