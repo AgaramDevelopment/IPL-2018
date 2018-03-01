@@ -742,7 +742,6 @@ typedef enum {
 
 -(void)selectedDate:(NSString *)Date
 {
-    
     self.date_lbl.text = Date;
     
 //    currentlySelectedDate = Date;

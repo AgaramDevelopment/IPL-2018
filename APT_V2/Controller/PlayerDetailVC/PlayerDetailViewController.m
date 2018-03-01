@@ -161,14 +161,14 @@
     NSMutableArray *entries2 = [[NSMutableArray alloc] init];
     
     // NOTE: The order of the entries when being added to the entries array determines their position around the center of the chart.
-    for (int i = 0; i < cnt; i++)
-    {
-        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-    }
-    
-    [entries1 removeAllObjects];
-    [entries2 removeAllObjects];
+//    for (int i = 0; i < cnt; i++)
+//    {
+//        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+//        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
+//    }
+//
+//    [entries1 removeAllObjects];
+//    [entries2 removeAllObjects];
     
 //    NSDictionary* mainDict = [Array valueForKey:@"set1"];
 //    NSDictionary* mainDict1 = [Array valueForKey:@"set2"];
