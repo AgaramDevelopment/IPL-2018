@@ -306,4 +306,5 @@
 
 #define recentFitnessKey         @"MOBILE_RECENTDETAILSFITNESSCHART"
 
-
+#define HTHPageLoad         @"APT_HTHPAGELOAD"
+#define HTHResults         @"APT_HTHRESULTS"
