@@ -21,5 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIView *headderView;
 
 
+@property (strong, nonatomic) IBOutlet UIView *popTableView;
+
+
 
 @end

@@ -18,10 +18,82 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamHeadToHead">
             <connections>
                 <outlet property="Poptable" destination="rJn-ud-tAu" id="rq6-DC-34b"/>
+                <outlet property="avgRunsOrWicketsT1Lbl" destination="YYR-VY-x1H" id="cDX-79-uTC"/>
+                <outlet property="avgRunsOrWicketsT2Lbl" destination="9u7-an-w91" id="mXj-S3-rNg"/>
+                <outlet property="avgRunsT1Lbl" destination="fh6-kP-ho5" id="II4-7L-4Ki"/>
+                <outlet property="avgRunsT2Lbl" destination="dbG-hZ-4ng" id="E16-0p-MrJ"/>
+                <outlet property="avgWicketsT1Lbl" destination="Gm9-jf-GES" id="ype-hq-3az"/>
+                <outlet property="avgWicketsT2Lbl" destination="21R-iy-VCX" id="VG8-WG-I0Y"/>
+                <outlet property="awayT1Lbl" destination="Pzk-Ct-n1v" id="asE-Od-8Y6"/>
+                <outlet property="awayT1PV" destination="WM1-Qn-kcK" id="HRq-9U-vZt"/>
+                <outlet property="awayT2Lbl" destination="HnO-mO-alR" id="RMl-cp-tus"/>
+                <outlet property="awayT2PV" destination="QQ8-Qg-yZs" id="2jH-5G-Bcu"/>
+                <outlet property="battingFirstInnWinT1Lbl" destination="H3T-pW-wiY" id="WG5-IS-9Kk"/>
+                <outlet property="battingFirstInnWinT1PV" destination="SNb-MT-kXw" id="4Cg-jl-K78"/>
+                <outlet property="battingFirstInnWinT2Lbl" destination="W9l-ai-tuM" id="aR5-Ai-tpX"/>
+                <outlet property="battingFirstInnWinT2PV" destination="8Gz-HG-Pis" id="tKd-cQ-EHP"/>
+                <outlet property="battingSRT1Lbl" destination="T4F-CU-yRj" id="i2E-Bg-8hX"/>
+                <outlet property="battingSRT1PV" destination="6BI-Qp-6ZU" id="LZB-En-xxK"/>
+                <outlet property="battingSRT2Lbl" destination="EKH-aU-2lt" id="7Q0-XO-Fud"/>
+                <outlet property="battingSRT2PV" destination="Gdz-OS-B1k" id="OXa-WB-zUH"/>
+                <outlet property="battingSecondInnWinT1Lbl" destination="oBj-h9-WCg" id="Vn2-rb-GnW"/>
+                <outlet property="battingSecondInnWinT1PV" destination="Thq-EW-YSL" id="TYU-jW-2Rt"/>
+                <outlet property="battingSecondInnWinT2Lbl" destination="Keb-Wf-avr" id="6Cn-BB-0gA"/>
+                <outlet property="battingSecondInnWinT2PV" destination="1VS-V9-C5W" id="3fW-rC-30t"/>
+                <outlet property="boundariesPercentT1Lbl" destination="CSn-6e-vTi" id="sYj-qc-QhF"/>
+                <outlet property="boundariesPercentT1PV" destination="nZp-lj-TnM" id="cvp-PF-1SW"/>
+                <outlet property="boundariesPercentT2Lbl" destination="A8S-cY-JqM" id="jZz-yP-zQ4"/>
+                <outlet property="boundariesPercentT2PV" destination="Mmu-hT-A3f" id="U1K-oT-GwN"/>
+                <outlet property="bowlingAvgT1Lbl" destination="R6y-Yy-tWQ" id="IaD-NE-fcr"/>
+                <outlet property="bowlingAvgT1PV" destination="KEL-li-d3O" id="0x0-Ie-3KO"/>
+                <outlet property="bowlingAvgT2Lbl" destination="SxD-Xc-ByK" id="vsq-Uj-E7Q"/>
+                <outlet property="bowlingAvgT2PV" destination="DzE-m2-xJF" id="rdg-3h-Ieb"/>
+                <outlet property="bowlingSRT1Lbl" destination="iLX-Xl-Ovm" id="scJ-8l-BvB"/>
+                <outlet property="bowlingSRT1PV" destination="Ih3-0g-vjI" id="BLL-GC-Xj3"/>
+                <outlet property="bowlingSRT2Lbl" destination="LbB-BT-tud" id="nD6-Zb-p6W"/>
+                <outlet property="bowlingSRT2PV" destination="yjB-dK-rK6" id="dC3-JQ-VFb"/>
+                <outlet property="competitionTF" destination="atK-wi-HS1" id="B6X-pG-Loz"/>
+                <outlet property="competitionView" destination="6fE-Xq-nCK" id="niu-b6-mo5"/>
+                <outlet property="decisionBatT1Lbl" destination="IPu-qX-jcZ" id="aYb-d0-00g"/>
+                <outlet property="decisionBatT1PV" destination="NyG-bo-iTe" id="JWd-sw-twy"/>
+                <outlet property="decisionBatT2Lbl" destination="syo-Pw-kfh" id="zQ6-cW-WmK"/>
+                <outlet property="decisionBatT2PV" destination="Yok-5A-Scf" id="raB-SM-mSG"/>
+                <outlet property="decisionBowlT1Lbl" destination="L65-1I-YD3" id="1td-l2-VDe"/>
+                <outlet property="decisionBowlT1PV" destination="hkZ-3l-Uvz" id="082-XF-MF0"/>
+                <outlet property="decisionBowlT2Lbl" destination="yv4-6e-ako" id="Ywl-4B-OlW"/>
+                <outlet property="decisionBowlT2PV" destination="sxL-sV-PMm" id="VcN-og-WWJ"/>
+                <outlet property="dotBallPercentT1Lbl" destination="c2E-yH-YCE" id="O2X-ZE-x2j"/>
+                <outlet property="dotBallPercentT1PV" destination="qpb-BG-9Mg" id="d4v-Ew-foO"/>
+                <outlet property="dotBallPercentT2Lbl" destination="5Em-rX-A5F" id="Vma-0h-Zi6"/>
+                <outlet property="dotBallPercentT2PV" destination="iF9-gS-LON" id="JDw-O4-AuQ"/>
                 <outlet property="firstInn" destination="3d3-eu-6B5" id="z0L-y3-YMX"/>
-                <outlet property="groundView" destination="6fE-Xq-nCK" id="vkI-ru-AFJ"/>
-                <outlet property="groundlbl" destination="b7k-cc-rAM" id="Gdl-AX-HZS"/>
+                <outlet property="groundTF" destination="2ej-dX-qrf" id="HTe-R6-USc"/>
+                <outlet property="groundView" destination="6AL-dz-nOM" id="3vs-Il-euJ"/>
                 <outlet property="headerView" destination="hDd-eW-Jic" id="Sp6-dP-AJ2"/>
+                <outlet property="highScoreT1Lbl" destination="bpc-a7-3D3" id="aKn-tV-j2g"/>
+                <outlet property="highScoreT2Lbl" destination="yey-QB-Vvl" id="DoA-6R-f8F"/>
+                <outlet property="homeT1Lbl" destination="UVd-SN-ene" id="NUr-GJ-87m"/>
+                <outlet property="homeT1PV" destination="uNp-Ea-cvS" id="FyH-wl-NYW"/>
+                <outlet property="homeT2Lbl" destination="voF-bs-fN8" id="3xj-iW-dto"/>
+                <outlet property="homeT2PV" destination="8ts-As-xve" id="udt-WP-ZKP"/>
+                <outlet property="lowScoreT1Lbl" destination="nHH-Kd-W9X" id="nlp-Kt-d1n"/>
+                <outlet property="lowScoreT2Lbl" destination="7EB-t9-7dG" id="yaw-kT-xtw"/>
+                <outlet property="playOffsT1Lbl" destination="qTs-P5-OD2" id="kHR-AR-wq0"/>
+                <outlet property="playOffsT1PV" destination="ATg-Xn-qI9" id="kGA-Ur-eB7"/>
+                <outlet property="playOffsT2Lbl" destination="M03-NQ-yOw" id="edq-z1-nZE"/>
+                <outlet property="playOffsT2PV" destination="pZO-zk-hGf" id="LrB-b1-t1k"/>
+                <outlet property="playedT1Lbl" destination="8fp-83-Kqv" id="nbt-Pb-ZLc"/>
+                <outlet property="playedT1PV" destination="Ykj-wx-PcF" id="2I0-oR-LNY"/>
+                <outlet property="playedT2Lbl" destination="Q4G-Jt-n5U" id="dmy-Xl-f7i"/>
+                <outlet property="playedT2PV" destination="bw2-8z-YIT" id="OrS-vU-bP6"/>
+                <outlet property="runsPerOverT1Lbl" destination="oCx-Kz-8l1" id="2YX-Ca-kiP"/>
+                <outlet property="runsPerOverT1PV" destination="2gU-Kf-zsY" id="2oK-1c-GSX"/>
+                <outlet property="runsPerOverT2Lbl" destination="fLC-wV-zgp" id="14X-Jy-74n"/>
+                <outlet property="runsPerOverT2PV" destination="ygt-Vb-zp5" id="AUQ-ic-cfC"/>
+                <outlet property="runsScoredT1Lbl" destination="EP5-1T-bLT" id="2FU-2g-dyh"/>
+                <outlet property="runsScoredT1PV" destination="qYn-dd-rTV" id="fFw-r5-Wxo"/>
+                <outlet property="runsScoredT2Lbl" destination="36X-EM-ia0" id="AJd-Am-LOY"/>
+                <outlet property="runsScoredT2PV" destination="Iih-m3-tha" id="Dm6-ai-Iqd"/>
                 <outlet property="secondInn" destination="Vwu-Om-ciA" id="f98-Mm-o3s"/>
                 <outlet property="spell1Inn" destination="wxA-SB-MNx" id="Apo-P6-zAE"/>
                 <outlet property="spell2Inn" destination="6sF-eE-HqP" id="QX8-Dq-PY4"/>
@@ -29,13 +101,21 @@
                 <outlet property="tableWidth" destination="beq-vm-VXm" id="88P-3M-tHd"/>
                 <outlet property="tableXposition" destination="1oP-HO-TJf" id="Yxy-S2-uxV"/>
                 <outlet property="tableYposition" destination="WJa-Sh-ed0" id="OYe-d6-LNh"/>
+                <outlet property="team1TF" destination="Pg7-D8-Em8" id="vT2-hA-pEr"/>
                 <outlet property="team1View" destination="ylh-Uj-ybZ" id="qT0-eb-kgV"/>
-                <outlet property="team1lbl" destination="WCP-Bt-Djo" id="h35-kK-Gz9"/>
                 <outlet property="team1win" destination="J64-1b-OFW" id="oEW-sD-dWe"/>
-                <outlet property="team2View" destination="0fX-0w-ehM" id="7vc-fT-Y9Z"/>
-                <outlet property="team2lbl" destination="h4R-kR-B9U" id="612-bD-dPj"/>
+                <outlet property="team2TF" destination="HRp-GZ-SYA" id="JxT-cc-OY3"/>
+                <outlet property="team2View" destination="Jth-yg-Toq" id="vI4-OP-6Dr"/>
                 <outlet property="team2win" destination="cdh-hn-3ff" id="A0m-1m-22C"/>
+                <outlet property="tossWonT1Lbl" destination="RGN-02-4Pj" id="Rsz-mt-vel"/>
+                <outlet property="tossWonT1PV" destination="yOA-JX-zfr" id="UZA-v2-Gpa"/>
+                <outlet property="tossWonT2Lbl" destination="42c-JK-V2Z" id="gYv-bX-LK5"/>
+                <outlet property="tossWonT2PV" destination="HXZ-e3-02H" id="8Wb-7D-Nzk"/>
                 <outlet property="view" destination="SeD-w8-XhN" id="gnJ-mk-6rC"/>
+                <outlet property="wicketsLostT1Lbl" destination="mvZ-4S-xeI" id="NQe-T0-uMb"/>
+                <outlet property="wicketsLostT1PV" destination="kZg-S7-kAC" id="leu-k4-f2Y"/>
+                <outlet property="wicketsLostT2Lbl" destination="Xgh-5d-hcB" id="8Wk-bY-dcB"/>
+                <outlet property="wicketsLostT2PV" destination="dZi-qm-2p6" id="eL5-3O-Fmx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -81,26 +161,26 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="168" height="30"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylh-Uj-ybZ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="30"/>
+                                                                    <rect key="frame" x="8.5" y="0.0" width="150" height="30"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCP-Bt-Djo">
-                                                                            <rect key="frame" x="5" y="0.0" width="142" height="30"/>
-                                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-A" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pg7-D8-Em8">
+                                                                            <rect key="frame" x="5" y="0.0" width="125" height="30"/>
                                                                             <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                            <variation key="heightClass=regular-widthClass=regular">
-                                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
-                                                                            </variation>
-                                                                        </label>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <connections>
+                                                                                <outlet property="delegate" destination="-1" id="K6l-Ip-Gu2"/>
+                                                                            </connections>
+                                                                        </textField>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="56p-oT-rp8">
-                                                                            <rect key="frame" x="147" y="8" width="15" height="15"/>
+                                                                            <rect key="frame" x="130" y="8" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="15" id="OKh-Kr-m5w"/>
                                                                                 <constraint firstAttribute="height" constant="15" id="mBU-U3-Zxf"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsy-Mx-rbB">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                                             <connections>
                                                                                 <action selector="Team1BtnAction:" destination="-1" eventType="touchUpInside" id="RVS-DF-sJF"/>
                                                                             </connections>
@@ -108,19 +188,19 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="WCP-Bt-Djo" secondAttribute="bottom" id="1ED-CW-4yb"/>
+                                                                        <constraint firstItem="56p-oT-rp8" firstAttribute="leading" secondItem="Pg7-D8-Em8" secondAttribute="trailing" id="5sk-KA-F6z"/>
                                                                         <constraint firstItem="56p-oT-rp8" firstAttribute="leading" secondItem="Vsy-Mx-rbB" secondAttribute="trailing" id="8EN-HZ-y76"/>
-                                                                        <constraint firstItem="56p-oT-rp8" firstAttribute="leading" secondItem="WCP-Bt-Djo" secondAttribute="trailing" id="Bhb-m0-lYE"/>
                                                                         <constraint firstItem="Vsy-Mx-rbB" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" id="VUG-wN-WKe"/>
-                                                                        <constraint firstAttribute="width" constant="167" id="Vpq-On-mig">
+                                                                        <constraint firstAttribute="width" constant="150" id="Vpq-On-mig">
                                                                             <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                         </constraint>
+                                                                        <constraint firstAttribute="bottom" secondItem="Pg7-D8-Em8" secondAttribute="bottom" id="YrE-LR-K3P"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Vsy-Mx-rbB" secondAttribute="bottom" id="buw-WV-J8M"/>
                                                                         <constraint firstAttribute="height" constant="30" id="gnJ-Su-La6"/>
                                                                         <constraint firstItem="Vsy-Mx-rbB" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" id="h4X-Sg-cwU"/>
                                                                         <constraint firstItem="56p-oT-rp8" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" constant="8" id="lX5-ts-94I"/>
-                                                                        <constraint firstItem="WCP-Bt-Djo" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" id="sGo-Yd-ebg"/>
-                                                                        <constraint firstItem="WCP-Bt-Djo" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" constant="5" id="uWI-ie-yen"/>
+                                                                        <constraint firstItem="Pg7-D8-Em8" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" constant="5" id="lmd-Nz-xDd"/>
+                                                                        <constraint firstItem="Pg7-D8-Em8" firstAttribute="top" secondItem="ylh-Uj-ybZ" secondAttribute="top" id="sZ4-wT-C2o"/>
                                                                         <constraint firstAttribute="trailing" secondItem="56p-oT-rp8" secondAttribute="trailing" constant="5" id="zdk-Bj-ygW"/>
                                                                     </constraints>
                                                                 </view>
@@ -135,28 +215,28 @@
                                                             <rect key="frame" x="198" y="0.0" width="167" height="30"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jth-yg-Toq">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="30"/>
+                                                                    <rect key="frame" x="8.5" y="0.0" width="150" height="30"/>
                                                                     <subviews>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRp-GZ-SYA">
+                                                                            <rect key="frame" x="5" y="0.0" width="125" height="30"/>
+                                                                            <nil key="textColor"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <connections>
+                                                                                <outlet property="delegate" destination="-1" id="HCy-4j-jYG"/>
+                                                                            </connections>
+                                                                        </textField>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="GHO-cd-jYx">
-                                                                            <rect key="frame" x="147" y="8" width="15" height="15"/>
+                                                                            <rect key="frame" x="130" y="8" width="15" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="LWz-ME-5hp"/>
                                                                                 <constraint firstAttribute="width" constant="15" id="px0-Zs-RjC"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4R-kR-B9U">
-                                                                            <rect key="frame" x="5" y="0.0" width="142" height="30"/>
-                                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                            <variation key="heightClass=regular-widthClass=regular">
-                                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
-                                                                            </variation>
-                                                                        </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1E-yk-mRA">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                                             <connections>
-                                                                                <action selector="Team2BtnAction:" destination="-1" eventType="touchUpInside" id="8SP-Fi-Tab"/>
+                                                                                <action selector="Team2BtnAction:" destination="-1" eventType="touchUpInside" id="o0M-n3-O8u"/>
                                                                             </connections>
                                                                         </button>
                                                                     </subviews>
@@ -164,18 +244,18 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="8eE-gD-shK"/>
                                                                         <constraint firstAttribute="bottom" secondItem="T1E-yk-mRA" secondAttribute="bottom" id="9am-P3-GRQ"/>
-                                                                        <constraint firstAttribute="width" constant="167" id="EoW-hS-YqT">
+                                                                        <constraint firstAttribute="bottom" secondItem="HRp-GZ-SYA" secondAttribute="bottom" id="AIr-T6-VrX"/>
+                                                                        <constraint firstItem="HRp-GZ-SYA" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" id="DR6-WR-lNR"/>
+                                                                        <constraint firstAttribute="width" constant="150" id="EoW-hS-YqT">
                                                                             <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                         </constraint>
                                                                         <constraint firstItem="T1E-yk-mRA" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" id="Uef-ZI-UxH"/>
-                                                                        <constraint firstItem="h4R-kR-B9U" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" constant="5" id="XMv-1V-adQ"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="h4R-kR-B9U" secondAttribute="bottom" id="YXm-1s-3cf"/>
                                                                         <constraint firstItem="GHO-cd-jYx" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" constant="8" id="Zcb-G0-NNg"/>
                                                                         <constraint firstAttribute="trailing" secondItem="GHO-cd-jYx" secondAttribute="trailing" constant="5" id="bAo-Rg-AM1"/>
-                                                                        <constraint firstItem="GHO-cd-jYx" firstAttribute="leading" secondItem="h4R-kR-B9U" secondAttribute="trailing" id="e0G-jW-3Yx"/>
                                                                         <constraint firstItem="GHO-cd-jYx" firstAttribute="leading" secondItem="T1E-yk-mRA" secondAttribute="trailing" id="hy9-In-Ajq"/>
                                                                         <constraint firstItem="T1E-yk-mRA" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" id="lYm-fg-A58"/>
-                                                                        <constraint firstItem="h4R-kR-B9U" firstAttribute="top" secondItem="Jth-yg-Toq" secondAttribute="top" id="nWK-9W-KPX"/>
+                                                                        <constraint firstItem="GHO-cd-jYx" firstAttribute="leading" secondItem="HRp-GZ-SYA" secondAttribute="trailing" id="rvB-PA-vsu"/>
+                                                                        <constraint firstItem="HRp-GZ-SYA" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" constant="5" id="tZR-tB-z72"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -203,7 +283,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAW-a5-nq3">
-                                                    <rect key="frame" x="5" y="50" width="365" height="60"/>
+                                                    <rect key="frame" x="5" y="55" width="365" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uah-NN-FBx">
                                                             <rect key="frame" x="168" y="3" width="30" height="20"/>
@@ -219,28 +299,28 @@
                                                             </variation>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fE-Xq-nCK">
-                                                            <rect key="frame" x="99" y="26" width="167" height="30"/>
+                                                            <rect key="frame" x="8.5" y="0.0" width="150" height="30"/>
                                                             <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Competition" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="atK-wi-HS1">
+                                                                    <rect key="frame" x="5" y="0.0" width="125" height="30"/>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="-1" id="6Jf-Uf-Ufo"/>
+                                                                    </connections>
+                                                                </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="fIu-Yi-2yJ">
-                                                                    <rect key="frame" x="147" y="8" width="15" height="15"/>
+                                                                    <rect key="frame" x="130" y="8" width="15" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Cw4-Xb-dAj"/>
                                                                         <constraint firstAttribute="width" constant="15" id="vhL-Io-bsI"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7k-cc-rAM">
-                                                                    <rect key="frame" x="5" y="0.0" width="142" height="30"/>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
-                                                                    </variation>
-                                                                </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVY-ev-fek">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                                     <connections>
-                                                                        <action selector="GroundBtnAction:" destination="-1" eventType="touchUpInside" id="Iqh-pq-e4Q"/>
+                                                                        <action selector="CompetitionBtnAction:" destination="-1" eventType="touchUpInside" id="TVk-qo-GJA"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -250,30 +330,74 @@
                                                                 <constraint firstItem="aVY-ev-fek" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" id="42t-ek-W2f"/>
                                                                 <constraint firstAttribute="height" constant="30" id="4br-18-Qaj"/>
                                                                 <constraint firstItem="aVY-ev-fek" firstAttribute="leading" secondItem="6fE-Xq-nCK" secondAttribute="leading" id="JA3-ie-v9r"/>
-                                                                <constraint firstItem="fIu-Yi-2yJ" firstAttribute="leading" secondItem="b7k-cc-rAM" secondAttribute="trailing" id="LaY-Ie-pAs"/>
-                                                                <constraint firstAttribute="bottom" secondItem="b7k-cc-rAM" secondAttribute="bottom" id="Lvr-9R-wLo"/>
-                                                                <constraint firstItem="b7k-cc-rAM" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" id="ObG-uL-lnG"/>
-                                                                <constraint firstItem="b7k-cc-rAM" firstAttribute="leading" secondItem="6fE-Xq-nCK" secondAttribute="leading" constant="5" id="hGj-hO-Sfp"/>
-                                                                <constraint firstAttribute="width" constant="167" id="inF-IL-VoY">
+                                                                <constraint firstAttribute="bottom" secondItem="atK-wi-HS1" secondAttribute="bottom" id="Y1e-hl-2To"/>
+                                                                <constraint firstAttribute="width" constant="150" id="inF-IL-VoY">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                                                                 </constraint>
+                                                                <constraint firstItem="fIu-Yi-2yJ" firstAttribute="leading" secondItem="atK-wi-HS1" secondAttribute="trailing" id="kAN-fC-WXr"/>
                                                                 <constraint firstItem="fIu-Yi-2yJ" firstAttribute="leading" secondItem="aVY-ev-fek" secondAttribute="trailing" id="kt5-IH-rlj"/>
+                                                                <constraint firstItem="atK-wi-HS1" firstAttribute="leading" secondItem="6fE-Xq-nCK" secondAttribute="leading" constant="5" id="lNz-Cq-NSd"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fIu-Yi-2yJ" secondAttribute="trailing" constant="5" id="qQ6-Np-0bW"/>
                                                                 <constraint firstAttribute="bottom" secondItem="aVY-ev-fek" secondAttribute="bottom" id="ulN-UG-6Rf"/>
+                                                                <constraint firstItem="atK-wi-HS1" firstAttribute="top" secondItem="6fE-Xq-nCK" secondAttribute="top" id="yQ4-3M-uZ9"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6AL-dz-nOM">
+                                                            <rect key="frame" x="206.5" y="0.0" width="150" height="30"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ground" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ej-dX-qrf">
+                                                                    <rect key="frame" x="5" y="0.0" width="125" height="30"/>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="-1" id="hdA-Hj-LuW"/>
+                                                                    </connections>
+                                                                </textField>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="I9i-8S-y5J">
+                                                                    <rect key="frame" x="130" y="8" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="15" id="HOw-bO-TK9"/>
+                                                                        <constraint firstAttribute="width" constant="15" id="ZRt-rM-AW8"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrt-GT-f36">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
+                                                                    <connections>
+                                                                        <action selector="GroundBtnAction:" destination="-1" eventType="touchUpInside" id="KYh-Ks-hcl"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="I9i-8S-y5J" secondAttribute="trailing" constant="5" id="4cg-da-TQH"/>
+                                                                <constraint firstItem="I9i-8S-y5J" firstAttribute="leading" secondItem="2ej-dX-qrf" secondAttribute="trailing" id="6ND-cv-DPN"/>
+                                                                <constraint firstAttribute="bottom" secondItem="yrt-GT-f36" secondAttribute="bottom" id="6jx-Mi-ar1"/>
+                                                                <constraint firstItem="yrt-GT-f36" firstAttribute="leading" secondItem="6AL-dz-nOM" secondAttribute="leading" id="JpE-jV-IPz"/>
+                                                                <constraint firstItem="2ej-dX-qrf" firstAttribute="top" secondItem="6AL-dz-nOM" secondAttribute="top" id="Mbl-hk-T1j"/>
+                                                                <constraint firstAttribute="height" constant="30" id="SKg-fU-Z0F"/>
+                                                                <constraint firstAttribute="width" constant="150" id="T2q-Xj-fQr">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                                                </constraint>
+                                                                <constraint firstItem="I9i-8S-y5J" firstAttribute="leading" secondItem="yrt-GT-f36" secondAttribute="trailing" id="X9d-00-656"/>
+                                                                <constraint firstAttribute="bottom" secondItem="2ej-dX-qrf" secondAttribute="bottom" id="mjq-8q-bF0"/>
+                                                                <constraint firstItem="2ej-dX-qrf" firstAttribute="leading" secondItem="6AL-dz-nOM" secondAttribute="leading" constant="5" id="oRo-a0-S2I"/>
+                                                                <constraint firstItem="I9i-8S-y5J" firstAttribute="top" secondItem="6AL-dz-nOM" secondAttribute="top" constant="8" id="q8n-lI-rLy"/>
+                                                                <constraint firstItem="yrt-GT-f36" firstAttribute="top" secondItem="6AL-dz-nOM" secondAttribute="top" id="ySk-rB-xBR"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="6fE-Xq-nCK" firstAttribute="centerX" secondItem="LAW-a5-nq3" secondAttribute="centerX" id="Bla-Sa-JlI"/>
-                                                        <constraint firstAttribute="height" constant="60" id="g77-9m-TiS"/>
-                                                        <constraint firstItem="6fE-Xq-nCK" firstAttribute="top" secondItem="Uah-NN-FBx" secondAttribute="bottom" constant="3" id="l1x-VF-lGm"/>
+                                                        <constraint firstItem="6fE-Xq-nCK" firstAttribute="top" secondItem="LAW-a5-nq3" secondAttribute="top" id="6NI-fe-BeY"/>
+                                                        <constraint firstAttribute="height" constant="30" id="g77-9m-TiS"/>
+                                                        <constraint firstItem="6AL-dz-nOM" firstAttribute="top" secondItem="LAW-a5-nq3" secondAttribute="top" id="u0x-90-6CA"/>
                                                         <constraint firstItem="Uah-NN-FBx" firstAttribute="centerX" secondItem="LAW-a5-nq3" secondAttribute="centerX" id="uBz-YQ-Xkr"/>
                                                         <constraint firstItem="Uah-NN-FBx" firstAttribute="top" secondItem="LAW-a5-nq3" secondAttribute="top" constant="3" id="wGs-vV-gcj"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAX-cg-fmv">
-                                                    <rect key="frame" x="5" y="120" width="365" height="300"/>
+                                                    <rect key="frame" x="5" y="95" width="365" height="300"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ox2-Tc-TRS">
                                                             <rect key="frame" x="99" y="5" width="167" height="20"/>
@@ -854,7 +978,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mjp-js-gyG">
-                                                    <rect key="frame" x="5" y="440" width="365" height="300"/>
+                                                    <rect key="frame" x="5" y="415" width="365" height="300"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V9m-RP-hMo">
                                                             <rect key="frame" x="99" y="5" width="167" height="20"/>
@@ -911,9 +1035,9 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toss Won" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6j-cJ-vWp">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="135" id="bPW-gK-haa"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="bPW-gK-haa"/>
                                                                         <constraint firstAttribute="height" constant="17" id="rZc-Wb-Igz"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -937,10 +1061,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Blv-Hu-D9d">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-JX-zfr">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -955,10 +1079,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dd5-xT-Tl3">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="HXZ-e3-02H">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1020,10 +1144,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decision - Bat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0J-TA-VKp">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="LrX-dj-Hev"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="b0y-LT-lqz"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="b0y-LT-lqz"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -1046,10 +1170,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6t-7T-7Oe">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NyG-bo-iTe">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1064,10 +1188,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJI-yu-hpt">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="Yok-5A-Scf">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1129,10 +1253,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decision - Bowl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eek-cB-CXg">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="Ddy-pI-N4e"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="tzx-G7-wPb"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="tzx-G7-wPb"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -1155,10 +1279,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmX-gD-Hio">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hkZ-3l-Uvz">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1173,10 +1297,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyh-Dl-1OC">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-sV-PMm">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1238,10 +1362,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting 1st Inn Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Soz-7B-rl5">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="561-qr-vKl"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="mfI-QX-8Pt"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="mfI-QX-8Pt"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -1264,10 +1388,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNm-T4-r0G">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SNb-MT-kXw">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1282,10 +1406,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABc-ah-dkc">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="8Gz-HG-Pis">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1347,9 +1471,9 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting 2nd Inn Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mo-r8-QRI">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="135" id="SET-YW-flL"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="SET-YW-flL"/>
                                                                         <constraint firstAttribute="height" constant="17" id="ehG-wx-uH7"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -1373,10 +1497,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFW-DQ-fEq">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Thq-EW-YSL">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1391,10 +1515,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6y-eK-KaV">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="1VS-V9-C5W">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -1463,7 +1587,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPH-6Q-4BR">
-                                                    <rect key="frame" x="5" y="760" width="365" height="1150"/>
+                                                    <rect key="frame" x="5" y="735" width="365" height="1220"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8z-DQ-fCF">
                                                             <rect key="frame" x="0.0" y="5" width="365" height="20"/>
@@ -2152,10 +2276,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs Scored" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUX-0F-ws9">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="133" y="12" width="100" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="I5W-BS-FAa"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="gFK-SW-Zqe"/>
+                                                                        <constraint firstAttribute="width" constant="100" id="gFK-SW-Zqe"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -2178,10 +2302,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypg-GB-g3O">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="78" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qYn-dd-rTV">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="78" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2196,10 +2320,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQJ-P2-7qo">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="238" y="11" width="77" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="ZLA-fh-0Rq">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="77" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2261,10 +2385,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs Per Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idl-qa-BbJ">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="rqc-dg-3kJ"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="ulV-fh-XxX"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="ulV-fh-XxX"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -2287,10 +2411,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dx-MC-MQ0">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2gU-Kf-zsY">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2305,10 +2429,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuc-s7-bBr">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="ygt-Vb-zp5">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2370,9 +2494,9 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wickets Lost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hge-j0-nOz">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="135" id="I1r-2D-veg"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="I1r-2D-veg"/>
                                                                         <constraint firstAttribute="height" constant="17" id="Oxa-3J-BvC"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -2396,10 +2520,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWA-r0-CDj">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kZg-S7-kAC">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2414,10 +2538,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivf-OY-g4s">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="dZi-qm-2p6">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2479,9 +2603,9 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batting S/R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04t-wA-8Vc">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="135" id="5tw-Ci-oIM"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="5tw-Ci-oIM"/>
                                                                         <constraint firstAttribute="height" constant="17" id="vRl-M5-pZY"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -2505,10 +2629,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40o-G6-0lN">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6BI-Qp-6ZU">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2523,10 +2647,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hg-97-vPc">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="Gdz-OS-B1k">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2588,10 +2712,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot Ball %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-gv-0ie">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="CPN-5f-ByE"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="I4k-yi-JT2"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="I4k-yi-JT2"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -2614,10 +2738,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sos-7n-ycL">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qpb-BG-9Mg">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2632,10 +2756,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-aH-9yR">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="iF9-gS-LON">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2697,10 +2821,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Boundaries %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="go5-3F-3Wh">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="Pnb-mb-fmk"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="SPL-EO-xta"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="SPL-EO-xta"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -2723,10 +2847,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67q-L8-FTI">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nZp-lj-TnM">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2741,10 +2865,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3B-GW-s0F">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="Mmu-hT-A3f">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2806,9 +2930,9 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling S/R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDQ-eD-0Ci">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="135" id="mV7-sB-YbN"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="mV7-sB-YbN"/>
                                                                         <constraint firstAttribute="height" constant="17" id="wKL-hC-e1Z"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -2832,10 +2956,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WyH-wf-B7j">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ih3-0g-vjI">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2850,10 +2974,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zV-sK-hMZ">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-dK-rK6">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2915,10 +3039,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bowling Avg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFK-oR-T2B">
-                                                                    <rect key="frame" x="115.5" y="12" width="135" height="17"/>
+                                                                    <rect key="frame" x="125.5" y="12" width="115" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="ctJ-Un-hsa"/>
-                                                                        <constraint firstAttribute="width" constant="135" id="oiM-eb-MC1"/>
+                                                                        <constraint firstAttribute="width" constant="115" id="oiM-eb-MC1"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                     <nil key="textColor"/>
@@ -2941,10 +3065,10 @@
                                                                     </variation>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cy-Qw-UHW">
-                                                                    <rect key="frame" x="50" y="11" width="60.5" height="17"/>
+                                                                    <rect key="frame" x="50" y="11" width="70.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KEL-li-d3O">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="70.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.0048934211949999999" green="0.10349602250000001" blue="0.31075537199999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -2959,10 +3083,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COJ-gQ-JSL">
-                                                                    <rect key="frame" x="255.5" y="11" width="59.5" height="17"/>
+                                                                    <rect key="frame" x="245.5" y="11" width="69.5" height="17"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-m2-xJF">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="17"/>
                                                                             <color key="progressTintColor" red="0.64432436230000001" green="0.028109934180000001" blue="0.0083615956829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <color key="trackTintColor" red="0.79992932080000001" green="0.80004525179999997" blue="0.79990392919999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </progressView>
@@ -3010,7 +3134,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1150" id="1iU-du-16n"/>
+                                                        <constraint firstAttribute="height" constant="1220" id="1iU-du-16n"/>
                                                         <constraint firstAttribute="trailing" secondItem="EgU-6v-e9o" secondAttribute="trailing" id="2aM-IV-ChB"/>
                                                         <constraint firstItem="Los-gX-l8V" firstAttribute="centerX" secondItem="WPH-6Q-4BR" secondAttribute="centerX" id="5bh-ze-PFS"/>
                                                         <constraint firstItem="cuO-q5-FWf" firstAttribute="centerX" secondItem="WPH-6Q-4BR" secondAttribute="centerX" id="6Je-ST-I0H"/>
@@ -3078,13 +3202,15 @@
                                                 <constraint firstItem="WPH-6Q-4BR" firstAttribute="top" secondItem="mjp-js-gyG" secondAttribute="bottom" constant="20" id="Bfo-Ll-gaM"/>
                                                 <constraint firstAttribute="trailing" secondItem="LAW-a5-nq3" secondAttribute="trailing" constant="5" id="D6o-jz-YAP"/>
                                                 <constraint firstAttribute="trailing" secondItem="WAX-cg-fmv" secondAttribute="trailing" constant="5" id="FqO-WN-bYD"/>
+                                                <constraint firstItem="6AL-dz-nOM" firstAttribute="leading" secondItem="Jth-yg-Toq" secondAttribute="leading" id="NFO-20-rVi"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="OSu-re-hlc"/>
                                                 <constraint firstAttribute="height" constant="1900" id="USA-Ku-p1u"/>
+                                                <constraint firstItem="6fE-Xq-nCK" firstAttribute="leading" secondItem="ylh-Uj-ybZ" secondAttribute="leading" id="VkC-RV-CLP"/>
                                                 <constraint firstItem="rJn-ud-tAu" firstAttribute="top" secondItem="iIO-Zd-6iU" secondAttribute="bottom" constant="1" id="WJa-Sh-ed0"/>
                                                 <constraint firstItem="iIO-Zd-6iU" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="Wh4-kr-gqg"/>
                                                 <constraint firstAttribute="trailing" secondItem="iIO-Zd-6iU" secondAttribute="trailing" constant="5" id="Xff-J9-30h"/>
                                                 <constraint firstItem="mjp-js-gyG" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="ebS-CK-08W"/>
-                                                <constraint firstItem="LAW-a5-nq3" firstAttribute="top" secondItem="iIO-Zd-6iU" secondAttribute="bottom" constant="10" id="ew5-IN-KR2"/>
+                                                <constraint firstItem="LAW-a5-nq3" firstAttribute="top" secondItem="iIO-Zd-6iU" secondAttribute="bottom" constant="15" id="ew5-IN-KR2"/>
                                                 <constraint firstItem="LAW-a5-nq3" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="hTC-iH-TIN"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="top" secondItem="LAW-a5-nq3" secondAttribute="bottom" constant="10" id="j9O-mp-IsZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="iIO-Zd-6iU" secondAttribute="trailing" constant="5" id="kVo-K7-yDu"/>

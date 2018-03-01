@@ -49,6 +49,8 @@
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
 		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
+		18A590662047C3A4002BBF64 /* IntAxisValueFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A590652047C3A3002BBF64 /* IntAxisValueFormatter.m */; };
+		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
 		18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A5CAB420383FAD00586896 /* TeamsVC.xib */; };
 		18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB820384F3800586896 /* ProfileVCCell.m */; };
@@ -398,6 +400,9 @@
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
+		18A590642047C3A3002BBF64 /* IntAxisValueFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntAxisValueFormatter.h; sourceTree = "<group>"; };
+		18A590652047C3A3002BBF64 /* IntAxisValueFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntAxisValueFormatter.m; sourceTree = "<group>"; };
+		18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeValueFormatter.swift; sourceTree = "<group>"; };
 		18A5CAB220383FAD00586896 /* TeamsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamsVC.h; sourceTree = "<group>"; };
 		18A5CAB320383FAD00586896 /* TeamsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamsVC.m; sourceTree = "<group>"; };
 		18A5CAB420383FAD00586896 /* TeamsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamsVC.xib; sourceTree = "<group>"; };
@@ -1027,6 +1032,16 @@
 				1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */,
 			);
 			path = TabHomeVC;
+			sourceTree = "<group>";
+		};
+		18A590632047C382002BBF64 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */,
+				18A590642047C3A3002BBF64 /* IntAxisValueFormatter.h */,
+				18A590652047C3A3002BBF64 /* IntAxisValueFormatter.m */,
+			);
+			path = Formatters;
 			sourceTree = "<group>";
 		};
 		18A5CAB120383F9400586896 /* TeamsVC */ = {
@@ -2080,6 +2095,7 @@
 		CEB2B9B92025938E00E7D5E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				18A590632047C382002BBF64 /* Formatters */,
 				CE367C842046D72300A94B28 /* StepSlider */,
 				CE6C16702045217A00672253 /* PlannerGraphs */,
 				CE6C164C2045213C00672253 /* Calendar */,
@@ -2676,6 +2692,7 @@
 				18AC3462203EF453003EE0F0 /* SwipeView.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				18BAE2A1202874070088178A /* MCOverViewResultCVC.m in Sources */,
+				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
 				18E071072046CAE90020D8EE /* TeamHeadToHead.m in Sources */,
 				CE6C17362045217A00672253 /* FFGuestsTableView.m in Sources */,

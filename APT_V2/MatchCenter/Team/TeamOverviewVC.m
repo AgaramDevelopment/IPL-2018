@@ -175,7 +175,7 @@
     if (IS_IPAD) {
         return CGSizeMake(350, 435);
     } else {
-        return CGSizeMake(250, 435);
+        return CGSizeMake(280, 435);
     }
 }
 
