@@ -11,7 +11,6 @@
 #import "BowlTypeCell.h"
 @import Charts;
 
-
 @interface GroundVC : UIViewController
 
 

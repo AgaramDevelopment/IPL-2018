@@ -167,6 +167,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)sessionsummary :(NSString *)list :(NSString *)matchcode :(NSString *)matchstatus:(NSString *)dayno:(NSString *)sessionno:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
                failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)TeamStandings :(NSString *)list :(NSString *)Competitioncode  success:(WebserviceRequestSuccessHandler)success
+              failure:(WebserviceRequestFailureHandler)failure;
+
 
 
 @end
