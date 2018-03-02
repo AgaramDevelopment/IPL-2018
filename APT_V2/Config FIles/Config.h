@@ -308,3 +308,5 @@
 
 #define HTHPageLoad         @"APT_HTHPAGELOAD"
 #define HTHResults         @"APT_HTHRESULTS"
+
+#define StandingsKey         @"APT_TEAMRESULTS"
