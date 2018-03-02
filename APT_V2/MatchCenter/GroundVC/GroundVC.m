@@ -12,7 +12,7 @@
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
 #import "BowlTypeCell.h"
-#import "IntAxisValueFormatter.h"
+//#import "IntAxisValueFormatter.h"
 #import "HorizontalXLblFormatter.h"
 
 
@@ -334,7 +334,7 @@
     xAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
     xAxis.granularity = 1.f;
     xAxis.centerAxisLabelsEnabled = YES;
-    xAxis.valueFormatter = [[IntAxisValueFormatter alloc] init];
+    //xAxis.valueFormatter = [[IntAxisValueFormatter alloc] init];
     
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.maximumFractionDigits = 1;
