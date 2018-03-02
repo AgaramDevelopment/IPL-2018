@@ -14,11 +14,13 @@
 #import "BowlTypeCell.h"
 //#import "IntAxisValueFormatter.h"
 #import "HorizontalXLblFormatter.h"
+@import drCharts;
 
 
 #define ITEM_COUNT 12
+#define header_height 65
 
-@interface GroundVC ()<PieChartViewDataSource,PieChartViewDelegate,ChartViewDelegate>
+@interface GroundVC ()<PieChartViewDataSource,PieChartViewDelegate,ChartViewDelegate,BarChartDelegate,BarChartDataSource>
 {
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
@@ -44,6 +46,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextX;
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextY;
 
+@property (strong, nonatomic) IBOutlet BarChart *barChartMultipleView;
 
 @end
 
@@ -73,7 +76,8 @@
     
     _scrollView.contentSize = _contentView.frame.size;
     
-    [self barchartMultiple];
+   // [self barchartMultiple];
+    [self createBarChart];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -489,6 +493,105 @@
     NSLog(@"chartValueNothingSelected");
 }
 
+
+- (void)createBarChart{
+    _barChartMultipleView = [[BarChart alloc] initWithFrame:CGRectMake(0, 0, self.barchart.frame.size.width+self.barchart.frame.size.width, self.barchart.frame.size.height)];
+    //_barChartMultipleView = [[BarChart alloc]init];
+    [_barChartMultipleView setDataSource:self];
+    [_barChartMultipleView setDelegate:self];
+    [_barChartMultipleView setLegendViewType:LegendTypeHorizontal];
+    [_barChartMultipleView setShowCustomMarkerView:TRUE];
+    [_barChartMultipleView drawBarGraph];
+    [_barChartMultipleView setLegendViewType:@"fff"];
+    [self.barchart addSubview:_barChartMultipleView];
+}
+#pragma mark BarChartDataSource
+- (NSMutableArray *)xDataForBarChart{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 8; i++) {
+        [array addObject:[NSString stringWithFormat:@"%d", 2000 + i]];
+    }
+    return  array;
+}
+
+- (NSInteger)numberOfBarsToBePlotted{
+    return 2;
+}
+
+- (UIColor *)colorForTheBarWithBarNumber:(NSInteger)barNumber{
+    NSInteger aRedValue = arc4random()%255;
+    NSInteger aGreenValue = arc4random()%255;
+    NSInteger aBlueValue = arc4random()%255;
+    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+    return randColor;
+}
+
+- (CGFloat)widthForTheBarWithBarNumber:(NSInteger)barNumber{
+    return 40;
+}
+
+- (NSString *)nameForTheBarWithBarNumber:(NSInteger)barNumber{
+    
+    if(barNumber == 0)
+    {
+        return [NSString stringWithFormat:@"value1 %d",(int)barNumber];
+    }
+    else if(barNumber == 1)
+    {
+    return [NSString stringWithFormat:@"Value2 %d",(int)barNumber];
+    }
+    return nil;
+}
+
+- (NSMutableArray *)yDataForBarWithBarNumber:(NSInteger)barNumber{
+    NSMutableArray *array;
+    NSArray *arr = @[ @"20",@"30",@"40",@"20",@"20",@"30",@"40",@"20"];
+    NSArray *arr1 = @[ @"10",@"20",@"30",@"40",@"10",@"20",@"30",@"40"];
+    
+    if(barNumber==0)
+    {
+        array = [[NSMutableArray alloc] init];
+        for (int i = 0; i < arr.count; i++) {
+            // [array addObject:[NSNumber numberWithLong:random() % 100]];
+            [array addObject:[arr objectAtIndex:i]];
+        }
+    }
+    if(barNumber==1)
+    {
+        array = [[NSMutableArray alloc] init];
+        for (int i = 0; i < arr1.count; i++) {
+            // [array addObject:[NSNumber numberWithLong:random() % 100]];
+            [array addObject:[arr1 objectAtIndex:i]];
+        }
+    }
+    return array;
+}
+
+- (UIView *)customViewForBarChartTouchWithValue:(NSNumber *)value{
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    [view.layer setCornerRadius:4.0F];
+    [view.layer setBorderWidth:1.0F];
+    [view.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [view.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [view.layer setShadowRadius:2.0F];
+    [view.layer setShadowOpacity:0.3F];
+    
+    UILabel *label = [[UILabel alloc] init];
+    [label setFont:[UIFont systemFontOfSize:12]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setText:[NSString stringWithFormat:@"%@", value]];
+    [label setFrame:CGRectMake(0, 0, 100, 30)];
+    [view addSubview:label];
+    
+    [view setFrame:label.frame];
+    return view;
+}
+
+#pragma mark BarChartDelegate
+- (void)didTapOnBarChartWithValue:(NSString *)value{
+    NSLog(@"Bar Chart: %@",value);
+}
 
 
 

@@ -360,7 +360,8 @@
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
     videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
-//    SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    
     
 
     [self.view addSubview:videoPlayerVC.view];

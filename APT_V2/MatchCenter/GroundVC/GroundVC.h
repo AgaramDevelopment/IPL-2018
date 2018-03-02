@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (strong, nonatomic) IBOutlet UIView *barchart;
+
 
 @property (strong, nonatomic) IBOutlet UITableView *BowlTypeTbl;
 
