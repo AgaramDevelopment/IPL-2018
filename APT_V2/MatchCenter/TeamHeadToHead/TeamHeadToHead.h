@@ -140,7 +140,7 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingAvgT1PV;
 
 //Team-2  Progress View Properties
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *runsScoredT2PV;
+@property (strong, nonatomic) IBOutlet UIProgressView *runsScoredT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *runsPerOverT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *wicketsLostT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *battingSRT2PV;
