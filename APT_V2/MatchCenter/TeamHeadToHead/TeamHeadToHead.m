@@ -18,10 +18,7 @@
     BOOL isteam2;
     BOOL isGround;
     BOOL isCompetition;
-    
 }
-
-
 
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
 //@property (nonatomic, strong) IBOutlet NSMutableArray *h2hResultsArray;
@@ -35,45 +32,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.firstInn.layer.borderWidth = 1.0f;
-    self.firstInn.layer.borderColor = [UIColor blackColor].CGColor;
-    self.firstInn.layer.cornerRadius = 2.0f;
-    
-    self.secondInn.layer.borderWidth = 1.0f;
-    self.secondInn.layer.borderColor = [UIColor blackColor].CGColor;
-     self.secondInn.layer.cornerRadius = 2.0f;
-    
-    self.team1win.layer.borderWidth = 1.0f;
-    self.team1win.layer.borderColor = [UIColor blackColor].CGColor;
-     self.team1win.layer.cornerRadius = 2.0f;
-    
-    self.team2win.layer.borderWidth = 1.0f;
-    self.team2win.layer.borderColor = [UIColor blackColor].CGColor;
-     self.team2win.layer.cornerRadius = 2.0f;
-    
-    self.spell1Inn.layer.borderWidth = 1.0f;
-    self.spell1Inn.layer.borderColor = [UIColor blackColor].CGColor;
-     self.spell1Inn.layer.cornerRadius = 2.0f;
-    
-    self.spell2Inn.layer.borderWidth = 1.0f;
-    self.spell2Inn.layer.borderColor = [UIColor blackColor].CGColor;
-     self.spell2Inn.layer.cornerRadius = 2.0f;
-    
-    self.spell3Inn.layer.borderWidth = 1.0f;
-    self.spell3Inn.layer.borderColor = [UIColor blackColor].CGColor;
-     self.spell3Inn.layer.cornerRadius = 2.0f;
-    
+    self.groundTF.delegate = self;
     self.Poptable.hidden = YES;
     [self customnavigationmethod];
+    [self setBorderForButtons];
     [self headToHeadPageLoadGetService];
 }
 
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation;
-    
-    
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
     [self.headerView addSubview:objCustomNavigation.view];
@@ -82,14 +50,41 @@
     objCustomNavigation.home_btn.hidden = YES;
     objCustomNavigation.menu_btn.hidden =NO;
     
-    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setBorderForButtons {
+    self.firstInn.layer.borderWidth = 1.0f;
+    self.firstInn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.firstInn.layer.cornerRadius = 2.0f;
     
+    self.secondInn.layer.borderWidth = 1.0f;
+    self.secondInn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.secondInn.layer.cornerRadius = 2.0f;
+    
+    self.team1win.layer.borderWidth = 1.0f;
+    self.team1win.layer.borderColor = [UIColor blackColor].CGColor;
+    self.team1win.layer.cornerRadius = 2.0f;
+    
+    self.team2win.layer.borderWidth = 1.0f;
+    self.team2win.layer.borderColor = [UIColor blackColor].CGColor;
+    self.team2win.layer.cornerRadius = 2.0f;
+    
+    self.spell1Inn.layer.borderWidth = 1.0f;
+    self.spell1Inn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.spell1Inn.layer.cornerRadius = 2.0f;
+    
+    self.spell2Inn.layer.borderWidth = 1.0f;
+    self.spell2Inn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.spell2Inn.layer.cornerRadius = 2.0f;
+    
+    self.spell3Inn.layer.borderWidth = 1.0f;
+    self.spell3Inn.layer.borderColor = [UIColor blackColor].CGColor;
+    self.spell3Inn.layer.cornerRadius = 2.0f;
 }
 
 - (IBAction)GroundBtnAction:(id)sender
@@ -106,7 +101,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.Poptable reloadData];
     });
-    [self checkValidations];
 }
 
 - (IBAction)CompetitionBtnAction:(id)sender {
@@ -173,11 +167,8 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
     static NSString *MyIdentifier = @"cellid";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
     
     if (cell == nil)
     {
@@ -186,6 +177,7 @@
     
     cell.textLabel.numberOfLines = 2;
     [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
+    
     if(isteam1 == YES) {
         cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
     }
@@ -203,7 +195,6 @@
     }
     
     cell.selectionStyle = UIAccessibilityTraitNone;
-    
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
@@ -212,14 +203,12 @@
 {
     if(isteam1==YES)
     {
-        
         self.team1TF.text = @"Chennai Super Kings";
          self.Poptable.hidden = YES;
     }
     
     if(isteam2==YES)
     {
-        
         self.team2TF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
          self.Poptable.hidden = YES;
     }
@@ -228,12 +217,13 @@
     {
         self.competitionTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
         self.Poptable.hidden = YES;
-    
     }
+    
     if(isGround==YES)
     {
         self.groundTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"Ground"];
-         self.Poptable.hidden = YES;
+        self.Poptable.hidden = YES;
+        [self checkValidations];
     }
 }
 
@@ -272,6 +262,7 @@
 }
 
 - (void)checkValidations {
+    
     if ([self.team1TF.text isEqualToString:@""]) {
         [self altermsg:@"Please Select Team1"];
     } else if ([self.team2TF.text isEqualToString:@""]) {
@@ -382,6 +373,7 @@
         
         self.bowlingAvgT1Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
         self.bowlingAvgT1PV.progress = 1 - [self.bowlingAvgT1Lbl.text floatValue]/100;
+        
         //Team2
         self.avgRunsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgRuns"]];
         self.avgWicketsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgwkts"]];
@@ -389,35 +381,31 @@
         self.highScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTHighscore"]];
         self.lowScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTLowscore"]];
         
-            //Team1 Progress View
+        //Team2 Progress View
         self.runsScoredT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTRuns"]];
-        self.runsScoredT2PV.progress = 1 - [self.runsScoredT2Lbl.text floatValue]/100;
+        self.runsScoredT2PV.progress = [self.runsScoredT2Lbl.text floatValue]/100;
         
         self.runsPerOverT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTOvers"]];
-        self.runsPerOverT2PV.progress = 1 - [self.runsPerOverT2Lbl.text floatValue]/100;
+        self.runsPerOverT2PV.progress = [self.runsPerOverT2Lbl.text floatValue]/100;
         
         self.wicketsLostT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTWkts"]];
-        self.wicketsLostT2PV.progress = 1 - [self.wicketsLostT2Lbl.text floatValue]/100;
+        self.wicketsLostT2PV.progress = [self.wicketsLostT2Lbl.text floatValue]/100;
         
         self.battingSRT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTBATSR"]];
-        self.battingSRT2PV.progress = 1 - [self.battingSRT2Lbl.text floatValue]/100;
+        self.battingSRT2PV.progress = [self.battingSRT2Lbl.text floatValue]/100;
         
         self.dotBallPercentT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BDotBall"]];
-        self.dotBallPercentT2PV.progress = 1 - [self.dotBallPercentT2Lbl.text floatValue]/100;
+        self.dotBallPercentT2PV.progress = [self.dotBallPercentT2Lbl.text floatValue]/100;
         
         self.boundariesPercentT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTBound"]];
-        self.boundariesPercentT2PV.progress = 1 - [self.dotBallPercentT2Lbl.text floatValue]/100;
+        self.boundariesPercentT2PV.progress = [self.dotBallPercentT2Lbl.text floatValue]/100;
         
         self.bowlingSRT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BBowlingSR"]];
-        self.bowlingSRT2PV.progress = 1 - [self.bowlingSRT2Lbl.text floatValue]/100;
+        self.bowlingSRT2PV.progress = [self.bowlingSRT2Lbl.text floatValue]/100;
         
         self.bowlingAvgT2Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
-        self.bowlingAvgT2PV.progress = 1 - [self.bowlingAvgT2Lbl.text floatValue]/100;
-        
+        self.bowlingAvgT2PV.progress = [self.bowlingAvgT2Lbl.text floatValue]/100;
     }
-    
-    
-    
     
     //Toss Decision
     NSMutableArray *tossResultsArray = [h2hResultsDict valueForKey:@"Tossresults"];
