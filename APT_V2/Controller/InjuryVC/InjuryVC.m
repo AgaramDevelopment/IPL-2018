@@ -63,7 +63,6 @@ typedef enum {
     BOOL isAssessment;
     BOOL isOnset;
     BOOL isExpected;
-    BOOL isoccurance;
     BOOL islocation;
     
     BOOL isXray;
@@ -82,33 +81,6 @@ typedef enum {
 //@property (nonatomic,strong)IBOutlet StepSlider * StSlider;
 
 
-@property (strong, nonatomic) IBOutlet StepSlider *Slider1;
-@property (nonatomic,strong)NSMutableArray  * InjuryListArray;
-@property (nonatomic,weak) IBOutlet UITextField * compliant_Txt;
-@property (nonatomic,weak) IBOutlet UITextField * comfirmatory_Txt;
-@property (nonatomic,weak) IBOutlet UITextField * diagnosis_Txt;
-@property (nonatomic,weak) IBOutlet UIButton * delay_Btn;
-@property (nonatomic,weak) IBOutlet UIButton * tur_Btn;
-@property (nonatomic,weak) IBOutlet UIButton * right_Btn;
-@property (nonatomic,weak) IBOutlet UIButton * left_Btn;
-@property (nonatomic,weak) IBOutlet UIButton * expectedright_Btn;
-@property (nonatomic,weak) IBOutlet UIButton * expectedLeft_Btn;
-@property (nonatomic,weak) IBOutlet UILabel * date_lbl;
-@property (nonatomic,weak) IBOutlet UIView * navigation_view;
-@property (nonatomic,weak) IBOutlet UITableView * pop_Tbl;
-@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewYposition;
-@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewXposition;
-@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewWidth;
-
-@property (nonatomic,weak) IBOutlet UIView * occurrence_view;
-@property (nonatomic,weak) IBOutlet UIView * location_view;
-@property (nonatomic,weak) IBOutlet UIView * site_view;
-@property (nonatomic,weak) IBOutlet UIView * type_view;
-@property (nonatomic,weak) IBOutlet UIView * casuse_view;
-
-@property (nonatomic,weak)IBOutlet UIView * filepopview;
-@property (nonatomic,weak) IBOutlet UIButton * selectFile;
-@property (nonatomic,strong) NSMutableArray * commonArray;
 
 
 
@@ -141,7 +113,7 @@ typedef enum {
     
     
     objWebservice = [WebService new];
-
+    _MainArray = [NSMutableArray new];
     [self customnavigationmethod];
     [self setBorderwidthMethod];
     self.filepopview.hidden = YES;
@@ -169,8 +141,13 @@ typedef enum {
     self.TeamArray =[[NSMutableArray alloc]init];
     self.playerArray =[[NSMutableArray alloc]init];
     _commonArray = [NSMutableArray new];
-    [self startFetchTeamPlayerGameService];
+    [self FetchMetadatawebservice];
+    
+    NSDictionary* occurance = @{@"occurance":@[@"Training",@"Competition"]};
+    NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
+    NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
 
+    
 
 }
 
@@ -180,6 +157,16 @@ typedef enum {
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
+}
+
+-(NSArray *)getInjurySite
+{
+    NSArray* arr = @[@{@"name":@"Anterior",@"code":@"MSC165"},
+                     @{@"name":@"Posterier",@"code":@"MSC167"},
+                     @{@"name":@"Medical",@"code":@"MSC166"},
+                     @{@"name":@"Lateral",@"code":@"MSC168"},
+                     ];
+    return arr;
 }
 
 -(void)customnavigationmethod
@@ -193,7 +180,7 @@ typedef enum {
     
     objCustomNavigation.btn_back.hidden =NO;
     objCustomNavigation.menu_btn.hidden =YES;
-            [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+            [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -201,8 +188,8 @@ typedef enum {
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
-    
+//    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)setBorderwidthMethod
@@ -259,67 +246,29 @@ typedef enum {
 
 -(IBAction)didClickOccurrencePopBtn:(id)sender
 {
-    self.popviewYposition.constant = self.occurrence_view.frame.origin.y-95;
-    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
-    self.popviewWidth.constant = self.occurrence_view.frame.size.width-180;
-    if(isOccurrence == NO)
-    {
-        self.pop_Tbl.hidden = NO;
-        isOccurrence = YES;
-        selectInjuryOccuranceCode=@"MSC131";
-//        self.SelectOccuranceArray = self.TrainingArray;
-//        self.commonArray = self.TrainingArray;
-        self.commonArray =[[NSMutableArray alloc]init];
-        
-        if(self.isUpdate == YES)
-        {
-            if([selectInjuryOccuranceCode isEqual: @"MSC131"])
-            {
-                self.commonArray = self.TrainingArray;
-            }
-            else
-            {
-                self.commonArray = self.competitionArray;
-            }
-            
-        }
-        else
-        {
-            if([selectInjuryOccuranceCode isEqual: @"MSC131"])
-            {
-                self.commonArray = self.TrainingArray;
-            }
-            else
-            {
-                self.commonArray = self.competitionArray;
-            }
-            
-        }
-        
-        //self.commonArray = self.SelectOccuranceArray;
-        
-        [self.pop_Tbl reloadData];
-
-        [self showAnimate];
-        
-    }
-    else
-    {
-        selectInjuryOccuranceCode=@"MSC133";
-
-        self.pop_Tbl.hidden = YES;
-        isOccurrence = NO;
-        [self removeAnimate];
-    }
+    [self.pop_Tbl setHidden:NO];
+//    self.popviewYposition.constant = self.occurrence_view.frame.origin.y-95;
+//    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
+//    self.popviewWidth.constant = self.occurrence_view.frame.size.width-180;
     
+    self.popviewYposition.constant = CGRectGetMaxY(self.occurrence_view.frame)+5;
+    self.popviewXposition.constant = CGRectGetMinX(self.occurrence_view.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.occurrence_view.frame);
+    [self.pop_Tbl updateConstraintsIfNeeded];
+    
+    self.commonArray =[[NSMutableArray alloc]init];
+    _commonArray = [_MainArray valueForKey:@"Training"];
+    
+    isOccurrence = YES;
     isCasuse = NO;
     isLocation = NO;
     isSite = NO;
     isType = NO;
-    
-    
-    
 
+    [self.pop_Tbl reloadData];
+    [self showAnimate];
+
+    
 }
 
 -(IBAction)didClickLocationPopBtn:(id)sender
@@ -327,85 +276,29 @@ typedef enum {
     self.popviewYposition.constant = self.location_view.frame.origin.y-85;
     self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
     self.popviewWidth.constant = self.location_view.frame.size.width-180;
-    if(isLocation == NO)
-    {
-        selectInjuryLocationCode=@"MSC141";
-        self.pop_Tbl.hidden = NO;
-        isLocation = YES;
-        self.commonArray =[[NSMutableArray alloc]init];
-        //self.commonArray = self.SelectLocationArray;
-        if(self.isUpdate == YES)
-        {
-            if([selectInjuryLocationCode isEqual: @"MSC141"])
-            {
-                self.commonArray = self.headandtruckArray;
-            }
-            else if([selectInjuryLocationCode isEqual: @"MSC149"])
-            {
-                self.commonArray = self.upperextremityArray;
-            }
-            else if([selectInjuryLocationCode isEqual: @"MSC157"])
-            {
-                self.commonArray = self.lowerextremityArray;
-            }
-            
-        }
-        else
-        {
-            if([selectInjuryLocationCode isEqual: @"MSC141"])
-            {
-                self.commonArray = self.headandtruckArray;
-            }
-            else if([selectInjuryLocationCode isEqual: @"MSC149"])
-            {
-                self.commonArray = self.upperextremityArray;
-            }
-            else if([selectInjuryLocationCode isEqual: @"MSC157"])
-            {
-                self.commonArray = self.lowerextremityArray;
-            }
-            
-        }
-        
-        
-        
-        [self.pop_Tbl reloadData];
-
-        [self showAnimate];
-    }
-    else
-    {
-        self.pop_Tbl.hidden = YES;
-        isLocation = NO;
-        [self removeAnimate];
-    }
     
     isCasuse = NO;
     isOccurrence = NO;
     isSite = NO;
     isType = NO;
+    isLocation = YES;
+
+    self.commonArray =[[NSMutableArray alloc]init];
+//    _commonArray = [_MainArray valueForKey:@"Training"];
+    [self.pop_Tbl setHidden:NO];
+    [self.pop_Tbl reloadData];
+    [self showAnimate];
+
 }
 
 -(IBAction)didClicksitePopBtn:(id)sender
 {
-    self.popviewYposition.constant = self.site_view.frame.origin.y-40;
-    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
-    self.popviewWidth.constant = self.site_view.frame.size.width-180;
-    if(isSite == NO)
-    {
-        selectInjurySiteCode=@"MSC165";
+    self.popviewYposition.constant = CGRectGetMaxY(self.site_view.frame)+5;
+    self.popviewXposition.constant = self.site_view.frame.origin.x;
+    self.popviewWidth.constant = self.site_view.frame.size.width;
+    [self.pop_Tbl updateConstraintsIfNeeded];
 
-        self.pop_Tbl.hidden = NO;
-        isSite = YES;
-        [self showAnimate];
-    }
-    else
-    {
-        self.pop_Tbl.hidden = YES;
-        isSite = NO;
-        [self removeAnimate];
-    }
-    
+    isSite = YES;
     isCasuse = NO;
     isOccurrence = NO;
     isLocation = NO;
@@ -413,55 +306,51 @@ typedef enum {
 }
 -(IBAction)didClickTypeBtn:(id)sender
 {
-    self.popviewYposition.constant = self.type_view.frame.origin.y-150;
-    self.popviewXposition.constant = 5;
-    self.popviewWidth.constant = self.type_view.frame.size.width/2.1;
+    [self.pop_Tbl setHidden:NO];
+    self.popviewYposition.constant = CGRectGetMaxY(self.type_view.superview.frame)+5;
+    self.popviewXposition.constant = self.type_view.frame.origin.x;
+    self.popviewWidth.constant = self.type_view.frame.size.width;
+    [self.pop_Tbl updateConstraintsIfNeeded];
     
-    if(isType == NO)
-    {
-        self.pop_Tbl.hidden = NO;
-        isType = YES;
-        [self.pop_Tbl reloadData];
+//    self.popviewYposition.constant = CGRectGetMaxY(self.occurrence_view.frame)+5;
+//    self.popviewXposition.constant = CGRectGetMinX(self.occurrence_view.frame);
+//    self.popviewWidth.constant = CGRectGetWidth(self.occurrence_view.frame);
+//    [self.pop_Tbl updateConstraintsIfNeeded];
 
-        [self showAnimate];
-    }
-    else
-    {
-        self.pop_Tbl.hidden = YES;
-        isType = NO;
-        
-        [self removeAnimate];
-    }
-    
+
+    isType = YES;
     isCasuse = NO;
     isOccurrence = NO;
     isLocation = NO;
     isSite = NO;
+    
+    self.commonArray =[[NSMutableArray alloc]init];
+    _commonArray = [_MainArray valueForKey:@"InjuryType"];
+
+    [self.pop_Tbl reloadData];
+    [self showAnimate];
+    
 }
 -(IBAction)didClickCasuseBtn:(id)sender
 {
-    self.popviewYposition.constant = self.type_view.frame.origin.y-150;
-    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/2.05);
-    self.popviewWidth.constant = self.type_view.frame.size.width/2.1;
-    if(isCasuse == NO)
-    {
-        self.pop_Tbl.hidden = NO;
-        isCasuse = YES;
-        [self.pop_Tbl reloadData];
+    [self.pop_Tbl setHidden:NO];
+    self.popviewYposition.constant = CGRectGetMaxY(self.casuse_view.superview.frame)+5;
+    self.popviewXposition.constant = self.casuse_view.frame.origin.x;
+    self.popviewWidth.constant = self.casuse_view.frame.size.width;
+    [self.pop_Tbl updateConstraintsIfNeeded];
 
-        [self showAnimate];
-    }
-    else
-    {
-        self.pop_Tbl.hidden = YES;
-        isCasuse = NO;
-        [self removeAnimate];
-    }
-    
+
+    isCasuse = YES;
     isType = NO;
     isOccurrence = NO;
     isLocation = NO;
     isSite = NO;
+    self.commonArray =[[NSMutableArray alloc]init];
+    _commonArray = [_MainArray valueForKey:@"InjuryCause"];
+
+    [self.pop_Tbl reloadData];
+    [self showAnimate];
+
 }
 
 -(IBAction)didClickDelayBtn:(id)sender
@@ -489,22 +378,28 @@ typedef enum {
 {
     [self setInningsBySelection:@"6"];
 }
+
 -(IBAction)didClickfilePopview:(id)sender
 {
-    if(isSelectPop == NO)
-    {
-        self.filepopview.hidden = NO;
-        isSelectPop = YES;
-        [self showAnimate];
-    }
-    else
-    {
-        self.filepopview.hidden = YES;
-        isSelectPop = NO;
-        [self removeAnimate];
-    }
+    
+//    if(isSelectPop == NO)
+//    {
+//        self.filepopview.hidden = NO;
+//        isSelectPop = YES;
+//        [self showAnimate];
+//    }
+//    else
+//    {
+//        self.filepopview.hidden = YES;
+//        isSelectPop = NO;
+//        [self removeAnimate];
+//    }
+    
+    [self.view bringSubviewToFront:self.filepopview];
+    [self.filepopview setHidden:NO];
     
 }
+
 - (void)showAnimate
 {
     self.pop_Tbl.transform = CGAffineTransformMakeScale(1.3, 1.3);
@@ -522,7 +417,6 @@ typedef enum {
         self.pop_Tbl.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (finished) {
-            // [self.popTblView removeFromSuperview];
             self.pop_Tbl.hidden = YES;
         }
     }];
@@ -771,22 +665,22 @@ typedef enum {
     imageToPost = image;
     if(isXray ==YES)
     {
-        self.xrayLbl.text =savedImagePath;
+//        self.xrayLbl.text =savedImagePath;
         xrData = [self encodeToBase64String:imageToPost];
     }
     else if (isCT ==YES)
     {
-        self.CTScanLbl.text =savedImagePath;
+//        self.CTScanLbl.text =savedImagePath;
         ctData = [self encodeToBase64String:imageToPost];
     }
     else if (isMRI ==YES)
     {
-        self.MRILbl.text =savedImagePath;
+//        self.MRILbl.text =savedImagePath;
         mrData = [self encodeToBase64String:imageToPost];
     }
     else if (isBlood ==YES)
     {
-        self.BloodTestLbl.text =savedImagePath;
+//        self.BloodTestLbl.text =savedImagePath;
 //        bloodData = [self encodeToBase64String:imageToPost];
     }
     
@@ -1068,14 +962,28 @@ typedef enum {
 
 -(void)FetchMetadatawebservice
 {
-    //[COMMON loadingIcon:self.view];
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+    
         [objWebservice getFetchMetadataList:FetchMetadata success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"API URL %@",URL_FOR_RESOURCE(FetchMetadata));
             NSLog(@"response ; %@",responseObject);
             
-            if(responseObject >0)
+            if(responseObject)
             {
+                
+//                NSDictionary* occurance = @{@"occurance":@[@"Training",@"Competition"]};
+//                NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
+//                NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
+//
+//                NSMutableDictionary* dict = responseObject;
+//                [dict addEntriesFromDictionary:occurance];
+//                [dict addEntriesFromDictionary:location];
+//                [dict addEntriesFromDictionary:injurySite];
+//
+//                _commonArray = dict;
+                
+                _MainArray = responseObject;
                 
                 self.TrainingArray =[responseObject valueForKey:@"Training"];
                 
@@ -1140,8 +1048,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC132"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.TrainingArray.count;i++)
                         {
@@ -1158,8 +1066,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC133"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.competitionArray.count;i++)
                         {
@@ -1177,8 +1085,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC134"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.competitionArray.count;i++)
                         {
@@ -1196,8 +1104,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC135"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.competitionArray.count;i++)
                         {
@@ -1215,8 +1123,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC136"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.competitionArray.count;i++)
                         {
@@ -1234,8 +1142,8 @@ typedef enum {
                     }
                     else if([selectoccurancecode isEqualToString:@"MSC137"])
                     {
-                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.TrainingBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.CompetitionBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.competitionArray.count;i++)
                         {
@@ -1258,9 +1166,9 @@ typedef enum {
                     
                     if([selectlocationCode isEqualToString:@"MSC141"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
                         {
@@ -1279,9 +1187,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC142"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
                         {
@@ -1301,9 +1209,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC143"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
                         {
@@ -1324,9 +1232,9 @@ typedef enum {
                     
                     else if([selectlocationCode isEqualToString:@"MSC144"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
                         {
@@ -1347,9 +1255,9 @@ typedef enum {
                     
                     else if([selectlocationCode isEqualToString:@"MSC145"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
                         {
@@ -1369,9 +1277,9 @@ typedef enum {
                     
                     else if([selectlocationCode isEqualToString:@"MSC146"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
@@ -1391,9 +1299,9 @@ typedef enum {
                     
                     else if([selectlocationCode isEqualToString:@"MSC147"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
@@ -1413,9 +1321,9 @@ typedef enum {
                     
                     else if([selectlocationCode isEqualToString:@"MSC148"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.headandtruckArray.count;i++)
@@ -1435,9 +1343,9 @@ typedef enum {
                     
                     if([selectlocationCode isEqualToString:@"MSC149"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1456,9 +1364,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC150"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1477,9 +1385,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC151"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1498,9 +1406,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC152"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1519,9 +1427,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC153"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1540,9 +1448,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC154"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1561,9 +1469,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC155"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1582,9 +1490,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC156"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.upperextremityArray.count;i++)
@@ -1605,9 +1513,9 @@ typedef enum {
                     
                     if([selectlocationCode isEqualToString:@"MSC157"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1626,9 +1534,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC158"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1647,9 +1555,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC159"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1668,9 +1576,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC160"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1689,9 +1597,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC161"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1710,9 +1618,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC162"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1731,9 +1639,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC163"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1752,9 +1660,9 @@ typedef enum {
                     }
                     else if([selectlocationCode isEqualToString:@"MSC164"])
                     {
-                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.headerBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.upperBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lowerBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                         
                         
                         for(int i=0;i<self.lowerextremityArray.count;i++)
@@ -1776,50 +1684,50 @@ typedef enum {
                     
                     
                     
-                    if([selectInjurySiteCode isEqualToString:@"MSC165"])
-                    {
-                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        
-                    }
-                    else if([selectInjurySiteCode isEqualToString:@"MSC167"])
-                    {
-                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        
-                    }
-                    else if([selectInjurySiteCode isEqualToString:@"MSC166"])
-                    {
-                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        
-                    }
-                    else if([selectInjurySiteCode isEqualToString:@"MSC168"])
-                    {
-                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        
-                    }
+//                    if([selectInjurySiteCode isEqualToString:@"MSC165"])
+//                    {
+//                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//
+//                    }
+//                    else if([selectInjurySiteCode isEqualToString:@"MSC167"])
+//                    {
+//                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//
+//                    }
+//                    else if([selectInjurySiteCode isEqualToString:@"MSC166"])
+//                    {
+//                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//
+//                    }
+//                    else if([selectInjurySiteCode isEqualToString:@"MSC168"])
+//                    {
+//                        [self.anteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.posteriorBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.medicalBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.lateralBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//
+//                    }
                     
                     
                     
                     if([selectInjurySideCode isEqualToString:@"MSC169"])
                     {
-                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
                     }
                     else
                     {
-                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.rightBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.leftBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
                     }
                     
                     for(int i=0;i<self.injuryTypeArray.count;i++)
@@ -1830,7 +1738,7 @@ typedef enum {
                         
                         if([injuryTypeCode isEqualToString:OccCode])
                         {
-                            self.injurytypeLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+//                            self.injurytypeLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
                             
                         }
                     }
@@ -1843,22 +1751,22 @@ typedef enum {
                         
                         if([injuryCausecode isEqualToString:OccCode])
                         {
-                            self.injuryCauseLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
+//                            self.injuryCauseLbl.text = [dic valueForKey:@"InjuryMetaDataTypeCode"];
                             
                         }
                     }
                     
                     
-                    if([selectExpertOpinionCode isEqualToString:@"MSC215"])
-                    {
-                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                    }
-                    else
-                    {
-                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                    }
+//                    if([selectExpertOpinionCode isEqualToString:@"MSC215"])
+//                    {
+//                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                    }
+//                    else
+//                    {
+//                        [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+//                        [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+//                    }
                     
                     
                     
@@ -1899,16 +1807,12 @@ typedef enum {
 //                    }
                 }
             }
-            [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
         }];
-        
-    }
     
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [self.commonArray count];
@@ -1927,36 +1831,36 @@ typedef enum {
         Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
     }
-    if(isGame ==YES)
+    if(isGame)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"gameName"] objectAtIndex:indexPath.row];
     }
-    else if (isTeam ==YES)
+    else if (isTeam)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"teamName"] objectAtIndex:indexPath.row];
         
     }
-    else if (isPlayer ==YES)
+    else if (isPlayer)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"athleteName"] objectAtIndex:indexPath.row];
         
     }
-    else if (isinjuryType ==YES)
+    else if (isType)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         
     }
-    else if (isinjuryCause ==YES)
+    else if (isCasuse)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         
     }
-    else if (isoccurance ==YES)
+    else if (isOccurrence)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         
     }
-    else if (islocation ==YES)
+    else if (islocation)
     {
         Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         
@@ -1996,17 +1900,17 @@ typedef enum {
 //        self.playerLbl.text =[[self.commonArray valueForKey:@"athleteName"] objectAtIndex:indexPath.row];
 //        selectPlayerCode = [[self.commonArray valueForKey:@"athleteCode"] objectAtIndex:indexPath.row];
     }
-    else if (isinjuryType ==YES)
+    else if (isType ==YES)
     {
-        self.injurytypeLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        self.injurytypeLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         injuryTypeCode =[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
-    else if (isinjuryCause ==YES)
+    else if (isCasuse ==YES)
     {
-        self.injuryCauseLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        self.injuryCauseLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         injuryCausecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
-    else if (isoccurance ==YES)
+    else if (isOccurrence ==YES)
     {
         self.occurancelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         selectoccurancecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
@@ -2062,6 +1966,11 @@ typedef enum {
     
     [self InsertWebservice];
     
+}
+
+-(IBAction)hideFileView:(id)sender
+{
+    [self.filepopview setHidden:YES];
 }
 @end
 

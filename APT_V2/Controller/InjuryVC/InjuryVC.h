@@ -10,61 +10,46 @@
 #import "Header.h"
 @interface InjuryVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet StepSlider *Slider1;
+@property (nonatomic,strong)NSMutableArray  * InjuryListArray;
+@property (nonatomic,weak) IBOutlet UITextField * compliant_Txt;
+@property (nonatomic,weak) IBOutlet UITextField * comfirmatory_Txt;
+@property (nonatomic,weak) IBOutlet UITextField * diagnosis_Txt;
+@property (nonatomic,weak) IBOutlet UIButton * delay_Btn;
+@property (nonatomic,weak) IBOutlet UIButton * tur_Btn;
+@property (nonatomic,weak) IBOutlet UIButton * right_Btn;
+@property (nonatomic,weak) IBOutlet UIButton * left_Btn;
+@property (nonatomic,weak) IBOutlet UIButton * expectedright_Btn;
+@property (nonatomic,weak) IBOutlet UIButton * expectedLeft_Btn;
+@property (nonatomic,weak) IBOutlet UILabel * date_lbl;
+@property (nonatomic,weak) IBOutlet UIView * navigation_view;
+@property (nonatomic,weak) IBOutlet UITableView * pop_Tbl;
+@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewYposition;
+@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewXposition;
+@property (nonatomic,weak) IBOutlet NSLayoutConstraint * popviewWidth;
 
-@property (nonatomic,strong) IBOutlet UILabel * gameLbl;
-@property (nonatomic,strong) IBOutlet UILabel * TeamLbl;
-@property (nonatomic,strong) IBOutlet UILabel * playerLbl;
-@property (nonatomic,strong) IBOutlet UILabel * injurytypeLbl;
-@property (nonatomic,strong) IBOutlet UILabel * injuryCauseLbl;
-@property (nonatomic,strong) IBOutlet UILabel * assessmentLbl;
-@property (nonatomic,strong) IBOutlet UILabel * onSetLbl;
-@property (nonatomic,strong) IBOutlet UITextField * injuryNameTxt;
-@property (nonatomic,strong) IBOutlet UITextField * cheifcomplientTxt;
-@property (nonatomic,strong) IBOutlet UILabel * xrayLbl;
-@property (nonatomic,strong) IBOutlet UILabel * CTScanLbl;
-@property (nonatomic,strong) IBOutlet UILabel * MRILbl;
-@property (nonatomic,strong) IBOutlet UILabel * BloodTestLbl;
-@property (nonatomic,strong) IBOutlet UILabel * expectedLbl;
-@property (nonatomic,strong) IBOutlet UIButton * updateBtn;
-@property (nonatomic,strong) IBOutlet UIButton * deleteBtn;
-@property (nonatomic,strong) IBOutlet UIButton * saveBtn;
+@property (nonatomic,weak) IBOutlet UIView * occurrence_view;
+@property (nonatomic,weak) IBOutlet UIView * location_view;
+@property (nonatomic,weak) IBOutlet UIView * site_view;
+@property (nonatomic,weak) IBOutlet UIView * type_view;
+@property (nonatomic,weak) IBOutlet UIView * casuse_view;
 
-@property (nonatomic,strong) IBOutlet UIButton * traumaticBtn;
+@property (nonatomic,weak)IBOutlet UIView * filepopview;
+@property (nonatomic,weak) IBOutlet UIButton * selectFile;
+@property (nonatomic,strong) NSMutableArray * commonArray;
+@property (nonatomic,strong) NSMutableArray * MainArray;
 
-@property (nonatomic,strong) IBOutlet UIButton * delayedBtn;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UILabel *occurancelbl;
+@property (weak, nonatomic) IBOutlet UILabel *locationlbl;
+@property (weak, nonatomic) IBOutlet UILabel *sitelbl;
+@property (weak, nonatomic) IBOutlet UILabel *typelbl;
+@property (weak, nonatomic) IBOutlet UILabel *causelbl;
 
-@property (nonatomic,strong) IBOutlet UIButton * TrainingBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * CompetitionBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * headerBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * upperBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * lowerBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * anteriorBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * posteriorBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * medicalBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * lateralBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * rightBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * leftBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * expertYesBtn;
-
-@property (nonatomic,strong) IBOutlet UIButton * expertNoBtn;
-
-@property (nonatomic,strong) IBOutlet UILabel * occurancelbl;
 
 @property (nonatomic,strong) IBOutlet UIButton * occurranceBtn;
 
 @property (nonatomic,strong) IBOutlet UIView * locationselectview;
 
-@property (nonatomic,strong) IBOutlet UILabel * locationlbl;
 
 @end
