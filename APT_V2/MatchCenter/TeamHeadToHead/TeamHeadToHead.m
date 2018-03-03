@@ -178,11 +178,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
+    
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
+    cell.textLabel.numberOfLines = 2;
+    [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
     if(isteam1 == YES) {
         cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
     }
@@ -233,6 +236,11 @@
          self.Poptable.hidden = YES;
     }
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewAutomaticDimension;
+//}
 
 - (void)headToHeadPageLoadGetService {
     /*
@@ -308,57 +316,147 @@
 
 - (void)assignH2HResultsArrayValuesToView:(NSMutableDictionary *)h2hResultsDict {
     
-        NSMutableArray *matchResultsArray = [h2hResultsDict valueForKey:@"Matchresults"];
-        NSLog(@"matchResultsDict:%@", matchResultsArray);
+    //Matches Win/Loss
+    NSMutableArray *matchResultsArray = [h2hResultsDict valueForKey:@"Matchresults"];
+    NSLog(@"matchResultsDict:%@", matchResultsArray);
     for (id key in matchResultsArray) {
         //Team-1
-        
-        
-        
         self.playedT1Lbl.text = [self checkNSNumber:[key valueForKey:@"TeamA"]];
-         self.playedT1PV.progress = 1 - [self.playedT1Lbl.text floatValue]/100;
-        
-        
+        self.playedT1PV.progress = 1 - [self.playedT1Lbl.text floatValue]/100;
         
         self.homeT1Lbl.text = [self checkNSNumber:[key valueForKey:@"HomeAT"]];
         self.homeT1PV.progress = 1 - [self.homeT1Lbl.text floatValue]/100;
         
-        
         self.awayT1Lbl.text = [self checkNSNumber:[key valueForKey:@"AwayAT"]];
         self.awayT1PV.progress = 1 - [self.awayT1Lbl.text floatValue]/100;
-        
         
         self.playOffsT1Lbl.text = [self checkNSNumber:[key valueForKey:@"PlayOffAT"]];
         self.playOffsT1PV.progress = 1 - [self.playOffsT1Lbl.text floatValue]/100;
         
         //Team-2
-        
         self.playedT2Lbl.text = [self checkNSNumber:[key valueForKey:@"TeamB"]];
         self.playedT2PV.progress = [self.playedT2Lbl.text floatValue]/100;
-        
         
         self.homeT2Lbl.text = [self checkNSNumber:[key valueForKey:@"HomeBT"]];
         self.homeT2PV.progress = [self.homeT2Lbl.text floatValue]/100;
         
-        
         self.awayT2Lbl.text = [self checkNSNumber:[key valueForKey:@"AwayBT"]];
         self.awayT2PV.progress = [self.awayT2Lbl.text floatValue]/100;
         
-        
         self.playOffsT2Lbl.text = [self checkNSNumber:[key valueForKey:@"PlayOffBT"]];
         self.playOffsT2PV.progress = [self.playOffsT2Lbl.text floatValue]/100;
+    }
+    
+    //Team1 & Team2 Score Card and Progress View
+    NSMutableArray *teamWideResultArray = [h2hResultsDict valueForKey:@"Teamwideresult"];
+    NSLog(@"teamWideResultDict:%@", teamWideResultArray);
+    for (id key in teamWideResultArray) {
+        //Team1
+        self.avgRunsT1Lbl.text = [self checkNull:[key valueForKey:@"AAvgRuns"]];
+        self.avgWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"AAvgwkts"]];
+        self.avgRunsOrWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"AAVGRW"]];
+        self.highScoreT1Lbl.text = [self checkNull:[key valueForKey:@"ATHighscore"]];
+        self.lowScoreT1Lbl.text = [self checkNull:[key valueForKey:@"ATLowscore"]];
+        
+        //Team1 Progress View
+        self.runsScoredT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATRuns"]];
+        self.runsScoredT1PV.progress = 1 - [self.runsScoredT1Lbl.text floatValue]/100;
+        
+        self.runsPerOverT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATOvers"]];
+        self.runsPerOverT1PV.progress = 1 - [self.runsPerOverT1Lbl.text floatValue]/100;
+        
+        self.wicketsLostT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATWkts"]];
+        self.wicketsLostT1PV.progress = 1 - [self.wicketsLostT1Lbl.text floatValue]/100;
+        
+        self.battingSRT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATBATSR"]];
+        self.battingSRT1PV.progress = 1 - [self.battingSRT1Lbl.text floatValue]/100;
+        
+        self.dotBallPercentT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ADotBall"]];
+        self.dotBallPercentT1PV.progress = 1 - [self.dotBallPercentT1Lbl.text floatValue]/100;
+        
+        self.boundariesPercentT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATBound"]];
+        self.boundariesPercentT1PV.progress = 1 - [self.dotBallPercentT1Lbl.text floatValue]/100;
+        
+        self.bowlingSRT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ABowlingSR"]];
+        self.bowlingSRT1PV.progress = 1 - [self.bowlingSRT1Lbl.text floatValue]/100;
+        
+        self.bowlingAvgT1Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
+        self.bowlingAvgT1PV.progress = 1 - [self.bowlingAvgT1Lbl.text floatValue]/100;
+        //Team2
+        self.avgRunsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgRuns"]];
+        self.avgWicketsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgwkts"]];
+        self.avgRunsOrWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"BAVGRW"]];
+        self.highScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTHighscore"]];
+        self.lowScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTLowscore"]];
+        
+            //Team1 Progress View
+        self.runsScoredT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTRuns"]];
+        self.runsScoredT2PV.progress = 1 - [self.runsScoredT2Lbl.text floatValue]/100;
+        
+        self.runsPerOverT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTOvers"]];
+        self.runsPerOverT2PV.progress = 1 - [self.runsPerOverT2Lbl.text floatValue]/100;
+        
+        self.wicketsLostT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTWkts"]];
+        self.wicketsLostT2PV.progress = 1 - [self.wicketsLostT2Lbl.text floatValue]/100;
+        
+        self.battingSRT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTBATSR"]];
+        self.battingSRT2PV.progress = 1 - [self.battingSRT2Lbl.text floatValue]/100;
+        
+        self.dotBallPercentT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BDotBall"]];
+        self.dotBallPercentT2PV.progress = 1 - [self.dotBallPercentT2Lbl.text floatValue]/100;
+        
+        self.boundariesPercentT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTBound"]];
+        self.boundariesPercentT2PV.progress = 1 - [self.dotBallPercentT2Lbl.text floatValue]/100;
+        
+        self.bowlingSRT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BBowlingSR"]];
+        self.bowlingSRT2PV.progress = 1 - [self.bowlingSRT2Lbl.text floatValue]/100;
+        
+        self.bowlingAvgT2Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
+        self.bowlingAvgT2PV.progress = 1 - [self.bowlingAvgT2Lbl.text floatValue]/100;
         
     }
     
-
-        NSMutableArray *teamWideResultArray = [h2hResultsDict valueForKey:@"Teamwideresult"];
-        NSLog(@"teamWideResultDict:%@", teamWideResultArray);
-        
-        NSMutableArray *tossResultsArray = [h2hResultsDict valueForKey:@"Tossresults"];
-        NSLog(@"tossResults:%@", tossResultsArray);
-
     
+    
+    
+    //Toss Decision
+    NSMutableArray *tossResultsArray = [h2hResultsDict valueForKey:@"Tossresults"];
+    NSLog(@"tossResults:%@", tossResultsArray);
+    //Team-1
+    for (id key in tossResultsArray) {
+        self.tossWonT1Lbl.text = [self checkNSNumber:[key valueForKey:@"TosswonTeamA"]];
+        self.tossWonT1PV.progress = 1 - [self.tossWonT1Lbl.text floatValue]/100;
+        
+        self.decisionBatT1Lbl.text = [self checkNSNumber:[key valueForKey:@"DecisionBattingA"]];
+        self.decisionBatT1PV.progress = 1 - [self.decisionBatT1Lbl.text floatValue]/100;
+        
+        self.decisionBowlT1Lbl.text = [self checkNSNumber:[key valueForKey:@"DecisionBowlingA"]];
+        self.decisionBowlT1PV.progress = 1 - [self.decisionBowlT1Lbl.text floatValue]/100;
+        
+        self.battingFirstInnWinT1Lbl.text = [self checkNSNumber:[key valueForKey:@"BatFirstInnsTeamA"]];
+        self.battingFirstInnWinT1PV.progress = 1 - [self.battingFirstInnWinT1Lbl.text floatValue]/100;
+        
+        self.battingSecondInnWinT1Lbl.text = [self checkNSNumber:[key valueForKey:@"BatSecondInnsTeamA"]];
+        self.battingSecondInnWinT1PV.progress = 1 - [self.battingSecondInnWinT1Lbl.text floatValue]/100;
+        
+        //Team-2
+        self.tossWonT2Lbl.text = [self checkNSNumber:[key valueForKey:@"TosswonTeamB"]];
+        self.tossWonT2PV.progress = [self.tossWonT2Lbl.text floatValue]/100;
+        
+        self.decisionBatT2Lbl.text = [self checkNSNumber:[key valueForKey:@"DecisionBattingB"]];
+        self.decisionBatT2PV.progress = [self.decisionBatT2Lbl.text floatValue]/100;
+        
+        self.decisionBowlT2Lbl.text = [self checkNSNumber:[key valueForKey:@"DecisionBowlingB"]];
+        self.decisionBowlT2PV.progress = [self.decisionBowlT2Lbl.text floatValue]/100;
+        
+        self.battingFirstInnWinT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BatFirstInnsTeamB"]];
+        self.battingFirstInnWinT2PV.progress = [self.battingFirstInnWinT2Lbl.text floatValue]/100;
+        
+        self.battingSecondInnWinT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BatSecondInnsTeamB"]];
+        self.battingSecondInnWinT2PV.progress = [self.battingSecondInnWinT2Lbl.text floatValue]/100;
+    }
 }
+
 -(void)altermsg:(NSString *) message
 {
     UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:@"Add Illness" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

@@ -167,8 +167,11 @@
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-A" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pg7-D8-Em8">
                                                                             <rect key="frame" x="5" y="0.0" width="125" height="30"/>
                                                                             <nil key="textColor"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <textInputTraits key="textInputTraits"/>
+                                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            </variation>
                                                                             <connections>
                                                                                 <outlet property="delegate" destination="-1" id="K6l-Ip-Gu2"/>
                                                                             </connections>
@@ -221,8 +224,11 @@
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HRp-GZ-SYA">
                                                                             <rect key="frame" x="5" y="0.0" width="125" height="30"/>
                                                                             <nil key="textColor"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <textInputTraits key="textInputTraits"/>
+                                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                            </variation>
                                                                             <connections>
                                                                                 <outlet property="delegate" destination="-1" id="HCy-4j-jYG"/>
                                                                             </connections>
@@ -305,8 +311,11 @@
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Competition" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="atK-wi-HS1">
                                                                     <rect key="frame" x="5" y="0.0" width="125" height="30"/>
                                                                     <nil key="textColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <textInputTraits key="textInputTraits"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    </variation>
                                                                     <connections>
                                                                         <outlet property="delegate" destination="-1" id="6Jf-Uf-Ufo"/>
                                                                     </connections>
@@ -349,8 +358,11 @@
                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ground" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ej-dX-qrf">
                                                                     <rect key="frame" x="5" y="0.0" width="125" height="30"/>
                                                                     <nil key="textColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <textInputTraits key="textInputTraits"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    </variation>
                                                                     <connections>
                                                                         <outlet property="delegate" destination="-1" id="hdA-Hj-LuW"/>
                                                                     </connections>
@@ -3184,7 +3196,7 @@
                                                 </view>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rJn-ud-tAu">
                                                     <rect key="frame" x="5" y="41" width="240" height="128"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="128" id="2IG-jm-Ay5"/>
                                                         <constraint firstAttribute="width" constant="240" id="beq-vm-VXm"/>
