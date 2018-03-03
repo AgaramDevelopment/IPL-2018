@@ -21,6 +21,8 @@
 @property (nonatomic, strong) IBOutlet UIView *groundView;
 @property (strong, nonatomic) IBOutlet UIView *competitionView;
 
+@property (strong, nonatomic) IBOutlet UIView *InsideTeam2View;
+
 //TextFields Properties
 @property (nonatomic, strong) IBOutlet UITextField *team1TF;
 @property (strong, nonatomic) IBOutlet UITextField *team2TF;
@@ -138,7 +140,7 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingAvgT1PV;
 
 //Team-2  Progress View Properties
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *runsScoredT2PV;
+@property (strong, nonatomic) IBOutlet UIProgressView *runsScoredT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *runsPerOverT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *wicketsLostT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *battingSRT2PV;

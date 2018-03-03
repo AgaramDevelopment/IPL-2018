@@ -153,7 +153,7 @@
                                                             <action selector="didClickStartDatepicker:" destination="paj-fF-mp1" eventType="touchUpInside" id="rKD-vC-6Ud"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_calender" translatesAutoresizingMaskIntoConstraints="NO" id="zL3-4M-Fts">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="zL3-4M-Fts">
                                                         <rect key="frame" x="215" y="10" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="DRv-Lf-xUA"/>
@@ -215,7 +215,7 @@
                                                             <action selector="didClickEndDate:" destination="paj-fF-mp1" eventType="touchUpInside" id="T7s-yc-wSc"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_calender" translatesAutoresizingMaskIntoConstraints="NO" id="j46-Fc-UCn">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="j46-Fc-UCn">
                                                         <rect key="frame" x="215" y="10" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Kae-Kb-wCm"/>
@@ -753,7 +753,7 @@
                                             <constraint firstAttribute="height" constant="45" id="44z-e7-6w2"/>
                                             <constraint firstAttribute="width" constant="45" id="YMO-zQ-uIn"/>
                                         </constraints>
-                                        <state key="normal" image="ico_add"/>
+                                        <state key="normal" image="ico_addWhite"/>
                                         <connections>
                                             <action selector="didClickPlusBtn:" destination="paj-fF-mp1" eventType="touchUpInside" id="kni-KB-wow"/>
                                         </connections>
@@ -1113,7 +1113,7 @@
         <!--Planner ListVC-->
         <scene sceneID="dge-nj-lwT">
             <objects>
-                <viewController storyboardIdentifier="PlannerList" id="BUE-fE-a6L" customClass="PlannerListVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlannerList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BUE-fE-a6L" customClass="PlannerListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WKq-W3-zHx">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6148,10 +6148,9 @@
         <image name="WagonWheel" width="284" height="284"/>
         <image name="fast_forward" width="32" height="32"/>
         <image name="full_screen" width="32" height="32"/>
-        <image name="ico_add" width="16" height="16"/>
         <image name="ico_addWhite" width="24" height="24"/>
-        <image name="ico_calender" width="16" height="16"/>
-        <image name="ico_cmb" width="16" height="16"/>
+        <image name="ico_calendar" width="14" height="14"/>
+        <image name="ico_cmb" width="12" height="12"/>
         <image name="ico_timer" width="16" height="16"/>
         <image name="next" width="32" height="32"/>
         <image name="next_frame" width="32" height="32"/>

@@ -9,19 +9,33 @@
 #import <UIKit/UIKit.h>
 @import Charts;
 
+
 @interface BattingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
+{
+    NSString *innNum;
+    NSString *Result;
+    NSString *types;
+}
 
 @property (nonatomic, strong) IBOutlet BarChartView *chartView;
 -(void) loadChart;
 -(void) loadTableFreez;
+
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 @property (strong, nonatomic) IBOutlet UIView *filterView;
+@property (strong, nonatomic) IBOutlet UIView *CompetitionView;
+@property (strong, nonatomic) IBOutlet UIView *insideCompetitionView;
 
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
 @property (nonatomic, strong) IBOutlet UITableView *PoplistTable;
 @property (nonatomic, strong) IBOutlet UILabel *overViewlbl;
 @property (nonatomic, strong) IBOutlet UILabel *runslbl;
+
+@property (nonatomic, strong) IBOutlet NSMutableArray *ChartValuesArray;
+@property (nonatomic, strong) IBOutlet NSMutableArray *ChartXAxisValuesArray;
+@property (nonatomic, strong) IBOutlet NSMutableArray *TableValuesArray;
 
 
 @end

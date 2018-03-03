@@ -310,3 +310,5 @@
 #define HTHResults         @"APT_HTHRESULTS"
 
 #define StandingsKey         @"APT_TEAMRESULTS"
+
+#define teamBattingKey         @"APT_TEAMBATTING"
