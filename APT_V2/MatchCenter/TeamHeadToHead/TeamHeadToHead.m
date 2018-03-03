@@ -12,6 +12,7 @@
 #import "Config.h"
 #import "WebService.h"
 
+
 @interface TeamHeadToHead ()
 {
     BOOL isteam1;
@@ -132,6 +133,7 @@
     isGround = NO;
     isCompetition = NO;
     self.Poptable.hidden = NO;
+    
     
     self.tableWidth.constant = self.team1View.frame.size.width;
     self.tableXposition.constant = self.team1View.frame.origin.x+5;

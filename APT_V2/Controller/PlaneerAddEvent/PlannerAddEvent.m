@@ -1240,9 +1240,12 @@
                 {
                     [self altermsg:@"Update successfully"];
                     
-                    PlannerVC  * objPlannerlist=[[PlannerVC alloc]init];
-                    objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"Planner"];
-                    [self.navigationController pushViewController:objPlannerlist animated:YES];
+//                    PlannerVC  * objPlannerlist=[[PlannerVC alloc]init];
+//
+//                    objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"Planner"];
+//                    [self.navigationController pushViewController:objPlannerlist animated:YES];
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
 
                 }
                 else{
