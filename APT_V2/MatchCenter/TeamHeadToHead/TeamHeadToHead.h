@@ -21,6 +21,8 @@
 @property (nonatomic, strong) IBOutlet UIView *groundView;
 @property (strong, nonatomic) IBOutlet UIView *competitionView;
 
+@property (strong, nonatomic) IBOutlet UIView *InsideTeam2View;
+
 //TextFields Properties
 @property (nonatomic, strong) IBOutlet UITextField *team1TF;
 @property (strong, nonatomic) IBOutlet UITextField *team2TF;

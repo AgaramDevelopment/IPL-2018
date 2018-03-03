@@ -150,8 +150,8 @@
     
     self.Poptable.hidden = NO;
     self.tableWidth.constant = self.team2View.frame.size.width;
-    self.tableXposition.constant = self.team2View.frame.origin.x+5;
-    self.tableYposition.constant = self.team2View.frame.origin.y+5;
+    self.tableXposition.constant = self.InsideTeam2View.frame.origin.x+self.team2View.frame.origin.x;
+    self.tableYposition.constant = self.InsideTeam2View.frame.origin.y+5;
         //Re-load Table View
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.Poptable reloadData];
