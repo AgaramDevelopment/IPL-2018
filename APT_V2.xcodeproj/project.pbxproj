@@ -150,13 +150,6 @@
 		CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16502045213C00672253 /* DMLazyScrollView.m */; };
 		CE6C16582045213C00672253 /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16522045213C00672253 /* SACalendar.m */; };
 		CE6C16592045213C00672253 /* SACalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16542045213C00672253 /* SACalendarCell.m */; };
-		CE6C16692045216100672253 /* AddParticipantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C165C2045216000672253 /* AddParticipantCell.m */; };
-		CE6C166A2045216100672253 /* AddParticipantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C165D2045216000672253 /* AddParticipantCell.xib */; };
-		CE6C166B2045216100672253 /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16602045216000672253 /* EventRecord.m */; };
-		CE6C166C2045216100672253 /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16622045216000672253 /* PlannerAddEvent.m */; };
-		CE6C166D2045216100672253 /* PlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16652045216000672253 /* PlannerCell.m */; };
-		CE6C166E2045216100672253 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C16662045216000672253 /* PlannerCell.xib */; };
-		CE6C166F2045216100672253 /* PlannerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16682045216000672253 /* PlannerListVC.m */; };
 		CE6C17072045217A00672253 /* FFAddEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16752045217A00672253 /* FFAddEventPopoverController.m */; };
 		CE6C17082045217A00672253 /* FFButtonAddEventWithPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16772045217A00672253 /* FFButtonAddEventWithPopover.m */; };
 		CE6C17092045217A00672253 /* FFCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16792045217A00672253 /* FFCalendarViewController.m */; };
@@ -566,18 +559,6 @@
 		CE6C16532045213C00672253 /* SACalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarCell.h; sourceTree = "<group>"; };
 		CE6C16542045213C00672253 /* SACalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACalendarCell.m; sourceTree = "<group>"; };
 		CE6C16552045213C00672253 /* SACalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarConstants.h; sourceTree = "<group>"; };
-		CE6C165B2045216000672253 /* AddParticipantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddParticipantCell.h; sourceTree = "<group>"; };
-		CE6C165C2045216000672253 /* AddParticipantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddParticipantCell.m; sourceTree = "<group>"; };
-		CE6C165D2045216000672253 /* AddParticipantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddParticipantCell.xib; sourceTree = "<group>"; };
-		CE6C165F2045216000672253 /* EventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRecord.h; sourceTree = "<group>"; };
-		CE6C16602045216000672253 /* EventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRecord.m; sourceTree = "<group>"; };
-		CE6C16612045216000672253 /* PlannerAddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerAddEvent.h; sourceTree = "<group>"; };
-		CE6C16622045216000672253 /* PlannerAddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerAddEvent.m; sourceTree = "<group>"; };
-		CE6C16642045216000672253 /* PlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerCell.h; sourceTree = "<group>"; };
-		CE6C16652045216000672253 /* PlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerCell.m; sourceTree = "<group>"; };
-		CE6C16662045216000672253 /* PlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerCell.xib; sourceTree = "<group>"; };
-		CE6C16672045216000672253 /* PlannerListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerListVC.h; sourceTree = "<group>"; };
-		CE6C16682045216000672253 /* PlannerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerListVC.m; sourceTree = "<group>"; };
 		CE6C16712045217A00672253 /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateProtocol.h; sourceTree = "<group>"; };
 		CE6C16742045217A00672253 /* FFAddEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFAddEventPopoverController.h; sourceTree = "<group>"; };
 		CE6C16752045217A00672253 /* FFAddEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFAddEventPopoverController.m; sourceTree = "<group>"; };
@@ -1506,40 +1487,6 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		CE6C165A2045216000672253 /* PlaneerAddEvent */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C165B2045216000672253 /* AddParticipantCell.h */,
-				CE6C165C2045216000672253 /* AddParticipantCell.m */,
-				CE6C165D2045216000672253 /* AddParticipantCell.xib */,
-				CE6C165E2045216000672253 /* EventRecord */,
-				CE6C16612045216000672253 /* PlannerAddEvent.h */,
-				CE6C16622045216000672253 /* PlannerAddEvent.m */,
-			);
-			path = PlaneerAddEvent;
-			sourceTree = "<group>";
-		};
-		CE6C165E2045216000672253 /* EventRecord */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C165F2045216000672253 /* EventRecord.h */,
-				CE6C16602045216000672253 /* EventRecord.m */,
-			);
-			path = EventRecord;
-			sourceTree = "<group>";
-		};
-		CE6C16632045216000672253 /* PlannerListVC */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16642045216000672253 /* PlannerCell.h */,
-				CE6C16652045216000672253 /* PlannerCell.m */,
-				CE6C16662045216000672253 /* PlannerCell.xib */,
-				CE6C16672045216000672253 /* PlannerListVC.h */,
-				CE6C16682045216000672253 /* PlannerListVC.m */,
-			);
-			path = PlannerListVC;
-			sourceTree = "<group>";
-		};
 		CE6C16702045217A00672253 /* PlannerGraphs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2133,8 +2080,6 @@
 			isa = PBXGroup;
 			children = (
 				18E0710E204702920020D8EE /* InjuryAndIllnessVC */,
-				CE6C165A2045216000672253 /* PlaneerAddEvent */,
-				CE6C16632045216000672253 /* PlannerListVC */,
 				CE6C163C2045211300672253 /* BattingKpiVC */,
 				CE6C16392045211300672253 /* BowlingKPIVC */,
 				CE6C1635204520F600672253 /* ScoreCardVideoPlayer */,
@@ -2531,7 +2476,6 @@
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CE6C173E2045217A00672253 /* redCircle.png in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
-				CE6C166A2045216100672253 /* AddParticipantCell.xib in Resources */,
 				CEC34C262046B1830058ACC3 /* BowlTypeCell.xib in Resources */,
 				18A68ABF20371A2C00EBA479 /* TrainingLoadVC.xib in Resources */,
 				04249B7E203D4AF000B13889 /* NutritionCell.xib in Resources */,
@@ -2551,7 +2495,6 @@
 				CE6C173B2045217A00672253 /* blackCircle.png in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
 				18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */,
-				CE6C166E2045216100672253 /* PlannerCell.xib in Resources */,
 				18BBECD720297DB100BAAFAA /* ResultCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */,
@@ -2677,7 +2620,6 @@
 				CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */,
 				CEB2B9DC2025C85100E7D5E4 /* AppCommon.m in Sources */,
 				CE6C17252045217A00672253 /* FFYearCell.m in Sources */,
-				CE6C166F2045216100672253 /* PlannerListVC.m in Sources */,
 				CE6C17232045217A00672253 /* FFMonthCellForYearCell.m in Sources */,
 				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,
 				18E07117204702930020D8EE /* InjuryAndIllnessVC.m in Sources */,
@@ -2759,7 +2701,6 @@
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				04534F8B2037EE9400C22717 /* FoodDiaryVC.m in Sources */,
 				CEBD2A7F202899BB000AFD1B /* DropDownTableViewController.m in Sources */,
-				CE6C166C2045216100672253 /* PlannerAddEvent.m in Sources */,
 				CE6C170A2045217A00672253 /* FFDayCalendarView.m in Sources */,
 				CE6C172D2045217A00672253 /* UILabel+FFCustomMethods.m in Sources */,
 				CE3E741020248BF100F10917 /* AppDelegate.m in Sources */,
@@ -2778,7 +2719,6 @@
 				CE6C17262045217A00672253 /* FFYearCollectionView.m in Sources */,
 				CE6C170E2045217A00672253 /* FFDayCell.m in Sources */,
 				CE6C17102045217A00672253 /* FFDayCollectionViewFlowLayout.m in Sources */,
-				CE6C16692045216100672253 /* AddParticipantCell.m in Sources */,
 				CE6C17312045217A00672253 /* FFDatePopoverController.m in Sources */,
 				CE6C17082045217A00672253 /* FFButtonAddEventWithPopover.m in Sources */,
 				18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */,
@@ -2829,7 +2769,6 @@
 				04B27F17202D784600ECB699 /* illnessVC.m in Sources */,
 				CEC34C4A2046B8470058ACC3 /* BowlingOverBlockCVC.m in Sources */,
 				CE6C17182045217A00672253 /* FFWeekCalendarView.m in Sources */,
-				CE6C166B2045216100672253 /* EventRecord.m in Sources */,
 				CEAF5B712038514300045C91 /* customTextField.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				CE6C160B2045200F00672253 /* PlannerVC.m in Sources */,
@@ -2842,7 +2781,6 @@
 				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				18AAC6DC2046192B00D5495A /* CustomCollectionStandings.swift in Sources */,
-				CE6C166D2045216100672253 /* PlannerCell.m in Sources */,
 				CE6C17332045217A00672253 /* FFHourPopoverController.m in Sources */,
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
