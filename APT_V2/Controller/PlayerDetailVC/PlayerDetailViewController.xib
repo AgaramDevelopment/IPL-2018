@@ -56,7 +56,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMy-Q5-Uar">
                     <rect key="frame" x="0.0" y="85" width="430" height="100"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player_andr" translatesAutoresizingMaskIntoConstraints="NO" id="dYb-MP-I0D">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_userimage" translatesAutoresizingMaskIntoConstraints="NO" id="dYb-MP-I0D">
                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="Gtj-X1-dRw">
@@ -112,7 +112,7 @@
                             <rect key="frame" x="220" y="10" width="200" height="30"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ot6-bS-rRA">
-                                    <rect key="frame" x="0.0" y="0.0" width="38.5" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="48.5" height="30"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="assessment" translatesAutoresizingMaskIntoConstraints="NO" id="fI4-mL-T4e">
                                             <rect key="frame" x="5.2362157934156812" y="0.044739075037000475" width="27" height="30"/>
@@ -129,7 +129,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H83-Wf-fYF">
-                                    <rect key="frame" x="40.5" y="0.0" width="38.5" height="30"/>
+                                    <rect key="frame" x="50.5" y="0.0" width="48.5" height="30"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="injury" translatesAutoresizingMaskIntoConstraints="NO" id="7Nw-de-xEW">
                                             <rect key="frame" x="5.2362157934156812" y="0.044739075037000475" width="27" height="30"/>
@@ -146,7 +146,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fe8-gQ-yL7">
-                                    <rect key="frame" x="81" y="0.0" width="38" height="30"/>
+                                    <rect key="frame" x="101" y="0.0" width="48.5" height="30"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Fl-ER-C1t">
                                             <rect key="frame" x="5.2362157934156812" y="0.044739075037000475" width="27" height="30"/>
@@ -167,9 +167,9 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WaO-PO-W65">
-                                    <rect key="frame" x="121" y="0.0" width="38.5" height="30"/>
+                                    <rect key="frame" x="151.5" y="0.0" width="48.5" height="30"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HuW-7X-FSl">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stats" translatesAutoresizingMaskIntoConstraints="NO" id="HuW-7X-FSl">
                                             <rect key="frame" x="5.2362157934156812" y="0.044739075037000475" width="27" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -177,28 +177,11 @@
                                             <rect key="frame" x="-1" y="0.0" width="32" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="R">
+                                            <state key="normal">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
                                                 <action selector="playerMultiActions:" destination="-1" eventType="touchUpInside" id="k2k-EK-eD4"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSL-8r-Sdg">
-                                    <rect key="frame" x="161.5" y="0.0" width="38.5" height="30"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="workload" translatesAutoresizingMaskIntoConstraints="NO" id="Vzu-OB-Fj2">
-                                            <rect key="frame" x="5.2362157934156812" y="0.044739075037000475" width="27" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7G-8S-Uiv">
-                                            <rect key="frame" x="-1" y="0.0" width="32" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <connections>
-                                                <action selector="playerMultiActions:" destination="-1" eventType="touchUpInside" id="xzu-MA-p2b"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -470,9 +453,9 @@
         </view>
     </objects>
     <resources>
+        <image name="Default_userimage" width="500" height="500"/>
         <image name="assessment" width="166" height="166"/>
         <image name="injury" width="166" height="166"/>
-        <image name="player_andr" width="230" height="284"/>
-        <image name="workload" width="166" height="166"/>
+        <image name="stats" width="166" height="166"/>
     </resources>
 </document>

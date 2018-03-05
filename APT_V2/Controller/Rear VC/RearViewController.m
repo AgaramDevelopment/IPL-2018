@@ -16,7 +16,6 @@
 #import "TrainingLoadUpdateVC.h"
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
-#import "PlannerVC.h"
 
 @interface RearViewController ()
 {
@@ -30,31 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
-//
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        arrItems = [NSArray new];
-//        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
-//    }
-//    else
-//    {
-//        arrItems = [NSArray new];
-//        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
-//    }
-    
-    
-    
-    
-    //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-    //self.lblName.text = [AppCommon GetUserRoleName];
-    
-    //self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -65,12 +41,12 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
     }
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+       arrItems = @[@"Team",@"Cricket Center",@"Sync",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -96,6 +72,7 @@
 {
     return arrItems.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
@@ -132,39 +109,19 @@
             newFrontController= [TabHomeVC new];
             
         }
-        if(indexPath.row == 1) // Assessment
+        else if(indexPath.row == 1)
         {
-            newFrontController= [PlannerVC new];
+            newFrontController= [MyStatsBattingVC new];
             
         }
         else if(indexPath.row == 2)
         {
-            //        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
-            newFrontController= [MyStatsBattingVC new];
-            
-        }
-        else if(indexPath.row == 3)
-        {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [MatchCenterTBC new];
             
         }
         
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 3)
         {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [FoodDiaryVC new];
             
         }
@@ -177,7 +134,6 @@
     else
     {
         
-        
         if(indexPath.row == 0)
         {
             newFrontController= [TeamsVC new];
@@ -185,16 +141,11 @@
         }
         else if(indexPath.row == 1) // Assessment
         {
-            newFrontController= [PlannerVC new];
-            
-        }
-        else if(indexPath.row == 2) // Assessment
-        {
             newFrontController= [ViewController new];
             
         }
         
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 2)
         {
             //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
             //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
@@ -204,7 +155,7 @@
             newFrontController= [MatchCenterTBC new];
             
         }
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 3)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
@@ -246,18 +197,6 @@
     
 }
 
--(void)pushView:(UIViewController*)VC
-{
-    for (UIViewController* VC in appDel.frontNavigationController) {
-        
-    }
-    
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:VC];
-    [navigationController setNavigationBarHidden:YES];
-    [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
-
-}
 
 -(void)actionLogOut
 {
