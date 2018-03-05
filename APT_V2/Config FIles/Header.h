@@ -82,5 +82,11 @@
 
 #import "ReportsVC.h"
 
+#import "ScoreCardVC.h"
+#import "ScoreCardCell.h"
+#import "ScorecardBowlCell.h"
+#import "ScoreCardVideoPlayer.h"
+
+
 #endif /* Header_h */
 

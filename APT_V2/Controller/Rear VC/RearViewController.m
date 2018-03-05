@@ -104,7 +104,7 @@
     
     if([rolecode isEqualToString:plyRolecode])
     {
-        if(indexPath.row == 0) // Assessment
+        if(indexPath.row == 0)
         {
             newFrontController= [TabHomeVC new];
             
@@ -139,23 +139,20 @@
             newFrontController= [TeamsVC new];
             
         }
-        else if(indexPath.row == 1) // Assessment
+        else if(indexPath.row == 1) // Match center with KPI's
         {
-            newFrontController= [ViewController new];
+//            ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            newFrontController = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+//            objFix.matchCode = displayMatchCode;
+//            objFix.matchDetails = scoreArray;
+//            objFix.backkey = @"yes";
+//            [self.navigationController pushViewController:objFix animated:YES];
+
             
         }
         
         else if(indexPath.row == 2)
-        {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
-            newFrontController= [MatchCenterTBC new];
-            
-        }
-        else if(indexPath.row == 3)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
