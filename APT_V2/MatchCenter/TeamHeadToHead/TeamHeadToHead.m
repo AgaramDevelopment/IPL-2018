@@ -19,6 +19,11 @@
     BOOL isteam2;
     BOOL isGround;
     BOOL isCompetition;
+    
+    NSString *team1Code;
+    NSString *team2Code;
+    NSString *groundCode;
+    NSString *competitionCode;
 }
 
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
@@ -206,24 +211,28 @@
     if(isteam1==YES)
     {
         self.team1TF.text = @"Chennai Super Kings";
-         self.Poptable.hidden = YES;
+        team1Code = @"TEA0000021";
+        self.Poptable.hidden = YES;
     }
     
     if(isteam2==YES)
     {
         self.team2TF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+        team2Code = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
          self.Poptable.hidden = YES;
     }
     
     if(isCompetition == YES)
     {
         self.competitionTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
+    competitionCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         self.Poptable.hidden = YES;
     }
     
     if(isGround==YES)
     {
         self.groundTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"Ground"];
+        groundCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"Groundcode"];
         self.Poptable.hidden = YES;
         [self checkValidations];
     }
