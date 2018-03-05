@@ -9,6 +9,10 @@
 #import "BattingView.h"
 #import "PlayerListCollectionViewCell.h"
 #import "Config.h"
+#import "AppCommon.h"
+#import "WebService.h"
+#import "HorizontalXLblFormatter.h"
+//#import "DayAxisValueFormatter.h"
 
 
 @implementation BattingView
@@ -17,6 +21,8 @@ NSArray* headingKeyArray;
 NSArray* headingButtonNames;
 BOOL isOverview;
 BOOL isRun;
+BOOL isComp;
+
 
 /* Filter */
 
@@ -86,16 +92,70 @@ BOOL isRun;
     {
         self.overViewlbl.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
         
+        if(indexPath.row==0)
+        {
+            innNum =@"";
+            Result = @"";
+        }
+        else if(indexPath.row==1)
+        {
+            innNum =@"1";
+            Result = @"";
+        }
+        else if(indexPath.row==2)
+        {
+            innNum =@"2";
+            Result = @"";
+        }
+        else if(indexPath.row==3)
+        {
+            innNum =@"1";
+            Result = @"won";
+        }
+        else if(indexPath.row==4)
+        {
+            innNum =@"2";
+            Result = @"won";
+        }
+        else if(indexPath.row==5)
+        {
+            innNum =@"1";
+            Result = @"loss";
+        }
+        else if(indexPath.row==6)
+        {
+            innNum =@"2";
+            Result = @"loss";
+        }
+        
     }else if(isRun==YES)
     {
         self.runslbl.text = indexPath.row == 0 ? @"Runs" : (indexPath.row == 1 ? @"Strike Rate" : @"Average");
+        
+        if(indexPath.row==0)
+        {
+            types =@"runs";
+        }
+        else if(indexPath.row==1)
+        {
+            types =@"sr";
+        }
+        else if(indexPath.row==2)
+        {
+            types =@"avg";
+        }
         
     }
     
     isOverview = NO;
     isRun = NO;
+    isComp = NO;
     self.PoplistTable.hidden = YES;
 
+    if( ![self.overViewlbl.text isEqualToString:@""] && ![self.runslbl.text isEqualToString:@""] )
+    {
+        [self BattingWebservice];
+    }
 }
 
 - (IBAction)onClickOverViewDD:(id)sender
@@ -105,6 +165,7 @@ BOOL isRun;
         
         isOverview = NO;
         isRun = NO;
+        isComp = NO;
         self.PoplistTable.hidden = YES;
 
         
@@ -112,11 +173,13 @@ BOOL isRun;
 
     isOverview = YES;
     isRun = NO;
+    isComp = NO;
     
     self.PoplistTable.hidden = NO;
     
     self.tableWidth.constant = 142;
     self.tableXposition.constant = self.filterView.frame.origin.x+8;
+    self.tableYposition.constant = self.filterView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
@@ -127,19 +190,43 @@ BOOL isRun;
         
         isOverview = NO;
         isRun = NO;
+        isComp = NO;
         self.PoplistTable.hidden = YES;
 
         
     }else{
     isOverview = NO;
     isRun = YES;
+    isComp = NO;
     self.PoplistTable.hidden = NO;
     self.tableWidth.constant = 142;
     self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+    self.tableYposition.constant = self.filterView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
 
+- (IBAction)onClickCompetition:(id)sender
+{
+    if(isRun){
+        
+        isOverview = NO;
+        isRun = NO;
+        isComp = NO;
+        self.PoplistTable.hidden = YES;
+        
+        
+    }else{
+        isOverview = NO;
+        isRun = NO;
+        isComp = YES;
+        self.PoplistTable.hidden = NO;
+        self.tableWidth.constant = 142;
+        self.tableYposition.constant = self.CompetitionView.frame.origin.y+40;
+        self.tableXposition.constant = self.insideCompetitionView.frame.origin.x+142+70;
+        [self.PoplistTable reloadData];
+    }
+}
 
 
 
@@ -151,7 +238,9 @@ BOOL isRun;
     self.PoplistTable.dataSource = self;
 
     
-    headingKeyArray =  @[@"Player",@"Style",@"Order",@"Mat",@"Inns",@"NO",@"Runs",@"BF",@"HS",@"Ave",@"SR",@"DB %",@"Bdry %",@"100",@"50",@"0",@"4s",@"6s"];
+   // headingKeyArray =  @[@"Player",@"Style",@"Order",@"Mat",@"Inns",@"NO",@"Runs",@"BF",@"HS",@"Ave",@"SR",@"DB %",@"Bdry %",@"100",@"50",@"0",@"4s",@"6s"];
+    
+    headingKeyArray =  @[@"PlayerName",@"BattingStyle",@"BattingOrder",@"TotalMatches",@"Innings",@"NotOuts",@"Runs",@"BallsFace",@"Highscore",@"Average",@"StrikRate",@"DotBallPercent",@"BoundaryPercent",@"Cents",@"Fiftys",@"DotBall",@"Fours",@"Sixs"];
     
     
     headingButtonNames = @[@"Player",@"Style",@"Order",@"Mat",@"Inns",@"NO",@"Runs",@"BF",@"HS",@"Ave",@"SR",@"DB %",@"Bdry %",@"100",@"50",@"0",@"4s",@"6s"];
@@ -170,7 +259,17 @@ BOOL isRun;
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     
-    return headingButtonNames.count;
+    //return headingButtonNames.count;
+    
+    if(self.TableValuesArray.count>0)
+    {
+        return self.TableValuesArray.count+1;
+        //return headingButtonNames.count;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -249,7 +348,20 @@ BOOL isRun;
         
         for (id temp in headingKeyArray) {
             if ([headingKeyArray indexOfObject:temp] == indexPath.row) {
-                // NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                 //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                
+                NSString *str;
+                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                {
+                    
+                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                    str = [vv stringValue];
+                }
+                else
+                {
+                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                }
+                
                 if([temp isEqualToString:@"Player"])
                 {
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -261,7 +373,7 @@ BOOL isRun;
                     cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                 }
-                [cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
+                [cell.btnName setTitle:str forState:UIControlStateNormal];
                 break;
             }
         }
@@ -287,15 +399,27 @@ BOOL isRun;
     layer.shadowOffset = CGSizeMake(10,3);
     layer.shadowOpacity = 1.0;
     
+    
 }
 
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
 
 
 /*  Chart  */
 -(void) loadChart
 
 {
-    
+    //[self BattingWebservice];
+}
+
+-(void)barchartloadValues
+{
     
 //    [self setupBarLineChartView:_chartView];
     
@@ -308,13 +432,15 @@ BOOL isRun;
 
     _chartView.chartDescription.enabled = NO;
     
+    
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:8.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
+    //xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
+    xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.minimumFractionDigits = 0;
@@ -349,7 +475,7 @@ BOOL isRun;
     l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.f];
     l.xEntrySpace = 4.0;
     l.enabled = NO;
-    [self setDataCount: 10 range: 20];
+    [self setDataCount: 0 range: 0];
 
     
 //    XYMarkerView *marker = [[XYMarkerView alloc]
@@ -382,19 +508,24 @@ BOOL isRun;
 
 - (void)setDataCount:(int)count range:(double)range
 {
-    double start = 1.0;
+    double start = 10.0;
     
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     
-    for (int i = start; i < start + count + 1; i++)
+    for (int i = 0; i < self.ChartValuesArray.count; i++)
     {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
+//        double mult = (range + 1);
+//        double val = (double) (arc4random_uniform(mult));
+//        if (arc4random_uniform(100) < 25) {
+//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+//        } else {
+//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+//        }
+        
+        
+        double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
+        
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*start y:val]];
     }
     
     BarChartDataSet *set1 = nil;
@@ -417,8 +548,8 @@ BOOL isRun;
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:10.f]];
         
-        data.barWidth = 0.9f;
-        
+        data.barWidth = 10.0f;
+    
         _chartView.data = data;
     }
 }
@@ -448,6 +579,78 @@ BOOL isRun;
 - (void)chartValueNothingSelected:(ChartViewBase * __nonnull)chartView
 {
     NSLog(@"chartValueNothingSelected");
+}
+
+-(void) BattingWebservice
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",teamBattingKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        NSString *CompetitionCode = @"";
+        NSString *TeamCode = @"TEA0000010";
+//        NSString *InningsNum = @"";
+//        NSString *Result = @"";
+//        NSString *Types = @"avg";
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(CompetitionCode)   [dic    setObject:CompetitionCode     forKey:@"CompetitionCode"];
+        if(TeamCode)   [dic    setObject:TeamCode     forKey:@"TeamCode"];
+        if(innNum)   [dic    setObject:innNum     forKey:@"InningsNum"];
+        if(Result)   [dic    setObject:Result     forKey:@"Result"];
+        if(types)   [dic    setObject:types     forKey:@"Types"];
+        
+        
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                self.ChartValuesArray = [[NSMutableArray alloc]init];
+                self.TableValuesArray = [[NSMutableArray alloc]init];
+                
+                self.ChartValuesArray = [responseObject valueForKey:@"bCharList"];
+                self.TableValuesArray = [responseObject valueForKey:@"plyrBattingList"];
+                
+                self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<self.ChartValuesArray.count;i++)
+                {
+                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                    [self.ChartXAxisValuesArray addObject:value];
+                }
+                
+                
+                [self barchartloadValues];
+                [self.resultCollectionView reloadData];
+            }
+            
+            [AppCommon hideLoading];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            
+            
+        }];
+    }
+    
 }
 
 @end

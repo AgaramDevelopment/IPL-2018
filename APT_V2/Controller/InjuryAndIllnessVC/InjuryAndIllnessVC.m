@@ -48,19 +48,21 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    
-        //    [self.view addSubview:objCustomNavigation.view];
-        //    objCustomNavigation.tittle_lbl.text=@"";
-    
-        //UIView* view= self.navigation_view.subviews.firstObject;
     [self.navigationView addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
-        //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(reveaFlToggle:) forControlEvents:UIControlEventTouchUpInside];
-        //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.btn_back.hidden =NO;
+    objCustomNavigation.menu_btn.hidden =YES;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 - (IBAction)injuriesAction:(id)sender {
     InjuryVC *injuryObj = [InjuryVC new];
     [self.navigationController pushViewController:injuryObj animated:YES];

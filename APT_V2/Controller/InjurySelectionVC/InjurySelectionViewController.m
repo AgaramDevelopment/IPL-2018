@@ -193,20 +193,24 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+//    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+//
+//    if (isBackEnable) {
+//        objCustomNavigation.menu_btn.hidden =YES;
+//        objCustomNavigation.btn_back.hidden =NO;
+//        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    else
+//    {
+//        objCustomNavigation.menu_btn.hidden =NO;
+//        objCustomNavigation.btn_back.hidden =YES;
+//        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+//    }
     
-    if (isBackEnable) {
-        objCustomNavigation.menu_btn.hidden =YES;
-        objCustomNavigation.btn_back.hidden =NO;
-        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else
-    {
-        objCustomNavigation.menu_btn.hidden =NO;
-        objCustomNavigation.btn_back.hidden =YES;
-        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
+    objCustomNavigation.menu_btn.hidden =YES;
+    objCustomNavigation.btn_back.hidden =NO;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+
     [self.navBarView addSubview:objCustomNavigation.view];
 
 }
@@ -215,7 +219,7 @@
 
 -(void)actionBack
 {
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
     
 }

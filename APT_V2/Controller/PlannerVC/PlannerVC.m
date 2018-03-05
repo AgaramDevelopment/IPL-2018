@@ -927,7 +927,8 @@
         if(ojAddPlannerArray.count>0)
         {
             PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
-            objPlannerlist = (PlannerListVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
             objPlannerlist.objPlannerArray =ojAddPlannerArray;
             [self.navigationController pushViewController:objPlannerlist animated:YES];
         }
