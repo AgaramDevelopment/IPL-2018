@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  APT_V2
+//  IPL-2018 project
 //
 //  Created by user on 02/02/18.
 //  Copyright © 2018 user. All rights reserved.
