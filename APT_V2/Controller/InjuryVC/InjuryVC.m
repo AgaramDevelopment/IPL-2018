@@ -116,7 +116,6 @@ typedef enum {
     _MainArray = [NSMutableArray new];
     [self customnavigationmethod];
     [self setBorderwidthMethod];
-    self.filepopview.hidden = YES;
     
     
     self.Slider1.labels = @[@"1", @"2", @"3", @"4", @"5",@"6",@"7"];
@@ -147,7 +146,6 @@ typedef enum {
     NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
     NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
 
-    
 
 }
 
@@ -382,22 +380,27 @@ typedef enum {
 -(IBAction)didClickfilePopview:(id)sender
 {
     
-//    if(isSelectPop == NO)
-//    {
-//        self.filepopview.hidden = NO;
-//        isSelectPop = YES;
-//        [self showAnimate];
-//    }
-//    else
-//    {
-//        self.filepopview.hidden = YES;
-//        isSelectPop = NO;
-//        [self removeAnimate];
-//    }
+    self.fileView.frame = self.view.frame;
+    self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height+self.filepopview.frame.size.height, self.fileView.frame.size.height, self.filepopview.frame.size.height);
     
-    [self.view bringSubviewToFront:self.filepopview];
-    [self.filepopview setHidden:NO];
-    
+    [self.view addSubview:self.fileView];
+
+    [self animationB2T];
+}
+
+-(void)animationB2T
+{
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            
+                            self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height-self.filepopview.frame.size.height, self.fileView.frame.size.height, self.fileView.frame.size.height);
+                            
+                            
+                        } completion:^(BOOL finished) {
+                            
+                        }];
+
 }
 
 - (void)showAnimate
@@ -652,6 +655,7 @@ typedef enum {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker
@@ -666,6 +670,7 @@ typedef enum {
     if(isXray ==YES)
     {
 //        self.xrayLbl.text =savedImagePath;
+        self.imgFile1.image = image;
         xrData = [self encodeToBase64String:imageToPost];
     }
     else if (isCT ==YES)
@@ -1902,12 +1907,12 @@ typedef enum {
     }
     else if (isType ==YES)
     {
-//        self.injurytypeLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        self.typelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         injuryTypeCode =[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
     else if (isCasuse ==YES)
     {
-//        self.injuryCauseLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        self.causelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
         injuryCausecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
     }
     else if (isOccurrence ==YES)
@@ -1931,9 +1936,10 @@ typedef enum {
     return YES;
 }
 - (IBAction)actionFileUpload:(id)sender {
+    
     if ([sender tag] == 0) { // File type 1
-        isXray =NO;
-        isCT =YES;
+        isXray =YES;
+        isCT =NO;
         isMRI =NO;
         isBlood =NO;
         
@@ -1970,7 +1976,24 @@ typedef enum {
 
 -(IBAction)hideFileView:(id)sender
 {
-    [self.filepopview setHidden:YES];
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            
+                            self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height+self.filepopview.frame.size.height, self.fileView.frame.size.height, self.fileView.frame.size.height);
+                            
+                            
+                        } completion:^(BOOL finished) {
+                            [self.fileView removeFromSuperview];
+                        }];
+
+    
 }
+-(IBAction)showCloseButton:(id)sender
+{
+    
+}
+
+
 @end
 
