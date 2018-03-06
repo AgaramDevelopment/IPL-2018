@@ -17,6 +17,7 @@
 #import "VideoGalleryVC.h"
 #import "HomeScreenStandingsVC.h"
 #import "SwipeView.h"
+#import "MyStatsBattingVC.h"
 
 @interface TabHomeVC ()
 {
@@ -24,6 +25,7 @@
     WellnessTrainingBowlingVC * objWell;
     VideoGalleryVC * objVideo;
     HomeScreenStandingsVC *StandsVC;
+    MyStatsBattingVC *objStats;
 }
 
 @end
@@ -75,27 +77,28 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-    return 3;
+    return 2;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
         {
-            return CGSizeMake(50, 50);
+            return CGSizeMake(widthF, 50);
         }
         else
         {
             
-                return CGSizeMake(100, 30);
+                return CGSizeMake(widthF, 30);
         }
     }
     else
     {
-        
-            return CGSizeMake(240, 50);
+        //CGFloat widthF = self.Titlecollview.frame.size.width/2;
+            return CGSizeMake(widthF, 50);
     }
 }
 #pragma mark collection view cell paddings
@@ -154,15 +157,11 @@
     }
     if(indexPath.row==1)
     {
-        cell.Title.text = @"WELLNESS/TRAININGLOAD/BOWLINGLOAD";
+        cell.Title.text = @"MYSTATS";
         [cell setTag:indexPath.row];
     }
-    if(indexPath.row==2)
-    {
-        cell.Title.text = @"STANDINGS";
-        [cell setTag:indexPath.row];
-    }
-    
+
+
         return cell;
     
 }
@@ -171,23 +170,28 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-   // TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
+    [cell setSelectedBackgroundView:bgColorView];
 
     if(indexPath.row == 0)
     {
-
         [self.swipeView scrollToItemAtIndex:0 duration:0];
+        
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         
     }
     if(indexPath.row == 1)
     {
+        
         [self.swipeView scrollToItemAtIndex:1 duration:0];
+        
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }
 
-    if(indexPath.row == 2)
-    {
-       [self.swipeView scrollToItemAtIndex:2 duration:0];
-    }
 }
 
 
@@ -195,7 +199,7 @@
 - (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
 {
     //return the total number of items in the carousel
-    return 3;
+    return 2;
 }
 
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -213,38 +217,17 @@
             objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
             objSch.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objSch.view];
-            
-//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-
+   
         }
          if(index == 1)
         {
-            objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-            objWell.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-            [view addSubview:objWell.view];
-            
-//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        }
-         if(index == 2)
-        {
-            StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-            StandsVC.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-            [view addSubview:StandsVC.view];
-            
-//            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-//            [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        }
-        
 
-        //[view addSubview:Fix.view];
-//    }
-//    else
-//    {
-//        //get a reference to the label in the recycled view
-//        label = (UILabel *)[view viewWithTag:1];
-//    }
+            
+            objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
+            objStats.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            [view addSubview:objStats.view];
+            
+        }
 
 
     return view;
@@ -268,11 +251,7 @@
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
         [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }
-    if(self.swipeView.currentItemIndex == 2)
-    {
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-    }
+
 }
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {

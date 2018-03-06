@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *resultView;
 @property (strong, nonatomic) IBOutlet UIView *commonView;
+@property (strong, nonatomic) IBOutlet UIView *videoView;
+@property (strong, nonatomic) IBOutlet UIView *standingsView;
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;

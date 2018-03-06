@@ -340,7 +340,7 @@
                     <rect key="frame" x="5" y="318" width="365" height="349"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LUQ-Vu-Umg">
-                            <rect key="frame" x="0.0" y="0.0" width="365" height="215"/>
+                            <rect key="frame" x="0.0" y="0.0" width="365" height="344"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xYs-gQ-sjL">
                                 <size key="itemSize" width="50" height="50"/>
@@ -356,10 +356,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="LUQ-Vu-Umg" firstAttribute="leading" secondItem="SIN-tC-iDB" secondAttribute="leading" id="BQ0-lQ-pgE"/>
-                        <constraint firstAttribute="bottom" secondItem="LUQ-Vu-Umg" secondAttribute="bottom" constant="134" id="Fmb-7Q-nBC"/>
-                        <constraint firstAttribute="trailing" secondItem="LUQ-Vu-Umg" secondAttribute="trailing" id="LJa-oY-aZ2"/>
-                        <constraint firstItem="LUQ-Vu-Umg" firstAttribute="top" secondItem="SIN-tC-iDB" secondAttribute="top" id="uZf-ct-jbe"/>
+                        <constraint firstItem="LUQ-Vu-Umg" firstAttribute="leading" secondItem="SIN-tC-iDB" secondAttribute="leading" id="0BO-8M-8Oe"/>
+                        <constraint firstAttribute="bottom" secondItem="LUQ-Vu-Umg" secondAttribute="bottom" constant="5" id="WJk-8P-rXu"/>
+                        <constraint firstAttribute="trailing" secondItem="LUQ-Vu-Umg" secondAttribute="trailing" id="bfi-4D-hbP"/>
+                        <constraint firstItem="LUQ-Vu-Umg" firstAttribute="top" secondItem="SIN-tC-iDB" secondAttribute="top" id="pmB-wn-6ZW"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sCF-UN-dvm">

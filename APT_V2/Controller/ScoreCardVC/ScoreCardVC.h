@@ -12,7 +12,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface ScoreCardVC : UIViewController
-
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 @property (nonatomic,strong) IBOutlet UIImageView * ww;
 @property (nonatomic,strong) IBOutlet UIButton * Team1;

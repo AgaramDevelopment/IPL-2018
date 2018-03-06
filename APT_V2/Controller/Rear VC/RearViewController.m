@@ -41,7 +41,7 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+        arrItems = @[@"Home",@"Match Center",@"Food Diary",@"Logout"];
     }
     else
     {
@@ -109,18 +109,18 @@
             newFrontController= [TabHomeVC new];
             
         }
+//        else if(indexPath.row == 1)
+//        {
+//            newFrontController= [MyStatsBattingVC new];
+//
+//        }
         else if(indexPath.row == 1)
-        {
-            newFrontController= [MyStatsBattingVC new];
-            
-        }
-        else if(indexPath.row == 2)
         {
             newFrontController= [MatchCenterTBC new];
             
         }
         
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 2)
         {
             newFrontController= [FoodDiaryVC new];
             
@@ -141,9 +141,11 @@
         }
         else if(indexPath.row == 1) // Match center with KPI's
         {
+            
+            newFrontController= [MatchCenterTBC new];
 //            ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            newFrontController = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+    //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    //        newFrontController = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
 //            objFix.matchCode = displayMatchCode;
 //            objFix.matchDetails = scoreArray;
 //            objFix.backkey = @"yes";
