@@ -193,7 +193,9 @@
      */
     
     if(![COMMON isInternetReachable])
-        [AppCommon showLoading];
+        return;
+    
+    [AppCommon showLoading];
     
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
     
