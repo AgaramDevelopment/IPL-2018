@@ -13,6 +13,7 @@
 #import "AppCommon.h"
 #import "BallsInVideosCVC.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TabHomeVC.h"
 
 @interface VideoPlayerViewController ()
 {
@@ -50,8 +51,6 @@
     [self.view removeFromSuperview];
 }
 -(void)staticvideo
-
-
 {
     
         NSString * url = [NSString stringWithFormat:@"%@%@",Video_URL,self.objSelectVideoLink];
@@ -79,21 +78,19 @@
 //
 //    [player play];
     
-    
-    
-    
-    
-    
    // NSURL *url = [[NSURL alloc] initWithString:@"https://s3-eu-west-1.amazonaws.com/alf-proeysen/Bakvendtland-MASTER.mp4"];
     
     // create a player view controller
     //player = [AVPlayer playerWithURL:videoURL];
     AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
+    [appDel.frontNavigationController presentViewController:controller animated:YES completion:nil];
+//    [self presentViewController:controller animated:YES completion:nil];
     
-    [self addChildViewController:controller];
-    [self.rootVideoView addSubview:controller.view];
     
-    controller.view.frame = CGRectMake(0,40,self.rootVideoView.frame.size.width,self.rootVideoView.frame.size.height);
+//    [self addChildViewController:controller];
+//    [self.rootVideoView addSubview:controller.view];
+//    controller.view.frame = CGRectMake(0,40,self.rootVideoView.frame.size.width,self.rootVideoView.frame.size.height);
+    
     controller.player = player;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(someMethod) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 
@@ -108,6 +105,7 @@
     
     [self.view removeFromSuperview];
 }
+
 /*
 #pragma mark - Navigation
 

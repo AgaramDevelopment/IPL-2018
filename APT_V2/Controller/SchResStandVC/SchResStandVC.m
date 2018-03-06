@@ -61,7 +61,6 @@
     
     [self ScheduleWebservice];
 
-    
 }
 
 
@@ -145,6 +144,7 @@
     return self.commonArray2.count;
     }
 }
+
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -348,7 +348,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if(collectionView==self.resultCollectionView)
+    if(collectionView == self.resultCollectionView)
     {
         displayMatchCode = [[self.commonArray2 valueForKey:@"MATCHCODE"] objectAtIndex:indexPath.row];
         NSMutableArray *scoreArray = [[NSMutableArray alloc]init];

@@ -31,6 +31,8 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Q1-BQ-lIg">
                     <rect key="frame" x="0.0" y="200" width="320" height="368"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="sectionIndexColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="uJq-IT-gic"/>
                         <outlet property="delegate" destination="-1" id="o7H-W4-6Wz"/>
@@ -40,7 +42,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_userimage" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-gj-BpT">
-                            <rect key="frame" x="25" y="25" width="100" height="100"/>
+                            <rect key="frame" x="25" y="44" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="gql-YI-Fcq"/>
                                 <constraint firstAttribute="height" constant="100" id="zj6-op-xix"/>
@@ -59,12 +61,12 @@
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="leading" secondItem="9f6-gj-BpT" secondAttribute="leading" id="9t7-m5-AN4"/>
                         <constraint firstAttribute="bottom" secondItem="dSQ-3p-Ile" secondAttribute="bottom" constant="15" id="Hka-1k-iiX"/>
                         <constraint firstAttribute="height" constant="200" id="LsS-Ds-WFn"/>
-                        <constraint firstItem="9f6-gj-BpT" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="top" constant="25" id="mdr-Qh-vPW"/>
                         <constraint firstAttribute="trailing" secondItem="dSQ-3p-Ile" secondAttribute="trailing" constant="50" id="xNe-V3-od7"/>
+                        <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="xjh-RC-qh3"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="ALU-Y0-oT2"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="bottom" id="Hah-fe-aCL"/>
@@ -73,7 +75,6 @@
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="c1D-I3-WZP"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iWj-vw-ILj"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lxr-Pg-W1H"/>
-                <constraint firstItem="5Q1-BQ-lIg" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="bottom" id="sVr-NW-eLI"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>

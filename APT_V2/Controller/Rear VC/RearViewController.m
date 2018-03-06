@@ -41,12 +41,12 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Match Center",@"Food Diary",@"Logout"];
+        arrItems = @[@"Home",@"Match Center",@"Logout"];
     }
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"Team",@"Cricket Center",@"Sync",@"Logout"];
+       arrItems = @[@"My Team",@"Cricket Center",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -94,6 +94,7 @@
     if (indexPath == PreviouslySelectedIndex) {
         return;
     }
+    
     // Grab a handle to the reveal controller, as if you'd do with a navigtion controller via self.navigationController.
     SWRevealViewController *revealController = appDel.revealViewController;
     UIViewController* newFrontController;
@@ -109,27 +110,16 @@
             newFrontController= [TabHomeVC new];
             
         }
-//        else if(indexPath.row == 1)
-//        {
-//            newFrontController= [MyStatsBattingVC new];
-//
-//        }
         else if(indexPath.row == 1)
         {
             newFrontController= [MatchCenterTBC new];
             
         }
-        
-        else if(indexPath.row == 2)
-        {
-            newFrontController= [FoodDiaryVC new];
-            
-        }
-        else if (indexPath.row == arrItems.count -1)
-        {
-            [self actionLogOut];
-            
-        }
+//        else if (indexPath.row == arrItems.count -1)
+//        {
+//            [self actionLogOut];
+//
+//        }
     }
     else
     {
@@ -143,46 +133,19 @@
         {
             
             newFrontController= [MatchCenterTBC new];
-//            ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
-    //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    //        newFrontController = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
-//            objFix.matchCode = displayMatchCode;
-//            objFix.matchDetails = scoreArray;
-//            objFix.backkey = @"yes";
-//            [self.navigationController pushViewController:objFix animated:YES];
-
-            
         }
-        
-        else if(indexPath.row == 2)
-        {
-            DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-            
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-            dic = [objCaptransactions AssessmentEntrySyncBackground];
-            NSMutableArray *reqList = [[NSMutableArray alloc]init];
-            reqList = [dic valueForKey:@"LstAssessmententry"];
-            if(reqList.count>0 ){
-                
-                [AppCommon showAlertWithMessage:@"Try After few seconds"];
-                
-            }else{
-                
-                [self synDataMethod];
-                
-            }
-            
-        }
-        else if (indexPath.row == arrItems.count -1)
-        {
-            
-            [self actionLogOut];
-            
-        }
+//        else if (indexPath.row == arrItems.count -1)
+//        {
+//            [self actionLogOut];
+//
+//        }
     }
     
-    
-    
+    if (indexPath.row == arrItems.count -1)
+    {
+        [self actionLogOut];
+        
+    }
     
     if (newFrontController == nil) {
         return;
