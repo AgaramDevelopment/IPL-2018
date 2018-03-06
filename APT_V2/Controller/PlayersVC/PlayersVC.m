@@ -38,6 +38,13 @@
 //    NSLog(@"BowlingDetailsArray3:%@", self.BowlingDetailsArray3);
 //    NSLog(@"BowlingDetailsArray4:%@", self.BowlingDetailsArray4);
     
+    self.BatsmanDetailsArray1 = appDel.BatsmanDetailsArray1;
+    self.BatsmanDetailsArray2 = appDel.BatsmanDetailsArray2;
+    self.BatsmanDetailsArray3 = appDel.BatsmanDetailsArray3;
+    self.BatsmanDetailsArray4 = appDel.BatsmanDetailsArray4;
+    self.matchcode = appDel.Currentmatchcode;
+    self.matchDetailss = appDel.Scorearray;
+    
     if (self.inningsDetailsArray.count == 2) {
         
         if (self.indexPath == 0) {

@@ -42,7 +42,27 @@
             </objects>
             <point key="canvasLocation" x="561" y="36"/>
         </scene>
-        <!--Score CardVC-->
+        <!--TabbarVC-->
+        <scene sceneID="Mj5-0Y-fU3">
+            <objects>
+                <tabBarController storyboardIdentifier="TabbarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uNz-1R-Gci" customClass="TabbarVC" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nw0-o2-spK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="R0u-nY-OpW" kind="relationship" relationship="viewControllers" id="cqp-TD-ayF"/>
+                        <segue destination="rBY-9n-EJv" kind="relationship" relationship="viewControllers" id="yq8-Iz-Ik9"/>
+                        <segue destination="yWT-6B-YZz" kind="relationship" relationship="viewControllers" id="mRj-dt-CmH"/>
+                        <segue destination="4sd-lV-ijb" kind="relationship" relationship="viewControllers" id="hBf-Va-3QM"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7D6-SE-8p7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3215" y="-1233"/>
+        </scene>
+        <!--Scorecard-->
         <scene sceneID="JVS-49-I3m">
             <objects>
                 <viewController storyboardIdentifier="ScoreCardVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R0u-nY-OpW" customClass="ScoreCardVC" sceneMemberID="viewController">
@@ -384,7 +404,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIu-en-473">
-                                <rect key="frame" x="0.0" y="390" width="768" height="1610"/>
+                                <rect key="frame" x="0.0" y="390" width="768" height="1561"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-pL-Bvb">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="41"/>
@@ -1956,6 +1976,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bMF-2L-tVZ"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Scorecard" id="36D-En-Xib" userLabel="ScoreCard"/>
                     <navigationItem key="navigationItem" id="zyI-3M-Uue"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="2000"/>
@@ -2002,7 +2023,7 @@
             </objects>
             <point key="canvasLocation" x="4164.375" y="-1211.6197183098591"/>
         </scene>
-        <!--PlayersVC-->
+        <!--BattingKPI-->
         <scene sceneID="MeO-RW-acc">
             <objects>
                 <viewController storyboardIdentifier="PlayersVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rBY-9n-EJv" customClass="PlayersVC" sceneMemberID="viewController">
@@ -2075,7 +2096,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-U4-sV6">
-                                <rect key="frame" x="0.0" y="130" width="768" height="894"/>
+                                <rect key="frame" x="0.0" y="130" width="768" height="845"/>
                                 <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Khc-sJ-YSb">
                                     <size key="itemSize" width="186" height="178"/>
@@ -2232,6 +2253,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2qk-d2-ldt"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="BattingKPI" id="kGh-ge-FqL" userLabel="Players"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
@@ -2789,7 +2811,7 @@
             </objects>
             <point key="canvasLocation" x="5021" y="-309"/>
         </scene>
-        <!--Field SummaryVC-->
+        <!--Fielding-->
         <scene sceneID="lb3-nh-qNm">
             <objects>
                 <viewController storyboardIdentifier="FieldingSummaryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yWT-6B-YZz" customClass="FieldSummaryVC" sceneMemberID="viewController">
@@ -2935,7 +2957,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QkJ-tI-HOi">
-                                <rect key="frame" x="8" y="108" width="752" height="908"/>
+                                <rect key="frame" x="8" y="108" width="752" height="859"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yWT-6B-YZz" id="Gis-ZT-deA"/>
@@ -2943,10 +2965,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaW-HB-RA5">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pQ-Yn-8Mq">
-                                        <rect key="frame" x="30" y="244" width="708" height="536"/>
+                                        <rect key="frame" x="30" y="219.5" width="708" height="536"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="np8-B9-bdU">
                                                 <rect key="frame" x="8" y="40" width="692" height="400"/>
@@ -3061,6 +3083,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Y3w-dE-7fm"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Fielding" id="TSa-t2-Gbx"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
@@ -3083,7 +3106,7 @@
             </objects>
             <point key="canvasLocation" x="2685.9375" y="1290.8203125"/>
         </scene>
-        <!--Session SummaryVC-->
+        <!--Sessions-->
         <scene sceneID="kTv-oW-fTQ">
             <objects>
                 <viewController storyboardIdentifier="SessionSummaryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4sd-lV-ijb" customClass="SessionSummaryVC" sceneMemberID="viewController">
@@ -3110,7 +3133,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rO-nc-UQK">
-                                <rect key="frame" x="0.0" y="60" width="768" height="1440"/>
+                                <rect key="frame" x="0.0" y="60" width="768" height="1391"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx3-hE-dOR">
                                         <rect key="frame" x="10" y="10" width="748" height="50"/>
@@ -4525,6 +4548,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h4u-8y-500"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Sessions" id="Hof-eg-sGE"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1500"/>
                     <connections>
