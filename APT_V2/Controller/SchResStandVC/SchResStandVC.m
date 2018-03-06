@@ -16,14 +16,15 @@
 #import "VideoGalleryVC.h"
 #import "ScoreCardVC.h"
 #import "VideoPlayerViewController.h"
+#import "HomeScreenStandingsVC.h"
 
 
 @interface SchResStandVC ()
 {
-    HomeScreenStandingsVC *StandsVC;
     VideoGalleryVC *objVideo;
     NSString *displayMatchCode;
     VideoPlayerViewController * videoPlayerVC;
+    HomeScreenStandingsVC *objStands;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -42,14 +43,16 @@
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
-    
-//    StandsVC = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-//    StandsVC.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
-//    [self.commonView addSubview:StandsVC.view];
+
     
     objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
-    objVideo.view.frame = CGRectMake(0, self.resultView.frame.origin.y+210, self.view.bounds.size.width, self.view.bounds.size.height);
-    [self.commonView addSubview:objVideo.view];
+    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
+    [self.videoView addSubview:objVideo.view];
+    
+    
+    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
+    [self.standingsView addSubview:objStands.view];
     
    
      //self.scroll.contentSize = CGSizeMake(self.scroll.frame.size.width, self.commonView.frame.size.height);
@@ -374,8 +377,8 @@
                 objFix.matchCode = displayMatchCode;
                 objFix.matchDetails = scoreArray;
                 objFix.backkey = @"yes";
-                [self.navigationController pushViewController:objFix animated:YES];
-                //[appDel.frontNavigationController pushViewController:objFix animated:YES];
+                //[self.navigationController pushViewController:objFix animated:YES];
+                [appDel.frontNavigationController pushViewController:objFix animated:YES];
         
                 //[self.view addSubview:objFix];
           //[self displayContentController:objFix];

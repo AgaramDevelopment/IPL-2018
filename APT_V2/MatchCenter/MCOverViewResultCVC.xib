@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
+        </array>
         <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
@@ -40,21 +43,21 @@
                                 <color key="textColor" red="0.26633411645889282" green="0.44610106945037842" blue="0.76664668321609497" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="csk_lgo" translatesAutoresizingMaskIntoConstraints="NO" id="Di3-sg-v5v">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Di3-sg-v5v">
                                 <rect key="frame" x="8" y="8" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3D7-36-kvW"/>
                                     <constraint firstAttribute="width" constant="50" id="tCF-so-Pcb"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="srh_lgo" translatesAutoresizingMaskIntoConstraints="NO" id="Bze-CL-gjh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bze-CL-gjh">
                                 <rect key="frame" x="392" y="8" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="6C9-p8-f7W"/>
                                     <constraint firstAttribute="height" constant="50" id="C6e-RD-fwz"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="192/4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-ze-dqF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-ze-dqF">
                                 <rect key="frame" x="66" y="8" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="kHS-Eu-pO0"/>
@@ -66,7 +69,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/20 Overs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qze-ZN-4c2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qze-ZN-4c2">
                                 <rect key="frame" x="66" y="34" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="hMm-0u-Cum"/>
@@ -78,7 +81,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRR: 7.84" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuR-YY-AQL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuR-YY-AQL">
                                 <rect key="frame" x="66" y="60" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="ErT-f5-v2t"/>
@@ -90,32 +93,32 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CSK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUL-L8-q5d">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUL-L8-q5d">
                                 <rect key="frame" x="8" y="66" width="50" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="bdN-gE-E1q"/>
                                     <constraint firstAttribute="height" constant="18" id="y1H-Fn-NVk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SRH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIY-Zr-7ag">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIY-Zr-7ag">
                                 <rect key="frame" x="392" y="66" width="50" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="aQe-Hh-Zws"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.3/20 Overs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYo-v5-X4v">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYo-v5-X4v">
                                 <rect key="frame" x="233.5" y="34" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="FuK-fg-0xM"/>
@@ -127,7 +130,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRR: 5.84" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nal-GZ-UYk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nal-GZ-UYk">
                                 <rect key="frame" x="233.5" y="60" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="fBo-AP-UE8"/>
@@ -139,7 +142,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170/6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-Nd-1iO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-Nd-1iO">
                                 <rect key="frame" x="233.5" y="8" width="150.5" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="SyM-aP-ZDX"/>
@@ -151,8 +154,8 @@
                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15th May 2015 @ Chennai" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhs-Jg-bm1">
-                                <rect key="frame" x="150.5" y="88" width="150.5" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhs-Jg-bm1">
+                                <rect key="frame" x="225" y="88" width="0.0" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="gFt-Hd-hvD"/>
                                 </constraints>
@@ -211,11 +214,20 @@
                 <constraint firstItem="JXZ-7P-QXk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hJU-T6-I5l"/>
             </constraints>
             <size key="customSize" width="491" height="110"/>
+            <connections>
+                <outlet property="Datelbl" destination="Jhs-Jg-bm1" id="S7A-ye-cZ0"/>
+                <outlet property="TeamOver2lbl" destination="AYo-v5-X4v" id="19u-NY-9OY"/>
+                <outlet property="TeamOvers1lbl" destination="qze-ZN-4c2" id="DbW-ZG-Ii3"/>
+                <outlet property="Teamname1lbl" destination="VUL-L8-q5d" id="yUg-aq-KZc"/>
+                <outlet property="Teamname2lbl" destination="BIY-Zr-7ag" id="rCm-Zd-Slh"/>
+                <outlet property="runrate1lbl" destination="YuR-YY-AQL" id="WAL-Yj-CMV"/>
+                <outlet property="runrate2lbl" destination="nal-GZ-UYk" id="6Ly-7g-DOb"/>
+                <outlet property="runs1lbl" destination="SEI-ze-dqF" id="ttN-3h-pYZ"/>
+                <outlet property="runs2lbl" destination="eRG-Nd-1iO" id="Rr1-V5-cbO"/>
+                <outlet property="team1Img" destination="Di3-sg-v5v" id="9By-dh-r1L"/>
+                <outlet property="team2Img" destination="Bze-CL-gjh" id="6DT-4g-AIh"/>
+            </connections>
             <point key="canvasLocation" x="308.5" y="82"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="csk_lgo" width="215" height="215"/>
-        <image name="srh_lgo" width="345" height="345"/>
-    </resources>
 </document>
