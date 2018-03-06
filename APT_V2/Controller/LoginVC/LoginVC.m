@@ -12,14 +12,21 @@
 
 @interface LoginVC ()
 {
-    
+    NSMutableArray *teamArray;
+    NSString *teamCode;
+    BOOL isTeam;
 }
 @property (weak,nonatomic)  IBOutlet UIView *commonview;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+@property (strong, nonatomic) IBOutlet UITextField *teamTF;
+
 @property (weak,nonatomic)  IBOutlet UIView *usernameview;
 @property (weak,nonatomic)  IBOutlet UIView *passwordview;
 
 @property (weak,nonatomic)  IBOutlet UITextField *userTxt;
 @property (weak,nonatomic) IBOutlet UITextField * passwordTxt;
+@property (strong, nonatomic) IBOutlet UITableView *teamTableView;
+
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewHeight;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewWidth;
@@ -40,8 +47,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    [self teamCodeGetService];
+    self.teamTableView.hidden = YES;
     _isVisible = false;
     self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
     self.passwordTxt.secureTextEntry= !_isVisible;
@@ -177,6 +184,44 @@
     
 }
 
+
+- (void)teamCodeGetService {
+    /*
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
+     METHOD     :   GET
+     PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        teamArray = [[NSMutableArray alloc] init];
+        teamArray = responseObject;
+        
+            //Re-load Table View
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.teamTableView reloadData];
+        });
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"FAILURE RESPONSE %@",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+}
+
 - (IBAction)switchAction:(id)sender {
     
     _isVisible = !_isVisible;
@@ -195,6 +240,74 @@
 //    self.passwordTxt.secureTextEntry= ![sender isOn];
 //}
 
+- (IBAction)teamButtonTapped:(id)sender {
+    
+    if(!isTeam) {
+        isTeam = YES;
+        self.teamTableView.hidden = NO;
+            //Re-load Table View
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.teamTableView reloadData];
+        });
+        
+    } else {
+        self.teamTableView.hidden = YES;
+        isTeam = NO;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+    // number of row in the section, I assume there is only 1 row
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    return teamArray.count;
+}
+
+    // the cell will be returned to the tableView
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *MyIdentifier = @"teamCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    }
+    
+    cell.textLabel.numberOfLines = 2;
+    [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
+    
+//    if(isteam1 == YES) {
+//        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+//    }
+    
+    cell.textLabel.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+//    cell.textLabel.text = [teamArray objectAtIndex:indexPath.row];
+    
+    cell.selectionStyle = UIAccessibilityTraitNone;
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (isTeam) {
+        isTeam = NO;
+        self.teamTF.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+        teamCode = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
+//        self.teamTF.text = [teamArray objectAtIndex:indexPath.row];
+        self.teamTableView.hidden = YES;
+    }
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view resignFirstResponder];
@@ -202,6 +315,7 @@
     [_userTxt resignFirstResponder];
     
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField.returnKeyType == UIReturnKeyNext && _userTxt.isFirstResponder)

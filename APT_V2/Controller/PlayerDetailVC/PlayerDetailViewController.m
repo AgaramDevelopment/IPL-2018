@@ -82,6 +82,11 @@
     [revealController.tapGestureRecognizer setEnabled:NO];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.txtTestDate setup];
+}
+
 -(void)chatConfiguration
 {
     spiderChartView.delegate = self;
@@ -528,10 +533,22 @@
 }
 
 - (IBAction)actionpopup:(id)sender {
+    
+    if(![sender tag]) // open
+    {
+        [tblDateDropDown setHidden:NO];
+        [self.contentView bringSubviewToFront:tblDateDropDown];
+        [tblDateDropDown reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [sender setTag:1];
+
+    }
+    else
+    {
+        [tblDateDropDown setHidden:YES];
+        [sender setTag:0];
+
+    }
   
-    [tblDateDropDown setHidden:NO];
-    [self.contentView bringSubviewToFront:tblDateDropDown];
-    [tblDateDropDown reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (IBAction)playerMultiActions:(id)sender {
