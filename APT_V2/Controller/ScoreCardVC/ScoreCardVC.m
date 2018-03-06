@@ -20,7 +20,7 @@
 #import "FieldSummaryVC.h"
 #import "BallsInVideosCVC.h"
 #import "AppDelegate.h"
-#import "ScoreCardVideoPlayer.h"
+#import "VideoPlayerViewController.h"
 
 
 
@@ -263,6 +263,8 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * tableHeight2;
 
 
+
+
 //wagon
 @property (nonatomic,strong) NSMutableArray * wagonWheelDrawData;
 @property (nonatomic,strong) NSMutableArray * wagonWheelDrawData2;
@@ -459,8 +461,8 @@
     
     if([self.backkey isEqualToString:@"no"])
     {
-   // self.matchCode=Appobj.Currentmatchcode;
-   // self.matchDetails =Appobj.Scorearray;
+    //self.matchCode=Appobj.Currentmatchcode;
+    //self.matchDetails =Appobj.Scorearray;
     }
     
     self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
@@ -475,63 +477,20 @@
     
     NSString *key = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
     
-//    if([ key isEqualToString:@"India"])
-//    {
-//        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
-//        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-//
-//    }
-//    else if([ key isEqualToString:@"Srilanka"])
-//    {
-//        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-//        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
-//
-//
-//    }
-//    else
-//    {
-//        self.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-//        self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-//    }
+    if([ key isEqualToString:@"India"])
+    {
+        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
+        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+        
+    }
+    else
+    {
+        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
+        
+        
+    }
     
-    NSString * imgStr1 = ([[self.matchDetails objectAtIndex:0] valueForKey:@"TeamALogo"]==[NSNull null])?@"":[[self.matchDetails objectAtIndex:0] valueForKey:@"TeamALogo"];
-    
-    NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
-    
-    NSString * imgStr2 = ([[self.matchDetails objectAtIndex:0] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[self.matchDetails objectAtIndex:0] valueForKey:@"TeamBLogo"];
-    
-    NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
-    
-    [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            self.teamAlogo.image = image;
-            
-            // cache the image for use later (when scrolling up)
-            self.teamAlogo.image = image;
-        }
-        else
-        {
-            self.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-        }
-    }];
-    
-    
-    [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            self.teamBlogo.image = image;
-            
-            // cache the image for use later (when scrolling up)
-            self.teamBlogo.image = image;
-        }
-        else
-        {
-            self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        }
-    }];
-    
-    [self ScoreWebservice];
     
 
     [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
@@ -542,25 +501,13 @@
     [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
     [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     self.popTbl.hidden=YES;
+    [self ScoreWebservice];
+
+    
+    
     
    // [self.Team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
 
-}
-
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if ( !error )
-                               {
-                                   UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
-                               } else{
-                                   completionBlock(NO,nil);
-                               }
-                           }];
 }
 
 
@@ -635,7 +582,6 @@
     }
     [self.navi_View addSubview:objCustomNavigation.view];
     //    objCustomNavigation.tittle_lbl.text=@"";
-    
 }
 
 -(IBAction)didClickSummaryBtn:(id)sender
@@ -652,6 +598,8 @@
     {
         self.popTbl.hidden=YES;
         isPoP=NO;
+        isList=YES;
+        isBowl=YES;
     }
 }
 
@@ -667,7 +615,7 @@
     else if(tableView == self.bowlingTbl)
 //    {
         return CommonArray2.count;
-    else if(isPoP==YES)
+    else if(tableView==self.popTbl)
         return self.Summaryarray.count;
 //    }
     return nil;
@@ -688,6 +636,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:nil];
         }
+        
         
         cell.textLabel.text = self.Summaryarray[indexPath.row];
         cell.textColor = [UIColor whiteColor];
@@ -711,6 +660,8 @@
             
             cell=[[ScoreCardCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
+        [cell setBackgroundColor:[UIColor lightGrayColor]];
+        [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -982,7 +933,7 @@
                     }
 
                 }
-                else if ([self.selectRuns isEqualToString: @"90"]){
+                else if ([self.selectRuns isEqualToString: @"90"] ){
                     
                     
                     
@@ -1062,11 +1013,13 @@
                 
                 int xposition;
                 int yposition;
+                NSMutableArray *dotscount = [[NSMutableArray alloc]init];
                 
                 if(![sepArray isEqual:[NSNull null]])
                 {
                 for(int i=0; i<sepArray.count;i++)
                 {
+                    
                     //PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
                     
                     if(IS_IPHONE_DEVICE)
@@ -1187,6 +1140,9 @@
                             
                             //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
                             
+                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
                             
                             if(isDotBall == YES)
                             {
@@ -1202,7 +1158,9 @@
                             //ed1d24
                             //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
                             
-                            
+                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
                             
                             if(isWkt == YES)
                             {
@@ -1243,7 +1201,8 @@
             cell=[[ScorecardBowlCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
 
-        
+        [cell setBackgroundColor:[UIColor lightGrayColor]];
+        [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.bowelernamelbl.text = [[CommonArray2 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
@@ -1266,7 +1225,7 @@
         [[cell wicketsBtn] setTag:[indexPath row]];
         
         
-        [cell.runSBtn addTarget:self action:@selector(myActionRUNSBowling :) forControlEvents:UIControlEventTouchUpInside];
+        [cell.runSBtn addTarget:self action:@selector(myActionRUNSBowling:) forControlEvents:UIControlEventTouchUpInside];
         [cell.oversBtn addTarget:self action:@selector(myActionOversBowling:) forControlEvents:UIControlEventTouchUpInside];
         [cell.wicketsBtn addTarget:self action:@selector(myActionWktsBowling:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1901,6 +1860,14 @@
             
             lastIndex = NULL;
             
+            isOnes = YES;
+            isTwos = YES;
+            isThrees = YES;
+            isFours = YES;
+            isSixes = YES;
+            isWkt = YES;
+            isDotBall = YES;
+            
         }
         else
         {
@@ -1918,7 +1885,7 @@
                 isWkt = YES;
                 isDotBall = YES;
                 
-                //self.tableHeight.constant = self.listTbl.frame.size.height+300;
+                //self.tableHeight.constant = self.listTbl.frame.size.height-300;
                 
                 // self.tableHeight.constant = self.listTbl.frame.size.height300;
                 // [self.listTbl reloadData];
@@ -1930,10 +1897,17 @@
         }
         [self.listTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
+       // self.tableYposition.constant = 0;
         [self.listTbl endUpdates];
         
-        
         [self.listTbl reloadData];
+        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
+        self.tableHeight.constant = height;
+        [self.view layoutIfNeeded];
+        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
+        self.tableHeight2.constant = height1;
+        [self.view layoutIfNeeded];
+        
         
         
         
@@ -1942,9 +1916,6 @@
     
     if(tableView == self.bowlingTbl)
     {
-        
-        
-        
         static NSString *MyIdentifier = @"myid";
         
         ScorecardBowlCell *cell = [self.bowlingTbl dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -1955,6 +1926,13 @@
             selectedIndex = -1;
             lastIndex = NULL;
             
+            isOnes = YES;
+            isTwos = YES;
+            isThrees = YES;
+            isFours = YES;
+            isSixes = YES;
+            isWkt = YES;
+            isDotBall = YES;
         }
         else
         {
@@ -1984,183 +1962,170 @@
         
         [self.bowlingTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
-        [self.bowlingTbl reloadData];
+        
         
         [self.bowlingTbl endUpdates];
+        [self.bowlingTbl reloadData];
+      
         
+        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
+        self.tableHeight.constant = height;
+        [self.view layoutIfNeeded];
+        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
+        self.tableHeight2.constant = height1;
+        [self.view layoutIfNeeded];
         
         
     }
-      if(tableView == self.popTbl)
+    if(tableView == self.popTbl)
+    {
+        //isPoP = NO;
+        //        if(indexPath.row == 0 || indexPath.row == 1)
+        //        {
+        //            self.popTbl.hidden = YES;
+        //        self.popTbl.hidden=YES;
+        //        PlayersVC * objFix = [[PlayersVC alloc]init];
+        //        objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
+        //        [self.navigationController pushViewController:objFix animated:YES];
+        //        }
+        
+        if(indexPath.row == 0)
         {
-            isPoP = NO;
-            //        if(indexPath.row == 0 || indexPath.row == 1)
-            //        {
-            //            self.popTbl.hidden = YES;
-            //        self.popTbl.hidden=YES;
-            //        PlayersVC * objFix = [[PlayersVC alloc]init];
-            //        objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
-            //        [self.navigationController pushViewController:objFix animated:YES];
-            //        }
-    
-            if(indexPath.row == 0)
-            {
-                self.popTbl.hidden=YES;
-                PlayersVC * objFix = [[PlayersVC alloc]init];
-                objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
-                objFix.indexPath = indexPath.row;
-                objFix.matchcode = self.matchCode;
-                objFix.matchDetailss = self.matchDetails;
-                objFix.BatsmanDetailsArray1 = BatsmanDetailsArray1;
-                objFix.BatsmanDetailsArray2 = BatsmanDetailsArray2;
-                objFix.BatsmanDetailsArray3 = BatsmanDetailsArray3;
-                objFix.BatsmanDetailsArray4 = BatsmanDetailsArray4;
-                objFix.inningsDetailsArray = array;
-                NSLog(@"%@", objFix.inningsDetailsArray);
-                [self.navigationController pushViewController:objFix animated:YES];
-    
-            } else if (indexPath.row == 1) {
-    
-                self.popTbl.hidden=YES;
-                PlayersVC * objFix = [[PlayersVC alloc]init];
-                objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
-                objFix.indexPath = indexPath.row;
-                objFix.matchcode = self.matchCode;
-                objFix.matchDetailss = self.matchDetails;
-                objFix.BowlingDetailsArray1 = BowlingDetailsArray1;
-                objFix.BowlingDetailsArray2 = BowlingDetailsArray2;
-                objFix.BowlingDetailsArray3 = BowlingDetailsArray3;
-                objFix.BowlingDetailsArray4 = BowlingDetailsArray4;
-                objFix.inningsDetailsArray = array;
-                [self.navigationController pushViewController:objFix animated:YES];
-            }
-    
-            if(indexPath.row == 2)
-            {
-
-                NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
-
-                self.popTbl.hidden = YES;
-                FieldSummaryVC * objFix = [[FieldSummaryVC alloc]init];
-                objFix = (FieldSummaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"FieldingSummaryVC"];
-                objFix.matchcode = self.matchCode;
-                objFix.matchHeadding = matchHeaderDetail;
-                objFix.isTest = isTestmatch;
-                [self.navigationController pushViewController:objFix animated:YES];
-
-
-
-                //            self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
-                //            self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
-                //
-                //            //    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-                //            //    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
-                //            self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
-            }
-
-
-            if(indexPath.row == 3)
-            {
-                NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
-                self.popTbl.hidden = YES;
-                SessionSummaryVC * objFix = [[SessionSummaryVC alloc]init];
-                objFix = (SessionSummaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummaryVC"];
-                objFix.matchcode = self.matchCode;
-                objFix.isTest = isTestmatch;
-                objFix.matchHeadding = matchHeaderDetail;
-                [self.navigationController pushViewController:objFix animated:YES];
-            }
+            self.popTbl.hidden=YES;
+            PlayersVC * objFix = [[PlayersVC alloc]init];
+            objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
+            objFix.indexPath = indexPath.row;
+            objFix.matchcode = self.matchCode;
+            objFix.matchDetailss = self.matchDetails;
+            objFix.BatsmanDetailsArray1 = BatsmanDetailsArray1;
+            objFix.BatsmanDetailsArray2 = BatsmanDetailsArray2;
+            objFix.BatsmanDetailsArray3 = BatsmanDetailsArray3;
+            objFix.BatsmanDetailsArray4 = BatsmanDetailsArray4;
+            objFix.inningsDetailsArray = array;
+            NSLog(@"%@", objFix.inningsDetailsArray);
+            [self.navigationController pushViewController:objFix animated:YES];
+            
+        } else if (indexPath.row == 1) {
+            
+            self.popTbl.hidden=YES;
+            PlayersVC * objFix = [[PlayersVC alloc]init];
+            objFix = (PlayersVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayersVC"];
+            objFix.indexPath = indexPath.row;
+            objFix.matchcode = self.matchCode;
+            objFix.matchDetailss = self.matchDetails;
+            objFix.BowlingDetailsArray1 = BowlingDetailsArray1;
+            objFix.BowlingDetailsArray2 = BowlingDetailsArray2;
+            objFix.BowlingDetailsArray3 = BowlingDetailsArray3;
+            objFix.BowlingDetailsArray4 = BowlingDetailsArray4;
+            objFix.inningsDetailsArray = array;
+            [self.navigationController pushViewController:objFix animated:YES];
         }
+        
+        if(indexPath.row == 2)
+        {
+            
+            NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
+            
+            self.popTbl.hidden = YES;
+            FieldSummaryVC * objFix = [[FieldSummaryVC alloc]init];
+            objFix = (FieldSummaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"FieldingSummaryVC"];
+            objFix.matchcode = self.matchCode;
+            objFix.matchHeadding = matchHeaderDetail;
+            objFix.isTest = isTestmatch;
+            [self.navigationController pushViewController:objFix animated:YES];
+            
+            
+            
+            //            self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
+            //            self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
+            //
+            //            //    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+            //            //    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+            //            self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
+        }
+        
+        
+        if(indexPath.row == 3)
+        {
+            NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
+            self.popTbl.hidden = YES;
+            SessionSummaryVC * objFix = [[SessionSummaryVC alloc]init];
+            objFix = (SessionSummaryVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"SessionSummaryVC"];
+            objFix.matchcode = self.matchCode;
+            objFix.isTest = isTestmatch;
+            objFix.matchHeadding = matchHeaderDetail;
+            [self.navigationController pushViewController:objFix animated:YES];
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
     if(tableView== self.listTbl ||tableView== self.bowlingTbl )
     {
         if (selectedIndex == indexPath.row)
         {
-            
+
             [cell setBackgroundColor:[UIColor lightGrayColor]];
             [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
-            CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-            self.tableHeight.constant = height;
-            [self.view layoutIfNeeded];
-            
-            CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-            self.tableHeight2.constant = height1;
-            [self.view layoutIfNeeded];
-            
-            //[self.listTbl reloadData];
         }
         else
         {
             [cell setBackgroundColor:[UIColor clearColor]];
             [cell setAccessibilityTraits:0];
-            CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-            self.tableHeight.constant = height;
-            [self.view layoutIfNeeded];
             
-            CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-            self.tableHeight2.constant = height1;
-            [self.view layoutIfNeeded];
         }
-        
+
     }
-    else
+    else if(tableView == self.popTbl)
     {
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell setAccessibilityTraits:0];
-        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-        self.tableHeight.constant = height;
-        [self.view layoutIfNeeded];
-        
-        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-        self.tableHeight2.constant = height1;
-        [self.view layoutIfNeeded];
+       
     }
-    
-    
+
+
 }
 
 
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    float scrollViewHeight = scrollView.frame.size.height;
-//    float scrollContentSizeHeight = scrollView.contentSize.height;
-//    float scrollOffset = scrollView.contentOffset.y;
-//    
-//    
-//    if(IS_IPHONE_DEVICE)
-//    {
-//        if(scrollOffset <=153 )
-//        {
-//            self.ContainerYposition.constant = -scrollOffset+70;
-//        
-//        
-//        }
-//        else
-//        {
-//            self.ContainerYposition.constant = -90;
-//        }
-//    }
-//    else
-//    {
-//        if(scrollOffset <=153 )
-//        {
-//            self.ContainerYposition.constant = -scrollOffset+60;
-//
-//        }
-//        else
-//        {
-//            self.ContainerYposition.constant = -190;
-//        }
-//
-//    }
-//    
-//    NSLog(@"%f",scrollOffset);
-//}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    float scrollViewHeight = self.commonScroll.frame.size.height;
+    float scrollContentSizeHeight = self.commonScroll.contentSize.height;
+    float scrollOffset = self.commonScroll.contentOffset.y;
+
+
+    if(IS_IPHONE_DEVICE)
+    {
+        if(scrollOffset <=153 )
+        {
+            self.ContainerYposition.constant = -scrollOffset+70;
+
+
+        }
+        else
+        {
+            self.ContainerYposition.constant = -90;
+        }
+    }
+    else
+    {
+        if(scrollOffset <=153 )
+        {
+            self.ContainerYposition.constant = -scrollOffset+60;
+
+        }
+        else
+        {
+            self.ContainerYposition.constant = -190;
+        }
+
+    }
+
+    NSLog(@"%f",scrollOffset);
+}
 -(IBAction)Inn1Action:(id)sender
 {
     
@@ -2185,10 +2150,9 @@
         innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
         dict = [self WagonWheelWebservice];
-        if(![dict isEqual:[NSNull null]])
-        {
+        
         [self.wwd1 addObject:dict];
-        }
+        
         
         NSLog(@"Service  wwbat %d",i);
     }
@@ -2292,7 +2256,8 @@
     CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
     self.tableHeight2.constant = height1;
     [self.view layoutIfNeeded];
-    
+   
+   
     NSLog(@"Service End");
     
     //[self.listTbl reloadData];
@@ -2300,7 +2265,7 @@
 
 -(IBAction)Inn2Action:(id)sender
 {
-    
+    [AppCommon showLoading];
     [self buttonclicked:sender];
     NSLog(@"%@", self.Team1);
     [self setInningsBySelection1:@"2"];
@@ -2429,6 +2394,7 @@
 
 -(IBAction)Inn3Action:(id)sender
 {
+    [AppCommon showLoading];
     [self buttonclicked:sender];
     NSLog(@"%@", self.Team1);
     [self setInningsBySelection1:@"3"];
@@ -2555,6 +2521,7 @@
 
 -(IBAction)Inn4Action:(id)sender
 {
+    [AppCommon showLoading];
     [self buttonclicked:sender];
     NSLog(@"%@", self.Team1);
     [self setInningsBySelection1:@"4"];
@@ -2686,6 +2653,7 @@
 
 -(IBAction)Team1Action:(id)sender
 {
+    [AppCommon showLoading];
     [self buttonclicked:sender];
     NSLog(@"%@", self.Team1);
     [self setInningsBySelection:@"1"];
@@ -2810,6 +2778,7 @@
 
 -(IBAction)Team2Action:(id)sender
 {
+   [AppCommon showLoading];
   
     [self buttonclicked:sender];
     [self setInningsBySelection:@"2"];
@@ -3490,236 +3459,7 @@
 
                 
                 
-                //[self.Team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-                
-                
-                
-                //TEAM1
-                
-//                self.wwd1 = [[NSMutableArray alloc]init];
-//                self.ppd1 = [[NSMutableArray alloc]init];
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelWebservice];
-//                    
-//                    
-//                        [self.wwd1 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapWebservice];
-//                    
-//                        [self.ppd1 addObject:dict];
-//                    
-//
-//                }
 
-                
-//                self.wwd2 = [[NSMutableArray alloc]init];
-//                self.ppd2 = [[NSMutableArray alloc]init];
-//                
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelWebservice];
-//                    
-//                    [self.wwd2 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapWebservice];
-//                    
-//                    
-//                    [self.ppd2 addObject:dict];
-//                    
-//                }
-                
-//                self.wwd3 = [[NSMutableArray alloc]init];
-//                self.ppd3 = [[NSMutableArray alloc]init];
-//                
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray3.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray3 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray3 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelWebservice];
-//                    
-//                    
-//                    [self.wwd3 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray3.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray3 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray3 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapWebservice];
-//                    
-//                    
-//                    [self.ppd3 addObject:dict];
-//                    
-//                }
-                
-//                self.wwd4 = [[NSMutableArray alloc]init];
-//                self.ppd4 = [[NSMutableArray alloc]init];
-//                
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray4.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray4 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray4 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelWebservice];
-//                    
-//                    
-//                    [self.wwd4 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BatsmanDetailsArray4.count;i++)
-//                {
-//                    playercode = [[BatsmanDetailsArray4 valueForKey:@"Batsmencode"] objectAtIndex:i];
-//                    innno = [[BatsmanDetailsArray4 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapWebservice];
-//                    
-//                    
-//                    [self.ppd4 addObject:dict];
-//                    
-//                }
-
-
-                
-            
-          //Bowling Details
-
-//                self.Bwwd1 = [[NSMutableArray alloc]init];
-//                self.Bppd1 = [[NSMutableArray alloc]init];
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelbowlWebservice];
-//                    [self.Bwwd1 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapbowlWebservice];
-//                    
-//                    
-//                    [self.Bppd1 addObject:dict];
-//                    
-//                }
-                
-//                self.Bwwd2 = [[NSMutableArray alloc]init];
-//                self.Bppd2 = [[NSMutableArray alloc]init];
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelbowlWebservice];
-//                    
-//                    
-//                    [self.Bwwd2 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapbowlWebservice];
-//                    
-//                    
-//                    [self.Bppd2 addObject:dict];
-//                    
-//                }
-                
-//                self.Bwwd3 = [[NSMutableArray alloc]init];
-//                self.Bppd3 = [[NSMutableArray alloc]init];
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray3.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray3 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray3 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelbowlWebservice];
-//                    
-//                   
-//                    [self.Bwwd3 addObject:dict];
-//                    
-//                }
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray3.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray3 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray3 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapbowlWebservice];
-//                    
-//                    if(dic.count!=0)
-//                    {
-//                    [self.Bppd3 addObject:dict];
-//                    }
-//                }
-                
-//                self.Bwwd4 = [[NSMutableArray alloc]init];
-//                self.Bppd4 = [[NSMutableArray alloc]init];
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray4.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray4 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray4 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self WagonWheelbowlWebservice];
-//                    
-//                    if(dic.count!=0)
-//                    {
-//                    [self.Bwwd4 addObject:dict];
-//                    }
-//                }
-//                
-//                for(int i= 0 ;i<BowlingDetailsArray4.count;i++)
-//                {
-//                    playercode = [[BowlingDetailsArray4 valueForKey:@"BowlerCode"] objectAtIndex:i];
-//                    innno = [[BowlingDetailsArray4 valueForKey:@"Inningsno"] objectAtIndex:i];
-//                    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-//                    dict = [self PitchmapbowlWebservice];
-//                    
-//                    if(dic.count!=0)
-//                    {
-//                    [self.Bppd4 addObject:dict];
-//                    }
-//                }
                 
                 
                 [self.listTbl reloadData];
@@ -3767,7 +3507,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
-         [COMMON webServiceFailureError:error];
+        [COMMON webServiceFailureError:error];
     }];
     return dic1;
 }
@@ -3793,7 +3533,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
-         [COMMON webServiceFailureError:error];
+        [COMMON webServiceFailureError:error];
     }];
     
     return dic1;
@@ -4145,8 +3885,8 @@
 {
     //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
     
-    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
-    videoPlayerVC = (ScoreCardVideoPlayer *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
+    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
     videoPlayerVC.MatchCode = self.matchCode;
     videoPlayerVC.PlayerCode = playercode;
     videoPlayerVC.VideoValue = value;
@@ -4162,64 +3902,64 @@
 -(void) loadVideoPaths : (NSString *) batsmanCode : (NSString *) value: (NSString *) batOrBowl
 {
     
-//    [AppCommon showLoading];
-//    
-//    
-//    [objWebservice GetVideoPathFile :GetVideoFilePath  :batsmanCode :self.matchCode : innno :value : batOrBowl success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        // NSLog(@"responseObject=%@",responseObject);
-//        if(responseObject >0)
-//        {
-//            
-//            NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
-//            [dic1 setDictionary:responseObject];
-//            
-//            videoURLArray= [[NSMutableArray alloc] init];
-//            videoURLArray =  [dic1 valueForKey:@"lstScoreCardVideoFilePathValuesRuns"];
-//            
-//            if(videoURLArray.count >0){
-//                selectedVideo = 0;
-////                self.rootVideoView.hidden = NO;
-////                [self.ballsColView reloadData];
-//                
-//                
-//                NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
-//                NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
-//                
-//                
-//                
-//                NSURL *videoURL = [NSURL URLWithString:url];
-//                
-//                [self.avPlayer seekToTime:CMTimeMake(0, 1)];
-//                [self.avPlayer pause];
-//                [self.avPlayerViewController.view removeFromSuperview];
-//                self.avPlayer = NULL;
-//                
-//                
-//                self.avPlayer = [AVPlayer playerWithURL:videoURL];
-//                
-//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerViewController.player ];
-//                
-//                
-////                self.avPlayerViewController = [AVPlayerViewController new];
-////                self.avPlayerViewController.player = self.avPlayer;
-////                self.avPlayerViewController.view.frame = _videoView.bounds;
-////                [_videoView addSubview:self.avPlayerViewController.view];
-////
-////                [self.avPlayer play];
-//                
-//                
-//            }
-//            //[self setDataDictInTableView: dic1];
-//            
-//        }
-//        
-//         [AppCommon hideLoading];
-//        self.view.userInteractionEnabled = true;
-//    } failure:^(AFHTTPRequestOperation *operation, id error) {
-//        //NSLog(@"failed");
-//        [COMMON webServiceFailureError:error];
-//        self.view.userInteractionEnabled = true;
-//    }];
+    [AppCommon showLoading];
+    
+    
+    [objWebservice GetVideoPathFile :GetVideoFilePath  :batsmanCode :self.matchCode : innno :value : batOrBowl success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // NSLog(@"responseObject=%@",responseObject);
+        if(responseObject >0)
+        {
+            
+            NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
+            [dic1 setDictionary:responseObject];
+            
+            videoURLArray= [[NSMutableArray alloc] init];
+            videoURLArray =  [dic1 valueForKey:@"lstScoreCardVideoFilePathValuesRuns"];
+            
+            if(videoURLArray.count >0){
+                selectedVideo = 0;
+//                self.rootVideoView.hidden = NO;
+//                [self.ballsColView reloadData];
+                
+                
+                NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
+                NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
+                
+                
+                
+                NSURL *videoURL = [NSURL URLWithString:url];
+                
+                [self.avPlayer seekToTime:CMTimeMake(0, 1)];
+                [self.avPlayer pause];
+                [self.avPlayerViewController.view removeFromSuperview];
+                self.avPlayer = NULL;
+                
+                
+                self.avPlayer = [AVPlayer playerWithURL:videoURL];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerViewController.player ];
+                
+                
+//                self.avPlayerViewController = [AVPlayerViewController new];
+//                self.avPlayerViewController.player = self.avPlayer;
+//                self.avPlayerViewController.view.frame = _videoView.bounds;
+//                [_videoView addSubview:self.avPlayerViewController.view];
+//
+//                [self.avPlayer play];
+                
+                
+            }
+            //[self setDataDictInTableView: dic1];
+            
+        }
+        
+        [AppCommon hideLoading];
+        self.view.userInteractionEnabled = true;
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        //NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        self.view.userInteractionEnabled = true;
+    }];
 }
 
 -(void)itemDidFinishPlaying:(NSNotification *) notification {
