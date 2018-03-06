@@ -48,6 +48,7 @@
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
 		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
+		188E55EB204EAD21001EFA40 /* TabbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E55EA204EAD21001EFA40 /* TabbarVC.m */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
@@ -328,6 +329,8 @@
 		1850ECA92029E1A200B48BA1 /* TabHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeCell.h; sourceTree = "<group>"; };
 		1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeCell.m; sourceTree = "<group>"; };
 		1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeCell.xib; sourceTree = "<group>"; };
+		188E55E9204EAD21001EFA40 /* TabbarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabbarVC.h; sourceTree = "<group>"; };
+		188E55EA204EAD21001EFA40 /* TabbarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabbarVC.m; sourceTree = "<group>"; };
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
@@ -833,6 +836,15 @@
 				1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */,
 			);
 			path = TabHomeVC;
+			sourceTree = "<group>";
+		};
+		188E55E8204EAD0A001EFA40 /* TabbarVC */ = {
+			isa = PBXGroup;
+			children = (
+				188E55E9204EAD21001EFA40 /* TabbarVC.h */,
+				188E55EA204EAD21001EFA40 /* TabbarVC.m */,
+			);
+			path = TabbarVC;
 			sourceTree = "<group>";
 		};
 		18A590632047C382002BBF64 /* Formatters */ = {
@@ -1487,6 +1499,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				188E55E8204EAD0A001EFA40 /* TabbarVC */,
 				18E0710E204702920020D8EE /* InjuryAndIllnessVC */,
 				CE6C163C2045211300672253 /* BattingKpiVC */,
 				CE6C16392045211300672253 /* BowlingKPIVC */,
@@ -2044,6 +2057,7 @@
 				18A68AB0203719B700EBA479 /* MyStatsBattingVC.m in Sources */,
 				CE6C161E204520B300672253 /* PlayersCell.m in Sources */,
 				CEA4210D203161A900B2DAB5 /* VideoGalleryVC.m in Sources */,
+				188E55EB204EAD21001EFA40 /* TabbarVC.m in Sources */,
 				CE6C16102045205400672253 /* ScoreCardVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,

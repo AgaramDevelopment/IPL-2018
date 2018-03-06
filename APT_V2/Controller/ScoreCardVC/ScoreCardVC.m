@@ -459,11 +459,14 @@
     
     NSLog(@"%@", _matchCode);
     
-    if([self.backkey isEqualToString:@"no"])
-    {
-    //self.matchCode=Appobj.Currentmatchcode;
-    //self.matchDetails =Appobj.Scorearray;
-    }
+//    if([self.backkey isEqualToString:@"no"])
+//    {
+//    self.matchCode=Appobj.Currentmatchcode;
+//    self.matchDetails =Appobj.Scorearray;
+//    }
+    
+    self.matchCode=Appobj.Currentmatchcode;
+    self.matchDetails =Appobj.Scorearray;
     
     self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
     self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
@@ -3458,7 +3461,14 @@
                 }
 
                 
-                
+                appDel.indexPath = 0;
+                appDel.Currentmatchcode = self.matchCode;
+                appDel.Scorearray = self.matchDetails;
+                appDel.BatsmanDetailsArray1 = BatsmanDetailsArray1;
+                appDel.BatsmanDetailsArray2 = BatsmanDetailsArray2;
+                appDel.BatsmanDetailsArray3 = BatsmanDetailsArray3;
+                appDel.BatsmanDetailsArray4 = BatsmanDetailsArray4;
+                appDel.inningsDetailsArray = array;
 
                 
                 

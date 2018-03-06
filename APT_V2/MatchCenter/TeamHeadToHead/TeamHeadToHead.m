@@ -251,6 +251,8 @@
      */
     
     if(![COMMON isInternetReachable])
+        return;
+    
     [AppCommon showLoading];
     
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
@@ -296,7 +298,9 @@
      */
     
     if(![COMMON isInternetReachable])
-        [AppCommon showLoading];
+        return;
+    
+    [AppCommon showLoading];
     
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, @"UCC0000008", @"TEA0000010", @"TEA0000008", @"GRD0000001"];
     
