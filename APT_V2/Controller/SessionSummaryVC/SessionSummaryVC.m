@@ -56,6 +56,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    self.matchcode = appDel.Currentmatchcode;
+    self.matchHeadding = appDel.matchHeaderDetails;
+    self.isTest = appDel.isTest;
+    
     [self customnavigationmethod];
     matchstatus = @"MSC215";
     
@@ -94,7 +99,7 @@
         objCustomNavigation.btn_back.hidden =NO;
         
         [objCustomNavigation.btn_back addTarget:self action:@selector(BackBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
+        //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     else
@@ -1195,7 +1200,7 @@
 
 -(IBAction)BackBtn:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

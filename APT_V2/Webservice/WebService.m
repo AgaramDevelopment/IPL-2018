@@ -556,6 +556,20 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
+-(void)BattingOverBlock :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
+         failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",list,Competitioncode,teamcode]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
 
 #pragma mark - Helpers
 

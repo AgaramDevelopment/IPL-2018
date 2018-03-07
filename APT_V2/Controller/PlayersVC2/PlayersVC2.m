@@ -7,7 +7,7 @@
 //
 
 
-#import "PlayersVC.h"
+#import "PlayersVC2.h"
 #import "CustomNavigation.h"
 #import "Config.h"
 #import "PlayersCell.h"
@@ -16,36 +16,36 @@
 #import "WebService.h"
 
 
-@interface PlayersVC ()
+@interface PlayersVC2 ()
 {
     NSString *teamcode;
 }
 
 @end
 
-@implementation PlayersVC
+@implementation PlayersVC2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    NSLog(@"BatsmanDetailsArray1:%@", self.BatsmanDetailsArray1);
-//    NSLog(@"BatsmanDetailsArray2:%@", self.BatsmanDetailsArray2);
-//    NSLog(@"BatsmanDetailsArray3:%@", self.BatsmanDetailsArray3);
-//    NSLog(@"BatsmanDetailsArray4:%@", self.BatsmanDetailsArray4);
-//
-//    NSLog(@"BowlingDetailsArray1:%@", self.BowlingDetailsArray1);
-//    NSLog(@"BowlingDetailsArray2:%@", self.BowlingDetailsArray2);
-//    NSLog(@"BowlingDetailsArray3:%@", self.BowlingDetailsArray3);
-//    NSLog(@"BowlingDetailsArray4:%@", self.BowlingDetailsArray4);
+    //    NSLog(@"BatsmanDetailsArray1:%@", self.BatsmanDetailsArray1);
+    //    NSLog(@"BatsmanDetailsArray2:%@", self.BatsmanDetailsArray2);
+    //    NSLog(@"BatsmanDetailsArray3:%@", self.BatsmanDetailsArray3);
+    //    NSLog(@"BatsmanDetailsArray4:%@", self.BatsmanDetailsArray4);
+    //
+    //    NSLog(@"BowlingDetailsArray1:%@", self.BowlingDetailsArray1);
+    //    NSLog(@"BowlingDetailsArray2:%@", self.BowlingDetailsArray2);
+    //    NSLog(@"BowlingDetailsArray3:%@", self.BowlingDetailsArray3);
+    //    NSLog(@"BowlingDetailsArray4:%@", self.BowlingDetailsArray4);
     
-    self.BatsmanDetailsArray1 = appDel.BatsmanDetailsArray1;
-    self.BatsmanDetailsArray2 = appDel.BatsmanDetailsArray2;
-    self.BatsmanDetailsArray3 = appDel.BatsmanDetailsArray3;
-    self.BatsmanDetailsArray4 = appDel.BatsmanDetailsArray4;
+    self.BowlingDetailsArray1 = appDel.BowlingDetailsArray1;
+    self.BowlingDetailsArray2 = appDel.BowlingDetailsArray2;
+    self.BowlingDetailsArray3 = appDel.BowlingDetailsArray3;
+    self.BowlingDetailsArray4 = appDel.BowlingDetailsArray4;
     self.matchcode = appDel.Currentmatchcode;
     self.matchDetailss = appDel.Scorearray;
     self.inningsDetailsArray = appDel.inningsDetailsArray;
-    self.indexPath = appDel.indexPath;
+    self.indexPath = appDel.indexPath2;
     
     if (self.inningsDetailsArray.count == 2) {
         
@@ -288,12 +288,12 @@
     if (isBackEnable) {
         objCustomNavigation.menu_btn.hidden =YES;
         objCustomNavigation.btn_back.hidden =NO;
-       
+        
         [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
         
-        //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        
         //[objCustomNavigation.home_btn addTarget:self action:@selector(didClickSummaryBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
@@ -389,14 +389,14 @@
         if (self.indexPath == 0) {
             [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
-
+            
             cell.inningsScoreLbl.text = [[commonArray valueForKey:@"Runs"] objectAtIndex:indexPath.row];
             cell.playerNameLbl.text = [[commonArray valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row];
         }
         if (self.indexPath == 1) {
             
             [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray[indexPath.row] valueForKey:@"BowlerPhoto"]]]
-                         placeholderImage:[UIImage imageNamed:@"Default_image"]];
+                                placeholderImage:[UIImage imageNamed:@"Default_image"]];
             NSString *wicketsScore = [NSString stringWithFormat:@"%@/%@", [[commonArray valueForKey:@"Wickets"] objectAtIndex:indexPath.row], [[commonArray valueForKey:@"Runs"] objectAtIndex:indexPath.row]];
             cell.inningsScoreLbl.text = wicketsScore;
             cell.playerNameLbl.text = [[commonArray valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
@@ -413,7 +413,7 @@
             
             [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
-
+            
             cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row] ;
             cell.firstInningsScoreLbl.text = [[commonArray1 valueForKey:@"Runs"] objectAtIndex:indexPath.row];
             
@@ -432,7 +432,7 @@
             if (![[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
                 [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                     placeholderImage:[UIImage imageNamed:@"Default_image"]];
-
+                
                 cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
                 NSString *wicketsScore = [NSString stringWithFormat:@"%@/%@", [[commonArray1 valueForKey:@"Wickets"] objectAtIndex:indexPath.row], [[commonArray1 valueForKey:@"Runs"] objectAtIndex:indexPath.row]];
                 cell.firstInningsScoreLbl.text = wicketsScore;
@@ -445,7 +445,7 @@
                     
                     [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [[commonArray2 valueForKey:@"BowlerPhoto"] objectAtIndex:i]]]
                                         placeholderImage:[UIImage imageNamed:@"Default_image"]];
-
+                    
                     NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
                     cell.playerNameLbl.text = [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i];
                     cell.secondInningsScoreLbl.text = [NSString stringWithFormat:@"%@/%@", [[commonArray2 valueForKey:@"Wickets"] objectAtIndex:i], [[commonArray2 valueForKey:@"Runs"] objectAtIndex:i]];
@@ -455,7 +455,7 @@
                     if (self.BowlingDetailsArray1.count < self.BowlingDetailsArray3.count || self.BowlingDetailsArray2.count < self.BowlingDetailsArray4.count) {
                         [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray2[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                             placeholderImage:[UIImage imageNamed:@"Default_image"]];
-
+                        
                         NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
                         cell.playerNameLbl.text = [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
                         if ([[[commonArray2 valueForKey:@"Runs"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
@@ -559,7 +559,7 @@
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
         }
-
+        
         if (self.indexPath == 1)
         {
             BowlingKPIViewController * objFix = [[BowlingKPIViewController alloc]init];
@@ -576,7 +576,7 @@
                 teamcode = @"TEA0000026";
                 //objFix.SelectedTeamCode = teamcode;
             }
-
+            
             objFix.SelectedPlayerCode = btcode;
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
@@ -591,11 +591,11 @@
             objFix.SelectedMatchCode = self.matchcode;
             NSString *btcode = [[commonArray1 valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
             objFix.SelectedPlayerCode = btcode;
-
+            
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
         }
-
+        
         if (self.indexPath == 1)
         {
             BowlingKPIViewController * objFix = [[BowlingKPIViewController alloc]init];
@@ -605,16 +605,16 @@
             if (![[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
                 btcode=[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row];
             } else {
-
+                
                 btcode=[[commonArray2 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row];
             }
-
+            
             objFix.SelectedPlayerCode = btcode;
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
         }
     }
-
+    
     if (self.inningsDetailsArray.count == 4)
     {
         if (self.indexPath == 0)
@@ -624,11 +624,11 @@
             objFix.SelectedMatchCode = self.matchcode;
             NSString *btcode = [[commonArray1 valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
             objFix.SelectedPlayerCode = btcode;
-
+            
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
         }
-
+        
         if (self.indexPath == 1)
         {
             BowlingKPIViewController * objFix = [[BowlingKPIViewController alloc]init];
@@ -638,10 +638,10 @@
             if (![[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
                 btcode=[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row];
             } else {
-
+                
                 btcode=[[commonArray2 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row];
             }
-
+            
             objFix.SelectedPlayerCode = btcode;
             objFix.SelectedTeamCode = teamcode;
             [self.navigationController pushViewController:objFix animated:YES];
@@ -755,7 +755,7 @@
             }
         }
     }
-
+    
     
     [self.GridTbl reloadData];
 }
@@ -900,4 +900,5 @@
 }
 
 @end
+
 

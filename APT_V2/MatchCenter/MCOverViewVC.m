@@ -12,10 +12,12 @@
 #import "SWRevealViewController.h"
 #import "Config.h"
 #import "WebService.h"
+#import "ResultsVc.h"
 
 @interface MCOverViewVC ()
 {
     WebService *objWebservice;
+    ResultsVc *objresult;
     NSMutableArray *recentMatchesArray;
     NSMutableArray *resultsArray;
     
@@ -32,6 +34,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
+    
+    self.CompetitionListtbl.hidden = YES;
+    self.popTableView.hidden = YES;
     
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"MCOverViewResultCVC" bundle:nil] forCellWithReuseIdentifier:@"mcResultCVC"];
     
@@ -313,6 +318,22 @@
     
 }
 
+
+- (IBAction)onClickMoreMatches:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+    //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objresult animated:YES];
+    
+}
+- (IBAction)onClickCompetitionBtn:(id)sender
+{
+    
+    self.CompetitionListtbl.hidden = NO;
+    self.popTableView.hidden = NO;
+}
+
 - (IBAction)onClickPrevBtn:(id)sender
 {
    if(self.prevBtn.tag==1)
@@ -411,6 +432,55 @@
     
 }
 
+
+#pragma mark - UITableViewDataSource
+// number of section(s), now I assume there is only 1 section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+// number of row in the section, I assume there is only 1 row
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+// the cell will be returned to the tableView
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    static NSString *MyIdentifier = @"cellid";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    }
+    
+    
+        cell.textLabel.text = @"text";
+    
+    cell.selectionStyle = UIAccessibilityTraitNone;
+    
+    cell.contentView.backgroundColor = [UIColor lightTextColor];
+    return cell;
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+    self.competitionlbl.text = @"text";
+    self.CompetitionListtbl.hidden = YES;
+    self.popTableView.hidden = YES;
+}
+
+- (IBAction)dismissview:(id)sender
+{
+    self.popTableView.hidden = YES;
+    self.CompetitionListtbl.hidden = YES;
+}
 
 
 @end
