@@ -155,7 +155,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhs-Jg-bm1">
-                                <rect key="frame" x="225" y="88" width="0.0" height="18"/>
+                                <rect key="frame" x="0.0" y="88" width="450" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="gFt-Hd-hvD"/>
                                 </constraints>
@@ -175,6 +175,7 @@
                             <constraint firstItem="dJo-fo-dZp" firstAttribute="centerX" secondItem="JXZ-7P-QXk" secondAttribute="centerX" id="93D-wD-soo"/>
                             <constraint firstItem="Bze-CL-gjh" firstAttribute="leading" secondItem="AYo-v5-X4v" secondAttribute="trailing" constant="8" id="DDc-v7-rK1"/>
                             <constraint firstItem="dJo-fo-dZp" firstAttribute="leading" secondItem="SEI-ze-dqF" secondAttribute="trailing" constant="8" id="Ewb-fm-J6t"/>
+                            <constraint firstItem="Jhs-Jg-bm1" firstAttribute="leading" secondItem="JXZ-7P-QXk" secondAttribute="leading" id="FI1-aG-tjE"/>
                             <constraint firstItem="YuR-YY-AQL" firstAttribute="top" secondItem="qze-ZN-4c2" secondAttribute="bottom" constant="8.5" id="Fc8-9O-fcr"/>
                             <constraint firstAttribute="trailing" secondItem="Bze-CL-gjh" secondAttribute="trailing" constant="8" id="G2v-aC-pnO"/>
                             <constraint firstItem="dJo-fo-dZp" firstAttribute="top" secondItem="JXZ-7P-QXk" secondAttribute="top" constant="12" id="Int-9z-yYz"/>
@@ -192,6 +193,7 @@
                             <constraint firstAttribute="height" constant="110" id="cPs-gs-iMr"/>
                             <constraint firstAttribute="trailing" secondItem="BIY-Zr-7ag" secondAttribute="trailing" constant="8" id="dzI-6z-cdO"/>
                             <constraint firstItem="dJo-fo-dZp" firstAttribute="leading" secondItem="qze-ZN-4c2" secondAttribute="trailing" constant="8" id="eJa-fL-2bV"/>
+                            <constraint firstAttribute="trailing" secondItem="Jhs-Jg-bm1" secondAttribute="trailing" id="f10-YG-Qgt"/>
                             <constraint firstItem="Di3-sg-v5v" firstAttribute="top" secondItem="JXZ-7P-QXk" secondAttribute="top" constant="8" id="hyd-JC-F9t"/>
                             <constraint firstItem="BIY-Zr-7ag" firstAttribute="top" secondItem="Bze-CL-gjh" secondAttribute="bottom" constant="8" id="kAv-tJ-kd6"/>
                             <constraint firstAttribute="bottom" secondItem="Jhs-Jg-bm1" secondAttribute="bottom" constant="4" id="q8M-rK-Kxa"/>
@@ -227,7 +229,7 @@
                 <outlet property="team1Img" destination="Di3-sg-v5v" id="9By-dh-r1L"/>
                 <outlet property="team2Img" destination="Bze-CL-gjh" id="6DT-4g-AIh"/>
             </connections>
-            <point key="canvasLocation" x="308.5" y="82"/>
+            <point key="canvasLocation" x="308" y="82"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -413,7 +413,7 @@
         [path2 moveToPoint:(CGPoint){self.Inn1.frame.size.width,0 }];//w0
         [path2 addLineToPoint:(CGPoint){0, 0}];//00
         [path2 addLineToPoint:(CGPoint){0,self.Inn1.frame.size.height }];//0h
-        [path2 addLineToPoint:(CGPoint){self.Inn1.frame.size.width-25, self.Inn1.frame.size.height}];//wh20
+        [path2 addLineToPoint:(CGPoint){self.Inn1.frame.size.width-15, self.Inn1.frame.size.height}];//wh20
         CAShapeLayer *mask2 = [CAShapeLayer new];
         mask2.frame = self.Inn1.bounds;
         mask2.path = path2.CGPath;
@@ -424,7 +424,7 @@
         [path4 moveToPoint:(CGPoint){self.Inn2.frame.size.width,0 }];//w0
         [path4 addLineToPoint:(CGPoint){0, 0}];//00
         [path4 addLineToPoint:(CGPoint){0,self.Inn2.frame.size.height }];//0h
-        [path4 addLineToPoint:(CGPoint){self.Inn2.frame.size.width-25, self.Inn2.frame.size.height}];//wh20
+        [path4 addLineToPoint:(CGPoint){self.Inn2.frame.size.width-15, self.Inn2.frame.size.height}];//wh20
         CAShapeLayer *mask3 = [CAShapeLayer new];
         mask3.frame = self.Inn2.bounds;
         mask3.path = path4.CGPath;
@@ -434,7 +434,7 @@
         [path5 moveToPoint:(CGPoint){self.Inn3.frame.size.width,0 }];//w0
         [path5 addLineToPoint:(CGPoint){0, 0}];//00
         [path5 addLineToPoint:(CGPoint){0,self.Inn3.frame.size.height }];//0h
-        [path5 addLineToPoint:(CGPoint){self.Inn3.frame.size.width-25, self.Inn3.frame.size.height}];//wh20
+        [path5 addLineToPoint:(CGPoint){self.Inn3.frame.size.width-15, self.Inn3.frame.size.height}];//wh20
         CAShapeLayer *mask4 = [CAShapeLayer new];
         mask4.frame = self.Inn3.bounds;
         mask4.path = path5.CGPath;
@@ -445,7 +445,7 @@
         [path6 moveToPoint:(CGPoint){self.Inn4.frame.size.width,0 }];//w0
         [path6 addLineToPoint:(CGPoint){0, 0}];//00
         [path6 addLineToPoint:(CGPoint){0,self.Inn4.frame.size.height }];//0h
-        [path6 addLineToPoint:(CGPoint){self.Inn4.frame.size.width-25, self.Inn4.frame.size.height}];//wh20
+        [path6 addLineToPoint:(CGPoint){self.Inn4.frame.size.width, self.Inn4.frame.size.height}];//wh20
         CAShapeLayer *mask5 = [CAShapeLayer new];
         mask5.frame = self.Inn4.bounds;
         mask5.path = path6.CGPath;

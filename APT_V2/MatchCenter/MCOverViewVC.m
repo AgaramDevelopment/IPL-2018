@@ -164,8 +164,10 @@
     
     
     
-    NSString *CompetitionCode = @"UCC0000116";
-    NSString *teamcode = @"TEA0000001";
+//    NSString *CompetitionCode = @"UCC0000116";
+//    NSString *teamcode = @"TEA0000001";
+    NSString *CompetitionCode = @"UCC0000008";
+    NSString *teamcode = @"TEA0000010";
     objWebservice = [[WebService alloc]init];
     
     

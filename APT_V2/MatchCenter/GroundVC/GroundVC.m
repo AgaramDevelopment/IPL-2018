@@ -33,7 +33,9 @@
     float num4;
     
      NSArray<NSString *> *months;
-    
+    NSMutableArray *recentMatchesArray;
+    NSMutableDictionary *battingDict;
+    NSMutableArray *commonArray;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -56,10 +58,6 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     
-    
-    
-    
-    
     markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
     
     self.battingFstPie.delegate = self;
@@ -77,6 +75,7 @@
     _scrollView.contentSize = _contentView.frame.size;
     
    // [self barchartMultiple];
+    [self groundGetService];
     [self createBarChart];
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -122,7 +121,100 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)innings1ButtonTapped:(id)sender {
+    NSMutableArray *battingInnFirstResultsArray = [battingDict valueForKey:@"BattingScoreResults"];
+    
+    for (id key in battingInnFirstResultsArray) {
+            //Batting 1st  Values Assign to Label Properties
+        self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BFAvgWonScore"]];
+        self.OBHighScore.text = [self checkNull:[key valueForKey:@"BFHighScore"]];
+        self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BFScore"]];
+        self.OBLowScore.text = [self checkNull:[key valueForKey:@"BFLowScore"]];
+    }
+    
+    commonArray = [NSMutableArray new];
+    commonArray = [battingDict valueForKey:@"PPOneBlockResult"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.BowlTypeTbl reloadData];
+    });
+    
+}
 
+- (IBAction)innings2ButtonTapped:(id)sender {
+    NSMutableArray *battingInnSecondResultsArray = [battingDict valueForKey:@"BattingInnSecondResults"];
+    for (id key in battingInnSecondResultsArray) {
+            //Batting 1st  Values Assign to Label Properties
+        self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BSAvgWonScore"]];
+        self.OBHighScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
+        self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
+        self.OBLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
+    }
+
+    commonArray = [NSMutableArray new];
+    commonArray = [battingDict valueForKey:@"PPTwoBlockResult"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.BowlTypeTbl reloadData];
+    });
+}
+
+- (void)groundGetService {
+    /*
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/
+     METHOD     :   GET
+     PARAMETER  :   {COMPETITIONCODE}/{TEAMCODE}/{GROUNDCODE}
+     */
+        //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/UCC0000008/TEA0000010/GRD0000006
+
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"TEA0000010", @"GRD0000006"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        
+        //Recent Matches
+        recentMatchesArray = [[NSMutableArray alloc] init];
+        recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
+
+            //Re-load Table View
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.resultCollectionView reloadData];
+        });
+        
+        NSMutableArray *battingScoreResultsArray = [responseObject valueForKey:@"BattingScoreResults"];
+        for (id key in battingScoreResultsArray) {
+            //Batting 1st  Values Assign to Label Properties
+            self.BFAvgWinScoreLbl.text = [self checkNull:[key valueForKey:@"BFAvgWonScore"]];
+            self.BFHighScore.text = [self checkNull:[key valueForKey:@"BFHighScore"]];
+            self.BFAvgScore.text = [self checkNull:[key valueForKey:@"BFScore"]];
+            self.BFLowScore.text = [self checkNull:[key valueForKey:@"BFLowScore"]];
+            
+            //Batting 2nd  Values Assign to Label Properties
+            self.BSAvgWinScoreLbl.text = [self checkNull:[key valueForKey:@"BSAvgWonScore"]];
+            self.BSHighScore.text = [self checkNull:[key valueForKey:@"BSHighScore"]];
+            self.BSAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
+            self.BSLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
+        }
+        
+        battingDict = [NSMutableDictionary new];
+        battingDict = responseObject;
+        [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"FAILURE RESPONSE %@",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -131,7 +223,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if(collectionView == _resultCollectionView){
-        return 3;
+        return recentMatchesArray.count;
     }else{
         return 0;
     }
@@ -142,17 +234,50 @@
     
     if(collectionView == self.resultCollectionView){
         
-        
-        
         MCOverViewResultCVC* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"mcResultCVC" forIndexPath:indexPath];
         
+//        cell.team1Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"] ];
+        cell.Teamname1lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATName"]];
         
+        NSString *team1RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsWckts"]]];
+        cell.runs1lbl.text = team1RunsWickets;
+        
+        NSString *team1Overs = [NSString stringWithFormat:@"%@/20 Overs", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATOvers"]]];
+        cell.TeamOvers1lbl.text = team1Overs;
+        
+        NSString *team1crr = [NSString stringWithFormat:@"CRR:%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATRR"]]];
+        cell.runrate1lbl.text = team1crr;
+        
+        
+//                cell.team2Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"] ];
+        cell.Teamname2lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTName"]];
+        
+        NSString *team2RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsWckts"]]];
+        cell.runs2lbl.text = team2RunsWickets;
+        
+        NSString *team2Overs = [NSString stringWithFormat:@"%@/20 Overs", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTOvers"]]];
+        
+        cell.TeamOver2lbl.text = team2Overs;
+        NSString *team2crr = [NSString stringWithFormat:@"CRR:%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTRR"]]];
+        cell.runrate2lbl.text = team2crr;
+        
+        //       Date Format
+        NSString *currentDate = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMatchDate"];
+        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+        [dateFormatters setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *dates = [dateFormatters dateFromString:currentDate];
+        
+        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+        [dfs setDateFormat:@"dd MMM, yyyy"];
+        NSString * ondateStr = [dfs stringFromDate:dates];
+
+        NSString *dateNvenue = [NSString stringWithFormat:@"%@ @ %@", ondateStr, [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Venue"]]];
+        cell.Datelbl.text = dateNvenue;
         
         return cell;
         
     }
     return nil;
-    
 }
 
 
@@ -266,7 +391,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return commonArray.count;
     
 }
 
@@ -282,6 +407,14 @@
          cell = self.objCell;
     }
     //cell.textLabel.text = @"Text";
+    cell.bowlingStyleLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BowlingStyle"]];
+    cell.wicketsLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"]];
+    cell.economyLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Econ"]];
+    cell.avgLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Average"]];
+    cell.strikeRateLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"StrikRate"]];
+    cell.dotBallsPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"DotBallPercent"]];
+    cell.boundaryPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BoundaryPercent"]];
+    
     return cell;
     
 }
@@ -593,6 +726,12 @@
     NSLog(@"Bar Chart: %@",value);
 }
 
-
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
 
 @end

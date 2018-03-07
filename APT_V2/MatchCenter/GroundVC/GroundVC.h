@@ -27,4 +27,27 @@
 @property (strong, nonatomic) IBOutlet UITableView *BowlTypeTbl;
 
 @property (nonatomic,strong) IBOutlet BowlTypeCell *objCell;
+
+//Batting 1st Label Properties
+@property (strong, nonatomic) IBOutlet UILabel *BFAvgWinScoreLbl;
+@property (strong, nonatomic) IBOutlet UILabel *BFHighScore;
+@property (strong, nonatomic) IBOutlet UILabel *BFAvgScore;
+@property (strong, nonatomic) IBOutlet UILabel *BFLowScore;
+//Batting 2nd Label Properties
+@property (strong, nonatomic) IBOutlet UILabel *BSAvgWinScoreLbl;
+@property (strong, nonatomic) IBOutlet UILabel *BSHighScore;
+@property (strong, nonatomic) IBOutlet UILabel *BSAvgScore;
+@property (strong, nonatomic) IBOutlet UILabel *BSLowScore;
+
+
+//Over Block 1-6 Label Properties
+@property (strong, nonatomic) IBOutlet UIButton *innings1Btn;
+@property (strong, nonatomic) IBOutlet UIButton *innings2Btn;
+
+@property (strong, nonatomic) IBOutlet UILabel *OBAvgWinScore;
+@property (strong, nonatomic) IBOutlet UILabel *OBHighScore;
+@property (strong, nonatomic) IBOutlet UILabel *OBAvgScore;
+@property (strong, nonatomic) IBOutlet UILabel *OBLowScore;
+
+
 @end
