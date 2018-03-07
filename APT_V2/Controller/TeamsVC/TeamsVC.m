@@ -75,7 +75,6 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
         manager.requestSerializer = requestSerializer;
         
         

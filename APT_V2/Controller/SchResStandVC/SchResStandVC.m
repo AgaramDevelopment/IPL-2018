@@ -17,6 +17,7 @@
 #import "ScoreCardVC.h"
 #import "VideoPlayerViewController.h"
 #import "HomeScreenStandingsVC.h"
+#import "TabbarVC.h"
 
 
 @interface SchResStandVC ()
@@ -25,6 +26,10 @@
     NSString *displayMatchCode;
     VideoPlayerViewController * videoPlayerVC;
     HomeScreenStandingsVC *objStands;
+    TabbarVC *objtab;
+    SWRevealViewController *revealController;
+    
+    //AppDelegate *objAppDel;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -61,7 +66,6 @@
     
     [self ScheduleWebservice];
 
-    
 }
 
 
@@ -145,6 +149,7 @@
     return self.commonArray2.count;
     }
 }
+
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -348,7 +353,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if(collectionView==self.resultCollectionView)
+    if(collectionView == self.resultCollectionView)
     {
         displayMatchCode = [[self.commonArray2 valueForKey:@"MATCHCODE"] objectAtIndex:indexPath.row];
         NSMutableArray *scoreArray = [[NSMutableArray alloc]init];
@@ -371,17 +376,29 @@
         
         [scoreArray addObject:dic];
         
-                ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        objFix = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
-                objFix.matchCode = displayMatchCode;
-                objFix.matchDetails = scoreArray;
-                objFix.backkey = @"yes";
-                //[self.navigationController pushViewController:objFix animated:YES];
-                [appDel.frontNavigationController pushViewController:objFix animated:YES];
+//                ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
+//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//        objFix = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+//                objFix.matchCode = displayMatchCode;
+//                objFix.matchDetails = scoreArray;
+//                objFix.backkey = @"yes";
+//                //[self.navigationController pushViewController:objFix animated:YES];
+//                [appDel.frontNavigationController pushViewController:objFix animated:YES];
         
                 //[self.view addSubview:objFix];
           //[self displayContentController:objFix];
+        
+        
+        
+                        //ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                       objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+                        appDel.Currentmatchcode = displayMatchCode;
+                        appDel.Scorearray = scoreArray;
+                        //objtab.backkey = @"yes";
+                        //[self.navigationController pushViewController:objFix animated:YES];
+                        [appDel.frontNavigationController pushViewController:objtab animated:YES];
+        
         
     }
     
