@@ -665,6 +665,9 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    cell.playerNamelbl.numberOfLines = 2;
+    [cell.playerNamelbl setAdjustsFontSizeToFitWidth:YES];
+    
     cell.playerNamelbl.text = [[CommonArray valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row];
     cell.runslbl.text = [[CommonArray valueForKey:@"Runs"] objectAtIndex:indexPath.row];
     cell.ballslbl.text = [[CommonArray valueForKey:@"Balls"] objectAtIndex:indexPath.row];
@@ -1823,7 +1826,11 @@
         {
             if(IS_IPHONE_DEVICE)
             {
+            if(tableView== self.listTbl) {
+                return 45;
+            } else {
                 return 35;
+            }
             }
             else
             {
