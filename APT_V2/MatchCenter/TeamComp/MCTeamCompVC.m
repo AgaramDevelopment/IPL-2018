@@ -87,7 +87,7 @@
         {
             if(collectionView == self.teamCompCollectionView)
             {
-                return CGSizeMake(404, 825);
+                return CGSizeMake(290, 825);
             }
             else
             {
