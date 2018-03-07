@@ -10,6 +10,10 @@
 
 @interface MCOverViewVC : UIViewController
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
+
+@property (strong, nonatomic) IBOutlet UITableView *CompetitionListtbl;
+@property (strong, nonatomic) IBOutlet UIView *popTableView;
+@property (strong, nonatomic) IBOutlet UILabel *competitionlbl;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *rootView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;

@@ -24,12 +24,27 @@
 
 @property (strong, readwrite) NSString *Currentmatchcode;
 @property (strong, readwrite) NSMutableArray *Scorearray;
-
+//Batting KPI
 @property (strong, readwrite) NSMutableArray *BatsmanDetailsArray1;
 @property (strong, readwrite) NSMutableArray *BatsmanDetailsArray2;
 @property (strong, readwrite) NSMutableArray *BatsmanDetailsArray3;
 @property (strong, readwrite) NSMutableArray *BatsmanDetailsArray4;
 @property (strong, readwrite) NSMutableArray *inningsDetailsArray;
 @property (readwrite) NSInteger indexPath;
+
+//Bowling KPI
+
+@property (nonatomic,strong)  NSMutableArray *BowlingDetailsArray1;
+@property (nonatomic,strong) NSMutableArray *BowlingDetailsArray2;
+@property (nonatomic,strong) NSMutableArray *BowlingDetailsArray3;
+@property (nonatomic,strong) NSMutableArray *BowlingDetailsArray4;
+@property (strong, readwrite) NSMutableArray *inningsDetailsArray2;
+@property (readwrite) NSInteger indexPath2;
+
+
+//FieldingKPI
+@property (strong, readwrite) NSString *matchHeaderDetails;
+@property (readwrite) BOOL isTest;
+
 @end
 

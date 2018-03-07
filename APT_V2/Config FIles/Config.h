@@ -314,3 +314,9 @@
 #define teamBattingKey         @"APT_TEAMBATTING"
 
 #define OverviewKey         @"APT_TEAMOVERVIEW"
+
+#define ResultsKey                               @"FETCHRESULT"
+
+#define battingOverblockKey                               @"APT_BATTINGOVERBLOCK"
+
+#define battingOverViewkKey                               @"APT_BATTINGOVERBLOCKOVERVIEW"

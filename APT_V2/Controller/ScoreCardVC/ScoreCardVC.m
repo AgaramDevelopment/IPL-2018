@@ -572,10 +572,11 @@
     if (isBackEnable) {
         objCustomNavigation.menu_btn.hidden =YES;
         objCustomNavigation.btn_back.hidden =NO;
-        objCustomNavigation.home_btn.hidden = NO;
+        objCustomNavigation.home_btn.hidden = YES;
         [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+        //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         
-        [objCustomNavigation.home_btn addTarget:self action:@selector(didClickSummaryBtn:) forControlEvents:UIControlEventTouchUpInside];
+        //[objCustomNavigation.home_btn addTarget:self action:@selector(didClickSummaryBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
@@ -3461,6 +3462,13 @@
                 }
 
                 
+                
+                
+                
+                [self.listTbl reloadData];
+                
+                
+                //batting KPI
                 appDel.indexPath = 0;
                 appDel.Currentmatchcode = self.matchCode;
                 appDel.Scorearray = self.matchDetails;
@@ -3469,12 +3477,23 @@
                 appDel.BatsmanDetailsArray3 = BatsmanDetailsArray3;
                 appDel.BatsmanDetailsArray4 = BatsmanDetailsArray4;
                 appDel.inningsDetailsArray = array;
-
+                
+                //bowling KPI
+                
+                appDel.indexPath2 = 1;
+                appDel.BowlingDetailsArray1 = BowlingDetailsArray1;
+                appDel.BowlingDetailsArray2 = BowlingDetailsArray2;
+                appDel.BowlingDetailsArray3 = BowlingDetailsArray3;
+                appDel.BowlingDetailsArray4 = BowlingDetailsArray4;
+                //appDel.inningsDetailsArray = array;
                 
                 
-                [self.listTbl reloadData];
+                //Fielding
                 
-              
+                NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
+                appDel.matchHeaderDetails = matchHeaderDetail;
+                appDel.isTest = isTestmatch;
+                
                 
             }
             
@@ -3613,7 +3632,7 @@
 -(IBAction)didClickBackBtn:(id)sender
 {
         
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

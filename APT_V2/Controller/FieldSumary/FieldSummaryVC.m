@@ -61,6 +61,12 @@ int headdingCount = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.matchcode = appDel.Currentmatchcode;
+    self.matchHeadding = appDel.matchHeaderDetails;
+    self.isTest = appDel.isTest;
+    
+    
     [self customnavigationmethod];
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -115,7 +121,7 @@ int headdingCount = 0;
         objCustomNavigation.btn_back.hidden =NO;
         
         [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
+        //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     else
@@ -133,7 +139,7 @@ int headdingCount = 0;
 -(IBAction)didClickBackBtn:(id)sender
 {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

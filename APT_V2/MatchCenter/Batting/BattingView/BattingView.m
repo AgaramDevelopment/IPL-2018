@@ -415,7 +415,11 @@ BOOL isComp;
 -(void) loadChart
 
 {
-    //[self BattingWebservice];
+    
+    innNum =@"";
+    Result = @"";
+    types = @"runs";
+    [self BattingWebservice];
 }
 
 -(void)barchartloadValues
