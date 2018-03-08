@@ -65,7 +65,7 @@
         [self removePreviousView:bowView FromSuperView: self.containerView];
         [self.containerView addSubview:bowView];
         
-        [bowView loadChart];
+       // [bowView loadChart];
         [bowView loadTableFreez];
 
     }else if([position isEqualToString:@"2"]){
