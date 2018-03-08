@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "Header.h"
 #import "TabHomeVC.h"
+#import "TeamMembersVC.h"
 
 @interface LoginVC ()
 {
@@ -47,11 +48,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self teamCodeGetService];
     self.teamTableView.hidden = YES;
     _isVisible = false;
     self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
     self.passwordTxt.secureTextEntry= !_isVisible;
+    
+    [self teamCodeGetService];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -68,6 +71,10 @@
         //self.commonViewWidth.constant = 
         
     }
+    
+    _teamTF.text = @"";
+    _userTxt.text = @"";
+    _passwordTxt.text = @"";
     
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:NO];
@@ -119,11 +126,11 @@
     manager.requestSerializer = requestSerializer;
     
     
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(teamCode)  [dic    setObject:teamCode forKey:@"teamcode"];
     if(username)   [dic    setObject:username     forKey:@"username"];
     if(password)   [dic    setObject:password     forKey:@"password"];
-    
+
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
@@ -159,7 +166,12 @@
             }
             else
             {
-                VC = [TeamsVC new];
+//                VC = [TeamsVC new];
+               TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+                objPlayersVC.teamCode = teamCode;
+                objPlayersVC.teamname = self.teamTF.text;
+                VC = objPlayersVC;
+
             }
             
             appDel.frontNavigationController = self.navigationController;
@@ -187,9 +199,9 @@
 
 - (void)teamCodeGetService {
     /*
-     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_LOGIN_TEAMS/
      METHOD     :   GET
-     PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
+     PARAMETER  :   nil
      */
     
     if(![COMMON isInternetReachable])
@@ -197,8 +209,9 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
-    
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
+    NSString *API_URL = URL_FOR_RESOURCE(@"FETCH_LOGIN_TEAMS");
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -218,20 +231,17 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
+        [AppCommon hideLoading];
         [COMMON webServiceFailureError:error];
     }];
 }
+
 
 - (IBAction)switchAction:(id)sender {
     
     _isVisible = !_isVisible;
     
-    if(!_isVisible){
-        self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
-    }else{
-        self.securityImage.image = [UIImage imageNamed:@"eye_show_icon"];
-    }
-   // self.passwordTxt.secureTextEntry= ![sender isOn];
+    self.securityImage.image = [UIImage imageNamed:(!_isVisible ? @"eye_hide_icon" : @"eye_show_icon") ];
     self.passwordTxt.secureTextEntry= !_isVisible;
 }
 
@@ -288,7 +298,7 @@
 //        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
 //    }
     
-    cell.textLabel.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+    cell.textLabel.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamname"];
 //    cell.textLabel.text = [teamArray objectAtIndex:indexPath.row];
     
     cell.selectionStyle = UIAccessibilityTraitNone;
@@ -301,10 +311,14 @@
 {
     if (isTeam) {
         isTeam = NO;
-        self.teamTF.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
-        teamCode = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
+        self.teamTF.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamname"];
+        teamCode = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamcode"];
 //        self.teamTF.text = [teamArray objectAtIndex:indexPath.row];
         self.teamTableView.hidden = YES;
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamTF.text forKey:@"initialTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"initialTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
     }
 }
 

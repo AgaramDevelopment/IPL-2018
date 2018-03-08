@@ -22,6 +22,8 @@
                 <outlet property="battingFstPie" destination="f4r-kA-R2t" id="Ors-Xj-mWx"/>
                 <outlet property="battingSecPie" destination="GLU-2i-dx0" id="mnh-2x-VyV"/>
                 <outlet property="headderView" destination="Tuh-8v-uDv" id="gl7-sI-fdi"/>
+                <outlet property="lbl1stCenter" destination="QxC-tP-0xO" id="O2m-Tl-Oy8"/>
+                <outlet property="lbl2ndCenter" destination="4T0-EK-uLG" id="4gK-Xb-DrM"/>
                 <outlet property="lblAwayMatch" destination="pxO-fL-2JU" id="1RQ-tN-h5a"/>
                 <outlet property="lblHomeMatch" destination="8xq-ua-jiL" id="5Si-pr-V8f"/>
                 <outlet property="lblMatchLost1" destination="fAb-ED-q4U" id="iOg-zg-Tgo"/>
@@ -29,6 +31,7 @@
                 <outlet property="lblMatchWon1" destination="d5L-I1-55e" id="PSc-if-K2F"/>
                 <outlet property="lblMatchWon2" destination="Ve7-7a-wuy" id="FEV-9O-d0Z"/>
                 <outlet property="resultCollectionView" destination="xAS-Pb-QR2" id="92K-3R-31z"/>
+                <outlet property="tossResultsSegment" destination="Urw-pX-8ff" id="VMz-8I-1FC"/>
                 <outlet property="tossView" destination="zHL-oL-VyD" id="Y52-CH-eOz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="btnToss" destination="rP4-Fw-QRW" id="ZRX-DH-81I"/>
@@ -105,10 +108,20 @@
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4r-kA-R2t" customClass="PieChartView">
                                                                     <rect key="frame" x="20" y="25.5" width="95" height="95"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxC-tP-0xO">
+                                                                            <rect key="frame" x="41.5" y="42" width="11.5" height="12"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="95" id="17b-rE-Tpr"/>
                                                                         <constraint firstAttribute="width" constant="95" id="Dbh-Lf-Xkr"/>
+                                                                        <constraint firstItem="QxC-tP-0xO" firstAttribute="centerX" secondItem="f4r-kA-R2t" secondAttribute="centerX" id="OEW-CB-6Gt"/>
+                                                                        <constraint firstItem="QxC-tP-0xO" firstAttribute="centerY" secondItem="f4r-kA-R2t" secondAttribute="centerY" id="V2c-4N-QDr"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="js8-eP-i3l">
@@ -229,8 +242,18 @@
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLU-2i-dx0" customClass="PieChartView">
                                                                     <rect key="frame" x="20" y="24" width="95" height="95"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T0-EK-uLG">
+                                                                            <rect key="frame" x="41" y="41" width="11.5" height="12"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
+                                                                        <constraint firstItem="4T0-EK-uLG" firstAttribute="centerY" secondItem="GLU-2i-dx0" secondAttribute="centerY" id="DNV-Lw-vKq"/>
+                                                                        <constraint firstItem="4T0-EK-uLG" firstAttribute="centerX" secondItem="GLU-2i-dx0" secondAttribute="centerX" id="Spe-gD-hOA"/>
                                                                         <constraint firstAttribute="width" constant="95" id="b4n-fX-GY0"/>
                                                                         <constraint firstAttribute="height" constant="95" id="cY1-Wp-J3K"/>
                                                                     </constraints>
@@ -542,7 +565,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="359" id="O9e-vW-zJL"/>
                                                     </constraints>
-                                                    <collectionViewLayout key="collectionViewLayout" id="ISf-9C-UXC" customClass="CustomCollectionViewLayout" customModule="APT_V2" customModuleProvider="target"/>
+                                                    <collectionViewLayout key="collectionViewLayout" id="ISf-9C-UXC" customClass="CustomCollectionViewLayout" customModule="IPL_2018" customModuleProvider="target"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="-1" id="L7h-aK-sev"/>
                                                         <outlet property="delegate" destination="-1" id="XbH-qP-0P5"/>
@@ -672,7 +695,7 @@
                 <constraint firstAttribute="bottom" secondItem="X9R-R7-2WT" secondAttribute="bottom" id="xPF-3w-bom"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="6" y="308"/>
+            <point key="canvasLocation" x="-231" y="283"/>
         </view>
     </objects>
     <resources>

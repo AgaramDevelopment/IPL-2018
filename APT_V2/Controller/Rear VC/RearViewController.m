@@ -16,6 +16,7 @@
 #import "TrainingLoadUpdateVC.h"
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
+#import "TeamMembersVC.h"
 
 @interface RearViewController ()
 {
@@ -107,41 +108,29 @@
     {
         if(indexPath.row == 0)
         {
-            newFrontController= [TabHomeVC new];
-            
+            newFrontController = [TabHomeVC new];
         }
-        else if(indexPath.row == 1)
-        {
-            newFrontController= [MatchCenterTBC new];
-            
-        }
-//        else if (indexPath.row == arrItems.count -1)
-//        {
-//            [self actionLogOut];
-//
-//        }
     }
     else
     {
-        
         if(indexPath.row == 0)
         {
-            newFrontController= [TeamsVC new];
-            
+//            newFrontController = [TeamsVC new];
+            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
+            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
+
+            newFrontController = objPlayersVC;
+
         }
-        else if(indexPath.row == 1) // Match center with KPI's
-        {
-            
-            newFrontController= [MatchCenterTBC new];
-        }
-//        else if (indexPath.row == arrItems.count -1)
-//        {
-//            [self actionLogOut];
-//
-//        }
     }
     
-    if (indexPath.row == arrItems.count -1)
+    if(indexPath.row == 1)
+    {
+        newFrontController = [MatchCenterTBC new];
+        
+    }
+    else if (indexPath.row == arrItems.count -1)
     {
         [self actionLogOut];
         

@@ -24,12 +24,13 @@
 
 @implementation TeamMembersVC
 
+@synthesize navView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
       [self.playesTable registerNib:[UINib nibWithNibName:@"TeamMemebersCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-    [self TeamsWebservice];
     self.TeamNamelbl.text = _teamname;
     
     self.AllBtn.layer.cornerRadius = 5;
@@ -46,9 +47,25 @@
     
     self.BowlerBtn.layer.cornerRadius = 5;
     self.BowlerBtn.clipsToBounds = YES;
+    [self customnavigationmethod];
+    [self TeamsWebservice];
+
     
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
     
+    [navView addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -111,7 +111,8 @@
 
 -(void)actionBack
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -164,7 +165,7 @@
     if (section == 0) {
         return 0;
     }
-    if (section == 1) {
+    else if (section == 1) {
         return (IS_IPAD)?65:55;
     }
     return 0;
@@ -2621,6 +2622,9 @@
 
 - (IBAction)battingAction:(id)sender {
     
+    [self setInningsButtonSelect:self.battingBtn];
+    [self setInningsButtonUnselect:self.bowlingBtn];
+        
     lastIndex = NULL;
     selectedIndex = -1;
     
@@ -2659,6 +2663,9 @@
 }
 
 - (IBAction)bowlingAction:(id)sender {
+    
+    [self setInningsButtonSelect:self.bowlingBtn];
+    [self setInningsButtonUnselect:self.battingBtn];
     
     lastIndex = NULL;
     selectedIndex = -1;
@@ -2804,6 +2811,24 @@
     return color;
 }
 
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+        // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+        //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+}
 
 - (void)myStatsBowlingPostMethodWebService {
     

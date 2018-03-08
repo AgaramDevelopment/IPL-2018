@@ -24,5 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblMatchLost1;
 @property (weak, nonatomic) IBOutlet UILabel *lblMatchWon2;
 @property (weak, nonatomic) IBOutlet UILabel *lblMatchLost2;
+@property (weak, nonatomic) IBOutlet UILabel *lbl2ndCenter;
+@property (weak, nonatomic) IBOutlet UILabel *lbl1stCenter;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tossResultsSegment;
 
 @end

@@ -38,8 +38,12 @@
                 <outlet property="OBHighScore" destination="dqK-9h-bLr" id="Tzz-p1-YX7"/>
                 <outlet property="OBLowScore" destination="lGs-xb-f3b" id="Byc-n4-A6h"/>
                 <outlet property="barchart" destination="dZD-CR-Rqc" id="Myr-V6-fQ4"/>
+                <outlet property="battingFirstMatchLostLbl" destination="9jD-pY-zNO" id="Fla-RO-mdY"/>
+                <outlet property="battingFirstMatchWonLbl" destination="o7q-WR-smw" id="Z37-o6-ceB"/>
                 <outlet property="battingFstPie" destination="3PK-Sb-DOh" id="vQh-fa-bgc"/>
                 <outlet property="battingSecPie" destination="qWR-bF-57d" id="Wal-4C-kAF"/>
+                <outlet property="battingSecondMatchLostLbl" destination="mir-Tb-xyj" id="cg3-Ya-APA"/>
+                <outlet property="battingSecondMatchWonLbl" destination="k3C-JB-hOe" id="PpO-gP-FaT"/>
                 <outlet property="headerView" destination="ydT-uU-h8a" id="6Ic-KN-Kzr"/>
                 <outlet property="innings1Btn" destination="ewj-PI-5K9" id="JFf-ri-2bO"/>
                 <outlet property="innings2Btn" destination="6s7-Nw-W4f" id="WG3-Ng-ROQ"/>
@@ -252,8 +256,8 @@
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7q-WR-smw">
-                                                                            <rect key="frame" x="96" y="4" width="33" height="12"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7q-WR-smw">
+                                                                            <rect key="frame" x="96" y="16" width="33" height="0.0"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="33" id="219-hi-xxH">
                                                                                     <variation key="heightClass=regular-widthClass=regular" constant="50"/>
@@ -277,8 +281,8 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jD-pY-zNO">
-                                                                            <rect key="frame" x="96" y="18" width="33" height="12"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jD-pY-zNO">
+                                                                            <rect key="frame" x="96" y="30" width="33" height="0.0"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="33" id="dbX-Fr-7xS">
                                                                                     <variation key="heightClass=regular-widthClass=regular" constant="50"/>
@@ -380,8 +384,8 @@
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3C-JB-hOe">
-                                                                            <rect key="frame" x="96" y="4" width="33" height="12"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3C-JB-hOe">
+                                                                            <rect key="frame" x="96" y="16" width="33" height="0.0"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="33" id="Mhw-cb-Vnr">
                                                                                     <variation key="heightClass=regular-widthClass=regular" constant="50"/>
@@ -405,8 +409,8 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mir-Tb-xyj">
-                                                                            <rect key="frame" x="96" y="18" width="33" height="12"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mir-Tb-xyj">
+                                                                            <rect key="frame" x="96" y="30" width="33" height="0.0"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="33" id="U0N-4z-cJN">
                                                                                     <variation key="heightClass=regular-widthClass=regular" constant="50"/>

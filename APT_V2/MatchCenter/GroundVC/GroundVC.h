@@ -49,5 +49,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *OBAvgScore;
 @property (strong, nonatomic) IBOutlet UILabel *OBLowScore;
 
+//Toss Won Label Properties
+@property (strong, nonatomic) IBOutlet UILabel *battingFirstMatchWonLbl;
+@property (strong, nonatomic) IBOutlet UILabel *battingFirstMatchLostLbl;
+@property (strong, nonatomic) IBOutlet UILabel *battingSecondMatchWonLbl;
+@property (strong, nonatomic) IBOutlet UILabel *battingSecondMatchLostLbl;
+
 
 @end

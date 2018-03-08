@@ -11,6 +11,8 @@
 #import "MatchCenterTBC.h"
 #import "TeamsVC.h"
 #import "TabHomeVC.h"
+#import "TeamMembersVC.h"
+
 @interface AppDelegate ()
 {
     BOOL IsTimer;
@@ -50,7 +52,10 @@
         }
         else
         {
-            frontViewController = [TeamsVC new];
+            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
+            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
+            frontViewController = objPlayersVC;
         }
     }
     else

@@ -20,11 +20,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoGalleryVC">
             <connections>
-                <outlet property="CancelTextImg" destination="OUh-Qe-dWb" id="7RG-WV-DFc"/>
                 <outlet property="catagory_lbl" destination="6KI-zl-lEp" id="wRW-EB-OaZ"/>
                 <outlet property="categoryTbl" destination="sCF-UN-dvm" id="Q8p-EO-pFd"/>
-                <outlet property="clearBtn" destination="jDN-Nq-x2f" id="vLt-Gu-UqZ"/>
-                <outlet property="date_lbl" destination="1iQ-cr-UVM" id="gO6-vO-gZm"/>
                 <outlet property="search_Txt" destination="fW4-m1-2x0" id="ZaP-Fq-t87"/>
                 <outlet property="videoCollectionview2" destination="LUQ-Vu-Umg" id="KNr-9B-jq4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -150,7 +147,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t83-Vr-2Ex">
                             <rect key="frame" x="125" y="5" width="115" height="30"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iQ-cr-UVM">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iQ-cr-UVM">
                                     <rect key="frame" x="5" y="2" width="90" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="bPp-WE-UKW"/>
@@ -161,7 +158,7 @@
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                     </variation>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel_BlackColor" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-Qe-dWb">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel_BlackColor" translatesAutoresizingMaskIntoConstraints="NO" id="OUh-Qe-dWb">
                                     <rect key="frame" x="95" y="4" width="20" height="20"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -169,7 +166,7 @@
                                         <constraint firstAttribute="height" constant="20" id="jRy-TM-OQv"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb1-4Z-J5f">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb1-4Z-J5f">
                                     <rect key="frame" x="5" y="28" width="105" height="1"/>
                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -179,20 +176,14 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVf-Wd-Gnz">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVf-Wd-Gnz">
                                     <rect key="frame" x="0.0" y="0.0" width="91" height="30"/>
-                                    <connections>
-                                        <action selector="didClickDatePicker:" destination="-1" eventType="touchUpInside" id="2Dv-nm-tto"/>
-                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDN-Nq-x2f">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDN-Nq-x2f">
                                     <rect key="frame" x="92" y="0.0" width="18" height="28"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="18" id="r7c-LD-Qa5"/>
                                     </constraints>
-                                    <connections>
-                                        <action selector="ClearTextAction:" destination="-1" eventType="touchUpInside" id="GLR-bS-aJD"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
