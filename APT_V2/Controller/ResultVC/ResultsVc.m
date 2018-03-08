@@ -395,7 +395,11 @@
                 
                 self.resultArr = [[NSMutableArray alloc]init];
                 NSMutableArray * filterarr = [[NSMutableArray alloc]init];
-                filterarr = [responseObject valueForKey:@"lstFixturesGridValues"];
+                
+                if ([responseObject valueForKey:@"lstFixturesGridValues"]) {
+                    filterarr = [responseObject valueForKey:@"lstFixturesGridValues"];
+
+                }
                 
                 for( int i=0;i<filterarr.count;i++)
                 {

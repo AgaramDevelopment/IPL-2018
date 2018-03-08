@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic)  NSMutableArray *PlayersArray;
 @property (strong, nonatomic)  NSMutableArray *PlayerRoleArray;
-
 @property (strong, nonatomic)  NSMutableArray *CommonArray;
 
 @end

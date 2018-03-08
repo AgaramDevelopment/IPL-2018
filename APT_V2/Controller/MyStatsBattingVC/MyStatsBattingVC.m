@@ -102,18 +102,11 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    
-        //    [self.view addSubview:objCustomNavigation.view];
-        //    objCustomNavigation.tittle_lbl.text=@"";
-    
-        //UIView* view= self.navigation_view.subviews.firstObject;
     [self.navBar addSubview:objCustomNavigation.view];
     
     objCustomNavigation.btn_back.hidden = NO;
     objCustomNavigation.menu_btn.hidden = YES;
-        //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-                [objCustomNavigation.home_btn addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)actionBack
@@ -2333,7 +2326,11 @@
         [AppCommon hideLoading];
         
         //Bowling Service
-        [self myStatsBowlingPostMethodWebService];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self myStatsBowlingPostMethodWebService];
+        });
+        
 
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
