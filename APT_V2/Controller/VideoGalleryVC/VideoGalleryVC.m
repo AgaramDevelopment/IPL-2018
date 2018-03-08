@@ -365,7 +365,9 @@
     
 
 //    [self.view addSubview:videoPlayerVC.view];
+    
 }
+
 -(IBAction)didClickcategoryPopView:(id)sender
 {
     if(isCategory == NO)
@@ -400,8 +402,6 @@
     return [self.CommonArray count];    //count number of row from counting array hear cataGorry is An Array
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -419,6 +419,7 @@
     // Ensure you use a placeholder image otherwise cells will be initialized with no image
    
     cell.textLabel.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -460,8 +461,6 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-    
-    
     
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@", searchText];
     _searchResult = [self.objSecondGalleryArray filteredArrayUsingPredicate:resultPredicate];

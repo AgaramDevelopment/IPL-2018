@@ -16,7 +16,6 @@
 
 @interface MyStatsBattingVC ()
 {
-    
     NSInteger selectedIndex;
     NSIndexPath *lastIndex;
     
@@ -41,6 +40,7 @@
     BOOL isBowling;
     
 }
+
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *battingTableViewHeight;
 
 @end

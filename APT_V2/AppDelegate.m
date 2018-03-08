@@ -32,6 +32,8 @@
 
 @synthesize storyBoard,rearViewController;
 
+@synthesize ArrayTeam,ArrayCompetition;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

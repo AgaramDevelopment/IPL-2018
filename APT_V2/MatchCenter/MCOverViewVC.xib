@@ -91,12 +91,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfE-40-PV2">
                                                     <rect key="frame" x="55" y="10" width="300" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuQ-by-e7C">
-                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
-                                                            <connections>
-                                                                <action selector="onClickCompetitionBtn:" destination="-1" eventType="touchUpInside" id="fm0-Va-0Wa"/>
-                                                            </connections>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cF1-Ja-TZG">
                                                             <rect key="frame" x="5" y="3" width="273" height="25"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
@@ -123,6 +117,12 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuQ-by-e7C">
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
+                                                            <connections>
+                                                                <action selector="onClickCompetitionBtn:" destination="-1" eventType="touchUpInside" id="fm0-Va-0Wa"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>

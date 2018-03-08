@@ -639,6 +639,44 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     [self.operationQueue cancelAllOperations];
 }
 
+-(void)getIPLTeamCodessuccess:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMS");
+    [self GET:URL parameters:nil
+      success:^(AFHTTPRequestOperation *operation, id responseDict)
+     {
+         if (success){
+             success(operation,responseDict);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         if (failure){
+             NSLog(@"response");
+             failure(operation, error);
+         }
+     }];
+
+}
+
+-(void)getIPLCompeteionCodesuccess:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLCOMPETITIONS");
+    [self GET:URL parameters:nil
+      success:^(AFHTTPRequestOperation *operation, id responseDict)
+     {
+         if (success){
+             success(operation,responseDict);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         if (failure){
+             NSLog(@"response");
+             failure(operation, error);
+         }
+     }];
+}
 
 @end
 

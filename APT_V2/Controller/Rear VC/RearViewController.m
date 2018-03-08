@@ -84,8 +84,20 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     
+    if (indexPath == PreviouslySelectedIndex) {
+        cell.textLabel.textColor = [UIColor cyanColor];
+//        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 17 : 15)];
+        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
+    }
+    else
+    {
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+//        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 15 : 12)];
+        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
+
+    }
     cell.textLabel.text = arrItems[indexPath.row];
-    //[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
     
 }
@@ -119,7 +131,6 @@
             TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
             objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
             objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
-
             newFrontController = objPlayersVC;
 
         }
@@ -133,7 +144,6 @@
     else if (indexPath.row == arrItems.count -1)
     {
         [self actionLogOut];
-        
     }
     
     if (newFrontController == nil) {
@@ -145,6 +155,7 @@
     appDel.frontNavigationController = navigationController;
     [revealController pushFrontViewController:navigationController animated:YES];
     PreviouslySelectedIndex = indexPath;
+    [_RearTableView reloadData];
     
 }
 

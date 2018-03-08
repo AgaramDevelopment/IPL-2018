@@ -40,6 +40,9 @@
 @property (nonatomic,strong) NSMutableArray *BowlingDetailsArray4;
 @property (strong, readwrite) NSMutableArray *inningsDetailsArray2;
 @property (readwrite) NSInteger indexPath2;
+@property (strong, readwrite) NSMutableArray *ArrayCompetition;
+@property (strong, readwrite) NSMutableArray *ArrayTeam;
+
 
 
 //FieldingKPI

@@ -14,17 +14,17 @@
 #import "WebService.h"
 #import "ResultsVc.h"
 
-@interface MCOverViewVC ()
+@interface MCOverViewVC ()<selectedDropDown>
 {
     WebService *objWebservice;
     ResultsVc *objresult;
     NSMutableArray *recentMatchesArray;
     NSMutableArray *resultsArray;
-    
     NSMutableArray *CommonArray;
     NSMutableArray *BatsmenArray;
     NSMutableArray *BowlersArray;
     NSMutableArray *FieldersArray;
+    NSArray* competetinArray;
 }
 
 @end
@@ -327,11 +327,40 @@
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
 }
+-(void)getTeamCodes
+{
+        [AppCommon showLoading ];
+    
+        objWebservice = [[WebService alloc]init];
+        [objWebservice getIPLCompeteionCodesuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if(responseObject >0)
+            {
+                competetinArray = responseObject;
+            }
+        } failure:^(AFHTTPRequestOperation *operation, id error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError:error];
+
+        }];
+}
+
+
 - (IBAction)onClickCompetitionBtn:(id)sender
 {
     
     self.CompetitionListtbl.hidden = NO;
     self.popTableView.hidden = NO;
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.array = competetinArray;
+    dropVC.key = @"ModuleName";
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    [self presentViewController:dropVC animated:YES completion:nil];
+
 }
 
 - (IBAction)onClickPrevBtn:(id)sender
@@ -480,6 +509,11 @@
 {
     self.popTableView.hidden = YES;
     self.CompetitionListtbl.hidden = YES;
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    NSLog(@"selected value %@",key);
 }
 
 
