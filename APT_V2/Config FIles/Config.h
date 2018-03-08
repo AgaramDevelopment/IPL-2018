@@ -321,3 +321,9 @@
 #define battingOverblockKey                       @"APT_BATTINGOVERBLOCK"
 
 #define ResultsKey                               @"FETCHRESULT"
+
+#define TeambowlingKey                       @"APT_TEAMBOWLING"
+
+#define bowlingOverViewkKey       @"APT_BOWLINGOVERBLOCKOVERVIEW"
+
+#define bowlingOverblockKey                       @"APT_BOWLINGOVERBLOCK"

@@ -176,6 +176,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)BattingOverBlock :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
                  failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)BowlingTeam :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode :(NSString *)innNo :(NSString *)result :(NSString *)type success:(WebserviceRequestSuccessHandler)success
+            failure:(WebserviceRequestFailureHandler)failure;
+
 
 
 @end
