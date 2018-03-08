@@ -40,6 +40,10 @@
 
 @synthesize lblMatchWon2,lblMatchLost2;
 
+@synthesize tossResultsSegment;
+
+@synthesize lbl1stCenter,lbl2ndCenter;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSUserDefaults standardUserDefaults] setInteger: 13 forKey:@"requiredColumn"];
@@ -89,6 +93,11 @@
     
     [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"viewWillAppear called");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -389,12 +398,11 @@
                 self.lblHomeMatch.text = [NSString stringWithFormat:@"%ld %@",[home_Per integerValue],@"%"];
                 self.lblAwayMatch.text = [NSString stringWithFormat:@"%ld %@",[away_Per integerValue],@"%"];
                 
-//                []
-                
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.resultCollectionView reloadData];
+                [tossResultsSegment sendActionsForControlEvents:UIControlEventValueChanged];
             });
             
             [AppCommon hideLoading];
@@ -411,11 +419,6 @@
 }
 
 - (IBAction)actionTossResults:(id)sender {
-//    if (currntlySelectedToss == [sender tag]) {
-//        return;
-//    }
-//
-//    currntlySelectedToss = [sender tag];
     
     UIImage* check = [UIImage imageNamed:@"radio_on"];
     UIImage* uncheck = [UIImage imageNamed:@"radio_off"];
@@ -495,9 +498,6 @@
         NSDictionary* set1 = @{@"set1":@[MatchWon1,MatchLost1]};
         NSDictionary* set2 = @{@"set2":@[MatchWon2,MatchLost2]};
 
-//        NSDictionary* set3 = @{@"set1":@[TosswonMatches,MatchWon2]};
-//        NSDictionary* set4 = @{@"set2":@[TosswonMatches,MatchLost2]};
-
         markers = [NSMutableArray new];
         [markers addObject:set1];
         [markers addObject:set2];
@@ -505,12 +505,13 @@
         lblMatchWon1.text = [MatchWon1 stringValue];
         lblMatchLost1.text = [MatchLost1 stringValue];
         NSNumber* tot1 = @([MatchWon1 integerValue] + [MatchLost1 integerValue]);
-
+        lbl1stCenter.text = [tot1 stringValue];
         
         lblMatchWon2.text = [MatchWon2 stringValue];
         lblMatchLost2.text = [MatchLost2 stringValue];
         
         NSNumber* tot2 = @([MatchWon2 integerValue] + [MatchLost2 integerValue]);
+        lbl2ndCenter.text = [tot2 stringValue];
         self.battingSecPie.obj.text = [tot1 stringValue];
         self.battingFstPie.obj.text = [tot2 stringValue];
         
@@ -541,7 +542,6 @@
     
     [self.battingFstPie reloadData];
     [self.battingSecPie reloadData];
-//    [self shakeAnimationInView:self.tossView];
 
 }
 @end
