@@ -315,3 +315,9 @@
 
 #define OverviewKey         @"APT_TEAMOVERVIEW"
 #define Ground              @"APT_GROUND"
+
+#define battingOverViewkKey       @"APT_BATTINGOVERBLOCKOVERVIEW"
+
+#define battingOverblockKey                       @"APT_BATTINGOVERBLOCK"
+
+#define ResultsKey                               @"FETCHRESULT"
