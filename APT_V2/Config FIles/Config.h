@@ -314,10 +314,18 @@
 #define teamBattingKey         @"APT_TEAMBATTING"
 
 #define OverviewKey         @"APT_TEAMOVERVIEW"
+
 #define Ground              @"APT_GROUND"
 
+#define groundOverResults         @"APT_GROUNDOVERRESULTS"
 #define battingOverViewkKey       @"APT_BATTINGOVERBLOCKOVERVIEW"
 
 #define battingOverblockKey                       @"APT_BATTINGOVERBLOCK"
 
 #define ResultsKey                               @"FETCHRESULT"
+
+#define TeambowlingKey                       @"APT_TEAMBOWLING"
+
+#define bowlingOverViewkKey       @"APT_BOWLINGOVERBLOCKOVERVIEW"
+
+#define bowlingOverblockKey                       @"APT_BOWLINGOVERBLOCK"

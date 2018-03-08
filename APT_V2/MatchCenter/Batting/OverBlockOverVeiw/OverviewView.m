@@ -61,7 +61,7 @@ NSMutableArray *months;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
-   cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strick Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+   cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
     
     
     cell.selectionStyle = UIAccessibilityTraitNone;
@@ -78,7 +78,7 @@ NSMutableArray *months;
     {
       
         
-        self.overViewlbl.text  = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strick Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+        self.overViewlbl.text  = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
         
         if(indexPath.row == 0)
         {
@@ -151,6 +151,8 @@ NSMutableArray *months;
     [self ChartsWebservice];
     
 }
+
+
 
 - (IBAction)onClickOverViewDD:(id)sender
 {
@@ -736,7 +738,7 @@ NSMutableArray *months;
     
     for (int index = 0; index <self.BarValuesArray3.count; index++)
     {
-        [entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(85) + 5)]];
+        //[entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(85) + 5)]];
         
         
                 int value = [[self.BarValuesArray3 objectAtIndex:index] intValue];

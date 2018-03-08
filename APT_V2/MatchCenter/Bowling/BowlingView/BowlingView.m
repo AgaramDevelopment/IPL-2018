@@ -9,6 +9,9 @@
 #import "BowlingView.h"
 #import "PlayerListCollectionViewCell.h"
 #import "Config.h"
+#import "AppCommon.h"
+#import "WebService.h"
+#import "HorizontalXLblFormatter.h"
 
 
 @implementation BowlingView
@@ -86,15 +89,72 @@ BOOL isBowlRun;
     {
         self.overViewlbl.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
         
+        if(indexPath.row==0)
+        {
+            innNum =@"";
+            Result = @"";
+        }
+        else if(indexPath.row==1)
+        {
+            innNum =@"1";
+            Result = @"";
+        }
+        else if(indexPath.row==2)
+        {
+            innNum =@"2";
+            Result = @"";
+        }
+        else if(indexPath.row==3)
+        {
+            innNum =@"1";
+            Result = @"won";
+        }
+        else if(indexPath.row==4)
+        {
+            innNum =@"2";
+            Result = @"won";
+        }
+        else if(indexPath.row==5)
+        {
+            innNum =@"1";
+            Result = @"loss";
+        }
+        else if(indexPath.row==6)
+        {
+            innNum =@"2";
+            Result = @"loss";
+        }
+        
     }else if(isBowlRun==YES)
     {
         self.runslbl.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
         
+        if(indexPath.row==0)
+        {
+            types =@"WICKETS";
+        }
+        else if(indexPath.row==1)
+        {
+            types =@"STRIKERATE";
+        }
+        else if(indexPath.row==2)
+        {
+            types =@"AVERAGE";
+        }
+        else if(indexPath.row==3)
+        {
+            types =@"DOTS";
+        }
     }
     
     isBowlOverview = NO;
     isBowlRun = NO;
     self.PoplistTable.hidden = YES;
+    
+    if( ![self.overViewlbl.text isEqualToString:@""] && ![self.runslbl.text isEqualToString:@""] )
+    {
+        [self BowlingWebservice];
+    }
 
 }
 
@@ -146,15 +206,20 @@ BOOL isBowlRun;
 /* Table Freez */
 -(void) loadTableFreez{
     
+    innNum =@"";
+    Result = @"";
+    types = @"WICKETS";
 
+    [self BowlingWebservice];
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
 
     
-    headingBowlKeyArray =  @[@"Player",@"Style",@"Mat",@"Inns",@"Over",@"Mdns",@"Runs",@"Wkts",@"BBI",@"Ave",@"Eco",@"SR",@"3 W",@"5 W",@"Ct",@"St"];
+    //headingBowlKeyArray =  @[@"Player",@"Style",@"Mat",@"Inns",@"Over",@"Mdns",@"Runs",@"Wkts",@"BBI",@"Ave",@"Eco",@"SR",@"3 W",@"5 W",@"Ct",@"St"];
     
+    headingBowlKeyArray =  @[@"PlayerName",@"BowlingStyle",@"TotalMatches",@"Innings",@"Overs",@"DotBall",@"Runs",@"Wickets",@"BBI",@"Average",@"Econ",@"StrikeRate",@"Threes",@"Fives",@"Catches",@"Stumpings"];
     
-    headingBowlButtonNames = @[@"Player",@"Style",@"Mat",@"Inns",@"Over",@"Mdns",@"Runs",@"Wkts",@"BBI",@"Ave",@"Eco",@"SR",@"3 W",@"5 W",@"Ct",@"St"];
+    headingBowlButtonNames = @[@"Player",@"Style",@"Mat",@"Inns",@"Over",@"Dotballs",@"Runs",@"Wkts",@"BBI",@"Ave",@"Eco",@"SR",@"3 W",@"5 W",@"Ct",@"St"];
     
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
     
@@ -170,7 +235,16 @@ BOOL isBowlRun;
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     
-    return headingBowlButtonNames.count;
+    //return headingBowlButtonNames.count;
+    if(self.TableValuesArray.count>0)
+    {
+        return self.TableValuesArray.count+1;
+        //return headingButtonNames.count;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -246,10 +320,43 @@ BOOL isBowlRun;
         
         cell.btnName.userInteractionEnabled = NO;
         
+//
+//        for (id temp in headingBowlKeyArray) {
+//            if ([headingBowlKeyArray indexOfObject:temp] == indexPath.row) {
+//                // NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+//                if([temp isEqualToString:@"Player"])
+//                {
+//                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+//                    //NSLog(@"Player Name %@ ",str);
+//                }
+//                else
+//                {
+//                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+//                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+//                }
+//                [cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
+//                break;
+//            }
+//        }
+        
         
         for (id temp in headingBowlKeyArray) {
             if ([headingBowlKeyArray indexOfObject:temp] == indexPath.row) {
-                // NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                
+                NSString *str;
+                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                {
+                    
+                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                    str = [vv stringValue];
+                }
+                else
+                {
+                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                }
+                
                 if([temp isEqualToString:@"Player"])
                 {
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -261,7 +368,7 @@ BOOL isBowlRun;
                     cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                     cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                 }
-                [cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
+                [cell.btnName setTitle:str forState:UIControlStateNormal];
                 break;
             }
         }
@@ -269,6 +376,14 @@ BOOL isBowlRun;
     }
     
     return cell;
+}
+
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -315,6 +430,7 @@ BOOL isBowlRun;
     xAxis.granularity = 1.0; // only intervals of 1 day
     xAxis.labelCount = 7;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
+    xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.minimumFractionDigits = 0;
@@ -382,19 +498,23 @@ BOOL isBowlRun;
 
 - (void)setDataCount:(int)count range:(double)range
 {
-    double start = 1.0;
+    double start = 10.0;
     
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     
-    for (int i = start; i < start + count + 1; i++)
+    for (int i = 0; i < self.ChartValuesArray.count; i++)
     {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
+//        double mult = (range + 1);
+//        double val = (double) (arc4random_uniform(mult));
+//        if (arc4random_uniform(100) < 25) {
+//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+//        } else {
+//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+//        }
+//
+        double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
+        
+        [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*start y:val]];
     }
     
     BarChartDataSet *set1 = nil;
@@ -417,7 +537,7 @@ BOOL isBowlRun;
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:10.f]];
         
-        data.barWidth = 0.9f;
+        data.barWidth = 10.0f;
         
         _chartView.data = data;
     }
@@ -449,5 +569,132 @@ BOOL isBowlRun;
 {
     NSLog(@"chartValueNothingSelected");
 }
+
+//-(void)BowlingWebservice
+//{
+//    [AppCommon showLoading ];
+//
+//    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+//
+//    WebService *objWebservice;
+//
+//    NSString *CompetitionCode = @"UCC0000008";
+//    NSString *teamcode = @"TEA0000008";
+//    //NSString *result = @"WON";
+//   // NSString *innNo = @"1";
+//   // NSString *type = @"DOTS";
+//    objWebservice = [[WebService alloc]init];
+//
+//
+//    [objWebservice BowlingTeam :TeambowlingKey :CompetitionCode :teamcode : innNum :Result :types success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"responseObject=%@",responseObject);
+//
+//        if(responseObject >0)
+//        {
+//            self.ChartValuesArray = [[NSMutableArray alloc]init];
+//            self.TableValuesArray = [[NSMutableArray alloc]init];
+//
+//            self.ChartValuesArray = [responseObject valueForKey:@"BowlingChartResult"];
+//            self.TableValuesArray = [responseObject valueForKey:@"BowlingGridResult"];
+//
+//            self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
+//
+//            for(int i=0;i<self.ChartValuesArray.count;i++)
+//            {
+//                NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+//                [self.ChartXAxisValuesArray addObject:value];
+//            }
+//
+//
+//            [self loadChart];
+//            [self.resultCollectionView reloadData];
+//
+//        }
+//        [AppCommon hideLoading];
+//
+//    }
+//                             failure:^(AFHTTPRequestOperation *operation, id error) {
+//                                 NSLog(@"failed");
+//                                 [COMMON webServiceFailureError:error];
+//                             }];
+//
+//}
+
+
+-(void) BowlingWebservice
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",TeambowlingKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+    
+        NSString *CompetitionCode = @"UCC0000008";
+        NSString *teamcode = @"TEA0000008";
+        //NSString *result = @"WON";
+        // NSString *innNo = @"1";
+        // NSString *type = @"DOTS";
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(CompetitionCode)   [dic    setObject:CompetitionCode     forKey:@"CompetitionCode"];
+        if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
+        if(innNum)   [dic    setObject:innNum     forKey:@"InningsNum"];
+        if(Result)   [dic    setObject:Result     forKey:@"Result"];
+        if(types)   [dic    setObject:types     forKey:@"Types"];
+        
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                self.ChartValuesArray = [[NSMutableArray alloc]init];
+                self.TableValuesArray = [[NSMutableArray alloc]init];
+                
+                self.ChartValuesArray = [responseObject valueForKey:@"BowlingChartResult"];
+                self.TableValuesArray = [responseObject valueForKey:@"BowlingGridResult"];
+                
+                self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<self.ChartValuesArray.count;i++)
+                {
+                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                    [self.ChartXAxisValuesArray addObject:value];
+                }
+                
+                
+                [self loadChart];
+                [self.resultCollectionView reloadData];
+            }
+            
+            [AppCommon hideLoading];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            
+            
+        }];
+    }
+    
+}
+
+
+
 
 @end

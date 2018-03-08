@@ -123,6 +123,8 @@
 		18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF9D1120316C2E00CDA268 /* PlayerListCollectionViewCell.xib */; };
 		18EF9D1C20316EE000CDA268 /* MatchCenterTBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D1720316EDF00CDA268 /* MatchCenterTBC.m */; };
 		18EF9D1E20316EE000CDA268 /* MatchCenterTBC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF9D1A20316EDF00CDA268 /* MatchCenterTBC.xib */; };
+		18F197892051086800D12D0F /* BowlingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F197872051086800D12D0F /* BowlingView.m */; };
+		18F1978A2051086800D12D0F /* BowlingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F197882051086800D12D0F /* BowlingView.xib */; };
 		CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */; };
 		CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */; };
 		CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */; };
@@ -255,8 +257,6 @@
 		CEC34C4B2046B8470058ACC3 /* BowlingOverBlockCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C3B2046B8470058ACC3 /* BowlingOverBlockCVC.xib */; };
 		CEC34C4C2046B8470058ACC3 /* BowlingOverBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C3D2046B8470058ACC3 /* BowlingOverBlockView.m */; };
 		CEC34C4D2046B8470058ACC3 /* BowlingOverBlockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C3E2046B8470058ACC3 /* BowlingOverBlockView.xib */; };
-		CEC34C4E2046B8470058ACC3 /* BowlingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C412046B8470058ACC3 /* BowlingView.m */; };
-		CEC34C4F2046B8470058ACC3 /* BowlingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C422046B8470058ACC3 /* BowlingView.xib */; };
 		CEC34C502046B8470058ACC3 /* MCBowlingRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C442046B8470058ACC3 /* MCBowlingRootVC.m */; };
 		CEC34C512046B8470058ACC3 /* MCBowlingRootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C452046B8470058ACC3 /* MCBowlingRootVC.xib */; };
 		CEC34C522046B8470058ACC3 /* OverviewBowlingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C482046B8470058ACC3 /* OverviewBowlingView.m */; };
@@ -454,6 +454,9 @@
 		18EF9D1620316EDE00CDA268 /* MatchCenterTBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchCenterTBC.h; sourceTree = "<group>"; };
 		18EF9D1720316EDF00CDA268 /* MatchCenterTBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchCenterTBC.m; sourceTree = "<group>"; };
 		18EF9D1A20316EDF00CDA268 /* MatchCenterTBC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCenterTBC.xib; sourceTree = "<group>"; };
+		18F197862051086800D12D0F /* BowlingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingView.h; sourceTree = "<group>"; };
+		18F197872051086800D12D0F /* BowlingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingView.m; sourceTree = "<group>"; };
+		18F197882051086800D12D0F /* BowlingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlingView.xib; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE10280F202DDB7500FA0B61 /* AssesmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssesmentTableViewCell.h; sourceTree = "<group>"; };
 		CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssesmentTableViewCell.m; sourceTree = "<group>"; };
@@ -654,9 +657,6 @@
 		CEC34C3C2046B8470058ACC3 /* BowlingOverBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingOverBlockView.h; sourceTree = "<group>"; };
 		CEC34C3D2046B8470058ACC3 /* BowlingOverBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingOverBlockView.m; sourceTree = "<group>"; };
 		CEC34C3E2046B8470058ACC3 /* BowlingOverBlockView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlingOverBlockView.xib; sourceTree = "<group>"; };
-		CEC34C402046B8470058ACC3 /* BowlingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingView.h; sourceTree = "<group>"; };
-		CEC34C412046B8470058ACC3 /* BowlingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingView.m; sourceTree = "<group>"; };
-		CEC34C422046B8470058ACC3 /* BowlingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlingView.xib; sourceTree = "<group>"; };
 		CEC34C432046B8470058ACC3 /* MCBowlingRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBowlingRootVC.h; sourceTree = "<group>"; };
 		CEC34C442046B8470058ACC3 /* MCBowlingRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBowlingRootVC.m; sourceTree = "<group>"; };
 		CEC34C452046B8470058ACC3 /* MCBowlingRootVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCBowlingRootVC.xib; sourceTree = "<group>"; };
@@ -1771,9 +1771,9 @@
 		CEC34C3F2046B8470058ACC3 /* BowlingView */ = {
 			isa = PBXGroup;
 			children = (
-				CEC34C402046B8470058ACC3 /* BowlingView.h */,
-				CEC34C412046B8470058ACC3 /* BowlingView.m */,
-				CEC34C422046B8470058ACC3 /* BowlingView.xib */,
+				18F197862051086800D12D0F /* BowlingView.h */,
+				18F197872051086800D12D0F /* BowlingView.m */,
+				18F197882051086800D12D0F /* BowlingView.xib */,
 			);
 			path = BowlingView;
 			sourceTree = "<group>";
@@ -1976,10 +1976,10 @@
 				CEAE88B9204809CF00FCE39D /* MCTossAndResultsVC.xib in Resources */,
 				18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */,
 				18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */,
-				CEC34C4F2046B8470058ACC3 /* BowlingView.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
 				1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */,
 				CEB2B99520257BBD00E7D5E4 /* MontserratAlternates-ThinItalic.otf in Resources */,
+				18F1978A2051086800D12D0F /* BowlingView.xib in Resources */,
 				CEB2B97520257BBD00E7D5E4 /* Montserrat-BoldItalic.otf in Resources */,
 				18E07118204702930020D8EE /* InjuryAndIllnessVC.xib in Resources */,
 				CE3E741620248BF100F10917 /* Main.storyboard in Resources */,
@@ -2078,6 +2078,7 @@
 				CEC34C502046B8470058ACC3 /* MCBowlingRootVC.m in Sources */,
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
+				18F197892051086800D12D0F /* BowlingView.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
 				04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */,
 				CEC34C272046B1830058ACC3 /* GroundVC.m in Sources */,
@@ -2160,7 +2161,6 @@
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
 				CE6C16142045207400672253 /* ScoreCardCell.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
-				CEC34C4E2046B8470058ACC3 /* BowlingView.m in Sources */,
 				CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */,
 				18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */,
 				18BBECCC2029760A00BAAFAA /* SchResStandVC.m in Sources */,
