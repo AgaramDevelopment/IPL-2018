@@ -14,6 +14,7 @@
 #import "BowlTypeCell.h"
 //#import "IntAxisValueFormatter.h"
 #import "HorizontalXLblFormatter.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @import drCharts;
 
 
@@ -32,10 +33,13 @@
     float num3;
     float num4;
     
-     NSArray<NSString *> *months;
+    NSArray<NSString *> *months;
     NSMutableArray *recentMatchesArray;
     NSMutableDictionary *battingDict;
     NSMutableArray *commonArray;
+    //Bar Charts
+    NSArray *arr;
+    NSArray *arr1;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -58,7 +62,7 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     
-    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
+//    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
@@ -76,7 +80,6 @@
     
    // [self barchartMultiple];
     [self groundGetService];
-    [self createBarChart];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -122,7 +125,7 @@
 }
 
 - (IBAction)innings1ButtonTapped:(id)sender {
-    NSMutableArray *battingInnFirstResultsArray = [battingDict valueForKey:@"BattingScoreResults"];
+    NSMutableArray *battingInnFirstResultsArray = [self checkNull:[battingDict valueForKey:@"BattingInnFirstResults"]];
     
     for (id key in battingInnFirstResultsArray) {
             //Batting 1st  Values Assign to Label Properties
@@ -133,19 +136,23 @@
     }
     
     commonArray = [NSMutableArray new];
-    commonArray = [battingDict valueForKey:@"PPOneBlockResult"];
+    commonArray = [self checkNull:[battingDict valueForKey:@"PPOneBlockResult"]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.BowlTypeTbl reloadData];
     });
     
+    arr = [NSArray new];
+    arr = [self checkNull:[battingDict valueForKey:@"BattingInnFirstChartResults"]];
+    //Bar Charts
+    [self createBarChart];
 }
 
 - (IBAction)innings2ButtonTapped:(id)sender {
-    NSMutableArray *battingInnSecondResultsArray = [battingDict valueForKey:@"BattingInnSecondResults"];
+    NSMutableArray *battingInnSecondResultsArray = [self checkNull:[battingDict valueForKey:@"BattingInnSecondResults"]];
     for (id key in battingInnSecondResultsArray) {
             //Batting 1st  Values Assign to Label Properties
         self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BSAvgWonScore"]];
-        self.OBHighScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
+        self.OBHighScore.text = [self checkNull:[key valueForKey:@"BSHighScore"]];
         self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
         self.OBLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
     }
@@ -155,6 +162,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.BowlTypeTbl reloadData];
     });
+
+    arr = [NSArray new];
+    arr = [self checkNull:[battingDict valueForKey:@"BattingInnSecondChartResults"]];
+    //Bar Charts
+    [self createBarChart];
 }
 
 - (void)groundGetService {
@@ -162,15 +174,16 @@
      API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/
      METHOD     :   GET
      PARAMETER  :   {COMPETITIONCODE}/{TEAMCODE}/{GROUNDCODE}
+     //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/UCC0000008/TEA0000010/GRD0000006
      */
-        //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/UCC0000008/TEA0000010/GRD0000006
-
+    // PARAMETER  :   {COMPETITIONCODE}/{GROUNDCODE}
+    //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/UCC0000008/GRD0000006
     if(![COMMON isInternetReachable])
         return;
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"TEA0000010", @"GRD0000006"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"GRD0000006"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -189,6 +202,43 @@
             [self.resultCollectionView reloadData];
         });
         
+        //Pie Chart
+        markers = [NSMutableArray new];
+        NSMutableArray *batFirstTosswonReslts = [responseObject valueForKey:@"BatFirstTosswonReslts"];
+        NSString *firstTotal, *firstWon, *firstLoss;
+        for (id key in batFirstTosswonReslts) {
+                //Batting 1st  Values Assign to Label Properties
+            firstTotal = [self checkNull:[key valueForKey:@"Total"]];
+            firstWon = [self checkNull:[key valueForKey:@"Won"]];
+            firstLoss = [self checkNull:[key valueForKey:@"Loss"]];
+        }
+        
+        float firtsResults =  [firstWon floatValue]/[firstTotal floatValue];
+        NSNumber *num1 = [NSNumber numberWithFloat:firtsResults];
+        [markers addObject:num1];
+                   
+        NSMutableArray *batSecondTosswonReslts = [responseObject valueForKey:@"BatSecondTosswonReslts"];
+        NSString *secondTotal, *secondWon, *secondLoss;
+        for (id key in batSecondTosswonReslts) {
+                //Batting 1st  Values Assign to Label Properties
+            secondTotal = [self checkNull:[key valueForKey:@"Total"]];
+            secondWon = [self checkNull:[key valueForKey:@"Won"]];
+            secondLoss = [self checkNull:[key valueForKey:@"Loss"]];
+        }
+        float secondResults = [secondWon floatValue]/[secondTotal floatValue];
+        NSNumber *num2 = [NSNumber numberWithFloat:secondResults];
+        [markers addObject:num2];
+        
+        self.battingFirstMatchWonLbl.text = firstWon;
+        self.battingFirstMatchLostLbl.text = firstLoss;
+        self.battingSecondMatchWonLbl.text = secondWon;
+        self.battingSecondMatchLostLbl.text = secondLoss;
+            //Re-load Table View
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.battingFstPie reloadData];
+            [self.battingSecPie reloadData];
+        });
+        
         NSMutableArray *battingScoreResultsArray = [responseObject valueForKey:@"BattingScoreResults"];
         for (id key in battingScoreResultsArray) {
             //Batting 1st  Values Assign to Label Properties
@@ -203,7 +253,40 @@
             self.BSAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
             self.BSLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
         }
+        //GroundOverResults Get Service Method
+        [self groundOverResultsGetService];
         
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"FAILURE RESPONSE %@",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+}
+
+- (void)groundOverResultsGetService {
+    /*
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUNDOVERRESULTS/
+     METHOD     :   GET
+     PARAMETER  :   {COMPETITIONCODE}/{GROUNDCODE}/{FromOver}/{ToOver}
+     */
+        //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUNDOVERRESULTS/UCC0000008/GRD0000006/0/5
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, @"UCC0000008", @"GRD0000006", @"0", @"5"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        
+        //
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
         [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -237,6 +320,8 @@
         MCOverViewResultCVC* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"mcResultCVC" forIndexPath:indexPath];
         
 //        cell.team1Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"] ];
+        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"]] placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
+        
         cell.Teamname1lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATName"]];
         
         NSString *team1RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsWckts"]]];
@@ -250,6 +335,7 @@
         
         
 //                cell.team2Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"] ];
+        [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"]] placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
         cell.Teamname2lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTName"]];
         
         NSString *team2RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsWckts"]]];
@@ -268,7 +354,7 @@
         NSDate *dates = [dateFormatters dateFromString:currentDate];
         
         NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-        [dfs setDateFormat:@"dd MMM, yyyy"];
+        [dfs setDateFormat:@"dd MMM yyyy"];
         NSString * ondateStr = [dfs stringFromDate:dates];
 
         NSString *dateNvenue = [NSString stringWithFormat:@"%@ @ %@", ondateStr, [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Venue"]]];
@@ -330,8 +416,8 @@
 {
     //        NSUInteger  obj = [self.markers objectAtIndex:index];
     //        NSString *s= [self.markers objectAtIndex:index];
-    float  obj = [[NSDecimalNumber decimalNumberWithString:[markers objectAtIndex:index]]floatValue] ;
-    
+//    float  obj = [[NSDecimalNumber decimalNumberWithString:[markers objectAtIndex:index]]floatValue] ;
+    float  obj = [[markers objectAtIndex:index] floatValue];
     
     if(obj==0)
     {
@@ -641,8 +727,9 @@
 #pragma mark BarChartDataSource
 - (NSMutableArray *)xDataForBarChart{
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 8; i++) {
-        [array addObject:[NSString stringWithFormat:@"%d", 2000 + i]];
+    [array addObject:@""];
+    for (int i = 0; i < arr.count; i++) {
+            [array addObject:[NSString stringWithFormat:@"%@", [[arr objectAtIndex:i] valueForKey:@"BFOvers"]]];
     }
     return  array;
 }
@@ -667,34 +754,34 @@
     
     if(barNumber == 0)
     {
-        return [NSString stringWithFormat:@"value1 %d",(int)barNumber];
+        return [NSString stringWithFormat:@"Avg - All Matches"];
     }
     else if(barNumber == 1)
     {
-    return [NSString stringWithFormat:@"Value2 %d",(int)barNumber];
+    return [NSString stringWithFormat:@"Avg - Win Matches"];
     }
     return nil;
 }
 
 - (NSMutableArray *)yDataForBarWithBarNumber:(NSInteger)barNumber{
     NSMutableArray *array;
-    NSArray *arr = @[ @"20",@"30",@"40",@"20",@"20",@"30",@"40",@"20"];
-    NSArray *arr1 = @[ @"10",@"20",@"30",@"40",@"10",@"20",@"30",@"40"];
+//    NSArray *arr = @[ @"20",@"30",@"40",@"20",@"20",@"30",@"40",@"20"];
+//    NSArray *arr1 = @[ @"10",@"20",@"30",@"40",@"10",@"20",@"30",@"40"];
     
     if(barNumber==0)
     {
         array = [[NSMutableArray alloc] init];
         for (int i = 0; i < arr.count; i++) {
             // [array addObject:[NSNumber numberWithLong:random() % 100]];
-            [array addObject:[arr objectAtIndex:i]];
+            [array addObject:[[arr objectAtIndex:i]valueForKey:@"BFRuns"]];
         }
     }
     if(barNumber==1)
     {
         array = [[NSMutableArray alloc] init];
-        for (int i = 0; i < arr1.count; i++) {
+        for (int i = 0; i < arr.count; i++) {
             // [array addObject:[NSNumber numberWithLong:random() % 100]];
-            [array addObject:[arr1 objectAtIndex:i]];
+            [array addObject:[[arr objectAtIndex:i]valueForKey:@"BSRuns"]];
         }
     }
     return array;
