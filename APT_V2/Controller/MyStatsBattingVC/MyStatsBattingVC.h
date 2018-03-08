@@ -36,6 +36,8 @@
 @property (strong, nonatomic) IBOutlet UIView *navigationView;
 @property (strong, nonatomic) IBOutlet UIButton *battingBtn;
 @property (strong, nonatomic) IBOutlet UIButton *bowlingBtn;
+@property (weak, nonatomic) IBOutlet UIView *navBar;
+@property (weak, nonatomic) IBOutlet UIView *myStats;
 
 
 @property (nonatomic,strong) NSString *selectRuns;

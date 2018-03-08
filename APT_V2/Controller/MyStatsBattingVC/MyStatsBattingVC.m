@@ -107,14 +107,20 @@
         //    objCustomNavigation.tittle_lbl.text=@"";
     
         //UIView* view= self.navigation_view.subviews.firstObject;
-    [self.navigationView addSubview:objCustomNavigation.view];
+    [self.navBar addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
+    objCustomNavigation.btn_back.hidden = NO;
+    objCustomNavigation.menu_btn.hidden = YES;
         //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+                [objCustomNavigation.home_btn addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(void)actionBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark - UITableViewDataSource
     // number of section(s), now I assume there is only 1 section
@@ -2297,7 +2303,6 @@
         return;
     
     [AppCommon showLoading];
-        //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(playerMyStatsBatting);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -2809,7 +2814,6 @@
         return;
     
     [AppCommon showLoading];
-        //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(playerMyStatsBowling);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -2837,7 +2841,6 @@
         bowlingRecentMatchesArray = [responseObject valueForKey:@"PlayerRecentDetailsList"];
         
         [AppCommon hideLoading];
-//        [self.bowlingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
         
         //Batting Action Call
         [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];

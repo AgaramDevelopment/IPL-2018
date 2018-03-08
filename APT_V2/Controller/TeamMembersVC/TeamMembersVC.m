@@ -190,14 +190,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
-    PlayerVC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
     
-    PlayerVC.TeamName = self.teamname;
-    NSLog(@"%@",appDel.frontNavigationController);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
-    });
+    
+    MyStatsBattingVC* VC = [MyStatsBattingVC new];
+    [appDel.frontNavigationController pushViewController:VC animated:YES];
+    
+    
+    
+    
+//    PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
+//    PlayerVC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
+//
+//    PlayerVC.TeamName = self.teamname;
+//    NSLog(@"%@",appDel.frontNavigationController);
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
+//    });
 }
 
 

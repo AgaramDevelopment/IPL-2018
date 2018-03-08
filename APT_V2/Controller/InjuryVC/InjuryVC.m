@@ -766,8 +766,6 @@ typedef enum {
     NSString* str_cause = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuryCauseCode"]];
     NSString* str_export_option = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpertOptionTakenCode"]];
     NSString* str_DOR = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpectedDateOfRecovery"]];
-    
-    
 
     
 }
