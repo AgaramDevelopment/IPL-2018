@@ -335,14 +335,14 @@
     if (videoPlayerVC != nil) {
        
     }
-    if(collectionView==self.videoCollectionview1)
+    
+    if(collectionView == self.videoCollectionview1)
     {
-        selectvideoStr =[[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
+        selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     }
-    if(collectionView==self.videoCollectionview2)
+    else if(collectionView == self.videoCollectionview2)
     {
-        selectvideoStr =[[self.objVideoFilterArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
-
+        selectvideoStr = [[self.objVideoFilterArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     }
     
 //    NSString * url = [NSString stringWithFormat:@"%@%@",Video_URL,selectvideoStr];
@@ -358,13 +358,13 @@
     
      videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
-    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+//    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
     SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
     
     
 
-    [self.view addSubview:videoPlayerVC.view];
+//    [self.view addSubview:videoPlayerVC.view];
 }
 -(IBAction)didClickcategoryPopView:(id)sender
 {

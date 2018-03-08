@@ -107,41 +107,23 @@
     {
         if(indexPath.row == 0)
         {
-            newFrontController= [TabHomeVC new];
-            
+            newFrontController = [TabHomeVC new];
         }
-        else if(indexPath.row == 1)
-        {
-            newFrontController= [MatchCenterTBC new];
-            
-        }
-//        else if (indexPath.row == arrItems.count -1)
-//        {
-//            [self actionLogOut];
-//
-//        }
     }
     else
     {
-        
         if(indexPath.row == 0)
         {
-            newFrontController= [TeamsVC new];
-            
+            newFrontController = [TeamsVC new];
         }
-        else if(indexPath.row == 1) // Match center with KPI's
-        {
-            
-            newFrontController= [MatchCenterTBC new];
-        }
-//        else if (indexPath.row == arrItems.count -1)
-//        {
-//            [self actionLogOut];
-//
-//        }
     }
     
-    if (indexPath.row == arrItems.count -1)
+    if(indexPath.row == 1)
+    {
+        newFrontController = [MatchCenterTBC new];
+        
+    }
+    else if (indexPath.row == arrItems.count -1)
     {
         [self actionLogOut];
         
