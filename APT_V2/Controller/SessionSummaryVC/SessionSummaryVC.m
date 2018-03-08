@@ -115,6 +115,7 @@
 
 -(void)MatchTypeService
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice matchtypesummary :MatchTypeKey :self.matchcode :matchstatus  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -150,6 +151,7 @@
 
 -(void)OdiService1
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -206,6 +208,7 @@
 
 -(void)OdiService2
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -260,6 +263,7 @@
 
 -(void)OdiService3
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -333,6 +337,7 @@
 
 -(void)SessionWebservice1
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -393,6 +398,7 @@
 
 -(void)SessionWebservice2
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)
@@ -450,6 +456,7 @@
 
 -(void)SessionWebservice3
 {
+    objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(responseObject>0)

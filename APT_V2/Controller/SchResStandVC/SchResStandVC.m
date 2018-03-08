@@ -28,6 +28,7 @@
     HomeScreenStandingsVC *objStands;
     TabbarVC *objtab;
     SWRevealViewController *revealController;
+    NSMutableArray *objarray;
     
     //AppDelegate *objAppDel;
 }
@@ -45,8 +46,9 @@
     
     //[self customnavigationmethod];
 
-    [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    //[self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
+    [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
 
     
@@ -65,6 +67,7 @@
     self.scroll.contentSize =  self.commonView.frame.size;
     
     [self ScheduleWebservice];
+    [self FixturesWebservice];
 
 }
 
@@ -110,7 +113,7 @@
                 self.commonArray2 = resultArray;
                 
                 
-                [self.scheduleCollectionView reloadData];
+                //[self.scheduleCollectionView reloadData];
                 [self.resultCollectionView reloadData];
             }
             
@@ -142,7 +145,7 @@
     
      if(collectionView == self.scheduleCollectionView)
      {
-         return self.commonArray.count;
+         return objarray.count;
      }
     else
     {
@@ -163,7 +166,7 @@
         {
             if(collectionView == self.scheduleCollectionView)
             {
-            return CGSizeMake(224, 135);
+            return CGSizeMake(310, 182);
             }
             else
             {
@@ -177,7 +180,7 @@
         
         if(collectionView == self.scheduleCollectionView)
         {
-            return CGSizeMake(250, 135);
+            return CGSizeMake(310, 182);
         }
         else
         {
@@ -223,32 +226,94 @@
     if(collectionView==self.scheduleCollectionView)
     {
     
-        ScheduleCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        ResultCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
         
         
-        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
-        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
-        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
-       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
-        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
+//        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
+//        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
+//        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
+//       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
+//        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
+//
+//
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"HH:mm:ss"];
+//        NSDate *date  = [dateFormatter dateFromString:starttime];
+//        // Convert to new Date Format
+//        [dateFormatter setDateFormat:@"hh:mm a"];
+//        NSString *newtime1 = [dateFormatter stringFromDate:date];
+//
+//        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+//        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
+//        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
+//        // Convert to new Date Format
+//        [dateFormatter2 setDateFormat:@"hh:mm a"];
+//        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
+//
+//        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
         
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        NSDate *date  = [dateFormatter dateFromString:starttime];
-        // Convert to new Date Format
-        [dateFormatter setDateFormat:@"hh:mm a"];
-        NSString *newtime1 = [dateFormatter stringFromDate:date];
+        cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
+       // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+        cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
+        cell.FirstInnScorelbl.text = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+        cell.SecondInnScorelbl.text = [[objarray valueForKey:@"team2"] objectAtIndex:indexPath.row];
+        cell.competitionNamelbl.text = [[objarray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
         
-        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
-        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
-        // Convert to new Date Format
-        [dateFormatter2 setDateFormat:@"hh:mm a"];
-        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
+        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
         
-        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
+//        NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+//        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+//
+//        NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+//        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+//
+//        [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamAlogo.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.teamAlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+//
+//
+//        [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamBlogo.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.teamBlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        
+        
+//        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+//
+//        if([ key isEqualToString:@"India"])
+//        {
+//            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
+//            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
+//
+//        }
+//        else
+//        {
+//            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
+//            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
+//        }
+
 
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
@@ -376,21 +441,13 @@
         
         [scoreArray addObject:dic];
         
-//                ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
-//                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//        objFix = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
-//                objFix.matchCode = displayMatchCode;
-//                objFix.matchDetails = scoreArray;
-//                objFix.backkey = @"yes";
-//                //[self.navigationController pushViewController:objFix animated:YES];
-//                [appDel.frontNavigationController pushViewController:objFix animated:YES];
-        
-                //[self.view addSubview:objFix];
-          //[self displayContentController:objFix];
+
         
         
         
-                        //ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
+        
+        
+        
                         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
                         appDel.Currentmatchcode = displayMatchCode;
@@ -434,6 +491,107 @@
                                    completionBlock(NO,nil);
                                }
                            }];
+}
+
+
+-(void)FixturesWebservice
+{
+    //[COMMON loadingIcon:self.view];
+    if([COMMON isInternetReachable])
+    {
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FixturesKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        NSString *competition = @"";
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                objarray = [[NSMutableArray alloc]init];
+                NSMutableArray * fixArr = [[NSMutableArray alloc]init];
+                fixArr = [responseObject valueForKey:@"lstFixturesGridValues"];
+                if(fixArr.count >0)
+                {
+                    //self.competitionLbl.text = [[fixArr valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
+                    
+                    NSMutableArray * sepArray = [[NSMutableArray alloc]init];
+                    
+                    for(int i=0;i<fixArr.count;i++)
+                    {
+                        
+                        sepArray = [fixArr objectAtIndex:i];
+                        
+                        NSString *dttime = [sepArray valueForKey:@"DateTime"];
+                        
+                        NSArray *components = [dttime componentsSeparatedByString:@" "];
+                        NSString *day = components[0];
+                        NSString *monthyear = components[1];
+                        NSString *time = components[2];
+                        NSString *local = components[3];
+                        
+                        NSString *realdate = [NSString stringWithFormat:@"%@ %@",day,monthyear];
+                        NSString *realtime = [NSString stringWithFormat:@"%@ %@",time,local];
+                        
+                        NSString *ground = [sepArray valueForKey:@"Ground"];
+                        NSString *place = [sepArray valueForKey:@"GroundCode"];
+                        NSString *realGroundname = [NSString stringWithFormat:@"%@,%@",ground,place];
+                        
+                        NSString *team1 = [sepArray valueForKey:@"TeamA"];
+                        NSString *team2 = [sepArray valueForKey:@"TeamB"];
+                        NSString *team1Image = [sepArray valueForKey:@"TeamALogo"];
+                        NSString *team2Image = [sepArray valueForKey:@"TeamBLogo"];
+                        NSString *CompetitionName = [sepArray valueForKey:@"COMPETITIONNAME"];
+                        
+                        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                        
+                        [dic setValue:realdate forKey:@"date"];
+                        [dic setValue:realtime forKey:@"time"];
+                        [dic setValue:realGroundname forKey:@"ground"];
+                        // [dic setValue:realdate forKey:@"date"];
+                        [dic setValue:team1 forKey:@"team1"];
+                        [dic setValue:team2 forKey:@"team2"];
+                        [dic setValue:team1Image forKey:@"team1Img"];
+                        [dic setValue:team2Image forKey:@"team2Img"];
+                        [dic setValue:CompetitionName forKey:@"CompetitionName"];
+                        
+                        [objarray addObject:dic];
+                        
+                        
+                    }
+                    
+                    [self.scheduleCollectionView reloadData];
+//                    popArray = [[NSMutableArray alloc]init];
+//                    popArray = [responseObject valueForKey:@"lstCompetitionVal"];
+                    
+                    //[self.ListTbl reloadData];
+                    
+                }
+            }
+            
+            
+          
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            
+        }];
+    }
+    
 }
 
 @end
