@@ -361,7 +361,7 @@
 //    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
     SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
-    
+    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
     
 
 //    [self.view addSubview:videoPlayerVC.view];

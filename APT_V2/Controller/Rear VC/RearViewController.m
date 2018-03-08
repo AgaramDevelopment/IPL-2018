@@ -16,6 +16,7 @@
 #import "TrainingLoadUpdateVC.h"
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
+#import "TeamMembersVC.h"
 
 @interface RearViewController ()
 {
@@ -114,7 +115,13 @@
     {
         if(indexPath.row == 0)
         {
-            newFrontController = [TeamsVC new];
+//            newFrontController = [TeamsVC new];
+            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
+            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
+
+            newFrontController = objPlayersVC;
+
         }
     }
     

@@ -92,7 +92,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEq-24-Ma8">
                             <rect key="frame" x="10" y="90" width="246" height="40"/>
                             <subviews>
-                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="user_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z5X-Q0-cz0">
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="user_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z5X-Q0-cz0">
                                     <rect key="frame" x="10" y="5" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="KaE-2t-eXX">
@@ -132,7 +132,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHB-9H-9GG">
                             <rect key="frame" x="10" y="150" width="246" height="40"/>
                             <subviews>
-                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="password_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ehy-6H-e1S">
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="password_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ehy-6H-e1S">
                                     <rect key="frame" x="10" y="5" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="Jmu-s5-yhA">
@@ -225,7 +225,7 @@
                                 </constraint>
                             </constraints>
                         </imageView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wcp-hk-hIa">
+                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wcp-hk-hIa">
                             <rect key="frame" x="10" y="80" width="246" height="110"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>

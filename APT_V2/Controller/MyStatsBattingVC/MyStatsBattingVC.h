@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *myStatsViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *mainContentview;
 
 @property (nonatomic,strong) NSString *selectRuns;
     //wagon

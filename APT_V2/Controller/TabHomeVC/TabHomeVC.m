@@ -204,7 +204,7 @@
 
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-    UILabel *label = nil;
+//    UILabel *label = nil;
 
     //create new view if no view is available for recycling
 //    if (view == nil)
@@ -219,15 +219,13 @@
             [view addSubview:objSch.view];
    
         }
-         if(index == 1)
+         else if(index == 1)
         {
-
-            
             objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
-            objStats.myStatsViewHeight.constant = 0;
-            objStats.navViewHeight.constant = 0;
-            objStats.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-            [view addSubview:objStats.view];
+//            objStats.myStatsViewHeight.constant = 0;
+//            objStats.navViewHeight.constant = 0;
+            objStats.mainContentview.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            [view addSubview:objStats.mainContentview];
             
         }
 
