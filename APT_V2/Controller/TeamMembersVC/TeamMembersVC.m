@@ -191,8 +191,10 @@
 {
     
     
-    MyStatsBattingVC* VC = [MyStatsBattingVC new];
-    [appDel.frontNavigationController pushViewController:VC animated:YES];
+    MyStatsBattingVC* objStats = [MyStatsBattingVC new];
+    objStats.myStatsViewHeight.constant = 60;
+    objStats.navViewHeight.constant = 35;
+    [appDel.frontNavigationController pushViewController:objStats animated:YES];
     
     
     
