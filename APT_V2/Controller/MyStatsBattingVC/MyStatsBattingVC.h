@@ -38,6 +38,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *bowlingBtn;
 @property (weak, nonatomic) IBOutlet UIView *navBar;
 @property (weak, nonatomic) IBOutlet UIView *myStats;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *navViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myStatsViewHeight;
 
 
 @property (nonatomic,strong) NSString *selectRuns;

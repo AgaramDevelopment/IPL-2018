@@ -224,6 +224,8 @@
 
             
             objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
+            objStats.myStatsViewHeight.constant = 0;
+            objStats.navViewHeight.constant = 0;
             objStats.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objStats.view];
             
