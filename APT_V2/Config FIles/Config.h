@@ -329,3 +329,6 @@
 #define bowlingOverViewkKey       @"APT_BOWLINGOVERBLOCKOVERVIEW"
 
 #define bowlingOverblockKey                       @"APT_BOWLINGOVERBLOCK"
+
+#define FixturesKey                               @"FETCHFIXTURES"
+
