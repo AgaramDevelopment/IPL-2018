@@ -24,4 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *Competitionlbl;
 @property (weak, nonatomic) IBOutlet UILabel *Teamnamelbl;
 
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+
 @end

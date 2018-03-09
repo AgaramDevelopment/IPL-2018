@@ -141,14 +141,14 @@
 - (IBAction)groundListButtonTapped:(id)sender {
     
     isCompetitionCode = NO;
-    isGroundCode = NO;
-    isteamCode = YES;
+    isteamCode = NO;
+    isGroundCode = YES;
     self.competitionTeamCodesTblView.hidden = NO;
     self.codeArray = [NSMutableArray new];
     self.codeArray = groundResultsArray;
     self.tableWidth.constant = self.groundView.frame.size.width;
     self.tableXPosition.constant = self.groundView.frame.origin.x+10;
-    self.tableYPosition.constant = self.groundView.frame.origin.y+self.groundView.frame.size.height+10;
+    self.tableYPosition.constant = self.groundView.frame.origin.y+10;
         //Re-load Table View
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.competitionTeamCodesTblView reloadData];
@@ -166,7 +166,8 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, @"UCC0000008"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -178,7 +179,7 @@
         
         groundResultsArray = [NSMutableArray new];
         groundResultsArray = [responseObject valueForKey:@"GroundResults"];
-            //GroundOverResults Get Service Method
+        //GroundOverResults Get Service Method
         [self groundOverResultsGetService];
         [AppCommon hideLoading];
         
@@ -375,15 +376,6 @@
             self.BSAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
             self.BSLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
         }
-        
-        /*
-         {
-         "GTopRight": "0.00",
-         "GTopLeft": "0.00",
-         "GBottomRight": "0.00",
-         "GBottomLeft": "0.00"
-         }
-         */
         
         NSMutableArray *groundDimensionResults = [responseObject valueForKey:@"GroundDimensionResults"];
         for (id key in groundDimensionResults) {

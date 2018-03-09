@@ -19,6 +19,18 @@
 -(void) loadPowerPlayDetails {
     
     
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        self.teamView.hidden = YES;
+    }
+    else
+    {
+        self.teamView.hidden = NO;
+    }
+    
     self.PopTableView.hidden = YES;
     self.pp1CollectionView.dataSource = self;
     self.pp1CollectionView.delegate = self;
