@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UIView *filterView;
 
 @property (strong, nonatomic) IBOutlet UIView *competView;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
 @property (strong, nonatomic) IBOutlet UIView *barView;
 @property (strong, nonatomic) IBOutlet UIView *lineView;
 
@@ -41,6 +42,11 @@
 
 @property (nonatomic, strong)  NSMutableArray *lineValuesArray3;
 @property (nonatomic, strong)  NSMutableArray *BarValuesArray3;
+
+
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
+@property (nonatomic, strong) IBOutlet UILabel *lblCompetetion;
+@property (nonatomic, strong) IBOutlet UILabel *teamlbl;
 
 
 @end

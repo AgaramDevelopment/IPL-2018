@@ -17,6 +17,7 @@
 BOOL isBowlXAxis;
 BOOL isBowlYAxis;
 BOOL isCompetition;
+BOOL isteems;
 NSMutableArray *bowlMonths;
 
 /* ----------------------------------Filter----------------------------------------- */
@@ -36,13 +37,21 @@ NSMutableArray *bowlMonths;
     {
         return 7;
     }
-    if(isBowlYAxis==YES)
+    else if(isBowlYAxis==YES)
     {
         return 7;
         
-    }else{
-        return 0;
     }
+    else if(isCompetition ==YES)
+    {
+        return appDel.ArrayCompetition.count;
+    }
+    else if(isteems == YES)
+    {
+        return appDel.ArrayTeam.count;
+        
+    }
+    return nil;
     
 }
 // the cell will be returned to the tableView
@@ -60,7 +69,25 @@ NSMutableArray *bowlMonths;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
-   cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+    if(isBowlXAxis==YES)
+    {
+        cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+    }
+    else if(isBowlYAxis==YES)
+    {
+        cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+        
+    }
+    
+    else if(isCompetition ==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+    }
+    else if(isteems == YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        
+    }
     
     
     cell.selectionStyle = UIAccessibilityTraitNone;
@@ -142,8 +169,32 @@ NSMutableArray *bowlMonths;
         }
     }
     
+    else if(isCompetition == YES)
+    {
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else if(isteems == YES)
+    {
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        NSString* teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     isBowlXAxis = NO;
     isBowlYAxis = NO;
+    isCompetition = NO;
+    isteems = NO;
     self.PoplistTable.hidden = YES;
     [self ChartsWebservice];
 }
@@ -156,6 +207,7 @@ NSMutableArray *bowlMonths;
         isBowlXAxis = NO;
         isBowlYAxis = NO;
         isCompetition = NO;
+        isteems =NO;
         self.PoplistTable.hidden = YES;
         
         
@@ -164,6 +216,7 @@ NSMutableArray *bowlMonths;
         isBowlXAxis = YES;
         isBowlYAxis = NO;
         isCompetition = NO;
+        isteems =NO;
         
         self.PoplistTable.hidden = NO;
         
@@ -180,6 +233,7 @@ NSMutableArray *bowlMonths;
         isBowlXAxis = NO;
         isBowlYAxis = NO;
         isCompetition = NO;
+        isteems =NO;
         self.PoplistTable.hidden = YES;
         
         
@@ -200,6 +254,7 @@ NSMutableArray *bowlMonths;
         
         isBowlXAxis = NO;
         isBowlYAxis = NO;
+        isteems =NO;
         isCompetition = NO;
         self.PoplistTable.hidden = YES;
         
@@ -208,12 +263,41 @@ NSMutableArray *bowlMonths;
         isBowlXAxis = NO;
         isBowlYAxis = NO;
         isCompetition = YES;
+        isteems =NO;
         self.PoplistTable.hidden = NO;
         //self.tableWidth.constant = 142;
         //self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
         
         self.tableWidth.constant = self.competView.frame.size.width;
         self.tableXposition.constant = self.competView.frame.origin.x;
+        self.tableYposition.constant = self.competView.frame.origin.y;
+        [self.PoplistTable reloadData];
+    }
+}
+
+- (IBAction)onClickTeam:(id)sender
+{
+    if(isteems){
+        
+        isBowlXAxis = NO;
+        isBowlYAxis = NO;
+        isCompetition = NO;
+        isteems = NO;
+        self.PoplistTable.hidden = YES;
+        
+        
+    }else{
+        isBowlXAxis = NO;
+        isBowlYAxis = NO;
+        isCompetition = NO;
+        isteems = YES;
+        self.PoplistTable.hidden = NO;
+        //self.tableWidth.constant = 142;
+        //self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        
+        self.tableWidth.constant = self.teamView.frame.size.width;
+        self.tableXposition.constant = self.teamView.frame.origin.x;
+        self.tableYposition.constant = self.teamView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
@@ -791,10 +875,15 @@ NSMutableArray *bowlMonths;
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *COMPETITIONCODE = @"UCC0000008";
-        NSString *TEAMCODE = @"TEA0000010";
+       // NSString *COMPETITIONCODE = @"UCC0000008";
+        //NSString *TEAMCODE = @"TEA0000010";
         // NSString *BARTYPE = @"RUNS";
         //NSString *LINETYPE = @"RUNS";
+        
+        NSString *COMPETITIONCODE = [AppCommon getCurrentCompetitionCode];
+        NSString *TEAMCODE = [AppCommon getCurrentTeamCode];
+        self.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        self.teamlbl.text = [AppCommon getCurrentTeamName];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
