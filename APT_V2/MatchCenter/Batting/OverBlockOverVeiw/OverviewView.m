@@ -17,6 +17,7 @@
 BOOL isXAxis;
 BOOL isYAxis;
 BOOL isCompe;
+BOOL isTeam;
 NSMutableArray *months;
 
 
@@ -37,13 +38,20 @@ NSMutableArray *months;
     {
         return 7;
     }
-    if(isYAxis==YES)
+    else if(isYAxis==YES)
     {
         return 7;
         
-    }else{
-        return 0;
     }
+    else if(isCompe==YES)
+    {
+        return appDel.ArrayCompetition.count;
+    }
+    else if(isTeam==YES)
+    {
+        return appDel.ArrayTeam.count;
+    }
+    return nil;
     
 }
 // the cell will be returned to the tableView
@@ -61,7 +69,26 @@ NSMutableArray *months;
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
+    if(isXAxis==YES)
+    {
    cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+    }
+    
+   else if(isYAxis==YES)
+    {
+        cell.textLabel.text = indexPath.row == 0 ? @"Runs" : indexPath.row == 1 ? @"Wickets" : indexPath.row == 2 ? @"Strike Rate" :  indexPath.row == 3 ? @"Runs per over" :  indexPath.row == 4 ? @"Average" :  indexPath.row == 5 ? @"Dot balls %" :  @"Boundaries %";
+    }
+   else if(isCompe ==YES)
+   {
+       cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+   }
+   else if(isTeam == YES)
+   {
+       cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+
+   }
+
+    
     
     
     cell.selectionStyle = UIAccessibilityTraitNone;
@@ -143,9 +170,32 @@ NSMutableArray *months;
             linevalue = @"BOUNDARIESPER";
         }
     }
+    else if(isCompe == YES)
+    {
+//        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else if(isTeam == YES)
+    {
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        NSString* teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
     isXAxis = NO;
     isYAxis = NO;
+    isCompe = NO;
+    isTeam = NO;
     self.PoplistTable.hidden = YES;
     
     [self ChartsWebservice];
@@ -175,6 +225,7 @@ NSMutableArray *months;
         
         self.tableWidth.constant = self.barView.frame.size.width;
         self.tableXposition.constant = self.barView.frame.origin.x;
+        self.tableYposition.constant = self.filterView.frame.origin.y+self.barView.frame.origin.y+57;
         [self.PoplistTable reloadData];
     }
 }
@@ -199,6 +250,8 @@ NSMutableArray *months;
         
         self.tableWidth.constant = self.lineView.frame.size.width;
         self.tableXposition.constant = self.lineView.frame.origin.x;
+        self.tableYposition.constant = self.filterView.frame.origin.y+self.lineView.frame.origin.y+57;
+        
         [self.PoplistTable reloadData];
     }
 }
@@ -223,6 +276,34 @@ NSMutableArray *months;
         
         self.tableWidth.constant = self.competView.frame.size.width;
         self.tableXposition.constant = self.competView.frame.origin.x;
+        self.tableYposition.constant = self.competView.frame.origin.y;
+        [self.PoplistTable reloadData];
+    }
+}
+
+- (IBAction)onClickTeam:(id)sender
+{
+    if(isTeam){
+        
+        isXAxis = NO;
+        isYAxis = NO;
+        isCompe = NO;
+        isTeam = NO;
+        self.PoplistTable.hidden = YES;
+        
+        
+    }else{
+        isXAxis = NO;
+        isYAxis = NO;
+        isCompe = NO;
+        isTeam = YES;
+        self.PoplistTable.hidden = NO;
+        //self.tableWidth.constant = 142;
+        //self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        
+        self.tableWidth.constant = self.teamView.frame.size.width;
+        self.tableXposition.constant = self.teamView.frame.origin.x;
+        self.tableYposition.constant = self.teamView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
@@ -796,10 +877,12 @@ NSMutableArray *months;
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *COMPETITIONCODE = @"UCC0000008";
+       // NSString *COMPETITIONCODE = @"UCC0000008";
         NSString *TEAMCODE = @"TEA0000010";
        // NSString *BARTYPE = @"RUNS";
         //NSString *LINETYPE = @"RUNS";
+        
+        NSString *COMPETITIONCODE = [AppCommon getCurrentCompetitionCode];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

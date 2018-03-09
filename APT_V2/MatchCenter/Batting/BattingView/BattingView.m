@@ -626,6 +626,7 @@ BOOL isComp;
         
         
         NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+        self.lblCompetetion.text= [AppCommon getCurrentCompetitionName];
         NSString *TeamCode = @"TEA0000010";
 //        NSString *InningsNum = @"";
 //        NSString *Result = @"";

@@ -20,14 +20,18 @@
 @property (strong, nonatomic) IBOutlet UIView *filterView;
 
 @property (strong, nonatomic) IBOutlet UIView *competView;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
 @property (strong, nonatomic) IBOutlet UIView *barView;
 @property (strong, nonatomic) IBOutlet UIView *lineView;
 
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
 @property (nonatomic, strong) IBOutlet UITableView *PoplistTable;
 @property (nonatomic, strong) IBOutlet UILabel *overViewlbl;
 @property (nonatomic, strong) IBOutlet UILabel *runslbl;
+@property (nonatomic, strong) IBOutlet UILabel *lblCompetetion;
+@property (nonatomic, strong) IBOutlet UILabel *teamlbl;
 @property (strong, nonatomic) IBOutlet CombinedChartView *barChartPP2;
 
 @property (strong, nonatomic) IBOutlet CombinedChartView *barChartPP3;

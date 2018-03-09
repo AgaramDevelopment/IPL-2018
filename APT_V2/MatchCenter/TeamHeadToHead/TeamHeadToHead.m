@@ -25,8 +25,10 @@
     NSString *team2Code;
     NSString *groundCode;
     NSString *competitionCode;
+    
+    NSString *team1InnsNum, *team2InnsNum, *tossWonTeamCode, *fromOver, *toOver;
+    NSString *teamName, *competitionName;
 }
-
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray1;
 //@property (nonatomic, strong) IBOutlet NSMutableArray *h2hResultsArray;
@@ -40,7 +42,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.groundTF.delegate = self;
+    
+    groundCode = @"";
+    team1InnsNum = @"" ;
+    team2InnsNum = @"";
+    tossWonTeamCode = @"";
+    fromOver = @"";
+    toOver = @"";
+    
+    team1Code = [AppCommon getCurrentTeamCode];
+    teamName = [AppCommon getCurrentTeamName];
+    competitionCode = [AppCommon getCurrentCompetitionCode];
+    competitionName = [AppCommon getCurrentCompetitionName];
+
+    self.team1TF.text = teamName;
+    self.competitionTF.text = competitionName;
+    
     self.Poptable.hidden = YES;
     [self customnavigationmethod];
     [self setBorderForButtons];
@@ -168,6 +185,39 @@
         [self.Poptable reloadData];
     });
 }
+- (IBAction)firstInningsAction:(id)sender {
+    team1InnsNum = @"1";
+    [self headToHeadResultsPostService];
+}
+- (IBAction)secondInningsAction:(id)sender {
+    team2InnsNum = @"2";
+    [self headToHeadResultsPostService];
+}
+
+- (IBAction)CSKWinAction:(id)sender {
+    tossWonTeamCode = @"TEA0000010";
+    [self headToHeadResultsPostService];
+}
+- (IBAction)MIWinAction:(id)sender {
+    tossWonTeamCode = @"TEA0000008";
+    [self headToHeadResultsPostService];
+}
+- (IBAction)oneToSixOversAction:(id)sender {
+    fromOver = @"0";
+    toOver = @"5";
+    [self headToHeadResultsPostService];
+}
+- (IBAction)sevenToFifteenOversAction:(id)sender {
+    fromOver = @"6";
+    toOver = @"14";
+    [self headToHeadResultsPostService];
+}
+- (IBAction)sixteenToTwentyOversAction:(id)sender {
+    fromOver = @"15";
+    toOver = @"19";
+    [self headToHeadResultsPostService];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -224,7 +274,7 @@
         team1Code = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
     
     if ([self.team1TF.text isEqualToString:self.team2TF.text]) {
-        [self altermsg:@"Please Select different Team"];
+        [self altermsg:@"Please Select different Team for Team-A"];
         self.team1TF.text = @"";
         team1Code = @"";
     }
@@ -237,7 +287,7 @@
         team2Code = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
     
     if ([self.team1TF.text isEqualToString:self.team2TF.text]) {
-        [self altermsg:@"Please Select different Team"];
+        [self altermsg:@"Please Select different Team for Team-B"];
         self.team2TF.text = @"";
         team2Code = @"";
     }
@@ -282,9 +332,9 @@
     
     [AppCommon showLoading];
     
-    NSString *teamCode = [AppCommon getCurrentTeamCode];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, team1Code];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, teamCode];
+//     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -311,14 +361,76 @@
         [self altermsg:@"Please Select Team2"];
     } else if ([self.competitionTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Select Competition"];
-    } else if ([self.groundTF.text isEqualToString:@""])
+    }
+ /*   else if ([self.groundTF.text isEqualToString:@""])
     {
         [self altermsg:@"Please Select Ground"];
-    } else {
-        [self headToHeadResultsGetService];
+    } */
+    else {
+//        [self headToHeadResultsGetService];
+         [self headToHeadResultsPostService];
     }
 }
 
+- (void)headToHeadResultsPostService {
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(HTHResults);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    /*
+     http://localhost:58774/AGAPTService.svc/APT_HTHRESULTS
+     {"CompetitionCode":"UCC0000008",
+     "TeamACode":"TEA0000008",
+     "TeamBCode":"TEA0000010",
+     "GroundCode":"",
+     "ATInnsNum":"",
+     "BTInnsNum":"",
+     "TossWonTeamCode":"TEA0000010",
+     "FromOver":"0",
+     "ToOver":"19"
+     }
+     */
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic    setObject:competitionCode     forKey:@"CompetitionCode"];
+    [dic    setObject:team1Code     forKey:@"TeamACode"];
+    [dic    setObject:team2Code     forKey:@"TeamBCode"];
+    [dic    setObject:groundCode     forKey:@"GroundCode"];
+    [dic    setObject:team1InnsNum     forKey:@"ATInnsNum"];
+    [dic    setObject:team2InnsNum     forKey:@"BTInnsNum"];
+    [dic    setObject:tossWonTeamCode     forKey:@"TossWonTeamCode"];
+    [dic    setObject:fromOver     forKey:@"FromOver"];
+    [dic    setObject:toOver     forKey:@"ToOver"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+            
+            NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+            NSMutableDictionary *h2hResultsDict = [[NSMutableDictionary alloc] init];
+            h2hResultsDict = responseObject;
+            [self assignH2HResultsArrayValuesToView:h2hResultsDict];
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+    
+}
 - (void)headToHeadResultsGetService {
     /*
      API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
@@ -326,6 +438,19 @@
      PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
      */
     
+    /*
+     http://localhost:58774/AGAPTService.svc/APT_HTHRESULTS
+     {"CompetitionCode":"UCC0000008",
+     "TeamACode":"TEA0000008",
+     "TeamBCode":"TEA0000010",
+     "GroundCode":"",
+     "ATInnsNum":"",
+     "BTInnsNum":"",
+     "TossWonTeamCode":"TEA0000010",
+     "FromOver":"0",
+     "ToOver":"19"
+     }
+     */
     if(![COMMON isInternetReachable])
         return;
     
