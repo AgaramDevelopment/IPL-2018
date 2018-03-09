@@ -9,13 +9,26 @@
 #import <UIKit/UIKit.h>
 
 @interface BowlingOverBlockView : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    BOOL isCompe;
+    BOOL isTeam;
+}
 
 @property (strong, nonatomic) IBOutlet UICollectionView *pp1CollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *pp2CollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *pp3CollectionView;
 -(void) loadPowerPlayDetails ;
 
+@property (strong, nonatomic) IBOutlet UITableView *PopTableView;
 
+@property (strong, nonatomic) IBOutlet UIView *competView;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+@property (nonatomic, strong) IBOutlet UILabel *lblCompetetion;
+@property (nonatomic, strong) IBOutlet UILabel *teamlbl;
+
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
 
 //powerplay1
 @property (strong, nonatomic) IBOutlet UIProgressView *runsPrgs1;

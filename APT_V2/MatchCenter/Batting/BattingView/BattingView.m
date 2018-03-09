@@ -295,6 +295,17 @@ BOOL isTeams;
 /* Table Freez */
 -(void) loadTableFreez{
     
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        self.teamView.hidden = YES;
+    }
+    else
+    {
+        self.teamView.hidden = NO;
+    }
 
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;

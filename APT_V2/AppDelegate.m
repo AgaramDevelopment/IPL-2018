@@ -144,7 +144,6 @@
         [app endBackgroundTask:bgTask];
         bgTask = UIBackgroundTaskInvalid;
     }];
-    
 
     
 }
