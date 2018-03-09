@@ -87,13 +87,13 @@
     if (indexPath == PreviouslySelectedIndex) {
         cell.textLabel.textColor = [UIColor cyanColor];
 //        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 17 : 15)];
-        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
+//        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
     }
     else
     {
         cell.textLabel.textColor = [UIColor lightGrayColor];
 //        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 15 : 12)];
-        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
+//        [cell.textLabel setFont:[UIFont fontWithName:@"" size:(IS_IPAD ? 17 : 15)]];
 
     }
     cell.textLabel.text = arrItems[indexPath.row];

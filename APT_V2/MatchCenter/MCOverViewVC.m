@@ -33,6 +33,10 @@
 
 @synthesize competitionlbl,dropviewComp;
 
+@synthesize viewCompetetion,viewTeam;
+
+@synthesize lblCompetetion,lblTeamName;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
@@ -54,14 +58,17 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([competitionlbl.text isEqualToString:@""] ||
-        ![competitionlbl.text isEqualToString:[AppCommon getCurrentCompetitionName]])
-    {
-        [self OverviewWebservice];
-
-    }
+//    if ([competitionlbl.text isEqualToString:@""] ||
+//        ![competitionlbl.text isEqualToString:[AppCommon getCurrentCompetitionName]])
+//    {
+//
+//    }
     
-    competitionlbl.text = [AppCommon getCurrentCompetitionName];
+    [self OverviewWebservice];
+
+    lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+    lblTeamName.text = [AppCommon getCurrentTeamName];
+//    competitionlbl.text = [AppCommon getCurrentCompetitionName];
 
 }
 
@@ -184,7 +191,7 @@
     [AppCommon showLoading ];
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    NSString *teamcode = @"TEA0000010";
+    NSString *teamcode = [AppCommon getCurrentTeamCode];
     objWebservice = [[WebService alloc]init];
     
     
@@ -519,16 +526,63 @@
     self.CompetitionListtbl.hidden = YES;
 }
 
+
+- (IBAction)actionCompetetionTeam:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 1) { // TEAM
+        
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+        
+        
+    }
+    else // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        
+    }
+    
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
 -(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
-    NSLog(@"%@",array[Index.row]);
-    NSLog(@"selected value %@",key);
-    competitionlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
-    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
     
-    [[NSUserDefaults standardUserDefaults] setValue:competitionlbl.text forKey:@"SelectedCompetitionName"];
-    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    else
+    {
+        lblTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+
     
     [self OverviewWebservice];
     

@@ -66,8 +66,7 @@ AppCommon *sharedCommon = nil;
             
             NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
             NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
-            NSLog(@"Competetioncode ; %@ ",Competetioncode);
-            NSLog(@"CompetetionName ; %@ ",CompetetionName);
+            NSLog(@"IPL COMPETETION %@ ",responseObject);
             [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
             [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -114,12 +113,9 @@ AppCommon *sharedCommon = nil;
             NSLog(@"IPL TEAMS %@ ",responseObject);
             NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamCode"];
             NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamName"];
-            NSLog(@"Competetioncode ; %@ ",Competetioncode);
-            NSLog(@"CompetetionName ; %@ ",CompetetionName);
             [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedTeamName"];
             [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedTeamCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-
             
         }
         [AppCommon hideLoading];
