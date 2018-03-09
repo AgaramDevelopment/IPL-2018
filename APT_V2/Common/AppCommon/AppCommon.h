@@ -49,7 +49,8 @@
 
 +(NSString *)getCurrentCompetitionCode;
 +(NSString *)getCurrentCompetitionName;
-
++(NSString *)getCurrentTeamCode;
++(NSString *)getCurrentTeamName;
 
 @end
 
