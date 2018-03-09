@@ -878,11 +878,14 @@ NSMutableArray *months;
         
         
        // NSString *COMPETITIONCODE = @"UCC0000008";
-        NSString *TEAMCODE = @"TEA0000010";
+        //NSString *TEAMCODE = @"TEA0000010";
        // NSString *BARTYPE = @"RUNS";
         //NSString *LINETYPE = @"RUNS";
         
         NSString *COMPETITIONCODE = [AppCommon getCurrentCompetitionCode];
+        NSString *TEAMCODE = [AppCommon getCurrentTeamCode];
+        self.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        self.teamlbl.text = [AppCommon getCurrentTeamName];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

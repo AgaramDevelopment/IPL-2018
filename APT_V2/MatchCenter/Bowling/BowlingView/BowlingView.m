@@ -20,6 +20,8 @@ NSArray* headingBowlKeyArray;
 NSArray* headingBowlButtonNames;
 BOOL isBowlOverview;
 BOOL isBowlRun;
+BOOL isCompt;
+BOOL isTeamp;
 
 /* Filter */
 
@@ -42,9 +44,12 @@ BOOL isBowlRun;
     {
         return 4;
 
-    }else{
-        return 0;
+    }else if(isCompt==YES){
+        return appDel.ArrayCompetition.count;
+    }else if(isTeamp==YES){
+        return appDel.ArrayTeam.count;
     }
+    return nil;
     
 }
 // the cell will be returned to the tableView
@@ -70,8 +75,13 @@ BOOL isBowlRun;
     {
         cell.textLabel.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
 
-    }else{
-        cell.textLabel.text = @"";
+    }else if(isCompt==YES){
+        
+        cell.textLabel.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
+        
+    }else if(isTeamp==YES){
+        
+        cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
     }
 
     
@@ -147,8 +157,33 @@ BOOL isBowlRun;
         }
     }
     
+    else if(isCompt==YES)
+    {
+        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    else if(isTeamp==YES)
+    {
+        self.lblteam.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        NSString* teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblteam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    
     isBowlOverview = NO;
     isBowlRun = NO;
+    isCompt =NO;
+    isTeamp =NO;
+    
     self.PoplistTable.hidden = YES;
     
     if( ![self.overViewlbl.text isEqualToString:@""] && ![self.runslbl.text isEqualToString:@""] )
@@ -165,6 +200,8 @@ BOOL isBowlRun;
         
         isBowlOverview = NO;
         isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = NO;
         self.PoplistTable.hidden = YES;
 
         
@@ -172,11 +209,14 @@ BOOL isBowlRun;
 
     isBowlOverview = YES;
     isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = NO;
     
     self.PoplistTable.hidden = NO;
     
-    self.tableWidth.constant = 142;
-    self.tableXposition.constant = self.filterView.frame.origin.x+8;
+        self.tableWidth.constant = self.overallView.frame.size.width;
+        self.tableXposition.constant = self.overallView.frame.origin.x;
+        self.tableYposition.constant = self.overallView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
@@ -187,15 +227,68 @@ BOOL isBowlRun;
         
         isBowlOverview = NO;
         isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = NO;
         self.PoplistTable.hidden = YES;
 
         
     }else{
     isBowlOverview = NO;
     isBowlRun = YES;
+        isTeamp = NO;
+        isCompt = NO;
     self.PoplistTable.hidden = NO;
-    self.tableWidth.constant = 142;
-    self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        self.tableWidth.constant = self.runsView.frame.size.width;
+        self.tableXposition.constant = self.runsView.frame.origin.x;
+        self.tableYposition.constant = self.runsView.frame.origin.y;
+        [self.PoplistTable reloadData];
+    }
+}
+
+- (IBAction)onClickTeam:(id)sender
+{
+    if(isTeamp){
+        
+        isBowlOverview = NO;
+        isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = NO;
+        self.PoplistTable.hidden = YES;
+        
+        
+    }else{
+        isBowlOverview = NO;
+        isBowlRun = NO;
+        isTeamp = YES;
+        isCompt = NO;
+        self.PoplistTable.hidden = NO;
+        self.tableWidth.constant = self.teamView.frame.size.width;
+        self.tableXposition.constant = self.teamView.frame.origin.x;
+        self.tableYposition.constant = self.filterView.frame.origin.y+self.teamView.frame.origin.y;
+        [self.PoplistTable reloadData];
+    }
+}
+
+- (IBAction)onClickCompeti:(id)sender
+{
+    if(isTeamp){
+        
+        isBowlOverview = NO;
+        isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = NO;
+        self.PoplistTable.hidden = YES;
+        
+        
+    }else{
+        isBowlOverview = NO;
+        isBowlRun = NO;
+        isTeamp = NO;
+        isCompt = YES;
+        self.PoplistTable.hidden = NO;
+        self.tableWidth.constant = self.CompetitionView.frame.size.width;
+        self.tableXposition.constant = self.CompetitionView.frame.origin.x;
+        self.tableYposition.constant = self.filterView.frame.origin.y+self.CompetitionView.frame.origin.y;
         [self.PoplistTable reloadData];
     }
 }
@@ -637,11 +730,16 @@ BOOL isBowlRun;
         manager.requestSerializer = requestSerializer;
         
     
-        NSString *CompetitionCode = @"UCC0000008";
-        NSString *teamcode = @"TEA0000008";
+        //NSString *CompetitionCode = @"UCC0000008";
+        //NSString *teamcode = @"TEA0000008";
         //NSString *result = @"WON";
         // NSString *innNo = @"1";
         // NSString *type = @"DOTS";
+        
+        NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+        self.lblCompetetion.text= [AppCommon getCurrentCompetitionName];
+        NSString *teamcode = [AppCommon getCurrentTeamCode];
+        self.lblteam.text= [AppCommon getCurrentTeamName];
         
         
         

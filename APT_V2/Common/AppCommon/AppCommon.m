@@ -62,6 +62,7 @@ AppCommon *sharedCommon = nil;
         
         if(responseObject >0)
         {
+            appDel.ArrayCompetition = [NSMutableArray new];
             appDel.ArrayCompetition = responseObject;
             
             NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
@@ -109,6 +110,7 @@ AppCommon *sharedCommon = nil;
         
         if(responseObject >0)
         {
+            appDel.ArrayTeam = [NSMutableArray new];
             appDel.ArrayTeam = responseObject;
             NSLog(@"IPL TEAMS %@ ",responseObject);
             NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamCode"];

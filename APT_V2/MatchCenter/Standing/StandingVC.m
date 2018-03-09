@@ -29,6 +29,11 @@
 
 @implementation StandingVC
 
+@synthesize viewTeam,viewCompetetion;
+
+@synthesize lblCompetetion,lblTeam;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
@@ -53,6 +58,9 @@
     self.standingsCollectionView.dataSource = self;
     
     [self StandingsWebservice];
+    
+    lblTeam.text = [AppCommon getCurrentTeamName];
+    lblCompetetion.text = [AppCommon getCurrentCompetitionName];
 
 }
 
@@ -150,7 +158,7 @@
         competitionCode = [[competitionArray valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
         self.standingsCollectionView.hidden = NO;
         self.popTableView.hidden = YES;
-        [self StandingsTeamTableWebservice];
+//        [self StandingsTeamTableWebservice];
         
     }
     
@@ -348,12 +356,8 @@
 {
     [AppCommon showLoading ];
     
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
-    
-    
-    NSString *CompetitionCode = @"UCC0000001";
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
     objWebservice = [[WebService alloc]init];
     
     
@@ -378,41 +382,66 @@
     
 }
 
--(void)StandingsTeamTableWebservice
-{
-    [AppCommon showLoading ];
-    
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+
+- (IBAction)actionDropDown:(id)sender {
     
     
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-    //NSString *CompetitionCode = @"UCC0000001";
-    objWebservice = [[WebService alloc]init];
-    
-    
-    [objWebservice TeamStandings:StandingsKey :competitionCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
-        
-        if(responseObject >0)
-        {
-            DetailsArray = [[NSMutableArray alloc]init];
-            DetailsArray = [responseObject valueForKey:@"TeamResult"];
-            
-            [self.standingsCollectionView reloadData];
-            
-        }
-        [AppCommon hideLoading];
-        
+    if(![sender tag]) // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+
     }
-                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                             NSLog(@"failed");
-                             [COMMON webServiceFailureError:error];
-                         }];
+    else // TEAM
+    {
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+
+    }
     
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
 }
 
-
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    else
+    {
+        lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblTeam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+    
+    [self StandingsWebservice];
+    
+}
 
 
 @end
