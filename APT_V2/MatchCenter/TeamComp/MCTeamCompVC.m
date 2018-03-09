@@ -1599,10 +1599,13 @@
     
     WebService *objWebservice;
     
+    //NSString *teamcode = @"TEA0000008";
     //NSString *CompetitionCode = @"UCC0000008";
-    NSString *teamcode = @"TEA0000010";
+    NSString *teamcode = [AppCommon getCurrentTeamCode];
+    self.Teamnamelbl.text = [AppCommon getCurrentTeamName];
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    self.Competitionlbl.text = [AppCommon getCurrentCompetitionName];
     objWebservice = [[WebService alloc]init];
     
     
@@ -1760,6 +1763,20 @@
         
         [self TeamWebservice];
     }
+    else if(isTeam==YES)
+    {
+        
+        self.PopTableView.hidden = YES;
+        self.Teamnamelbl.text = [[appDel.ArrayTeam valueForKey:@"TeamName"]objectAtIndex:indexPath.row];
+        NSString *selectedCode = [[appDel.ArrayTeam valueForKey:@"TeamCode"]objectAtIndex:indexPath.row];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:_Competitionlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:selectedCode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self TeamWebservice];
+    }
+
 
 }
 
