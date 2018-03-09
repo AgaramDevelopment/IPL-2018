@@ -41,20 +41,20 @@
     
     //MCOverViewVC
     MCOverViewVC *firstViewController = [[MCOverViewVC alloc]init];
-//    firstViewController.title = @"Overview";
-//    firstViewController.tabBarItem = self.overviewBarItem;
+    firstViewController.title = @"Overview";
+    firstViewController.tabBarItem = self.overviewBarItem;
     
 //    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 //    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
-    UIImage* overView_selected = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-    UIImage* overView_Unselected = [[UIImage imageNamed:@"Overview"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    UIImage* overView_selected = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //
-//
-    UITabBarItem* item1 = [[UITabBarItem alloc] initWithTitle:@"Overview" image:overView_Unselected selectedImage:overView_selected];
-    item1.imageInsets = UIEdgeInsetsMake(0, 0, -6, 0);
-    [firstViewController setTabBarItem:item1];
+//    UIImage* overView_Unselected = [[UIImage imageNamed:@"Overview"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+////
+////
+//    UITabBarItem* item1 = [[UITabBarItem alloc] initWithTitle:@"Overview" image:overView_Unselected selectedImage:overView_selected];
+//    item1.imageInsets = UIEdgeInsetsMake(0, 0, -6, 0);
+//    [firstViewController setTabBarItem:item1];
 
     
    

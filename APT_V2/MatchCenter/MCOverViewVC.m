@@ -189,6 +189,7 @@
     }
     
     [AppCommon showLoading ];
+    NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
     NSString *teamcode = [AppCommon getCurrentTeamCode];

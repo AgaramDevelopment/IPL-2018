@@ -67,7 +67,8 @@
     self.scroll.contentSize =  self.commonView.frame.size;
     
     [self ScheduleWebservice];
-    [self FixturesWebservice];
+//    [self FixturesWebservice];
+
 
 }
 
@@ -118,14 +119,14 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+            [self FixturesWebservice];
+
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
              [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
             
         }];
     }
@@ -530,7 +531,6 @@
 
 -(void)FixturesWebservice
 {
-    //[COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
     {
         
@@ -608,10 +608,7 @@
                     }
                     
                     [self.scheduleCollectionView reloadData];
-//                    popArray = [[NSMutableArray alloc]init];
-//                    popArray = [responseObject valueForKey:@"lstCompetitionVal"];
-                    
-                    //[self.ListTbl reloadData];
+                    [AppCommon hideLoading];
                     
                 }
             }
@@ -621,6 +618,7 @@
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [COMMON webServiceFailureError:error];
             NSLog(@"failed");
             
         }];

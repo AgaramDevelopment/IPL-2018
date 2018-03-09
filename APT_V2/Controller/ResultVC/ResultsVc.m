@@ -14,8 +14,9 @@
 #import "WebService.h"
 #import "ScoreCardVC.h"
 #import "TabbarVC.h"
+#import "Header.h"
 
-@interface ResultsVc ()
+@interface ResultsVc () <selectedDropDown>
 {
     BOOL isPop;
     BOOL isList;
@@ -30,6 +31,8 @@
 
 @implementation ResultsVc
 
+@synthesize competitionLbl,v1;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -41,7 +44,8 @@
     self.ShawdowView.layer.shadowOffset = CGSizeMake(0,5);
     self.ShawdowView.layer.shadowOpacity = 0.5;
     isList = YES;
-    self.competitionLbl.text = [[self.listCompArray valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
+//    self.competitionLbl.text = [[self.listCompArray valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
+    competitionLbl.text = [AppCommon getCurrentCompetitionName];
     [self ResultsWebservice];
     self.popTbl.hidden = YES;
     
@@ -83,26 +87,43 @@
 
 -(IBAction)didClickCompetetion:(id)sender
 {
-    if(isPop==NO)
-    {
-        [self.ListTbl setUserInteractionEnabled:NO];
-        self.popTbl.hidden = NO;
-        isPop = YES;
-        isList = NO;
+//    if(isPop==NO)
+//    {
+//        [self.ListTbl setUserInteractionEnabled:NO];
+//        self.popTbl.hidden = NO;
+//        isPop = YES;
+//        isList = NO;
+//
+//        self.popXposition.constant = self.v1.frame.origin.x;
+//        self.popWidth.constant = self.CompetBtn.frame.size.width;
+//
+//        //[self.popTbl reloadData];
+//
+//    }
+//    else
+//    {
+//        isPop=NO;
+//        isList = YES;
+//        self.popTbl.hidden = YES;
+//        [self.ListTbl setUserInteractionEnabled:YES];
+//    }
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(v1.frame), CGRectGetMaxY(v1.superview.frame)+60, CGRectGetWidth(v1.frame), 300)];
         
-        self.popXposition.constant = self.v1.frame.origin.x;
-        self.popWidth.constant = self.CompetBtn.frame.size.width;
-        
-        //[self.popTbl reloadData];
-        
-    }
-    else
-    {
-        isPop=NO;
-        isList = YES;
-        self.popTbl.hidden = YES;
-        [self.ListTbl setUserInteractionEnabled:YES];
-    }
+    
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
 }
 
 //-(IBAction)didClickSeason:(id)sender
@@ -379,7 +400,8 @@
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(self.competitionLbl.text)   [dic    setObject:self.competitionLbl.text     forKey:@"Competitioncode"];
+        if([AppCommon getCurrentCompetitionCode])
+            [dic    setObject:[AppCommon getCurrentCompetitionCode]     forKey:@"Competitioncode"];
         
         
         NSLog(@"parameters : %@",dic);
@@ -433,6 +455,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    
+    
+        competitionLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:competitionLbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    [self ResultsWebservice];
+    
+}
 
 @end
