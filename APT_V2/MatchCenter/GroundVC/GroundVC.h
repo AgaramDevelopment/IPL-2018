@@ -58,5 +58,15 @@
 
     //wagon
 @property (nonatomic,strong) NSMutableArray * wagonWheelDrawData;
+@property (strong, nonatomic) IBOutlet UITableView *competitionTeamCodesTblView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableYPosition;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableXPosition;
+@property (strong, nonatomic) IBOutlet UIView *competitionView;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+@property (nonatomic,strong) NSMutableArray * codeArray;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tableWidth;
+@property (strong, nonatomic) IBOutlet UITextField *competitionCodeTF;
+@property (strong, nonatomic) IBOutlet UITextField *teamCodeTF;
+
 
 @end

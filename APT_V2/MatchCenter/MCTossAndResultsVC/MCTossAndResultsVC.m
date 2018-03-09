@@ -44,7 +44,9 @@
 
 @synthesize lbl1stCenter,lbl2ndCenter;
 
-@synthesize txtCompetetionName;
+@synthesize txtCompetetionName,txtTeamName;
+
+@synthesize viewTeam,viewCompetetion;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -111,6 +113,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [txtCompetetionName setup];
+    [txtTeamName setup];
 }
 
 
@@ -474,6 +477,8 @@
 
 }
 - (IBAction)actionUpdateToss:(id)sender {
+    
+    
 }
 
 
@@ -566,12 +571,26 @@
     
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
-    dropVC.array = appDel.ArrayCompetition;
-    dropVC.key = @"CompetitionName";
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(txtCompetetionName.frame), CGRectGetMaxY(txtCompetetionName.frame), CGRectGetWidth(txtCompetetionName.frame), 300)];
+
+    if ([sender tag] == 1) { // TEAM
+        
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+
+
+    }
+    else // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+
+    }
+    
     
     [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
         NSLog(@"DropDown loaded");
@@ -581,15 +600,29 @@
 
 -(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
-    NSLog(@"%@",array[Index.row]);
-    NSLog(@"selected value %@",key);
-    txtCompetetionName.text = [[array objectAtIndex:Index.row] valueForKey:key];
-    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
-    
-    [[NSUserDefaults standardUserDefaults] setValue:txtCompetetionName.text forKey:@"SelectedCompetitionName"];
-    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        txtCompetetionName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:txtCompetetionName.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+    else
+    {
+        txtTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:txtTeamName.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+    }
     
     UIImage* check = [UIImage imageNamed:@"radio_on"];
     
@@ -600,6 +633,8 @@
             break;
         }
     }
+
+    
     
 }
 

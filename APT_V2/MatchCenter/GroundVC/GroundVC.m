@@ -43,6 +43,11 @@
     NSArray *arr1;
     
     UIColor *strokeColor;
+    
+    BOOL isteamCode;
+    BOOL isCompetitionCode;
+    NSString *teamCode;
+    NSString *competitionCode;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -81,6 +86,7 @@
     
     _scrollView.contentSize = _contentView.frame.size;
     
+    self.competitionTeamCodesTblView.hidden = YES;
    // [self barchartMultiple];
     [self groundGetService];
     [self groundDimensions];
@@ -127,6 +133,41 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)competitionCodeButtonTapped:(id)sender {
+    
+    isCompetitionCode = YES;
+    isteamCode = NO;
+    self.competitionTeamCodesTblView.hidden = NO;
+    self.codeArray = [NSMutableArray new];
+    NSLog(@"%@", appDel.ArrayCompetition);
+    self.codeArray = appDel.ArrayCompetition;
+    self.tableWidth.constant = self.competitionView.frame.size.width;
+    self.tableXPosition.constant = self.competitionView.frame.origin.x+10;
+    self.tableYPosition.constant = self.competitionView.frame.origin.y+self.competitionView.frame.size.height+15;
+        //Re-load Table View
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.competitionTeamCodesTblView reloadData];
+    });
+}
+
+- (IBAction)teamCodeButtonTapped:(id)sender {
+    
+    isCompetitionCode = NO;
+    isteamCode = YES;
+    self.competitionTeamCodesTblView.hidden = NO;
+    self.codeArray = [NSMutableArray new];
+    NSLog(@"%@", appDel.ArrayTeam);
+    self.codeArray = appDel.ArrayTeam;
+    self.tableWidth.constant = self.teamView.frame.size.width;
+    self.tableXPosition.constant = self.teamView.frame.origin.x+10;
+    self.tableYPosition.constant = self.teamView.frame.origin.y+self.teamView.frame.size.height+15;
+        //Re-load Table View
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.competitionTeamCodesTblView reloadData];
+    });
+}
+
 
 - (IBAction)innings1ButtonTapped:(id)sender {
     NSMutableArray *battingInnFirstResultsArray = [self checkNull:[battingDict valueForKey:@"BattingInnFirstResults"]];
@@ -762,33 +803,79 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return commonArray.count;
-    
+    if (self.competitionTeamCodesTblView == tableView) {
+        return self.codeArray.count;
+    } else {
+        return commonArray.count;
+    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *MyIdentifier = @"MyIdentifier";
-    BowlTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"BowlTypeCell" owner:self options:nil];
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefaultreuseIdentifier:MyIdentifier];
-         cell = self.objCell;
+    if (self.competitionTeamCodesTblView == tableView) {
+        static NSString *MyIdentifier = @"cellid";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+            {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+            }
+        
+        cell.textLabel.numberOfLines = 2;
+        [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
+        
+        if(isteamCode == YES) {
+            cell.textLabel.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        }
+        
+        if(isCompetitionCode == YES) {
+            cell.textLabel.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
+        }
+        return cell;
+    } else {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        BowlTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        if (cell == nil)
+            {
+            [[NSBundle mainBundle] loadNibNamed:@"BowlTypeCell" owner:self options:nil];
+                //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefaultreuseIdentifier:MyIdentifier];
+            cell = self.objCell;
+            }
+            //cell.textLabel.text = @"Text";
+        cell.bowlingStyleLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BowlingStyle"]];
+        cell.wicketsLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"]];
+        cell.economyLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Econ"]];
+        cell.avgLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Average"]];
+        cell.strikeRateLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"StrikRate"]];
+        cell.dotBallsPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"DotBallPercent"]];
+        cell.boundaryPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BoundaryPercent"]];
+        
+        return cell;
     }
-    //cell.textLabel.text = @"Text";
-    cell.bowlingStyleLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BowlingStyle"]];
-    cell.wicketsLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"]];
-    cell.economyLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Econ"]];
-    cell.avgLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"Average"]];
-    cell.strikeRateLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"StrikRate"]];
-    cell.dotBallsPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"DotBallPercent"]];
-    cell.boundaryPercentLbl.text = [self checkNull:[[commonArray objectAtIndex:indexPath.row] valueForKey:@"BoundaryPercent"]];
-    
-    return cell;
-    
+    return nil;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.competitionTeamCodesTblView == tableView) {
+        if(isteamCode == YES)
+            {
+            self.teamCodeTF.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+            teamCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+            self.competitionTeamCodesTblView.hidden = YES;
+            }
+        
+        if(isCompetitionCode == YES)
+            {
+            self.competitionCodeTF.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
+            competitionCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+            self.competitionTeamCodesTblView.hidden = YES;
+            }
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44;

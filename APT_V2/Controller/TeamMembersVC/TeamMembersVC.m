@@ -207,23 +207,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
     MyStatsBattingVC* objStats = [MyStatsBattingVC new];
+    [objStats viewDidLoad];
     objStats.myStatsViewHeight.constant = 60;
     objStats.navViewHeight.constant = 35;
+    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
     [appDel.frontNavigationController pushViewController:objStats animated:YES];
     
-    
-    
-    
-//    PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
-//    PlayerVC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
-//
-//    PlayerVC.TeamName = self.teamname;
-//    NSLog(@"%@",appDel.frontNavigationController);
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
-//    });
 }
 
 
@@ -238,11 +228,14 @@
 -(void)TeamsWebservice
 {
     
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+        
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",playersKey]];
+        NSString *URLString =  URL_FOR_RESOURCE(playersKey);
+                                
+
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -250,16 +243,15 @@
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
-        
-        
+        NSString *ClientCode = [AppCommon GetClientCode];
+        NSString *UserrefCode = [AppCommon GetuserReference];
+        NSString *TeamCode = [AppCommon getCurrentTeamCode];
+
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
         if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
-        if(self.teamCode)   [dic    setObject:self.teamCode     forKey:@"Teamcode"];
+        if(TeamCode)   [dic    setObject:TeamCode     forKey:@"Teamcode"];
         
         
         NSLog(@"parameters : %@",dic);
@@ -286,10 +278,8 @@
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
             
         }];
-    }
     
 }
 
