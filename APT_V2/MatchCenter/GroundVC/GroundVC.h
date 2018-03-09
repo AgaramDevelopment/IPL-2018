@@ -54,6 +54,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *battingFirstMatchLostLbl;
 @property (strong, nonatomic) IBOutlet UILabel *battingSecondMatchWonLbl;
 @property (strong, nonatomic) IBOutlet UILabel *battingSecondMatchLostLbl;
+@property (strong, nonatomic) IBOutlet UIImageView *wagonImage;
 
+    //wagon
+@property (nonatomic,strong) NSMutableArray * wagonWheelDrawData;
 
 @end

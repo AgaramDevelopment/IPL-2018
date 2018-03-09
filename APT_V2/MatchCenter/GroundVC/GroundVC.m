@@ -27,7 +27,8 @@
     NSArray* headingButtonNames;
     
     //Donar Charts
-    NSMutableArray *markers;
+    NSMutableArray *markers1;
+    NSMutableArray *markers2;
     float num1;
     float num2;
     float num3;
@@ -40,6 +41,8 @@
     //Bar Charts
     NSArray *arr;
     NSArray *arr1;
+    
+    UIColor *strokeColor;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -80,6 +83,7 @@
     
    // [self barchartMultiple];
     [self groundGetService];
+    [self groundDimensions];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -203,8 +207,11 @@
         });
         
         //Pie Chart
-        markers = [NSMutableArray new];
+//        markers = [[NSMutableArray alloc] initWithObjects:@"1", @"4", nil];
+
+        markers1 = [NSMutableArray new];
         NSMutableArray *batFirstTosswonReslts = [responseObject valueForKey:@"BatFirstTosswonReslts"];
+
         NSString *firstTotal, *firstWon, *firstLoss;
         for (id key in batFirstTosswonReslts) {
                 //Batting 1st  Values Assign to Label Properties
@@ -215,8 +222,17 @@
         
         float firtsResults =  [firstWon floatValue]/[firstTotal floatValue];
         NSNumber *num1 = [NSNumber numberWithFloat:firtsResults];
-        [markers addObject:num1];
-                   
+        
+        if (firstLoss < firstWon) {
+            [markers1 addObject:firstLoss];
+            [markers1 addObject:firstWon];
+        } else {
+            [markers1 addObject:firstWon];
+            [markers1 addObject:firstLoss];
+        }
+        
+        
+        markers2 = [NSMutableArray new];
         NSMutableArray *batSecondTosswonReslts = [responseObject valueForKey:@"BatSecondTosswonReslts"];
         NSString *secondTotal, *secondWon, *secondLoss;
         for (id key in batSecondTosswonReslts) {
@@ -227,8 +243,16 @@
         }
         float secondResults = [secondWon floatValue]/[secondTotal floatValue];
         NSNumber *num2 = [NSNumber numberWithFloat:secondResults];
-        [markers addObject:num2];
         
+        if (secondLoss < secondWon) {
+            [markers2 addObject:secondLoss];
+            [markers2 addObject:secondWon];
+        } else {
+            [markers2 addObject:secondWon];
+            [markers2 addObject:secondLoss];
+        }
+        
+ 
         self.battingFirstMatchWonLbl.text = firstWon;
         self.battingFirstMatchLostLbl.text = firstLoss;
         self.battingSecondMatchWonLbl.text = secondWon;
@@ -297,6 +321,251 @@
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
     }];
+}
+
+- (void)groundDimensions {
+    
+    self.wagonWheelDrawData = [[NSMutableArray alloc] initWithObjects:
+                               @{
+                                 @"Colour":@"#ed1d24",
+                                 @"WWX1":@"161",
+                                 @"WWX2":@"90",
+                                 @"WWY1":@"125",
+                                 @"WWY2":@"250"
+                                 },
+                               @{
+                                 @"Colour":@"#ed1d24",
+                                 @"WWX1":@"161",
+                                 @"WWX2":@"180",
+                                 @"WWY1":@"125",
+                                 @"WWY2":@"250"
+                                 },
+                               @{
+                                 @"Colour":@"#ed1d24",
+                                 @"WWX1":@"161",
+                                 @"WWX2":@"270",
+                                 @"WWY1":@"125",
+                                 @"WWY2":@"250"
+                                 },
+                               @{
+                                 @"Colour":@"#ed1d24",
+                                 @"WWX1":@"161",
+                                 @"WWX2":@"20",
+                                 @"WWY1":@"125",
+                                 @"WWY2":@"150"
+                                 },
+                               nil];
+    /*
+     WWX1 = 161;
+     WWX2 = 279;
+     WWY1 = 125;
+     WWY2 = 168;
+     */
+    
+    if (IS_IPAD) {
+        
+            //wagon wheel
+        if(self.wagonWheelDrawData.count>0)
+            {
+            
+            NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+            
+            sepArray= self.wagonWheelDrawData;
+            if(![sepArray isEqual:[NSNull null]])
+                {
+                
+                for(int i=0;sepArray.count>i;i++)
+                {
+                    for (CALayer *layer in self.wagonImage.layer.sublayers) {
+                        if ([layer.name isEqualToString:@"DrawLine"]) {
+                            [layer removeFromSuperlayer];
+                            break;
+                        }
+                    }
+                }
+                
+                int x1position;
+                int y1position;
+                int x2position;
+                int y2position;
+                
+                int BASE_X = 280;
+                
+                
+                for(int i=0; i<sepArray.count;i++)
+                    {
+                    
+                    if(IS_IPHONE_DEVICE)
+                        {
+                        x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
+                        y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
+                        x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
+                        y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+                        }
+                    
+                    else
+                        {
+                        
+                        x1position = 100;
+                        y1position = 84.7;
+                        
+                        x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
+                        y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
+                        
+                        
+                        }
+                    
+                    
+                    
+                    int Xposition = x1position;
+                    int Yposition = y1position;
+                    
+                    
+                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+                    CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+                    
+                    
+                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+                    
+                    shapeLayer.path = straightLinePath;
+                    UIColor *fillColor = [UIColor redColor];
+                    shapeLayer.fillColor = fillColor.CGColor;
+                    
+                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                    
+                    strokeColor = [self colorWithHexString:color];
+                    
+                    
+                    shapeLayer.strokeColor = strokeColor.CGColor;
+                    shapeLayer.lineWidth = 2.0f;
+                    shapeLayer.fillRule = kCAFillRuleNonZero;
+                    shapeLayer.name = @"DrawLine";
+                    [self.wagonImage.layer addSublayer:shapeLayer];
+                    }
+                }
+            }
+    } else {
+        
+            //wagon wheel
+        if(self.wagonWheelDrawData.count>0)
+            {
+            
+            NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+            
+            sepArray= self.wagonWheelDrawData;
+            if(![sepArray isEqual:[NSNull null]])
+                {
+                
+                for(int i=0;sepArray.count>i;i++)
+                    {
+                    for (CALayer *layer in self.wagonImage.layer.sublayers) {
+                        if ([layer.name isEqualToString:@"DrawLine"]) {
+                            [layer removeFromSuperlayer];
+                            break;
+                        }
+                    }
+                    }
+                
+                int x1position;
+                int y1position;
+                int x2position;
+                int y2position;
+                
+                int BASE_X = 280;
+                
+                
+                
+                
+                for(int i=0; i<sepArray.count;i++)
+                    {
+                    
+                    if(IS_IPHONE_DEVICE)
+                        {
+                        
+                        x1position = 65;
+                        y1position = 55;
+                        
+                        x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
+                        y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
+                        }
+                    
+                    else
+                        {
+                        
+                        x1position = 100;
+                        y1position = 84.7;
+                        
+                        x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
+                        y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
+                        
+                        
+                        }
+                    
+                    int Xposition = x1position;
+                    int Yposition = y1position;
+                    
+                    
+                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+                    CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+                    
+                    
+                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+                    
+                    shapeLayer.path = straightLinePath;
+                    UIColor *fillColor = [UIColor redColor];
+                    shapeLayer.fillColor = fillColor.CGColor;
+                    
+                    
+                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                    
+                    strokeColor = [self colorWithHexString:color];
+                    
+                    shapeLayer.strokeColor = strokeColor.CGColor;
+                    shapeLayer.lineWidth = 2.0f;
+                    shapeLayer.fillRule = kCAFillRuleNonZero;
+                    shapeLayer.name = @"DrawLine";
+                    [self.wagonImage.layer addSublayer:shapeLayer];
+                    
+                    }
+                }
+            }
+    }
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+        //-----------------------------------------
+        // Convert hex string to an integer
+        //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    
+        // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+        // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    /*
+     CGFloat red   = ((baseColor1 & 0xFF0000) >> 16) / 255.0f;
+     CGFloat green = ((baseColor1 & 0x00FF00) >>  8) / 255.0f;
+     CGFloat blue  =  (baseColor1 & 0x0000FF) / 255.0f;
+     */[scanner scanHexInt:&hexint];
+    
+    
+    
+        //-----------------------------------------
+        // Create color object, specifying alpha
+        //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255.0f
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255.0f
+                     blue:((CGFloat) (hexint & 0xFF))/255.0f
+                    alpha:1.0f];
+    
+    return color;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -386,8 +655,14 @@
 #pragma mark - PieChartViewDataSource
 -(int)numberOfSlicesInPieChartView:(PieChartView *)pieChartView
 {
-    NSUInteger  obj =  markers.count;
-    return (int)obj;
+    if (self.battingFstPie == pieChartView) {
+        NSUInteger  obj =  markers1.count;
+        return (int)obj;
+    } else if (self.battingSecPie == pieChartView) {
+        NSUInteger  obj =  markers2.count;
+        return (int)obj;
+    }
+    return nil;
 }
 -(UIColor *)pieChartView:(PieChartView *)pieChartView colorForSliceAtIndex:(NSUInteger)index
 {
@@ -414,10 +689,20 @@
 
 -(double)pieChartView:(PieChartView *)pieChartView valueForSliceAtIndex:(NSUInteger)index
 {
-    //        NSUInteger  obj = [self.markers objectAtIndex:index];
-    //        NSString *s= [self.markers objectAtIndex:index];
+    
 //    float  obj = [[NSDecimalNumber decimalNumberWithString:[markers objectAtIndex:index]]floatValue] ;
-    float  obj = [[markers objectAtIndex:index] floatValue];
+    float  obj;
+    if (self.battingFstPie == pieChartView) {
+        
+        obj = [[NSDecimalNumber decimalNumberWithString:[markers1 objectAtIndex:index]]floatValue] ;
+        
+    }
+  
+    if (self.battingSecPie == pieChartView) {
+        
+        obj = [[NSDecimalNumber decimalNumberWithString:[markers2 objectAtIndex:index]]floatValue] ;
+        
+    }
     
     if(obj==0)
     {
