@@ -52,6 +52,7 @@
 +(NSString *)getCurrentTeamCode;
 +(NSString *)getCurrentTeamName;
 
+
 @end
 
 extern AppCommon *sharedCommon;

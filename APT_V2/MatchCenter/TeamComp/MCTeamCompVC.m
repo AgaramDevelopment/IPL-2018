@@ -21,6 +21,9 @@
 //    NSString *BowlerCount;
 //    NSString *AllroundCount;
     
+    BOOL isComp;
+    BOOL isTeam;
+    
 }
 
 
@@ -35,10 +38,14 @@
 @property (strong, nonatomic)  NSMutableArray *TeamPlayersArray4;
 @property (strong, nonatomic)  NSMutableArray *TeamPlayersArray5;
 
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
+
 
 @end
 
 @implementation MCTeamCompVC
+
 
 
 - (void)viewDidLoad {
@@ -51,6 +58,8 @@
     [self.BatsmenCollectionView
      registerNib:[UINib nibWithNibName:@"MCTeamPlayersCompCell" bundle:nil] forCellWithReuseIdentifier:@"CompCell"];
     [self.AllrounderCollectionView registerNib:[UINib nibWithNibName:@"MCTeamPlayersCompCell" bundle:nil] forCellWithReuseIdentifier:@"CompCell"];
+    
+    self.PopTableView.hidden = YES;
     
     [self TeamWebservice];
 
@@ -166,6 +175,8 @@
         
         if(indexPath.row==0)
         {
+            if(self.TeamPlayersArray1.count>0 && ![self.TeamPlayersArray1 isEqual:[NSNull null]])
+            {
             cell.datelbl.text = [[self.TeamPlayersArray1 valueForKey:@"MatchDate"]objectAtIndex:0];
             NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
             NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
@@ -418,8 +429,11 @@
             }
             
         }
+        }
         else if(indexPath.row==1)
         {
+            if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
+            {
             cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
             NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
             NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
@@ -671,8 +685,11 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+        }
         else if(indexPath.row==2)
         {
+            if(self.TeamPlayersArray3.count>0 && ![self.TeamPlayersArray3 isEqual:[NSNull null]])
+            {
             
             cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
             NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
@@ -929,8 +946,11 @@
             }
             
         }
+        }
         else if(indexPath.row==3)
         {
+            if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
+            {
             cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
             NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
             NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
@@ -1183,8 +1203,11 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+        }
         else if(indexPath.row==4)
         {
+            if(self.TeamPlayersArray5.count>0 && ![self.TeamPlayersArray5 isEqual:[NSNull null]])
+            {
             
             cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
             NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
@@ -1438,6 +1461,7 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+        }
         
         
         
@@ -1575,8 +1599,10 @@
     
     WebService *objWebservice;
     
-    NSString *CompetitionCode = @"UCC0000008";
+    //NSString *CompetitionCode = @"UCC0000008";
     NSString *teamcode = @"TEA0000010";
+    
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
     objWebservice = [[WebService alloc]init];
     
     
@@ -1630,6 +1656,8 @@
             self.TeamPlayersArray4 = [responseObject valueForKey:@"lstplayerMatchComp4"];
             self.TeamPlayersArray5 = [responseObject valueForKey:@"lstplayerMatchComp5"];
             
+            [self.teamCompCollectionView reloadData];
+            
         }
         [AppCommon hideLoading];
         
@@ -1640,6 +1668,101 @@
                              }];
     
 }
+- (IBAction)onClickCompetitionBtn:(id)sender
+{
+    isComp = YES;
+    isTeam = NO;
+    self.PopTableView.hidden = NO;
+    
+    self.tableWidth.constant = self.dropviewComp1.frame.size.width;
+    self.tableXposition.constant = self.dropviewComp1.frame.origin.x;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    arr = appDel.ArrayCompetition;
+    [self.PopTableView reloadData];
+    
+}
+
+- (IBAction)onClickTeamBtn:(id)sender
+{
+    isComp = NO;
+    isTeam = YES;
+    self.PopTableView.hidden = NO;
+    self.tableWidth.constant = self.dropviewComp2.frame.size.width;
+    self.tableXposition.constant = self.dropviewComp2.frame.origin.x;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    arr = appDel.ArrayTeam;
+    
+     [self.PopTableView reloadData];
+    
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+// number of row in the section, I assume there is only 1 row
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(isComp==YES)
+    {
+    return appDel.ArrayCompetition.count;
+    }
+    else if(isTeam==YES)
+    {
+        return appDel.ArrayTeam.count;
+    }
+    return nil;
+}
+// the cell will be returned to the tableView
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    static NSString *MyIdentifier = @"cellid";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    }
+    
+    if(isComp==YES)
+    {
+    cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+    }
+    else if(isTeam==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayTeam valueForKey:@"TeamName"]objectAtIndex:indexPath.row];
+    }
+    
+    cell.selectionStyle = UIAccessibilityTraitNone;
+    
+    cell.contentView.backgroundColor = [UIColor lightTextColor];
+    return cell;
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(isComp==YES)
+    {
+        
+        self.PopTableView.hidden = YES;
+        self.Competitionlbl.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        NSString *selectedCode = [[appDel.ArrayCompetition valueForKey:@"CompetitionCode"]objectAtIndex:indexPath.row];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:_Competitionlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:selectedCode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self TeamWebservice];
+    }
+
+}
+
 
 
 @end

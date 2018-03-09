@@ -62,5 +62,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *AgainstCountlbl;
 @property (strong, nonatomic) IBOutlet UILabel *nrrlbl;
 @property (strong, nonatomic) IBOutlet UILabel *Wktslbl;
+@property (weak, nonatomic) IBOutlet UIView *viewCompetetion;
+@property (weak, nonatomic) IBOutlet UILabel *lblCompetetion;
+
+- (IBAction)actionCompetetionTeam:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *viewTeam;
+@property (weak, nonatomic) IBOutlet UILabel *lblTeamName;
+
 
 @end

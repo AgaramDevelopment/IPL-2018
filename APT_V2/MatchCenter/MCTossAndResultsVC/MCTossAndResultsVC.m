@@ -579,7 +579,7 @@
         
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
 
 
     }
@@ -587,7 +587,7 @@
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
 
     }
     
