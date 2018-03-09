@@ -25,7 +25,6 @@
                 <outlet property="AgainstCountlbl" destination="dkg-DC-oVv" id="fcW-jc-xkI"/>
                 <outlet property="Againstlbl" destination="goS-54-RdH" id="WdF-ZP-bY8"/>
                 <outlet property="Captainnamelbl" destination="dwy-3f-XOd" id="iO8-Y7-VPz"/>
-                <outlet property="CompetitionListtbl" destination="Yha-Pb-ent" id="9bB-NK-ESW"/>
                 <outlet property="ForCountlbl" destination="VEX-5h-35I" id="9mF-z1-KcQ"/>
                 <outlet property="Forlbl" destination="2Co-IG-Mjt" id="ryj-VQ-1ZR"/>
                 <outlet property="Groundmnamelbl" destination="8iN-Sa-YcD" id="3TW-Q9-5fo"/>
@@ -215,7 +214,7 @@
                                                     <rect key="frame" x="8" y="160" width="359" height="150"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFM-dR-N5Z">
-                                                            <rect key="frame" x="8" y="8" width="87.666666666666671" height="15"/>
+                                                            <rect key="frame" x="8" y="8" width="97.333333333333329" height="15"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -633,7 +632,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Batsmen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xN-la-Muh">
-                                                                    <rect key="frame" x="144" y="13" width="71" height="14"/>
+                                                                    <rect key="frame" x="138.66666666666666" y="13" width="82" height="14"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -690,7 +689,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPw-gU-1D1">
-                                                                    <rect key="frame" x="264" y="52.666666666666636" width="87" height="23.333333333333336"/>
+                                                                    <rect key="frame" x="264" y="51.333333333333371" width="87" height="24.666666666666671"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="87" id="1KQ-8f-bmc"/>
@@ -1036,18 +1035,6 @@ Anderson</string>
                                                         <constraint firstItem="3jm-Hg-wl4" firstAttribute="top" secondItem="qVh-Ti-j2I" secondAttribute="bottom" constant="3" id="wNr-iW-liL"/>
                                                     </constraints>
                                                 </view>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yha-Pb-ent">
-                                                    <rect key="frame" x="55" y="40" width="300" height="200"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="300" id="tCi-GQ-kqV"/>
-                                                        <constraint firstAttribute="height" constant="200" id="tpl-i3-Tyv"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="-1" id="ivY-Kh-tOu"/>
-                                                        <outlet property="delegate" destination="-1" id="m43-Qp-qVt"/>
-                                                    </connections>
-                                                </tableView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.91363531351089478" green="0.91378861665725708" blue="0.91361522674560547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -1055,7 +1042,6 @@ Anderson</string>
                                                 <constraint firstItem="Msy-jP-Tl3" firstAttribute="top" secondItem="hmk-HS-qkd" secondAttribute="bottom" constant="2" id="37g-vq-ALU"/>
                                                 <constraint firstItem="h0O-yt-4Wa" firstAttribute="leading" secondItem="iYv-2o-8sy" secondAttribute="leading" constant="8" id="4u1-sh-Wdc"/>
                                                 <constraint firstItem="JfE-40-PV2" firstAttribute="top" secondItem="iYv-2o-8sy" secondAttribute="top" constant="10" id="67h-wL-daL"/>
-                                                <constraint firstItem="Yha-Pb-ent" firstAttribute="top" secondItem="JfE-40-PV2" secondAttribute="bottom" id="E8p-nS-Ymk"/>
                                                 <constraint firstAttribute="trailing" secondItem="hmk-HS-qkd" secondAttribute="trailing" id="Ewv-yL-ckT"/>
                                                 <constraint firstItem="eEt-5m-JeZ" firstAttribute="top" secondItem="iYv-2o-8sy" secondAttribute="top" constant="50" id="HGm-fQ-Or1"/>
                                                 <constraint firstAttribute="trailing" secondItem="eEt-5m-JeZ" secondAttribute="trailing" constant="8" id="HqS-kL-S6f"/>
@@ -1063,7 +1049,6 @@ Anderson</string>
                                                 <constraint firstItem="hmk-HS-qkd" firstAttribute="top" secondItem="h0O-yt-4Wa" secondAttribute="bottom" constant="10" id="RFw-EY-rZX"/>
                                                 <constraint firstItem="h0O-yt-4Wa" firstAttribute="top" secondItem="eEt-5m-JeZ" secondAttribute="bottom" constant="10" id="Wsn-Ax-c4g"/>
                                                 <constraint firstAttribute="trailing" secondItem="Msy-jP-Tl3" secondAttribute="trailing" constant="8" id="aeF-k9-aRi"/>
-                                                <constraint firstAttribute="trailing" secondItem="Yha-Pb-ent" secondAttribute="trailing" constant="20" id="iHK-7S-7Nn"/>
                                                 <constraint firstAttribute="trailing" secondItem="h0O-yt-4Wa" secondAttribute="trailing" constant="8" id="j3U-nq-RFx"/>
                                                 <constraint firstItem="Msy-jP-Tl3" firstAttribute="leading" secondItem="iYv-2o-8sy" secondAttribute="leading" constant="8" id="mLX-dP-axh"/>
                                                 <constraint firstAttribute="height" constant="844" id="wMN-e8-V6G"/>

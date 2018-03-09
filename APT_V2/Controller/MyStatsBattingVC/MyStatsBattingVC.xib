@@ -32,17 +32,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeB-OA-ydL" userLabel="navigation View">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" id="dP3-2U-QjJ"/>
+                                <constraint firstAttribute="height" constant="60" id="dP3-2U-QjJ"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfY-rn-sXy">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="60" width="320" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Stats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-5Q-o71">
-                                    <rect key="frame" x="15" y="0.0" width="305" height="0.0"/>
+                                    <rect key="frame" x="15" y="0.0" width="305" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -53,12 +53,12 @@
                                 <constraint firstAttribute="bottom" secondItem="ZEe-5Q-o71" secondAttribute="bottom" id="FqK-Ur-ZOe"/>
                                 <constraint firstItem="ZEe-5Q-o71" firstAttribute="leading" secondItem="EfY-rn-sXy" secondAttribute="leading" constant="15" id="SrA-tG-N9g"/>
                                 <constraint firstItem="ZEe-5Q-o71" firstAttribute="top" secondItem="EfY-rn-sXy" secondAttribute="top" id="XHQ-1v-ltO"/>
-                                <constraint firstAttribute="height" id="gL3-Nd-ozU"/>
+                                <constraint firstAttribute="height" constant="35" id="gL3-Nd-ozU"/>
                                 <constraint firstAttribute="trailing" secondItem="ZEe-5Q-o71" secondAttribute="trailing" id="tHi-IS-75H"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByI-lI-0ms" userLabel="main view">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <rect key="frame" x="0.0" y="95" width="320" height="473"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UfX-OB-Z5j">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -105,7 +105,7 @@
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="XPT-Xj-oAx">
-                                    <rect key="frame" x="0.0" y="40" width="320" height="528"/>
+                                    <rect key="frame" x="0.0" y="40" width="320" height="433"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>

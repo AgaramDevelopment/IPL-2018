@@ -36,8 +36,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self layoutSubviews];
-//        self = [super initWithFrame:[self frame]];
-//        [self setup];
+        self = [super initWithFrame:[self frame]];
+        [self setup];
     }
     return self;
 }

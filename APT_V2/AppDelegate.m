@@ -46,10 +46,10 @@
     NSString *plyRolecode = @"ROL0000002";
     
     UIViewController *frontViewController;
+    [COMMON getIPLteams];
+
     if(isLogin==YES)
     {
-        [COMMON getIPLCompetetion];
-
         if([rolecode isEqualToString:plyRolecode])
         {
             frontViewController = [TabHomeVC new];
@@ -60,7 +60,6 @@
             objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
             objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
             frontViewController = objPlayersVC;
-            [COMMON getIPLteams];
 
         }
     }
