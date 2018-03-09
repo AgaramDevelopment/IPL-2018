@@ -313,10 +313,13 @@
         isTeam = NO;
         self.teamTF.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamname"];
         teamCode = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamcode"];
-//        self.teamTF.text = [teamArray objectAtIndex:indexPath.row];
         self.teamTableView.hidden = YES;
         [[NSUserDefaults standardUserDefaults] setValue:self.teamTF.text forKey:@"initialTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"initialTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamTF.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
     }

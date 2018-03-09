@@ -91,7 +91,6 @@
         }
         else
         {
-            
                 return CGSizeMake(widthF, 30);
         }
     }
@@ -147,12 +146,8 @@
     
     if(indexPath.row==0)
     {
-        cell.Title.text = @"SCHEDULE/RESULTS/VIDEOS";
+        cell.Title.text = @"FIXTURES/RESULTS/VIDEOS";
         [cell setTag:indexPath.row];
-        
-//        objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
-//        objSch.view.frame = CGRectMake(0, self.Titlecollview.frame.origin.y+50, self.view.bounds.size.width, self.view.bounds.size.height);
-//        [self.view addSubview:objSch.view];
         
     }
     if(indexPath.row==1)
@@ -222,9 +217,7 @@
          else if(index == 1)
         {
             objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
-//            objStats.myStatsViewHeight.constant = 0;
-//            objStats.navViewHeight.constant = 0;
-            objStats.view.frame = CGRectMake(0, 70+35, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            objStats.view.frame = CGRectMake(0, -(70+45), self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+(70+45));
             [view addSubview:objStats.view];
         }
 

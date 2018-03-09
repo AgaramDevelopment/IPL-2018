@@ -129,8 +129,8 @@
         {
 //            newFrontController = [TeamsVC new];
             TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
-            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
+            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
+            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
             newFrontController = objPlayersVC;
 
         }

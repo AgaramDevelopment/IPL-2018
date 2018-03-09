@@ -38,6 +38,7 @@
     NSMutableArray *recentMatchesArray;
     NSMutableDictionary *battingDict;
     NSMutableArray *commonArray;
+    NSMutableArray *groundResultsArray;
     //Bar Charts
     NSArray *arr;
     NSArray *arr1;
@@ -46,8 +47,10 @@
     
     BOOL isteamCode;
     BOOL isCompetitionCode;
+    BOOL isGroundCode;
     NSString *teamCode;
     NSString *competitionCode;
+    NSString *groundCode;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -88,8 +91,9 @@
     
     self.competitionTeamCodesTblView.hidden = YES;
    // [self barchartMultiple];
+    
     [self groundGetService];
-    [self groundDimensions];
+//    [self groundDimensions];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -134,10 +138,61 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)groundListButtonTapped:(id)sender {
+    
+    isCompetitionCode = NO;
+    isGroundCode = NO;
+    isteamCode = YES;
+    self.competitionTeamCodesTblView.hidden = NO;
+    self.codeArray = [NSMutableArray new];
+    self.codeArray = groundResultsArray;
+    self.tableWidth.constant = self.groundView.frame.size.width;
+    self.tableXPosition.constant = self.groundView.frame.origin.x+10;
+    self.tableYPosition.constant = self.groundView.frame.origin.y+self.groundView.frame.size.height+10;
+        //Re-load Table View
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.competitionTeamCodesTblView reloadData];
+    });
+
+}
+
+- (void)groundListGetService {
+    /*
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUNDLIST/UCC0000008
+     METHOD     :   GET
+     */
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        
+        groundResultsArray = [NSMutableArray new];
+        groundResultsArray = [responseObject valueForKey:@"GroundResults"];
+            //GroundOverResults Get Service Method
+        [self groundOverResultsGetService];
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"FAILURE RESPONSE %@",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+}
+
 - (IBAction)competitionCodeButtonTapped:(id)sender {
     
     isCompetitionCode = YES;
     isteamCode = NO;
+    isGroundCode = NO;
     self.competitionTeamCodesTblView.hidden = NO;
     self.codeArray = [NSMutableArray new];
     NSLog(@"%@", appDel.ArrayCompetition);
@@ -154,6 +209,7 @@
 - (IBAction)teamCodeButtonTapped:(id)sender {
     
     isCompetitionCode = NO;
+    isGroundCode = NO;
     isteamCode = YES;
     self.competitionTeamCodesTblView.hidden = NO;
     self.codeArray = [NSMutableArray new];
@@ -167,6 +223,7 @@
         [self.competitionTeamCodesTblView reloadData];
     });
 }
+
 
 
 - (IBAction)innings1ButtonTapped:(id)sender {
@@ -318,9 +375,32 @@
             self.BSAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
             self.BSLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
         }
-        //GroundOverResults Get Service Method
-        [self groundOverResultsGetService];
         
+        /*
+         {
+         "GTopRight": "0.00",
+         "GTopLeft": "0.00",
+         "GBottomRight": "0.00",
+         "GBottomLeft": "0.00"
+         }
+         */
+        
+        NSMutableArray *groundDimensionResults = [responseObject valueForKey:@"GroundDimensionResults"];
+        for (id key in groundDimensionResults) {
+            self.groundTopLeft.text = [key valueForKey:@"GTopLeft"];
+            self.groundTopRight.text = [key valueForKey:@"GTopRight"];
+            self.groundBottomLeft.text = [key valueForKey:@"GTopRight"];
+            self.groundBottomRight.text = [key valueForKey:@"GBottomLeft"];
+            
+//            self.groundTopLeft.text = [NSString stringWithFormat:@"%@",[key valueForKey:@"GTopLeft"]];
+//            self.groundTopRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
+//            self.groundBottomLeft.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
+//            self.groundBottomRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GBottomLeft"]];
+        }
+        
+        //Ground Service Call
+        [self groundListGetService];
+    
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -341,7 +421,7 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, @"UCC0000008", @"GRD0000006", @"0", @"5"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -355,6 +435,7 @@
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
         [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        
         
         [AppCommon hideLoading];
         
@@ -833,6 +914,11 @@
         if(isCompetitionCode == YES) {
             cell.textLabel.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
         }
+        
+        if(isGroundCode == YES) {
+            cell.textLabel.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
+        }
+        
         return cell;
     } else {
         static NSString *MyIdentifier = @"MyIdentifier";
@@ -873,6 +959,12 @@
             competitionCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
             self.competitionTeamCodesTblView.hidden = YES;
             }
+        if (isGroundCode == YES) {
+            self.groundLbl.text = [NSString stringWithFormat:@"%@ %@", [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"], [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"Venue"]];
+            
+            groundCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"GroundCode"];
+            self.competitionTeamCodesTblView.hidden = YES;
+        }
     }
 }
 
