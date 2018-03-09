@@ -1625,6 +1625,9 @@
                                                                                         <constraint firstAttribute="width" constant="15" id="FuO-vV-jFL"/>
                                                                                         <constraint firstAttribute="height" constant="15" id="eWO-E2-D8M"/>
                                                                                     </constraints>
+                                                                                    <connections>
+                                                                                        <action selector="firstInningsAction:" destination="-1" eventType="touchUpInside" id="1rb-LR-hN6"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1st Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRH-Lo-xhE">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1648,6 +1651,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-Om-ciA">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="secondInningsAction:" destination="-1" eventType="touchUpInside" id="6Bj-mg-tGI"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2nd Innings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIX-oH-sT9">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1701,6 +1707,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J64-1b-OFW">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="CSKWinAction:" destination="-1" eventType="touchUpInside" id="VPH-jX-aBh"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CSK Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogW-fY-c6H">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1718,6 +1727,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdh-hn-3ff">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="MIWinAction:" destination="-1" eventType="touchUpInside" id="03Q-6A-57a"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MI Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEd-DJ-EiF">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1771,6 +1783,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxA-SB-MNx">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="oneToSixOversAction:" destination="-1" eventType="touchUpInside" id="dtB-ar-463"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-6 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORM-zg-CAi">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1788,6 +1803,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sF-eE-HqP">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="sevenToFifteenOversAction:" destination="-1" eventType="touchUpInside" id="lRh-a7-bxE"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-15 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmR-gc-hO5">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
@@ -1805,6 +1823,9 @@
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9n-LT-Ins">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                                    <connections>
+                                                                                        <action selector="sixteenToTwentyOversAction:" destination="-1" eventType="touchUpInside" id="ia9-Lp-kl2"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16-20 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PuV-xx-dwr">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
