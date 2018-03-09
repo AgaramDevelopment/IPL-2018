@@ -91,7 +91,6 @@
         }
         else
         {
-            
                 return CGSizeMake(widthF, 30);
         }
     }
@@ -224,7 +223,7 @@
             objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
 //            objStats.myStatsViewHeight.constant = 0;
 //            objStats.navViewHeight.constant = 0;
-            objStats.view.frame = CGRectMake(0, 70+35, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            objStats.view.frame = CGRectMake(0, -(70+45), self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+(70+45));
             [view addSubview:objStats.view];
         }
 

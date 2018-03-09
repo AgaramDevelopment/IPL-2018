@@ -83,7 +83,6 @@
 
 -(IBAction)didClickCompetetion:(id)sender
 {
-    
     if(isPop==NO)
     {
         [self.ListTbl setUserInteractionEnabled:NO];
@@ -95,7 +94,6 @@
         self.popWidth.constant = self.CompetBtn.frame.size.width;
         
         //[self.popTbl reloadData];
-        
         
     }
     else
@@ -173,8 +171,6 @@
         }
         cell = self.objCell;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
         
         NSMutableArray *firstobj = [[NSMutableArray alloc]init];
         
