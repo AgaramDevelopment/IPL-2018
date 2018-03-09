@@ -31,5 +31,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tossResultsSegment;
 @property (weak, nonatomic) IBOutlet LineTextField *txtCompetetionName;
 - (IBAction)actionCompetetion:(id)sender;
+@property (weak, nonatomic) IBOutlet LineTextField *txtTeamName;
+@property (weak, nonatomic) IBOutlet UIView *viewCompetetion;
+@property (weak, nonatomic) IBOutlet UIView *viewTeam;
 
 @end

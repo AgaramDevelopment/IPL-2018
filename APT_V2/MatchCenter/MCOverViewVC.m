@@ -356,7 +356,7 @@
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp.frame), CGRectGetMaxY(dropviewComp.frame), CGRectGetWidth(dropviewComp.frame), 300)];
+    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp.frame), CGRectGetMaxY(dropviewComp.frame)+60, CGRectGetWidth(dropviewComp.frame), 300)];
 
 //    [dropVC.tblDropDown.topAnchor constraintEqualToAnchor:self.competitionlbl.bottomAnchor];
 //    [dropVC.tblDropDown.widthAnchor constraintEqualToAnchor:self.competitionlbl.widthAnchor];

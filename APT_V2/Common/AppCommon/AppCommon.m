@@ -73,6 +73,7 @@ AppCommon *sharedCommon = nil;
             [[NSUserDefaults standardUserDefaults] synchronize];
 
         }
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
@@ -92,16 +93,13 @@ AppCommon *sharedCommon = nil;
 
 +(NSString *)getCurrentTeamCode
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"CompetitionCode"];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
 }
 
 +(NSString *)getCurrentTeamName
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"CompetitionCode"];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
 }
-
-
-
 
 -(void)getIPLteams
 {
@@ -113,7 +111,19 @@ AppCommon *sharedCommon = nil;
         if(responseObject >0)
         {
             appDel.ArrayTeam = responseObject;
+            NSLog(@"IPL TEAMS %@ ",responseObject);
+            NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamCode"];
+            NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamName"];
+            NSLog(@"Competetioncode ; %@ ",Competetioncode);
+            NSLog(@"CompetetionName ; %@ ",CompetetionName);
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedTeamName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedTeamCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            
         }
+        [AppCommon hideLoading];
+        [self getIPLCompetetion];
 
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         
