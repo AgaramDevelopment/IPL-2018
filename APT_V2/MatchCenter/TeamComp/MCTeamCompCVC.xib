@@ -526,7 +526,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sj4-3C-xTl">
                                 <rect key="frame" x="0.0" y="635" width="404" height="45"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batsmen-7 Pace-3 Spin-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fj-QJ-6vh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fj-QJ-6vh">
                                         <rect key="frame" x="9" y="11" width="386" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Ncx-VW-VLG"/>
@@ -551,11 +551,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qH6-Y7-PaT">
                                 <rect key="frame" x="0.0" y="685" width="404" height="140"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-nj-u07">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-nj-u07">
                                         <rect key="frame" x="8" y="8" width="388" height="90"/>
-                                        <string key="text">Praveen Kumar
-Zeeshan Ansari
-Karthik Tyagi</string>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -563,7 +560,7 @@ Karthik Tyagi</string>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maharasshtra Won by 31 Runs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-MH-uWR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-MH-uWR">
                                         <rect key="frame" x="8" y="106" width="388" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="w12-iU-656"/>
@@ -649,6 +646,34 @@ Karthik Tyagi</string>
                 <constraint firstAttribute="trailing" secondItem="tmd-GZ-Cdp" secondAttribute="trailing" id="zFt-le-fNs"/>
             </constraints>
             <size key="customSize" width="404" height="825"/>
+            <connections>
+                <outlet property="Player1" destination="pbI-8b-vqr" id="NKg-9o-QO2"/>
+                <outlet property="Player10" destination="ve4-mH-5am" id="Nfr-l4-RNO"/>
+                <outlet property="Player10Img" destination="c8S-uG-rbY" id="brG-pA-d4A"/>
+                <outlet property="Player11" destination="Ux4-Qy-EOQ" id="4Tn-QT-L2u"/>
+                <outlet property="Player11Img" destination="LiW-Jt-E26" id="6rK-5U-f44"/>
+                <outlet property="Player1Img" destination="rUQ-fK-H1T" id="BSO-fD-tmo"/>
+                <outlet property="Player2" destination="2Nm-e4-V7m" id="K5N-D0-NOb"/>
+                <outlet property="Player2Img" destination="VR7-KG-NjD" id="ZT9-lm-lBW"/>
+                <outlet property="Player3" destination="osb-Pc-TKK" id="Idx-kr-znd"/>
+                <outlet property="Player3Img" destination="0sz-HM-rMD" id="MxC-K6-rt1"/>
+                <outlet property="Player4" destination="M9K-uR-p1F" id="noq-Zu-oZv"/>
+                <outlet property="Player4Img" destination="a4a-dk-UFd" id="tzc-8g-Gsa"/>
+                <outlet property="Player5" destination="UWj-cK-IHW" id="7ID-Mn-PIc"/>
+                <outlet property="Player5Img" destination="HmS-eE-fLG" id="eyh-XV-Cct"/>
+                <outlet property="Player6" destination="sq1-5s-4rB" id="Nhs-8G-RJz"/>
+                <outlet property="Player6Img" destination="mK6-Lt-s6T" id="AF9-nJ-8Wz"/>
+                <outlet property="Player7" destination="JN7-WG-iY4" id="yd7-cI-FfB"/>
+                <outlet property="Player7Img" destination="Wu0-8u-uGo" id="4Dt-pN-2sI"/>
+                <outlet property="Player8" destination="l3i-Iu-QE9" id="XQi-Ap-qED"/>
+                <outlet property="Player8Img" destination="jwL-1D-7ex" id="KIl-eG-NxK"/>
+                <outlet property="Player9" destination="hvE-ts-oE7" id="SUo-N7-Zhg"/>
+                <outlet property="Player9Img" destination="sRR-gO-rng" id="dfm-9F-A5c"/>
+                <outlet property="PlayerRoleCountlbl" destination="8Fj-QJ-6vh" id="xiu-Qw-BFH"/>
+                <outlet property="TeamVenuelbl" destination="3jI-1B-Vfv" id="AIC-O7-KAs"/>
+                <outlet property="WonStatuslbl" destination="rGN-MH-uWR" id="5cP-gA-Pcg"/>
+                <outlet property="datelbl" destination="VWh-8T-ql0" id="Ek4-pZ-Y4s"/>
+            </connections>
             <point key="canvasLocation" x="46" y="320.5"/>
         </collectionViewCell>
     </objects>
