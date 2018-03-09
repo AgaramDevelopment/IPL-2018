@@ -11,6 +11,7 @@
 #import "SWRevealViewController.h"
 #import "Config.h"
 #import "WebService.h"
+#import "AppCommon.h"
 
 
 @interface TeamHeadToHead ()
@@ -27,6 +28,7 @@
 }
 
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
+@property (nonatomic, strong) IBOutlet NSMutableArray *commonArray1;
 //@property (nonatomic, strong) IBOutlet NSMutableArray *h2hResultsArray;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
@@ -100,6 +102,8 @@
     isGround = YES;
     isCompetition = NO;
     self.Poptable.hidden = NO;
+    self.commonArray = [NSMutableArray new];
+    self.commonArray = self.commonArray1;
     self.tableWidth.constant = self.groundView.frame.size.width;
     self.tableXposition.constant = self.groundView.frame.origin.x+5;
     self.tableYposition.constant = self.groundView.frame.origin.y+self.groundView.frame.size.height+20;
@@ -115,6 +119,9 @@
     isGround = NO;
     isCompetition = YES;
     self.Poptable.hidden = NO;
+    self.commonArray = [NSMutableArray new];
+    NSLog(@"%@", appDel.ArrayCompetition);
+    self.commonArray = appDel.ArrayCompetition;
     self.tableWidth.constant = self.competitionView.frame.size.width;
     self.tableXposition.constant = self.competitionView.frame.origin.x+5;
     self.tableYposition.constant = self.competitionView.frame.origin.y+self.competitionView.frame.size.height+20;
@@ -133,7 +140,8 @@
     isCompetition = NO;
     self.Poptable.hidden = NO;
     
-    
+    self.commonArray = [NSMutableArray new];
+    self.commonArray = self.commonArray1;
     self.tableWidth.constant = self.team1View.frame.size.width;
     self.tableXposition.constant = self.team1View.frame.origin.x+5;
     self.tableYposition.constant = self.team1View.frame.origin.y+5;
@@ -150,6 +158,8 @@
     isCompetition = NO;
     
     self.Poptable.hidden = NO;
+    self.commonArray = [NSMutableArray new];
+    self.commonArray = self.commonArray1;
     self.tableWidth.constant = self.team2View.frame.size.width;
     self.tableXposition.constant = self.InsideTeam2View.frame.origin.x+self.team2View.frame.origin.x;
     self.tableYposition.constant = self.InsideTeam2View.frame.origin.y+5;
@@ -210,8 +220,14 @@
 {
     if(isteam1==YES)
     {
-        self.team1TF.text = @"Chennai Super Kings";
-        team1Code = @"TEA0000021";
+        self.team1TF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
+        team1Code = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
+    
+    if ([self.team1TF.text isEqualToString:self.team2TF.text]) {
+        [self altermsg:@"Please Select different Team"];
+        self.team1TF.text = @"";
+        team1Code = @"";
+    }
         self.Poptable.hidden = YES;
     }
     
@@ -219,6 +235,13 @@
     {
         self.team2TF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
         team2Code = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBcode"];
+    
+    if ([self.team1TF.text isEqualToString:self.team2TF.text]) {
+        [self altermsg:@"Please Select different Team"];
+        self.team2TF.text = @"";
+        team2Code = @"";
+    }
+    
          self.Poptable.hidden = YES;
     }
     
@@ -227,6 +250,10 @@
         self.competitionTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
     competitionCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         self.Poptable.hidden = YES;
+    
+//    [[NSUserDefaults standardUserDefaults] setValue:self.competitionTF.text forKey:@"SelectedCompetitionName"];
+//    [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     if(isGround==YES)
@@ -255,7 +282,9 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
+    NSString *teamCode = [AppCommon getCurrentTeamCode];
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, teamCode];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -264,8 +293,8 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
-        self.commonArray = [[NSMutableArray alloc] init];
-        self.commonArray = responseObject;
+        self.commonArray1 = [[NSMutableArray alloc] init];
+        self.commonArray1 = responseObject;
         [AppCommon hideLoading];
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -302,7 +331,7 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, @"UCC0000008", @"TEA0000010", @"TEA0000008", @"GRD0000001"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, competitionCode, team1Code, team2Code, groundCode];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -462,7 +491,7 @@
 
 -(void)altermsg:(NSString *) message
 {
-    UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:@"Add Illness" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:@"Head To Head" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objaltert show];
 }
 
