@@ -19,7 +19,7 @@
 -(void) loadPowerPlayDetails {
     
     
-    
+    self.PopTableView.hidden = YES;
     self.pp1CollectionView.dataSource = self;
     self.pp1CollectionView.delegate = self;
     
@@ -178,8 +178,13 @@
     
     WebService *objWebservice;
     
-    NSString *CompetitionCode = @"UCC0000008";
-    NSString *teamcode = @"TEA0000010";
+    //NSString *CompetitionCode = @"UCC0000008";
+    //NSString *teamcode = @"TEA0000010";
+    
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    NSString *teamcode = [AppCommon getCurrentTeamCode];
+    self.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+    self.teamlbl.text = [AppCommon getCurrentTeamName];
     objWebservice = [[WebService alloc]init];
     
     
@@ -373,6 +378,144 @@
                                    completionBlock(NO,nil);
                                }
                            }];
+}
+
+
+- (IBAction)onClickCompetition:(id)sender
+{
+    if(isCompe){
+        
+        isTeam = NO;
+        isCompe = NO;
+        self.PopTableView.hidden = YES;
+        
+        
+    }else{
+        isTeam = NO;
+        isCompe = YES;
+        self.PopTableView.hidden = NO;
+        //self.tableWidth.constant = 142;
+        //self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        
+        self.tableWidth.constant = self.competView.frame.size.width;
+        self.tableXposition.constant = self.competView.frame.origin.x;
+        self.tableYposition.constant = self.competView.frame.origin.y;
+        [self.PopTableView reloadData];
+    }
+}
+
+- (IBAction)onClickTeam:(id)sender
+{
+    if(isTeam){
+        
+        isCompe = NO;
+        isTeam = NO;
+        self.PopTableView.hidden = YES;
+        
+        
+    }else{
+        isCompe = NO;
+        isTeam = YES;
+        self.PopTableView.hidden = NO;
+        //self.tableWidth.constant = 142;
+        //self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
+        
+        self.tableWidth.constant = self.teamView.frame.size.width;
+        self.tableXposition.constant = self.teamView.frame.origin.x;
+        self.tableYposition.constant = self.teamView.frame.origin.y;
+        [self.PopTableView reloadData];
+    }
+}
+
+#pragma mark - UITableViewDataSource
+// number of section(s), now I assume there is only 1 section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+// number of row in the section, I assume there is only 1 row
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    
+    if(isCompe==YES)
+    {
+        return appDel.ArrayCompetition.count;
+    }
+    else if(isTeam==YES)
+    {
+        return appDel.ArrayTeam.count;
+    }
+    return nil;
+    
+}
+// the cell will be returned to the tableView
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    static NSString *MyIdentifier = @"cellid";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    }
+    
+    if(isCompe ==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+    }
+    else if(isTeam == YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        
+    }
+    
+    
+    
+    
+    cell.selectionStyle = UIAccessibilityTraitNone;
+    
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+    
+    
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(isCompe == YES)
+    {
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else if(isTeam == YES)
+    {
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+        
+        self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        NSString* teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    
+    //isCompe = NO;
+    //isTeam = NO;
+    self.PopTableView.hidden = YES;
+    
+    [self OverblockWebservice];
+    
 }
 
 
