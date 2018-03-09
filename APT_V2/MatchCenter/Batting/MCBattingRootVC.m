@@ -27,9 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
-    [self setInningsBySelection:@"1"];
-    
-    [self loadContainerView:@"1"];
+//    [self setInningsBySelection:@"1"];
+//
+//    [self loadContainerView:@"1"];
 //    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
 //
 //
@@ -40,6 +40,9 @@
 //
 //    [btView loadChart];
 //    [btView loadTableFreez];
+    
+    [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
 
 }
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
@@ -63,7 +66,7 @@
         btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self removePreviousView:btView FromSuperView: self.containerView];
         [self.containerView addSubview:btView];
-        
+        btView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
         [btView loadChart];
         [btView loadTableFreez];
 
@@ -207,6 +210,7 @@
     [self setInningsBySelection:@"1"];
     
     [self loadContainerView : @"1"];
+    
     
 }
 - (IBAction)onClickOverView:(id)sender {

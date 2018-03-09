@@ -16,6 +16,7 @@
 
 
 @implementation BattingView
+@synthesize lblCompetetion,insideCompetitionView;
 
 NSArray* headingKeyArray;
 NSArray* headingButtonNames;
@@ -46,7 +47,7 @@ BOOL isComp;
         return 3;
 
     }else{
-        return 0;
+        return appDel.ArrayCompetition.count;
     }
     
 }
@@ -74,7 +75,7 @@ BOOL isComp;
         cell.textLabel.text = indexPath.row == 0 ? @"Runs" : (indexPath.row == 1 ? @"Strike Rate" : @"Average");
 
     }else{
-        cell.textLabel.text = @"";
+        cell.textLabel.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
     }
 
     
@@ -146,6 +147,16 @@ BOOL isComp;
         }
         
     }
+    else {
+        lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+
+    }
     
     isOverview = NO;
     isRun = NO;
@@ -209,13 +220,13 @@ BOOL isComp;
 - (IBAction)onClickCompetition:(id)sender
 {
     if(isRun){
-        
+
         isOverview = NO;
         isRun = NO;
         isComp = NO;
         self.PoplistTable.hidden = YES;
-        
-        
+
+
     }else{
         isOverview = NO;
         isRun = NO;
@@ -226,6 +237,20 @@ BOOL isComp;
         self.tableXposition.constant = self.insideCompetitionView.frame.origin.x+142+70;
         [self.PoplistTable reloadData];
     }
+    
+//    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+//    dropVC.protocol = self;
+//    dropVC.array = appDel.ArrayCompetition;
+//    dropVC.key = @"CompetitionName";
+//    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+//    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(insideCompetitionView.frame), CGRectGetMaxY(insideCompetitionView.frame), CGRectGetWidth(insideCompetitionView.frame), 300)];
+//
+//    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+//        NSLog(@"DropDown loaded");
+//    }];
+
 }
 
 
@@ -592,7 +617,7 @@ BOOL isComp;
     {
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",teamBattingKey]];
+        NSString *URLString =  URL_FOR_RESOURCE(teamBattingKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -600,7 +625,7 @@ BOOL isComp;
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *CompetitionCode = @"";
+        NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
         NSString *TeamCode = @"TEA0000010";
 //        NSString *InningsNum = @"";
 //        NSString *Result = @"";
@@ -656,5 +681,21 @@ BOOL isComp;
     }
     
 }
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    NSLog(@"%@",array[Index.row]);
+    NSLog(@"selected value %@",key);
+    lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self BattingWebservice];
+    
+}
+
 
 @end

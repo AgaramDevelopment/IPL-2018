@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "PieChartView.h"
+#import "Header.h"
+
 @interface MCTossAndResultsVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *headderView;
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
@@ -27,5 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl2ndCenter;
 @property (weak, nonatomic) IBOutlet UILabel *lbl1stCenter;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tossResultsSegment;
+@property (weak, nonatomic) IBOutlet LineTextField *txtCompetetionName;
+- (IBAction)actionCompetetion:(id)sender;
 
 @end

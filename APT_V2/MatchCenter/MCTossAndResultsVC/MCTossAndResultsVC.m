@@ -13,7 +13,7 @@
 #import "SWRevealViewController.h"
 @import Charts;
 
-@interface MCTossAndResultsVC () <PieChartViewDelegate,PieChartViewDataSource>
+@interface MCTossAndResultsVC () <PieChartViewDelegate,PieChartViewDataSource,selectedDropDown>
 {
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
@@ -43,6 +43,8 @@
 @synthesize tossResultsSegment;
 
 @synthesize lbl1stCenter,lbl2ndCenter;
+
+@synthesize txtCompetetionName;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,15 +92,27 @@
     self.battingSecPie.delegate = self;
     self.battingSecPie.datasource = self;
 
-    
-    [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
+    txtCompetetionName.text = @"";
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"viewWillAppear called");
+    if ([txtCompetetionName.text isEqualToString:@""] ||
+        ![txtCompetetionName.text isEqualToString:[AppCommon getCurrentCompetitionName]])
+    {
+        [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+    }
+    
+    txtCompetetionName.text = [AppCommon getCurrentCompetitionName];
+    
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [txtCompetetionName setup];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -374,7 +388,9 @@
         
         [AppCommon showLoading];
     
-    NSString * tempStr = [NSString stringWithFormat:@"APT_TOSSRESULTS/%@/%@/%@",@"UCC0000008",@"TEA0000008",tossType];
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+
+    NSString * tempStr = [NSString stringWithFormat:@"APT_TOSSRESULTS/%@/%@/%@",CompetitionCode,@"TEA0000008",tossType];
         NSString *URLString =  URL_FOR_RESOURCE(tempStr);
     
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -544,4 +560,47 @@
     [self.battingSecPie reloadData];
 
 }
+
+
+- (IBAction)actionCompetetion:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.array = appDel.ArrayCompetition;
+    dropVC.key = @"CompetitionName";
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(txtCompetetionName.frame), CGRectGetMaxY(txtCompetetionName.frame), CGRectGetWidth(txtCompetetionName.frame), 300)];
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    NSLog(@"%@",array[Index.row]);
+    NSLog(@"selected value %@",key);
+    txtCompetetionName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:txtCompetetionName.text forKey:@"SelectedCompetitionName"];
+    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    UIImage* check = [UIImage imageNamed:@"radio_on"];
+    
+    for (UIButton* tempBtn in btnToss) {
+        if ([[tempBtn currentImage] isEqual: check]) {
+            [tempBtn setImage:check forState:UIControlStateNormal];
+            [self tossResultWebServiceFor:[tempBtn currentTitle]];
+            break;
+        }
+    }
+    
+}
+
 @end

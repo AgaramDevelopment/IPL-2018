@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
+
 @import Charts;
 
 
-@interface BattingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
+@interface BattingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,selectedDropDown>
 {
     NSString *innNum;
     NSString *Result;
@@ -36,6 +38,7 @@
 @property (nonatomic, strong) IBOutlet NSMutableArray *ChartValuesArray;
 @property (nonatomic, strong) IBOutlet NSMutableArray *ChartXAxisValuesArray;
 @property (nonatomic, strong) IBOutlet NSMutableArray *TableValuesArray;
+@property (weak, nonatomic) IBOutlet UILabel *lblCompetetion;
 
 
 @end

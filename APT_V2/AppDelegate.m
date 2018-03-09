@@ -48,6 +48,8 @@
     UIViewController *frontViewController;
     if(isLogin==YES)
     {
+        [COMMON getIPLCompetetion];
+
         if([rolecode isEqualToString:plyRolecode])
         {
             frontViewController = [TabHomeVC new];
@@ -58,6 +60,8 @@
             objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamCode"];
             objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"initialTeamName"];
             frontViewController = objPlayersVC;
+            [COMMON getIPLteams];
+
         }
     }
     else
@@ -80,7 +84,6 @@
     
     [window setBackgroundColor:[UIColor whiteColor]];
     [window makeKeyAndVisible];
-    
     return YES;
 }
 
