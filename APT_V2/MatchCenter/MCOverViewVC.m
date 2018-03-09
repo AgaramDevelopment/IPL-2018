@@ -31,6 +31,8 @@
 
 @implementation MCOverViewVC
 
+@synthesize competitionlbl,dropviewComp;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
@@ -47,13 +49,25 @@
 //    [self.nextBtn setTag:0];
 //    self.prevBtn.hidden = YES;
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-    [self OverviewWebservice];
+    competitionlbl.text = @"";
+
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    if ([competitionlbl.text isEqualToString:@""] ||
+        ![competitionlbl.text isEqualToString:[AppCommon getCurrentCompetitionName]])
+    {
+        [self OverviewWebservice];
+
+    }
+    
+    competitionlbl.text = [AppCommon getCurrentCompetitionName];
+
 }
 
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation;
-    
     
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
@@ -162,16 +176,14 @@
 
 -(void)OverviewWebservice
 {
+    
+    if (![COMMON isInternetReachable]) {
+        return;
+    }
+    
     [AppCommon showLoading ];
     
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    
-    
-//    NSString *CompetitionCode = @"UCC0000116";
-//    NSString *teamcode = @"TEA0000001";
-    NSString *CompetitionCode = @"UCC0000008";
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
     NSString *teamcode = @"TEA0000010";
     objWebservice = [[WebService alloc]init];
     
@@ -179,21 +191,23 @@
     [objWebservice Overview:OverviewKey :CompetitionCode : teamcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
-        if(responseObject >0)
+        NSMutableArray *teamDetailsArray = [[NSMutableArray alloc]init];
+        teamDetailsArray = [responseObject valueForKey:@"Overview"];
+
+        if(teamDetailsArray.count >0)
         {
-            NSMutableArray *teamDetailsArray = [[NSMutableArray alloc]init];
-            teamDetailsArray = [responseObject valueForKey:@"Overview"];
+            
+                self.Teamnamelbl.text = [[teamDetailsArray valueForKey:@"TeamName"] objectAtIndex:0];
+            
+                NSString *groundDetails = [NSString stringWithFormat:@"%@,%@",[[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0], [[teamDetailsArray valueForKey:@"Venue"] objectAtIndex:0]];
+                self.Groundmnamelbl.text = [[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0];
+                self.Captainnamelbl.text = [NSString stringWithFormat:@"Captain :%@",[[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0]];
+            
+//                [[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0];
             
             
-            self.Teamnamelbl.text = [[teamDetailsArray valueForKey:@"TeamName"] objectAtIndex:0];
-            
-            NSString *groundDetails = [NSString stringWithFormat:@"%@,%@",[[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0], [[teamDetailsArray valueForKey:@"Venue"] objectAtIndex:0]];
-            self.Groundmnamelbl.text = [[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0];
-            self.Captainnamelbl.text = [NSString stringWithFormat:@"Captain :%@",[[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0]];
-            [[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0];
-            
-            
-            NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
+                NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
+
             [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
                 if (succeeded) {
                     // change the image in the cell
@@ -327,39 +341,33 @@
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
 }
--(void)getTeamCodes
-{
-        [AppCommon showLoading ];
-    
-        objWebservice = [[WebService alloc]init];
-        [objWebservice getIPLCompeteionCodesuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            if(responseObject >0)
-            {
-                competetinArray = responseObject;
-            }
-        } failure:^(AFHTTPRequestOperation *operation, id error) {
-            NSLog(@"failed");
-            [COMMON webServiceFailureError:error];
-
-        }];
-}
 
 
 - (IBAction)onClickCompetitionBtn:(id)sender
 {
     
-    self.CompetitionListtbl.hidden = NO;
-    self.popTableView.hidden = NO;
+//    self.CompetitionListtbl.hidden = NO;
+//    self.popTableView.hidden = NO;
     
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
-    dropVC.array = competetinArray;
-    dropVC.key = @"ModuleName";
+    dropVC.array = appDel.ArrayCompetition;
+    dropVC.key = @"CompetitionName";
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    [self presentViewController:dropVC animated:YES completion:nil];
+    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp.frame), CGRectGetMaxY(dropviewComp.frame), CGRectGetWidth(dropviewComp.frame), 300)];
+
+//    [dropVC.tblDropDown.topAnchor constraintEqualToAnchor:self.competitionlbl.bottomAnchor];
+//    [dropVC.tblDropDown.widthAnchor constraintEqualToAnchor:self.competitionlbl.widthAnchor];
+//    [dropVC.tblDropDown.heightAnchor constraintEqualToConstant:200];
+//    [dropVC.tblDropDown.leadingAnchor constraintEqualToAnchor:self.competitionlbl.leadingAnchor];
+//    [dropVC.tblDropDown.trailingAnchor constraintEqualToAnchor:self.competitionlbl.trailingAnchor];
+//    [dropVC.tblDropDown setTranslatesAutoresizingMaskIntoConstraints:YES];
+
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
 
 }
 
@@ -513,7 +521,17 @@
 
 -(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
+    NSLog(@"%@",array[Index.row]);
     NSLog(@"selected value %@",key);
+    competitionlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:competitionlbl.text forKey:@"SelectedCompetitionName"];
+    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self OverviewWebservice];
+    
 }
 
 

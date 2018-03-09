@@ -52,6 +52,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *Player5SRlbl;
 
 
+@property (weak, nonatomic) IBOutlet UIView *dropviewComp;
 @property (strong, nonatomic) IBOutlet UILabel *TotalMatcheslbl;
 @property (strong, nonatomic) IBOutlet UILabel *winLosslbl;
 @property (strong, nonatomic) IBOutlet UILabel *winLossCountlbl;

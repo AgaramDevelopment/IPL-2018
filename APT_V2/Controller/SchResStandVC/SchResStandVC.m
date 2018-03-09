@@ -345,22 +345,56 @@
         
         NSString *first = [self checkNull:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
             NSLog(@"%ld",(long)indexPath.row);
+        if( [first isEqualToString:@"0 /0 (0.0 Ov)"])
+        {
+            cell.FirstInnScorelbl.text = @"";
+        }
+        else
+        {
           cell.FirstInnScorelbl.text = first;
+        }
        
         
         NSString *second = [self checkNull:[[self.commonArray2 valueForKey:@"SECONDINNINGSSCORE"]objectAtIndex:indexPath.row]];
             NSLog(@"%ld",(long)indexPath.row);
-        cell.SecondInnScorelbl.text = second;
+        
+        if( [second isEqualToString:@"0 /0 (0.0 Ov)"])
+        {
+            cell.SecondInnScorelbl.text = @"";
+        }
+        else
+        {
+            cell.SecondInnScorelbl.text = second;
+        }
        
         
         NSString *third = [self checkNull:[[self.commonArray2 valueForKey:@"THIRDINNINGSSCORE"]objectAtIndex:indexPath.row]];
             NSLog(@"%ld",(long)indexPath.row);
-        cell.ThirdInnScorelbl.text = third;
+        
+        if( [third isEqualToString:@"0 /0 (0.0 Ov)"])
+        {
+            cell.ThirdInnScorelbl.text = @"";
+        }
+        else
+        {
+            cell.ThirdInnScorelbl.text = third;
+        }
+        
         
         
         NSString *fourth = [self checkNull:[[self.commonArray2 valueForKey:@"FOURTHINNINGSSCORE"]objectAtIndex:indexPath.row]];
             NSLog(@"%ld",(long)indexPath.row);
-        cell.FouthInnScorelbl.text = fourth;
+        
+        if( [fourth isEqualToString:@"0 /0 (0.0 Ov)"])
+        {
+            cell.FouthInnScorelbl.text = @"";
+        }
+        else
+        {
+            cell.FouthInnScorelbl.text = fourth;
+        }
+        
+        
         
         
         NSString * imgStr1 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"];

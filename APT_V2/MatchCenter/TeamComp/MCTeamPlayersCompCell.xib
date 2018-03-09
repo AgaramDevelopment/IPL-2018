@@ -27,8 +27,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsW-ja-SQn">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="178"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player_andr" translatesAutoresizingMaskIntoConstraints="NO" id="m0b-8K-KWE">
-                                <rect key="frame" x="0.0" y="8" width="186" height="92.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="m0b-8K-KWE">
+                                <rect key="frame" x="0.0" y="20" width="186" height="80.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dek-2I-Dh9">
@@ -45,7 +45,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D Chameera" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyd-Oe-gex">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyd-Oe-gex">
                                 <rect key="frame" x="0.0" y="111.5" width="186" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="if7-WX-Gy5"/>
@@ -56,7 +56,7 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAFM" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfy-Th-ESW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfy-Th-ESW">
                                 <rect key="frame" x="0.0" y="132.5" width="186" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ava-Rp-cvc"/>
@@ -69,10 +69,10 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-m8-3FV">
-                                <rect key="frame" x="151" y="5" width="30" height="13"/>
+                                <rect key="frame" x="101" y="5" width="80" height="13"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8U-Xf-wtk">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="13"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8U-Xf-wtk">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="13"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="9"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="EBe-RC-7Hv"/>
                                     <constraint firstItem="C8U-Xf-wtk" firstAttribute="leading" secondItem="cxf-m8-3FV" secondAttribute="leading" id="InI-Wy-Akn"/>
-                                    <constraint firstAttribute="width" constant="30" id="RWZ-IF-DFb"/>
+                                    <constraint firstAttribute="width" constant="80" id="RWZ-IF-DFb"/>
                                     <constraint firstAttribute="trailing" secondItem="C8U-Xf-wtk" secondAttribute="trailing" id="Sw0-yX-uc8"/>
                                     <constraint firstAttribute="bottom" secondItem="C8U-Xf-wtk" secondAttribute="bottom" id="XsY-vn-iIJ"/>
                                     <constraint firstItem="C8U-Xf-wtk" firstAttribute="top" secondItem="cxf-m8-3FV" secondAttribute="top" id="joR-Me-ECD"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="FGt-4V-aYn" firstAttribute="leading" secondItem="KsW-ja-SQn" secondAttribute="leading" id="gu5-Gd-UT1"/>
                             <constraint firstItem="Xyd-Oe-gex" firstAttribute="top" secondItem="FGt-4V-aYn" secondAttribute="bottom" constant="8.5" id="hIn-GN-M3d"/>
                             <constraint firstAttribute="trailing" secondItem="cxf-m8-3FV" secondAttribute="trailing" constant="5" id="lEx-hM-50t"/>
-                            <constraint firstItem="m0b-8K-KWE" firstAttribute="top" secondItem="KsW-ja-SQn" secondAttribute="top" constant="8" id="nJW-HO-B8b"/>
+                            <constraint firstItem="m0b-8K-KWE" firstAttribute="top" secondItem="KsW-ja-SQn" secondAttribute="top" constant="20" id="nJW-HO-B8b"/>
                             <constraint firstItem="Qfy-Th-ESW" firstAttribute="leading" secondItem="KsW-ja-SQn" secondAttribute="leading" id="u9F-dB-5qH"/>
                             <constraint firstItem="Qfy-Th-ESW" firstAttribute="top" secondItem="Xyd-Oe-gex" secondAttribute="bottom" id="vCJ-bo-wME"/>
                         </constraints>
@@ -125,10 +125,16 @@
                 <constraint firstAttribute="bottom" secondItem="KsW-ja-SQn" secondAttribute="bottom" id="Z2j-eN-Bxi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Oi8-Bj-QaR"/>
+            <connections>
+                <outlet property="PlayerName" destination="Xyd-Oe-gex" id="R79-xU-jgr"/>
+                <outlet property="PlayerRole" destination="C8U-Xf-wtk" id="xpA-Gf-goQ"/>
+                <outlet property="PlayerStyle" destination="Qfy-Th-ESW" id="0cr-Uc-An5"/>
+                <outlet property="colorView" destination="cxf-m8-3FV" id="klk-s0-Xyb"/>
+            </connections>
             <point key="canvasLocation" x="-45" y="-160"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="player_andr" width="230" height="284"/>
+        <image name="no-image" width="300" height="300"/>
     </resources>
 </document>

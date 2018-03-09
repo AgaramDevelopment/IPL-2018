@@ -43,6 +43,14 @@
 -(void)actionLogOut;
 + (NSString *)syncId;
 
+-(void)getIPLCompetetion;
+-(void)getIPLteams;
+
+
++(NSString *)getCurrentCompetitionCode;
++(NSString *)getCurrentCompetitionName;
+
+
 @end
 
 extern AppCommon *sharedCommon;

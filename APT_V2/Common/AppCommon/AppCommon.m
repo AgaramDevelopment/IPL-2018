@@ -53,6 +53,78 @@ AppCommon *sharedCommon = nil;
     [AppCommon showAlertWithMessage:error.localizedDescription];
 }
 
+-(void)getIPLCompetetion
+{
+    [AppCommon showLoading];
+    
+    WebService* objWebservice = [[WebService alloc]init];
+    [objWebservice getIPLCompeteionCodesuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+        {
+            appDel.ArrayCompetition = responseObject;
+            
+            NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSLog(@"Competetioncode ; %@ ",Competetioncode);
+            NSLog(@"CompetetionName ; %@ ",CompetetionName);
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+        }
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+    }];
+
+}
+
++(NSString *)getCurrentCompetitionCode
+{
+   return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionCode"];
+}
+
++(NSString *)getCurrentCompetitionName
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"];
+}
+
++(NSString *)getCurrentTeamCode
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"CompetitionCode"];
+}
+
++(NSString *)getCurrentTeamName
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"CompetitionCode"];
+}
+
+
+
+
+-(void)getIPLteams
+{
+    [AppCommon showLoading];
+    
+    WebService* objWebservice = [[WebService alloc]init];
+    [objWebservice getIPLTeamCodessuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+        {
+            appDel.ArrayTeam = responseObject;
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+
+    }];
+    
+}
+
+
 #pragma mark - get usercode,clientcode,usereferencecode
 
 +(NSString *)GetUsercode

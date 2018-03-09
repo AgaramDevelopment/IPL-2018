@@ -332,3 +332,5 @@
 
 #define FixturesKey                               @"FETCHFIXTURES"
 
+#define TeamCompoKey                               @"APT_TEAMCOMPOSITION"
+

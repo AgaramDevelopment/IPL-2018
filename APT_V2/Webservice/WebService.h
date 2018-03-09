@@ -185,6 +185,9 @@ failure:(WebserviceRequestFailureHandler)failure;
 -(void)getIPLCompeteionCodesuccess:(WebserviceRequestSuccessHandler)success
                            failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)TeamComposition :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure;
+
 
 @end
 
