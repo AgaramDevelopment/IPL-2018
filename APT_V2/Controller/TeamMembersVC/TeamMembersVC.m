@@ -212,7 +212,7 @@
     objStats.myStatsViewHeight.constant = 60;
     objStats.navViewHeight.constant = 35;
     objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
-    [appDel.frontNavigationController pushViewController:objStats animated:YES];
+    [appDel.frontNavigationController pushViewController:objStats.view animated:YES];
     
 }
 
