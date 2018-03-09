@@ -53,10 +53,9 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M20-ho-wZr">
-                                            <rect key="frame" x="5" y="3" width="109" height="25"/>
+                                            <rect key="frame" x="5" y="3" width="174.5" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="GqC-Ga-t5h"/>
-                                                <constraint firstAttribute="width" constant="109" id="vGa-Qq-Tc8"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                             <nil key="highlightedColor"/>
@@ -73,10 +72,9 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZU-xA-xOD">
-                                            <rect key="frame" x="5" y="27" width="190" height="1"/>
+                                            <rect key="frame" x="5" y="27" width="195" height="1"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="190" id="N4H-Wl-LzP"/>
                                                 <constraint firstAttribute="height" constant="1" id="glJ-GP-Wp6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -88,9 +86,11 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="qdw-F2-JsB" secondAttribute="trailing" id="3n4-Mz-bVL"/>
                                         <constraint firstItem="r2I-80-42n" firstAttribute="top" secondItem="MkK-hM-rf5" secondAttribute="top" constant="5" id="5Wo-Ws-vrI"/>
+                                        <constraint firstItem="r2I-80-42n" firstAttribute="leading" secondItem="M20-ho-wZr" secondAttribute="trailing" id="Fdn-BV-6Y2"/>
                                         <constraint firstAttribute="height" constant="30" id="Kjq-tW-M0f"/>
                                         <constraint firstItem="qdw-F2-JsB" firstAttribute="leading" secondItem="MkK-hM-rf5" secondAttribute="leading" id="ONk-FM-L7W"/>
                                         <constraint firstAttribute="width" constant="200" id="SFu-gf-4q7"/>
+                                        <constraint firstAttribute="trailing" secondItem="wZU-xA-xOD" secondAttribute="trailing" id="Skm-Yb-ETq"/>
                                         <constraint firstAttribute="bottom" secondItem="wZU-xA-xOD" secondAttribute="bottom" constant="2" id="XNN-B2-6Vf"/>
                                         <constraint firstAttribute="bottom" secondItem="qdw-F2-JsB" secondAttribute="bottom" id="ePm-SA-NGX"/>
                                         <constraint firstItem="M20-ho-wZr" firstAttribute="top" secondItem="MkK-hM-rf5" secondAttribute="top" constant="3" id="gTV-jg-zeU"/>
@@ -111,7 +111,7 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-cx-4jW">
                             <rect key="frame" x="8" y="125" width="359" height="502"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <collectionViewLayout key="collectionViewLayout" id="hJP-Ec-PS4" customClass="CustomCollectionStandings" customModule="APT_V2" customModuleProvider="target"/>
+                            <collectionViewLayout key="collectionViewLayout" id="hJP-Ec-PS4" customClass="CustomCollectionStandings" customModule="APT_Cricket" customModuleProvider="target"/>
                         </collectionView>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aub-2y-7IV">
                             <rect key="frame" x="0.0" y="107" width="375" height="560"/>

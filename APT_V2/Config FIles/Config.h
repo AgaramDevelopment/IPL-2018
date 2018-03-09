@@ -317,6 +317,8 @@
 
 #define Ground              @"APT_GROUND"
 
+#define GroundList              @"APT_GROUNDLIST"
+
 #define groundOverResults         @"APT_GROUNDOVERRESULTS"
 #define battingOverViewkKey       @"APT_BATTINGOVERBLOCKOVERVIEW"
 

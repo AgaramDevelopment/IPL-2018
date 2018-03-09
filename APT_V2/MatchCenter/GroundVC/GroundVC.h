@@ -68,5 +68,12 @@
 @property (strong, nonatomic) IBOutlet UITextField *competitionCodeTF;
 @property (strong, nonatomic) IBOutlet UITextField *teamCodeTF;
 
+@property (strong, nonatomic) IBOutlet UILabel *groundTopLeft;
+@property (strong, nonatomic) IBOutlet UILabel *groundTopRight;
+@property (strong, nonatomic) IBOutlet UILabel *groundBottomLeft;
+@property (strong, nonatomic) IBOutlet UILabel *groundBottomRight;
+@property (strong, nonatomic) IBOutlet UIView *groundView;
+@property (strong, nonatomic) IBOutlet UILabel *groundLbl;
+@property (strong, nonatomic) IBOutlet UILabel *homeGroundLbl;
 
 @end
