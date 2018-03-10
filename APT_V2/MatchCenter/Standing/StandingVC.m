@@ -430,7 +430,7 @@
     else
     {
         lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:lblTeam.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];

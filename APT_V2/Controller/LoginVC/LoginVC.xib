@@ -25,8 +25,7 @@
                 <outlet property="passwordview" destination="pHB-9H-9GG" id="hMe-ce-vDX"/>
                 <outlet property="securityImage" destination="oog-SD-dqC" id="8Ye-wg-qv0"/>
                 <outlet property="teamTF" destination="mRq-hA-ihj" id="U3C-ks-MRo"/>
-                <outlet property="teamTableView" destination="wcp-hk-hIa" id="gvP-ib-K8A"/>
-                <outlet property="teamView" destination="xnl-ed-hFM" id="fvp-lv-1dp"/>
+                <outlet property="teamview" destination="xnl-ed-hFM" id="lRG-wv-r51"/>
                 <outlet property="userTxt" destination="EZU-iN-iul" id="Sj9-SW-sCi"/>
                 <outlet property="usernameview" destination="YEq-24-Ma8" id="VbN-Oc-sQi"/>
                 <outlet property="view" destination="dnz-e3-FeI" id="3vH-Kf-mkm"/>
@@ -46,10 +45,10 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnl-ed-hFM">
                             <rect key="frame" x="10" y="30" width="246" height="40"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Team" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRq-hA-ihj">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Team" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRq-hA-ihj">
                                     <rect key="frame" x="45" y="5" width="158" height="30"/>
                                     <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="nkZ-d6-CTx">
@@ -225,19 +224,6 @@
                                 </constraint>
                             </constraints>
                         </imageView>
-                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wcp-hk-hIa">
-                            <rect key="frame" x="10" y="80" width="246" height="110"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="110" id="DmB-9J-S0E">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="200"/>
-                                </constraint>
-                            </constraints>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="3W8-7W-fHt"/>
-                                <outlet property="delegate" destination="-1" id="3YF-LP-byl"/>
-                            </connections>
-                        </tableView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -248,11 +234,9 @@
                         <constraint firstItem="xnl-ed-hFM" firstAttribute="top" secondItem="Ikb-1t-3fZ" secondAttribute="bottom" constant="30" id="ByK-HY-VBV"/>
                         <constraint firstItem="Ikb-1t-3fZ" firstAttribute="centerX" secondItem="tpc-nu-YBa" secondAttribute="centerX" id="Cdt-p8-MjD"/>
                         <constraint firstAttribute="trailing" secondItem="YEq-24-Ma8" secondAttribute="trailing" constant="10" id="Mgd-g8-V2R"/>
-                        <constraint firstItem="wcp-hk-hIa" firstAttribute="top" secondItem="xnl-ed-hFM" secondAttribute="bottom" constant="10" id="MwS-QO-CCx"/>
                         <constraint firstItem="pHB-9H-9GG" firstAttribute="top" secondItem="YEq-24-Ma8" secondAttribute="bottom" constant="20" id="NbB-Wh-DNI"/>
                         <constraint firstItem="blN-Wf-6sY" firstAttribute="top" secondItem="pHB-9H-9GG" secondAttribute="bottom" constant="30" id="ThL-XK-nxM"/>
                         <constraint firstAttribute="trailing" secondItem="pHB-9H-9GG" secondAttribute="trailing" constant="10" id="bcO-VI-sBU"/>
-                        <constraint firstItem="wcp-hk-hIa" firstAttribute="width" secondItem="xnl-ed-hFM" secondAttribute="width" id="brb-N3-7zs"/>
                         <constraint firstItem="YEq-24-Ma8" firstAttribute="top" secondItem="xnl-ed-hFM" secondAttribute="bottom" constant="20" id="dgQ-Wv-FvV"/>
                         <constraint firstItem="pHB-9H-9GG" firstAttribute="leading" secondItem="tpc-nu-YBa" secondAttribute="leading" constant="10" id="gDH-0u-SsA"/>
                         <constraint firstItem="blN-Wf-6sY" firstAttribute="centerX" secondItem="tpc-nu-YBa" secondAttribute="centerX" id="iHl-Ca-aHC"/>
@@ -260,7 +244,6 @@
                         <constraint firstAttribute="height" constant="260" id="jaO-TR-VeH">
                             <variation key="heightClass=regular-widthClass=regular" constant="300"/>
                         </constraint>
-                        <constraint firstItem="wcp-hk-hIa" firstAttribute="leading" secondItem="xnl-ed-hFM" secondAttribute="leading" id="ngx-hX-AWJ"/>
                         <constraint firstItem="Ikb-1t-3fZ" firstAttribute="top" secondItem="tpc-nu-YBa" secondAttribute="top" constant="-100" id="p6N-du-brn">
                             <variation key="heightClass=regular-widthClass=regular" constant="-130"/>
                         </constraint>

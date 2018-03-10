@@ -7,6 +7,7 @@
 //
 
 #import "DropDownTableViewController.h"
+#import "Header.h"
 
 @interface DropDownTableViewController ()
 
@@ -59,10 +60,12 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
+    cell.textLabel.font = [UIFont fontWithName:@"Montserrat Regular" size:(IS_IPAD ? 15.0 : 13.0 )];
     cell.textLabel.text = [[array objectAtIndex:indexPath.row] valueForKey:key];
     // Configure the cell...
     

@@ -157,40 +157,45 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CGFloat widthF = self.scheduleCollectionView.superview.frame.size.width/2;
+    CGFloat HeightF = self.scheduleCollectionView.superview.frame.size.height;
+
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
         {
-            return CGSizeMake(50, 50);
+            return CGSizeMake(widthF, HeightF);
         }
         else
         {
             if(collectionView == self.scheduleCollectionView)
             {
-            return CGSizeMake(310, 182);
+                return CGSizeMake(widthF, HeightF);
             }
             else
             {
-                return CGSizeMake(310, 182);
+                return CGSizeMake(widthF, HeightF);
             }
         }
     }
     else
     {
-        //return CGSizeMake(160, 140);
-        
         if(collectionView == self.scheduleCollectionView)
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(widthF, HeightF);
         }
         else
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(widthF, HeightF);
         }
     }
 }
+
 #pragma mark collection view cell paddings
+
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    
     if(!IS_IPHONE_DEVICE)
     {
         return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
@@ -198,10 +203,12 @@
     else{
         return UIEdgeInsetsMake(10, 10, 10, 10);
     }
+    
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
     if(!IS_IPHONE_DEVICE)
     {
         return 20.0;
@@ -212,6 +219,7 @@
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    
     if(!IS_IPHONE_DEVICE)
     {
         return 23.0;
@@ -219,6 +227,7 @@
     else{
         return 10.0;
     }
+    
 }
 
 
@@ -229,32 +238,6 @@
     
         ResultCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
-        
-        
-//        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
-//        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
-//        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
-//       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
-//        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
-//
-//
-//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateFormat:@"HH:mm:ss"];
-//        NSDate *date  = [dateFormatter dateFromString:starttime];
-//        // Convert to new Date Format
-//        [dateFormatter setDateFormat:@"hh:mm a"];
-//        NSString *newtime1 = [dateFormatter stringFromDate:date];
-//
-//        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-//        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
-//        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
-//        // Convert to new Date Format
-//        [dateFormatter2 setDateFormat:@"hh:mm a"];
-//        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
-//
-//        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
-        
-        
         cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
        // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
@@ -264,57 +247,6 @@
         
         cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
         cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        
-//        NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
-//        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
-//
-//        NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
-//        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
-//
-//        [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
-//            if (succeeded) {
-//                // change the image in the cell
-//                cell.teamAlogo.image = image;
-//
-//                // cache the image for use later (when scrolling up)
-//                cell.teamAlogo.image = image;
-//            }
-//            else
-//            {
-//                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-//            }
-//        }];
-//
-//
-//        [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
-//            if (succeeded) {
-//                // change the image in the cell
-//                cell.teamBlogo.image = image;
-//
-//                // cache the image for use later (when scrolling up)
-//                cell.teamBlogo.image = image;
-//            }
-//            else
-//            {
-//                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-//            }
-//        }];
-        
-        
-//        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
-//
-//        if([ key isEqualToString:@"India"])
-//        {
-//            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
-//            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
-//
-//        }
-//        else
-//        {
-//            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
-//            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
-//        }
-
 
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;

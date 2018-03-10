@@ -11,12 +11,12 @@
 #import "TabHomeVC.h"
 #import "TeamMembersVC.h"
 
-@interface LoginVC ()
+@interface LoginVC () <selectedDropDown>
 {
     NSMutableArray *teamArray;
-    NSString *teamCode;
     BOOL isTeam;
 }
+
 @property (weak,nonatomic)  IBOutlet UIView *commonview;
 @property (strong, nonatomic) IBOutlet UIView *teamView;
 @property (strong, nonatomic) IBOutlet UITextField *teamTF;
@@ -45,6 +45,8 @@
 
 
 @implementation LoginVC
+
+@synthesize teamview;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -116,7 +118,6 @@
         return;
     
     [AppCommon showLoading];
-    //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(LoginKey);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -127,7 +128,8 @@
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(teamCode)  [dic    setObject:teamCode forKey:@"teamcode"];
+    NSString* teamCode = [AppCommon getCurrentTeamCode];
+    if(_teamTF.hasText)  [dic    setObject:teamCode forKey:@"teamcode"];
     if(username)   [dic    setObject:username     forKey:@"username"];
     if(password)   [dic    setObject:password     forKey:@"password"];
 
@@ -168,7 +170,7 @@
             {
 //                VC = [TeamsVC new];
                TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-                objPlayersVC.teamCode = teamCode;
+                objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
                 objPlayersVC.teamname = self.teamTF.text;
                 VC = objPlayersVC;
 
@@ -209,7 +211,6 @@
     
     [AppCommon showLoading];
     
-//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
     NSString *API_URL = URL_FOR_RESOURCE(@"FETCH_LOGIN_TEAMS");
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -221,11 +222,6 @@
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
         teamArray = [[NSMutableArray alloc] init];
         teamArray = responseObject;
-        
-            //Re-load Table View
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.teamTableView reloadData];
-        });
         
         [AppCommon hideLoading];
         
@@ -245,85 +241,45 @@
     self.passwordTxt.secureTextEntry= !_isVisible;
 }
 
-//- (IBAction)switchAction:(id)sender {
-//    
-//    self.passwordTxt.secureTextEntry= ![sender isOn];
-//}
-
 - (IBAction)teamButtonTapped:(id)sender {
     
-    if(!isTeam) {
-        isTeam = YES;
-        self.teamTableView.hidden = NO;
-            //Re-load Table View
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.teamTableView reloadData];
-        });
-        
-    } else {
-        self.teamTableView.hidden = YES;
-        isTeam = NO;
-    }
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-    // number of row in the section, I assume there is only 1 row
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
-    return teamArray.count;
-}
-
-    // the cell will be returned to the tableView
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *MyIdentifier = @"teamCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
+    if (!teamArray.count) {
+        [self teamCodeGetService];
+        return;
     }
     
-    cell.textLabel.numberOfLines = 2;
-    [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-//    if(isteam1 == YES) {
-//        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamBName"];
-//    }
+        dropVC.array = teamArray;
+        dropVC.key = @"Teamname";
     
-    cell.textLabel.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamname"];
-//    cell.textLabel.text = [teamArray objectAtIndex:indexPath.row];
-    
-    cell.selectionStyle = UIAccessibilityTraitNone;
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
-    
+    CGFloat xValue = CGRectGetMinX(teamview.superview.frame) + CGRectGetMinX(teamview.frame);
+    CGFloat yValue = CGRectGetMinY(teamview.superview.frame) + CGRectGetMaxY(teamview.frame)+5;
+
+    [dropVC.tblDropDown setFrame:CGRectMake(xValue, yValue, CGRectGetWidth(teamview.frame), (IS_IPAD ? 200 : 150))];
+        
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
-    if (isTeam) {
-        isTeam = NO;
-        self.teamTF.text = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamname"];
-        teamCode = [[teamArray objectAtIndex:indexPath.row] valueForKey:@"Teamcode"];
-        self.teamTableView.hidden = YES;
-        [[NSUserDefaults standardUserDefaults] setValue:self.teamTF.text forKey:@"initialTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"initialTeamCode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        _teamTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"Teamcode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:self.teamTF.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
-    }
 }
+
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

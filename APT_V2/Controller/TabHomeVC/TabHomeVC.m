@@ -59,6 +59,7 @@
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
@@ -68,6 +69,12 @@
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.Titlecollview reloadData];
+    });
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -83,6 +90,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
+    CGFloat HeightF = self.Titlecollview.superview.frame.size.height;
+
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
@@ -146,7 +155,7 @@
     
     if(indexPath.row==0)
     {
-        cell.Title.text = @"FIXTURES/RESULTS/VIDEOS";
+        cell.Title.text = @"HOME";
         [cell setTag:indexPath.row];
         
     }
@@ -197,6 +206,7 @@
     return 2;
 }
 
+//- (void)swipeViewDidScroll:(__unused SwipeView *)swipeView {}
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
 //    UILabel *label = nil;
