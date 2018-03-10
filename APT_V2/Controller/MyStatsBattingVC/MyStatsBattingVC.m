@@ -1166,6 +1166,7 @@
                     }
             }
         }
+        cell.selectionStyle = UIAccessibilityTraitNone;
     }
         return cell;
     }
