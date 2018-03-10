@@ -217,7 +217,7 @@
          else if(index == 1)
         {
             objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
-            objStats.view.frame = CGRectMake(0, -(70+45), self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+(70+45));
+            objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objStats.view];
         }
 
