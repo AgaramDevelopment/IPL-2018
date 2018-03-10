@@ -48,6 +48,8 @@
 
 @implementation VideoGalleryVC
 
+@synthesize btnUpload;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[WebService alloc]init];
@@ -76,6 +78,19 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+    
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        [btnUpload setHidden:YES];
+    }
+    else
+    {
+        [btnUpload setHidden:NO];
+    }
+    
 }
 
 - (void)showAnimate

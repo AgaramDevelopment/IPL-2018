@@ -38,6 +38,10 @@
     [self customnavigationmethod];
     
     [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
+
+
 }
 -(void)customnavigationmethod
 {
@@ -69,12 +73,14 @@
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
-}
--(void)viewDidAppear:(BOOL)animated
-{
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.Titlecollview reloadData];
     });
+
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -89,8 +95,10 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
     CGFloat HeightF = self.Titlecollview.superview.frame.size.height;
+    
 
     if(IS_IPHONE_DEVICE)
     {
@@ -219,14 +227,12 @@
 
         if(index == 0)
         {
-            objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
             objSch.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objSch.view];
    
         }
          else if(index == 1)
         {
-            objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
             objStats.view.frame = CGRectMake(0, -(70+45), self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+(70+45));
             [view addSubview:objStats.view];
         }

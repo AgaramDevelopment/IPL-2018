@@ -113,10 +113,10 @@ AppCommon *sharedCommon = nil;
             appDel.ArrayTeam = [NSMutableArray new];
             appDel.ArrayTeam = responseObject;
             NSLog(@"IPL TEAMS %@ ",responseObject);
-            NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamCode"];
-            NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"TeamName"];
-            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedTeamName"];
-            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedTeamCode"];
+            NSString* Teamcode = [[appDel.ArrayTeam firstObject] valueForKey:@"TeamCode"];
+            NSString* TeamName = [[appDel.ArrayTeam firstObject] valueForKey:@"TeamName"];
+            [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
         }

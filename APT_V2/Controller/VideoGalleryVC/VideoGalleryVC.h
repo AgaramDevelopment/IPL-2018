@@ -16,4 +16,7 @@
 
 @property (nonatomic,strong) IBOutlet UIButton * clearBtn;
 @property (nonatomic,strong) IBOutlet UIImageView * CancelTextImg;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnUpload;
+
 @end

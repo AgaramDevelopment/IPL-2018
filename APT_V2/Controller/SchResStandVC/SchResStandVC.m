@@ -67,9 +67,6 @@
     self.scroll.contentSize =  self.commonView.frame.size;
     
     [self ScheduleWebservice];
-//    [self FixturesWebservice];
-
-
 }
 
 
@@ -159,7 +156,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat widthF = self.scheduleCollectionView.superview.frame.size.width/2;
-    CGFloat HeightF = self.scheduleCollectionView.superview.frame.size.height;
+    CGFloat HeightF = self.scheduleCollectionView.superview.frame.size.height-20;
+    widthF-=20;
 
     if(IS_IPHONE_DEVICE)
     {

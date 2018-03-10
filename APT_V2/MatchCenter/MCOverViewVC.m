@@ -66,6 +66,7 @@
 //    self.prevBtn.hidden = YES;
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     competitionlbl.text = @"";
+    
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -76,11 +77,12 @@
 //
 //    }
     
-    [self OverviewWebservice];
 
     lblCompetetion.text = [AppCommon getCurrentCompetitionName];
     lblTeamName.text = [AppCommon getCurrentTeamName];
-//    competitionlbl.text = [AppCommon getCurrentCompetitionName];
+    
+    [self OverviewWebservice];
+
 
 }
 
