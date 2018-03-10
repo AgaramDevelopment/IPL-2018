@@ -958,6 +958,8 @@
             self.competitionTeamCodesTblView.hidden = YES;
         }
     }
+    
+    [self groundListGetService];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

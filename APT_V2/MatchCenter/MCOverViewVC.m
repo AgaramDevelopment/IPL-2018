@@ -14,7 +14,7 @@
 #import "WebService.h"
 #import "ResultsVc.h"
 
-@interface MCOverViewVC ()<selectedDropDown>
+@interface MCOverViewVC ()
 {
     WebService *objWebservice;
     ResultsVc *objresult;
@@ -25,6 +25,12 @@
     NSMutableArray *BowlersArray;
     NSMutableArray *FieldersArray;
     NSArray* competetinArray;
+    
+    NSString *CompetitionCode;
+    NSString *teamcode;
+    
+    BOOL isComp;
+    BOOL isTeam;
 }
 
 @end
@@ -54,7 +60,13 @@
     }
     
     self.CompetitionListtbl.hidden = YES;
-    self.popTableView.hidden = YES;
+    //self.popTableView.hidden = YES;
+    self.prevBtn.hidden = YES;
+    self.NodataView.hidden = YES;
+    
+    CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    teamcode = [AppCommon getCurrentTeamCode];
+    
     
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"MCOverViewResultCVC" bundle:nil] forCellWithReuseIdentifier:@"mcResultCVC"];
     
@@ -84,7 +96,6 @@
     [self OverviewWebservice];
 
 
-}
 
 -(void)customnavigationmethod
 {
@@ -195,7 +206,7 @@
     
 }
 
--(void)OverviewWebservice
+-(void)OverviewWebservice :(NSString *)compCode :(NSString *)temCode
 {
     
     if (![COMMON isInternetReachable]) {
@@ -205,12 +216,15 @@
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
     
-    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    NSString *teamcode = [AppCommon getCurrentTeamCode];
+    self.competitionlbl.text = [AppCommon getCurrentCompetitionName];
+     self.teamlbl.text = [AppCommon getCurrentTeamName];
+    
+//    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+//    NSString *teamcode = [AppCommon getCurrentTeamCode];
     objWebservice = [[WebService alloc]init];
     
     
-    [objWebservice Overview:OverviewKey :CompetitionCode : teamcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice Overview:OverviewKey :compCode : temCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         NSMutableArray *teamDetailsArray = [[NSMutableArray alloc]init];
@@ -283,6 +297,7 @@
             [self.resultCollectionView reloadData];
             
             [self.nextBtn setTag:0];
+            self.prevBtn.hidden = NO;
             self.prevBtn.hidden = YES;
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             
@@ -318,15 +333,24 @@
 
 - (IBAction)onClickNextBtn:(id)sender
 {
+    self.NodataView.hidden = YES;
     if(self.nextBtn.tag==0)
     {
         self.PlayerTypelbl.text = @"Top Batsmens";
         self.prevBtn.hidden = YES;
         [self.nextBtn setTag:1];
-        
         CommonArray =[[NSMutableArray alloc]init];
         CommonArray = BatsmenArray;
-        [self SetValuesOfTopPlayers:CommonArray];
+        if(CommonArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            [self SetValuesOfTopPlayers:CommonArray];
+            
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
     }
     else if(self.nextBtn.tag==1)
     {
@@ -337,17 +361,35 @@
         
         CommonArray =[[NSMutableArray alloc]init];
         CommonArray = BowlersArray;
-        [self SetValuesOfTopPlayers:CommonArray];
+        if(CommonArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            [self SetValuesOfTopPlayers:CommonArray];
+            
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
     }
     else if(self.nextBtn.tag==2)
     {
+        self.NodataView.hidden = YES;
         self.PlayerTypelbl.text = @"Top Fielders";
         self.nextBtn.hidden = YES;
         [self.prevBtn setTag:2];
         
         CommonArray =[[NSMutableArray alloc]init];
         CommonArray = FieldersArray;
-        [self SetValuesOfTopPlayers:CommonArray];
+        if(CommonArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            [self SetValuesOfTopPlayers:CommonArray];
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
     }
     
     
@@ -365,48 +407,63 @@
 }
 
 
+
+
 - (IBAction)onClickCompetitionBtn:(id)sender
 {
+    isComp = YES;
+    isTeam = NO;
+    self.CompetitionListtbl.hidden = NO;
     
-//    self.CompetitionListtbl.hidden = NO;
-//    self.popTableView.hidden = NO;
+    self.tableWidth.constant = self.competView.frame.size.width;
+    self.tableXposition.constant = self.competView.frame.origin.x;
     
-    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
-    dropVC.protocol = self;
-    dropVC.array = appDel.ArrayCompetition;
-    dropVC.key = @"CompetitionName";
-    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp.frame), CGRectGetMaxY(dropviewComp.frame)+60, CGRectGetWidth(dropviewComp.frame), 300)];
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    arr = appDel.ArrayCompetition;
+    [self.CompetitionListtbl reloadData];
+    
+}
 
-//    [dropVC.tblDropDown.topAnchor constraintEqualToAnchor:self.competitionlbl.bottomAnchor];
-//    [dropVC.tblDropDown.widthAnchor constraintEqualToAnchor:self.competitionlbl.widthAnchor];
-//    [dropVC.tblDropDown.heightAnchor constraintEqualToConstant:200];
-//    [dropVC.tblDropDown.leadingAnchor constraintEqualToAnchor:self.competitionlbl.leadingAnchor];
-//    [dropVC.tblDropDown.trailingAnchor constraintEqualToAnchor:self.competitionlbl.trailingAnchor];
-//    [dropVC.tblDropDown setTranslatesAutoresizingMaskIntoConstraints:YES];
-
-    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
-        NSLog(@"DropDown loaded");
-    }];
-
+- (IBAction)onClickTeamBtn:(id)sender
+{
+    isComp = NO;
+    isTeam = YES;
+    self.CompetitionListtbl.hidden = NO;
+    self.tableWidth.constant = self.teamView.frame.size.width;
+    self.tableXposition.constant = self.teamView.frame.origin.x;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    arr = appDel.ArrayTeam;
+    
+    [self.CompetitionListtbl reloadData];
+    
 }
 
 - (IBAction)onClickPrevBtn:(id)sender
 {
    if(self.prevBtn.tag==1)
    {
+       self.NodataView.hidden = YES;
        self.PlayerTypelbl.text = @"Top Batsmens";
        self.prevBtn.hidden = YES;
        [self.nextBtn setTag:1];
        
        CommonArray =[[NSMutableArray alloc]init];
        CommonArray = BatsmenArray;
-       [self SetValuesOfTopPlayers:CommonArray];
+       if(CommonArray.count>0)
+       {
+           self.NodataView.hidden = YES;
+           [self SetValuesOfTopPlayers:CommonArray];
+           
+       }
+       else
+       {
+           self.NodataView.hidden = NO;
+       }
    }
    else if(self.prevBtn.tag==2)
    {
+       self.NodataView.hidden = YES;
        self.PlayerTypelbl.text = @"Top Bowlers";
        [self.nextBtn setTag:2];
        [self.prevBtn setTag:1];
@@ -414,7 +471,16 @@
        
        CommonArray =[[NSMutableArray alloc]init];
        CommonArray = BowlersArray;
-       [self SetValuesOfTopPlayers:CommonArray];
+       if(CommonArray.count>0)
+       {
+           self.NodataView.hidden = YES;
+           [self SetValuesOfTopPlayers:CommonArray];
+           
+       }
+       else
+       {
+           self.NodataView.hidden = NO;
+       }
    }
    
 }
@@ -501,7 +567,18 @@
 // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    
+    
+    if(isComp==YES)
+    {
+        return appDel.ArrayCompetition.count;
+    }
+    else if(isTeam==YES)
+    {
+        return appDel.ArrayTeam.count;
+    }
+    return nil;
+    
 }
 // the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -518,90 +595,61 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
+    if(isComp ==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
+    }
+    else if(isTeam == YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        
+    }
     
-        cell.textLabel.text = @"text";
+
     
     cell.selectionStyle = UIAccessibilityTraitNone;
     
-    cell.contentView.backgroundColor = [UIColor lightTextColor];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
+    
+    
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    self.competitionlbl.text = @"text";
-    self.CompetitionListtbl.hidden = YES;
-    self.popTableView.hidden = YES;
-}
-
-- (IBAction)dismissview:(id)sender
-{
-    self.popTableView.hidden = YES;
-    self.CompetitionListtbl.hidden = YES;
-}
-
-
-- (IBAction)actionCompetetionTeam:(id)sender {
-    
-    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
-    dropVC.protocol = self;
-    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    
-    if ([sender tag] == 1) { // TEAM
-        
-        dropVC.array = appDel.ArrayTeam;
-        dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
-        
-        
-    }
-    else // COMPETETION
+    if(isComp == YES)
     {
-        dropVC.array = appDel.ArrayCompetition;
-        dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
         
-    }
-    
-    
-    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
-        NSLog(@"DropDown loaded");
-    }];
-    
-}
-
--(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
-{
-    
-    if ([key  isEqualToString: @"CompetitionName"]) {
+        self.competitionlbl.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+       CompetitionCode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         
-        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
-        
-        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.competitionlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        
     }
-    else
+    else if(isTeam == YES)
     {
         lblTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
     }
-
     
-    [self OverviewWebservice];
+    
+    //isComp = NO;
+   // isTeam = NO;
+    self.CompetitionListtbl.hidden = YES;
+    
+    [self OverviewWebservice:CompetitionCode:teamcode];
     
 }
+
+
 
 
 @end
