@@ -129,8 +129,8 @@
         {
 //            newFrontController = [TeamsVC new];
             TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
-            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
+            objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
+            objPlayersVC.teamname = [AppCommon getCurrentTeamName];
             newFrontController = objPlayersVC;
 
         }
@@ -174,6 +174,7 @@
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
         [navigationController setNavigationBarHidden:YES];
+        appDel.frontNavigationController = navigationController;
         [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
         
     }];

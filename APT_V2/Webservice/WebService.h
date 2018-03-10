@@ -35,8 +35,6 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 
 
-
-
 //#define BASE_URL   @"http://192.168.0.151:8029/AGAPTService.svc/"
 //#define IMAGE_URL   @"http://192.168.0.151:8030/"
 //#define Video_URL   @"http://192.168.0.151:8029/"
@@ -61,9 +59,6 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#endif
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
-
-
-
 
 @interface WebService : AFHTTPRequestOperationManager
 

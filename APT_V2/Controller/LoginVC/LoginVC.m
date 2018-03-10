@@ -156,6 +156,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
             
+
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -164,11 +165,12 @@
             UIViewController* VC;
             if([objRoleCode isEqualToString:@"ROL0000002"]) // player
             {
+                NSString * playerTeamCode =[[objRole valueForKey:@"CAPTeamcode"] objectAtIndex:0];
+                [[NSUserDefaults standardUserDefaults] setObject:playerTeamCode forKey:@"SelectedTeamCode"];
                 VC = [TabHomeVC new];
             }
             else
             {
-//                VC = [TeamsVC new];
                TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
                 objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
                 objPlayersVC.teamname = self.teamTF.text;
@@ -178,9 +180,6 @@
             
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
-            
-            
-           
             
         }
         else{
@@ -243,6 +242,7 @@
 
 - (IBAction)teamButtonTapped:(id)sender {
     
+  
     if (!teamArray.count) {
         [self teamCodeGetService];
         return;

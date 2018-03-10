@@ -41,12 +41,17 @@
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
-    //    UIViewController *frontViewController = [storyBoard instantiateViewControllerWithIdentifier:(isLogin ? @"frontViewController" : @"LoginVC")];
+    if (!appDel.ArrayTeam.count) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [COMMON getIPLteams];
+        });
+    }
+
     NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     NSString *plyRolecode = @"ROL0000002";
     
     UIViewController *frontViewController;
-    [COMMON getIPLteams];
+    
 
     if(isLogin)
     {

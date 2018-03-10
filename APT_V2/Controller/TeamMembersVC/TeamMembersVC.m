@@ -15,6 +15,9 @@
 #import "TeamMemebersCell.h"
 
 @interface TeamMembersVC ()
+{
+    UIRefreshControl *refreshControl;
+}
 
 @property (strong, nonatomic)  NSMutableArray *PlayersArray;
 @property (strong, nonatomic)  NSMutableArray *PlayerRoleArray;
@@ -24,12 +27,15 @@
 
 @implementation TeamMembersVC
 
+@synthesize AllrounderBtn,WktKeeperBtn;
+
 @synthesize navView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    refreshControl = [[UIRefreshControl alloc] init];
+
       [self.playesTable registerNib:[UINib nibWithNibName:@"TeamMemebersCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     self.TeamNamelbl.text = _teamname;
     
@@ -48,9 +54,35 @@
     self.BowlerBtn.layer.cornerRadius = 5;
     self.BowlerBtn.clipsToBounds = YES;
     [self customnavigationmethod];
+    
+    [self addRefreshControl];
     [self TeamsWebservice];
 
+//    AllrounderBtn.align
     
+    NSString* str_wkt_keeper = [NSString stringWithFormat:@"Wkt\n Keeper"];
+    NSString* str_all_rounder = [NSString stringWithFormat:@"All\n Rounder"];
+    [AllrounderBtn setTitle:str_all_rounder forState:UIControlStateNormal];
+    [WktKeeperBtn setTitle:str_wkt_keeper forState:UIControlStateNormal];
+    AllrounderBtn.titleLabel.numberOfLines = 2;
+    WktKeeperBtn.titleLabel.numberOfLines = 2;
+    AllrounderBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    WktKeeperBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+}
+
+-(void)addRefreshControl
+{
+    refreshControl.tintColor = [UIColor grayColor];
+    [refreshControl addTarget:self action:@selector(refershControlAction) forControlEvents:UIControlEventValueChanged];
+    [self.playesTable addSubview:refreshControl];
+    self.playesTable.alwaysBounceVertical = YES;
+}
+
+
+-(void)refershControlAction
+{
+    [self TeamsWebservice];
 }
 
 -(void)customnavigationmethod
@@ -84,6 +116,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
+    [self.lblNoData setHidden:_CommonArray.count];
     return _CommonArray.count;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
@@ -208,11 +241,11 @@
 {
     
     MyStatsBattingVC* objStats = [MyStatsBattingVC new];
-    [objStats viewDidLoad];
-    objStats.myStatsViewHeight.constant = 60;
-    objStats.navViewHeight.constant = 35;
-    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
-    [appDel.frontNavigationController pushViewController:objStats.view animated:YES];
+//    [objStats viewDidLoad];
+//    objStats.myStatsViewHeight.constant = 60;
+//    objStats.navViewHeight.constant = 35;
+//    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
+    [appDel.frontNavigationController pushViewController:objStats animated:YES];
     
 }
 
@@ -230,7 +263,8 @@
     
     if(![COMMON isInternetReachable])
         return;
-        
+    
+    [refreshControl endRefreshing];
         [AppCommon showLoading];
         
         NSString *URLString =  URL_FOR_RESOURCE(playersKey);
@@ -266,15 +300,14 @@
                 self.PlayerRoleArray = [[NSMutableArray alloc]init];
                 self.PlayerRoleArray = [responseObject valueForKey:@"lstPlayerRoles"];
                 [self.playesTable reloadData];
-                
                [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [refreshControl endRefreshing];
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];

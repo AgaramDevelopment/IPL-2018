@@ -25,7 +25,6 @@
                 <outlet property="AgainstCountlbl" destination="dkg-DC-oVv" id="fcW-jc-xkI"/>
                 <outlet property="Againstlbl" destination="goS-54-RdH" id="WdF-ZP-bY8"/>
                 <outlet property="Captainnamelbl" destination="dwy-3f-XOd" id="iO8-Y7-VPz"/>
-                <outlet property="CompetitionListtbl" destination="fFa-GD-AHy" id="mCI-Hr-Pee"/>
                 <outlet property="ForCountlbl" destination="VEX-5h-35I" id="9mF-z1-KcQ"/>
                 <outlet property="Forlbl" destination="2Co-IG-Mjt" id="ryj-VQ-1ZR"/>
                 <outlet property="Groundmnamelbl" destination="8iN-Sa-YcD" id="3TW-Q9-5fo"/>
@@ -51,21 +50,19 @@
                 <outlet property="Teamnamelbl" destination="s9D-3L-VQN" id="qAb-pg-xQs"/>
                 <outlet property="TotalMatcheslbl" destination="Qgs-at-V7k" id="CEQ-UJ-dnJ"/>
                 <outlet property="Wktslbl" destination="zoY-iS-lzw" id="7LT-Ye-Rzf"/>
-                <outlet property="competView" destination="zc4-ke-MfL" id="lWl-Ay-f8Z"/>
-                <outlet property="competitionlbl" destination="ytA-Q7-hh6" id="zwV-NZ-2eG"/>
                 <outlet property="contentView" destination="iYv-2o-8sy" id="fi7-CP-laH"/>
                 <outlet property="headerView" destination="u1r-4u-dnr" id="KCR-2y-V8y"/>
+                <outlet property="lblCompetetion" destination="ytA-Q7-hh6" id="cDy-1Y-ZvX"/>
+                <outlet property="lblTeamName" destination="4qX-Qs-JMD" id="czY-pI-saL"/>
                 <outlet property="nextBtn" destination="4pq-Y2-bfR" id="U95-12-Sd2"/>
                 <outlet property="nrrlbl" destination="fpQ-nR-DBI" id="7ks-C8-mCh"/>
                 <outlet property="prevBtn" destination="oiw-FN-2BX" id="Iok-UT-YaU"/>
                 <outlet property="resultCollectionView" destination="7DJ-Ub-D1B" id="S3l-HH-bYu"/>
                 <outlet property="rootView" destination="9Pd-BK-t56" id="Bls-yv-57l"/>
                 <outlet property="scrollView" destination="pDm-o4-weW" id="PJc-4Y-HKu"/>
-                <outlet property="tableWidth" destination="9yR-fT-yYu" id="3mi-M4-kzL"/>
-                <outlet property="tableXposition" destination="8DD-7B-UMj" id="wF0-WA-8fe"/>
-                <outlet property="teamView" destination="hz4-wS-olw" id="gOj-VO-OHe"/>
-                <outlet property="teamlbl" destination="4qX-Qs-JMD" id="OLq-Sj-PIZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewCompetetion" destination="zc4-ke-MfL" id="wqa-Ez-rQv"/>
+                <outlet property="viewTeam" destination="hz4-wS-olw" id="vfY-a0-N3B"/>
                 <outlet property="winLossCountlbl" destination="Gxp-92-ewh" id="NgC-GE-3jd"/>
                 <outlet property="winLosslbl" destination="YOj-Nd-xBs" id="CeL-ph-Fet"/>
             </connections>
@@ -106,7 +103,7 @@
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JJ-TS-QwG">
                                                                             <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="30"/>
                                                                             <connections>
-                                                                                <action selector="onClickCompetitionBtn:" destination="-1" eventType="touchUpInside" id="zCA-cB-d8C"/>
+                                                                                <action selector="actionCompetetionTeam:" destination="-1" eventType="touchUpInside" id="PDb-UM-x2y"/>
                                                                             </connections>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytA-Q7-hh6">
@@ -160,7 +157,7 @@
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVD-o2-3XM">
                                                                             <rect key="frame" x="0.0" y="0.0" width="172.33333333333334" height="30"/>
                                                                             <connections>
-                                                                                <action selector="onClickTeamBtn:" destination="-1" eventType="touchUpInside" id="jPA-oH-r2r"/>
+                                                                                <action selector="actionCompetetionTeam:" destination="-1" eventType="touchUpInside" id="6G4-vn-8HF"/>
                                                                             </connections>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qX-Qs-JMD">
@@ -1100,13 +1097,9 @@ Anderson</string>
                                                             <rect key="frame" x="0.0" y="40" width="359" height="287"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubc-KU-Oky">
-                                                                    <rect key="frame" x="98.666666666666686" y="133" width="162" height="21"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="162" id="3pg-lH-mVj"/>
-                                                                        <constraint firstAttribute="height" constant="21" id="hsL-oK-Y8L"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="130" y="135.66666666666663" width="99.666666666666686" height="16"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
-                                                                    <color key="textColor" red="0.36480823159999998" green="0.15820229050000001" blue="0.52602392440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=compact">
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
@@ -1177,25 +1170,11 @@ Anderson</string>
                                         <constraint firstItem="iYv-2o-8sy" firstAttribute="top" secondItem="pDm-o4-weW" secondAttribute="top" id="WNH-07-Q7I"/>
                                     </constraints>
                                 </scrollView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fFa-GD-AHy">
-                                    <rect key="frame" x="10" y="40" width="285" height="254"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="285" id="9yR-fT-yYu"/>
-                                        <constraint firstAttribute="height" constant="254" id="y7h-Z6-lpE"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="ae9-Wo-qke"/>
-                                        <outlet property="delegate" destination="-1" id="HhF-Ga-Ses"/>
-                                    </connections>
-                                </tableView>
                             </subviews>
                             <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="pDm-o4-weW" secondAttribute="trailing" id="0Ss-T6-0kn"/>
                                 <constraint firstItem="iYv-2o-8sy" firstAttribute="width" secondItem="EMu-us-pdc" secondAttribute="width" id="4br-tp-iRR"/>
-                                <constraint firstItem="fFa-GD-AHy" firstAttribute="leading" secondItem="EMu-us-pdc" secondAttribute="leading" constant="10" id="8DD-7B-UMj"/>
-                                <constraint firstItem="fFa-GD-AHy" firstAttribute="top" secondItem="EMu-us-pdc" secondAttribute="top" constant="40" id="EXQ-GB-WAP"/>
                                 <constraint firstItem="pDm-o4-weW" firstAttribute="leading" secondItem="EMu-us-pdc" secondAttribute="leading" id="Iby-ef-Qmc"/>
                                 <constraint firstAttribute="bottom" secondItem="pDm-o4-weW" secondAttribute="bottom" id="K1K-mV-TYa"/>
                                 <constraint firstItem="pDm-o4-weW" firstAttribute="top" secondItem="EMu-us-pdc" secondAttribute="top" id="OhS-yU-hrE"/>

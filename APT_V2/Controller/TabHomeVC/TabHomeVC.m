@@ -38,6 +38,7 @@
     [self customnavigationmethod];
     
     [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
     objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
     objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
 
@@ -152,8 +153,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-        
         TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         //cell.contentView.backgroundColor = [UIColor whiteColor];
     
@@ -233,7 +232,7 @@
         }
          else if(index == 1)
         {
-            objStats.view.frame = CGRectMake(0, -(70+45), self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+(70+45));
+            objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
             [view addSubview:objStats.view];
         }
 
