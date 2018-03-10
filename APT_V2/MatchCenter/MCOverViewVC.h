@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (strong, nonatomic) IBOutlet UIView *NodataView;
+
 @property (strong, nonatomic) IBOutlet UILabel *Teamnamelbl;
 @property (strong, nonatomic) IBOutlet UILabel *Groundmnamelbl;
 @property (strong, nonatomic) IBOutlet UILabel *Captainnamelbl;
@@ -64,10 +66,18 @@
 @property (strong, nonatomic) IBOutlet UILabel *Wktslbl;
 @property (weak, nonatomic) IBOutlet UIView *viewCompetetion;
 @property (weak, nonatomic) IBOutlet UILabel *lblCompetetion;
+@property (weak, nonatomic) IBOutlet UILabel *teamlbl;
 
-- (IBAction)actionCompetetionTeam:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *viewTeam;
 @property (weak, nonatomic) IBOutlet UILabel *lblTeamName;
+
+@property (strong, nonatomic) IBOutlet UIView *competView;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+
+
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
+@property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
 
 
 @end

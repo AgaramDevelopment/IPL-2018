@@ -1665,7 +1665,8 @@
             self.TeamPlayersArray4 = [[NSMutableArray alloc]init];
             self.TeamPlayersArray5 = [[NSMutableArray alloc]init];
             
-            
+            if([self.TeamPlayersArray1 isKindOfClass:NULL])
+            {
             self.TeamPlayersArray1 = [responseObject valueForKey:@"lstplayerMatchComp1"];
             self.TeamPlayersArray2 = [responseObject valueForKey:@"lstplayerMatchComp2"];
             self.TeamPlayersArray3 = [responseObject valueForKey:@"lstplayerMatchComp3"];
@@ -1673,6 +1674,11 @@
             self.TeamPlayersArray5 = [responseObject valueForKey:@"lstplayerMatchComp5"];
             
             [self.teamCompCollectionView reloadData];
+            }
+            else
+            {
+                
+            }
             
         }
         [AppCommon hideLoading];
@@ -1783,7 +1789,7 @@
         self.Teamnamelbl.text = [[appDel.ArrayTeam valueForKey:@"TeamName"]objectAtIndex:indexPath.row];
         NSString *selectedCode = [[appDel.ArrayTeam valueForKey:@"TeamCode"]objectAtIndex:indexPath.row];
         
-        [[NSUserDefaults standardUserDefaults] setValue:_Competitionlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.Teamnamelbl.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:selectedCode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
