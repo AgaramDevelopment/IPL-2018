@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Header.h"
 
 @interface PlayersVC2 : UIViewController {
     int team1MaxBatsmanCount;
@@ -40,6 +41,7 @@
 @property (nonatomic,strong) NSMutableArray *BowlingDetailsArray3;
 @property (nonatomic,strong) NSMutableArray *BowlingDetailsArray4;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *titleCollection;
 
 @property (nonatomic,strong) NSString *matchcode;
 @end

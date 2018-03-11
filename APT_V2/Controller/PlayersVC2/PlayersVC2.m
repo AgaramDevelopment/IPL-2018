@@ -8,26 +8,29 @@
 
 
 #import "PlayersVC2.h"
-#import "CustomNavigation.h"
-#import "Config.h"
 #import "PlayersCell.h"
 #import "BattingKPIViewController.h"
 #import "BowlingKPIViewController.h"
-#import "WebService.h"
 
 
 @interface PlayersVC2 ()
 {
     NSString *teamcode;
+    NSIndexPath* selectedIndex;
 }
 
 @end
 
 @implementation PlayersVC2
+@synthesize titleCollection;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [titleCollection registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+
     //    NSLog(@"BatsmanDetailsArray1:%@", self.BatsmanDetailsArray1);
     //    NSLog(@"BatsmanDetailsArray2:%@", self.BatsmanDetailsArray2);
     //    NSLog(@"BatsmanDetailsArray3:%@", self.BatsmanDetailsArray3);
@@ -263,6 +266,7 @@
     [self customnavigationmethod];
     
     [self.team1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0 ];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -308,25 +312,40 @@
 -(IBAction)didClickBackBtn:(id)sender
 {
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
-    {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(110, 110);
-        }
-        else
-        {
-            return CGSizeMake(90, 100);
-        }
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (collectionView == titleCollection) {
+        
+        CGFloat widthF = titleCollection.superview.frame.size.width/2;
+        CGFloat HeightF = titleCollection.superview.frame.size.height;
+        
+        return CGSizeMake(widthF, HeightF);
+
     }
     else
     {
-        return CGSizeMake(200, 180);
+        if(IS_IPHONE_DEVICE)
+        {
+            if(!IS_IPHONE5)
+            {
+                return CGSizeMake(110, 110);
+            }
+            else
+            {
+                return CGSizeMake(90, 100);
+            }
+        }
+        else
+        {
+            return CGSizeMake(200, 180);
+        }
     }
+
+    
+    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -335,45 +354,95 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
+    
+    if (collectionView == titleCollection) {
+        
+        return 2;
+    }
+    
     return numberOfItems;
 }
 
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(20, 20, 20, 20); // top, left, bottom, right
-    }
-    else{
+   
+    if (collectionView == titleCollection) {
+        
         return UIEdgeInsetsMake(10, 10, 10, 10);
     }
+    else{
+        if(!IS_IPHONE_DEVICE)
+        {
+            return UIEdgeInsetsMake(20, 20, 20, 20); // top, left, bottom, right
+        }
+        else{
+            return UIEdgeInsetsMake(10, 10, 10, 10);
+        }
+    }
+
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 20.0;
-    }
-    else{
-        return 5.0;
-    }
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+//
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 20.0;
+//    }
+//    else{
+//        return 5.0;
+//    }
+//}
+//
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+//
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+//}
 
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(10, 10, 10, 10);
 //}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* commoncell;
     
+    if (collectionView == titleCollection) {
+        
+        TabHomeCell* cell = [titleCollection dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        if(indexPath.row==0)
+        {
+            cell.Title.text = @"HOME";
+            [cell setTag:indexPath.row];
+            
+        }
+        if(indexPath.row==1)
+        {
+            cell.Title.text = @"MYSTATS";
+            [cell setTag:indexPath.row];
+        }
+        
+        if (indexPath == selectedIndex) {
+            cell.selectedLineView.backgroundColor = [UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f];
+            
+        }
+        else
+        {
+            cell.selectedLineView.backgroundColor = [UIColor clearColor];
+            
+        }
+
+        commoncell = cell;
+        
+    }
+    else
+    {
+        
     PlayersCell *cell = [self.GridTbl dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
     
     cell.layer.borderWidth = 1.0;
@@ -542,11 +611,21 @@
             }
         }
     }
-    return cell;
+    
+        commoncell = cell;
+}
+    return commoncell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (collectionView == titleCollection) {
+        
+        
+    }
+    else
+    {
+    
     if (self.inningsDetailsArray.count == 2)
     {
         if (self.indexPath == 0)
@@ -647,6 +726,9 @@
             [self.navigationController pushViewController:objFix animated:YES];
         }
     }
+    
+}
+
 }
 - (IBAction)Team1Action:(id)sender {
     
@@ -898,6 +980,8 @@
         }
     }
 }
+
+
 
 @end
 
