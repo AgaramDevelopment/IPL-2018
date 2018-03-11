@@ -194,37 +194,45 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
     
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 20.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 20.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
     
 }
 

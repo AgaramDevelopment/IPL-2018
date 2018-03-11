@@ -134,47 +134,71 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
+    
+    CGFloat widthF = (self.BowlerCollectionView.superview.frame.size.width/2) - 20;
+    CGFloat HeightF = self.BowlerCollectionView.superview.frame.size.height-20;
+
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//            if(collectionView == self.teamCompCollectionView)
+//            {
+//                return CGSizeMake(290, 825);
+//            }
+//            else
+//            {
+//                return CGSizeMake(250, 130);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //return CGSizeMake(160, 140);
+//
+//        if(collectionView == self.teamCompCollectionView)
+//        {
+//            return CGSizeMake(404, 825);
+//        }
+//        else
+//        {
+//            return CGSizeMake(250, 130);
+//        }
+//    }
+    
+    
+    if(collectionView == self.teamCompCollectionView)
     {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-            if(collectionView == self.teamCompCollectionView)
-            {
-                return CGSizeMake(290, 825);
-            }
-            else
-            {
-                return CGSizeMake(250, 130);
-            }
-        }
+        return (IS_IPAD ? CGSizeMake(404, 825) : CGSizeMake(290, 825) );
     }
     else
     {
-        //return CGSizeMake(160, 140);
-        
-        if(collectionView == self.teamCompCollectionView)
-        {
-            return CGSizeMake(404, 825);
-        }
-        else
-        {
-            return CGSizeMake(250, 130);
-        }
+       return  CGSizeMake(widthF, HeightF);
     }
+
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(10, 20, 10, 20); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+    
+//    if(collectionView == self.teamCompCollectionView)
+//    {
+//        if(!IS_IPHONE_DEVICE)
+//        {
+//            return UIEdgeInsetsMake(10, 20, 10, 20); // top, left, bottom, right
+//        }
+//        else{
+//            return UIEdgeInsetsMake(10, 10, 10, 10);
+//        }
+//
+//    }
+
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -91,6 +91,7 @@
 #import "MyStatsBattingVC.h"
 #import "MyStatsBattingCell.h"
 
+#import "TabHomeCell.h"
 
 #endif /* Header_h */
 

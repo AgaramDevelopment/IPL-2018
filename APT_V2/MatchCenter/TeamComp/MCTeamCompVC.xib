@@ -191,7 +191,7 @@
                                     <rect key="frame" x="5" y="93" width="365" height="140"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EeC-Qb-NAQ">
-                                            <rect key="frame" x="5" y="0.0" width="355" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="140"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mAM-XK-Obu">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -209,8 +209,8 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="140" id="2AM-U1-tkw"/>
                                         <constraint firstAttribute="bottom" secondItem="EeC-Qb-NAQ" secondAttribute="bottom" id="2dV-uR-XpK"/>
-                                        <constraint firstAttribute="trailing" secondItem="EeC-Qb-NAQ" secondAttribute="trailing" constant="5" id="JQY-3k-VGa"/>
-                                        <constraint firstItem="EeC-Qb-NAQ" firstAttribute="leading" secondItem="asC-yk-J2e" secondAttribute="leading" constant="5" id="T2M-Fv-Fvp"/>
+                                        <constraint firstAttribute="trailing" secondItem="EeC-Qb-NAQ" secondAttribute="trailing" id="JQY-3k-VGa"/>
+                                        <constraint firstItem="EeC-Qb-NAQ" firstAttribute="leading" secondItem="asC-yk-J2e" secondAttribute="leading" id="T2M-Fv-Fvp"/>
                                         <constraint firstItem="EeC-Qb-NAQ" firstAttribute="top" secondItem="asC-yk-J2e" secondAttribute="top" id="gJh-zf-Zt4"/>
                                     </constraints>
                                 </view>
@@ -230,7 +230,7 @@
                                     <rect key="frame" x="5" y="279" width="365" height="140"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="sov-Km-GEy">
-                                            <rect key="frame" x="5" y="0.0" width="355" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="140"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nsC-bc-awU">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -247,10 +247,10 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="140" id="42s-fF-Rd7"/>
-                                        <constraint firstItem="sov-Km-GEy" firstAttribute="leading" secondItem="OBj-FN-SFG" secondAttribute="leading" constant="5" id="KBE-Ml-wSn"/>
+                                        <constraint firstItem="sov-Km-GEy" firstAttribute="leading" secondItem="OBj-FN-SFG" secondAttribute="leading" id="KBE-Ml-wSn"/>
                                         <constraint firstItem="sov-Km-GEy" firstAttribute="top" secondItem="OBj-FN-SFG" secondAttribute="top" id="Kpk-tc-m19"/>
                                         <constraint firstAttribute="bottom" secondItem="sov-Km-GEy" secondAttribute="bottom" id="qzy-uG-x09"/>
-                                        <constraint firstAttribute="trailing" secondItem="sov-Km-GEy" secondAttribute="trailing" constant="5" id="tL2-nS-bjx"/>
+                                        <constraint firstAttribute="trailing" secondItem="sov-Km-GEy" secondAttribute="trailing" id="tL2-nS-bjx"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All rounders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncJ-Xw-e5X">
@@ -269,7 +269,7 @@
                                     <rect key="frame" x="5" y="465" width="365" height="140"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Qq-DX-1oT">
-                                            <rect key="frame" x="5" y="0.0" width="355" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="140"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Spd-t5-nqM">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -285,9 +285,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="0Qq-DX-1oT" firstAttribute="leading" secondItem="ucT-r2-2tn" secondAttribute="leading" constant="5" id="Bzi-QM-lKx"/>
+                                        <constraint firstItem="0Qq-DX-1oT" firstAttribute="leading" secondItem="ucT-r2-2tn" secondAttribute="leading" id="Bzi-QM-lKx"/>
                                         <constraint firstAttribute="height" constant="140" id="Zag-3y-vaE"/>
-                                        <constraint firstAttribute="trailing" secondItem="0Qq-DX-1oT" secondAttribute="trailing" constant="5" id="efV-Ce-J1g"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Qq-DX-1oT" secondAttribute="trailing" id="efV-Ce-J1g"/>
                                         <constraint firstItem="0Qq-DX-1oT" firstAttribute="top" secondItem="ucT-r2-2tn" secondAttribute="top" id="zaC-6A-ZDH"/>
                                         <constraint firstAttribute="bottom" secondItem="0Qq-DX-1oT" secondAttribute="bottom" id="zen-at-e0N"/>
                                     </constraints>
