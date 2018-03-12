@@ -1824,17 +1824,25 @@
     {
         if(indexPath.row ==  selectedIndex)
         {
+            if(!IS_IPHONE_DEVICE)
+            {
             return 300;
+            }
+            else
+            {
+                return 472;
+            }
+                
         }
         else
         {
             if(IS_IPHONE_DEVICE)
             {
-            if(tableView== self.listTbl) {
-                return 45;
-            } else {
-                return 35;
-            }
+                if(tableView== self.listTbl) {
+                    return 45;
+                } else {
+                    return 35;
+                }
             }
             else
             {
@@ -3499,6 +3507,8 @@
                 
                 NSString *matchHeaderDetail =[NSString stringWithFormat:@"%@ Vs %@ - %@",self.teamAlbl.text,self.teamBlbl.text,self.groundlbl.text];
                 appDel.matchHeaderDetails = matchHeaderDetail;
+                appDel.TeamA = self.teamAlbl.text;
+                appDel.TeamB = self.teamBlbl.text;
                 appDel.isTest = isTestmatch;
                 
                 
@@ -3922,7 +3932,7 @@
     //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
     
     VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
-    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"videoplayer"];
+    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.MatchCode = self.matchCode;
     videoPlayerVC.PlayerCode = playercode;
     videoPlayerVC.VideoValue = value;

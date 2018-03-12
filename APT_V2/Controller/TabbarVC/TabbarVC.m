@@ -82,7 +82,7 @@
     fourthVC.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     fifthVC = [[SessionSummaryVC alloc]init];
-    fifthVC.title = @"Session Summary";
+    fifthVC.title = @"Over Block Summary";
     fifthVC.tabBarItem = self.tossAndResultBarItem;
     
     fifthVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -136,7 +136,7 @@
     UITabBarItem *tabItem5 = [tabBar.items objectAtIndex:4];
     tabItem5.selectedImage = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem5.image = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem5.title = @"SESSION SUMMARY";
+    tabItem5.title = @"OVER BLOCK SUMMARY";
     
   
     self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];
