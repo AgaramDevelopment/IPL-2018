@@ -113,31 +113,42 @@
     UIViewController* newFrontController;
     
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        if(indexPath.row == 0)
+//        {
+//            newFrontController = [TabHomeVC new];
+//        }
+//    }
+//    else
+//    {
+//        if(indexPath.row == 0)
+//        {
+////            newFrontController = [TeamsVC new];
+//            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+//            objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
+//            objPlayersVC.teamname = [AppCommon getCurrentTeamName];
+//            newFrontController = objPlayersVC;
+//
+//        }
+//    }
     
-    if([rolecode isEqualToString:plyRolecode])
+    if(indexPath.row == 0)
     {
-        if(indexPath.row == 0)
-        {
-            newFrontController = [TabHomeVC new];
-        }
+        newFrontController = [TabHomeVC new];
     }
-    else
-    {
-        if(indexPath.row == 0)
-        {
-//            newFrontController = [TeamsVC new];
-            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-            objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
-            objPlayersVC.teamname = [AppCommon getCurrentTeamName];
-            newFrontController = objPlayersVC;
 
-        }
-    }
-    
-    if(indexPath.row == 1)
+    else if(indexPath.row == 1)
     {
+        if (!appDel.ArrayTeam.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [COMMON getIPLteams];
+            });
+        }
+
         newFrontController = [MatchCenterTBC new];
         
     }

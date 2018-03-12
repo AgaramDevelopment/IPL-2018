@@ -844,14 +844,14 @@
             <point key="canvasLocation" x="109.5" y="454.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="battingCellForiPhone" rowHeight="318" id="Jru-Mg-bxO" customClass="MyStatsBattingCell">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="440"/>
+            <rect key="frame" x="0.0" y="0.0" width="325" height="450"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jru-Mg-bxO" id="nxr-8u-mJO">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="439.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="449.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4M-Cl-9kx">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="439.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="449.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YX7-vp-aZg">
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="55"/>
@@ -948,7 +948,7 @@
                                 </constraints>
                             </view>
                             <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb1-ug-Je5">
-                                <rect key="frame" x="0.0" y="65" width="325" height="372"/>
+                                <rect key="frame" x="0.0" y="65" width="325" height="382"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XXj-5W-I0B">
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="200"/>
@@ -1668,7 +1668,7 @@
                                     <constraint firstItem="YVL-EC-yMe" firstAttribute="leading" secondItem="Tb1-ug-Je5" secondAttribute="leading" id="6HI-r5-eZ9"/>
                                     <constraint firstItem="XXj-5W-I0B" firstAttribute="top" secondItem="Tb1-ug-Je5" secondAttribute="top" id="BS2-bO-6vG"/>
                                     <constraint firstItem="YVL-EC-yMe" firstAttribute="top" secondItem="XXj-5W-I0B" secondAttribute="bottom" constant="10" id="Hrw-06-e42"/>
-                                    <constraint firstAttribute="height" constant="372" id="j03-Se-Lzf"/>
+                                    <constraint firstAttribute="height" constant="382" id="j03-Se-Lzf"/>
                                     <constraint firstAttribute="trailing" secondItem="XXj-5W-I0B" secondAttribute="trailing" id="pCp-xw-Mza"/>
                                     <constraint firstItem="XXj-5W-I0B" firstAttribute="leading" secondItem="Tb1-ug-Je5" secondAttribute="leading" id="ppk-BN-00d"/>
                                     <constraint firstAttribute="trailing" secondItem="YVL-EC-yMe" secondAttribute="trailing" id="xIL-VL-dIR"/>
@@ -2140,6 +2140,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="230" id="PJa-AM-ykW"/>
                                                     <constraint firstItem="n9l-bO-wg0" firstAttribute="width" secondItem="fZi-Rr-N7b" secondAttribute="width" id="moc-vE-DwC"/>
                                                     <constraint firstAttribute="width" constant="230" id="nve-cO-eB0"/>
                                                     <constraint firstItem="n9l-bO-wg0" firstAttribute="height" secondItem="fZi-Rr-N7b" secondAttribute="height" id="sa6-IM-G2k"/>
@@ -2542,7 +2543,6 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9as-2h-WgS" secondAttribute="trailing" id="3pd-W3-0cH"/>
-                                            <constraint firstAttribute="bottom" secondItem="ZsH-4c-j5j" secondAttribute="bottom" constant="10" id="7bc-aw-CU4"/>
                                             <constraint firstItem="9as-2h-WgS" firstAttribute="top" secondItem="ctR-Iv-YaC" secondAttribute="top" id="G5l-qa-tAc"/>
                                             <constraint firstAttribute="bottom" secondItem="9as-2h-WgS" secondAttribute="bottom" id="RQJ-LE-Hov"/>
                                             <constraint firstItem="ZsH-4c-j5j" firstAttribute="top" secondItem="ctR-Iv-YaC" secondAttribute="top" constant="10" id="Ydp-8y-86U"/>

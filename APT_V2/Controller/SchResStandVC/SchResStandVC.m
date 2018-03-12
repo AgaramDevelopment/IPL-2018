@@ -414,21 +414,15 @@
         
         [scoreArray addObject:dic];
         
-
         
         
-        
-        
-        
-        
-                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
-                       objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
-                        appDel.Currentmatchcode = displayMatchCode;
-                        appDel.Scorearray = scoreArray;
-                        //objtab.backkey = @"yes";
-                        //[self.navigationController pushViewController:objFix animated:YES];
-                        [appDel.frontNavigationController pushViewController:objtab animated:YES];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+       objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+        appDel.Currentmatchcode = displayMatchCode;
+        appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+        [appDel.frontNavigationController pushViewController:objtab animated:YES];
         
         
     }
@@ -470,10 +464,12 @@
 
 -(void)FixturesWebservice
 {
-    if([COMMON isInternetReachable])
-    {
-        
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FixturesKey]];
+    if(![COMMON isInternetReachable])
+        return;
+    
+    
+    [AppCommon showLoading];
+        NSString *URLString =  URL_FOR_RESOURCE(FixturesKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -543,7 +539,6 @@
                         
                         [objarray addObject:dic];
                         
-                        
                     }
                     
                     [self.scheduleCollectionView reloadData];
@@ -563,6 +558,5 @@
         }];
     }
     
-}
 
 @end

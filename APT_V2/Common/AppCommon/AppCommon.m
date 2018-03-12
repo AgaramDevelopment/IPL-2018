@@ -170,6 +170,13 @@ AppCommon *sharedCommon = nil;
     return userreference;
 }
 
++(BOOL)isCoach
+{
+   //  ROL0000002 player code
+    
+    return ([[AppCommon GetUserRoleCode] isEqualToString:@"ROL0000003"]);
+}
+
 #pragma mark - Get Height of Control
 
 - (CGSize)getControlHeight:(NSString *)string withFontName:(NSString *)fontName ofSize:(NSInteger)size withSize:(CGSize)LabelWidth {
