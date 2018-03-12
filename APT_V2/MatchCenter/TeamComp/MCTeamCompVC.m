@@ -231,6 +231,40 @@
             //cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
                 
             cell.WonStatuslbl.text = [self.MatchResultsArray1 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray1 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray1 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray1 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -267,9 +301,7 @@
 //            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
 //            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
                 
-                NSString *  BowlerCount = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
-                NSString * BatsmenCount = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
-                NSString * AllroundCount = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -484,13 +516,49 @@
             if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
 //            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray2 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray2 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray2 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray2 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -504,28 +572,28 @@
             cell.Player10.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:9];
             cell.Player11.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:10];
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray2.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray2.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -741,13 +809,49 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
 //            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray3 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray3 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray3 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray3 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -764,28 +868,28 @@
             
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray3.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-            }
-          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray3.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//            }
+//          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -1001,13 +1105,50 @@
             if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+           // NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
+           // NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
+           // cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
 //            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray4 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray4 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray4 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray4 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -1022,28 +1163,28 @@
             cell.Player11.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:10];
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray4.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray4.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -1259,9 +1400,48 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray5 valueForKey:@"MatchResult"];
+                
+                
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray5 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray5 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray5 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+                }
+                
             
 //            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
@@ -1280,29 +1460,29 @@
             cell.Player11.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:10];
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray5.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
-            
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray5.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
             
