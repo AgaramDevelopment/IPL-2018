@@ -28,6 +28,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 //    array = @[@"one",@"two",@"three"];
+//    [self addshadow];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -44,6 +45,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)addshadow
+{
+    self.tblDropDown.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    self.tblDropDown.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.tblDropDown.layer.shadowRadius = 2.0f;
+    self.tblDropDown.layer.shadowOpacity = 1.0f;
+    self.tblDropDown.layer.masksToBounds = NO;
+    self.tblDropDown.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.tblDropDown.bounds cornerRadius:self.tblDropDown.layer.cornerRadius].CGPath;
+
 }
 
 #pragma mark - Table view data source
@@ -65,8 +77,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
-    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 15.0 : 10.0 )];
-    cell.textLabel.textColor = [UIColor lightTextColor];
+    
+    cell.backgroundColor = [UIColor colorWithRed:28.0/255.0 green:26.0/255.0 blue:68.0/255.0 alpha:0.5];
+    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.text = [[array objectAtIndex:indexPath.row] valueForKey:key];
     
@@ -89,6 +103,7 @@
     [protocol selectedValue:array andKey:key andIndex:indexPath];
     [self close:nil];
 }
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

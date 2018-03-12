@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoGalleryCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIView *shadowview;
-@property (nonatomic,strong) IBOutlet UILabel * batting_lbl;
-@property (nonatomic,strong) IBOutlet UILabel * playername_lbl;
-@property (nonatomic,strong) IBOutlet UILabel * date_lbl;
+
+//@property (weak, nonatomic) IBOutlet UILabel *lblVideoFileName;
+//@property (weak, nonatomic) IBOutlet UIImageView *imgVideoThumpNail;
+@property (weak, nonatomic) IBOutlet UILabel *lblVideoFileName;
+@property (weak, nonatomic) IBOutlet UIImageView *imgVideoThumpNail;
+
 @end

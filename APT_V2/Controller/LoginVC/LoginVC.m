@@ -155,33 +155,47 @@
             [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
             
             [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
-            
 
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
         
             
-            UIViewController* VC;
-            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
-            {
-                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
-                if (!playerTeamCode) {
-                    [AppCommon showAlertWithMessage:@"Player code missing"];
-                    return;
-                }
-                
-                [[NSUserDefaults standardUserDefaults] setObject:playerTeamCode forKey:@"SelectedTeamCode"];
-                VC = [TabHomeVC new];
-            }
-            else
-            {
-               TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-                objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
-                objPlayersVC.teamname = self.teamTF.text;
-                VC = objPlayersVC;
+                UIViewController* VC;
+            
+            if (![AppCommon isCoach]) {
+                NSString * APTTeamCode =[responseObject valueForKey:@"APTTeamcode"];
+                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamCode"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
 
+                
+                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"SelectedTeamCode"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }
+
+                VC = [TabHomeVC new];
+            
+            
+//            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
+//            {
+//                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+//                if (!playerTeamCode) {
+//                    [AppCommon showAlertWithMessage:@"Player code missing"];
+//                    return;
+//                }
+//
+//                [[NSUserDefaults standardUserDefaults] setObject:playerTeamCode forKey:@"SelectedTeamCode"];
+//                VC = [TabHomeVC new];
+//            }
+//            else
+//            {
+//               TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+//                objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
+//                objPlayersVC.teamname = self.teamTF.text;
+//                VC = objPlayersVC;
+//
+//            }
             
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];

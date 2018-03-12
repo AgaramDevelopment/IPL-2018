@@ -41,34 +41,38 @@
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
-    if (!appDel.ArrayTeam.count) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [COMMON getIPLteams];
-        });
-    }
 
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
     
     UIViewController *frontViewController;
     
 
     if(isLogin)
     {
-        if([rolecode isEqualToString:plyRolecode])
-        {
-            frontViewController = [TabHomeVC new];
-        }
-        else
-        {
-            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
-            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
-            frontViewController = objPlayersVC;
-        }
+//        if([rolecode isEqualToString:plyRolecode])
+//        {
+//            frontViewController = [TabHomeVC new];
+//        }
+//        else
+//        {
+//            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+//            objPlayersVC.teamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
+//            objPlayersVC.teamname = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
+//            frontViewController = objPlayersVC;
+//        }
+        
+        frontViewController = [TabHomeVC new];
+
     }
     else
     {
+        if (!appDel.ArrayTeam.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [COMMON getIPLteams];
+            });
+        }
+
         frontViewController = [LoginVC new];
     }
 

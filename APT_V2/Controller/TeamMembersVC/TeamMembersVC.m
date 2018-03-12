@@ -56,7 +56,6 @@
     [self customnavigationmethod];
     
     [self addRefreshControl];
-    [self TeamsWebservice];
 
 //    AllrounderBtn.align
     
@@ -69,6 +68,8 @@
     AllrounderBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     WktKeeperBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self TeamsWebservice];
+
 }
 
 -(void)addRefreshControl
@@ -122,53 +123,78 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
+    
+    CGFloat widthF = self.playesTable.superview.frame.size.width/3;
+
+    if(IS_IPHONE5)
     {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-                return CGSizeMake(130, 178);
-        }
+         widthF = self.playesTable.superview.frame.size.width/2;
     }
-    else
+    else if (IS_IPAD)
     {
-        
-            return CGSizeMake(210, 178);
+        widthF = self.playesTable.superview.frame.size.width/4;
     }
+    
+    return CGSizeMake(widthF-20, widthF-20);
+    
+//    return UICollectionViewFlowLayoutAutomaticSize;
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//                return CGSizeMake(130, 178);
+//        }
+//    }
+//    else
+//    {
+//
+//            return CGSizeMake(210, 178);
+//    }
 }
+
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+    
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 20.0;
-    }
-    else{
-        return 10.0;
-    }
+////    if(!IS_IPHONE_DEVICE)
+////    {
+////        return 20.0;
+////    }
+////    else{
+////        return 10.0;
+////    }
+    return 10.0;
+//
 }
-
+//
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+////    if(!IS_IPHONE_DEVICE)
+////    {
+////        return 23.0;
+////    }
+////    else{
+////        return 10.0;
+////    }
+//
+    return 10.0;
+//
 }
 
 
@@ -228,7 +254,7 @@
         cell.contentView.layer.masksToBounds = YES;
 
         cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowOffset = CGSizeMake(0,0);
         cell.layer.shadowRadius = 2.0f;
         cell.layer.shadowOpacity = 1.0f;
         cell.layer.masksToBounds = NO;
@@ -241,6 +267,7 @@
 {
     
     MyStatsBattingVC* objStats = [MyStatsBattingVC new];
+    objStats.selectedPlayerCode = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteCode"];
 //    [objStats viewDidLoad];
 //    objStats.myStatsViewHeight.constant = 60;
 //    objStats.navViewHeight.constant = 35;

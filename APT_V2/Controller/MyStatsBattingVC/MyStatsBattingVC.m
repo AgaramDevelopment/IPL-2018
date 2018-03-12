@@ -41,6 +41,7 @@
     BOOL isBatting;
     BOOL isBowling;
     
+    
 }
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *battingTableViewHeight;
@@ -48,6 +49,8 @@
 @end
 
 @implementation MyStatsBattingVC
+
+@synthesize selectedPlayerCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -2630,12 +2633,12 @@
     manager.requestSerializer = requestSerializer;
     
     clientCode = [AppCommon GetClientCode];
-    userCode = [AppCommon GetUsercode];
-    userRefCode = [AppCommon GetuserReference];
+    userRefCode = ([AppCommon isCoach] ? selectedPlayerCode : [AppCommon GetuserReference]);
+//    userRefCode = [AppCommon GetuserReference];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
-    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
+//    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
     if(userRefCode)   [dic    setObject:userRefCode     forKey:@"UserrefCode"];
     
     NSLog(@"parameters : %@",dic);
@@ -3207,12 +3210,12 @@
     manager.requestSerializer = requestSerializer;
     
     clientCode = [AppCommon GetClientCode];
-    userCode = [AppCommon GetUsercode];
-    userRefCode = [AppCommon GetuserReference];
+    userRefCode = ([AppCommon isCoach] ? selectedPlayerCode : [AppCommon GetuserReference]);
+//    userRefCode = [AppCommon GetuserReference];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
-    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
+//    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
     if(userRefCode)   [dic    setObject:userRefCode     forKey:@"UserrefCode"];
     
     NSLog(@"parameters : %@",dic);
@@ -3238,6 +3241,7 @@
     }];
     
 }
+
 /*
 #pragma mark - Navigation
 

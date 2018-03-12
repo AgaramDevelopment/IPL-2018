@@ -49,4 +49,6 @@
     //pitch
 @property (nonatomic,strong) NSMutableArray * pitchData;
 
+@property (strong,nonatomic) NSString* selectedPlayerCode;
+
 @end
