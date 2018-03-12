@@ -66,7 +66,8 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    [self ResultsWebservice];
+    [self ScheduleWebservice];
+//    [self ResultsWebservice];
 }
 
 -(void)ResultsWebservice
@@ -98,6 +99,8 @@
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
+            [AppCommon hideLoading];
+
             if(responseObject >0)
             {
                 
@@ -130,7 +133,6 @@
             
             
             
-            [AppCommon hideLoading];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");

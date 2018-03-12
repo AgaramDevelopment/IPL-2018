@@ -607,12 +607,7 @@
     if(![COMMON isInternetReachable])
         return;
     
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-
-    
     
     [AppCommon showLoading];
     
@@ -757,6 +752,7 @@
         }];
     }
 }
+
 -(void)altermsg:(NSString *)msg
 {
     UIAlertController* alert = [UIAlertController
@@ -771,11 +767,14 @@
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
 -(IBAction)didClickCancelBtnAction:(id)sender
 {
     //[self.view removeFromSuperview];
     
-    [appDel.frontNavigationController.topViewController dismissViewControllerAnimated:YES completion:nil];
+//    [appDel.frontNavigationController.topViewController dismissViewControllerAnimated:YES completion:nil];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+
     
 }
 @end

@@ -68,9 +68,7 @@
     else
     {
         if (!appDel.ArrayTeam.count) {
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [COMMON getIPLteams];
-            });
         }
 
         frontViewController = [LoginVC new];

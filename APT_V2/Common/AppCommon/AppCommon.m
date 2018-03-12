@@ -55,6 +55,10 @@ AppCommon *sharedCommon = nil;
 
 -(void)getIPLCompetetion
 {
+    if(![COMMON isInternetReachable])
+        return;
+
+    
     [AppCommon showLoading];
     
     WebService* objWebservice = [[WebService alloc]init];
@@ -103,6 +107,10 @@ AppCommon *sharedCommon = nil;
 
 -(void)getIPLteams
 {
+    if(![COMMON isInternetReachable])
+        return;
+
+    
     [AppCommon showLoading];
     
     WebService* objWebservice = [[WebService alloc]init];
@@ -121,10 +129,13 @@ AppCommon *sharedCommon = nil;
             
         }
         [AppCommon hideLoading];
-        [self getIPLCompetetion];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self getIPLCompetetion];
+        });
 
     } failure:^(AFHTTPRequestOperation *operation, id error) {
-        
+        [AppCommon hideLoading];
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
 
@@ -225,14 +236,21 @@ AppCommon *sharedCommon = nil;
 
 +(void)showLoading
 {
+//    if (appDel.window.subviews containsObject:) {
+//
+//    }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     hud.label.text = @"Please wait";
     [hud setBackgroundColor:[UIColor clearColor]];
 }
+
 +(void)hideLoading
 {
-    [MBProgressHUD hideHUDForView:appDel.window animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:appDel.window animated:YES];
+    });
 }
 
 +(UIColor*)colorWithHexString:(NSString*)hex

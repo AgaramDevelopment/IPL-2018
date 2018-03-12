@@ -144,9 +144,7 @@
     else if(indexPath.row == 1)
     {
         if (!appDel.ArrayTeam.count) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [COMMON getIPLteams];
-            });
+            [COMMON getIPLteams];
         }
 
         newFrontController = [MatchCenterTBC new];

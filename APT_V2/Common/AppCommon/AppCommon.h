@@ -18,6 +18,7 @@
     
 }
 @property (nonatomic, strong) NSArray *contents;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 + (AppCommon *)common;
 -(BOOL) isInternetReachable;

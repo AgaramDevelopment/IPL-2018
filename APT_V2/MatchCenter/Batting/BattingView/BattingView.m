@@ -35,10 +35,10 @@ BOOL isTeams;
 {
     return 1;
 }
+
 // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     if(isOverview==YES)
     {
         return 7;
