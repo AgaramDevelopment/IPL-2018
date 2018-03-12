@@ -18,6 +18,7 @@
 #import "HomeScreenStandingsVC.h"
 #import "SwipeView.h"
 #import "MyStatsBattingVC.h"
+#import "TeamMembersVC.h"
 
 @interface TabHomeVC ()
 {
@@ -27,6 +28,8 @@
     HomeScreenStandingsVC *StandsVC;
     MyStatsBattingVC *objStats;
     NSIndexPath* selectedIndex;
+    TeamMembersVC* objPlayersVC;
+    NSArray* titleArray;
 }
 
 @end
@@ -42,7 +45,17 @@
     
     objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
     objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
+    objPlayersVC = [TeamMembersVC new];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
+    
+    if ([AppCommon isCoach]) {
+        
+        titleArray = @[@"Home",@"MY Teams"];
+    }
+    else {
+        titleArray = @[@"Home",@"My Stats"];
+    }
+    
 
 }
 
@@ -106,146 +119,43 @@
     CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
     CGFloat HeightF = self.Titlecollview.superview.frame.size.height;
     
-
-//    if(IS_IPHONE_DEVICE)
-//    {
-//        if(!IS_IPHONE5)
-//        {
-//            return CGSizeMake(widthF, 50);
-//        }
-//        else
-//        {
-//                return CGSizeMake(widthF, 30);
-//        }
-//    }
-//    else
-//    {
-//        //CGFloat widthF = self.Titlecollview.frame.size.width/2;
-//            return CGSizeMake(widthF, 50);
-//    }
-    
     return CGSizeMake(widthF, HeightF);
 }
-
-//#pragma mark collection view cell paddings
-//- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return UIEdgeInsetsMake(20, 0, 30, 20); // top, left, bottom, right
-//    }
-//    else{
-//        return UIEdgeInsetsMake(10, 0, 0, 10);
-//    }
-//}
-//
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return 20.0;
-//    }
-//    else{
-//        return 10.0;
-//    }
-//}
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return 23.0;
-//    }
-//    else{
-//        return 10.0;
-//    }
-//}
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-        TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        //cell.contentView.backgroundColor = [UIColor whiteColor];
+    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+    cell.Title.text = titleArray[indexPath.row];
+    [cell setTag:indexPath.row];
     
-//    UIView *bgColorView = [[UIView alloc] init];
-//    bgColorView.backgroundColor = [UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
-//    [cell setSelectedBackgroundView:bgColorView];
-    
-    if(indexPath.row==0)
-    {
-        cell.Title.text = @"HOME";
-        [cell setTag:indexPath.row];
-        
-    }
-    if(indexPath.row==1)
-    {
-        cell.Title.text = @"MYSTATS";
-        [cell setTag:indexPath.row];
-    }
-
     if (indexPath == selectedIndex) {
         cell.selectedLineView.backgroundColor = [UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f];
-
     }
-    else
-    {
+    else {
         cell.selectedLineView.backgroundColor = [UIColor clearColor];
-
     }
-
-
-        return cell;
     
+    return cell;
 }
 
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-//    TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-//    UIView *bgColorView = [[UIView alloc] init];
-//    bgColorView.backgroundColor = [UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
-//    [cell setSelectedBackgroundView:bgColorView];
-
-    
-
-//    if(indexPath.row == 0)
-//    {
-//        [self.swipeView scrollToItemAtIndex:0 duration:0];
-    
-//        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-//        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        
-//    }
-//    if(indexPath.row == 1)
-//    {
-//
-//        [self.swipeView scrollToItemAtIndex:1 duration:0];
-//
-//        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-//        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-//    }
-    
-//    selectedIndex = indexPath;
     [self.swipeView scrollToItemAtIndex:indexPath.item duration:0.2];
-//    [collectionView reloadData];
-
 }
 
 
 
 - (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
 {
-    //return the total number of items in the carousel
-    return 2;
+    return titleArray.count;
 }
 
 //- (void)swipeViewDidScroll:(__unused SwipeView *)swipeView {}
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
-//    UILabel *label = nil;
-
-    //create new view if no view is available for recycling
-//    if (view == nil)
-//    {
         view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
@@ -255,12 +165,19 @@
             [view addSubview:objSch.view];
    
         }
+    
          else if(index == 1)
         {
-            objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
-            [view addSubview:objStats.view];
+            if ([AppCommon isCoach]) {
+                objPlayersVC.view.frame = CGRectMake(0, -65, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+65);
+                [view addSubview:objPlayersVC.view];
+            }
+            else
+            {
+                objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
+                [view addSubview:objStats.view];
+            }
         }
-
 
     return view;
 }
@@ -272,23 +189,10 @@
 
 - (void)swipeViewDidScroll:(SwipeView *)swipeView
 {
-
-//    if(self.swipeView.currentItemIndex == 0)
-//    {
-//        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-//        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-//    }
-//    if(self.swipeView.currentItemIndex == 1)
-//    {
-//        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-//        [self.Titlecollview selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-//    }
-
-    
     selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
     [self.Titlecollview reloadData];
-
 }
+
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {
    // self.page_control.currentPage = self.swipeView.currentItemIndex;

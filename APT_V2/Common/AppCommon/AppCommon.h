@@ -51,6 +51,7 @@
 +(NSString *)getCurrentCompetitionName;
 +(NSString *)getCurrentTeamCode;
 +(NSString *)getCurrentTeamName;
++(BOOL)isCoach;
 
 
 @end

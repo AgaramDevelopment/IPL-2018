@@ -54,8 +54,9 @@
     [super viewDidLoad];
     objWebService = [[WebService alloc]init];
     [self videoGalleryWebservice];
-    [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-    [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
+    [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
     self.categoryTbl.layer.borderColor = [UIColor brownColor].CGColor;
     self.categoryTbl.layer.borderWidth = 1.0;
     self.categoryTbl.layer.masksToBounds = YES;
@@ -79,17 +80,7 @@
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
-    
-    if([rolecode isEqualToString:plyRolecode])
-    {
-        [btnUpload setHidden:YES];
-    }
-    else
-    {
-        [btnUpload setHidden:NO];
-    }
+    [btnUpload setHidden:![AppCommon isCoach]];
     
 }
 
@@ -190,20 +181,32 @@
 
 - (IBAction)UploadVideoAction:(id)sender {
     
-    [self callVideoUploadMethod];
-    [self.view layoutIfNeeded];
+    
+    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+    videouploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    videouploadVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [videouploadVC.view setBackgroundColor:[UIColor clearColor]];
+    [appDel.frontNavigationController presentViewController:videouploadVC animated:YES completion:^{
+    }];
+
+//    [self callVideoUploadMethod];
+//    [self.view layoutIfNeeded];
     //videouploadVC.commonView.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
 
 }
+     
 -(void)callVideoUploadMethod
 {
-    if(videouploadVC != nil)
-    {
-        [videouploadVC.view removeFromSuperview];
-    }
-    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+//    if(videouploadVC != nil)
+//    {
+//        [videouploadVC.view removeFromSuperview];
+//    }
     
-    [self.view addSubview:videouploadVC.view];
+    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+    [self.navigationController presentViewController:videouploadVC animated:YES completion:^{
+        
+    }];
+//    [self.view addSubview:videouploadVC.view];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -211,114 +214,138 @@
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    //return self.commonArray.count;
-    if(collectionView==self.videoCollectionview1)
-    {
-    return self.objFirstGalleryArray.count;
-    }
-    else
-    {
-        return self.objVideoFilterArray.count;
-    }
+
+//    if(collectionView==self.videoCollectionview1)
+//    {
+//    return self.objFirstGalleryArray.count;
+//    }
+//    else
+//    {
+//        return self.objVideoFilterArray.count;
+//    }
+    
+    return self.objVideoFilterArray.count;
+
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
-    {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-            if(collectionView == self.videoCollectionview1)
-            {
-                return CGSizeMake(224, 135);
-            }
-            else
-            {
-                return CGSizeMake(120, 180);
-            }
-        }
-    }
-    else
-    {
-        //return CGSizeMake(160, 140);
-        
-        if(collectionView == self.videoCollectionview1)
-        {
-            return CGSizeMake(224, 135);
-        }
-        else
-        {
-            return CGSizeMake(150, 220);
-        }
-    }
+    
+    CGFloat widthF = self.videoCollectionview2.frame.size.width/3;
+    
+    return CGSizeMake(widthF -20 , widthF);
+    
+
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//            if(collectionView == self.videoCollectionview1)
+//            {
+//                return CGSizeMake(224, 135);
+//            }
+//            else
+//            {
+//                return CGSizeMake(120, 180);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //return CGSizeMake(160, 140);
+//
+//        if(collectionView == self.videoCollectionview1)
+//        {
+//            return CGSizeMake(224, 135);
+//        }
+//        else
+//        {
+//            return CGSizeMake(150, 220);
+//        }
+//    }
+    
 }
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(15, 15, 25, 15); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+    
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+    
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(15, 15, 25, 15); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 10.0;
-    }
-    else{
-        return 10.0;
-    }
+    
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 10.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(collectionView==self.videoCollectionview1)
-    {
-        
-        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        
-        cell.contentView.layer.cornerRadius = 2.0f;
-        cell.contentView.layer.borderWidth = 1.0f;
-        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
-        
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
-        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
-        
-        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
-        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
-        return cell;
-    }
+//    if(collectionView==self.videoCollectionview1)
+//    {
+//
+//        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+//
+//        cell.contentView.layer.cornerRadius = 2.0f;
+//        cell.contentView.layer.borderWidth = 1.0f;
+//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+//        cell.contentView.layer.masksToBounds = YES;
+//
+//        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+//        cell.layer.shadowRadius = 2.0f;
+//        cell.layer.shadowOpacity = 1.0f;
+//        cell.layer.masksToBounds = NO;
+//        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+//        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+//        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+//
+//        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+//        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
+//        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+//        return cell;
+//    }
+    
     if(collectionView==self.videoCollectionview2)
     {
         
-        VideoGalleryUploadCell* cell = [self.videoCollectionview2 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+//        VideoGalleryUploadCell* cell = [self.videoCollectionview2 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        VideoGalleryCell* cell = [self.videoCollectionview2 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
@@ -331,13 +358,11 @@
         cell.layer.shadowOpacity = 1.0f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
         NSString * videoDetailStr = [[self.objVideoFilterArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
         NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
-
-        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
-        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
-
+        cell.lblVideoFileName.text = [NSString stringWithFormat:@"%@",component3[1]];
+        
         return cell;
     }
     
@@ -350,12 +375,8 @@
     if (videoPlayerVC != nil) {
        
     }
-    
-    if(collectionView == self.videoCollectionview1)
-    {
-        selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
-    }
-    else if(collectionView == self.videoCollectionview2)
+
+    if(collectionView == self.videoCollectionview2)
     {
         selectvideoStr = [[self.objVideoFilterArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     }
