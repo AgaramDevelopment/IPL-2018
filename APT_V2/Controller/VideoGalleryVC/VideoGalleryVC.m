@@ -246,7 +246,16 @@
     
     CGFloat widthF = self.videoCollectionview2.frame.size.width/3;
     
-    return CGSizeMake(widthF -20 , widthF);
+
+    if (IS_IPAD) {
+        
+        return UICollectionViewFlowLayoutAutomaticSize;
+    }
+    else
+    {
+        return CGSizeMake(widthF -20 , widthF);
+    }
+    
     
 
     

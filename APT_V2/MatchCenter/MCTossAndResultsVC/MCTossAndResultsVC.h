@@ -32,7 +32,10 @@
 @property (weak, nonatomic) IBOutlet LineTextField *txtCompetetionName;
 - (IBAction)actionCompetetion:(id)sender;
 @property (weak, nonatomic) IBOutlet LineTextField *txtTeamName;
+
 @property (weak, nonatomic) IBOutlet UIView *viewCompetetion;
 @property (weak, nonatomic) IBOutlet UIView *viewTeam;
+@property (weak, nonatomic) IBOutlet UILabel *lblCompetetion;
+@property (weak, nonatomic) IBOutlet UILabel *lblTeam;
 
 @end

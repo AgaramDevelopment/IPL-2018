@@ -48,6 +48,8 @@
 
 @synthesize viewTeam,viewCompetetion;
 
+@synthesize lblCompetetion,lblTeam;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -106,26 +108,12 @@
     self.battingSecPie.delegate = self;
     self.battingSecPie.datasource = self;
 
-    txtCompetetionName.text = @"";
+    lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+    lblTeam.text = [AppCommon getCurrentTeamName];
     
-}
+    [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
 
--(void)viewWillAppear:(BOOL)animated
-{
-    if ([txtCompetetionName.text isEqualToString:@""] ||
-        ![txtCompetetionName.text isEqualToString:[AppCommon getCurrentCompetitionName]])
-    {
-        [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-
-    }
     
-    txtCompetetionName.text = [AppCommon getCurrentCompetitionName];
-    
-}
--(void)viewDidAppear:(BOOL)animated
-{
-    [txtCompetetionName setup];
-    [txtTeamName setup];
 }
 
 
@@ -175,6 +163,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
@@ -404,8 +393,9 @@
         [AppCommon showLoading];
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    NSString * teamcode = [AppCommon getCurrentTeamCode];
 
-    NSString * tempStr = [NSString stringWithFormat:@"APT_TOSSRESULTS/%@/%@/%@",CompetitionCode,@"TEA0000008",tossType];
+    NSString * tempStr = [NSString stringWithFormat:@"APT_TOSSRESULTS/%@/%@/%@",CompetitionCode,teamcode,tossType];
         NSString *URLString =  URL_FOR_RESOURCE(tempStr);
     
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -591,7 +581,7 @@
         
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
 
 
     }
@@ -599,7 +589,7 @@
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
 
     }
     
@@ -616,21 +606,20 @@
         
         NSLog(@"%@",array[Index.row]);
         NSLog(@"selected value %@",key);
-        txtCompetetionName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:txtCompetetionName.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
         
     }
     else
     {
-        txtTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:txtTeamName.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:lblTeam.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 

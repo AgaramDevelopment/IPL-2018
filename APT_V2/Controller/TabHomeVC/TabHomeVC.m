@@ -50,7 +50,7 @@
     
     if ([AppCommon isCoach]) {
         
-        titleArray = @[@"Home",@"MY Teams"];
+        titleArray = @[@"Home",@"My Teams"];
     }
     else {
         titleArray = @[@"Home",@"My Stats"];
