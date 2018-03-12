@@ -220,9 +220,9 @@
             cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
             
-            NSString *wonstatus =[[self.TeamPlayersArray1 valueForKey:@"Comments"]objectAtIndex:0];
-            NSString *WonTeamname =[[self.TeamPlayersArray1 valueForKey:@"MatchWon"]objectAtIndex:0];
-            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+            //NSString *wonstatus =[[self.TeamPlayersArray1 valueForKey:@"Comments"]objectAtIndex:0];
+            //NSString *WonTeamname =[[self.TeamPlayersArray1 valueForKey:@"MatchWon"]objectAtIndex:0];
+            //cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
             
             cell.Player1.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -476,9 +476,9 @@
             NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
             cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
-            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
-            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
-            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
+//            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
+//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
             
             cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -1688,16 +1688,26 @@
             self.TeamPlayersArray3 = [[NSMutableArray alloc]init];
             self.TeamPlayersArray4 = [[NSMutableArray alloc]init];
             self.TeamPlayersArray5 = [[NSMutableArray alloc]init];
+           // lstplayerMatchComp
             
-            if([self.TeamPlayersArray1 isKindOfClass:NULL])
+            NSMutableArray *teamArray = [[NSMutableArray alloc]init];
+            
+            if([[responseObject valueForKey:@"lstplayerMatchComp"] isKindOfClass:NULL])
             {
-            self.TeamPlayersArray1 = [responseObject valueForKey:@"lstplayerMatchComp1"];
-            self.TeamPlayersArray2 = [responseObject valueForKey:@"lstplayerMatchComp2"];
-            self.TeamPlayersArray3 = [responseObject valueForKey:@"lstplayerMatchComp3"];
-            self.TeamPlayersArray4 = [responseObject valueForKey:@"lstplayerMatchComp4"];
-            self.TeamPlayersArray5 = [responseObject valueForKey:@"lstplayerMatchComp5"];
+            teamArray = [responseObject valueForKey:@"lstplayerMatchComp"];
+                if([teamArray isKindOfClass:NULL])
+                {
+                
+                    self.TeamPlayersArray1 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0];
+                    self.TeamPlayersArray2 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1];
+                    self.TeamPlayersArray3 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2];
+                    self.TeamPlayersArray4 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3];
+                    self.TeamPlayersArray5 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4];
+                    
+                    [self.teamCompCollectionView reloadData];
+                }
             
-            [self.teamCompCollectionView reloadData];
+            
             }
             else
             {
