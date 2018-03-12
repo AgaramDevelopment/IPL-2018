@@ -221,9 +221,9 @@
             if(self.TeamPlayersArray1.count>0 && ![self.TeamPlayersArray1 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray1 valueForKey:@"MatchDate"]objectAtIndex:0];
-            //NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
-            //NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
-            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
             
             //NSString *wonstatus =[[self.TeamPlayersArray1 valueForKey:@"Comments"]objectAtIndex:0];
@@ -516,9 +516,9 @@
             if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
-            //NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
-            //NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
-            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
@@ -809,9 +809,9 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
-            //NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
-            //NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
-            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
@@ -1105,9 +1105,9 @@
             if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
-           // NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
-           // NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
-           // cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
@@ -1400,9 +1400,9 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
-            //NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
-            //NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
-            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
                 
                 cell.WonStatuslbl.text = [self.MatchResultsArray5 valueForKey:@"MatchResult"];
                 
