@@ -83,15 +83,15 @@
     fourthViewController.title = @"Batting";
     fourthViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     //BowlingVC
     MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
     bowlingViewController.title = @"Bowling";
     bowlingViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 //    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
   

@@ -478,11 +478,12 @@
         
         
         NSString *competition = @"";
-        
+        NSString* teamcode = [AppCommon getCurrentTeamCode];
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
-        
+        if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
+
         
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -546,9 +547,6 @@
                     
                 }
             }
-            
-            
-          
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
