@@ -29,6 +29,8 @@
     BOOL isThrees;
     BOOL isFours;
     BOOL isSixes;
+    BOOL isDotBall;
+    BOOL isWkt;
     BOOL isAll;
     
     UIColor *strokeColor;
@@ -73,7 +75,8 @@
 //    isThrees = YES;
 //    isFours = YES;
 //    isSixes = YES;
-//
+//    isWkt = YES;
+//     isDotBall = YES;
 //    isBatting = YES;
 //    isBowling = NO;
     
@@ -265,8 +268,16 @@
             cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
             cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
+
+            if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+            }
+            else
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+            }
            
-                
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 
                 // EXpanded iPad Cell Header
@@ -290,7 +301,13 @@
                 [cell.threeBtniPad addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.fourBtniPad addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.sixBtniPad addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.dotBtniPad addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.wktBtniPad addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.alllbliPad addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
+                
+                //Drop Down Action For Expanded Cell
+                    [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
+                    
                 
                     //wagon wheel
                 if(self.wagonWheelDrawData.count>0)
@@ -327,8 +344,7 @@
                         NSMutableArray *threescount = [[NSMutableArray alloc]init];
                         NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                         NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                        
-                        
+                        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
                         
                         for(int i=0; i<sepArray.count;i++)
                             {
@@ -527,6 +543,43 @@
                                     strokeColor = [UIColor clearColor];
                                     }
                                 
+                            } else if ([self.selectRuns isEqualToString: @"90"]){
+                                
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                [cell.dotBtniPad setTitle:ss forState:UIControlStateNormal];
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [self colorWithHexString:@"#eee"];
+                                
+                                if(isDotBall == YES)
+                                    {
+                                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                
+                            }
+                            else if ([self.selectRuns isEqualToString: @"80"]){
+                                
+                                
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                
+                                if(isWkt == YES)
+                                    {
+                                    strokeColor = [self colorWithHexString:color];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                
                             }
                             
                                 //                else if ([self.selectRuns isEqualToString: @"0"]){
@@ -677,7 +730,7 @@
                                         }
                                     
                                     
-                                }else if ([run isEqualToString: @"6"]){
+                                } else if ([run isEqualToString: @"6"]){
                                         // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
                                     
                                     
@@ -690,6 +743,36 @@
                                         Img_ball.backgroundColor =[UIColor clearColor];
                                         }
                                     
+                                    
+                                }else if ([run isEqualToString: @"90"]){
+                                    
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
+                                }
+                                else if ([run isEqualToString: @"80"]){
+                                        //ed1d24
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
                                     
                                 }
                                 
@@ -725,6 +808,15 @@
             cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
             cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
+            if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+                {
+                cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
+                }
+            else
+                {
+                cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
+                }
+            
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 
                 // EXpanded iPhone Cell Header
@@ -747,6 +839,8 @@
                 [cell.threeBtniPhone addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.fourBtniPhone addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.sixBtniPhone addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.dotBtniPhone addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.wktBtniPhone addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.alllbliPhone addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                 
                     //wagon wheel
@@ -784,7 +878,7 @@
                         NSMutableArray *threescount = [[NSMutableArray alloc]init];
                         NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                         NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                        
+                        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
                         
                         
                         for(int i=0; i<sepArray.count;i++)
@@ -967,7 +1061,7 @@
                                     //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
                                     //                    strokeColor = [self colorWithHexString:color];
                                 
-                            }else if ([self.selectRuns isEqualToString: @"6"]){
+                            } else if ([self.selectRuns isEqualToString: @"6"]){
                                 
                                 
                                     // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -988,8 +1082,44 @@
                                     strokeColor = [UIColor clearColor];
                                     }
                                 
+                            } else if ([self.selectRuns isEqualToString: @"90"]){
+                                
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                [cell.dotBtniPhone setTitle:ss forState:UIControlStateNormal];
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [self colorWithHexString:@"#eee"];
+                                
+                                if(isDotBall == YES)
+                                    {
+                                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                
                             }
-                            
+                            else if ([self.selectRuns isEqualToString: @"80"]){
+                                
+                                
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                
+                                if(isWkt == YES)
+                                    {
+                                    strokeColor = [self colorWithHexString:color];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                
+                            }
                                 //                else if ([self.selectRuns isEqualToString: @"0"]){
                                 //
                                 //                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -1154,6 +1284,36 @@
                                         }
                                     
                                     
+                                } else if ([run isEqualToString: @"90"]){
+                                    
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
+                                }
+                                else if ([run isEqualToString: @"80"]){
+                                        //ed1d24
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
                                 }
                                 
                                     //                        else if ([run isEqualToString: @"0"]){
@@ -1265,6 +1425,15 @@
                 cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
                 
+                if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+                    {
+                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+                    }
+                else
+                    {
+                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
                         // EXpanded iPad Cell Header
@@ -1296,6 +1465,8 @@
                     [cell.threeBtniPad addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.fourBtniPad addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.sixBtniPad addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.dotBtniPad addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.wktBtniPad addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.alllbliPad addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                     
                         //wagon wheel
@@ -1333,7 +1504,8 @@
                             NSMutableArray *threescount = [[NSMutableArray alloc]init];
                             NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                             NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                            
+                            NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+                            NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
                             
                             
                             for(int i=0; i<sepArray.count;i++)
@@ -1533,6 +1705,45 @@
                                         strokeColor = [UIColor clearColor];
                                         }
                                     
+                                } else if ([self.selectRuns isEqualToString: @"90"]){
+                                    
+                                    
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                    [cell.dotBtniPad setTitle:ss forState:UIControlStateNormal];
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [self colorWithHexString:@"#eee"];
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    
+                                }
+                                else if ([self.selectRuns isEqualToString: @"80"]){
+                                    
+                                    
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        strokeColor = [self colorWithHexString:color];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                    
                                 }
                                 
                                     //                else if ([self.selectRuns isEqualToString: @"0"]){
@@ -1695,7 +1906,35 @@
                                             {
                                             Img_ball.backgroundColor =[UIColor clearColor];
                                             }
+                                    } else if ([run isEqualToString: @"90"]){
                                         
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        if(isDotBall == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
+                                    }
+                                    else if ([run isEqualToString: @"80"]){
+                                            //ed1d24
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        
+                                        if(isWkt == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
                                         
                                     }
                                     
@@ -1732,6 +1971,15 @@
                 cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
                 
+                if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+                    {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
+                    }
+                else
+                    {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
                         // EXpanded iPhone Cell Header
@@ -1755,6 +2003,8 @@
                     [cell.threeBtniPhone addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.fourBtniPhone addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.sixBtniPhone addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.dotBtniPhone addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.wktBtniPhone addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.alllbliPhone addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                     
                         //wagon wheel
@@ -1793,7 +2043,8 @@
                             NSMutableArray *threescount = [[NSMutableArray alloc]init];
                             NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                             NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                            
+                            NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+                            NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
                             
                             
                             for(int i=0; i<sepArray.count;i++)
@@ -1976,7 +2227,7 @@
                                         //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
                                         //                    strokeColor = [self colorWithHexString:color];
                                     
-                                }else if ([self.selectRuns isEqualToString: @"6"]){
+                                } else if ([self.selectRuns isEqualToString: @"6"]){
                                     
                                     
                                         // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -1997,7 +2248,47 @@
                                         strokeColor = [UIColor clearColor];
                                         }
                                     
+                                }   else if ([self.selectRuns isEqualToString: @"90"]){
+                                    
+                                    
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                    [cell.dotBtniPhone setTitle:ss forState:UIControlStateNormal];
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [self colorWithHexString:@"#eee"];
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    
                                 }
+                                else if ([self.selectRuns isEqualToString: @"80"]){
+                                    
+                                    
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        strokeColor = [self colorWithHexString:color];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                    
+                                }
+
                                 
                                     //                else if ([self.selectRuns isEqualToString: @"0"]){
                                     //
@@ -2163,6 +2454,36 @@
                                             }
                                         
                                         
+                                    } else if ([run isEqualToString: @"90"]){
+                                        
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        if(isDotBall == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
+                                    }
+                                    else if ([run isEqualToString: @"80"]){
+                                            //ed1d24
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        
+                                        if(isWkt == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
                                     }
                                     
                                         //                        else if ([run isEqualToString: @"0"]){
@@ -2238,6 +2559,8 @@
                 isThrees = YES;
                 isFours = YES;
                 isSixes = YES;
+                isWkt = YES;
+                isDotBall = YES;
             }
             lastIndex = indexPath;
             selectedIndex = indexPath.row;
@@ -2610,13 +2933,8 @@
                 NSString *playerCode = [self checkNull:[[bowlingRecentMatchesArray objectAtIndex:(loopCount+1)] valueForKey:@"PlayerCode"]];
                 
                 [self pitchMapWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs:(loopCount+1): (int)bowlingRecentMatchesArray.count];
-                
             }
-            
-            
         }
-       
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
@@ -2637,6 +2955,8 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
+    isWkt = YES;
+    isDotBall = YES;
     
     isBatting = YES;
     isBowling = NO;
@@ -2659,11 +2979,6 @@
             
             [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode:0: (int)battingRecentMatchesArray.count];
     }
-        
-    
-    
-    
-   
 }
 
 - (IBAction)bowlingAction:(id)sender {
@@ -2679,6 +2994,8 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
+    isWkt = YES;
+    isDotBall = YES;
     
     isBatting = NO;
     isBowling = YES;
@@ -2713,6 +3030,8 @@
     isThrees = NO;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
 }
@@ -2724,6 +3043,8 @@
     isThrees = NO;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
 }
@@ -2735,6 +3056,8 @@
     isThrees = YES;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
 }
@@ -2746,6 +3069,8 @@
     isThrees = NO;
     isFours = YES;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
 }
@@ -2757,9 +3082,38 @@
     isThrees = NO;
     isFours = NO;
     isSixes = YES;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
 }
+
+-(IBAction)didClickdotsBatting:(id)sender
+{
+    isOnes = NO;
+    isTwos = NO;
+    isThrees = NO;
+    isFours = NO;
+    isSixes = NO;
+    isWkt = NO;
+    isDotBall = YES;
+    
+    [self.batttingTableView reloadData];
+}
+
+-(IBAction)didClickwicketBatting:(id)sender
+{
+    isOnes = NO;
+    isTwos = NO;
+    isThrees = NO;
+    isFours = NO;
+    isSixes = NO;
+    isWkt = YES;
+    isDotBall = NO;
+    
+    [self.batttingTableView reloadData];
+}
+
 
 -(IBAction)didClickAllBatting:(id)sender
 {
@@ -2769,8 +3123,15 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
+    isWkt = YES;
+    isDotBall = YES;
     
     [self.batttingTableView reloadData];
+}
+
+-(IBAction)didClickDropDownButtonForExpandCell:(id)sender
+{
+    
 }
 
 -(NSString *)checkNull:(NSString *)_value
