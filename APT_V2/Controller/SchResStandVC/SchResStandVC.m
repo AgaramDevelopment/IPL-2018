@@ -74,8 +74,9 @@
 -(void)ScheduleWebservice
 {
  
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+        
         [AppCommon showLoading];
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",ScheduleKey]];
@@ -116,7 +117,10 @@
             }
             
             [AppCommon hideLoading];
-            [self FixturesWebservice];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self FixturesWebservice];
+            });
 
             
             
@@ -126,7 +130,6 @@
             [COMMON webServiceFailureError:error];
             
         }];
-    }
     
 }
 
@@ -414,8 +417,6 @@
         
         [scoreArray addObject:dic];
         
-        
-        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
@@ -423,7 +424,6 @@
         //objtab.backkey = @"yes";
         //[self.navigationController pushViewController:objFix animated:YES];
         [appDel.frontNavigationController pushViewController:objtab animated:YES];
-        
         
     }
     
@@ -496,7 +496,6 @@
                 fixArr = [responseObject valueForKey:@"lstFixturesGridValues"];
                 if(fixArr.count >0)
                 {
-                    //self.competitionLbl.text = [[fixArr valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
                     
                     NSMutableArray * sepArray = [[NSMutableArray alloc]init];
                     
@@ -543,13 +542,14 @@
                     }
                     
                     [self.scheduleCollectionView reloadData];
-                    [AppCommon hideLoading];
                     
                 }
             }
-            
+            [AppCommon hideLoading];
+
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
             NSLog(@"failed");
             
