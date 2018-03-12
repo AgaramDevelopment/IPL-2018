@@ -28,7 +28,7 @@
     HomeScreenStandingsVC *objStands;
     TabbarVC *objtab;
     SWRevealViewController *revealController;
-    NSMutableArray *objarray;
+    NSMutableArray *objarray,*resultArr;
     
     //AppDelegate *objAppDel;
 }
@@ -66,9 +66,81 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    [self ScheduleWebservice];
+    [self ResultsWebservice];
 }
 
+-(void)ResultsWebservice
+{
+    if(![COMMON isInternetReachable])
+        return;
+        
+    
+    [AppCommon showLoading];
+
+    NSString *URLString =  URL_FOR_RESOURCE(ResultsKey);
+                                
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+    
+    
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+        if([AppCommon getCurrentCompetitionCode])
+            [dic    setObject:[AppCommon getCurrentCompetitionCode]     forKey:@"Competitioncode"];
+        if([AppCommon getCurrentTeamCode])
+            [dic    setObject:[AppCommon getCurrentTeamCode]     forKey:@"TeamCode"];
+
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                
+                resultArr = [[NSMutableArray alloc]init];
+                NSMutableArray * filterarr = [[NSMutableArray alloc]init];
+                
+                if ([responseObject valueForKey:@"lstFixturesGridValues"]) {
+                    filterarr = [responseObject valueForKey:@"lstFixturesGridValues"];
+                    
+                }
+                
+                for( int i=0;i<filterarr.count;i++)
+                {
+                    if(![[[filterarr valueForKey:@"FIRSTINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"SECONDINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"THIRDINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"FOURTHINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]]  )
+                    {
+                        
+                        [resultArr addObject:[filterarr objectAtIndex:i]];
+                        
+//                        isList=YES;
+                    }
+                }
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self FixturesWebservice];
+                });
+
+                
+            }
+            
+            
+            
+            [AppCommon hideLoading];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+
+            [COMMON webServiceFailureError:error];
+            
+        }];
+    
+}
 
 
 -(void)ScheduleWebservice

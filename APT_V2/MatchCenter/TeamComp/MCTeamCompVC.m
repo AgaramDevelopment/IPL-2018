@@ -59,18 +59,20 @@
     [self customnavigationmethod];
     
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        self.dropviewComp2.hidden = YES;
+//    }
+//    else
+//    {
+//        self.dropviewComp2.hidden = NO;
+//    }
     
-    if([rolecode isEqualToString:plyRolecode])
-    {
-        self.dropviewComp2.hidden = YES;
-    }
-    else
-    {
-        self.dropviewComp2.hidden = NO;
-    }
-    
+    [self.dropviewComp2 setHidden:![AppCommon isCoach]];
+
     [self.teamCompCollectionView registerNib:[UINib nibWithNibName:@"MCTeamCompCVC" bundle:nil] forCellWithReuseIdentifier:@"mcTeamCompCVC"];
     
     [self.BowlerCollectionView registerNib:[UINib nibWithNibName:@"MCTeamPlayersCompCell" bundle:nil] forCellWithReuseIdentifier:@"CompCell"];
