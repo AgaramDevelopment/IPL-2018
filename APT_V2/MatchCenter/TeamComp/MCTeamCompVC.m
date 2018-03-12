@@ -38,6 +38,12 @@
 @property (strong, nonatomic)  NSMutableArray *TeamPlayersArray4;
 @property (strong, nonatomic)  NSMutableArray *TeamPlayersArray5;
 
+@property (strong, nonatomic)  NSMutableArray *MatchResultsArray1;
+@property (strong, nonatomic)  NSMutableArray *MatchResultsArray2;
+@property (strong, nonatomic)  NSMutableArray *MatchResultsArray3;
+@property (strong, nonatomic)  NSMutableArray *MatchResultsArray4;
+@property (strong, nonatomic)  NSMutableArray *MatchResultsArray5;
+
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
 
@@ -215,14 +221,50 @@
             if(self.TeamPlayersArray1.count>0 && ![self.TeamPlayersArray1 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray1 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
             
             //NSString *wonstatus =[[self.TeamPlayersArray1 valueForKey:@"Comments"]objectAtIndex:0];
             //NSString *WonTeamname =[[self.TeamPlayersArray1 valueForKey:@"MatchWon"]objectAtIndex:0];
             //cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+            cell.WonStatuslbl.text = [self.MatchResultsArray1 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray1 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray1 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray1 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -236,28 +278,30 @@
             cell.Player10.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:9];
             cell.Player11.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:10];
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray1.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray1.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray1 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+                
+                
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -472,13 +516,49 @@
             if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
 //            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
 //            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray2 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray2 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray2 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray2 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -492,28 +572,28 @@
             cell.Player10.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:9];
             cell.Player11.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:10];
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray2.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray2.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -532,7 +612,7 @@
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -551,7 +631,7 @@
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -570,7 +650,7 @@
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -589,7 +669,7 @@
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -607,7 +687,7 @@
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -626,7 +706,7 @@
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -645,7 +725,7 @@
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -663,7 +743,7 @@
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -681,7 +761,7 @@
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -699,7 +779,7 @@
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -717,7 +797,7 @@
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -729,13 +809,49 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
-            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
-            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
-            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
+//            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
+//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray3 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray3 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray3 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray3 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -752,28 +868,28 @@
             
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray3.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-                }
-            }
-          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray3.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+//                }
+//            }
+//          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -792,7 +908,7 @@
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -811,7 +927,7 @@
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -830,7 +946,7 @@
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -849,7 +965,7 @@
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -867,7 +983,7 @@
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -886,7 +1002,7 @@
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -905,7 +1021,7 @@
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -923,7 +1039,7 @@
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -941,7 +1057,7 @@
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -959,7 +1075,7 @@
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -977,7 +1093,7 @@
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -989,13 +1105,50 @@
             if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
             {
             cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+           // NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
+           // NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
+           // cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
-            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
-            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
-            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
+//            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
+//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+                
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray4 valueForKey:@"MatchResult"];
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray4 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray4 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray4 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -1010,28 +1163,28 @@
             cell.Player11.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:10];
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray4.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray4.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
@@ -1050,7 +1203,7 @@
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1069,7 +1222,7 @@
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1088,7 +1241,7 @@
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1107,7 +1260,7 @@
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1125,7 +1278,7 @@
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1144,7 +1297,7 @@
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1163,7 +1316,7 @@
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1181,7 +1334,7 @@
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1199,7 +1352,7 @@
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1217,7 +1370,7 @@
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1235,7 +1388,7 @@
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1247,13 +1400,52 @@
             {
             
             cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+            //NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
+            //NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
+            //cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+                
+                cell.WonStatuslbl.text = [self.MatchResultsArray5 valueForKey:@"MatchResult"];
+                
+                
+                NSString *  BowlerCount ;
+                if([[self.MatchResultsArray5 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [vv stringValue];
+                }
+                else
+                {
+                    BowlerCount = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+                }
+                
+                
+                NSString * BatsmenCount;
+                if([[self.MatchResultsArray5 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+                    BatsmenCount = [vv stringValue];
+                }
+                else
+                {
+                    BatsmenCount = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+                }
+                
+                
+                NSString * AllroundCount;
+                if([[self.MatchResultsArray5 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                {
+                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+                    AllroundCount = [vv stringValue];
+                }
+                else
+                {
+                    AllroundCount = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+                }
+                
             
-            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
-            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
-            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
+//            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
+//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
             
             cell.Player1.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -1268,29 +1460,29 @@
             cell.Player11.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:10];
             
             
-            NSMutableArray *arr = [[NSMutableArray alloc]init];
-            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-            for(int i=0;i<self.TeamPlayersArray5.count;i++)
-            {
-                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
-                if( [playerrole isEqualToString:@"Bowler"])
-                {
-                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"Batsman"])
-                {
-                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-                else if( [playerrole isEqualToString:@"All Rounder"])
-                {
-                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-                }
-            }
-            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
-            
+//            NSMutableArray *arr = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+//            for(int i=0;i<self.TeamPlayersArray5.count;i++)
+//            {
+//                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
+//                if( [playerrole isEqualToString:@"Bowler"])
+//                {
+//                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"Batsman"])
+//                {
+//                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//                else if( [playerrole isEqualToString:@"All Rounder"])
+//                {
+//                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+//                }
+//            }
+//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//
             cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
             
@@ -1308,7 +1500,7 @@
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1327,7 +1519,7 @@
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1346,7 +1538,7 @@
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1365,7 +1557,7 @@
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1383,7 +1575,7 @@
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1402,7 +1594,7 @@
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1421,7 +1613,7 @@
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1439,7 +1631,7 @@
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1457,7 +1649,7 @@
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1475,7 +1667,7 @@
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1493,7 +1685,7 @@
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"batball"];
             }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper"])
+            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
@@ -1692,10 +1884,10 @@
             
             NSMutableArray *teamArray = [[NSMutableArray alloc]init];
             
-            if([[responseObject valueForKey:@"lstplayerMatchComp"] isKindOfClass:NULL])
+            if(![[responseObject valueForKey:@"lstplayerMatchComp"] isKindOfClass:NULL])
             {
             teamArray = [responseObject valueForKey:@"lstplayerMatchComp"];
-                if([teamArray isKindOfClass:NULL])
+                if(![teamArray isKindOfClass:NULL])
                 {
                 
                     self.TeamPlayersArray1 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0];
@@ -1709,10 +1901,24 @@
             
             
             }
-            else
+            
+            if(![[responseObject valueForKey:@"lstTeamCompResults"] isKindOfClass:NULL])
             {
                 
+            NSMutableArray *arrayResults = [[NSMutableArray alloc]init];
+            arrayResults = [responseObject valueForKey:@"lstTeamCompResults"];
+            
+            self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
+            self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
+            self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
+            self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
+            self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
+                
+                
             }
+            
+            
+            
             
         }
         [AppCommon hideLoading];
