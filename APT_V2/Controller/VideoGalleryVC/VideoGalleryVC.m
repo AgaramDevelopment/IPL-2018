@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[WebService alloc]init];
-    [self videoGalleryWebservice];
+    //[self videoGalleryWebservice];
     
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     
