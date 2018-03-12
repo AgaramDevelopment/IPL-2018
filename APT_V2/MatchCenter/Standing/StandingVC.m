@@ -42,6 +42,7 @@
     self.PoplistTable.dataSource = self;
     
     self.standingsCollectionView.hidden = YES;
+    self.PoplistTable.hidden = YES;
     
     
     //headingKeyArray =  @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
@@ -110,7 +111,7 @@
     
     if(isYear==YES)
     {
-        return competitionArray.count;
+        return appDel.ArrayCompetition.count;
     }
     else{
         return 0;
@@ -136,7 +137,7 @@
     {
         //cell.textLabel.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
         
-        cell.textLabel.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
         
     }else{
         cell.textLabel.text = @"";
@@ -154,11 +155,14 @@
     if(isYear==YES)
     {
        // self.yearlbl.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
-        self.yearlbl.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
-        competitionCode = [[competitionArray valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
+        self.yearlbl.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        competitionCode = [[appDel.ArrayCompetition valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
         self.standingsCollectionView.hidden = NO;
-        self.popTableView.hidden = YES;
-//        [self StandingsTeamTableWebservice];
+        self.PoplistTable.hidden = YES;
+        [[NSUserDefaults standardUserDefaults] setValue:self.yearlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self StandingsWebservice];
         
     }
     
@@ -184,8 +188,8 @@
         self.PoplistTable.hidden = NO;
         self.popTableView.hidden = NO;
         
-        self.tableWidth.constant = self.standingsCollectionView.frame.size.width;
-        self.tableXposition.constant = self.standingsCollectionView.frame.origin.x;
+        self.tableWidth.constant = self.viewCompetetion.frame.size.width;
+        self.tableXposition.constant = self.viewCompetetion.frame.origin.x;
         [self.PoplistTable reloadData];
     }
 }
@@ -358,6 +362,7 @@
     
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    self.yearlbl.text = [AppCommon getCurrentCompetitionName];
     objWebservice = [[WebService alloc]init];
     
     
@@ -366,10 +371,13 @@
         
         if(responseObject >0)
         {
-            competitionArray = [[NSMutableArray alloc]init];
-            competitionArray = [responseObject valueForKey:@"CompetitionResult"];
+            //competitionArray = [[NSMutableArray alloc]init];
+            //competitionArray = [responseObject valueForKey:@"CompetitionResult"];
+            DetailsArray = [[NSMutableArray alloc]init];
+            DetailsArray = [responseObject valueForKey:@"TeamResult"];
             
-            [self.PoplistTable reloadData];
+            
+            [self.standingsCollectionView reloadData];
             
         }
         [AppCommon hideLoading];

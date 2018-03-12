@@ -567,8 +567,8 @@
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS1 valueForKey:@"PaceMaiden"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS1 valueForKey:@"PaceMaidenWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [[pacearrS1 valueForKey:@"PaceDots"] objectAtIndex:0];
+    NSString *v4 =[[pacearrS1 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
@@ -621,8 +621,8 @@
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS1 valueForKey:@"SpinMaiden"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS1 valueForKey:@"SpinMaidenWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [[spinarrS1 valueForKey:@"SpinDots"] objectAtIndex:0];
+    NSString *vv4 =[[spinarrS1 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
@@ -684,8 +684,8 @@
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS2 valueForKey:@"PaceMaiden"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS2 valueForKey:@"PaceMaidenWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [[pacearrS2 valueForKey:@"PaceDots"] objectAtIndex:0];
+    NSString *v4 =[[pacearrS2 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
@@ -737,8 +737,8 @@
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS2 valueForKey:@"SpinMaiden"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS2 valueForKey:@"SpinMaidenWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [[spinarrS2 valueForKey:@"SpinDots"] objectAtIndex:0];
+    NSString *vv4 =[[spinarrS2 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
@@ -801,8 +801,8 @@
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS3 valueForKey:@"PaceMaiden"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS3 valueForKey:@"PaceMaidenWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [[pacearrS3 valueForKey:@"PaceDots"] objectAtIndex:0];
+    NSString *v4 =[[pacearrS3 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
@@ -854,8 +854,8 @@
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS3 valueForKey:@"SpinMaiden"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS3 valueForKey:@"SpinMaidenWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [[spinarrS3 valueForKey:@"SpinDots"] objectAtIndex:0];
+    NSString *vv4 =[[spinarrS3 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
