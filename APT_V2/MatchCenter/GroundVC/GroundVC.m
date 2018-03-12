@@ -76,6 +76,21 @@
     competitionCode = [AppCommon getCurrentCompetitionCode];
     competitionName = [AppCommon getCurrentCompetitionName];
     
+    //To Hide Team Code For Player
+  
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+        {
+        self.teamView.hidden = YES;
+        }
+    else
+        {
+        self.teamView.hidden = NO;
+        }
+   
+    
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
     
@@ -948,14 +963,25 @@
             self.teamCodeTF.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
             teamCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
             self.competitionTeamCodesTblView.hidden = YES;
+            
+                //Sync Team Code
+//            [[NSUserDefaults standardUserDefaults] setValue:self.teamCodeTF.text forKey:@"SelectedTeamName"];
+//            [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"SelectedTeamCode"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             }
         
         if(isCompetitionCode == YES)
-            {
+        {
             self.competitionCodeTF.text = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
             competitionCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
             self.competitionTeamCodesTblView.hidden = YES;
-            }
+        
+            //Sync Competition Code
+            [[NSUserDefaults standardUserDefaults] setValue:self.competitionCodeTF.text forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         if (isGroundCode == YES) {
             self.groundLbl.text = [NSString stringWithFormat:@"%@ %@", [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"], [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"Venue"]];
             
