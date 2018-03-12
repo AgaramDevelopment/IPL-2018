@@ -182,16 +182,29 @@
 - (IBAction)UploadVideoAction:(id)sender {
     
     
-    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
-    videouploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    videouploadVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [videouploadVC.view setBackgroundColor:[UIColor clearColor]];
-    [appDel.frontNavigationController presentViewController:videouploadVC animated:YES completion:^{
-    }];
+//    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+//    videouploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    videouploadVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [videouploadVC.view setBackgroundColor:[UIColor clearColor]];
+//    [appDel.frontNavigationController presentViewController:videouploadVC.view animated:YES completion:^{
+//    }];
+    
+    
+    
+   // [self.view addSubview:videouploadVC.view];
 
 //    [self callVideoUploadMethod];
 //    [self.view layoutIfNeeded];
     //videouploadVC.commonView.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    
+    
+    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+    //    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+        videouploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        videouploadVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [videouploadVC.view setBackgroundColor:[UIColor clearColor]];
+    [appDel.frontNavigationController pushViewController:videouploadVC animated:YES];
 
 }
      

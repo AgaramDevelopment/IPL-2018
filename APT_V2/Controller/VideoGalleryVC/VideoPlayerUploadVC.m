@@ -357,8 +357,7 @@
     
     imagePicker.delegate = self;
     
-    imagePicker.sourceType =
-    UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     
     imagePicker.mediaTypes =
     @[(NSString *) kUTTypeImage,
@@ -745,7 +744,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 // Update the UI
                 [AppCommon hideLoading];
-               [self.view removeFromSuperview];
+//               [self.view removeFromSuperview];
+                [appDel.frontNavigationController.topViewController dismissViewControllerAnimated:YES completion:nil];
             });
 
             
@@ -773,6 +773,9 @@
 }
 -(IBAction)didClickCancelBtnAction:(id)sender
 {
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
+    
+    [appDel.frontNavigationController.topViewController dismissViewControllerAnimated:YES completion:nil];
+    
 }
 @end
