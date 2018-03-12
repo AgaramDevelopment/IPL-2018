@@ -20,7 +20,25 @@
     WebService *objWebservice;
     NSInteger selectedIndex;
     NSIndexPath *lastIndex;
-
+    int positiveCount;
+    
+    
+    int caughtCount;
+    int chaseStopCount;
+    int directHitCount;
+    int diveStopCount;
+    int goodThrowCount;
+    int pickThrowCount;
+    int relayThrowCount;
+    int slideStopCount;
+    int wellKeptCount;
+    
+    int catchDropCount;
+    int diveMissCount;
+    int fumbleCount;
+    int misFieldCount;
+    int runOutMissCount;
+    int throwaatStumpsCount;
 }
 @end
 
@@ -89,6 +107,7 @@ int headdingCount = 0;
         self.odiInnsView.layer.shadowColor = [[UIColor blackColor] CGColor];
         self.odiInnsView.layer.shadowOffset = CGSizeMake(0,5);
         self.odiInnsView.layer.shadowOpacity = 0.5;
+        
     }
     
     [self setTabView];
@@ -254,6 +273,9 @@ int headdingCount = 0;
         _odiInnsView.hidden = false;
         _testInnsView.hidden = true;
         
+        [self.odiInn1Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
+        [self.odiInn2Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+        
         [self clearBtnSubView:_odiInn1Btn];
         [self clearBtnSubView:_odiInn2Btn];
         
@@ -334,10 +356,10 @@ int headdingCount = 0;
             cell.dismissTeamScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"FOW"];
             cell.dismissPartnerShipLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"Partnership"];
             
-            cell.arrowImg.image = [UIImage imageNamed:@"uparrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"upArrow"];
             
         }else{
-            cell.arrowImg.image = [UIImage imageNamed:@"Down Arrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"downArrow"];
         }
         
         
@@ -350,6 +372,7 @@ int headdingCount = 0;
         [[NSBundle mainBundle] loadNibNamed:@"FieldSummaryTVC" owner:self options:nil];
         cell = self.headdingTVC;
         cell.headdingLbl.text = @"Positives";
+        //cell.countLbl.text = [NSString stringWithFormat:@"%d",positiveCount];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -369,22 +392,31 @@ int headdingCount = 0;
 
                 if([key isEqualToString:@"Caught"]){
                     [self loadFieldPlayer: cell :key : @"Caught":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",caughtCount];
                 }else if([key isEqualToString:@"ChaseStop"]){
                     [self loadFieldPlayer: cell :key : @"Chase and Stop":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",chaseStopCount];
                 }else if([key isEqualToString:@"DirectHit"]){
                     [self loadFieldPlayer: cell :key : @"Direct Hit":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",directHitCount];
                 }else if([key isEqualToString:@"DiveStop"]){
                     [self loadFieldPlayer: cell :key : @"Dive and Stop":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",diveStopCount];
                 }else if([key isEqualToString:@"GoodThrow"]){
                     [self loadFieldPlayer: cell :key : @"Good Throw":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",goodThrowCount];
                 }else if([key isEqualToString:@"PickThrow"]){
                     [self loadFieldPlayer: cell :key : @"Pick and Throw":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",pickThrowCount];
                 }else if([key isEqualToString:@"RelayThrow"]){
                     [self loadFieldPlayer: cell :key : @"Relay Throw":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",relayThrowCount];
                 }else if([key isEqualToString:@"SlideStop"]){
                     [self loadFieldPlayer: cell :key : @"Side and Stop":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",slideStopCount];
                 }else if([key isEqualToString:@"WellKept"]){
                     [self loadFieldPlayer: cell :key : @"Well Kept":positiveTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",wellKeptCount];
                 }
                 
                 break;
@@ -393,9 +425,9 @@ int headdingCount = 0;
         }
 
         if(selectedIndex == indexPath.row){
-            cell.arrowImg.image = [UIImage imageNamed:@"uparrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"upArrow"];
         }else{
-            cell.arrowImg.image = [UIImage imageNamed:@"Down Arrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"downArrow"];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -426,16 +458,22 @@ int headdingCount = 0;
                 
                 if([key isEqualToString:@"CatchDrop"]){
                     [self loadFieldPlayer: cell :key : @"Catch Dropped":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",catchDropCount];
                 }else if([key isEqualToString:@"DiveMiss"]){
                     [self loadFieldPlayer: cell :key : @"Dive and Miss":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",diveMissCount];
                 }else if([key isEqualToString:@"Fumble"]){
                     [self loadFieldPlayer: cell :key : @"Fumble":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",fumbleCount];
                 }else if([key isEqualToString:@"MisField"]){
                     [self loadFieldPlayer: cell :key : @"Mis-field":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",misFieldCount];
                 }else if([key isEqualToString:@"RunOutMiss"]){
                     [self loadFieldPlayer: cell :key : @"Run Out Missed":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",runOutMissCount];
                 }else if([key isEqualToString:@"ThrowaatStumps"]){
                     [self loadFieldPlayer: cell :key : @"Thrown at Stumps":negativeTypeDict:indexPath];
+                    cell.countLbl.text = [NSString stringWithFormat:@"%d",throwaatStumpsCount];
                 }
                 break;
             }
@@ -444,9 +482,9 @@ int headdingCount = 0;
         
         
         if(selectedIndex == indexPath.row){
-            cell.arrowImg.image = [UIImage imageNamed:@"uparrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"upArrow"];
         }else{
-            cell.arrowImg.image = [UIImage imageNamed:@"Down Arrow"];
+            cell.arrowImg.image = [UIImage imageNamed:@"downArrow"];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -777,39 +815,54 @@ int headdingCount = 0;
     if(caught.count > 0){
         
         [positiveTypeDict setObject:caught forKey:@"Caught"];
+         caughtCount = caught.count;
     }
 
     if(chaseStop.count > 0){
         [positiveTypeDict setObject:chaseStop forKey:@"ChaseStop"];
+         chaseStopCount = chaseStop.count;
     }
     
     if(directHit.count > 0){
         [positiveTypeDict setObject:directHit forKey:@"DirectHit"];
+        directHitCount = directHit.count;
     }
     
     if(diveStop.count > 0){
         [positiveTypeDict setObject:diveStop forKey:@"DiveStop"];
+        diveStopCount = diveStop.count;
     }
     
     if(goodThrow.count > 0){
         [positiveTypeDict setObject:goodThrow forKey:@"GoodThrow"];
+        goodThrowCount = goodThrow.count;
     }
     
     if(pickThrow.count > 0){
         [positiveTypeDict setObject:pickThrow forKey:@"PickThrow"];
+        pickThrowCount = pickThrow.count;
     }
     
     if(relayThrow.count > 0){
         [positiveTypeDict setObject:relayThrow forKey:@"RelayThrow"];
+        
+        relayThrowCount = relayThrow.count;
     }
     
     if(slideStop.count > 0){
         [positiveTypeDict setObject:slideStop forKey:@"SlideStop"];
+         slideStopCount = slideStop.count;
     }
     
     if(wellKept.count > 0){
         [positiveTypeDict setObject:wellKept forKey:@"WellKept"];
+         wellKeptCount = wellKept.count;
     }
+    
+    
+//     positiveCount = caught.count+chaseStop.count+directHit.count+diveStop.count+goodThrow.count+pickThrow.count+relayThrow.count+slideStop.count+wellKept.count;
+    
+    
     
     //-------- Negatives
     
@@ -906,26 +959,33 @@ int headdingCount = 0;
     if(catchDrop.count > 0){
         
         [negativeTypeDict setObject:catchDrop forKey:@"CatchDrop"];
+        catchDropCount = catchDrop.count;
     }
     
     if(diveMiss.count > 0){
         [negativeTypeDict setObject:diveMiss forKey:@"DiveMiss"];
+        
+        diveMissCount = diveMiss.count;
     }
     
     if(fumble.count > 0){
         [negativeTypeDict setObject:fumble forKey:@"Fumble"];
+        fumbleCount = fumble.count;
     }
     
     if(misField.count > 0){
         [negativeTypeDict setObject:misField forKey:@"MisField"];
+        misFieldCount = misField.count;
     }
     
     if(runOutMiss.count > 0){
         [negativeTypeDict setObject:runOutMiss forKey:@"RunOutMiss"];
+         runOutMissCount = runOutMiss.count;
     }
     
     if(throwaatStumps.count > 0){
         [negativeTypeDict setObject:throwaatStumps forKey:@"ThrowaatStumps"];
+        throwaatStumpsCount = throwaatStumps.count;
     }
     
    

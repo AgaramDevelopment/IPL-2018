@@ -47,6 +47,8 @@
 
 //FieldingKPI
 @property (strong, readwrite) NSString *matchHeaderDetails;
+@property (strong, readwrite) NSString *TeamA;
+@property (strong, readwrite) NSString *TeamB;
 @property (readwrite) BOOL isTest;
 
 @end

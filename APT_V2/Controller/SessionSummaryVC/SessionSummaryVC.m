@@ -11,6 +11,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "SessionPartCell.h"
+#import "AppCommon.h"
 
 
 @interface SessionSummaryVC ()
@@ -60,6 +61,9 @@
     self.matchcode = appDel.Currentmatchcode;
     self.matchHeadding = appDel.matchHeaderDetails;
     self.isTest = appDel.isTest;
+    
+    [self.Innings1 setTitle:appDel.TeamA forState:UIControlStateNormal];
+    [self.Innings2 setTitle:appDel.TeamB forState:UIControlStateNormal];
     
     [self customnavigationmethod];
     matchstatus = @"MSC215";
@@ -115,6 +119,7 @@
 
 -(void)MatchTypeService
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice matchtypesummary :MatchTypeKey :self.matchcode :matchstatus  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -136,12 +141,13 @@
             {
                 self.ODIview.hidden=NO;
                 self.TESTview.hidden=YES;
-                [self.session1 setTitle:@"PPL1"  forState:UIControlStateNormal];
-                [self.session2 setTitle:@"PPL2"  forState:UIControlStateNormal];
-                [self.session3 setTitle:@"PPL3"  forState:UIControlStateNormal];
+                [self.session1 setTitle:@"1-6 Ov"  forState:UIControlStateNormal];
+                [self.session2 setTitle:@"7-15 Ov"  forState:UIControlStateNormal];
+                [self.session3 setTitle:@"16-20 Ov"  forState:UIControlStateNormal];
                 [self.Innings1 sendActionsForControlEvents:UIControlEventTouchUpInside];
             }
-            
+          
+            [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -151,6 +157,7 @@
 
 -(void)OdiService1
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -198,7 +205,7 @@
             
             NSLog(@"%@", day1Sessionarray);
             
-            
+            [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -208,6 +215,7 @@
 
 -(void)OdiService2
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -253,7 +261,7 @@
             
             
             NSLog(@"%@", day1Sessionarray);
-            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -263,6 +271,7 @@
 
 -(void)OdiService3
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -323,7 +332,7 @@
             
             
             
-            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -337,6 +346,7 @@
 
 -(void)SessionWebservice1
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -388,7 +398,7 @@
             
             
             // day1Session1array = [responseObject valueForKey:@"lstSessionTeamSummary"];
-            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -398,6 +408,7 @@
 
 -(void)SessionWebservice2
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -446,7 +457,7 @@
             
             
             NSLog(@"%@", day1Sessionarray);
-            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -456,6 +467,7 @@
 
 -(void)SessionWebservice3
 {
+    [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice sessionsummary:SessionKey :self.matchcode :matchstatus :dayno :sessionNo :innNo success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -515,7 +527,7 @@
             self.partnrTblHeight.constant = height1;
             [self.view layoutIfNeeded];
             
-            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -1001,6 +1013,7 @@
         cell.runslbl.text = [[day1Sessionarray valueForKey:@"Runs"] objectAtIndex:indexPath.row];
         cell.runratelbl.text = [[day1Sessionarray valueForKey:@"RR"] objectAtIndex:indexPath.row];
         cell.wicketslbl.text = [[day1Sessionarray valueForKey:@"Wkts"] objectAtIndex:indexPath.row];
+        cell.dotballslbl.text = [[day1Sessionarray valueForKey:@"Dots"] objectAtIndex:indexPath.row];
         
         return cell;
     }
