@@ -2582,7 +2582,7 @@
     if (indexPath.section == 1) {
         if(indexPath.row ==  selectedIndex)
         {
-            return 420;
+            return 450;
         } else {
             return (IS_IPAD)?80: 60;
         }
