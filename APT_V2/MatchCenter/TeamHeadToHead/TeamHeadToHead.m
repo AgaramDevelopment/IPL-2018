@@ -332,7 +332,7 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, team1Code];
     
 //     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
     
@@ -374,19 +374,6 @@
 
 - (void)headToHeadResultsPostService {
     
-    if(![COMMON isInternetReachable])
-        return;
-    
-    [AppCommon showLoading];
-    
-    NSString *URLString =  URL_FOR_RESOURCE(HTHResults);
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    manager.requestSerializer = requestSerializer;
-    
     /*
      http://localhost:58774/AGAPTService.svc/APT_HTHRESULTS
      {"CompetitionCode":"UCC0000008",
@@ -400,6 +387,19 @@
      "ToOver":"19"
      }
      */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(HTHResults);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic    setObject:competitionCode     forKey:@"CompetitionCode"];

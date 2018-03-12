@@ -49,7 +49,7 @@
     BOOL isCompetitionCode;
     BOOL isGroundCode;
     NSString *teamCode;
-    NSString *competitionCode;
+    NSString *competitionCode, *competitionName;
     NSString *groundCode;
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
@@ -73,7 +73,8 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     
-//    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
+    competitionCode = [AppCommon getCurrentCompetitionCode];
+    competitionName = [AppCommon getCurrentCompetitionName];
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
@@ -92,7 +93,10 @@
     self.competitionTeamCodesTblView.hidden = YES;
    // [self barchartMultiple];
     
-    [self groundGetService];
+    //Ground List Get Service Call
+    [self groundListGetService];
+    
+//    [self groundGetService];
 //    [self groundDimensions];
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -166,8 +170,8 @@
     
     [AppCommon showLoading];
     
-//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, @"UCC0000008"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, @"UCC0000008"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -179,8 +183,7 @@
         
         groundResultsArray = [NSMutableArray new];
         groundResultsArray = [responseObject valueForKey:@"GroundResults"];
-        //GroundOverResults Get Service Method
-        [self groundOverResultsGetService];
+        
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -286,7 +289,8 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"GRD0000006"];
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"GRD0000006"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, competitionCode, groundCode];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -389,10 +393,10 @@
 //            self.groundBottomLeft.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
 //            self.groundBottomRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GBottomLeft"]];
         }
-        
-        //Ground Service Call
-        [self groundListGetService];
     
+            //GroundOverResults Get Service Method
+        [self groundOverResultsGetService];
+        
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -413,7 +417,9 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
+    //Doubt --->
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, @"0", @"5"];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -423,7 +429,6 @@
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
         
-        //
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
         [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -956,10 +961,10 @@
             
             groundCode = [[self.codeArray objectAtIndex:indexPath.row] valueForKey:@"GroundCode"];
             self.competitionTeamCodesTblView.hidden = YES;
+                //Get Ground Combo Box Results
+            [self groundGetService];
         }
     }
-    
-    [self groundListGetService];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
