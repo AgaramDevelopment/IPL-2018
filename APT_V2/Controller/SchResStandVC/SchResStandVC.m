@@ -66,7 +66,7 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    [self ResultsWebservice];
+    //[self ResultsWebservice];
 }
 
 -(void)ResultsWebservice

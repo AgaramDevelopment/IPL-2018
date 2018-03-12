@@ -44,6 +44,12 @@
 @property (strong, nonatomic)  NSMutableArray *MatchResultsArray4;
 @property (strong, nonatomic)  NSMutableArray *MatchResultsArray5;
 
+@property (strong, nonatomic)  NSMutableArray *replaceArray2;
+@property (strong, nonatomic)  NSMutableArray *replaceArray3;
+@property (strong, nonatomic)  NSMutableArray *replaceArray4;
+@property (strong, nonatomic)  NSMutableArray *replaceArray5;
+
+
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
 
@@ -1918,6 +1924,20 @@
                 
                 
             }
+            
+            if(![[responseObject valueForKey:@"lstTeamplayercompReplaces"] isKindOfClass:NULL])
+            {
+                NSMutableArray *replArray = [[NSMutableArray alloc]init];
+                replArray = [responseObject valueForKey:@"lstTeamplayercompReplaces"];
+                
+                self.replaceArray2 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:1];
+                self.replaceArray3 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:2];
+                self.replaceArray4 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:3];
+                self.replaceArray5 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:4];
+                
+            }
+            
+            
             
             
             
