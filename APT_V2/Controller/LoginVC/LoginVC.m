@@ -165,7 +165,7 @@
             UIViewController* VC;
             if([objRoleCode isEqualToString:@"ROL0000002"]) // player
             {
-                NSString * playerTeamCode =[[objRole valueForKey:@"CAPTeamcode"] objectAtIndex:0];
+                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
                 if (!playerTeamCode) {
                     [AppCommon showAlertWithMessage:@"Player code missing"];
                     return;
