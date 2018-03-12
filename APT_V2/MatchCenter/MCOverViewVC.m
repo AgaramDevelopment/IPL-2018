@@ -47,17 +47,20 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        self.viewTeam.hidden = YES;
+//    }
+//    else
+//    {
+//        self.viewTeam.hidden = NO;
+//    }
     
-    if([rolecode isEqualToString:plyRolecode])
-    {
-        self.viewTeam.hidden = YES;
-    }
-    else
-    {
-        self.viewTeam.hidden = NO;
-    }
+    [self.viewTeam setHidden:![AppCommon isCoach]];
+
     
 //    self.CompetitionListtbl.hidden = YES;
     //self.popTableView.hidden = YES;
