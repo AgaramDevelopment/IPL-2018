@@ -50,6 +50,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        self.viewTeam.hidden = YES;
+    }
+    else
+    {
+        self.viewTeam.hidden = NO;
+    }
     [[NSUserDefaults standardUserDefaults] setInteger: 13 forKey:@"requiredColumn"];
     [self customnavigationmethod];
 //    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];

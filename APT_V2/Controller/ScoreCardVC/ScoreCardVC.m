@@ -679,7 +679,8 @@
     cell.sixeslbl.text = [[CommonArray valueForKey:@"Sixs"] objectAtIndex:indexPath.row];
     cell.strikelbl.text = [[CommonArray valueForKey:@"Strikerate"] objectAtIndex:indexPath.row];
     cell.wktDesclbl.text = [[CommonArray valueForKey:@"WicketsDesc"] objectAtIndex:indexPath.row];
-        
+    cell.dotballslbl.text = [[CommonArray valueForKey:@"DotBalls"] objectAtIndex:indexPath.row];
+        //DotBalls
         
         
     [cell.onesBtn addTarget:self action:@selector(didClickOnesBatting:) forControlEvents:UIControlEventTouchUpInside];
@@ -702,6 +703,7 @@
         [cell.ballsBtn addTarget:self action:@selector(myActionBalls:) forControlEvents:UIControlEventTouchUpInside];
         [cell.foursBtn addTarget:self action:@selector(myActionFours:) forControlEvents:UIControlEventTouchUpInside];
         [cell.sixesBtn addTarget:self action:@selector(myActionSixes:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.dotsBtn addTarget:self action:@selector(myActionDots:) forControlEvents:UIControlEventTouchUpInside];
         
         
         //wagon wheel
@@ -1217,6 +1219,7 @@
         cell.runslbl.text = [[CommonArray2 valueForKey:@"Runs"] objectAtIndex:indexPath.row];
         cell.wicketslbl.text = [[CommonArray2 valueForKey:@"Wickets"] objectAtIndex:indexPath.row];
         cell.economylbl.text = [[CommonArray2 valueForKey:@"Econ"] objectAtIndex:indexPath.row];
+        cell.dotballslbl.text = [[CommonArray2 valueForKey:@"DotBalls"] objectAtIndex:indexPath.row];
         
         [cell.onesBtn addTarget:self action:@selector(didClickOnesbowlingTbl:) forControlEvents:UIControlEventTouchUpInside];
         [cell.twoBtn addTarget:self action:@selector(didClicktwosbowlingTbl:) forControlEvents:UIControlEventTouchUpInside];
@@ -1230,11 +1233,13 @@
         [[cell runSBtn] setTag:[indexPath row]];
         [[cell oversBtn] setTag:[indexPath row]];
         [[cell wicketsBtn] setTag:[indexPath row]];
+        [[cell dotsBtn] setTag:[indexPath row]];
         
         
         [cell.runSBtn addTarget:self action:@selector(myActionRUNSBowling:) forControlEvents:UIControlEventTouchUpInside];
         [cell.oversBtn addTarget:self action:@selector(myActionOversBowling:) forControlEvents:UIControlEventTouchUpInside];
         [cell.wicketsBtn addTarget:self action:@selector(myActionWktsBowling:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.dotsBtn addTarget:self action:@selector(myActionDotsBowling:) forControlEvents:UIControlEventTouchUpInside];
         
 
         
@@ -1762,6 +1767,22 @@
     [self loadVideoPlayer:Batsmancode :@"SIXES" :@"BATTING" innings:innno];
 
 }
+-(IBAction)myActionDots:(id)sender
+{
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    ScoreCardCell * cell = [self.listTbl cellForRowAtIndexPath:indexPath];
+    
+    NSLog(@"%@",[[CommonArray valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row]);
+    // NSLog(@"Selected row: %ld", (long)indexPath.row);
+    //......
+    
+    NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
+    
+    //[self loadVideoPaths:Batsmancode :@"SIXES" :@"BATTING"];
+    [self loadVideoPlayer:Batsmancode :@"DOTS" :@"BATTING" innings:innno];
+    
+}
 
 
 -(IBAction)myActionOversBowling:(id)sender
@@ -1812,6 +1833,22 @@
     
    // [self loadVideoPaths:Batsmancode :@"WKT" :@"BOWLING"];
     [self loadVideoPlayer:Batsmancode :@"WKT" :@"BOWLING" innings:innno];
+    
+}
+-(IBAction)myActionDotsBowling:(id)sender
+{
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    ScorecardBowlCell * cell = [self.bowlingTbl cellForRowAtIndexPath:indexPath];
+    
+    NSLog(@"%@",[[CommonArray2 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row]);
+    // NSLog(@"Selected row: %ld", (long)indexPath.row);
+    //......
+    
+    NSString * Batsmancode =[[CommonArray2 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row];
+    
+    // [self loadVideoPaths:Batsmancode :@"WKT" :@"BOWLING"];
+    [self loadVideoPlayer:Batsmancode :@"DOTS" :@"BOWLING" innings:innno];
     
 }
 
