@@ -301,9 +301,6 @@
     competitionCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         self.Poptable.hidden = YES;
     
-//    [[NSUserDefaults standardUserDefaults] setValue:self.competitionTF.text forKey:@"SelectedCompetitionName"];
-//    [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     if(isGround==YES)
@@ -332,7 +329,7 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, team1Code];
+    NSString *API_URL = [NSString stringWithFormat:@"%@%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, team1Code];
     
 //     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
     

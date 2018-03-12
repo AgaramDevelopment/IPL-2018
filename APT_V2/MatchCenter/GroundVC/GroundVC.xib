@@ -54,7 +54,6 @@
                 <outlet property="groundTopRight" destination="0LN-i4-tzg" id="88c-AR-DbV"/>
                 <outlet property="groundView" destination="POf-BT-d48" id="8eM-xg-Fva"/>
                 <outlet property="headerView" destination="ydT-uU-h8a" id="6Ic-KN-Kzr"/>
-                <outlet property="homeGroundLbl" destination="8Rb-i4-BKd" id="tME-3D-lAT"/>
                 <outlet property="innings1Btn" destination="ewj-PI-5K9" id="JFf-ri-2bO"/>
                 <outlet property="innings2Btn" destination="6s7-Nw-W4f" id="WG3-Ng-ROQ"/>
                 <outlet property="resultCollectionView" destination="leO-6H-2Lz" id="7SY-Tn-fMO"/>
@@ -115,21 +114,9 @@
                                                             <rect key="frame" x="179.5" y="0.0" width="179.5" height="60"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M A Chidambaram Stadium,chennai" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UrM-2m-sin">
-                                                                    <rect key="frame" x="0.0" y="40" width="90" height="15"/>
+                                                                    <rect key="frame" x="0.0" y="40" width="179.5" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Vlp-Qi-du2"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
-                                                                    </variation>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HomeGround:M A Chidambaram Stadium,chennai" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Rb-i4-BKd">
-                                                                    <rect key="frame" x="90" y="40" width="89.5" height="15"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="15" id="OxJ-ha-4Am"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     <nil key="textColor"/>
@@ -154,12 +141,9 @@
                                                             <constraints>
                                                                 <constraint firstItem="UrM-2m-sin" firstAttribute="leading" secondItem="POf-BT-d48" secondAttribute="leading" id="7BA-9J-NC1"/>
                                                                 <constraint firstAttribute="trailing" secondItem="lvB-AL-YR2" secondAttribute="trailing" id="Ad9-XE-g5c"/>
-                                                                <constraint firstAttribute="trailing" secondItem="8Rb-i4-BKd" secondAttribute="trailing" id="EfZ-Tj-AWe"/>
                                                                 <constraint firstAttribute="bottom" secondItem="UrM-2m-sin" secondAttribute="bottom" constant="5" id="HRL-NT-LEr"/>
                                                                 <constraint firstItem="lvB-AL-YR2" firstAttribute="top" secondItem="POf-BT-d48" secondAttribute="top" id="J9a-8Y-5eB"/>
-                                                                <constraint firstItem="8Rb-i4-BKd" firstAttribute="width" secondItem="UrM-2m-sin" secondAttribute="width" id="POl-Nj-AIc"/>
-                                                                <constraint firstAttribute="bottom" secondItem="8Rb-i4-BKd" secondAttribute="bottom" constant="5" id="cHe-Vf-3SJ"/>
-                                                                <constraint firstItem="8Rb-i4-BKd" firstAttribute="leading" secondItem="UrM-2m-sin" secondAttribute="trailing" id="k4v-tI-QpW"/>
+                                                                <constraint firstAttribute="trailing" secondItem="UrM-2m-sin" secondAttribute="trailing" id="l4u-Gm-EKW"/>
                                                                 <constraint firstAttribute="height" constant="60" id="u2w-b1-bFt"/>
                                                             </constraints>
                                                         </view>
@@ -181,7 +165,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oen-Mk-g1C">
                                                             <rect key="frame" x="10" y="0.0" width="159.5" height="30"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-A" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohY-Gb-xKe">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Competition Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohY-Gb-xKe">
                                                                     <rect key="frame" x="5" y="0.0" width="134.5" height="30"/>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="10"/>
@@ -222,7 +206,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32D-IJ-gex">
                                                             <rect key="frame" x="189.5" y="0.0" width="159.5" height="30"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team-B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UV3-2h-4qm">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Team Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UV3-2h-4qm">
                                                                     <rect key="frame" x="5" y="0.0" width="134.5" height="30"/>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="10"/>
@@ -277,7 +261,7 @@
                                                     <rect key="frame" x="8" y="118" width="359" height="150"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vme-9h-aFa">
-                                                            <rect key="frame" x="8" y="8" width="97.5" height="15"/>
+                                                            <rect key="frame" x="8" y="8" width="88" height="15"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
