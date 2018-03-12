@@ -65,18 +65,18 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
-    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 15.0 : 5.0 )];
+    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 15.0 : 10.0 )];
     cell.textLabel.textColor = [UIColor lightTextColor];
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.text = [[array objectAtIndex:indexPath.row] valueForKey:key];
     
-    if (indexPath.row % 2 == 0) {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-    else
-    {
-        cell.backgroundColor = [UIColor lightGrayColor];
-    }
+//    if (indexPath.row % 2 == 0) {
+//        cell.backgroundColor = [UIColor whiteColor];
+//    }
+//    else
+//    {
+//        cell.backgroundColor = [UIColor lightGrayColor];
+//    }
     // Configure the cell...
     
     return cell;
