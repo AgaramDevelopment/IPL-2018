@@ -703,6 +703,7 @@
         [[cell ballsBtn] setTag:[indexPath row]];
         [[cell foursBtn] setTag:[indexPath row]];
         [[cell sixesBtn] setTag:[indexPath row]];
+        [[cell dotsBtn] setTag:[indexPath row]];
         
         [cell.runsBtn addTarget:self action:@selector(myActionRuns:) forControlEvents:UIControlEventTouchUpInside];
         [cell.ballsBtn addTarget:self action:@selector(myActionBalls:) forControlEvents:UIControlEventTouchUpInside];
@@ -3425,12 +3426,12 @@
                 
                 
                 NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
-                NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+                NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
                 
                 NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"];
-                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+                NSString *teamBString = [NSString stringWithFormat:@"%@",imgStr2];
                 
-                [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
                     if (succeeded) {
                         // change the image in the cell
                         self.teamAlogo.image = image;
@@ -3445,7 +3446,7 @@
                 }];
                 
                 
-                [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
+                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
                     if (succeeded) {
                         // change the image in the cell
                         self.teamBlogo.image = image;
