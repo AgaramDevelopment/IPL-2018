@@ -56,15 +56,9 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    
-    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
-    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
-    [self.videoView addSubview:objVideo.view];
-    
-    
-//    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-//    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
-//    [self.standingsView addSubview:objStands.view];
+    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
+    [self.standingsView addSubview:objStands.view];
     
 }
 
@@ -135,6 +129,7 @@
 {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
@@ -599,6 +594,7 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.scheduleCollectionView reloadData];
+                        [self videoGallery];
                     });
                     
                     
@@ -607,9 +603,6 @@
             
             [AppCommon hideLoading];
             
-            
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [COMMON webServiceFailureError:error];
             NSLog(@"failed");
@@ -617,6 +610,14 @@
         }];
     }
     
+}
+
+-(void)videoGallery
+{
+    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
+    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
+    [self.videoView addSubview:objVideo.view];
+
 }
 
 @end

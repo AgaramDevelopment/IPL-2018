@@ -73,6 +73,9 @@
     [self.view_datepicker setHidden:YES];
     
     [btnUpload setHidden:![AppCommon isCoach]];
+    
+    [self videoGalleryWebservice];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
