@@ -23,7 +23,7 @@
 @property (nonatomic,strong) IBOutlet UITableView * popTbl;
 
 @property (nonatomic,strong) IBOutlet UIButton * CompetBtn;
-@property (nonatomic,strong) IBOutlet UIButton * SeasonBtn;
+@property (nonatomic,strong) IBOutlet UIButton * teamBtn;
 
 @property (nonatomic,strong) IBOutlet UIView * v1;
 @property (nonatomic,strong) IBOutlet UIView * v2;
@@ -31,6 +31,8 @@
 @property (nonatomic,strong)  NSMutableArray * resultArr;
 
 @property (nonatomic,strong)IBOutlet  UILabel * competitionLbl;
+@property (strong, nonatomic) IBOutlet UILabel *teamLbl;
+
 @property (nonatomic,strong)  NSMutableArray * listCompArray;
 
 @end

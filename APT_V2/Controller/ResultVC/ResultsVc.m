@@ -107,7 +107,7 @@
 //        self.popTbl.hidden = YES;
 //        [self.ListTbl setUserInteractionEnabled:YES];
 //    }
-    
+   /*
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -116,17 +116,40 @@
     
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(v1.frame), CGRectGetMaxY(v1.superview.frame)+60, CGRectGetWidth(v1.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(v1.frame), CGRectGetMaxY(v1.superview.frame)+10, CGRectGetWidth(v1.frame), 300)];
+   */
+   
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 1) { // TEAM
         
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v2.frame), CGRectGetMaxY(self.v2.frame)+self.v2.frame.size.height+20, CGRectGetWidth(self.v2.frame), 300)];
+        
+        
+    }
+    else // COMPETETION
+        {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v1.frame), CGRectGetMaxY(self.v1.frame)+self.v1.frame.size.height+20, CGRectGetWidth(self.v1.frame), 300)];
+        
+        }
     
     
     [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
         NSLog(@"DropDown loaded");
     }];
-
+    
 }
 
-//-(IBAction)didClickSeason:(id)sender
+//-(IBAction)didClickTeam:(id)sender
 //{
 //
 //    if(isPop==NO)
@@ -337,6 +360,7 @@
         self.popTbl.hidden =YES;
         [self ResultsWebservice];
         [self.ListTbl setUserInteractionEnabled:YES];
+    
     }
     if(isList==YES)
     {
@@ -456,15 +480,25 @@
 -(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
     
-    
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
         competitionLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:competitionLbl.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
+        
+    } else {
+        self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        }
+
     [self ResultsWebservice];
     
 }
