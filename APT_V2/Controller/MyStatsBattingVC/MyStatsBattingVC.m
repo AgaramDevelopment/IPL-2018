@@ -272,7 +272,7 @@
             cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
 
-            if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+            if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
             {
                 cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
             }
@@ -809,7 +809,7 @@
             cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
             cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
-            if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+            if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
                 {
                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                 }
@@ -1429,7 +1429,7 @@
                 cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
                 
-                if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+                if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
                     {
                     cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
                     }
@@ -1975,7 +1975,7 @@
                 cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
                 
-                if([[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"] isEqualToString:@"HOME"])
+                if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
                     {
                     cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                     }
