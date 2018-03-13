@@ -62,9 +62,9 @@
     [self.videoView addSubview:objVideo.view];
     
     
-    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
-    [self.standingsView addSubview:objStands.view];
+//    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+//    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
+//    [self.standingsView addSubview:objStands.view];
     
 }
 
@@ -175,11 +175,11 @@
         
         if(collectionView == self.scheduleCollectionView)
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(310, 170);
         }
         else
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(310, 170);
         }
     }
 }
@@ -530,6 +530,8 @@
         
         NSString *competition = @"";
         NSString *teamcode = [AppCommon getCurrentTeamCode];
+        
+       // NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamCode"];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
