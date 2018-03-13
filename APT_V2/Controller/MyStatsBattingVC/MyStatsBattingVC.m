@@ -91,8 +91,6 @@
 {
     [super viewWillAppear:animated];
     
-    
-    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];

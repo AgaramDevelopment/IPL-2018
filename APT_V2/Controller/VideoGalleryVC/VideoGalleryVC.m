@@ -56,7 +56,6 @@
     [super viewDidLoad];
     
     objWebService = [[WebService alloc]init];
-//    [self videoGalleryWebservice];
     
     [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
@@ -73,6 +72,9 @@
     [self.view_datepicker setHidden:YES];
     
     [btnUpload setHidden:![AppCommon isCoach]];
+    
+    [self videoGalleryWebservice];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
