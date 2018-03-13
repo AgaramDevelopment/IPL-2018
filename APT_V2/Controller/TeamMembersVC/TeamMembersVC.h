@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Header.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface TeamMembersVC : UIViewController
 
