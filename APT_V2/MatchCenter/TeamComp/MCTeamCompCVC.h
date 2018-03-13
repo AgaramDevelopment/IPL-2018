@@ -27,6 +27,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *WonStatuslbl;
 @property (strong, nonatomic) IBOutlet UILabel *PlayerRoleCountlbl;
 
+@property (strong, nonatomic) IBOutlet UILabel *replacePlayerslbl;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *Player1Img;
 @property (strong, nonatomic) IBOutlet UIImageView *Player2Img;

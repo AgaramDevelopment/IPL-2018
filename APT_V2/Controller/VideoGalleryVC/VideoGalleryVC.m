@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     objWebService = [[WebService alloc]init];
-    //[self videoGalleryWebservice];
+    [self videoGalleryWebservice];
     
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     
@@ -110,7 +110,7 @@
 
 -(void)videoGalleryWebservice
 {
-   // [AppCommon showLoading ];
+    [AppCommon showLoading ];
     
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
@@ -120,7 +120,7 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
+    //[AppCommon showLoading];
     //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(GalleryVideo);
     

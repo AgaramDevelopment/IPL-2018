@@ -1901,7 +1901,8 @@
     
     if(tableView == self.listTbl)
     {
-        
+        if(!IS_IPHONE_DEVICE)
+        {
         
         static NSString *MyIdentifier = @"MyIdentifier";
         
@@ -1965,13 +1966,15 @@
         [self.view layoutIfNeeded];
         
         
-        
+        }
         
     }
     
     
     if(tableView == self.bowlingTbl)
     {
+        if(!IS_IPHONE_DEVICE)
+        {
         static NSString *MyIdentifier = @"myid";
         
         ScorecardBowlCell *cell = [self.bowlingTbl dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -2030,7 +2033,7 @@
         CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
         self.tableHeight2.constant = height1;
         [self.view layoutIfNeeded];
-        
+      }
         
     }
     if(tableView == self.popTbl)
@@ -3976,6 +3979,7 @@
     videoPlayerVC.Innings = innNo;
     videoPlayerVC.Type = batOrBowl;
     [self.navigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    //[self.navigationController popToViewController:videoPlayerVC animated:YES];
 }
 
 
