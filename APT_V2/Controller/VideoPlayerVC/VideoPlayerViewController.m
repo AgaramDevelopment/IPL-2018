@@ -53,7 +53,7 @@
 -(void)staticvideo
 {
     
-        NSString * url = [NSString stringWithFormat:@"%@",self.objSelectVideoLink];
+        NSString * url = [NSString stringWithFormat:@"%@/%@",Video_URL,self.objSelectVideoLink];
 //
         NSURL *videoURL = [NSURL URLWithString:url];
         AVPlayer *player = [AVPlayer playerWithURL:videoURL];

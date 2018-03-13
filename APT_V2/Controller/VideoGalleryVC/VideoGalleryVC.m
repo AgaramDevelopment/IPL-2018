@@ -20,7 +20,7 @@
 #import "SchResStandVC.h"
 
 
-@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
+@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate>
 {
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
