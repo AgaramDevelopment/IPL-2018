@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Header.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface TeamMembersVC : UIViewController
 
@@ -24,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *BowlerBtn;
 @property (weak, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoData;
+
 
 @end

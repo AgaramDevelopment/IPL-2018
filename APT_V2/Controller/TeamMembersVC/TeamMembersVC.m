@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "TeamMemebersCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface TeamMembersVC ()
 {
@@ -223,6 +224,31 @@
     NSString *availability = [self checkNull:[[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
     
+    NSString * imgStr1 = ([[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"]==[NSNull null])?@"":[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"];
+    NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
+    
+    
+    [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+        if (succeeded) {
+            // change the image in the cell
+            cell.playerImg.image = image;
+            
+            // cache the image for use later (when scrolling up)
+            cell.playerImg.image = image;
+        }
+        else
+        {
+            cell.playerImg.image = [UIImage imageNamed:@"no-image"];
+        }
+    }];
+    
+//    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString:imgStr1]
+//                        placeholderImage:[UIImage imageNamed:@"no-image"]];
+    
+//    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString: [self checkNull:imgStr1]] placeholderImage:[UIImage imageNamed:@"no-image"]];
+    
+
+    
     if([availability isEqualToString:@"Available"])
     {
 //       cell.availabilityView.backgroundColor = [UIColor colorWithRed:(142/255.0f) green:(207/255.0f) blue:(100/255.0f) alpha:1.0f] ;
@@ -284,6 +310,24 @@
     }
     return _value;
 }
+
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
 
 -(void)TeamsWebservice
 {
