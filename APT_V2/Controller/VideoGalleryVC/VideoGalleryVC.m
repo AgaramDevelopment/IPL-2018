@@ -251,12 +251,15 @@
         }
         else
         {
-            return CGSizeMake(150, 220);
+            return CGSizeMake(150, 122);
         }
     }
     
+    
+    
     //return UICollectionViewFlowLayoutAutomaticSize;
 }
+
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
 //    if(!IS_IPHONE_DEVICE)

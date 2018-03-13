@@ -165,13 +165,13 @@
             
             //if (![AppCommon isCoach]) {
                 NSString * APTTeamCode =[responseObject valueForKey:@"APTTeamcode"];
-                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamCode"];
+                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"SelectedTeamCode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 
-                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
-                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"SelectedTeamCode"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+//                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+//                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"SelectedTeamCode"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
             //}
 
                 VC = [TabHomeVC new];

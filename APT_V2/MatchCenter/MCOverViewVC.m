@@ -67,8 +67,6 @@
     self.prevBtn.hidden = YES;
     self.NodataView.hidden = YES;
     
-//    CompetitionCode = [AppCommon getCurrentCompetitionCode];
-//    teamcode = [AppCommon getCurrentTeamCode];
     
     
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"MCOverViewResultCVC" bundle:nil] forCellWithReuseIdentifier:@"mcResultCVC"];
@@ -90,7 +88,13 @@
 
     lblCompetetion.text = [AppCommon getCurrentCompetitionName];
     lblTeamName.text = [AppCommon getCurrentTeamName];
+    
+    CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    teamcode = [AppCommon getCurrentTeamCode];
+
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     [self OverviewWebservice];
+
 
 }
 
@@ -217,7 +221,7 @@
     
 }
 
--(void)OverviewWebservice //:(NSString *)compCode :(NSString *)temCode
+-(void)OverviewWebservice // :(NSString *)compCode :(NSString *)temCode
 {
     
     if (![COMMON isInternetReachable]) {
@@ -230,12 +234,12 @@
 //    self.competitionlbl.text = [AppCommon getCurrentCompetitionName];
 //     self.teamlbl.text = [AppCommon getCurrentTeamName];
     
-    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    NSString *teamcode = [AppCommon getCurrentTeamCode];
+    NSString *compCode = [AppCommon getCurrentCompetitionCode];
+    NSString *temCode = [AppCommon getCurrentTeamCode];
     objWebservice = [[WebService alloc]init];
     
     
-    [objWebservice Overview:OverviewKey :CompetitionCode : teamcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice Overview:OverviewKey :compCode : temCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         NSMutableArray *teamDetailsArray = [[NSMutableArray alloc]init];
@@ -488,10 +492,10 @@
     if ([key  isEqualToString: @"CompetitionName"]) {
         
         lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        CompetitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         
@@ -499,16 +503,20 @@
     else
     {
         lblTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+//        teamcode = [[array firstObject] valueForKey:@"TeamCode"];
         
+        teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+
         [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
     }
     
     
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     [self OverviewWebservice];
+
     
 }
 
@@ -705,6 +713,7 @@
     {
         //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
 
+        // SelectedTeamCode
         self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
         teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
         [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
@@ -713,9 +722,9 @@
     }
     
     
-    self.CompetitionListtbl.hidden = YES;
+//    self.CompetitionListtbl.hidden = YES;
     
-    [self OverviewWebservice];
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     
 }
 
