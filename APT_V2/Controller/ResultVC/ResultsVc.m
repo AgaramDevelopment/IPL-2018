@@ -293,10 +293,8 @@
     if(isPop==YES)
     {
         
-        
         static NSString *MyIdentifier = @"MyIdentifier";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        
         
         
         if (cell == nil)

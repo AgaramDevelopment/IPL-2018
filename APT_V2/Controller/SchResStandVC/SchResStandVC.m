@@ -28,7 +28,7 @@
     HomeScreenStandingsVC *objStands;
     TabbarVC *objtab;
     SWRevealViewController *revealController;
-    NSMutableArray *objarray,*resultArr;
+    NSMutableArray *objarray;
     
     //AppDelegate *objAppDel;
 }
@@ -42,15 +42,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self ScheduleWebservice];
+    
     // Do any additional setup after loading the view from its nib.
     
     //[self customnavigationmethod];
-
+    
     //[self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
-
+    
+    self.scroll.contentSize =  self.commonView.frame.size;
+    
     
     objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
     objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
@@ -61,96 +66,15 @@
     objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
     [self.standingsView addSubview:objStands.view];
     
-   
-     //self.scroll.contentSize = CGSizeMake(self.scroll.frame.size.width, self.commonView.frame.size.height);
-    
-    self.scroll.contentSize =  self.commonView.frame.size;
-    
-    [self ScheduleWebservice];
-//    [self ResultsWebservice];
 }
 
--(void)ResultsWebservice
-{
-    if(![COMMON isInternetReachable])
-        return;
-        
-    
-    [AppCommon showLoading];
-
-    NSString *URLString =  URL_FOR_RESOURCE(ResultsKey);
-                                
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        manager.requestSerializer = requestSerializer;
-    
-    
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-        if([AppCommon getCurrentCompetitionCode])
-            [dic    setObject:[AppCommon getCurrentCompetitionCode]     forKey:@"Competitioncode"];
-        if([AppCommon getCurrentTeamCode])
-            [dic    setObject:[AppCommon getCurrentTeamCode]     forKey:@"TeamCode"];
-
-        
-        NSLog(@"parameters : %@",dic);
-        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
-            
-            [AppCommon hideLoading];
-
-            if(responseObject >0)
-            {
-                
-                resultArr = [[NSMutableArray alloc]init];
-                NSMutableArray * filterarr = [[NSMutableArray alloc]init];
-                
-                if ([responseObject valueForKey:@"lstFixturesGridValues"]) {
-                    filterarr = [responseObject valueForKey:@"lstFixturesGridValues"];
-                    
-                }
-                
-                for( int i=0;i<filterarr.count;i++)
-                {
-                    if(![[[filterarr valueForKey:@"FIRSTINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"SECONDINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"THIRDINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]] || ![[[filterarr valueForKey:@"FOURTHINNINGSSCORE"] objectAtIndex:i] isEqual:[NSNull null]]  )
-                    {
-                        
-                        [resultArr addObject:[filterarr objectAtIndex:i]];
-                        
-//                        isList=YES;
-                    }
-                }
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self FixturesWebservice];
-                });
-
-                
-            }
-            
-            
-            
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"failed");
-            [AppCommon hideLoading];
-
-            [COMMON webServiceFailureError:error];
-            
-        }];
-    
-}
 
 
 -(void)ScheduleWebservice
 {
- 
-    if(![COMMON isInternetReachable])
-        return;
-        
+    
+    if([COMMON isInternetReachable])
+    {
         [AppCommon showLoading];
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",ScheduleKey]];
@@ -160,11 +84,9 @@
         
         manager.requestSerializer = requestSerializer;
         
-        
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
         NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
         NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -191,19 +113,17 @@
             }
             
             [AppCommon hideLoading];
+            [self FixturesWebservice];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self FixturesWebservice];
-            });
-
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
-             [AppCommon hideLoading];
+            [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
             
         }];
+    }
     
 }
 
@@ -218,111 +138,119 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-     if(collectionView == self.scheduleCollectionView)
-     {
-         return objarray.count;
-     }
+    if(collectionView == self.scheduleCollectionView)
+    {
+        return objarray.count;
+    }
     else
     {
-    return self.commonArray2.count;
+        return self.commonArray2.count;
     }
 }
 
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CGFloat widthF = self.scheduleCollectionView.superview.frame.size.width/2;
-    CGFloat HeightF = self.scheduleCollectionView.superview.frame.size.height-20;
-    widthF-=20;
-
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
         {
-            return CGSizeMake(widthF, HeightF);
+            return CGSizeMake(50, 50);
         }
         else
         {
             if(collectionView == self.scheduleCollectionView)
             {
-                return CGSizeMake(widthF, HeightF);
+                return CGSizeMake(310, 182);
             }
             else
             {
-                return CGSizeMake(widthF, HeightF);
+                return CGSizeMake(310, 182);
             }
         }
     }
     else
     {
+        //return CGSizeMake(160, 140);
+        
         if(collectionView == self.scheduleCollectionView)
         {
-            return CGSizeMake(widthF, HeightF);
+            return CGSizeMake(310, 182);
         }
         else
         {
-            return CGSizeMake(widthF, HeightF);
+            return CGSizeMake(310, 182);
         }
     }
 }
-
 #pragma mark collection view cell paddings
-
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
-//    }
-//    else{
-//        return UIEdgeInsetsMake(10, 10, 10, 10);
-//    }
-    
-    return UIEdgeInsetsMake(10, 10, 10, 10);
-
+    if(!IS_IPHONE_DEVICE)
+    {
+        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+    }
+    else{
+        return UIEdgeInsetsMake(10, 10, 10, 10);
+    }
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return 20.0;
-//    }
-//    else{
-//        return 10.0;
-//    }
-    
-    return 10.0;
-
+    if(!IS_IPHONE_DEVICE)
+    {
+        return 20.0;
+    }
+    else{
+        return 10.0;
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    
-//    if(!IS_IPHONE_DEVICE)
-//    {
-//        return 23.0;
-//    }
-//    else{
-//        return 10.0;
-//    }
-    
-    return 10.0;
-
-    
+    if(!IS_IPHONE_DEVICE)
+    {
+        return 23.0;
+    }
+    else{
+        return 10.0;
+    }
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  
+    
     if(collectionView==self.scheduleCollectionView)
     {
-    
+        
         ResultCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
+        
+        
+        //        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
+        //        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
+        //        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
+        //       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
+        //        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
+        //
+        //
+        //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        //        NSDate *date  = [dateFormatter dateFromString:starttime];
+        //        // Convert to new Date Format
+        //        [dateFormatter setDateFormat:@"hh:mm a"];
+        //        NSString *newtime1 = [dateFormatter stringFromDate:date];
+        //
+        //        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+        //        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
+        //        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
+        //        // Convert to new Date Format
+        //        [dateFormatter2 setDateFormat:@"hh:mm a"];
+        //        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
+        //
+        //        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
+        
+        
         cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
-       // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+        // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
         cell.FirstInnScorelbl.text = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
         cell.SecondInnScorelbl.text = [[objarray valueForKey:@"team2"] objectAtIndex:indexPath.row];
@@ -330,7 +258,58 @@
         
         cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
         cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-
+        
+        //        NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+        //        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+        //
+        //        NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+        //        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+        //
+        //        [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+        //            if (succeeded) {
+        //                // change the image in the cell
+        //                cell.teamAlogo.image = image;
+        //
+        //                // cache the image for use later (when scrolling up)
+        //                cell.teamAlogo.image = image;
+        //            }
+        //            else
+        //            {
+        //                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+        //            }
+        //        }];
+        //
+        //
+        //        [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
+        //            if (succeeded) {
+        //                // change the image in the cell
+        //                cell.teamBlogo.image = image;
+        //
+        //                // cache the image for use later (when scrolling up)
+        //                cell.teamBlogo.image = image;
+        //            }
+        //            else
+        //            {
+        //                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+        //            }
+        //        }];
+        
+        
+        //        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+        //
+        //        if([ key isEqualToString:@"India"])
+        //        {
+        //            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
+        //            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
+        //
+        //        }
+        //        else
+        //        {
+        //            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
+        //            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
+        //        }
+        
+        
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
         cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
@@ -342,13 +321,13 @@
         cell.layer.shadowOpacity = 1.0f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-    
-    return cell;
+        
+        return cell;
     }
     if(collectionView==self.resultCollectionView)
     {
         
-       ResultCell* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
+        ResultCell* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
         
         cell.competitionNamelbl.text = [[self.commonArray2 valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
@@ -360,19 +339,19 @@
         
         
         NSString *first = [self checkNull:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
-            NSLog(@"%ld",(long)indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
         if( [first isEqualToString:@"0 /0 (0.0 Ov)"])
         {
             cell.FirstInnScorelbl.text = @"";
         }
         else
         {
-          cell.FirstInnScorelbl.text = first;
+            cell.FirstInnScorelbl.text = first;
         }
-       
+        
         
         NSString *second = [self checkNull:[[self.commonArray2 valueForKey:@"SECONDINNINGSSCORE"]objectAtIndex:indexPath.row]];
-            NSLog(@"%ld",(long)indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
         
         if( [second isEqualToString:@"0 /0 (0.0 Ov)"])
         {
@@ -382,10 +361,10 @@
         {
             cell.SecondInnScorelbl.text = second;
         }
-       
+        
         
         NSString *third = [self checkNull:[[self.commonArray2 valueForKey:@"THIRDINNINGSSCORE"]objectAtIndex:indexPath.row]];
-            NSLog(@"%ld",(long)indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
         
         if( [third isEqualToString:@"0 /0 (0.0 Ov)"])
         {
@@ -399,7 +378,7 @@
         
         
         NSString *fourth = [self checkNull:[[self.commonArray2 valueForKey:@"FOURTHINNINGSSCORE"]objectAtIndex:indexPath.row]];
-            NSLog(@"%ld",(long)indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
         
         if( [fourth isEqualToString:@"0 /0 (0.0 Ov)"])
         {
@@ -461,8 +440,8 @@
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         return cell;
-      }
-
+    }
+    
     return nil;
 }
 
@@ -492,12 +471,13 @@
         [scoreArray addObject:dic];
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-       objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
         appDel.Scorearray = scoreArray;
         //objtab.backkey = @"yes";
         //[self.navigationController pushViewController:objFix animated:YES];
         [appDel.frontNavigationController pushViewController:objtab animated:YES];
+        
         
     }
     
@@ -538,26 +518,24 @@
 
 -(void)FixturesWebservice
 {
-    if(![COMMON isInternetReachable])
-        return;
-    
-    
-    [AppCommon showLoading];
-        NSString *URLString =  URL_FOR_RESOURCE(FixturesKey);
+    if([COMMON isInternetReachable])
+    {
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",FixturesKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         manager.requestSerializer = requestSerializer;
         
-        
         NSString *competition = @"";
-        NSString* teamcode = [AppCommon getCurrentTeamCode];
+        NSString *teamcode = [AppCommon getCurrentTeamCode];
+        
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
         if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
-
+        
         
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -570,6 +548,7 @@
                 fixArr = [responseObject valueForKey:@"lstFixturesGridValues"];
                 if(fixArr.count >0)
                 {
+                    //self.competitionLbl.text = [[fixArr valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
                     
                     NSMutableArray * sepArray = [[NSMutableArray alloc]init];
                     
@@ -613,22 +592,30 @@
                         
                         [objarray addObject:dic];
                         
+                        
                     }
                     
-                    [self.scheduleCollectionView reloadData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.scheduleCollectionView reloadData];
+                    });
+                    
                     
                 }
             }
+            
             [AppCommon hideLoading];
-
+            
+            
+            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
             NSLog(@"failed");
             
         }];
     }
     
+}
 
 @end
+

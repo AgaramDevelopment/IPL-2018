@@ -59,7 +59,7 @@ AppCommon *sharedCommon = nil;
         return;
 
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     
     WebService* objWebservice = [[WebService alloc]init];
     [objWebservice getIPLCompeteionCodesuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -77,7 +77,7 @@ AppCommon *sharedCommon = nil;
             [[NSUserDefaults standardUserDefaults] synchronize];
 
         }
-        [AppCommon hideLoading];
+//        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
@@ -111,7 +111,7 @@ AppCommon *sharedCommon = nil;
         return;
 
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     
     WebService* objWebservice = [[WebService alloc]init];
     [objWebservice getIPLTeamCodessuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -128,14 +128,14 @@ AppCommon *sharedCommon = nil;
             [[NSUserDefaults standardUserDefaults] synchronize];
             
         }
-        [AppCommon hideLoading];
+//        [AppCommon hideLoading];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self getIPLCompetetion];
         });
 
     } failure:^(AFHTTPRequestOperation *operation, id error) {
-        [AppCommon hideLoading];
+//        [AppCommon hideLoading];
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
 
@@ -239,18 +239,24 @@ AppCommon *sharedCommon = nil;
 //    if (appDel.window.subviews containsObject:) {
 //
 //    }
+    NSLog(@"%@ ",appDel.window.subviews);
+    
+//    [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
+//    [MBProgressHUD]
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     hud.label.text = @"Please wait";
     [hud setBackgroundColor:[UIColor clearColor]];
+    
 }
 
 +(void)hideLoading
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUDForView:appDel.window animated:YES];
-    });
+//    });
+    
 }
 
 +(UIColor*)colorWithHexString:(NSString*)hex

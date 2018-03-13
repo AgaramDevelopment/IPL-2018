@@ -53,6 +53,7 @@
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,6 +68,7 @@
  // Pass the selected object to the new view controller.
  }
  */
+
 #pragma mark - UITableView Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -175,6 +177,8 @@
     UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
+        PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+
         arrItems=[NSArray new];
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
