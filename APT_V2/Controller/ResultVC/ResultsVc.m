@@ -408,7 +408,7 @@
     [AppCommon showLoading];
     if([COMMON isInternetReachable])
     {
-        
+    
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",ResultsKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -424,7 +424,7 @@
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if([AppCommon getCurrentCompetitionCode])
             [dic    setObject:[AppCommon getCurrentCompetitionCode]     forKey:@"Competitioncode"];
-        
+    
         
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
