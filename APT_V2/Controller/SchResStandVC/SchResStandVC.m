@@ -56,9 +56,9 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
-    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
-    [self.standingsView addSubview:objStands.view];
+//    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
+//    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
+//    [self.standingsView addSubview:objStands.view];
     
 }
 
@@ -594,7 +594,7 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.scheduleCollectionView reloadData];
-//                        [self videoGallery];
+                        [self videoGallery];
                     });
                     
                     

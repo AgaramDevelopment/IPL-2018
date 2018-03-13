@@ -56,7 +56,7 @@
     [super viewDidLoad];
     
     objWebService = [[WebService alloc]init];
-    //[self videoGalleryWebservice];
+    
     
     [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
@@ -165,9 +165,15 @@
             }
             
             self.objVideoFilterArray =  self.objSecondGalleryArray;
+            
             [self.videoCollectionview1 reloadData];
             [self.videoCollectionview2 reloadData];
+            
+            
+            
+            
         }
+        
         
         
         [AppCommon hideLoading];
@@ -217,39 +223,39 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    if(IS_IPHONE_DEVICE)
-//    {
-//        if(!IS_IPHONE5)
-//        {
-//            return CGSizeMake(50, 50);
-//        }
-//        else
-//        {
-//            if(collectionView == self.videoCollectionview1)
-//            {
-//                return CGSizeMake(224, 135);
-//            }
-//            else
-//            {
-//                return CGSizeMake(120, 180);
-//            }
-//        }
-//    }
-//    else
-//    {
-//        //return CGSizeMake(160, 140);
-//
-//        if(collectionView == self.videoCollectionview1)
-//        {
-//            return CGSizeMake(224, 135);
-//        }
-//        else
-//        {
-//            return CGSizeMake(150, 220);
-//        }
-//    }
+    if(IS_IPHONE_DEVICE)
+    {
+        if(!IS_IPHONE5)
+        {
+            return CGSizeMake(50, 50);
+        }
+        else
+        {
+            if(collectionView == self.videoCollectionview1)
+            {
+                return CGSizeMake(224, 135);
+            }
+            else
+            {
+                return CGSizeMake(120, 180);
+            }
+        }
+    }
+    else
+    {
+        //return CGSizeMake(160, 140);
+
+        if(collectionView == self.videoCollectionview1)
+        {
+            return CGSizeMake(224, 135);
+        }
+        else
+        {
+            return CGSizeMake(150, 220);
+        }
+    }
     
-    return UICollectionViewFlowLayoutAutomaticSize;
+    //return UICollectionViewFlowLayoutAutomaticSize;
 }
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
