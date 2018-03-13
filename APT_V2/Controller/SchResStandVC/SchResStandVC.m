@@ -594,7 +594,7 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.scheduleCollectionView reloadData];
-                        [self videoGallery];
+//                        [self videoGallery];
                     });
                     
                     

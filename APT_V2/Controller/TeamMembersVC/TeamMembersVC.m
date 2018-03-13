@@ -224,30 +224,7 @@
     NSString *availability = [self checkNull:[[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
     
-    NSString * imgStr1 = ([[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"]==[NSNull null])?@"":[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"];
-    NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
-    
-    
-    [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            cell.playerImg.image = image;
-            
-            // cache the image for use later (when scrolling up)
-            cell.playerImg.image = image;
-        }
-        else
-        {
-            cell.playerImg.image = [UIImage imageNamed:@"no-image"];
-        }
-    }];
-    
-//    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString:imgStr1]
-//                        placeholderImage:[UIImage imageNamed:@"no-image"]];
-    
-//    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString: [self checkNull:imgStr1]] placeholderImage:[UIImage imageNamed:@"no-image"]];
-    
-
+    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString: [self checkNull:[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"]]] placeholderImage:[UIImage imageNamed:@"no-image"]];
     
     if([availability isEqualToString:@"Available"])
     {
