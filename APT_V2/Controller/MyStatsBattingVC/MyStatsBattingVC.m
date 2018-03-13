@@ -13,6 +13,9 @@
 #import "WebService.h"
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
+#import "ScoreCardVC.h"
+#import "AppDelegate.h"
+#import "TabbarVC.h"
 
 @interface MyStatsBattingVC ()
 {
@@ -41,7 +44,7 @@
     BOOL isBatting;
     BOOL isBowling;
     
-    
+    TabbarVC *objtab;
 }
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *battingTableViewHeight;
@@ -246,7 +249,10 @@
         }
         cell.backgroundColor = [UIColor clearColor];
 
-        
+    
+            //Drop Down Action For Expanded Cell
+        [[cell dropDowniPadBtn] setTag:[indexPath row]];
+        [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
         
         NSLog(@"recentMatchesArray:%@", recentMatchesArray);
         if (IS_IPAD) {
@@ -305,10 +311,8 @@
                 [cell.wktBtniPad addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.alllbliPad addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                 
-                //Drop Down Action For Expanded Cell
-                    [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
                     
-                
+
                     //wagon wheel
                 if(self.wagonWheelDrawData.count>0)
                     {
@@ -1402,6 +1406,9 @@
             }
             cell.backgroundColor = [UIColor clearColor];
             
+                //Drop Down Action For Expanded Cell
+            [[cell dropDowniPhoneBtn] setTag:[indexPath row]];
+            [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
             
             
             NSLog(@"recentMatchesArray:%@", recentMatchesArray);
@@ -2510,70 +2517,23 @@
     // when user tap the row, what action you want to perform
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 1) {
-        /*
-        NSString *matchCode = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchCode"]];
-        NSString *innigs = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"InnsNo"]];
-        NSString *playerCode = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"PlayerCode"]];
-        
-        //Get Match Batting Performance
-        [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode];
-        //WagonWheel Web Service
-        [self wagonWheelWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs];
-        //Pitch Map Web Service
-        [self pitchMapWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs];
-        */
-//        [self.batttingTableView reloadData];
-        matchDetailsArray = [NSMutableArray new];
-        self.wagonWheelDrawData = [NSMutableArray new];
-        self.pitchData = [NSMutableArray new];
-        NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
-        NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
-        NSLog(@"battingPitchData:%@", battingPitchData);
-        if (isBatting) {
-            matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
-            self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
-            self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
-        }
-        
-        if (isBowling) {
-            matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
-            self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
-            self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
-        }
-//        [self.batttingTableView reloadData];
-        [self.batttingTableView beginUpdates];
-        
-        if(indexPath.row == selectedIndex) {
-            selectedIndex = -1;
-                //cell.scoreView.hidden = YES;
-            lastIndex = NULL;
-        } else {
-                //cell.scoreView.hidden = NO;
-            if(lastIndex != nil) {
-            
-                [self.batttingTableView reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
-                isOnes = YES;
-                isTwos = YES;
-                isThrees = YES;
-                isFours = YES;
-                isSixes = YES;
-                isWkt = YES;
-                isDotBall = YES;
-            }
-            lastIndex = indexPath;
-            selectedIndex = indexPath.row;
-        }
-            //[self.batttingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSLog(@"recentMatchesArray:%@", recentMatchesArray);
+//    AppDelegate *Appobj = [AppDelegate new];
+    appDel.Currentmatchcode = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchCode"];
+    appDel.Scorearray = [recentMatchesArray objectAtIndex:indexPath.row];
     
-            //[self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [self.batttingTableView endUpdates];
-        
-        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.batttingTableView reloadData];
-    }
+//    ScoreCardVC *scoreObj = [[ScoreCardVC alloc] init];
+//    scoreObj = (ScoreCardVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+//    [appDel.frontNavigationController pushViewController:scoreObj animated:YES];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//    appDel.Currentmatchcode = displayMatchCode;
+//    appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objtab animated:YES];
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -3131,6 +3091,60 @@
 
 -(IBAction)didClickDropDownButtonForExpandCell:(id)sender
 {
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:1];
+    MyStatsBattingCell *cell = [self.batttingTableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.section == 1) {
+        
+            //        [self.batttingTableView reloadData];
+        matchDetailsArray = [NSMutableArray new];
+        self.wagonWheelDrawData = [NSMutableArray new];
+        self.pitchData = [NSMutableArray new];
+        NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
+        NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
+        NSLog(@"battingPitchData:%@", battingPitchData);
+        if (isBatting) {
+            matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
+            self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
+            self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
+        }
+        
+        if (isBowling) {
+            matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
+            self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
+            self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
+        }
+            //        [self.batttingTableView reloadData];
+        [self.batttingTableView beginUpdates];
+        
+        if(indexPath.row == selectedIndex) {
+            selectedIndex = -1;
+                //cell.scoreView.hidden = YES;
+            lastIndex = NULL;
+        } else {
+                //cell.scoreView.hidden = NO;
+            if(lastIndex != nil) {
+                
+                [self.batttingTableView reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+                isOnes = YES;
+                isTwos = YES;
+                isThrees = YES;
+                isFours = YES;
+                isSixes = YES;
+                isWkt = YES;
+                isDotBall = YES;
+            }
+            lastIndex = indexPath;
+            selectedIndex = indexPath.row;
+        }
+        
+        [self.batttingTableView endUpdates];
+        
+        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.batttingTableView reloadData];
+    }
     
 }
 

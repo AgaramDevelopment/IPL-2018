@@ -465,8 +465,11 @@
 //    self.matchDetails =Appobj.Scorearray;
 //    }
     
-    self.matchCode=Appobj.Currentmatchcode;
-    self.matchDetails =Appobj.Scorearray;
+    self.matchCode=appDel.Currentmatchcode;
+    self.matchDetails =appDel.Scorearray;
+    
+    NSLog(@"matchCode:%@", self.matchCode);
+    NSLog(@"matchDetails:%@", self.matchDetails);
     
     self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
     self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
