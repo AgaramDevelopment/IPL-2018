@@ -120,7 +120,7 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
+    //[AppCommon showLoading];
     //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(GalleryVideo);
     

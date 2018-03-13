@@ -44,6 +44,7 @@
 @property (strong, nonatomic)  NSMutableArray *MatchResultsArray4;
 @property (strong, nonatomic)  NSMutableArray *MatchResultsArray5;
 
+@property (strong, nonatomic)  NSMutableArray *replaceArray1;
 @property (strong, nonatomic)  NSMutableArray *replaceArray2;
 @property (strong, nonatomic)  NSMutableArray *replaceArray3;
 @property (strong, nonatomic)  NSMutableArray *replaceArray4;
@@ -149,7 +150,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat widthF = (self.BowlerCollectionView.superview.frame.size.width/2) - 20;
+    CGFloat widthF = (self.BowlerCollectionView.superview.frame.size.width/3) - 20;
     CGFloat HeightF = self.BowlerCollectionView.superview.frame.size.height-20;
 
     
@@ -188,7 +189,7 @@
     
     if(collectionView == self.teamCompCollectionView)
     {
-        return (IS_IPAD ? CGSizeMake(404, 825) : CGSizeMake(290, 825) );
+        return (IS_IPAD ? CGSizeMake(300, 825) : CGSizeMake(290, 825) );
     }
     else
     {
@@ -273,6 +274,24 @@
                 {
                     AllroundCount = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
                 }
+                
+                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+                
+                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.replaceArray1.count;i++)
+                {
+                    NSString *str = [[self.replaceArray1 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [placedArray addObject:str];
+                }
+                if(placedArray.count>0)
+                {
+                    NSString *players = [placedArray componentsJoinedByString:@","];
+                    cell.replacePlayerslbl.text = players;
+                }
+                else
+                {
+                    cell.replacePlayerslbl.text = @"";
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -285,6 +304,9 @@
             cell.Player9.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:8];
             cell.Player10.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:9];
             cell.Player11.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:10];
+                
+                
+                
             
 //            NSMutableArray *arr = [[NSMutableArray alloc]init];
 //            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
@@ -311,7 +333,7 @@
                 
                 
             
-            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+            
             
             
             NSString *playerRole1 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:0];
@@ -518,6 +540,7 @@
             }
             
         }
+            return cell;
         }
         else if(indexPath.row==1)
         {
@@ -567,6 +590,24 @@
                 {
                     AllroundCount = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
                 }
+                
+                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+                
+                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.replaceArray2.count;i++)
+                {
+                    NSString *str = [[self.replaceArray2 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [placedArray addObject:str];
+                }
+                if(placedArray.count>0)
+                {
+                NSString *players = [placedArray componentsJoinedByString:@","];
+                cell.replacePlayerslbl.text = players;
+                }
+                else
+                {
+                    cell.replacePlayerslbl.text = @"";
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -579,6 +620,8 @@
             cell.Player9.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:8];
             cell.Player10.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:9];
             cell.Player11.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:10];
+                
+                
             
 //            NSMutableArray *arr = [[NSMutableArray alloc]init];
 //            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
@@ -603,7 +646,7 @@
 //            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
 //            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
-            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+            
             
             
             
@@ -810,6 +853,7 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+            return cell;
         }
         else if(indexPath.row==2)
         {
@@ -859,6 +903,23 @@
                 else
                 {
                     AllroundCount = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+                }
+                
+                
+                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.replaceArray3.count;i++)
+                {
+                    NSString *str = [[self.replaceArray3 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [placedArray addObject:str];
+                }
+                if(placedArray.count>0)
+                {
+                    NSString *players = [placedArray componentsJoinedByString:@","];
+                    cell.replacePlayerslbl.text = players;
+                }
+                else
+                {
+                    cell.replacePlayerslbl.text = @"";
                 }
             
             cell.Player1.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:0];
@@ -1107,6 +1168,7 @@
             }
             
         }
+            return cell;
         }
         else if(indexPath.row==3)
         {
@@ -1157,6 +1219,26 @@
                 {
                     AllroundCount = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
                 }
+                
+                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+                
+                
+                
+                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.replaceArray4.count;i++)
+                {
+                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [placedArray addObject:str];
+                }
+                if(placedArray.count>0)
+                {
+                    NSString *players = [placedArray componentsJoinedByString:@","];
+                    cell.replacePlayerslbl.text = players;
+                }
+                else
+                {
+                    cell.replacePlayerslbl.text = @"";
+                }
             
             cell.Player1.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:0];
             cell.Player2.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:1];
@@ -1194,7 +1276,6 @@
 //            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
 //            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
             
-            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
             
             
@@ -1401,6 +1482,7 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+            return cell;
         }
         else if(indexPath.row==4)
         {
@@ -1450,6 +1532,25 @@
                     AllroundCount = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
                 }
                 
+                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+                
+                
+                
+                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.replaceArray4.count;i++)
+                {
+                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [placedArray addObject:str];
+                }
+                if(placedArray.count>0)
+                {
+                    NSString *players = [placedArray componentsJoinedByString:@","];
+                    cell.replacePlayerslbl.text = players;
+                }
+                else
+                {
+                    cell.replacePlayerslbl.text = @"";
+                }
             
 //            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
 //            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
@@ -1491,7 +1592,6 @@
 //            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
 //            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
 //
-            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
             
             
             
@@ -1698,11 +1798,12 @@
                 cell.Player11Img.image = [UIImage imageNamed:@"glove"];
             }
         }
+            return cell;
         }
         
         
         
-        return cell;
+        return nil;
         
     }
     
@@ -1895,41 +1996,82 @@
             if(![[responseObject valueForKey:@"lstplayerMatchComp"] isKindOfClass:NULL])
             {
             teamArray = [responseObject valueForKey:@"lstplayerMatchComp"];
-                if(![teamArray isKindOfClass:NULL])
+                if(![teamArray isKindOfClass:NULL] && teamArray.count>0)
                 {
                 
+                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0] isKindOfClass:NULL])
+                    {
                     self.TeamPlayersArray1 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0];
+                    }
+                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1] isKindOfClass:NULL])
+                    {
                     self.TeamPlayersArray2 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1];
-                    self.TeamPlayersArray3 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2];
-                    self.TeamPlayersArray4 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3];
-                    self.TeamPlayersArray5 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4];
+                    }
                     
-                    [self.teamCompCollectionView reloadData];
+                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2] isKindOfClass:NULL])
+                    {
+                    self.TeamPlayersArray3 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2];
+                    }
+                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3] isKindOfClass:NULL])
+                    {
+                    self.TeamPlayersArray4 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3];
+                    }
+                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4] isKindOfClass:NULL])
+                    {
+                    self.TeamPlayersArray5 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4];
+                    }
                 }
             
             
             }
             
+            self.MatchResultsArray1 = [[NSMutableArray alloc]init];
+            self.MatchResultsArray2 = [[NSMutableArray alloc]init];
+            self.MatchResultsArray3 = [[NSMutableArray alloc]init];
+            self.MatchResultsArray4 = [[NSMutableArray alloc]init];
+            self.MatchResultsArray5 = [[NSMutableArray alloc]init];
             if(![[responseObject valueForKey:@"lstTeamCompResults"] isKindOfClass:NULL])
             {
                 
             NSMutableArray *arrayResults = [[NSMutableArray alloc]init];
             arrayResults = [responseObject valueForKey:@"lstTeamCompResults"];
             
-            self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
-            self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
-            self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
-            self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
-            self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
+                
+                if(![[arrayResults objectAtIndex:0] isKindOfClass:NULL])
+                {
+                    self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
+                }
+                if(![[arrayResults objectAtIndex:1] isKindOfClass:NULL])
+                {
+                    self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
+                }
+                if(![[arrayResults objectAtIndex:2] isKindOfClass:NULL])
+                {
+                    self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
+                }
+                if(![[arrayResults objectAtIndex:3] isKindOfClass:NULL])
+                {
+                    self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
+                }
+                if(![[arrayResults objectAtIndex:4] isKindOfClass:NULL])
+                {
+                    self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
+                }
                 
                 
             }
             
+            self.replaceArray1 = [[NSMutableArray alloc]init];
+            self.replaceArray2 = [[NSMutableArray alloc]init];
+            self.replaceArray3 = [[NSMutableArray alloc]init];
+            self.replaceArray4 = [[NSMutableArray alloc]init];
+            self.replaceArray5 = [[NSMutableArray alloc]init];
             if(![[responseObject valueForKey:@"lstTeamplayercompReplaces"] isKindOfClass:NULL])
             {
                 NSMutableArray *replArray = [[NSMutableArray alloc]init];
                 replArray = [responseObject valueForKey:@"lstTeamplayercompReplaces"];
                 
+                self.replaceArray1 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:0];
                 self.replaceArray2 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:1];
                 self.replaceArray3 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:2];
                 self.replaceArray4 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:3];
@@ -1937,7 +2079,7 @@
                 
             }
             
-            
+           [self.teamCompCollectionView reloadData];
             
             
             
