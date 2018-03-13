@@ -306,7 +306,9 @@
         
         NSString *ClientCode = [AppCommon GetClientCode];
         NSString *UserrefCode = [AppCommon GetuserReference];
-        NSString *TeamCode = [AppCommon getCurrentTeamCode];
+        //NSString *TeamCode = [AppCommon getCurrentTeamCode];
+
+    NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamCode"];
 
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

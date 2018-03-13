@@ -170,11 +170,11 @@
         
         if(collectionView == self.scheduleCollectionView)
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(310, 170);
         }
         else
         {
-            return CGSizeMake(310, 182);
+            return CGSizeMake(310, 170);
         }
     }
 }
@@ -525,6 +525,8 @@
         
         NSString *competition = @"";
         NSString *teamcode = [AppCommon getCurrentTeamCode];
+        
+       // NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamCode"];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

@@ -42,6 +42,8 @@
     NSMutableArray *BowlingDetailsArray3;
     NSMutableArray *BowlingDetailsArray4;
     
+    NSMutableArray *matchDetailsImageArray;
+    
     NSMutableArray *wktdescArray1;
     NSMutableArray *wktdescArray2;
     NSMutableArray *wktdescArray3;
@@ -3344,6 +3346,22 @@
     
 }
 
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
 
 
 
@@ -3400,6 +3418,46 @@
                 BowlingDetailsArray1 = [[NSMutableArray alloc]init];
                 BowlingDetailsArray1 = [[array1 valueForKey:@"lstSEBowlerDetails"] objectAtIndex:0];
                 
+                matchDetailsImageArray = [[NSMutableArray alloc]init];
+                matchDetailsImageArray = [[array1 valueForKey:@"lstMatchDetails"] objectAtIndex:0];
+                
+                
+                
+                
+                NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
+                NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+                
+                NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"];
+                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+                
+                [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        self.teamAlogo.image = image;
+                        
+                        // cache the image for use later (when scrolling up)
+                        self.teamAlogo.image = image;
+                    }
+                    else
+                    {
+                        self.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+                    }
+                }];
+                
+                
+                [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        self.teamBlogo.image = image;
+                        
+                        // cache the image for use later (when scrolling up)
+                        self.teamBlogo.image = image;
+                    }
+                    else
+                    {
+                        self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+                    }
+                }];
                 
                 
                 //second button details
