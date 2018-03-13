@@ -158,7 +158,7 @@ int headdingCount = 0;
 -(IBAction)didClickBackBtn:(id)sender
 {
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

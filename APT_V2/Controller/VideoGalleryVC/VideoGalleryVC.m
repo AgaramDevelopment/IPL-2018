@@ -73,7 +73,6 @@
     [self.view_datepicker setHidden:YES];
     
     [btnUpload setHidden:![AppCommon isCoach]];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
