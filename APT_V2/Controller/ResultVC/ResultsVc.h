@@ -30,6 +30,8 @@
 
 @property (nonatomic,strong)  NSMutableArray * resultArr;
 
+@property (nonatomic,strong)  NSMutableArray * TotalMatchesArr;
+
 @property (nonatomic,strong)IBOutlet  UILabel * competitionLbl;
 @property (strong, nonatomic) IBOutlet UILabel *teamLbl;
 

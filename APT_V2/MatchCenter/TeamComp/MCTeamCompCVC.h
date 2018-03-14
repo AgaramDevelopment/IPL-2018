@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *PlayerRoleCountlbl;
 
 @property (strong, nonatomic) IBOutlet UILabel *replacePlayerslbl;
+@property (strong, nonatomic) IBOutlet UILabel *replacePlayersCountlbl;
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *Player1Img;

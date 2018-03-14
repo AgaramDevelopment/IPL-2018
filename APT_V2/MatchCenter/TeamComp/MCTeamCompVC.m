@@ -131,7 +131,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if(collectionView == self.teamCompCollectionView){
-        return 5;
+        return self.TeamPlayersArray1.count;
     }
     else if(collectionView == self.BowlerCollectionView)
     {
@@ -225,13 +225,14 @@
         
         MCTeamCompCVC * cell = [self.teamCompCollectionView dequeueReusableCellWithReuseIdentifier:@"mcTeamCompCVC" forIndexPath:indexPath];
         
-        if(indexPath.row==0)
-        {
-            if(self.TeamPlayersArray1.count>0 && ![self.TeamPlayersArray1 isEqual:[NSNull null]])
+        NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+        [reqArray addObjectsFromArray:[[self.TeamPlayersArray1 valueForKey:@"MatchTeamPlayers"]objectAtIndex:indexPath.row]];
+       
+            if(reqArray.count>0 && ![reqArray isEqual:[NSNull null]])
             {
-            cell.datelbl.text = [[self.TeamPlayersArray1 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray1 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray1 valueForKey:@"Venue"]objectAtIndex:0];
+            cell.datelbl.text = [[reqArray valueForKey:@"MatchDate"]objectAtIndex:0];
+            NSString *team =[[reqArray valueForKey:@"TeamName"]objectAtIndex:0];
+            NSString *venue =[[reqArray valueForKey:@"Venue"]objectAtIndex:0];
             cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
             
             
@@ -239,71 +240,77 @@
             //NSString *WonTeamname =[[self.TeamPlayersArray1 valueForKey:@"MatchWon"]objectAtIndex:0];
             //cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
                 
-            cell.WonStatuslbl.text = [self.MatchResultsArray1 valueForKey:@"MatchResult"];
+            cell.WonStatuslbl.text = [[self.MatchResultsArray1 valueForKey:@"MatchResult"]objectAtIndex:indexPath.row];
                 NSString *  BowlerCount ;
-                if([[self.MatchResultsArray1 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+                if([[[self.MatchResultsArray1 valueForKey:@"Bowlingcount"]objectAtIndex:indexPath.row] isKindOfClass:[NSNumber class]])
                 {
-                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                    NSNumber *vv = [[self.MatchResultsArray1 valueForKey:@"Bowlingcount"]objectAtIndex:indexPath.row];
                     BowlerCount = [vv stringValue];
                 }
                 else
                 {
-                    BowlerCount = [self.MatchResultsArray1 valueForKey:@"Bowlingcount"];
+                    BowlerCount = [[self.MatchResultsArray1 valueForKey:@"Bowlingcount"]objectAtIndex:indexPath.row];
                 }
                 
                 
                 NSString * BatsmenCount;
-                if([[self.MatchResultsArray1 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+                if([[[self.MatchResultsArray1 valueForKey:@"Battingcount"]objectAtIndex:indexPath.row] isKindOfClass:[NSNumber class]])
                 {
-                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                    NSNumber *vv = [[self.MatchResultsArray1 valueForKey:@"Battingcount"]objectAtIndex:indexPath.row];
                     BatsmenCount = [vv stringValue];
                 }
                 else
                 {
-                    BatsmenCount = [self.MatchResultsArray1 valueForKey:@"Battingcount"];
+                    BatsmenCount = [[self.MatchResultsArray1 valueForKey:@"Battingcount"]objectAtIndex:indexPath.row];
                 }
                 
                 
                 NSString * AllroundCount;
-                if([[self.MatchResultsArray1 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+                if([[[self.MatchResultsArray1 valueForKey:@"Allroundercount"]objectAtIndex:indexPath.row] isKindOfClass:[NSNumber class]])
                 {
-                    NSNumber *vv = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                    NSNumber *vv = [[self.MatchResultsArray1 valueForKey:@"Allroundercount"]objectAtIndex:indexPath.row];
                     AllroundCount = [vv stringValue];
                 }
                 else
                 {
-                    AllroundCount = [self.MatchResultsArray1 valueForKey:@"Allroundercount"];
+                    AllroundCount = [[self.MatchResultsArray1 valueForKey:@"Allroundercount"]objectAtIndex:indexPath.row];
                 }
                 
                 cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
                 
                 NSMutableArray *placedArray = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.replaceArray1.count;i++)
+                NSMutableArray *replacedArr = [[NSMutableArray alloc]init];
+                replacedArr = [[self.replaceArray1 objectAtIndex:indexPath.row]valueForKey:@"lstplayerstoreplace"];
+                for(int i=0;i<replacedArr.count;i++)
                 {
-                    NSString *str = [[self.replaceArray1 objectAtIndex:i] valueForKey:@"PlayerName"];
+                    NSString *str = [[replacedArr objectAtIndex:i] valueForKey:@"PlayerName"];
                     [placedArray addObject:str];
                 }
+                
                 if(placedArray.count>0)
                 {
                     NSString *players = [placedArray componentsJoinedByString:@","];
                     cell.replacePlayerslbl.text = players;
+                    cell.replacePlayersCountlbl.text = [NSString stringWithFormat:@"%d",placedArray.count];
                 }
                 else
                 {
+                    
                     cell.replacePlayerslbl.text = @"";
+                    cell.replacePlayersCountlbl.text = @"-";
                 }
             
-            cell.Player1.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:0];
-            cell.Player2.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:1];
-            cell.Player3.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:2];
-            cell.Player4.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:3];
-            cell.Player5.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:4];
-            cell.Player6.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:5];
-            cell.Player7.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:6];
-            cell.Player8.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:7];
-            cell.Player9.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:8];
-            cell.Player10.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:9];
-            cell.Player11.text = [[self.TeamPlayersArray1 valueForKey:@"PlayerName"]objectAtIndex:10];
+            cell.Player1.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:0];
+            cell.Player2.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:1];
+            cell.Player3.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:2];
+            cell.Player4.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:3];
+            cell.Player5.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:4];
+            cell.Player6.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:5];
+            cell.Player7.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:6];
+            cell.Player8.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:7];
+            cell.Player9.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:8];
+            cell.Player10.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:9];
+            cell.Player11.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:10];
                 
                 
                 
@@ -336,7 +343,7 @@
             
             
             
-            NSString *playerRole1 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:0];
+            NSString *playerRole1 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:0];
             if( [playerRole1 isEqualToString:@"Batsman"])
             {
                 cell.Player1Img.image = [UIImage imageNamed:@"bat"];
@@ -355,7 +362,7 @@
             }
             
             
-            NSString *playerRole2 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:1];
+            NSString *playerRole2 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:1];
             if( [playerRole2 isEqualToString:@"Batsman"])
             {
                 cell.Player2Img.image = [UIImage imageNamed:@"bat"];
@@ -374,7 +381,7 @@
             }
             
             
-            NSString *playerRole3 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:2];
+            NSString *playerRole3 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:2];
             if( [playerRole3 isEqualToString:@"Batsman"])
             {
                 cell.Player3Img.image = [UIImage imageNamed:@"bat"];
@@ -393,7 +400,7 @@
             }
             
             
-            NSString *playerRole4 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:3];
+            NSString *playerRole4 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:3];
             if( [playerRole4 isEqualToString:@"Batsman"])
             {
                 cell.Player4Img.image = [UIImage imageNamed:@"bat"];
@@ -411,7 +418,7 @@
                 cell.Player4Img.image = [UIImage imageNamed:@"glove"];
             }
             
-            NSString *playerRole5 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:4];
+            NSString *playerRole5 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:4];
             if( [playerRole5 isEqualToString:@"Batsman"])
             {
                 cell.Player5Img.image = [UIImage imageNamed:@"bat"];
@@ -430,7 +437,7 @@
             }
             
             
-            NSString *playerRole6 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:5];
+            NSString *playerRole6 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:5];
             if( [playerRole6 isEqualToString:@"Batsman"])
             {
                 cell.Player6Img.image = [UIImage imageNamed:@"bat"];
@@ -449,7 +456,7 @@
             }
             
             
-            NSString *playerRole7 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:6];
+            NSString *playerRole7 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:6];
             if( [playerRole7 isEqualToString:@"Batsman"])
             {
                 cell.Player7Img.image = [UIImage imageNamed:@"bat"];
@@ -467,7 +474,7 @@
                 cell.Player7Img.image = [UIImage imageNamed:@"glove"];
             }
             
-            NSString *playerRole8 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:7];
+            NSString *playerRole8 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:7];
             if( [playerRole8 isEqualToString:@"Batsman"])
             {
                 cell.Player8Img.image = [UIImage imageNamed:@"bat"];
@@ -485,7 +492,7 @@
                 cell.Player8Img.image = [UIImage imageNamed:@"glove"];
             }
             
-            NSString *playerRole9 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:8];
+            NSString *playerRole9 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:8];
             if( [playerRole9 isEqualToString:@"Batsman"])
             {
                 cell.Player9Img.image = [UIImage imageNamed:@"bat"];
@@ -503,7 +510,7 @@
                 cell.Player9Img.image = [UIImage imageNamed:@"glove"];
             }
             
-            NSString *playerRole10 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:9];
+            NSString *playerRole10 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:9];
             if( [playerRole10 isEqualToString:@"Batsman"])
             {
                 cell.Player10Img.image = [UIImage imageNamed:@"bat"];
@@ -521,7 +528,7 @@
                 cell.Player10Img.image = [UIImage imageNamed:@"glove"];
             }
             
-            NSString *playerRole11 = [[self.TeamPlayersArray1 valueForKey:@"PlayerRole"]objectAtIndex:10];
+            NSString *playerRole11 = [[reqArray valueForKey:@"PlayerRole"]objectAtIndex:10];
             if( [playerRole11 isEqualToString:@"Batsman"])
             {
                 cell.Player11Img.image = [UIImage imageNamed:@"bat"];
@@ -541,1269 +548,1266 @@
             
         }
             return cell;
-        }
-        else if(indexPath.row==1)
-        {
-            if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
-            {
-            cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
-            
-//            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
-//            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
-//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
-                
-                cell.WonStatuslbl.text = [self.MatchResultsArray2 valueForKey:@"MatchResult"];
-                NSString *  BowlerCount ;
-                if([[self.MatchResultsArray2 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
-                    BowlerCount = [vv stringValue];
-                }
-                else
-                {
-                    BowlerCount = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
-                }
-                
-                
-                NSString * BatsmenCount;
-                if([[self.MatchResultsArray2 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
-                    BatsmenCount = [vv stringValue];
-                }
-                else
-                {
-                    BatsmenCount = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
-                }
-                
-                
-                NSString * AllroundCount;
-                if([[self.MatchResultsArray2 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
-                    AllroundCount = [vv stringValue];
-                }
-                else
-                {
-                    AllroundCount = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
-                }
-                
-                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
-                
-                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.replaceArray2.count;i++)
-                {
-                    NSString *str = [[self.replaceArray2 objectAtIndex:i] valueForKey:@"PlayerName"];
-                    [placedArray addObject:str];
-                }
-                if(placedArray.count>0)
-                {
-                NSString *players = [placedArray componentsJoinedByString:@","];
-                cell.replacePlayerslbl.text = players;
-                }
-                else
-                {
-                    cell.replacePlayerslbl.text = @"";
-                }
-            
-            cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
-            cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
-            cell.Player3.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:2];
-            cell.Player4.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:3];
-            cell.Player5.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:4];
-            cell.Player6.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:5];
-            cell.Player7.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:6];
-            cell.Player8.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:7];
-            cell.Player9.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:8];
-            cell.Player10.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:9];
-            cell.Player11.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:10];
-                
-                
-            
-//            NSMutableArray *arr = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-//            for(int i=0;i<self.TeamPlayersArray2.count;i++)
+        
+//        else if(indexPath.row==1)
+//        {
+//            if(self.TeamPlayersArray2.count>0 && ![self.TeamPlayersArray2 isEqual:[NSNull null]])
 //            {
-//                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
-//                if( [playerrole isEqualToString:@"Bowler"])
-//                {
-//                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"Batsman"])
-//                {
-//                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"All Rounder"])
-//                {
-//                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
-//                }
-//            }
-//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
-            
-            
-            
-            
-            
-            NSString *playerRole1 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:0];
-            if( [playerRole1 isEqualToString:@"Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole1 isEqualToString:@"Bowler"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole1 isEqualToString:@"All Rounder"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole2 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:1];
-            if( [playerRole2 isEqualToString:@"Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole2 isEqualToString:@"Bowler"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole2 isEqualToString:@"All Rounder"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole3 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:2];
-            if( [playerRole3 isEqualToString:@"Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole3 isEqualToString:@"Bowler"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole3 isEqualToString:@"All Rounder"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole4 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:3];
-            if( [playerRole4 isEqualToString:@"Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole4 isEqualToString:@"Bowler"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole4 isEqualToString:@"All Rounder"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole5 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:4];
-            if( [playerRole5 isEqualToString:@"Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole5 isEqualToString:@"Bowler"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole5 isEqualToString:@"All Rounder"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole6 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:5];
-            if( [playerRole6 isEqualToString:@"Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole6 isEqualToString:@"Bowler"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole6 isEqualToString:@"All Rounder"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole7 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:6];
-            if( [playerRole7 isEqualToString:@"Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole7 isEqualToString:@"Bowler"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole7 isEqualToString:@"All Rounder"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole8 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:7];
-            if( [playerRole8 isEqualToString:@"Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole8 isEqualToString:@"Bowler"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole8 isEqualToString:@"All Rounder"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole9 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:8];
-            if( [playerRole9 isEqualToString:@"Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole9 isEqualToString:@"Bowler"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole9 isEqualToString:@"All Rounder"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole10 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:9];
-            if( [playerRole10 isEqualToString:@"Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole10 isEqualToString:@"Bowler"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole10 isEqualToString:@"All Rounder"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole11 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:10];
-            if( [playerRole11 isEqualToString:@"Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole11 isEqualToString:@"Bowler"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole11 isEqualToString:@"All Rounder"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
-            }
-        }
-            return cell;
-        }
-        else if(indexPath.row==2)
-        {
-            if(self.TeamPlayersArray3.count>0 && ![self.TeamPlayersArray3 isEqual:[NSNull null]])
-            {
-            
-            cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
-            
-//            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
-//            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
-//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
-                
-                cell.WonStatuslbl.text = [self.MatchResultsArray3 valueForKey:@"MatchResult"];
-                NSString *  BowlerCount ;
-                if([[self.MatchResultsArray3 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
-                    BowlerCount = [vv stringValue];
-                }
-                else
-                {
-                    BowlerCount = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
-                }
-                
-                
-                NSString * BatsmenCount;
-                if([[self.MatchResultsArray3 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
-                    BatsmenCount = [vv stringValue];
-                }
-                else
-                {
-                    BatsmenCount = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
-                }
-                
-                
-                NSString * AllroundCount;
-                if([[self.MatchResultsArray3 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
-                    AllroundCount = [vv stringValue];
-                }
-                else
-                {
-                    AllroundCount = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
-                }
-                
-                
-                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.replaceArray3.count;i++)
-                {
-                    NSString *str = [[self.replaceArray3 objectAtIndex:i] valueForKey:@"PlayerName"];
-                    [placedArray addObject:str];
-                }
-                if(placedArray.count>0)
-                {
-                    NSString *players = [placedArray componentsJoinedByString:@","];
-                    cell.replacePlayerslbl.text = players;
-                }
-                else
-                {
-                    cell.replacePlayerslbl.text = @"";
-                }
-            
-            cell.Player1.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:0];
-            cell.Player2.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:1];
-            cell.Player3.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:2];
-            cell.Player4.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:3];
-            cell.Player5.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:4];
-            cell.Player6.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:5];
-            cell.Player7.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:6];
-            cell.Player8.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:7];
-            cell.Player9.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:8];
-            cell.Player10.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:9];
-            cell.Player11.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:10];
-            
-            
-            
-            
-//            NSMutableArray *arr = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-//            for(int i=0;i<self.TeamPlayersArray3.count;i++)
-//            {
-//                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
-//                if( [playerrole isEqualToString:@"Bowler"])
-//                {
-//                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"Batsman"])
-//                {
-//                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"All Rounder"])
-//                {
-//                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
-//                }
-//            }
-//          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-//           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-//           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
-            
-            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
-            
-            
-            
-            NSString *playerRole1 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:0];
-            if( [playerRole1 isEqualToString:@"Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole1 isEqualToString:@"Bowler"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole1 isEqualToString:@"All Rounder"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole2 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:1];
-            if( [playerRole2 isEqualToString:@"Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole2 isEqualToString:@"Bowler"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole2 isEqualToString:@"All Rounder"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole3 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:2];
-            if( [playerRole3 isEqualToString:@"Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole3 isEqualToString:@"Bowler"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole3 isEqualToString:@"All Rounder"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole4 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:3];
-            if( [playerRole4 isEqualToString:@"Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole4 isEqualToString:@"Bowler"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole4 isEqualToString:@"All Rounder"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole5 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:4];
-            if( [playerRole5 isEqualToString:@"Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole5 isEqualToString:@"Bowler"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole5 isEqualToString:@"All Rounder"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole6 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:5];
-            if( [playerRole6 isEqualToString:@"Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole6 isEqualToString:@"Bowler"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole6 isEqualToString:@"All Rounder"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole7 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:6];
-            if( [playerRole7 isEqualToString:@"Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole7 isEqualToString:@"Bowler"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole7 isEqualToString:@"All Rounder"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole8 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:7];
-            if( [playerRole8 isEqualToString:@"Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole8 isEqualToString:@"Bowler"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole8 isEqualToString:@"All Rounder"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole9 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:8];
-            if( [playerRole9 isEqualToString:@"Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole9 isEqualToString:@"Bowler"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole9 isEqualToString:@"All Rounder"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole10 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:9];
-            if( [playerRole10 isEqualToString:@"Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole10 isEqualToString:@"Bowler"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole10 isEqualToString:@"All Rounder"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole11 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:10];
-            if( [playerRole11 isEqualToString:@"Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole11 isEqualToString:@"Bowler"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole11 isEqualToString:@"All Rounder"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-        }
-            return cell;
-        }
-        else if(indexPath.row==3)
-        {
-            if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
-            {
-            cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
-            
-//            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
-//            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
-//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
-                
-                
-                cell.WonStatuslbl.text = [self.MatchResultsArray4 valueForKey:@"MatchResult"];
-                NSString *  BowlerCount ;
-                if([[self.MatchResultsArray4 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
-                    BowlerCount = [vv stringValue];
-                }
-                else
-                {
-                    BowlerCount = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
-                }
-                
-                
-                NSString * BatsmenCount;
-                if([[self.MatchResultsArray4 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
-                    BatsmenCount = [vv stringValue];
-                }
-                else
-                {
-                    BatsmenCount = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
-                }
-                
-                
-                NSString * AllroundCount;
-                if([[self.MatchResultsArray4 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
-                    AllroundCount = [vv stringValue];
-                }
-                else
-                {
-                    AllroundCount = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
-                }
-                
-                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
-                
-                
-                
-                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.replaceArray4.count;i++)
-                {
-                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
-                    [placedArray addObject:str];
-                }
-                if(placedArray.count>0)
-                {
-                    NSString *players = [placedArray componentsJoinedByString:@","];
-                    cell.replacePlayerslbl.text = players;
-                }
-                else
-                {
-                    cell.replacePlayerslbl.text = @"";
-                }
-            
-            cell.Player1.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:0];
-            cell.Player2.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:1];
-            cell.Player3.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:2];
-            cell.Player4.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:3];
-            cell.Player5.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:4];
-            cell.Player6.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:5];
-            cell.Player7.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:6];
-            cell.Player8.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:7];
-            cell.Player9.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:8];
-            cell.Player10.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:9];
-            cell.Player11.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:10];
-            
-            
-//            NSMutableArray *arr = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-//            for(int i=0;i<self.TeamPlayersArray4.count;i++)
-//            {
-//                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
-//                if( [playerrole isEqualToString:@"Bowler"])
-//                {
-//                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"Batsman"])
-//                {
-//                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"All Rounder"])
-//                {
-//                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
-//                }
-//            }
-//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
-            
-            
-            
-            
-            NSString *playerRole1 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:0];
-            if( [playerRole1 isEqualToString:@"Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole1 isEqualToString:@"Bowler"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole1 isEqualToString:@"All Rounder"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole2 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:1];
-            if( [playerRole2 isEqualToString:@"Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole2 isEqualToString:@"Bowler"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole2 isEqualToString:@"All Rounder"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole3 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:2];
-            if( [playerRole3 isEqualToString:@"Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole3 isEqualToString:@"Bowler"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole3 isEqualToString:@"All Rounder"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole4 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:3];
-            if( [playerRole4 isEqualToString:@"Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole4 isEqualToString:@"Bowler"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole4 isEqualToString:@"All Rounder"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole5 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:4];
-            if( [playerRole5 isEqualToString:@"Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole5 isEqualToString:@"Bowler"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole5 isEqualToString:@"All Rounder"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole6 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:5];
-            if( [playerRole6 isEqualToString:@"Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole6 isEqualToString:@"Bowler"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole6 isEqualToString:@"All Rounder"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole7 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:6];
-            if( [playerRole7 isEqualToString:@"Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole7 isEqualToString:@"Bowler"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole7 isEqualToString:@"All Rounder"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole8 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:7];
-            if( [playerRole8 isEqualToString:@"Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole8 isEqualToString:@"Bowler"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole8 isEqualToString:@"All Rounder"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole9 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:8];
-            if( [playerRole9 isEqualToString:@"Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole9 isEqualToString:@"Bowler"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole9 isEqualToString:@"All Rounder"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole10 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:9];
-            if( [playerRole10 isEqualToString:@"Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole10 isEqualToString:@"Bowler"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole10 isEqualToString:@"All Rounder"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole11 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:10];
-            if( [playerRole11 isEqualToString:@"Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole11 isEqualToString:@"Bowler"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole11 isEqualToString:@"All Rounder"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
-            }
-        }
-            return cell;
-        }
-        else if(indexPath.row==4)
-        {
-            if(self.TeamPlayersArray5.count>0 && ![self.TeamPlayersArray5 isEqual:[NSNull null]])
-            {
-            
-            cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
-            NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
-            NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
-            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
-                
-                cell.WonStatuslbl.text = [self.MatchResultsArray5 valueForKey:@"MatchResult"];
-                
-                
-                NSString *  BowlerCount ;
-                if([[self.MatchResultsArray5 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
-                    BowlerCount = [vv stringValue];
-                }
-                else
-                {
-                    BowlerCount = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
-                }
-                
-                
-                NSString * BatsmenCount;
-                if([[self.MatchResultsArray5 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
-                    BatsmenCount = [vv stringValue];
-                }
-                else
-                {
-                    BatsmenCount = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
-                }
-                
-                
-                NSString * AllroundCount;
-                if([[self.MatchResultsArray5 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
-                {
-                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
-                    AllroundCount = [vv stringValue];
-                }
-                else
-                {
-                    AllroundCount = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
-                }
-                
-                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
-                
-                
-                
-                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.replaceArray4.count;i++)
-                {
-                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
-                    [placedArray addObject:str];
-                }
-                if(placedArray.count>0)
-                {
-                    NSString *players = [placedArray componentsJoinedByString:@","];
-                    cell.replacePlayerslbl.text = players;
-                }
-                else
-                {
-                    cell.replacePlayerslbl.text = @"";
-                }
-            
-//            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
-//            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
-//            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
-            
-            cell.Player1.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:0];
-            cell.Player2.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:1];
-            cell.Player3.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:2];
-            cell.Player4.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:3];
-            cell.Player5.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:4];
-            cell.Player6.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:5];
-            cell.Player7.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:6];
-            cell.Player8.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:7];
-            cell.Player9.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:8];
-            cell.Player10.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:9];
-            cell.Player11.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:10];
-            
-            
-//            NSMutableArray *arr = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
-//            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
-//            for(int i=0;i<self.TeamPlayersArray5.count;i++)
-//            {
-//                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
-//                if( [playerrole isEqualToString:@"Bowler"])
-//                {
-//                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"Batsman"])
-//                {
-//                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-//                }
-//                else if( [playerrole isEqualToString:@"All Rounder"])
-//                {
-//                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
-//                }
-//            }
-//            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
-//            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
-//            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//            cell.datelbl.text = [[self.TeamPlayersArray2 valueForKey:@"MatchDate"]objectAtIndex:0];
+//            NSString *team =[[self.TeamPlayersArray2 valueForKey:@"TeamName"]objectAtIndex:0];
+//            NSString *venue =[[self.TeamPlayersArray2 valueForKey:@"Venue"]objectAtIndex:0];
+//            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
 //
-            
-            
-            
-            NSString *playerRole1 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:0];
-            if( [playerRole1 isEqualToString:@"Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole1 isEqualToString:@"Bowler"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole1 isEqualToString:@"All Rounder"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole2 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:1];
-            if( [playerRole2 isEqualToString:@"Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole2 isEqualToString:@"Bowler"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole2 isEqualToString:@"All Rounder"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole3 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:2];
-            if( [playerRole3 isEqualToString:@"Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole3 isEqualToString:@"Bowler"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole3 isEqualToString:@"All Rounder"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole4 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:3];
-            if( [playerRole4 isEqualToString:@"Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole4 isEqualToString:@"Bowler"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole4 isEqualToString:@"All Rounder"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole5 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:4];
-            if( [playerRole5 isEqualToString:@"Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole5 isEqualToString:@"Bowler"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole5 isEqualToString:@"All Rounder"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole6 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:5];
-            if( [playerRole6 isEqualToString:@"Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole6 isEqualToString:@"Bowler"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole6 isEqualToString:@"All Rounder"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            
-            NSString *playerRole7 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:6];
-            if( [playerRole7 isEqualToString:@"Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole7 isEqualToString:@"Bowler"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole7 isEqualToString:@"All Rounder"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole8 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:7];
-            if( [playerRole8 isEqualToString:@"Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole8 isEqualToString:@"Bowler"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole8 isEqualToString:@"All Rounder"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole9 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:8];
-            if( [playerRole9 isEqualToString:@"Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole9 isEqualToString:@"Bowler"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole9 isEqualToString:@"All Rounder"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole10 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:9];
-            if( [playerRole10 isEqualToString:@"Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole10 isEqualToString:@"Bowler"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole10 isEqualToString:@"All Rounder"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
-            }
-            
-            NSString *playerRole11 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:10];
-            if( [playerRole11 isEqualToString:@"Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
-            }
-            else if( [playerRole11 isEqualToString:@"Bowler"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
-            }
-            else if( [playerRole11 isEqualToString:@"All Rounder"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
-            }
-            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
-            {
-                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
-            }
-        }
-            return cell;
-        }
+////            NSString *wonstatus =[[self.TeamPlayersArray2 valueForKey:@"Comments"]objectAtIndex:0];
+////            NSString *WonTeamname =[[self.TeamPlayersArray2 valueForKey:@"MatchWon"]objectAtIndex:0];
+////            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//
+//                cell.WonStatuslbl.text = [self.MatchResultsArray2 valueForKey:@"MatchResult"];
+//                NSString *  BowlerCount ;
+//                if([[self.MatchResultsArray2 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+//                    BowlerCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BowlerCount = [self.MatchResultsArray2 valueForKey:@"Bowlingcount"];
+//                }
+//
+//
+//                NSString * BatsmenCount;
+//                if([[self.MatchResultsArray2 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+//                    BatsmenCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BatsmenCount = [self.MatchResultsArray2 valueForKey:@"Battingcount"];
+//                }
+//
+//
+//                NSString * AllroundCount;
+//                if([[self.MatchResultsArray2 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+//                    AllroundCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    AllroundCount = [self.MatchResultsArray2 valueForKey:@"Allroundercount"];
+//                }
+//
+//                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+//
+//                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+//                for(int i=0;i<self.replaceArray2.count;i++)
+//                {
+//                    NSString *str = [[self.replaceArray2 objectAtIndex:i] valueForKey:@"PlayerName"];
+//                    [placedArray addObject:str];
+//                }
+//                if(placedArray.count>0)
+//                {
+//                NSString *players = [placedArray componentsJoinedByString:@","];
+//                cell.replacePlayerslbl.text = players;
+//                }
+//                else
+//                {
+//                    cell.replacePlayerslbl.text = @"";
+//                }
+//
+//            cell.Player1.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:0];
+//            cell.Player2.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:1];
+//            cell.Player3.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:2];
+//            cell.Player4.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:3];
+//            cell.Player5.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:4];
+//            cell.Player6.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:5];
+//            cell.Player7.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:6];
+//            cell.Player8.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:7];
+//            cell.Player9.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:8];
+//            cell.Player10.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:9];
+//            cell.Player11.text = [[self.TeamPlayersArray2 valueForKey:@"PlayerName"]objectAtIndex:10];
+//
+//
+//
+////            NSMutableArray *arr = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+////            for(int i=0;i<self.TeamPlayersArray2.count;i++)
+////            {
+////                NSString *playerrole = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:i];
+////                if( [playerrole isEqualToString:@"Bowler"])
+////                {
+////                    [arr addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"Batsman"])
+////                {
+////                    [arr1 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"All Rounder"])
+////                {
+////                    [arr2 addObject:[self.TeamPlayersArray2 objectAtIndex:i]];
+////                }
+////            }
+////            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+////            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+////            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//
+//
+//
+//
+//
+//            NSString *playerRole1 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:0];
+//            if( [playerRole1 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole2 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:1];
+//            if( [playerRole2 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole3 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:2];
+//            if( [playerRole3 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole4 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:3];
+//            if( [playerRole4 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole5 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:4];
+//            if( [playerRole5 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole6 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:5];
+//            if( [playerRole6 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole7 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:6];
+//            if( [playerRole7 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole8 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:7];
+//            if( [playerRole8 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole9 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:8];
+//            if( [playerRole9 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole10 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:9];
+//            if( [playerRole10 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole11 = [[self.TeamPlayersArray2 valueForKey:@"PlayerRole"]objectAtIndex:10];
+//            if( [playerRole11 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//        }
+//            return cell;
+//        }
+//        else if(indexPath.row==2)
+//        {
+//            if(self.TeamPlayersArray3.count>0 && ![self.TeamPlayersArray3 isEqual:[NSNull null]])
+//            {
+//
+//            cell.datelbl.text = [[self.TeamPlayersArray3 valueForKey:@"MatchDate"]objectAtIndex:0];
+//            NSString *team =[[self.TeamPlayersArray3 valueForKey:@"TeamName"]objectAtIndex:0];
+//            NSString *venue =[[self.TeamPlayersArray3 valueForKey:@"Venue"]objectAtIndex:0];
+//            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+//
+////            NSString *wonstatus =[[self.TeamPlayersArray3 valueForKey:@"Comments"]objectAtIndex:0];
+////            NSString *WonTeamname =[[self.TeamPlayersArray3 valueForKey:@"MatchWon"]objectAtIndex:0];
+////            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//
+//                cell.WonStatuslbl.text = [self.MatchResultsArray3 valueForKey:@"MatchResult"];
+//                NSString *  BowlerCount ;
+//                if([[self.MatchResultsArray3 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+//                    BowlerCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BowlerCount = [self.MatchResultsArray3 valueForKey:@"Bowlingcount"];
+//                }
+//
+//
+//                NSString * BatsmenCount;
+//                if([[self.MatchResultsArray3 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+//                    BatsmenCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BatsmenCount = [self.MatchResultsArray3 valueForKey:@"Battingcount"];
+//                }
+//
+//
+//                NSString * AllroundCount;
+//                if([[self.MatchResultsArray3 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+//                    AllroundCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    AllroundCount = [self.MatchResultsArray3 valueForKey:@"Allroundercount"];
+//                }
+//
+//
+//                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+//                for(int i=0;i<self.replaceArray3.count;i++)
+//                {
+//                    NSString *str = [[self.replaceArray3 objectAtIndex:i] valueForKey:@"PlayerName"];
+//                    [placedArray addObject:str];
+//                }
+//                if(placedArray.count>0)
+//                {
+//                    NSString *players = [placedArray componentsJoinedByString:@","];
+//                    cell.replacePlayerslbl.text = players;
+//                }
+//                else
+//                {
+//                    cell.replacePlayerslbl.text = @"";
+//                }
+//
+//            cell.Player1.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:0];
+//            cell.Player2.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:1];
+//            cell.Player3.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:2];
+//            cell.Player4.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:3];
+//            cell.Player5.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:4];
+//            cell.Player6.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:5];
+//            cell.Player7.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:6];
+//            cell.Player8.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:7];
+//            cell.Player9.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:8];
+//            cell.Player10.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:9];
+//            cell.Player11.text = [[self.TeamPlayersArray3 valueForKey:@"PlayerName"]objectAtIndex:10];
+//
+//
+//
+//
+////            NSMutableArray *arr = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+////            for(int i=0;i<self.TeamPlayersArray3.count;i++)
+////            {
+////                NSString *playerrole = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:i];
+////                if( [playerrole isEqualToString:@"Bowler"])
+////                {
+////                    [arr addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"Batsman"])
+////                {
+////                    [arr1 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"All Rounder"])
+////                {
+////                    [arr2 addObject:[self.TeamPlayersArray3 objectAtIndex:i]];
+////                }
+////            }
+////          NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+////           NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+////           NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//
+//            cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+//
+//
+//
+//            NSString *playerRole1 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:0];
+//            if( [playerRole1 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole2 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:1];
+//            if( [playerRole2 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole3 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:2];
+//            if( [playerRole3 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole4 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:3];
+//            if( [playerRole4 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole5 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:4];
+//            if( [playerRole5 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole6 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:5];
+//            if( [playerRole6 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole7 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:6];
+//            if( [playerRole7 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole8 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:7];
+//            if( [playerRole8 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole9 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:8];
+//            if( [playerRole9 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole10 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:9];
+//            if( [playerRole10 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole11 = [[self.TeamPlayersArray3 valueForKey:@"PlayerRole"]objectAtIndex:10];
+//            if( [playerRole11 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//        }
+//            return cell;
+//        }
+ //       else if(indexPath.row==3)
+//        {
+//            if(self.TeamPlayersArray4.count>0 && ![self.TeamPlayersArray4 isEqual:[NSNull null]])
+//            {
+//            cell.datelbl.text = [[self.TeamPlayersArray4 valueForKey:@"MatchDate"]objectAtIndex:0];
+//            NSString *team =[[self.TeamPlayersArray4 valueForKey:@"TeamName"]objectAtIndex:0];
+//            NSString *venue =[[self.TeamPlayersArray4 valueForKey:@"Venue"]objectAtIndex:0];
+//            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+//
+////            NSString *wonstatus =[[self.TeamPlayersArray4 valueForKey:@"Comments"]objectAtIndex:0];
+////            NSString *WonTeamname =[[self.TeamPlayersArray4 valueForKey:@"MatchWon"]objectAtIndex:0];
+////            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//
+//
+//                cell.WonStatuslbl.text = [self.MatchResultsArray4 valueForKey:@"MatchResult"];
+//                NSString *  BowlerCount ;
+//                if([[self.MatchResultsArray4 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+//                    BowlerCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BowlerCount = [self.MatchResultsArray4 valueForKey:@"Bowlingcount"];
+//                }
+//
+//
+//                NSString * BatsmenCount;
+//                if([[self.MatchResultsArray4 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+//                    BatsmenCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BatsmenCount = [self.MatchResultsArray4 valueForKey:@"Battingcount"];
+//                }
+//
+//
+//                NSString * AllroundCount;
+//                if([[self.MatchResultsArray4 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+//                    AllroundCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    AllroundCount = [self.MatchResultsArray4 valueForKey:@"Allroundercount"];
+//                }
+//
+//                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+//
+//
+//
+//                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+//                for(int i=0;i<self.replaceArray4.count;i++)
+//                {
+//                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
+//                    [placedArray addObject:str];
+//                }
+//                if(placedArray.count>0)
+//                {
+//                    NSString *players = [placedArray componentsJoinedByString:@","];
+//                    cell.replacePlayerslbl.text = players;
+//                }
+//                else
+//                {
+//                    cell.replacePlayerslbl.text = @"";
+//                }
+//
+//            cell.Player1.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:0];
+//            cell.Player2.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:1];
+//            cell.Player3.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:2];
+//            cell.Player4.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:3];
+//            cell.Player5.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:4];
+//            cell.Player6.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:5];
+//            cell.Player7.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:6];
+//            cell.Player8.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:7];
+//            cell.Player9.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:8];
+//            cell.Player10.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:9];
+//            cell.Player11.text = [[self.TeamPlayersArray4 valueForKey:@"PlayerName"]objectAtIndex:10];
+//
+//
+////            NSMutableArray *arr = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+////            for(int i=0;i<self.TeamPlayersArray4.count;i++)
+////            {
+////                NSString *playerrole = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:i];
+////                if( [playerrole isEqualToString:@"Bowler"])
+////                {
+////                    [arr addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"Batsman"])
+////                {
+////                    [arr1 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"All Rounder"])
+////                {
+////                    [arr2 addObject:[self.TeamPlayersArray4 objectAtIndex:i]];
+////                }
+////            }
+////            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+////            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+////            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+//
+//
+//
+//
+//            NSString *playerRole1 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:0];
+//            if( [playerRole1 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole2 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:1];
+//            if( [playerRole2 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole3 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:2];
+//            if( [playerRole3 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole4 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:3];
+//            if( [playerRole4 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole5 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:4];
+//            if( [playerRole5 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole6 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:5];
+//            if( [playerRole6 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole7 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:6];
+//            if( [playerRole7 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole8 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:7];
+//            if( [playerRole8 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole9 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:8];
+//            if( [playerRole9 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole10 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:9];
+//            if( [playerRole10 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole11 = [[self.TeamPlayersArray4 valueForKey:@"PlayerRole"]objectAtIndex:10];
+//            if( [playerRole11 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//        }
+//            return cell;
+//        }
+//        else if(indexPath.row==4)
+//        {
+//            if(self.TeamPlayersArray5.count>0 && ![self.TeamPlayersArray5 isEqual:[NSNull null]])
+//            {
+//
+//            cell.datelbl.text = [[self.TeamPlayersArray5 valueForKey:@"MatchDate"]objectAtIndex:0];
+//            NSString *team =[[self.TeamPlayersArray5 valueForKey:@"TeamName"]objectAtIndex:0];
+//            NSString *venue =[[self.TeamPlayersArray5 valueForKey:@"Venue"]objectAtIndex:0];
+//            cell.TeamVenuelbl.text = [NSString stringWithFormat:@"%@(%@)",team,venue];
+//
+//                cell.WonStatuslbl.text = [self.MatchResultsArray5 valueForKey:@"MatchResult"];
+//
+//
+//                NSString *  BowlerCount ;
+//                if([[self.MatchResultsArray5 valueForKey:@"Bowlingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+//                    BowlerCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BowlerCount = [self.MatchResultsArray5 valueForKey:@"Bowlingcount"];
+//                }
+//
+//
+//                NSString * BatsmenCount;
+//                if([[self.MatchResultsArray5 valueForKey:@"Battingcount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+//                    BatsmenCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    BatsmenCount = [self.MatchResultsArray5 valueForKey:@"Battingcount"];
+//                }
+//
+//
+//                NSString * AllroundCount;
+//                if([[self.MatchResultsArray5 valueForKey:@"Allroundercount"] isKindOfClass:[NSNumber class]])
+//                {
+//                    NSNumber *vv = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+//                    AllroundCount = [vv stringValue];
+//                }
+//                else
+//                {
+//                    AllroundCount = [self.MatchResultsArray5 valueForKey:@"Allroundercount"];
+//                }
+//
+//                cell.PlayerRoleCountlbl.text = [NSString stringWithFormat:@"Batsmen-%@ Bowlers-%@ AllRounders-%@",BatsmenCount,BowlerCount,AllroundCount];
+//
+//
+//
+//                NSMutableArray *placedArray = [[NSMutableArray alloc]init];
+//                for(int i=0;i<self.replaceArray4.count;i++)
+//                {
+//                    NSString *str = [[self.replaceArray4 objectAtIndex:i] valueForKey:@"PlayerName"];
+//                    [placedArray addObject:str];
+//                }
+//                if(placedArray.count>0)
+//                {
+//                    NSString *players = [placedArray componentsJoinedByString:@","];
+//                    cell.replacePlayerslbl.text = players;
+//                }
+//                else
+//                {
+//                    cell.replacePlayerslbl.text = @"";
+//                }
+//
+////            NSString *wonstatus =[[self.TeamPlayersArray5 valueForKey:@"Comments"]objectAtIndex:0];
+////            NSString *WonTeamname =[[self.TeamPlayersArray5 valueForKey:@"MatchWon"]objectAtIndex:0];
+////            cell.WonStatuslbl.text = [NSString stringWithFormat:@"%@ %@",WonTeamname,wonstatus];
+//
+//            cell.Player1.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:0];
+//            cell.Player2.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:1];
+//            cell.Player3.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:2];
+//            cell.Player4.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:3];
+//            cell.Player5.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:4];
+//            cell.Player6.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:5];
+//            cell.Player7.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:6];
+//            cell.Player8.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:7];
+//            cell.Player9.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:8];
+//            cell.Player10.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:9];
+//            cell.Player11.text = [[self.TeamPlayersArray5 valueForKey:@"PlayerName"]objectAtIndex:10];
+//
+//
+////            NSMutableArray *arr = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr1 = [[NSMutableArray alloc]init];
+////            NSMutableArray *arr2 = [[NSMutableArray alloc]init];
+////            for(int i=0;i<self.TeamPlayersArray5.count;i++)
+////            {
+////                NSString *playerrole = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:i];
+////                if( [playerrole isEqualToString:@"Bowler"])
+////                {
+////                    [arr addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"Batsman"])
+////                {
+////                    [arr1 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+////                }
+////                else if( [playerrole isEqualToString:@"All Rounder"])
+////                {
+////                    [arr2 addObject:[self.TeamPlayersArray5 objectAtIndex:i]];
+////                }
+////            }
+////            NSString *  BowlerCount = [NSString stringWithFormat:@"%d",arr.count];
+////            NSString * BatsmenCount = [NSString stringWithFormat:@"%d",arr1.count];
+////            NSString * AllroundCount = [NSString stringWithFormat:@"%d",arr2.count];
+////
+//
+//
+//
+//            NSString *playerRole1 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:0];
+//            if( [playerRole1 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole1 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player1Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole2 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:1];
+//            if( [playerRole2 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole2 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player2Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole3 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:2];
+//            if( [playerRole3 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole3 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player3Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole4 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:3];
+//            if( [playerRole4 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole4 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player4Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole5 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:4];
+//            if( [playerRole5 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole5 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player5Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole6 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:5];
+//            if( [playerRole6 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole6 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player6Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//
+//            NSString *playerRole7 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:6];
+//            if( [playerRole7 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole7 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player7Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole8 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:7];
+//            if( [playerRole8 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole8 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player8Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole9 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:8];
+//            if( [playerRole9 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole9 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player9Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole10 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:9];
+//            if( [playerRole10 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole10 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player10Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//
+//            NSString *playerRole11 = [[self.TeamPlayersArray5 valueForKey:@"PlayerRole"]objectAtIndex:10];
+//            if( [playerRole11 isEqualToString:@"Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"bat"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Bowler"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"ball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"All Rounder"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"batball"];
+//            }
+//            else if( [playerRole11 isEqualToString:@"Wicket Keeper Batsman"])
+//            {
+//                cell.Player11Img.image = [UIImage imageNamed:@"glove"];
+//            }
+//        }
+//            return cell;
+//        }
         
-        
-        
-        return nil;
         
     }
     
@@ -1998,28 +2002,36 @@
             teamArray = [responseObject valueForKey:@"lstplayerMatchComp"];
                 if(![teamArray isKindOfClass:NULL] && teamArray.count>0)
                 {
-                
-                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0] isKindOfClass:NULL])
-                    {
-                    self.TeamPlayersArray1 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0];
-                    }
-                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1] isKindOfClass:NULL])
-                    {
-                    self.TeamPlayersArray2 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1];
-                    }
                     
-                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2] isKindOfClass:NULL])
+                    for(int i =0;i<teamArray.count;i++)
                     {
-                    self.TeamPlayersArray3 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2];
+                        if(![[teamArray  objectAtIndex:i] isKindOfClass:NULL])
+                        {
+                        [self.TeamPlayersArray1 addObject:[teamArray  objectAtIndex:i]];
+                        }
                     }
-                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3] isKindOfClass:NULL])
-                    {
-                    self.TeamPlayersArray4 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3];
-                    }
-                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4] isKindOfClass:NULL])
-                    {
-                    self.TeamPlayersArray5 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4];
-                    }
+                
+//                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0] isKindOfClass:NULL])
+//                    {
+//                    self.TeamPlayersArray1 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:0];
+//                    }
+//                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1] isKindOfClass:NULL])
+//                    {
+//                    self.TeamPlayersArray2 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:1];
+//                    }
+//
+//                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2] isKindOfClass:NULL])
+//                    {
+//                    self.TeamPlayersArray3 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:2];
+//                    }
+//                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3] isKindOfClass:NULL])
+//                    {
+//                    self.TeamPlayersArray4 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:3];
+//                    }
+//                    if(![[[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4] isKindOfClass:NULL])
+//                    {
+//                    self.TeamPlayersArray5 = [[teamArray valueForKey:@"MatchTeamPlayers"] objectAtIndex:4];
+//                    }
                 }
             
             
@@ -2033,30 +2045,39 @@
             if(![[responseObject valueForKey:@"lstTeamCompResults"] isKindOfClass:NULL])
             {
                 
+                
             NSMutableArray *arrayResults = [[NSMutableArray alloc]init];
             arrayResults = [responseObject valueForKey:@"lstTeamCompResults"];
             
+                for(int i =0;i<arrayResults.count;i++)
+                {
+                    if(![[arrayResults objectAtIndex:i] isKindOfClass:NULL])
+                    {
+                        [self.MatchResultsArray1 addObject:[arrayResults objectAtIndex:i]];
+                    }
+                }
                 
-                if(![[arrayResults objectAtIndex:0] isKindOfClass:NULL])
-                {
-                    self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
-                }
-                if(![[arrayResults objectAtIndex:1] isKindOfClass:NULL])
-                {
-                    self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
-                }
-                if(![[arrayResults objectAtIndex:2] isKindOfClass:NULL])
-                {
-                    self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
-                }
-                if(![[arrayResults objectAtIndex:3] isKindOfClass:NULL])
-                {
-                    self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
-                }
-                if(![[arrayResults objectAtIndex:4] isKindOfClass:NULL])
-                {
-                    self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
-                }
+                
+//                if(![[arrayResults objectAtIndex:0] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
+//                }
+//                if(![[arrayResults objectAtIndex:1] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
+//                }
+//                if(![[arrayResults objectAtIndex:2] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
+//                }
+//                if(![[arrayResults objectAtIndex:3] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
+//                }
+//                if(![[arrayResults objectAtIndex:4] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
+//                }
                 
                 
             }
@@ -2071,11 +2092,20 @@
                 NSMutableArray *replArray = [[NSMutableArray alloc]init];
                 replArray = [responseObject valueForKey:@"lstTeamplayercompReplaces"];
                 
-                self.replaceArray1 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:0];
-                self.replaceArray2 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:1];
-                self.replaceArray3 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:2];
-                self.replaceArray4 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:3];
-                self.replaceArray5 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:4];
+                
+                for(int i =0;i<replArray.count;i++)
+                {
+                    if(![[replArray objectAtIndex:i] isKindOfClass:NULL])
+                    {
+                        [self.replaceArray1 addObject:[replArray objectAtIndex:i]];
+                    }
+                }
+                
+//                self.replaceArray1 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:0];
+//                self.replaceArray2 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:1];
+//                self.replaceArray3 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:2];
+//                self.replaceArray4 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:3];
+//                self.replaceArray5 = [[replArray valueForKey:@"lstplayerstoreplace"] objectAtIndex:4];
                 
             }
             
