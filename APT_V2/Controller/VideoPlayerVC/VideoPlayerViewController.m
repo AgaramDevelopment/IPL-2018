@@ -40,6 +40,24 @@
    // [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
     [self staticvideo];
 
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        if avPlayerController?.isBeingDismissed ?? false {
+//            avPlayerController?.player = nil
+//        }
+//    }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+//    if (!self.avPlayerViewController.isBeingDismissed) {
+//        self.avPlayerViewController.player = nil;
+//    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,8 +83,9 @@
        // [player play];
     
 //
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height / 2.0;
+//    CGFloat width = self.view.frame.size.width;
+//    CGFloat height = self.view.frame.size.height / 2.0;
+    
 //    AVPlayer * player = [AVPlayer playerWithURL:videoURL];
 //    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
 //    playerLayer.player = player;

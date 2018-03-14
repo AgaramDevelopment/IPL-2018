@@ -291,5 +291,45 @@ AppCommon *sharedCommon = nil;
     return @"Sync";
 }
 
++(void)getTeamAndPlayerCode
+{
+    NSString *URLString =  URL_FOR_RESOURCE(@"FETCH_IPLPLAYERS");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:URLString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            /*
+             {
+             "TeamCode": "TEA0000008",
+             "PlayerCode": "PYC0000277",
+             "PlayerName": "AAKASH CHOPRA"
+             },
+             
+             */
+            
+            appDel.ArrayIPL_teamplayers = [NSMutableArray new];
+            appDel.ArrayIPL_teamplayers = responseObject;
+        }
+        
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+    
+}
+
 @end
 

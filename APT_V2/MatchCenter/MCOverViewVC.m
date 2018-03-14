@@ -483,6 +483,7 @@
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
+    
     if ([sender tag] == 1) { // TEAM
         
         dropVC.array = appDel.ArrayTeam;

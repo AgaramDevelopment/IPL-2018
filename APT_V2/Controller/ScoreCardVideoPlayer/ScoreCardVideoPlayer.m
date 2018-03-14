@@ -35,6 +35,8 @@
 @synthesize PlayerCode,VideoValue,Innings,Type;
 @synthesize MatchCode;
 
+@synthesize HomeVideoStr,isFromHome;
+
 -(void)didTapView:(TappabbleView *)view
 {
     if (view.tag == 1)
@@ -79,7 +81,15 @@
     self.avPlayerViewController = [AVPlayerViewController new];
     self.avPlayerViewController.showsPlaybackControls = NO;
     selectedVideo = 0;
-    [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
+    
+    
+    if (isFromHome) {
+        [self playHomeVideos:HomeVideoStr];
+    }
+    else
+    {
+        [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
+    }
     
     
     
@@ -149,6 +159,34 @@
     [self playNextVideo:selectedVideo];
     
 }
+
+
+-(void)playHomeVideos:(NSString *)sampleURL
+{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        self.rootVideoView.hidden = NO;
+//        [self.ballsColView reloadData];
+        
+        //Video Player
+//        NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
+//        NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
+        
+        
+        NSURL *videoURL = [NSURL URLWithString:sampleURL];
+        
+        [self.avPlayer seekToTime:CMTimeMake(0, 1)];
+        [self.avPlayer pause];
+        self.avPlayer = [AVPlayer playerWithURL:videoURL];
+        
+        self.avPlayerViewController.player = self.avPlayer;
+        self.avPlayerViewController.view.frame = _videoView.bounds;
+        [_videoView addSubview:self.avPlayerViewController.view];
+        
+        [self playAndPause:@""];
+//    });
+
+}
+
 
 #pragma mark Video player methods
 

@@ -42,6 +42,7 @@
 @property (readwrite) NSInteger indexPath2;
 @property (strong, nonatomic) NSMutableArray *ArrayCompetition;
 @property (strong, nonatomic) NSMutableArray *ArrayTeam;
+@property (strong, nonatomic) NSMutableArray *ArrayIPL_teamplayers;
 
 
 

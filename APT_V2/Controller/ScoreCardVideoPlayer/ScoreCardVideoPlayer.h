@@ -31,6 +31,7 @@
 @property (strong,readwrite) NSString* VideoValue;
 @property (strong,readwrite) NSString* Innings;
 @property (strong,readwrite) NSString* Type;
+@property (strong,nonatomic) NSString* HomeVideoStr;
 
 @property (strong, nonatomic) IBOutlet UISlider *sliderVolume;
 @property (strong, nonatomic) IBOutlet UIView *vidoeWithCollection;
@@ -38,7 +39,7 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *progressView;
 @property (nonatomic, strong) NSTimer *myTimer;
 @property (strong, nonatomic) IBOutlet UIButton *playAndPauseBtn;
-
+@property BOOL isFromHome;
 - (IBAction)closeVideo:(id)sender;
 
 @end

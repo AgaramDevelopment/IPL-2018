@@ -53,6 +53,7 @@
 +(NSString *)getCurrentTeamCode;
 +(NSString *)getCurrentTeamName;
 +(BOOL)isCoach;
++(void)getTeamAndPlayerCode;
 
 
 @end

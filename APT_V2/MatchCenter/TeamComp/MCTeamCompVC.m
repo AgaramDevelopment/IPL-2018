@@ -2056,6 +2056,30 @@
                         [self.MatchResultsArray1 addObject:[arrayResults objectAtIndex:i]];
                     }
                 }
+                
+                
+//                if(![[arrayResults objectAtIndex:0] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray1 = [arrayResults objectAtIndex:0];
+//                }
+//                if(![[arrayResults objectAtIndex:1] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray2 = [arrayResults objectAtIndex:1];
+//                }
+//                if(![[arrayResults objectAtIndex:2] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray3 = [arrayResults objectAtIndex:2];
+//                }
+//                if(![[arrayResults objectAtIndex:3] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray4 = [arrayResults objectAtIndex:3];
+//                }
+//                if(![[arrayResults objectAtIndex:4] isKindOfClass:NULL])
+//                {
+//                    self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
+//                }
+                
+                
             }
             
             self.replaceArray1 = [[NSMutableArray alloc]init];
