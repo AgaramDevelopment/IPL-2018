@@ -26,6 +26,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withText" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-pq-6vY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                </imageView>
                 <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Dy-4h-QvO">
                     <rect key="frame" x="0.0" y="25" width="375" height="45"/>
                     <subviews>
@@ -63,12 +66,16 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3Dy-4h-QvO" secondAttribute="trailing" id="1Q8-G7-sju"/>
+                <constraint firstItem="ZGB-pq-6vY" firstAttribute="leading" secondItem="tBS-kI-ybY" secondAttribute="leading" id="5J7-Nq-JmT"/>
+                <constraint firstItem="ZGB-pq-6vY" firstAttribute="top" secondItem="tBS-kI-ybY" secondAttribute="top" id="Cor-CU-dHU"/>
+                <constraint firstAttribute="bottom" secondItem="ZGB-pq-6vY" secondAttribute="bottom" id="dBX-Uf-3mX"/>
                 <constraint firstItem="3Dy-4h-QvO" firstAttribute="leading" secondItem="tBS-kI-ybY" secondAttribute="leading" id="eFL-AM-JbL"/>
                 <constraint firstItem="3Dy-4h-QvO" firstAttribute="top" secondItem="tBS-kI-ybY" secondAttribute="top" constant="25" id="fxW-eb-1gA"/>
                 <constraint firstAttribute="bottom" secondItem="3Dy-4h-QvO" secondAttribute="bottom" id="lNf-bu-sUb"/>
+                <constraint firstAttribute="trailing" secondItem="ZGB-pq-6vY" secondAttribute="trailing" id="oDA-lp-f1Y"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -80,5 +87,6 @@
     <resources>
         <image name="ico-menu" width="18" height="18"/>
         <image name="ico_back_btn" width="15" height="15"/>
+        <image name="withText" width="1920" height="360"/>
     </resources>
 </document>

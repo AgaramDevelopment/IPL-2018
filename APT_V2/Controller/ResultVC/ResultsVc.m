@@ -198,6 +198,22 @@
     return nil;
 }
 
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -244,18 +260,54 @@
         cell.time.text = [NSString stringWithFormat:@"%@ %@",time,local];
         
         
-        NSString *key = [firstobj valueForKey:@"TeamA"];
         
-        if([ key isEqualToString:@"India"])
-        {
-            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
-            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
-        }
-        else
-        {
-            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
-            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
-        }
+        NSString * imgStr1 = ([firstobj  valueForKey:@"TeamALogo"]==[NSNull null])?@"":[firstobj valueForKey:@"TeamALogo"];
+        //                NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+        
+        NSString * imgStr2 = ([firstobj  valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[firstobj  valueForKey:@"TeamBLogo"];
+        //                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+        
+        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.team1Img.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.team1Img.image = image;
+            }
+            else
+            {
+                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+        
+        
+        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.team2Img.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.team2Img.image = image;
+            }
+            else
+            {
+                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+        
+//        NSString *key = [firstobj valueForKey:@"TeamA"];
+//
+//        if([ key isEqualToString:@"India"])
+//        {
+//            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
+//            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
+//        }
+//        else
+//        {
+//            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
+//            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
+//        }
         
         
         //        NSString *ground = [firstobj valueForKey:@"Ground"];

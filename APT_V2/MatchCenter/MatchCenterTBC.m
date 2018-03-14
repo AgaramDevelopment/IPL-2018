@@ -44,8 +44,8 @@
     firstViewController.title = @"Overview";
     firstViewController.tabBarItem = self.overviewBarItem;
     
-//    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
 //    UIImage* overView_selected = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //
@@ -63,7 +63,7 @@
     secondViewController.title = @"Toss & Result";
     secondViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    secondViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Toss&Results_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+   // secondViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Toss&Results_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 //    secondViewController.tabBarItem.image = [[UIImage imageNamed:@"Toss&Results"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
 
     
@@ -74,25 +74,23 @@
     thirdViewController.title = @"Team Composition";
     thirdViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Teamcomposition_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"Teamcomposition"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"TeamComp_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"TeamComp_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
     //BattingVC
     MCBattingRootVC *fourthViewController = [[MCBattingRootVC alloc]init];
     fourthViewController.title = @"Batting";
     fourthViewController.tabBarItem = self.tossAndResultBarItem;
-    
-//    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     //BowlingVC
     MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
     bowlingViewController.title = @"Bowling";
     bowlingViewController.tabBarItem = self.tossAndResultBarItem;
-    
-//    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_KPI_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_SelectIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
   
     //GroundVC
@@ -100,8 +98,8 @@
     fifthViewController.title = @"Ground";
     fifthViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Ground_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    fifthViewController.tabBarItem.image = [[UIImage imageNamed:@"Ground_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Ground_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fifthViewController.tabBarItem.image = [[UIImage imageNamed:@"Ground_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     //Standings
@@ -109,8 +107,8 @@
     sixthViewController.title = @"Standings";
     sixthViewController.tabBarItem = self.tossAndResultBarItem;
     
-//    sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Standings_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"Standings"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Standings_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"Standings_Unselected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     //H2H
