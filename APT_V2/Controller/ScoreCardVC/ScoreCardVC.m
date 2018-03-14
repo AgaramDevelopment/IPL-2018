@@ -325,7 +325,8 @@
     
     Appobj = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    
+    self.headerUIView.hidden = YES;
+    self.headerUIViewTestmatch.hidden = YES;
     titleArray = [NSArray arrayWithObjects:@"National Team",@"Age",@"Date of Birth",@"Weight",@"height",@"Role",@"Batting Style",@"Bowling Style", nil];
     valuesArray = [NSArray arrayWithObjects:@"India",@"28",@"5 Nvember 1988",@"69kg",@"1.75 m",@"Batsman",@"Right Handed Bat",@"Right-arm Medium", nil];
     
@@ -498,7 +499,6 @@
         
         
     }
-    
     
 
     [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
@@ -3428,7 +3428,7 @@
                 NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
                 NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
                 
-                NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"];
+                NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"];
                 NSString *teamBString = [NSString stringWithFormat:@"%@",imgStr2];
                 
                 [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -3554,7 +3554,7 @@
                 }
                 if(array.count==3)
                 {
-                    //self.headerUIView.hidden = YES;
+                    self.headerUIView.hidden = YES;
                     self.headerUIViewTestmatch.hidden = NO;
                     [self.Inn4 setUserInteractionEnabled:NO];
                     [self.Inn4 setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
@@ -3568,7 +3568,7 @@
 
                 if(array.count==4)
                 {
-                    //self.headerUIView.hidden = YES;
+                    self.headerUIView.hidden = YES;
                     self.headerUIViewTestmatch.hidden = NO;
                     self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
                     self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];

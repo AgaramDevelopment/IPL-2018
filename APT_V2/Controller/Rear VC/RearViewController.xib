@@ -41,26 +41,34 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gX7-q3-OzD">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk5-gC-7Ir">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_userimage" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-gj-BpT">
-                            <rect key="frame" x="25" y="44" width="100" height="100"/>
+                            <rect key="frame" x="25" y="45" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="gql-YI-Fcq"/>
                                 <constraint firstAttribute="height" constant="100" id="zj6-op-xix"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSQ-3p-Ile">
-                            <rect key="frame" x="25" y="164" width="245" height="21"/>
+                            <rect key="frame" x="25" y="165" width="245" height="20"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.045337669551372528" green="0.14756330847740173" blue="0.44107168912887573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="9f6-gj-BpT" firstAttribute="leading" secondItem="gX7-q3-OzD" secondAttribute="leading" constant="25" id="6lO-gF-nVj"/>
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="leading" secondItem="9f6-gj-BpT" secondAttribute="leading" id="9t7-m5-AN4"/>
+                        <constraint firstItem="Hk5-gC-7Ir" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="top" id="B9A-lJ-Lh4"/>
                         <constraint firstAttribute="bottom" secondItem="dSQ-3p-Ile" secondAttribute="bottom" constant="15" id="Hka-1k-iiX"/>
                         <constraint firstAttribute="height" constant="200" id="LsS-Ds-WFn"/>
+                        <constraint firstItem="Hk5-gC-7Ir" firstAttribute="leading" secondItem="gX7-q3-OzD" secondAttribute="leading" id="Vf0-pU-CXi"/>
+                        <constraint firstAttribute="bottom" secondItem="Hk5-gC-7Ir" secondAttribute="bottom" id="lo1-fq-D0e"/>
+                        <constraint firstAttribute="trailing" secondItem="Hk5-gC-7Ir" secondAttribute="trailing" id="lyd-FQ-RRI"/>
                         <constraint firstAttribute="trailing" secondItem="dSQ-3p-Ile" secondAttribute="trailing" constant="50" id="xNe-V3-od7"/>
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="xjh-RC-qh3"/>
                     </constraints>
