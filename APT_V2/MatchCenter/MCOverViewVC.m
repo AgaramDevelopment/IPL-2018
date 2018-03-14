@@ -296,23 +296,23 @@
             
             resultsArray = [[NSMutableArray alloc]init];
             resultsArray = [responseObject valueForKey:@"OvATResults"];
+        
+            self.TotalMatcheslbl.text =  [self checkNull:[resultsArray valueForKey:@"ATMatches"]];
             
-            self.TotalMatcheslbl.text = [resultsArray valueForKey:@"ATMatches"] ;
-            
-            self.winLosslbl.text = [resultsArray valueForKey:@"ATWinper"];
+            self.winLosslbl.text = [self checkNull:[resultsArray valueForKey:@"ATWinper"]];
             NSString *wincount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATWon"],[resultsArray valueForKey:@"ATMatches"]];
             self.winLossCountlbl.text =wincount;
-            
-            self.Forlbl.text =[resultsArray valueForKey:@"For"];
+        
+            self.Forlbl.text = [self checkNull:[resultsArray valueForKey:@"For"]];
             NSString *forcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATRuns"],[resultsArray valueForKey:@"ATOvers"]];
             self.ForCountlbl.text =forcount;
             
-            
-            self.Againstlbl.text = [resultsArray valueForKey:@"Against"];
+        
+            self.Againstlbl.text = [self checkNull:[resultsArray valueForKey:@"Against"]];
             NSString *Againstcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTRuns"],[resultsArray valueForKey:@"BTOvers"]];
             self.AgainstCountlbl.text =Againstcount;
-            
-            self.nrrlbl.text = [resultsArray valueForKey:@"NetRR"];
+        
+            self.nrrlbl.text = [self checkNull:[resultsArray valueForKey:@"NetRR"]];
             
             NSString *wkts = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTWcktsTkn"],[resultsArray valueForKey:@"ATWcktsGvn"]];
             self.Wktslbl.text = wkts;
@@ -373,6 +373,8 @@
         [self.nextBtn setTag:1];
         CommonArray =[[NSMutableArray alloc]init];
         CommonArray = BatsmenArray;
+    if(CommonArray.count>0 || ![CommonArray isEqual:[NSNull null]])
+        {
         if(CommonArray.count>0)
         {
             self.NodataView.hidden = YES;
@@ -382,6 +384,7 @@
         else
         {
             self.NodataView.hidden = NO;
+        }
         }
     }
     else if(self.nextBtn.tag==1)
@@ -761,7 +764,13 @@
     
 }
 
-
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
 
 
 @end

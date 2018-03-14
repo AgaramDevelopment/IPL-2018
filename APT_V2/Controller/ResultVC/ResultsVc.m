@@ -23,6 +23,7 @@
     
     TabbarVC *objtab;
     NSString *displayMatchCode;
+    NSString* Teamcode;
 }
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popXposition;
 
@@ -128,7 +129,18 @@
     
     if ([sender tag] == 1) { // TEAM
         
-        dropVC.array = appDel.ArrayTeam;
+        
+        NSMutableArray *teamArray = [[NSMutableArray alloc]init];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        [dic setObject:@"All" forKey:@"TeamName"];
+        [dic setObject:@"" forKey:@"TeamCode"];
+        [teamArray addObject:dic];
+        
+        for(int i=0;i<appDel.ArrayTeam.count;i++)
+        {
+            [teamArray addObject:[appDel.ArrayTeam objectAtIndex:i]];
+        }
+        dropVC.array = teamArray;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v2.frame), CGRectGetMaxY(self.v2.frame)+self.v2.frame.size.height+20, CGRectGetWidth(self.v2.frame), 300)];
         
@@ -408,7 +420,7 @@
     [AppCommon showLoading];
     if([COMMON isInternetReachable])
     {
-        
+    
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",ResultsKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -424,7 +436,7 @@
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if([AppCommon getCurrentCompetitionCode])
             [dic    setObject:[AppCommon getCurrentCompetitionCode]     forKey:@"Competitioncode"];
-        
+    
         
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -448,9 +460,17 @@
                         
                         [self.resultArr addObject:[filterarr objectAtIndex:i]];
                         
+                        
+                        
                         isList=YES;
                     }
                 }
+                self.TotalMatchesArr = [[NSMutableArray alloc]init];
+                self.TotalMatchesArr = self.resultArr;
+                
+                self.teamLbl.text = @"All";
+                Teamcode = @"";
+                [self setFilterResults];
                 
                 
                 //self.resultArr = [responseObject valueForKey:@"lstFixturesGridValues"];
@@ -458,7 +478,7 @@
             }
             
             
-            [self.ListTbl reloadData];
+            //[self.ListTbl reloadData];
             
             [AppCommon hideLoading];
             
@@ -488,19 +508,58 @@
         [[NSUserDefaults standardUserDefaults] setValue:competitionLbl.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [self ResultsWebservice];
         
     } else {
+        
         self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        }
-
-    [self ResultsWebservice];
     
+         [self setFilterResults];
+        }
+    
+}
+
+-(void)setFilterResults
+{
+    
+    if(![competitionLbl.text isEqualToString:@""] || ![self.teamLbl.text isEqualToString:@""] )
+    {
+        
+        if([Teamcode isEqualToString:@""])
+        {
+            self.teamLbl.text =@"All";
+            self.resultArr = [[NSMutableArray alloc]init];
+            self.resultArr = self.TotalMatchesArr;
+        }
+        else
+        {
+            NSMutableArray *ReqTeamArray = [[NSMutableArray alloc]init];
+            ReqTeamArray = self.TotalMatchesArr;
+        
+            self.resultArr = [[NSMutableArray alloc]init];
+            for( int i=0;i<ReqTeamArray.count;i++)
+            {
+                NSString *selectedTeamCodeA = [[ReqTeamArray valueForKey:@"TeamACode"] objectAtIndex:i];
+                NSString *selectedTeamCodeB = [[ReqTeamArray valueForKey:@"TeamBCode"] objectAtIndex:i];
+                NSString *GlobalteamCode = [AppCommon getCurrentTeamCode];
+                if([Teamcode isEqualToString:selectedTeamCodeA])
+                {
+                    [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
+                }
+                else if([Teamcode isEqualToString:selectedTeamCodeB])
+                {
+                    [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
+                }
+            }
+        }
+        [self.ListTbl reloadData];
+    
+    }
 }
 
 @end
