@@ -65,7 +65,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="722"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Che-7W-Z3b">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="722"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DD-K8-Eox" userLabel="Dropdown View">
                                                     <rect key="frame" x="0.0" y="5" width="320" height="35"/>
@@ -685,7 +685,7 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xAS-Pb-QR2">
-                                                    <rect key="frame" x="8" y="387" width="304" height="327"/>
+                                                    <rect key="frame" x="8" y="387" width="304" height="483"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewLayout key="collectionViewLayout" id="ISf-9C-UXC" customClass="CustomCollectionViewLayout" customModule="APT_Cricket" customModuleProvider="target"/>
                                                     <connections>
@@ -769,11 +769,13 @@
                                                 <constraint firstItem="9DD-K8-Eox" firstAttribute="top" secondItem="Che-7W-Z3b" secondAttribute="top" constant="5" id="Alu-6m-tss"/>
                                                 <constraint firstItem="xAS-Pb-QR2" firstAttribute="leading" secondItem="Che-7W-Z3b" secondAttribute="leading" constant="8" id="F8Y-ln-zda"/>
                                                 <constraint firstAttribute="trailing" secondItem="xAS-Pb-QR2" secondAttribute="trailing" constant="8" id="GpQ-4G-HCQ"/>
-                                                <constraint firstAttribute="height" constant="722" id="Jgn-E4-Bq8"/>
+                                                <constraint firstAttribute="height" constant="900" id="Jgn-E4-Bq8"/>
                                                 <constraint firstItem="9DD-K8-Eox" firstAttribute="leading" secondItem="Che-7W-Z3b" secondAttribute="leading" id="NAt-bQ-ILh"/>
                                                 <constraint firstAttribute="trailing" secondItem="zHL-oL-VyD" secondAttribute="trailing" constant="8" id="UOh-KU-sfU"/>
                                                 <constraint firstItem="ViI-ZV-iHd" firstAttribute="centerX" secondItem="Che-7W-Z3b" secondAttribute="centerX" id="aIU-dM-J9T"/>
-                                                <constraint firstAttribute="bottom" secondItem="xAS-Pb-QR2" secondAttribute="bottom" constant="8" id="aIb-tp-3e6"/>
+                                                <constraint firstAttribute="bottom" secondItem="xAS-Pb-QR2" secondAttribute="bottom" constant="30" id="aIb-tp-3e6">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                                </constraint>
                                                 <constraint firstItem="zHL-oL-VyD" firstAttribute="top" secondItem="9DD-K8-Eox" secondAttribute="bottom" id="cVx-wE-FcH"/>
                                                 <constraint firstItem="xAS-Pb-QR2" firstAttribute="top" secondItem="ViI-ZV-iHd" secondAttribute="bottom" constant="8" id="d4c-Sq-foU"/>
                                                 <constraint firstItem="npG-RB-L0G" firstAttribute="top" secondItem="zHL-oL-VyD" secondAttribute="bottom" constant="8" id="gMA-Lj-AzI"/>
