@@ -145,9 +145,6 @@
 
     else if(indexPath.row == 1)
     {
-        if (!appDel.ArrayTeam.count) {
-            [COMMON getIPLteams];
-        }
 
         newFrontController = [MatchCenterTBC new];
         

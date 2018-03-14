@@ -20,7 +20,7 @@
 #import "SchResStandVC.h"
 
 
-@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate>
+@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate,selectedDropDown>
 {
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
@@ -49,7 +49,11 @@
 
 @implementation VideoGalleryVC
 
-@synthesize btnUpload;
+@synthesize btnUpload,dropdownView;
+
+@synthesize btnTeam,btnPlayer,btnType,btnCategory;
+
+@synthesize lblTeam,lblPlayer,lblType,lblcategory;
 
 - (void)viewDidLoad {
     
@@ -74,6 +78,8 @@
     
     [btnUpload setHidden:![AppCommon isCoach]];
     
+    
+    
     [self videoGalleryWebservice];
 
 }
@@ -84,6 +90,12 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [dropdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [dropdownView updateConstraintsIfNeeded];
 }
 
 - (void)showAnimate
@@ -660,4 +672,84 @@
 
 
 
+- (IBAction)showFilter:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 0) { // TEAM
+        
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+    }
+    else if([sender tag] == 1) // player
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+
+    }
+    else if([sender tag] == 2) // Type
+    {
+        NSArray* typeArray = @[@{@"type":@"Bowling"},@{@"type":@"Batting"}];
+        dropVC.array = typeArray;
+        dropVC.key = @"type";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 45*2)];
+
+    }
+    else if([sender tag] == 3) // Category
+    {
+        NSArray* typeArray = @[@{@"category":@"Bowling"},@{@"category":@"Batting"}];
+
+        dropVC.array = typeArray;
+        dropVC.key = @"category";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 45*2)];
+
+    }
+    
+    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 45*2)];
+
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
+}
+
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key isEqualToString:@"TeamName"]) {
+        lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+    }
+    else if ([key isEqualToString:@"CompetitionName"]) {
+        lblPlayer.text = [[array objectAtIndex:Index.row] valueForKey:key];
+
+        
+    }
+    else if ([key isEqualToString:@"type"]) {
+        lblType.text = [[array objectAtIndex:Index.row] valueForKey:key];
+
+        
+    }
+    else if ([key isEqualToString:@"category"]) {
+        lblcategory.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+    }
+
+
+    
+    NSLog(@"selected value %@",[[array objectAtIndex:Index.row] valueForKey:key]);
+}
+
+
+
+- (IBAction)actionFilterVideo:(id)sender {
+}
 @end

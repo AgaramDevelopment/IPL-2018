@@ -2057,8 +2057,6 @@
                 {
                     self.MatchResultsArray5 = [arrayResults objectAtIndex:4];
                 }
-                
-                
             }
             
             self.replaceArray1 = [[NSMutableArray alloc]init];

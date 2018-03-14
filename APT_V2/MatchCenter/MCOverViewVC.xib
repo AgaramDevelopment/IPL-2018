@@ -229,7 +229,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEt-5m-JeZ">
                                                     <rect key="frame" x="8" y="57" width="359" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="duD-aO-sJ8">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="duD-aO-sJ8">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="KcN-fE-IAm"/>
@@ -294,7 +294,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0O-yt-4Wa">
-                                                    <rect key="frame" x="8" y="167" width="359" height="170"/>
+                                                    <rect key="frame" x="8" y="167" width="359" height="190"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Matches" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFM-dR-N5Z">
                                                             <rect key="frame" x="8" y="8" width="97.333333333333329" height="15"/>
@@ -324,10 +324,10 @@
                                                             </connections>
                                                         </button>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7DJ-Ub-D1B">
-                                                            <rect key="frame" x="0.0" y="32" width="359" height="130"/>
+                                                            <rect key="frame" x="0.0" y="32" width="359" height="150"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="130" id="Xqa-Nf-fy9"/>
+                                                                <constraint firstAttribute="height" constant="150" id="Xqa-Nf-fy9"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EDS-RW-ZME">
                                                                 <size key="itemSize" width="310" height="110"/>
@@ -348,7 +348,7 @@
                                                         <constraint firstItem="7DJ-Ub-D1B" firstAttribute="top" secondItem="gFM-dR-N5Z" secondAttribute="bottom" constant="9" id="4WF-Ff-2WO"/>
                                                         <constraint firstItem="gFM-dR-N5Z" firstAttribute="top" secondItem="h0O-yt-4Wa" secondAttribute="top" constant="8" id="655-yR-uQG"/>
                                                         <constraint firstAttribute="bottom" secondItem="7DJ-Ub-D1B" secondAttribute="bottom" constant="8" id="NSV-zl-hHf"/>
-                                                        <constraint firstAttribute="height" constant="170" id="hqQ-LT-uP7"/>
+                                                        <constraint firstAttribute="height" constant="190" id="hqQ-LT-uP7"/>
                                                         <constraint firstItem="YhS-YK-h07" firstAttribute="top" secondItem="h0O-yt-4Wa" secondAttribute="top" constant="5" id="qTe-1H-R0G"/>
                                                         <constraint firstItem="gFM-dR-N5Z" firstAttribute="leading" secondItem="h0O-yt-4Wa" secondAttribute="leading" constant="8" id="qoO-00-vaQ"/>
                                                         <constraint firstItem="7DJ-Ub-D1B" firstAttribute="leading" secondItem="h0O-yt-4Wa" secondAttribute="leading" id="rgl-Jj-RB7"/>
@@ -356,7 +356,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmk-HS-qkd">
-                                                    <rect key="frame" x="0.0" y="337" width="375" height="224"/>
+                                                    <rect key="frame" x="0.0" y="357" width="375" height="224"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hj7-1w-FLL">
                                                             <rect key="frame" x="7.9999999999999929" y="8" width="114.33333333333331" height="100"/>
@@ -709,7 +709,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msy-jP-Tl3">
-                                                    <rect key="frame" x="8" y="563" width="359" height="335"/>
+                                                    <rect key="frame" x="8" y="583" width="359" height="335"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vek-Em-rPs">
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>

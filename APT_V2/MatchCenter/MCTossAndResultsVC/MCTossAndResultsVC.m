@@ -102,7 +102,6 @@
      [self.resultCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
     
     
-  //  [self setupPieChartView:_battingFstPie];
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
@@ -115,7 +114,6 @@
     lblTeam.text = [AppCommon getCurrentTeamName];
     
     [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-
     
 }
 
@@ -480,10 +478,6 @@
 //    } completion:nil];
 
 
-}
-- (IBAction)actionUpdateToss:(id)sender {
-    
-    
 }
 
 

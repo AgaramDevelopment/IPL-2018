@@ -323,13 +323,12 @@
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         manager.requestSerializer = requestSerializer;
-        
-        
+    
         NSString *ClientCode = [AppCommon GetClientCode];
         NSString *UserrefCode = [AppCommon GetuserReference];
-        //NSString *TeamCode = [AppCommon getCurrentTeamCode];
+//        NSString *TeamCode = [AppCommon getCurrentTeamCode]; // APT teamcode
 
-    NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamCode"];
+        NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
 
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

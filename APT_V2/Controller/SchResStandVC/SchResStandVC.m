@@ -56,6 +56,10 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
+    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
+    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
+    [self.videoView addSubview:objVideo.view];
+
 //    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
 //    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
 //    [self.standingsView addSubview:objStands.view];
@@ -120,10 +124,6 @@
     }
     
 }
-
-
-
-
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -254,40 +254,40 @@
         cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
         cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
         
-        //        NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
-        //        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
-        //
-        //        NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
-        //        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
-        //
-        //        [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
-        //            if (succeeded) {
-        //                // change the image in the cell
-        //                cell.teamAlogo.image = image;
-        //
-        //                // cache the image for use later (when scrolling up)
-        //                cell.teamAlogo.image = image;
-        //            }
-        //            else
-        //            {
-        //                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-        //            }
-        //        }];
-        //
-        //
-        //        [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
-        //            if (succeeded) {
-        //                // change the image in the cell
-        //                cell.teamBlogo.image = image;
-        //
-        //                // cache the image for use later (when scrolling up)
-        //                cell.teamBlogo.image = image;
-        //            }
-        //            else
-        //            {
-        //                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        //            }
-        //        }];
+                NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+//                NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+        
+                NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+//                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+        
+                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        cell.teamAlogo.image = image;
+        
+                        // cache the image for use later (when scrolling up)
+                        cell.teamAlogo.image = image;
+                    }
+                    else
+                    {
+                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+                    }
+                }];
+        
+        
+                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        cell.teamBlogo.image = image;
+        
+                        // cache the image for use later (when scrolling up)
+                        cell.teamBlogo.image = image;
+                    }
+                    else
+                    {
+                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+                    }
+                }];
         
         
         //        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
@@ -327,8 +327,8 @@
         
         cell.competitionNamelbl.text = [[self.commonArray2 valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
         cell.datelbl.text = [[self.commonArray2 valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
-        //cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
-        //cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
+//        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
+//        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
         
         
@@ -388,12 +388,12 @@
         
         
         NSString * imgStr1 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"];
-        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
+//        NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
         
         NSString * imgStr2 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"];
-        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
+//        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
         
-        [self downloadImageWithURL:[NSURL URLWithString:teamAString] completionBlock:^(BOOL succeeded, UIImage *image) {
+        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
                 cell.teamAlogo.image = image;
@@ -408,7 +408,7 @@
         }];
         
         
-        [self downloadImageWithURL:[NSURL URLWithString:teamBString] completionBlock:^(BOOL succeeded, UIImage *image) {
+        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
                 cell.teamBlogo.image = image;
@@ -523,14 +523,14 @@
         
         manager.requestSerializer = requestSerializer;
         
-        NSString *competition = @"";
-        NSString *teamcode = [AppCommon getCurrentTeamCode];
+//        NSString *competition = @"";
+//        NSString *teamcode = [AppCommon getCurrentTeamCode];
         
-       // NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamCode"];
+        NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"CAPTeamcode"];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+//        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
         if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
         
         
@@ -594,7 +594,6 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.scheduleCollectionView reloadData];
-                        [self videoGallery];
                     });
                     
                     

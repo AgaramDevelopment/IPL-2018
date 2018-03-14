@@ -80,6 +80,8 @@
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     competitionlbl.text = @"";
     
+    
+    
 
 }
 
@@ -131,6 +133,7 @@
 {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if(collectionView == _resultCollectionView){
@@ -142,10 +145,20 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    
     CGFloat widthF = self.resultCollectionView.superview.frame.size.width-20;
     CGFloat HeightF = self.resultCollectionView.superview.frame.size.height-20;
-
+    
+    if (IS_IPHONE5) {
+        widthF = widthF;
+    }
+    else if(IS_IPAD)
+    {
+        widthF = widthF/2;
+    }
     return CGSizeMake(widthF, HeightF);
+    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
@@ -182,7 +195,9 @@
         cell.Datelbl.text = arr[0];
         
         
-        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+//        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -198,7 +213,9 @@
         }];
         
         
-        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+//        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+
         [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -257,7 +274,7 @@
 //                [[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0];
             
             
-                NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
+                NSString * photourl = [NSString stringWithFormat:@"%@",[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
 
             [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
                 if (succeeded) {
@@ -503,8 +520,6 @@
     else
     {
         lblTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
-//        teamcode = [[array firstObject] valueForKey:@"TeamCode"];
-        
         teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
 
         [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
@@ -595,6 +610,24 @@
    }
    else if([self.PlayerTypelbl.text isEqualToString:@"Top Bowlers"])
    {
+       
+       
+       NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+       
+       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+           if (succeeded) {
+               // change the image in the cell
+               self.Player1Img.image = image;
+               
+               // cache the image for use later (when scrolling up)
+           }
+           else
+           {
+               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+           }
+       }];
+
+       
        self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
        self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
        self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
