@@ -165,17 +165,17 @@
             
             //if (![AppCommon isCoach]) {
                 NSString * APTTeamCode =[responseObject valueForKey:@"APTTeamcode"];
-                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamCode"];
+                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamcode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 
                 NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
-                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"SelectedTeamCode"];
+                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"CAPTeamcode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             //}
 
                 VC = [TabHomeVC new];
-            
+                [COMMON getIPLteams];
             
 //            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
 //            {
@@ -224,7 +224,7 @@
      PARAMETER  :   nil
      */
     
-    if(![COMMON isInternetReachable])
+    if(![COMMON isInternetReachable]) // APT Teamcode
         return;
     
     [AppCommon showLoading];

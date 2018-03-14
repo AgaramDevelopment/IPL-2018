@@ -80,6 +80,7 @@
     
     cell.backgroundColor = [UIColor colorWithRed:28.0/255.0 green:26.0/255.0 blue:68.0/255.0 alpha:0.5];
     cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.text = [[array objectAtIndex:indexPath.row] valueForKey:key];
@@ -101,6 +102,8 @@
 {
 //    [protocol selectedValue:[[array objectAtIndex:indexPath.row] valueForKey:key]andKey:key];
     [protocol selectedValue:array andKey:key andIndex:indexPath];
+    NSLog(@"Selected Name and code %@",[array objectAtIndex:indexPath.row]);
+
     [self close:nil];
 }
 

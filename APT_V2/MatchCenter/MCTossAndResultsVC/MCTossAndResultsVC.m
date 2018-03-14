@@ -102,7 +102,6 @@
      [self.resultCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
     
     
-  //  [self setupPieChartView:_battingFstPie];
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
@@ -115,7 +114,6 @@
     lblTeam.text = [AppCommon getCurrentTeamName];
     
     [btnToss.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-
     
 }
 
@@ -481,10 +479,6 @@
 
 
 }
-- (IBAction)actionUpdateToss:(id)sender {
-    
-    
-}
 
 
 - (IBAction)actionTossWonAndLost:(id)sender {
@@ -620,7 +614,7 @@
     else
     {
         lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:lblTeam.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];

@@ -46,7 +46,8 @@
 //    NSString *plyRolecode = @"ROL0000002";
     
     UIViewController *frontViewController;
-    
+    [COMMON getIPLteams];
+
 
     if(isLogin)
     {
@@ -67,9 +68,6 @@
     }
     else
     {
-        if (!appDel.ArrayTeam.count) {
-                [COMMON getIPLteams];
-        }
 
         frontViewController = [LoginVC new];
     }

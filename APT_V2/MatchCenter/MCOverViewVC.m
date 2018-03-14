@@ -67,8 +67,6 @@
     self.prevBtn.hidden = YES;
     self.NodataView.hidden = YES;
     
-//    CompetitionCode = [AppCommon getCurrentCompetitionCode];
-//    teamcode = [AppCommon getCurrentTeamCode];
     
     
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"MCOverViewResultCVC" bundle:nil] forCellWithReuseIdentifier:@"mcResultCVC"];
@@ -82,6 +80,8 @@
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     competitionlbl.text = @"";
     
+    
+    
 
 }
 
@@ -90,7 +90,13 @@
 
     lblCompetetion.text = [AppCommon getCurrentCompetitionName];
     lblTeamName.text = [AppCommon getCurrentTeamName];
+    
+    CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    teamcode = [AppCommon getCurrentTeamCode];
+
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     [self OverviewWebservice];
+
 
 }
 
@@ -127,6 +133,7 @@
 {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if(collectionView == _resultCollectionView){
@@ -138,10 +145,20 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    
     CGFloat widthF = self.resultCollectionView.superview.frame.size.width-20;
     CGFloat HeightF = self.resultCollectionView.superview.frame.size.height-20;
-
+    
+    if (IS_IPHONE5) {
+        widthF = widthF;
+    }
+    else if(IS_IPAD)
+    {
+        widthF = widthF/2;
+    }
     return CGSizeMake(widthF, HeightF);
+    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
@@ -178,7 +195,9 @@
         cell.Datelbl.text = arr[0];
         
         
-        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+//        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -194,7 +213,9 @@
         }];
         
         
-        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+//        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+
         [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -217,7 +238,7 @@
     
 }
 
--(void)OverviewWebservice //:(NSString *)compCode :(NSString *)temCode
+-(void)OverviewWebservice // :(NSString *)compCode :(NSString *)temCode
 {
     
     if (![COMMON isInternetReachable]) {
@@ -230,12 +251,12 @@
 //    self.competitionlbl.text = [AppCommon getCurrentCompetitionName];
 //     self.teamlbl.text = [AppCommon getCurrentTeamName];
     
-    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    NSString *teamcode = [AppCommon getCurrentTeamCode];
+    NSString *compCode = [AppCommon getCurrentCompetitionCode];
+    NSString *temCode = [AppCommon getCurrentTeamCode];
     objWebservice = [[WebService alloc]init];
     
     
-    [objWebservice Overview:OverviewKey :CompetitionCode : teamcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice Overview:OverviewKey :compCode : temCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         NSMutableArray *teamDetailsArray = [[NSMutableArray alloc]init];
@@ -253,7 +274,7 @@
 //                [[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0];
             
             
-                NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
+                NSString * photourl = [NSString stringWithFormat:@"%@",[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
 
             [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
                 if (succeeded) {
@@ -491,10 +512,10 @@
     if ([key  isEqualToString: @"CompetitionName"]) {
         
         lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        CompetitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         
@@ -502,16 +523,18 @@
     else
     {
         lblTeamName.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array firstObject] valueForKey:@"TeamCode"];
-        
+        teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+
         [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
     }
     
     
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     [self OverviewWebservice];
+
     
 }
 
@@ -590,6 +613,24 @@
    }
    else if([self.PlayerTypelbl.text isEqualToString:@"Top Bowlers"])
    {
+       
+       
+       NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+       
+       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+           if (succeeded) {
+               // change the image in the cell
+               self.Player1Img.image = image;
+               
+               // cache the image for use later (when scrolling up)
+           }
+           else
+           {
+               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+           }
+       }];
+
+       
        self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
        self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
        self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
@@ -708,6 +749,7 @@
     {
         //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
 
+        // SelectedTeamCode
         self.teamlbl.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
         teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
         [[NSUserDefaults standardUserDefaults] setValue:self.teamlbl.text forKey:@"SelectedTeamName"];
@@ -716,9 +758,9 @@
     }
     
     
-    self.CompetitionListtbl.hidden = YES;
+//    self.CompetitionListtbl.hidden = YES;
     
-    [self OverviewWebservice];
+//    [self OverviewWebservice:CompetitionCode :teamcode];
     
 }
 
