@@ -117,8 +117,8 @@
     
     
     UITabBarItem *tabItem2 = [tabBar.items objectAtIndex:1];
-    tabItem2.selectedImage = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem2.image = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.selectedImage = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.image = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem2.title = @"BATTING KPI";
     
     UITabBarItem *tabItem3 = [tabBar.items objectAtIndex:2];

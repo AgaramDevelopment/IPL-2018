@@ -3428,7 +3428,7 @@
                 NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
                 NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
                 
-                NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"TeamBLogo"];
+                NSString * imgStr2 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"];
                 NSString *teamBString = [NSString stringWithFormat:@"%@",imgStr2];
                 
                 [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {

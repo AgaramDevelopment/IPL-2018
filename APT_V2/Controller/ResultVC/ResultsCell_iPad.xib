@@ -82,7 +82,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MI-logo" translatesAutoresizingMaskIntoConstraints="NO" id="tNt-kw-gjZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="tNt-kw-gjZ">
                                 <rect key="frame" x="10" y="34" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="RU6-DK-sPY"/>
@@ -99,7 +99,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PSG-logo" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-6d-jwm">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-6d-jwm">
                                 <rect key="frame" x="320" y="34" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="ASY-iY-Ohl"/>
@@ -148,6 +148,10 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="team1Img" destination="tNt-kw-gjZ" id="Sra-B7-c9X"/>
+                <outlet property="team2Img" destination="F7B-6d-jwm" id="Fom-ez-fMd"/>
+            </connections>
             <point key="canvasLocation" x="-50.5" y="-136"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyIdentifier" id="7gw-Qz-eTF" customClass="ResultsCell">
@@ -343,7 +347,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="MI-logo" width="130" height="130"/>
-        <image name="PSG-logo" width="130" height="130"/>
+        <image name="no-image" width="300" height="300"/>
     </resources>
 </document>
