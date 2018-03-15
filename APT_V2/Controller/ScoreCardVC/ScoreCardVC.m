@@ -785,10 +785,16 @@
                 
                 if(IS_IPHONE_DEVICE)
                 {
-                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
-                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
-                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
-                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+//                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
+//                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
+//                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
+//                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+                
+                    x1position = 65;
+                    y1position = 55;
+                
+                    x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
+                    y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
                 }
                 
                 else
@@ -1039,8 +1045,11 @@
                     
                     if(IS_IPHONE_DEVICE)
                     {
-                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-90;
-                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-60;
+//                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-90;
+//                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-60;
+                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
+                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
+                    
                     }
                     else
                     {
@@ -1292,10 +1301,11 @@
             
             if(IS_IPHONE_DEVICE)
             {
-                x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
-                y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
-                x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
-                y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+                x1position = 65;
+                y1position = 55;
+            
+                x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
+                y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
             }
             
             else
@@ -1541,8 +1551,8 @@
                 
                 if(IS_IPHONE_DEVICE)
                 {
-                    xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-90;
-                    yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-60;
+                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
+                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
                 }
                 else
                 {
@@ -1867,13 +1877,13 @@
     {
         if(indexPath.row ==  selectedIndex)
         {
-            if(!IS_IPHONE_DEVICE)
+            if(IS_IPHONE_DEVICE)
             {
-            return 300;
+                return 220;
             }
             else
             {
-                return 472;
+                return 300;
             }
                 
         }
@@ -1907,9 +1917,6 @@
     
     if(tableView == self.listTbl)
     {
-        if(!IS_IPHONE_DEVICE)
-        {
-        
         static NSString *MyIdentifier = @"MyIdentifier";
         
         ScoreCardCell *cell = [self.listTbl dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -1971,16 +1978,11 @@
         self.tableHeight2.constant = height1;
         [self.view layoutIfNeeded];
         
-        
-        }
-        
     }
     
     
     if(tableView == self.bowlingTbl)
     {
-        if(!IS_IPHONE_DEVICE)
-        {
         static NSString *MyIdentifier = @"myid";
         
         ScorecardBowlCell *cell = [self.bowlingTbl dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -2039,8 +2041,6 @@
         CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
         self.tableHeight2.constant = height1;
         [self.view layoutIfNeeded];
-      }
-        
     }
     if(tableView == self.popTbl)
     {

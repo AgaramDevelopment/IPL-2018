@@ -172,7 +172,7 @@
 //        NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
         
         
-        NSURL *videoURL = [NSURL URLWithString:sampleURL];
+        NSURL *videoURL = [NSURL URLWithString:[sampleURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
         
         [self.avPlayer seekToTime:CMTimeMake(0, 1)];
         [self.avPlayer pause];

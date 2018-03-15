@@ -37,27 +37,12 @@
     self.avPlayerViewController = [AVPlayerViewController new];
     self.avPlayerViewController.showsPlaybackControls = NO;
    
-   // [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
-    [self staticvideo];
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        if avPlayerController?.isBeingDismissed ?? false {
-//            avPlayerController?.player = nil
-//        }
-//    }
+    [self addPlayer];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-//    if (!self.avPlayerViewController.isBeingDismissed) {
-//        self.avPlayerViewController.player = nil;
-//    }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,47 +53,16 @@
     
     [self.view removeFromSuperview];
 }
--(void)staticvideo
+
+-(void)addPlayer
 {
     
-        NSString * url = [NSString stringWithFormat:@"%@/%@",Video_URL,self.objSelectVideoLink];
-//
-        NSURL *videoURL = [NSURL URLWithString:url];
+        NSString * url = [NSString stringWithFormat:@"%@",self.objSelectVideoLink];
+        NSURL *videoURL = [NSURL URLWithString:[url stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
         AVPlayer *player = [AVPlayer playerWithURL:videoURL];
 
-        // create a player view controller
-       // AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
-       // [self presentViewController:controller animated:YES completion:nil];
-       // controller.player = player;
-       // [player play];
-    
-//
-//    CGFloat width = self.view.frame.size.width;
-//    CGFloat height = self.view.frame.size.height / 2.0;
-    
-//    AVPlayer * player = [AVPlayer playerWithURL:videoURL];
-//    AVPlayerLayer *playerLayer = [AVPlayerLayer layer];
-//    playerLayer.player = player;
-//    playerLayer.frame = CGRectMake(.0, height, width, height);
-//    playerLayer.backgroundColor = [UIColor blackColor].CGColor;
-//    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-//
-//    [self.view.layer addSublayer:playerLayer];
-//
-//    [player play];
-    
-   // NSURL *url = [[NSURL alloc] initWithString:@"https://s3-eu-west-1.amazonaws.com/alf-proeysen/Bakvendtland-MASTER.mp4"];
-    
-    // create a player view controller
-    //player = [AVPlayer playerWithURL:videoURL];
     AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
     [appDel.frontNavigationController presentViewController:controller animated:YES completion:nil];
-//    [self presentViewController:controller animated:YES completion:nil];
-    
-    
-//    [self addChildViewController:controller];
-//    [self.rootVideoView addSubview:controller.view];
-//    controller.view.frame = CGRectMake(0,40,self.rootVideoView.frame.size.width,self.rootVideoView.frame.size.height);
     
     controller.player = player;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(someMethod) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
