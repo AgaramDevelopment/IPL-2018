@@ -18,6 +18,7 @@
 #import "VideoPlayerViewController.h"
 #import "HomeScreenStandingsVC.h"
 #import "TabbarVC.h"
+#import "ResultsVc.h"
 
 
 @interface SchResStandVC ()
@@ -29,6 +30,8 @@
     TabbarVC *objtab;
     SWRevealViewController *revealController;
     NSMutableArray *objarray;
+    ResultsVc *objresult;
+    
     
     //AppDelegate *objAppDel;
 }
@@ -63,6 +66,15 @@
 //    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
 //    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
 //    [self.standingsView addSubview:objStands.view];
+    
+}
+
+- (IBAction)onClickMoreMatches:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+    //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
 }
 
@@ -220,30 +232,6 @@
         
         
         
-        //        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
-        //        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
-        //        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
-        //       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
-        //        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
-        //
-        //
-        //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        //        NSDate *date  = [dateFormatter dateFromString:starttime];
-        //        // Convert to new Date Format
-        //        [dateFormatter setDateFormat:@"hh:mm a"];
-        //        NSString *newtime1 = [dateFormatter stringFromDate:date];
-        //
-        //        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-        //        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
-        //        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
-        //        // Convert to new Date Format
-        //        [dateFormatter2 setDateFormat:@"hh:mm a"];
-        //        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
-        //
-        //        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
-        
-        
         cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
         // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
@@ -331,7 +319,8 @@
 //        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
         
-        
+        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
+        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         
         NSString *first = [self checkNull:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
         NSLog(@"%ld",(long)indexPath.row);

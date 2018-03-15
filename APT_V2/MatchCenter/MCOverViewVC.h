@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *PlayerTypelbl;
 @property (strong, nonatomic) IBOutlet UIButton *prevBtn;
 @property (strong, nonatomic) IBOutlet UIButton *nextBtn;
+@property (strong, nonatomic) IBOutlet UIButton *moreBtn;
 
 @property (strong, nonatomic) IBOutlet UIImageView *Player1Img;
 @property (strong, nonatomic) IBOutlet UILabel *Player1Namelbl;
