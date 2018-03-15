@@ -44,8 +44,8 @@
     firstViewController.title = @"Overview";
     firstViewController.tabBarItem = self.overviewBarItem;
     
-    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
 //    UIImage* overView_selected = [[UIImage imageNamed:@"Overview_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //
@@ -74,23 +74,23 @@
     thirdViewController.title = @"Team Composition";
     thirdViewController.tabBarItem = self.tossAndResultBarItem;
     
-    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"TeamComp_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"TeamComp_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"TeamComp_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"TeamComp_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
     //BattingVC
     MCBattingRootVC *fourthViewController = [[MCBattingRootVC alloc]init];
     fourthViewController.title = @"Batting";
     fourthViewController.tabBarItem = self.tossAndResultBarItem;
-    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     //BowlingVC
     MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
     bowlingViewController.title = @"Bowling";
     bowlingViewController.tabBarItem = self.tossAndResultBarItem;
-    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_SelectIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_SelectIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
   
     //GroundVC
@@ -98,8 +98,8 @@
     fifthViewController.title = @"Ground";
     fifthViewController.tabBarItem = self.tossAndResultBarItem;
     
-    fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Ground_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    fifthViewController.tabBarItem.image = [[UIImage imageNamed:@"Ground_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Ground_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fifthViewController.tabBarItem.image = [[UIImage imageNamed:@"Ground_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     //Standings
@@ -107,8 +107,8 @@
     sixthViewController.title = @"Standings";
     sixthViewController.tabBarItem = self.tossAndResultBarItem;
     
-    sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Standings_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"Standings_Unselected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Standings_Unselected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    sixthViewController.tabBarItem.image = [[UIImage imageNamed:@"Standings_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     //H2H
@@ -116,8 +116,8 @@
     headtoheadController.title = @"H2H";
     headtoheadController.tabBarItem = self.tossAndResultBarItem;
     
-//    headtoheadController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Head2Head_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-//    headtoheadController.tabBarItem.image = [[UIImage imageNamed:@"Head2Head"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    headtoheadController.tabBarItem.selectedImage = [[UIImage imageNamed:@""] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    headtoheadController.tabBarItem.image = [[UIImage imageNamed:@"H2H_White"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
 //    //Team overview
@@ -137,13 +137,14 @@
     
     // Add this code to change StateNormal text Color,
     [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor grayColor]}
+     @{NSForegroundColorAttributeName : [UIColor whiteColor]}
                                            forState:UIControlStateNormal];
     
     // then if StateSelected should be different, you should add this code
     [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor whiteColor]}
+     @{NSForegroundColorAttributeName : [UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f]}
                                            forState:UIControlStateSelected];
+    
     
 }
 

@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SchResStandVC">
             <connections>
+                <outlet property="MoreBtn" destination="POl-lM-n5v" id="Ndf-BR-yCl"/>
                 <outlet property="commonView" destination="Lno-E5-Jbz" id="CW6-4o-g1S"/>
                 <outlet property="resultCollectionView" destination="RAQ-ix-iEM" id="oKh-I3-2vg"/>
                 <outlet property="resultView" destination="Spk-sB-6vo" id="J7I-1T-5Y9"/>
@@ -41,7 +42,7 @@
                                     <rect key="frame" x="5" y="0.0" width="365" height="30"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fixtures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cu-RR-6jI">
-                                            <rect key="frame" x="5" y="0.0" width="60.5" height="30"/>
+                                            <rect key="frame" x="5" y="0.0" width="68" height="30"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -86,18 +87,33 @@
                                     <rect key="frame" x="5" y="215" width="365" height="30"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZO-Ep-iL6">
-                                            <rect key="frame" x="5" y="0.0" width="48" height="30"/>
+                                            <rect key="frame" x="5" y="0.0" width="54" height="30"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POl-lM-n5v">
+                                            <rect key="frame" x="325" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="LyJ-AL-xvF"/>
+                                            </constraints>
+                                            <state key="normal" title="More" image="More">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onClickMoreMatches:" destination="-1" eventType="touchUpInside" id="2bU-t7-8b2"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="fZO-Ep-iL6" firstAttribute="top" secondItem="vQ0-RB-pze" secondAttribute="top" id="4CK-0J-rNx"/>
                                         <constraint firstAttribute="bottom" secondItem="fZO-Ep-iL6" secondAttribute="bottom" id="66S-fN-xch"/>
                                         <constraint firstAttribute="height" constant="30" id="BwT-CX-9LD"/>
+                                        <constraint firstAttribute="bottom" secondItem="POl-lM-n5v" secondAttribute="bottom" id="EuQ-oq-vKq"/>
+                                        <constraint firstAttribute="trailing" secondItem="POl-lM-n5v" secondAttribute="trailing" constant="10" id="GfL-Xe-cxS"/>
                                         <constraint firstItem="fZO-Ep-iL6" firstAttribute="leading" secondItem="vQ0-RB-pze" secondAttribute="leading" constant="5" id="YZi-eb-pkn"/>
+                                        <constraint firstItem="POl-lM-n5v" firstAttribute="top" secondItem="vQ0-RB-pze" secondAttribute="top" id="b7s-zj-Ld5"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spk-sB-6vo">
@@ -175,4 +191,7 @@
             <point key="canvasLocation" x="59.5" y="163"/>
         </view>
     </objects>
+    <resources>
+        <image name="More" width="83" height="73"/>
+    </resources>
 </document>
