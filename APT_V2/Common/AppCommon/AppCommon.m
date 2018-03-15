@@ -331,5 +331,14 @@ AppCommon *sharedCommon = nil;
     
 }
 
++(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
+
+
 @end
 

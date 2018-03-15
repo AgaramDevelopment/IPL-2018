@@ -90,7 +90,7 @@
         cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
        
         
-        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[self.CollectionPowerPlayArray1 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray1 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -121,7 +121,7 @@
         cell.econlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
         cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
         
-        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[self.CollectionPowerPlayArray2 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray2 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -155,7 +155,7 @@
         cell.econlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
         cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
         
-        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[self.CollectionPowerPlayArray3 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray3 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell

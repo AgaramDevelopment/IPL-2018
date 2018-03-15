@@ -456,7 +456,7 @@
         cell.inningsScoreLbl.hidden = false;
         
         if (self.indexPath == 0) {
-            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
+            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
             
             cell.inningsScoreLbl.text = [[commonArray valueForKey:@"Runs"] objectAtIndex:indexPath.row];
@@ -464,7 +464,7 @@
         }
         if (self.indexPath == 1) {
             
-            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray[indexPath.row] valueForKey:@"BowlerPhoto"]]]
+            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
             NSString *wicketsScore = [NSString stringWithFormat:@"%@/%@", [[commonArray valueForKey:@"Wickets"] objectAtIndex:indexPath.row], [[commonArray valueForKey:@"Runs"] objectAtIndex:indexPath.row]];
             cell.inningsScoreLbl.text = wicketsScore;
@@ -480,7 +480,7 @@
         
         if (self.indexPath == 0) { // Batsman
             
-            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
+            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray1[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
             
             cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row] ;
@@ -499,7 +499,7 @@
         } else if (self.indexPath == 1) { // Bowler
             
             if (![[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
-                [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BowlerPhoto"]]]
+                [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray1[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                     placeholderImage:[UIImage imageNamed:@"Default_image"]];
                 
                 cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
@@ -512,7 +512,7 @@
             for (int i = 0; i < commonArray2.count; i++) {
                 if ([[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:[[commonArray2 valueForKey:@"BowlerCode"] objectAtIndex:i]]) {
                     
-                    [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [[commonArray2 valueForKey:@"BowlerPhoto"] objectAtIndex:i]]]
+                    [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [[commonArray2 valueForKey:@"BowlerPhoto"] objectAtIndex:i]]]
                                         placeholderImage:[UIImage imageNamed:@"Default_image"]];
                     
                     NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
@@ -522,7 +522,7 @@
                     
                 } else {
                     if (self.BowlingDetailsArray1.count < self.BowlingDetailsArray3.count || self.BowlingDetailsArray2.count < self.BowlingDetailsArray4.count) {
-                        [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray2[indexPath.row] valueForKey:@"BowlerPhoto"]]]
+                        [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray2[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                             placeholderImage:[UIImage imageNamed:@"Default_image"]];
                         
                         NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
@@ -555,7 +555,7 @@
         
         if (self.indexPath == 0) { // Batsman
             
-            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
+            [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray1[indexPath.row] valueForKey:@"BatsmenPhoto"]]]
                                 placeholderImage:[UIImage imageNamed:@"Default_image"]];
             
             cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BatsmenName"] objectAtIndex:indexPath.row] ;
@@ -574,7 +574,7 @@
         } else if (self.indexPath == 1) { // Bowler
             
             if (![[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:@""]) {
-                [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray1[indexPath.row] valueForKey:@"BowlerPhoto"]]]
+                [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray1[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                     placeholderImage:[UIImage imageNamed:@"Default_image"]];
                 
                 cell.playerNameLbl.text = [[commonArray1 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
@@ -587,7 +587,7 @@
             for (int i = 0; i < commonArray2.count; i++) {
                 if ([[[commonArray1 valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row] isEqualToString:[[commonArray2 valueForKey:@"BowlerCode"] objectAtIndex:i]]) {
                     
-                    [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [[commonArray2 valueForKey:@"BowlerPhoto"] objectAtIndex:i]]]
+                    [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [[commonArray2 valueForKey:@"BowlerPhoto"] objectAtIndex:i]]]
                                         placeholderImage:[UIImage imageNamed:@"Default_image"]];
                     
                     NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
@@ -597,7 +597,7 @@
                     
                 } else {
                     if (self.BowlingDetailsArray1.count < self.BowlingDetailsArray3.count || self.BowlingDetailsArray2.count < self.BowlingDetailsArray4.count) {
-                        [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [commonArray2[indexPath.row] valueForKey:@"BowlerPhoto"]]]
+                        [cell.playerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [commonArray2[indexPath.row] valueForKey:@"BowlerPhoto"]]]
                                             placeholderImage:[UIImage imageNamed:@"Default_image"]];
                         
                         NSLog(@"Name:%d:%@", i, [[commonArray2 valueForKey:@"BowlerName"] objectAtIndex:i]);
