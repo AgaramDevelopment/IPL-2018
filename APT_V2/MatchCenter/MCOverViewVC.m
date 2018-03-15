@@ -445,8 +445,8 @@
 
 - (IBAction)onClickMoreMatches:(id)sender
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
     //[self.navigationController pushViewController:objFix animated:YES];
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     

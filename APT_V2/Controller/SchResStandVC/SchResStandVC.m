@@ -32,8 +32,6 @@
     NSMutableArray *objarray;
     ResultsVc *objresult;
     
-    
-    //AppDelegate *objAppDel;
 }
 
 @property (strong, nonatomic)  NSMutableArray *commonArray;
@@ -66,13 +64,36 @@
 //    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
 //    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
 //    [self.standingsView addSubview:objStands.view];
+    [self changeFormat];
+    
+}
+
+-(void)changeFormat
+{
+    /*
+     NSString *finalDate = @"2014-10-15";
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+     NSDate *date = [dateFormatter dateFromString:dateStr];
+     [dateFormatter setDateFormat:@"EE, d MMM, YYYY"];
+     return [dateFormatter stringFromDate:date];
+     */
+    
+//    NSString* str =@"21 May'17 12:00AM (IST)";
+    NSString* str =@"21 May'17";
+
+    NSDateFormatter* dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd MMM''yy"];
+    NSDate* date = [dateFormatter dateFromString:str];
+    [dateFormatter setDateFormat:@"d MMM''yy HH:mma (zzz)"];
+    NSLog(@"%@",[dateFormatter stringFromDate:date]);
     
 }
 
 - (IBAction)onClickMoreMatches:(id)sender
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
     //[self.navigationController pushViewController:objFix animated:YES];
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
@@ -137,6 +158,28 @@
     
 }
 
+-(void)addShadows:(CALayer *)layer
+{
+//    float shadowSize = 10.0f;
+//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(self.avatarImageView.frame.origin.x - shadowSize / 2,
+//                                                                           self.avatarImageView.frame.origin.y - shadowSize / 2,
+//                                                                           self.avatarImageView.frame.size.width + shadowSize,
+//                                                                           self.avatarImageView.frame.size.height + shadowSize)];
+//    self.avatarImageView.layer.masksToBounds = NO;
+//    self.avatarImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.avatarImageView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+//    self.avatarImageView.layer.shadowOpacity = 0.8f;
+//    self.avatarImageView.layer.shadowPath = shadowPath.CGPath;
+    
+    UIBezierPath* path = [UIBezierPath bezierPathWithRect:layer.visibleRect];
+    layer.masksToBounds = NO;
+    layer.shadowColor = [UIColor blackColor].CGColor;
+    layer.shadowOffset = CGSizeZero;
+    layer.shadowOpacity = 0.8f;
+    layer.shadowPath = path.CGPath;
+    
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -158,68 +201,100 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
+    
+    CGFloat width = collectionView.frame.size.width;
+    CGFloat height = collectionView.frame.size.height;
+    
+    if(!IS_IPAD && !IS_IPHONE5)
     {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-            if(collectionView == self.scheduleCollectionView)
-            {
-                return CGSizeMake(310, 182);
-            }
-            else
-            {
-                return CGSizeMake(310, 182);
-            }
-        }
+        width = width/2;
     }
-    else
+    else if(IS_IPAD)
     {
-        //return CGSizeMake(160, 140);
-        
-        if(collectionView == self.scheduleCollectionView)
-        {
-            return CGSizeMake(310, 170);
-        }
-        else
-        {
-            return CGSizeMake(310, 170);
-        }
+        width = width/3;
     }
+    
+    return CGSizeMake(width-20, height-20);
+    
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//            if(collectionView == self.scheduleCollectionView)
+//            {
+//                return CGSizeMake(310, 182);
+//            }
+//            else
+//            {
+//                return CGSizeMake(310, 182);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //return CGSizeMake(160, 140);
+//
+//        if(collectionView == self.scheduleCollectionView)
+//        {
+//            return CGSizeMake(310, 170);
+//        }
+//        else
+//        {
+//            return CGSizeMake(310, 170);
+//        }
+//    }
 }
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
+    
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 20.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 20.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    return 10.0;
+
+}
+
+-(NSString* )getRequireddate:(NSString *)dateString
+{
+  
+    NSString* str = @"";
+    
+    return str;
 }
 
 
@@ -293,15 +368,22 @@
         //        }
         
         
-        cell.contentView.layer.cornerRadius = 2.0f;
-        cell.contentView.layer.borderWidth = 1.0f;
-        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
+//        cell.contentView.layer.cornerRadius = 2.0f;
+//        cell.contentView.layer.borderWidth = 1.0f;
+//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+//        cell.contentView.layer.masksToBounds = YES;
         
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
+        if (indexPath.row % 2 == 1) {
+            
+            cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        }
+//        else {
+//            cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        }
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 10.0f;
+        cell.layer.shadowOpacity = 0.5f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         
@@ -412,15 +494,19 @@
         }];
         
         
-        cell.contentView.layer.cornerRadius = 2.0f;
-        cell.contentView.layer.borderWidth = 1.0f;
-        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
+//        cell.contentView.layer.cornerRadius = 2.0f;
+//        cell.contentView.layer.borderWidth = 1.0f;
+//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+//        cell.contentView.layer.masksToBounds = YES;
         
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
+        if (indexPath.row % 2 == 0) {
+            
+            cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        }
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 10.0f;
+        cell.layer.shadowOpacity = 0.5f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         return cell;
@@ -454,8 +540,8 @@
         
         [scoreArray addObject:dic];
         
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
         appDel.Scorearray = scoreArray;
         //objtab.backkey = @"yes";

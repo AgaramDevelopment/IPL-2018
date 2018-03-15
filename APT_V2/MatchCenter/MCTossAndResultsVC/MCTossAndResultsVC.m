@@ -165,6 +165,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.item == 0) {
+        
+    }
+    
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
@@ -184,10 +188,33 @@
     }
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    
+    if (section == 0) {
+        return UIEdgeInsetsMake(0, 10, 0, 0);
+    }
+    else
+    {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+}
+
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     PlayerListCollectionViewCell* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"ContentCellIdentifier" forIndexPath:indexPath];
+    
+    if (indexPath.item == 0) {
+        
+        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 5.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = YES;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
+    }
     
     if (indexPath.section == 0) {
       
@@ -214,6 +241,7 @@
     else
     {
         [cell.lblRightShadow setHidden:(indexPath.row == 0 ? NO : YES)];
+        
         if (!cell.lblRightShadow.isHidden) {
             cell.lblRightShadow.clipsToBounds = NO;
             [self setShadow:cell.lblRightShadow.layer];
@@ -221,7 +249,6 @@
         
         if (indexPath.section % 2 != 0) {
             cell.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
-            
         }else {
             cell.backgroundColor = [UIColor whiteColor];
         }
@@ -379,7 +406,6 @@
 
 -(void)tossResultWebServiceFor:(NSString *)tossType
 {
-    
     /*
      
      API URL    : http://192.168.0.151:8044/AGAPTService.svc/APT_TOSSRESULTS/COMPRTETION_CODE/TEAM_CODE/TOSS_TYPE
@@ -428,7 +454,6 @@
             });
             
             [AppCommon hideLoading];
-            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
