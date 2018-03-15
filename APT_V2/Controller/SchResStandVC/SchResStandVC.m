@@ -220,30 +220,6 @@
         
         
         
-        //        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
-        //        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
-        //        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
-        //       // cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",starttime,endtime];
-        //        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
-        //
-        //
-        //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //        [dateFormatter setDateFormat:@"HH:mm:ss"];
-        //        NSDate *date  = [dateFormatter dateFromString:starttime];
-        //        // Convert to new Date Format
-        //        [dateFormatter setDateFormat:@"hh:mm a"];
-        //        NSString *newtime1 = [dateFormatter stringFromDate:date];
-        //
-        //        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-        //        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
-        //        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
-        //        // Convert to new Date Format
-        //        [dateFormatter2 setDateFormat:@"hh:mm a"];
-        //        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
-        //
-        //        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
-        
-        
         cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
         // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
@@ -331,7 +307,8 @@
 //        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
         
-        
+        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
+        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         
         NSString *first = [self checkNull:[[self.commonArray2 valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
         NSLog(@"%ld",(long)indexPath.row);

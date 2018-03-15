@@ -62,6 +62,7 @@
     [self.viewTeam setHidden:![AppCommon isCoach]];
 
     
+    
 //    self.CompetitionListtbl.hidden = YES;
     //self.popTableView.hidden = YES;
     self.prevBtn.hidden = YES;
@@ -247,6 +248,7 @@
     
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
+    self.moreBtn.hidden = YES;
     
 //    self.competitionlbl.text = [AppCommon getCurrentCompetitionName];
 //     self.teamlbl.text = [AppCommon getCurrentTeamName];
@@ -293,6 +295,15 @@
             
             recentMatchesArray = [[NSMutableArray alloc]init];
             recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
+            
+            if(recentMatchesArray.count>0)
+            {
+                self.moreBtn.hidden = NO;
+            }
+            else
+            {
+                self.moreBtn.hidden = YES;
+            }
             
             resultsArray = [[NSMutableArray alloc]init];
             resultsArray = [responseObject valueForKey:@"OvATResults"];
@@ -589,6 +600,23 @@
 {
    if([self.PlayerTypelbl.text isEqualToString:@"Top Batsmens"])
    {
+       
+       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
+       
+       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+           if (succeeded) {
+               // change the image in the cell
+               self.Player1Img.image = image;
+               
+               // cache the image for use later (when scrolling up)
+           }
+           else
+           {
+               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+           }
+       }];
+
+       
     self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
     self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
     self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
@@ -616,7 +644,7 @@
    {
        
        
-       NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
        
        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
            if (succeeded) {
@@ -652,6 +680,23 @@
    }
    else if([self.PlayerTypelbl.text isEqualToString:@"Top Fielders"])
    {
+       
+       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
+       
+       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+           if (succeeded) {
+               // change the image in the cell
+               self.Player1Img.image = image;
+               
+               // cache the image for use later (when scrolling up)
+           }
+           else
+           {
+               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+           }
+       }];
+
+       
        self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
        self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
        self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];

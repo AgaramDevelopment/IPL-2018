@@ -83,7 +83,7 @@
     fourthViewController.title = @"Batting";
     fourthViewController.tabBarItem = self.tossAndResultBarItem;
     fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     //BowlingVC
     MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
@@ -137,7 +137,7 @@
     
     // Add this code to change StateNormal text Color,
     [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor grayColor]}
+     @{NSForegroundColorAttributeName : [UIColor blackColor]}
                                            forState:UIControlStateNormal];
     
     // then if StateSelected should be different, you should add this code

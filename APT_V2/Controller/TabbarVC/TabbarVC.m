@@ -51,8 +51,8 @@
     firstViewController.tabBarItem = self.overviewBarItem;
     //firstViewController.matchDetails = self.matchDetails;
     //firstViewController.matchCode = self.matchCode;
-    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    firstViewController.tabBarItem.image = [[UIImage imageNamed:@"Overview_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     //MCTossAndResultsVC
@@ -60,8 +60,8 @@
     secondViewController.title = @"BattingKPI";
     secondViewController.tabBarItem = self.tossAndResultBarItem;
     
-    secondViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    secondViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    secondViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    secondViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     
@@ -71,8 +71,8 @@
     thirdViewController.title = @"BowlingKPI";
     thirdViewController.tabBarItem = self.tossAndResultBarItem;
     
-    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_SelectIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    thirdViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     fourthVC = [[FieldSummaryVC alloc]init];
     fourthVC.title = @"Fielding Summary";
@@ -111,25 +111,25 @@
     UITabBar *tabBar = self.tabBar;
     
     UITabBarItem *tabItem1 = [tabBar.items objectAtIndex:0];
-    tabItem1.selectedImage = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem1.image = [[UIImage imageNamed:@"ico_calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem1.selectedImage = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem1.image = [[UIImage imageNamed:@"Overview_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem1.title = @"SCORECARD";
     
     
     UITabBarItem *tabItem2 = [tabBar.items objectAtIndex:1];
-    tabItem2.selectedImage = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem2.image = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.selectedImage = [[UIImage imageNamed:@"Batting_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.image = [[UIImage imageNamed:@"Batting_KPI"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem2.title = @"BATTING KPI";
     
     UITabBarItem *tabItem3 = [tabBar.items objectAtIndex:2];
-    tabItem3.selectedImage = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem3.image = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem3.selectedImage = [[UIImage imageNamed:@"Bowling_SelectIcon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem3.image = [[UIImage imageNamed:@"Bowling_Unselect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem3.title = @"BOWLING KPI";
     
     
     UITabBarItem *tabItem4 = [tabBar.items objectAtIndex:3];
-    tabItem4.selectedImage = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem4.image = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem4.selectedImage = [[UIImage imageNamed:@"Field_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem4.image = [[UIImage imageNamed:@"Field_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem4.title = @"FIELDING SUMMARY";
     
     
@@ -138,22 +138,33 @@
     tabItem5.image = [[UIImage imageNamed:@"ico_calendar"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     tabItem5.title = @"OVER BLOCK SUMMARY";
     
+    
   
     self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];
+
     //self.tabBar.tintColor = [UIColor whiteColor];
     //self.tabBar.unselectedItemTintColor = [UIColor colorWithRed:(80/255.0f) green:(177/255.0f) blue:(215/255.0f) alpha:1.0f];
     
     //
     
     // Add this code to change StateNormal text Color,
+//    [UITabBarItem.appearance setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName : [UIColor colorWithRed:(80/255.0f) green:(177/255.0f) blue:(215/255.0f) alpha:1.0f]}
+//                                           forState:UIControlStateNormal];
     [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor colorWithRed:(80/255.0f) green:(177/255.0f) blue:(215/255.0f) alpha:1.0f]}
+     @{NSForegroundColorAttributeName : [UIColor blackColor]}
                                            forState:UIControlStateNormal];
     
     // then if StateSelected should be different, you should add this code
     [UITabBarItem.appearance setTitleTextAttributes:
      @{NSForegroundColorAttributeName : [UIColor whiteColor]}
                                            forState:UIControlStateSelected];
+    
+    
+    
+    
+    
+
     
    
 }
