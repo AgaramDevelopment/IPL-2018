@@ -23,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIView *videoView;
 @property (strong, nonatomic) IBOutlet UIView *standingsView;
 
+@property (strong, nonatomic) IBOutlet UIButton *MoreBtn;
+
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 

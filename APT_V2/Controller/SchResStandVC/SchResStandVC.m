@@ -18,6 +18,7 @@
 #import "VideoPlayerViewController.h"
 #import "HomeScreenStandingsVC.h"
 #import "TabbarVC.h"
+#import "ResultsVc.h"
 
 
 @interface SchResStandVC ()
@@ -29,6 +30,8 @@
     TabbarVC *objtab;
     SWRevealViewController *revealController;
     NSMutableArray *objarray;
+    ResultsVc *objresult;
+    
     
     //AppDelegate *objAppDel;
 }
@@ -63,6 +66,15 @@
 //    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
 //    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);
 //    [self.standingsView addSubview:objStands.view];
+    
+}
+
+- (IBAction)onClickMoreMatches:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+    //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
 }
 
