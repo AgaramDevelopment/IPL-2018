@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "ResultsVc.h"
+#import "TabbarVC.h"
 
 @interface MCOverViewVC ()
 {
@@ -26,8 +27,11 @@
     NSMutableArray *FieldersArray;
     NSArray* competetinArray;
     
+    TabbarVC *objtab;
+    
     NSString *CompetitionCode;
     NSString *teamcode;
+    NSString *displayMatchCode;
     
     BOOL isComp;
     BOOL isTeam;
@@ -197,7 +201,7 @@
         
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
-        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];
 
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
@@ -215,7 +219,7 @@
         
         
 //        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
-        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:indexPath.row]];
 
         [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
@@ -238,6 +242,50 @@
     return nil;
     
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+        displayMatchCode = [[recentMatchesArray valueForKey:@"ATMatchCode"] objectAtIndex:indexPath.row];
+        NSMutableArray *scoreArray = [[NSMutableArray alloc]init];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        
+        NSString *ground = @"";
+        NSString *place = [[recentMatchesArray valueForKey:@"Venue"]objectAtIndex:indexPath.row];
+        
+        [dic setValue:[NSString stringWithFormat:@"%@,%@",ground,place] forKey:@"ground"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATName"] objectAtIndex:indexPath.row] forKey:@"team1"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"BTName"] objectAtIndex:indexPath.row] forKey:@"team2"];
+    
+    NSString * team1Score = [NSString stringWithFormat:@"%@/%@(%@)",[[recentMatchesArray valueForKey:@"ATMaxInnsTotal"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"ATMaxInnsWckts"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"ATOvers"] objectAtIndex:indexPath.row]];
+        [dic setValue:team1Score forKey:@"Inn1Score"];
+    
+    NSString * team2Score = [NSString stringWithFormat:@"%@/%@(%@)",[[recentMatchesArray valueForKey:@"BTMaxInnsTotal"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"BTMaxInnsWckts"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"BTOvers"] objectAtIndex:indexPath.row]];
+        [dic setValue:team2Score forKey:@"Inn2Score"];
+    
+        [dic setValue:@"" forKey:@"Inn3Score"];
+        [dic setValue:@"" forKey:@"Inn4Score"];
+        [dic setValue:@"" forKey:@"result"];
+        [dic setValue:@"" forKey:@"Competition"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row] forKey:@"TeamALogo"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row] forKey:@"TeamBLogo"];
+        
+        [scoreArray addObject:dic];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+        appDel.Currentmatchcode = displayMatchCode;
+        appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+        [appDel.frontNavigationController pushViewController:objtab animated:YES];
+        
+        
+    
+    
+}
+
+
+
 
 -(void)OverviewWebservice // :(NSString *)compCode :(NSString *)temCode
 {
@@ -345,6 +393,75 @@
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             
            
+        }
+        else{
+            
+            self.Teamnamelbl.text = @"";
+            
+            NSString *groundDetails = @"";
+            self.Groundmnamelbl.text = @"";
+            self.Captainnamelbl.text = @"";
+            
+            
+            
+            NSString * photourl = @"";
+            
+            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    self.TeamImgView.image = image;
+                    
+                    // cache the image for use later (when scrolling up)
+                    self.TeamImgView.image = image;
+                }
+                else
+                {
+                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
+                }
+            }];
+            
+            
+            
+            self.moreBtn.hidden = YES;
+            
+            
+            
+            
+            self.TotalMatcheslbl.text =  @"";
+            
+            self.winLosslbl.text = @"";
+            NSString *wincount = @"";
+            self.winLossCountlbl.text =@"";
+            
+            self.Forlbl.text = @"";
+            NSString *forcount = @"";
+            self.ForCountlbl.text =@"";
+            
+            
+            self.Againstlbl.text = @"";
+            NSString *Againstcount = @"";
+            self.AgainstCountlbl.text =@"";
+            
+            self.nrrlbl.text = @"";
+            
+            NSString *wkts = @"";
+            self.Wktslbl.text = @"";
+            
+            BatsmenArray = [[NSMutableArray alloc]init];
+            
+            
+            BowlersArray = [[NSMutableArray alloc]init];
+            
+            
+            FieldersArray = [[NSMutableArray alloc]init];
+            
+            recentMatchesArray =[[NSMutableArray alloc]init];
+            [self.resultCollectionView reloadData];
+            
+            CommonArray = [[NSMutableArray alloc]init];
+            [self SetValuesOfTopPlayers:CommonArray];
+            
+            
         }
         [AppCommon hideLoading];
         
@@ -601,124 +718,144 @@
 
 -(void)SetValuesOfTopPlayers :(NSMutableArray *)ReqArray
 {
-   if([self.PlayerTypelbl.text isEqualToString:@"Top Batsmens"])
-   {
-       
-       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
-       
-       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-           if (succeeded) {
-               // change the image in the cell
-               self.Player1Img.image = image;
-               
-               // cache the image for use later (when scrolling up)
-           }
-           else
-           {
-               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-           }
-       }];
-
-       
-    self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
-    self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
-    self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
-    self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
-    self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
-    
-    self.Player1Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:0];
-    self.Player2Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:1];
-    self.Player3Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:2];
-    self.Player4Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:3];
-    self.Player5Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:4];
-    
-    self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
-    self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
-    self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
-    self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
-    self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
-       
-       
-      
-       
-       
-   }
-   else if([self.PlayerTypelbl.text isEqualToString:@"Top Bowlers"])
-   {
-       
-       
-       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
-       
-       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-           if (succeeded) {
-               // change the image in the cell
-               self.Player1Img.image = image;
-               
-               // cache the image for use later (when scrolling up)
-           }
-           else
-           {
-               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-           }
-       }];
-
-       
-       self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
-       self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
-       self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
-       self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
-       self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
-       
-       self.Player1Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:0];
-       self.Player2Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:1];
-       self.Player3Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:2];
-       self.Player4Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:3];
-       self.Player5Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:4];
-       
-       self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
-       self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
-       self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
-       self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
-       self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
-   }
-   else if([self.PlayerTypelbl.text isEqualToString:@"Top Fielders"])
-   {
-       
-       NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
-       
-       [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-           if (succeeded) {
-               // change the image in the cell
-               self.Player1Img.image = image;
-               
-               // cache the image for use later (when scrolling up)
-           }
-           else
-           {
-               self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-           }
-       }];
-
-       
-       self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
-       self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
-       self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
-       self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
-       self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
-       
-       self.Player1Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:0];
-       self.Player2Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:1];
-       self.Player3Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:2];
-       self.Player4Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:3];
-       self.Player5Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:4];
-       
-       self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
-       self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
-       self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
-       self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
-       self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
-   }
-    
+    if([self.PlayerTypelbl.text isEqualToString:@"Top Batsmens"])
+    {
+        if(ReqArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
+            
+            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    self.Player1Img.image = image;
+                    
+                    // cache the image for use later (when scrolling up)
+                }
+                else
+                {
+                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+                }
+            }];
+            
+            
+            self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
+            self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
+            self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
+            self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
+            self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
+            
+            self.Player1Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:0];
+            self.Player2Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:1];
+            self.Player3Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:2];
+            self.Player4Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:3];
+            self.Player5Countlbl.text = [[ReqArray valueForKey:@"Runs"] objectAtIndex:4];
+            
+            self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
+            self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
+            self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
+            self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
+            self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
+            
+            
+            
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
+        
+    }
+    else if([self.PlayerTypelbl.text isEqualToString:@"Top Bowlers"])
+    {
+        if(ReqArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            
+            NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
+            
+            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    self.Player1Img.image = image;
+                    
+                    // cache the image for use later (when scrolling up)
+                }
+                else
+                {
+                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+                }
+            }];
+            
+            
+            self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
+            self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
+            self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
+            self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
+            self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
+            
+            self.Player1Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:0];
+            self.Player2Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:1];
+            self.Player3Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:2];
+            self.Player4Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:3];
+            self.Player5Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:4];
+            
+            self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
+            self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
+            self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
+            self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
+            self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
+    }
+    else if([self.PlayerTypelbl.text isEqualToString:@"Top Fielders"])
+    {
+        if(ReqArray.count>0)
+        {
+            self.NodataView.hidden = YES;
+            NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
+            
+            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    self.Player1Img.image = image;
+                    
+                    // cache the image for use later (when scrolling up)
+                }
+                else
+                {
+                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+                }
+            }];
+            
+            
+            self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
+            self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
+            self.Player3Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:2];
+            self.Player4Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:3];
+            self.Player5Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:4];
+            
+            self.Player1Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:0];
+            self.Player2Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:1];
+            self.Player3Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:2];
+            self.Player4Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:3];
+            self.Player5Countlbl.text = [[ReqArray valueForKey:@"Wickets"] objectAtIndex:4];
+            
+            self.Player1SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:0];
+            self.Player2SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:1];
+            self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
+            self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
+            self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
+        }
+        else
+        {
+            self.NodataView.hidden = NO;
+        }
+        
+    }
     
     
 }

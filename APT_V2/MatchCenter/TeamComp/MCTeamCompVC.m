@@ -1831,6 +1831,22 @@
         
         cell.PlayerStyle.text = [[self.BowlersArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row];
         
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.BowlersArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
+        
+        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.PlayerImg.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.PlayerImg.image = image;
+            }
+            else
+            {
+                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+        
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
         cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
@@ -1868,6 +1884,22 @@
         cell.PlayerName.text = [[self.BatsmenArray valueForKey:@"PlayerName"]objectAtIndex:indexPath.row];
         
         cell.PlayerStyle.text = [[self.BatsmenArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row];
+        
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.BatsmenArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
+        
+        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.PlayerImg.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.PlayerImg.image = image;
+            }
+            else
+            {
+                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
         
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
@@ -1912,6 +1944,22 @@
         
         cell.PlayerStyle.text = [NSString stringWithFormat:@"%@/%@",value3,value4];
         
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[self.AllrounderArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
+        
+        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.PlayerImg.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.PlayerImg.image = image;
+            }
+            else
+            {
+                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+        
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
         cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
@@ -1931,6 +1979,22 @@
     
 }
 
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
 
 -(void)TeamWebservice
 {

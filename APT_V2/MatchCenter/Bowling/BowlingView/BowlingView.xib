@@ -297,6 +297,10 @@
                                                 <constraint firstAttribute="height" constant="359" id="OBZ-kk-Yo4"/>
                                             </constraints>
                                             <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionLayerBowling" customModule="APT_Cricket" customModuleProvider="target"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="iN0-l3-epB" id="YUm-UY-f58"/>
+                                                <outlet property="delegate" destination="iN0-l3-epB" id="DJd-JY-6kL"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
