@@ -157,14 +157,14 @@ BOOL isTeams;
     }
     else if(isComp==YES)
     {
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+    
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+    NSLog(@"Competition:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
-        
+    NSLog(@"Competetioncode:%@", Competetioncode);
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-
     }
     else if(isTeams==YES)
     {
