@@ -506,6 +506,7 @@ BOOL runSortingKey;
 -(void)barchartloadValues
 {
     
+    
 //    [self setupBarLineChartView:_chartView];
     
     _chartView.delegate = self;

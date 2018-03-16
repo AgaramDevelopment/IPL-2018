@@ -474,41 +474,44 @@
     NSLog(@"matchCode:%@", self.matchCode);
     NSLog(@"matchDetails:%@", self.matchDetails);
     
-    self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
-    self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
+//    self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
+//    self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
+//
+//    self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
+//    self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
+//
+////    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+////    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+//    self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
+//
+////    NSString *key = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
+////
+////    if([ key isEqualToString:@"India"])
+////    {
+////        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
+////        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+////
+////    }
+////    else
+////    {
+////        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+////        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
+////
+////
+////    }
+//
+//
+//    [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
+//    [self.Team2 setTitle:[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0] forState:UIControlStateNormal];
+//
+//    [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     
-    self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
-    self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
-    
-//    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-//    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
-    self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
-    
-    NSString *key = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
-    
-    if([ key isEqualToString:@"India"])
-    {
-        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
-        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-        
-    }
-    else
-    {
-        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
-        
-        
-    }
-    
-
-    [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
-    [self.Team2 setTitle:[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0] forState:UIControlStateNormal];
-    
-    [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     self.popTbl.hidden=YES;
+    
+    
     [self ScoreWebservice];
 
     
@@ -3444,6 +3447,26 @@
                 
                 
                 
+                
+                
+                self.competitionTypelbl.text = [[matchDetailsImageArray valueForKey:@"Tournament"] objectAtIndex:0];
+                self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
+                
+                self.teamAlbl.text = [[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0];
+                self.teamBlbl.text = [[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0];
+                
+                    //self.teamAScorelbl.text = [[matchDetailsImageArray valueForKey:@"Inn1Score"] objectAtIndex:0];
+                   // self.teamBScorelbl.text = [[matchDetailsImageArray valueForKey:@"Inn2Score"] objectAtIndex:0];
+                  self.groundlbl.text = [[matchDetailsImageArray valueForKey:@"Venue"] objectAtIndex:0];
+                
+                
+                [self.Team1 setTitle:[[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                [self.Team2 setTitle:[[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                
+//                [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//                [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
+//                [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//                [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
                 
                 NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
                 NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
