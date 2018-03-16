@@ -704,12 +704,14 @@
         [[cell foursBtn] setTag:[indexPath row]];
         [[cell sixesBtn] setTag:[indexPath row]];
         [[cell dotsBtn] setTag:[indexPath row]];
+        [[cell wktsBtn] setTag:[indexPath row]];
         
         [cell.runsBtn addTarget:self action:@selector(myActionRuns:) forControlEvents:UIControlEventTouchUpInside];
         [cell.ballsBtn addTarget:self action:@selector(myActionBalls:) forControlEvents:UIControlEventTouchUpInside];
         [cell.foursBtn addTarget:self action:@selector(myActionFours:) forControlEvents:UIControlEventTouchUpInside];
         [cell.sixesBtn addTarget:self action:@selector(myActionSixes:) forControlEvents:UIControlEventTouchUpInside];
         [cell.dotsBtn addTarget:self action:@selector(myActionDots:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.wktsBtn addTarget:self action:@selector(myActionplayerWkt:) forControlEvents:UIControlEventTouchUpInside];
         
         
         //wagon wheel
@@ -1799,6 +1801,24 @@
     [self loadVideoPlayer:Batsmancode :@"DOTS" :@"BATTING" innings:innno];
     
 }
+
+-(IBAction)myActionplayerWkt:(id)sender
+{
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    ScoreCardCell * cell = [self.listTbl cellForRowAtIndexPath:indexPath];
+    
+    //NSLog(@"%@",[[CommonArray valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row]);
+    // NSLog(@"Selected row: %ld", (long)indexPath.row);
+    //......
+    
+    NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
+    
+    // [self loadVideoPaths:Batsmancode :@"WKT" :@"BOWLING"];
+    [self loadVideoPlayer:Batsmancode :@"WKT" :@"BATTING" innings:innno];
+    
+}
+
 
 
 -(IBAction)myActionOversBowling:(id)sender

@@ -61,7 +61,7 @@
     secondViewController.tabBarItem = self.tossAndResultBarItem;
     
     secondViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    secondViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_KPI"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    secondViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_UnSelect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
     
     
@@ -117,30 +117,30 @@
     //tabItem1.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     
-    UITabBarItem *tabItem2 = [tabBar.items objectAtIndex:1];
-    tabItem2.selectedImage = [[UIImage imageNamed:@"Batting_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem2.image = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem2.title = @"BATTING KPI";
-    //tabItem2.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
-    
-    UITabBarItem *tabItem3 = [tabBar.items objectAtIndex:2];
-    tabItem3.selectedImage = [[UIImage imageNamed:@"Bowling_select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem3.image = [[UIImage imageNamed:@"Bowling_Unselect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem3.title = @"BOWLING KPI";
+//    UITabBarItem *tabItem2 = [tabBar.items objectAtIndex:1];
+//    tabItem2.selectedImage = [[UIImage imageNamed:@"Batting_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+//    tabItem2.image = [[UIImage imageNamed:@"Batting_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+//    tabItem2.title = @"BATTING KPI";
+//    //tabItem2.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+//
+//    UITabBarItem *tabItem3 = [tabBar.items objectAtIndex:2];
+//    tabItem3.selectedImage = [[UIImage imageNamed:@"Bowling_select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+//    tabItem3.image = [[UIImage imageNamed:@"Bowling_Unselect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+//    tabItem3.title = @"BOWLING KPI";
     //tabItem3.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     
-    UITabBarItem *tabItem4 = [tabBar.items objectAtIndex:3];
-    tabItem4.selectedImage = [[UIImage imageNamed:@"Field_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem4.image = [[UIImage imageNamed:@"Field_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem4.title = @"FIELDING SUMMARY";
+    UITabBarItem *tabItem2 = [tabBar.items objectAtIndex:1];
+    tabItem2.selectedImage = [[UIImage imageNamed:@"Field_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.image = [[UIImage imageNamed:@"Field_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem2.title = @"FIELDING SUMMARY";
     //tabItem4.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     
-    UITabBarItem *tabItem5 = [tabBar.items objectAtIndex:4];
-    tabItem5.selectedImage = [[UIImage imageNamed:@"OverBlock_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem5.image = [[UIImage imageNamed:@"OverBlock_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
-    tabItem5.title = @"OVER BLOCK SUMMARY";
+    UITabBarItem *tabItem3 = [tabBar.items objectAtIndex:2];
+    tabItem3.selectedImage = [[UIImage imageNamed:@"OverBlock_Select"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem3.image = [[UIImage imageNamed:@"OverBlock_UnSelect"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabItem3.title = @"OVER BLOCK SUMMARY";
     //tabItem5.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     
