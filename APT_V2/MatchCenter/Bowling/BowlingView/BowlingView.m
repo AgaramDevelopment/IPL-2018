@@ -42,7 +42,7 @@ BOOL isTeamp;
     }
     if(isBowlRun==YES)
     {
-        return 4;
+        return 5;
 
     }else if(isCompt==YES){
         return appDel.ArrayCompetition.count;
@@ -73,7 +73,7 @@ BOOL isTeamp;
 
     }else if(isBowlRun==YES)
     {
-        cell.textLabel.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
+        cell.textLabel.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" :indexPath.row == 3 ? @"Economy": @"Dot Balls";
 
     }else if(isCompt==YES){
         
@@ -137,7 +137,7 @@ BOOL isTeamp;
         
     }else if(isBowlRun==YES)
     {
-        self.runslbl.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
+        self.runslbl.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" :indexPath.row == 3 ? @"Economy": @"Dot Balls";
         
         if(indexPath.row==0)
         {
@@ -152,6 +152,10 @@ BOOL isTeamp;
             types =@"AVERAGE";
         }
         else if(indexPath.row==3)
+        {
+            types =@"ECONOMY";
+        }
+        else if(indexPath.row==4)
         {
             types =@"DOTS";
         }

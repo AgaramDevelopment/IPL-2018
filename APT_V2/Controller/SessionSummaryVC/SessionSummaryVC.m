@@ -43,6 +43,7 @@
     
     NSMutableArray *pacearrS3;
     NSMutableArray *spinarrS3;
+    int selectedTab ;
     
 }
 
@@ -57,6 +58,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    selectedTab =1;
+    if(_isTest){
+        self.TESTview.clipsToBounds = NO;
+        self.TESTview.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.TESTview.layer.shadowOffset = CGSizeMake(0,5);
+        self.TESTview.layer.shadowOpacity = 0.5;
+        
+    }else{
+        self.ODIview.clipsToBounds = NO;
+        self.ODIview.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.ODIview.layer.shadowOffset = CGSizeMake(0,5);
+        self.ODIview.layer.shadowOpacity = 0.5;
+        
+    }
     
     self.matchcode = appDel.Currentmatchcode;
     self.matchHeadding = appDel.matchHeaderDetails;
@@ -892,7 +907,9 @@
 
 -(IBAction)Innings1Action:(id)sender
 {
-    [self setInningsBySelection:@"1"];
+    //[self setInningsBySelection:@"1"];
+    selectedTab =1;
+    [self setTabView];
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
     dayno= @"1";
@@ -904,7 +921,10 @@
 }
 -(IBAction)Innings2Action:(id)sender
 {
-    [self setInningsBySelection:@"2"];
+    //[self setInningsBySelection:@"2"];
+    
+    selectedTab =2;
+    [self setTabView];
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
     dayno= @"1";
@@ -914,10 +934,76 @@
     [self OdiService1];
 }
 
+-(void) setTabView{
+    
+    if(_isTest){
+        
+        self.ODIview.hidden = true;
+        self.TESTview.hidden = false;
+        
+        [self clearBtnSubView:self.day1];
+        [self clearBtnSubView:self.day2];
+        [self clearBtnSubView:self.day3];
+        [self clearBtnSubView:self.day4];
+        
+        if(selectedTab ==  1){
+            [self.day1 addSubview: [self getLineView:self.day1]];
+        }else if(selectedTab ==  2){
+            [self.day2 addSubview: [self getLineView:self.day2]];
+            
+        }else if(selectedTab ==  3){
+            [self.day3 addSubview: [self getLineView:self.day3]];
+            
+        }else if(selectedTab ==  4){
+            [self.day4 addSubview: [self getLineView:self.day4]];
+            
+        }
+        
+    }else{
+        
+        self.ODIview.hidden = false;
+        self.TESTview.hidden = true;
+        
+        [self clearBtnSubView:self.Innings1];
+        [self clearBtnSubView:self.Innings2];
+        
+        if(selectedTab ==  1){
+            [self.Innings1 addSubview: [self getLineView:self.Innings1]];
+            
+        }else if(selectedTab ==  2){
+            [self.Innings2 addSubview: [self getLineView:self.Innings2]];
+            
+        }
+        
+    }
+    
+}
+
+-(UIView *) getLineView : (UIButton *) btn{
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, btn.frame.size.height-5, btn.frame.size.width, 5)];
+    lineView.backgroundColor =[UIColor colorWithRed:16.0f/255.0f
+                                              green:45.0f/255.0f
+                                               blue:125.0f/255.0f
+                                              alpha:1.0f];
+    lineView.tag = 1234;
+    return lineView;
+}
+
+-(void) clearBtnSubView : (UIButton *) btn{
+    for (UIView *view in [btn subviews])
+    {
+        if(view.tag == 1234){
+            [view removeFromSuperview];
+        }
+    }
+}
+
 
 -(IBAction)day1Action:(id)sender
 {
-    [self setDayBySelection:@"1"];
+    //[self setDayBySelection:@"1"];
+    selectedTab =1;
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
     dayno= @"1";
