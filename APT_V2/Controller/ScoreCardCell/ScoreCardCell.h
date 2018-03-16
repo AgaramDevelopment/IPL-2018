@@ -43,6 +43,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * foursBtn;
 @property (nonatomic,strong) IBOutlet UIButton * sixesBtn;
 @property (nonatomic,strong) IBOutlet UIButton * dotsBtn;
+@property (nonatomic,strong) IBOutlet UIButton * wktsBtn;
 
 
 

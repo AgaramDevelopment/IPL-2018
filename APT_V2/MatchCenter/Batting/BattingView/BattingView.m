@@ -703,18 +703,18 @@ BOOL isTeams;
                 
                 self.ChartValuesArray = [responseObject valueForKey:@"bCharList"];
                 self.TableValuesArray = [responseObject valueForKey:@"plyrBattingList"];
-                
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
+               
                 
-                for(int i=0;i<self.ChartValuesArray.count;i++)
-                {
-                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
-                    [self.ChartXAxisValuesArray addObject:value];
-                }
-                
+                    for(int i=0;i<self.ChartValuesArray.count;i++)
+                    {
+                        NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                        [self.ChartXAxisValuesArray addObject:value];
+                    }
                 
                 [self barchartloadValues];
                 [self.resultCollectionView reloadData];
+                
             }
             
             [AppCommon hideLoading];

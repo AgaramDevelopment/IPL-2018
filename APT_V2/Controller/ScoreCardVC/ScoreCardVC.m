@@ -355,6 +355,29 @@
     
     
     
+//    UIInterpolatingMotionEffect *verticalMotionEffect =
+//    [[UIInterpolatingMotionEffect alloc]
+//     initWithKeyPath:@"center.y"
+//     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+//    verticalMotionEffect.minimumRelativeValue = @(-10);
+//    verticalMotionEffect.maximumRelativeValue = @(10);
+//
+//    // Set horizontal effect
+//    UIInterpolatingMotionEffect *horizontalMotionEffect =
+//    [[UIInterpolatingMotionEffect alloc]
+//     initWithKeyPath:@"center.x"
+//     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+//    horizontalMotionEffect.minimumRelativeValue = @(-10);
+//    horizontalMotionEffect.maximumRelativeValue = @(10);
+//
+//    // Create group to combine both
+//    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+//    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+//
+//    // Add both effects to your view
+//    [self.containerUIView addMotionEffect:group];
+    
+    
      selectedVideo = 0;
    // NSMutableArray  *videoURLArray;
     
@@ -474,40 +497,40 @@
     NSLog(@"matchCode:%@", self.matchCode);
     NSLog(@"matchDetails:%@", self.matchDetails);
     
-    self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
-    self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
-    
-    self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
-    self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
-    
-//    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-//    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
-    self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
-    
-    NSString *key = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
-    
-    if([ key isEqualToString:@"India"])
-    {
-        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
-        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-        
-    }
-    else
-    {
-        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
-        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
-        
-        
-    }
-    
-
-    [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
-    [self.Team2 setTitle:[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0] forState:UIControlStateNormal];
-    
-    [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
-    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    self.competitionTypelbl.text = [[self.matchDetails valueForKey:@"Competition"] objectAtIndex:0];
+//    self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
+//
+//    self.teamAlbl.text = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
+//    self.teamBlbl.text = [[self.matchDetails valueForKey:@"team2"] objectAtIndex:0];
+//
+////    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+////    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+//    self.groundlbl.text = [[self.matchDetails valueForKey:@"ground"] objectAtIndex:0];
+//
+//    NSString *key = [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0];
+//
+//    if([ key isEqualToString:@"India"])
+//    {
+//        self.teamAlogo.image = [UIImage imageNamed:@"Indialogo"];
+//        self.teamBlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+//
+//    }
+//    else
+//    {
+//        self.teamAlogo.image = [UIImage imageNamed:@"Srilankalogo"];
+//        self.teamBlogo.image = [UIImage imageNamed:@"Indialogo"];
+//
+//
+//    }
+//
+//
+//    [self.Team1 setTitle:[[self.matchDetails valueForKey:@"team1"] objectAtIndex:0] forState:UIControlStateNormal];
+//    [self.Team2 setTitle:[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0] forState:UIControlStateNormal];
+//
+//    [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+//    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     self.popTbl.hidden=YES;
     [self ScoreWebservice];
 
@@ -669,8 +692,8 @@
             
             cell=[[ScoreCardCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
-        [cell setBackgroundColor:[UIColor lightGrayColor]];
-        [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
+        //[cell setBackgroundColor:[UIColor lightGrayColor]];
+        //[cell setAccessibilityTraits:UIAccessibilityTraitSelected];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -704,510 +727,512 @@
         [[cell foursBtn] setTag:[indexPath row]];
         [[cell sixesBtn] setTag:[indexPath row]];
         [[cell dotsBtn] setTag:[indexPath row]];
+        [[cell wktsBtn] setTag:[indexPath row]];
         
         [cell.runsBtn addTarget:self action:@selector(myActionRuns:) forControlEvents:UIControlEventTouchUpInside];
         [cell.ballsBtn addTarget:self action:@selector(myActionBalls:) forControlEvents:UIControlEventTouchUpInside];
         [cell.foursBtn addTarget:self action:@selector(myActionFours:) forControlEvents:UIControlEventTouchUpInside];
         [cell.sixesBtn addTarget:self action:@selector(myActionSixes:) forControlEvents:UIControlEventTouchUpInside];
         [cell.dotsBtn addTarget:self action:@selector(myActionDots:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.wktsBtn addTarget:self action:@selector(myActionplayerWkt:) forControlEvents:UIControlEventTouchUpInside];
         
         
         //wagon wheel
-        if(self.wagonWheelDrawData.count>0)
-        {
-            //for(int i=0;i<self.wagonWheelDrawData.count;i++)
-
-              NSMutableArray *sepArray = [[NSMutableArray alloc]init];
-              sepArray= [[self.wagonWheelDrawData valueForKey:@"Value"]objectAtIndex:indexPath.row];
-        
-            if(![sepArray isEqual:[NSNull null]])
-            {
-
-            for(int i=0;sepArray.count>i;i++)
-            {
-                for (CALayer *layer in cell.WagonImg.layer.sublayers) {
-                    if ([layer.name isEqualToString:@"DrawLine"]) {
-                        [layer removeFromSuperlayer];
-                        break;
-                    }
-                }
-            }
-            
-            
-            //[self HideLable];
-            int x1position;
-            int y1position;
-            int x2position;
-            int y2position;
-            
-            int BASE_X = 280;
-            
-        NSMutableArray *onescount = [[NSMutableArray alloc]init];
-        NSMutableArray *twoscount = [[NSMutableArray alloc]init];
-        NSMutableArray *threescount = [[NSMutableArray alloc]init];
-        NSMutableArray *fourscount = [[NSMutableArray alloc]init];
-        NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
-       
-
-            for(int i=0; i<sepArray.count;i++)
-            {
-                //SpiderWagonRecords * objRecord =(SpiderWagonRecords *)[_spiderWagonArray objectAtIndex:i];
-                
-                
+//        if(self.wagonWheelDrawData.count>0)
+//        {
+//            //for(int i=0;i<self.wagonWheelDrawData.count;i++)
+//
+//              NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+//              sepArray= [[self.wagonWheelDrawData valueForKey:@"Value"]objectAtIndex:indexPath.row];
+//
+//            if(![sepArray isEqual:[NSNull null]])
+//            {
+//
+//            for(int i=0;sepArray.count>i;i++)
+//            {
+//                for (CALayer *layer in cell.WagonImg.layer.sublayers) {
+//                    if ([layer.name isEqualToString:@"DrawLine"]) {
+//                        [layer removeFromSuperlayer];
+//                        break;
+//                    }
+//                }
+//            }
+//
+//
+//            //[self HideLable];
+//            int x1position;
+//            int y1position;
+//            int x2position;
+//            int y2position;
+//
+//            int BASE_X = 280;
+//
+//        NSMutableArray *onescount = [[NSMutableArray alloc]init];
+//        NSMutableArray *twoscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *threescount = [[NSMutableArray alloc]init];
+//        NSMutableArray *fourscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *sixscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+//
+//
+//            for(int i=0; i<sepArray.count;i++)
+//            {
+//                //SpiderWagonRecords * objRecord =(SpiderWagonRecords *)[_spiderWagonArray objectAtIndex:i];
+//
+//
+////                if(IS_IPHONE_DEVICE)
+////                {
+////                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
+////                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
+////                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
+////                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+////                }
+////
+////                else
+////                {
+////                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
+////                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
+////                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-70;
+////                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-70;
+////
+////                }
+////
+////
+////                self.selectRuns =[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
+////
+////                int Xposition = x1position-60;
+////                int Yposition = y1position-40;
+////
+////
+////                CGMutablePathRef straightLinePath = CGPathCreateMutable();
+////                CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+////                CGPathAddLineToPoint(straightLinePath, NULL,(x2position/2)+60,(y2position/2)+60);
+//
 //                if(IS_IPHONE_DEVICE)
 //                {
-//                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
-//                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
-//                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
-//                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+////                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
+////                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
+////                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
+////                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
+//
+//                    x1position = 65;
+//                    y1position = 55;
+//
+//                    x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
+//                    y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
 //                }
-//                
+//
 //                else
 //                {
-//                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
-//                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
-//                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-70;
-//                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-70;
-//                    
+////                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
+////                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
+////                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue];
+//  //                  y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue];
+//
+//                    x1position = 100;
+//                    y1position = 84.7;
+////                    x2position  =196;
+////                    y2position  =109;
+//
+//                    x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
+//                    y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
+//
+//
 //                }
-//                
-//                
+//
+//
 //                self.selectRuns =[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
-//            
-//                int Xposition = x1position-60;
-//                int Yposition = y1position-40;
-//                
-//                
+//
+//                int Xposition = x1position;
+//                int Yposition = y1position;
+//
+//
 //                CGMutablePathRef straightLinePath = CGPathCreateMutable();
 //                CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-//                CGPathAddLineToPoint(straightLinePath, NULL,(x2position/2)+60,(y2position/2)+60);
-                
-                if(IS_IPHONE_DEVICE)
-                {
-//                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue]-105;
-//                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue]-90;
-//                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-105;
-//                    y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-90;
-                
-                    x1position = 65;
-                    y1position = 55;
-                
-                    x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
-                    y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
-                }
-                
-                else
-                {
-//                    x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
-//                    y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
-//                    x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue];
-  //                  y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue];
-                    
-                    x1position = 100;
-                    y1position = 84.7;
-//                    x2position  =196;
-//                    y2position  =109;
-                    
-                    x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
-                    y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
-                    
-                    
-                }
-                
-                
-                self.selectRuns =[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
-                
-                int Xposition = x1position;
-                int Yposition = y1position;
-                
-                
-                CGMutablePathRef straightLinePath = CGPathCreateMutable();
-                CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-                CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
-
-                
-                CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-                //[shapeLayer setPosition:cell.WagonImg.center];
-                shapeLayer.path = straightLinePath;
-                UIColor *fillColor = [UIColor redColor];
-                shapeLayer.fillColor = fillColor.CGColor;
-                
-                
-                
-                //NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                
-                
-                    if ([self.selectRuns isEqualToString: @"1"]) {
-                        
-                        
-                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                    
-                        [onescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                        NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)onescount.count];
-                        [cell.onesBtn setTitle:ss forState:UIControlStateNormal];
-                    
-                        NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                        
-                        if(isOnes == YES)
-                        {
-                        strokeColor = [self colorWithHexString:color];
-                        }
-                        else
-                        {
-                            strokeColor = [UIColor clearColor];
-                        }
-                    
-                    
-                }else if ([self.selectRuns isEqualToString: @"2"]){
-                    
-                    
-                    //strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
-                    [twoscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)twoscount.count];
-                    [cell.twoBtn setTitle:ss forState:UIControlStateNormal];
-                    
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    //strokeColor = [self colorWithHexString:color];
-                    
-                    if(isTwos == YES)
-                    {
-                        strokeColor = [self colorWithHexString:color];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                    
-                    
-                }else if ([self.selectRuns isEqualToString: @"3"]){
-                    
-                    
-                    //strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                    
-                    [threescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)threescount.count];
-                    [cell.threeBtn setTitle:ss forState:UIControlStateNormal];
-                    
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    
-                   // strokeColor = [self colorWithHexString:color];
-                    if(isThrees == YES)
-                    {
-                        strokeColor = [self colorWithHexString:color];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                    
-                    
-                }else if ([self.selectRuns isEqualToString: @"4"]){
-                    
-                    
-                    //strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                    [fourscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)fourscount.count];
-                    [cell.fourBtn setTitle:ss forState:UIControlStateNormal];
-                    
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    
-                    //strokeColor = [self colorWithHexString:color];
-                    
-                    if(isFours == YES)
-                    {
-                        strokeColor = [self colorWithHexString:color];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                
-                
-//                }else if ([self.selectRuns isEqualToString: @"5"]){
-//                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+//
+//
+//                CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//                //[shapeLayer setPosition:cell.WagonImg.center];
+//                shapeLayer.path = straightLinePath;
+//                UIColor *fillColor = [UIColor redColor];
+//                shapeLayer.fillColor = fillColor.CGColor;
+//
+//
+//
+//                //NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//
+//                    if ([self.selectRuns isEqualToString: @"1"]) {
+//
+//
+//                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//
+//                        [onescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                        NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)onescount.count];
+//                        [cell.onesBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                        NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                        if(isOnes == YES)
+//                        {
+//                        strokeColor = [self colorWithHexString:color];
+//                        }
+//                        else
+//                        {
+//                            strokeColor = [UIColor clearColor];
+//                        }
+//
+//
+//                }else if ([self.selectRuns isEqualToString: @"2"]){
+//
+//
+//                    //strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+//                    [twoscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)twoscount.count];
+//                    [cell.twoBtn setTitle:ss forState:UIControlStateNormal];
+//
 //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-//                    strokeColor = [self colorWithHexString:color];
-                    
-                }else if ([self.selectRuns isEqualToString: @"6"]){
-                    
-                    
-                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                    [sixscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)sixscount.count];
-                    [cell.sixBtn setTitle:ss forState:UIControlStateNormal];
-                    
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    
-                    //strokeColor = [self colorWithHexString:color];
-                    
-                    if(isSixes == YES)
-                    {
-                        strokeColor = [self colorWithHexString:color];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                }
-                else if ([self.selectRuns isEqualToString: @"90"] ){
-                    
-                    
-                    
-                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
-                    [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    //strokeColor = [self colorWithHexString:@"#eee"];
-                    
-                    if(isDotBall == YES)
-                    {
-                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
-                    
-                }
-                else if ([self.selectRuns isEqualToString: @"80"]){
-                    
-                    
-                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                    
-                    if(isWkt == YES)
-                    {
-                        strokeColor = [self colorWithHexString:color];
-                    }
-                    else
-                    {
-                        strokeColor = [UIColor clearColor];
-                    }
-
-                
-                }
-//                else if ([self.selectRuns isEqualToString: @"0"]){
-//                    
-//                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-//                    strokeColor = [self colorWithHexString:color];
-//                    
+//                    //strokeColor = [self colorWithHexString:color];
+//
+//                    if(isTwos == YES)
+//                    {
+//                        strokeColor = [self colorWithHexString:color];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
+//
+//
+//                }else if ([self.selectRuns isEqualToString: @"3"]){
+//
+//
+//                    //strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//
+//                    [threescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)threescount.count];
+//                    [cell.threeBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                   // strokeColor = [self colorWithHexString:color];
+//                    if(isThrees == YES)
+//                    {
+//                        strokeColor = [self colorWithHexString:color];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
+//
+//
+//                }else if ([self.selectRuns isEqualToString: @"4"]){
+//
+//
+//                    //strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                    [fourscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)fourscount.count];
+//                    [cell.fourBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                    //strokeColor = [self colorWithHexString:color];
+//
+//                    if(isFours == YES)
+//                    {
+//                        strokeColor = [self colorWithHexString:color];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
+//
+//
+////                }else if ([self.selectRuns isEqualToString: @"5"]){
+////                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+////                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+////                    strokeColor = [self colorWithHexString:color];
+//
+//                }else if ([self.selectRuns isEqualToString: @"6"]){
+//
+//
+//                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                    [sixscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)sixscount.count];
+//                    [cell.sixBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                    //strokeColor = [self colorWithHexString:color];
+//
+//                    if(isSixes == YES)
+//                    {
+//                        strokeColor = [self colorWithHexString:color];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
 //                }
-
-
-                //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-                //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-                //        }
-                //
-               
-                shapeLayer.strokeColor = strokeColor.CGColor;
-                shapeLayer.lineWidth = 2.0f;
-                shapeLayer.fillRule = kCAFillRuleNonZero;
-                shapeLayer.name = @"DrawLine";
-                [cell.WagonImg.layer addSublayer:shapeLayer];
-                
-                //}
-            }
-            }
-        }
+//                else if ([self.selectRuns isEqualToString: @"90"] ){
+//
+//
+//
+//                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+//                    [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
+//                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                    //strokeColor = [self colorWithHexString:@"#eee"];
+//
+//                    if(isDotBall == YES)
+//                    {
+//                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
+//                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+//
+//                }
+//                else if ([self.selectRuns isEqualToString: @"80"]){
+//
+//
+//                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//                    if(isWkt == YES)
+//                    {
+//                        strokeColor = [self colorWithHexString:color];
+//                    }
+//                    else
+//                    {
+//                        strokeColor = [UIColor clearColor];
+//                    }
+//
+//
+//                }
+////                else if ([self.selectRuns isEqualToString: @"0"]){
+////
+////                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+////                    strokeColor = [self colorWithHexString:color];
+////
+////                }
+//
+//
+//                //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+//                //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+//                //        }
+//                //
+//
+//                shapeLayer.strokeColor = strokeColor.CGColor;
+//                shapeLayer.lineWidth = 2.0f;
+//                shapeLayer.fillRule = kCAFillRuleNonZero;
+//                shapeLayer.name = @"DrawLine";
+//                [cell.WagonImg.layer addSublayer:shapeLayer];
+//
+//                //}
+//            }
+//            }
+//        }
         
                 //pitch map
             
-            if(self.pitchData.count>0)
-            {
-            
-            NSMutableArray *sepArray = [[NSMutableArray alloc]init];
-            sepArray= [[self.pitchData valueForKey:@"Value"]objectAtIndex:indexPath.row];
-                for(UIImageView * obj in [cell.PitchImg subviews])
-                {
-                    NSLog(@"%@",obj);
-                    [obj removeFromSuperview];
-                }
-                
-                
-                int xposition;
-                int yposition;
-                NSMutableArray *dotscount = [[NSMutableArray alloc]init];
-                
-                if(![sepArray isEqual:[NSNull null]])
-                {
-                for(int i=0; i<sepArray.count;i++)
-                {
-                    
-                    //PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
-                    
-                    if(IS_IPHONE_DEVICE)
-                    {
-//                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-90;
-//                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-60;
-                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
-                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
-                    
-                    }
-                    else
-                    {
-                        
-                        
-//                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-83;
-//                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-30;
-                        
-                        
-                        xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*200)-4;
-                        yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*200)-1;
-                        
-                    }
-                    
-                    if([[[self.pitchData valueForKey:@"Battingstyle"]objectAtIndex:indexPath.row] isEqualToString:@"RIGHT"])
-                    {
-                        
-                        cell.PitchImg.image = [UIImage imageNamed:@"Pitchmap"];
-                    }
-                    else
-                    {
-                        cell.PitchImg.image = [UIImage imageNamed:@"PitchmapLefthand"];
-                    }
-                    
-                    NSString * run;
-                        run =([[[sepArray valueForKey:@"Runs"] objectAtIndex:i] isEqualToString:@"0"])?@"":[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
-                    
-                    if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
-                        
-                        Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition,yposition,6, 6)];
-                        //Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                        
-                        Img_ball.layer.cornerRadius =3;
-                        Img_ball.layer.masksToBounds=YES;
-                        if ([run isEqualToString: @"1"]) {
-                            
-                                //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                           // else{
-                                //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                            if(isOnes == YES)
-                            {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-                           // }
-                        }else if ([run isEqualToString: @"2"]){
-                            //Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
-                            if(isTwos == YES)
-                            {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"ff6c00"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-                            
-                        }else if ([run isEqualToString: @"3"]){
-                            //Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                            
-                            if(isThrees == YES)
-                            {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"A305C0"];
-                            }
-                            
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-                            
-                        }else if ([run isEqualToString: @"4"]){
-                            //Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                            if(isFours == YES)
-                            {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"2454f1"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-
-                            
-                        }else if ([run isEqualToString: @"5"]){
-                           // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
-                            if(isFours == YES)
-                            {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-
-                            
-                        }else if ([run isEqualToString: @"6"]){
-                           // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                            
-                            
-                            if(isSixes == YES)
-                            {
-                                Img_ball.backgroundColor = [self colorWithHexString:@"ff00ea"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-
-                            
-                        }else if ([run isEqualToString: @"90"]){
-                            
-                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                            
-                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
-                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
-                            
-                            if(isDotBall == YES)
-                            {
-                                Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-
-                        }
-                        else if ([run isEqualToString: @"80"]){
-                            //ed1d24
-                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                            
-                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
-                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
-                            
-                            if(isWkt == YES)
-                            {
-                                Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
-                            }
-                            else
-                            {
-                                Img_ball.backgroundColor =[UIColor clearColor];
-                            }
-
-                        }
-//                        else if ([run isEqualToString: @"0"]){
-//                            
-//                            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//            if(self.pitchData.count>0)
+//            {
+//
+//            NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+//            sepArray= [[self.pitchData valueForKey:@"Value"]objectAtIndex:indexPath.row];
+//                for(UIImageView * obj in [cell.PitchImg subviews])
+//                {
+//                    NSLog(@"%@",obj);
+//                    [obj removeFromSuperview];
+//                }
+//
+//
+//                int xposition;
+//                int yposition;
+//                NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+//
+//                if(![sepArray isEqual:[NSNull null]])
+//                {
+//                for(int i=0; i<sepArray.count;i++)
+//                {
+//
+//                    //PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
+//
+//                    if(IS_IPHONE_DEVICE)
+//                    {
+////                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-90;
+////                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-60;
+//                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
+//                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
+//
+//                    }
+//                    else
+//                    {
+//
+//
+////                        xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-83;
+////                        yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-30;
+//
+//
+//                        xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*200)-4;
+//                        yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*200)-1;
+//
+//                    }
+//
+//                    if([[[self.pitchData valueForKey:@"Battingstyle"]objectAtIndex:indexPath.row] isEqualToString:@"RIGHT"])
+//                    {
+//
+//                        cell.PitchImg.image = [UIImage imageNamed:@"Pitchmap"];
+//                    }
+//                    else
+//                    {
+//                        cell.PitchImg.image = [UIImage imageNamed:@"PitchmapLefthand"];
+//                    }
+//
+//                    NSString * run;
+//                        run =([[[sepArray valueForKey:@"Runs"] objectAtIndex:i] isEqualToString:@"0"])?@"":[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
+//
+//                    if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
+//
+//                        Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition,yposition,6, 6)];
+//                        //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+//
+//                        Img_ball.layer.cornerRadius =3;
+//                        Img_ball.layer.masksToBounds=YES;
+//                        if ([run isEqualToString: @"1"]) {
+//
+//                                //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                           // else{
+//                                //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//                            if(isOnes == YES)
+//                            {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//                           // }
+//                        }else if ([run isEqualToString: @"2"]){
+//                            //Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+//                            if(isTwos == YES)
+//                            {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"ff6c00"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//                        }else if ([run isEqualToString: @"3"]){
+//                            //Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//
+//                            if(isThrees == YES)
+//                            {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"A305C0"];
+//                            }
+//
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//                        }else if ([run isEqualToString: @"4"]){
+//                            //Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                            if(isFours == YES)
+//                            {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"2454f1"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//
+//                        }else if ([run isEqualToString: @"5"]){
+//                           // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                            if(isFours == YES)
+//                            {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//
+//                        }else if ([run isEqualToString: @"6"]){
+//                           // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//
+//                            if(isSixes == YES)
+//                            {
+//                                Img_ball.backgroundColor = [self colorWithHexString:@"ff00ea"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//
+//                        }else if ([run isEqualToString: @"90"]){
+//
+//                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+//                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                            if(isDotBall == YES)
+//                            {
+//                                Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
 //                        }
-                        
-                        [cell.PitchImg addSubview:Img_ball];
-                        
-                        
-                    }
-                }
-                }
-              }
+//                        else if ([run isEqualToString: @"80"]){
+//                            //ed1d24
+//                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//                            [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                            NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+//                            [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                            if(isWkt == YES)
+//                            {
+//                                Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+//                            }
+//                            else
+//                            {
+//                                Img_ball.backgroundColor =[UIColor clearColor];
+//                            }
+//
+//                        }
+////                        else if ([run isEqualToString: @"0"]){
+////
+////                            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+////                        }
+//
+//                        [cell.PitchImg addSubview:Img_ball];
+//
+//
+//                    }
+//                }
+//                }
+//              }
         
         
         
@@ -1225,8 +1250,8 @@
             cell=[[ScorecardBowlCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
 
-        [cell setBackgroundColor:[UIColor lightGrayColor]];
-        [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
+        //[cell setBackgroundColor:[UIColor lightGrayColor]];
+        //[cell setAccessibilityTraits:UIAccessibilityTraitSelected];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.bowelernamelbl.text = [[CommonArray2 valueForKey:@"BowlerName"] objectAtIndex:indexPath.row];
@@ -1262,448 +1287,448 @@
         
         //wagon wheel
         
-        if(self.wagonWheelDrawData2.count>0)
-        {
-        NSMutableArray *sepArray = [[NSMutableArray alloc]init];
-        sepArray= [[self.wagonWheelDrawData2 valueForKey:@"Value"]objectAtIndex:indexPath.row];
-        if(![sepArray isEqual:[NSNull null]])
-        {
-        for(int i=0;sepArray.count>i;i++)
-        {
-            for (CALayer *layer in cell.WagonImg.layer.sublayers) {
-                if ([layer.name isEqualToString:@"DrawLine"]) {
-                    [layer removeFromSuperlayer];
-                    break;
-                }
-            }
-        }
-        
-        
-        //[self HideLable];
-        int x1position;
-        int y1position;
-        int x2position;
-        int y2position;
-        
-        int BASE_X = 280;
-        NSMutableArray *onescount = [[NSMutableArray alloc]init];
-        NSMutableArray *twoscount = [[NSMutableArray alloc]init];
-        NSMutableArray *threescount = [[NSMutableArray alloc]init];
-        NSMutableArray *fourscount = [[NSMutableArray alloc]init];
-        NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
-        NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
-        
-        for(int i=0; i<sepArray.count;i++)
-        {
-            //SpiderWagonRecords * objRecord =(SpiderWagonRecords *)[_spiderWagonArray objectAtIndex:i];
-            
-            
-            if(IS_IPHONE_DEVICE)
-            {
-                x1position = 65;
-                y1position = 55;
-            
-                x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
-                y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
-            }
-            
-            else
-            {
-//                x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
-//                y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
-//                x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-40;
-//                y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-80;
-                
-                x1position = 100;
-                y1position = 84.7;
-                //                    x2position  =196;
-                //                    y2position  =109;
-                
-                x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
-                y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
-                
-            }
-            
-            self.selectRuns =[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
-            
-            
-            
-            int Xposition = x1position;
-            int Yposition = y1position;
-            
-            
-            CGMutablePathRef straightLinePath = CGPathCreateMutable();
-            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
-            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-            //[shapeLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(Xposition, Xposition, 200, 2)] CGPath]];
-            shapeLayer.path = straightLinePath;
-            UIColor *fillColor = [UIColor redColor];
-            shapeLayer.fillColor = fillColor.CGColor;
-            
-            
-            //NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-            
-            
-            if ([self.selectRuns isEqualToString: @"1"]) {
-                
-                
-                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                
-                [onescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)onescount.count];
-                [cell.onesBtn setTitle:ss forState:UIControlStateNormal];
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                
-                if(isOnes == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                
-            }else if ([self.selectRuns isEqualToString: @"2"]){
-                
-                
-                //strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
-                [twoscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)twoscount.count];
-                [cell.twoBtn setTitle:ss forState:UIControlStateNormal];
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                //strokeColor = [self colorWithHexString:color];
-                
-                if(isTwos == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                
-                
-            }else if ([self.selectRuns isEqualToString: @"3"]){
-                
-                
-                //strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                
-                [threescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)threescount.count];
-                [cell.threeBtn setTitle:ss forState:UIControlStateNormal];
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                
-                // strokeColor = [self colorWithHexString:color];
-                if(isThrees == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                
-                
-            }else if ([self.selectRuns isEqualToString: @"4"]){
-                
-                
-                //strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                [fourscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)fourscount.count];
-                [cell.fourBtn setTitle:ss forState:UIControlStateNormal];
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                
-                //strokeColor = [self colorWithHexString:color];
-                
-                if(isFours == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                
-                
-                //                }else if ([self.selectRuns isEqualToString: @"5"]){
-                //                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
-                //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                //                    strokeColor = [self colorWithHexString:color];
-                
-            }else if ([self.selectRuns isEqualToString: @"6"]){
-                
-                
-                // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                [sixscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)sixscount.count];
-                [cell.sixBtn setTitle:ss forState:UIControlStateNormal];
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                
-                //strokeColor = [self colorWithHexString:color];
-                
-                if(isSixes == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-            }
-            else if ([self.selectRuns isEqualToString: @"90"]){
-                
-                
-                
-                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
-                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
-                [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                //strokeColor = [self colorWithHexString:@"#eee"];
-                
-                if(isDotBall == YES)
-                {
-                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
-                
-            }
-            else if ([self.selectRuns isEqualToString: @"80"]){
-                
-                
-                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
-                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                
-                if(isWkt == YES)
-                {
-                    strokeColor = [self colorWithHexString:color];
-                }
-                else
-                {
-                    strokeColor = [UIColor clearColor];
-                }
-                
-                
-            }//            else if ([self.selectRuns isEqualToString: @"0"]){
+//        if(self.wagonWheelDrawData2.count>0)
+//        {
+//        NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+//        sepArray= [[self.wagonWheelDrawData2 valueForKey:@"Value"]objectAtIndex:indexPath.row];
+//        if(![sepArray isEqual:[NSNull null]])
+//        {
+//        for(int i=0;sepArray.count>i;i++)
+//        {
+//            for (CALayer *layer in cell.WagonImg.layer.sublayers) {
+//                if ([layer.name isEqualToString:@"DrawLine"]) {
+//                    [layer removeFromSuperlayer];
+//                    break;
+//                }
+//            }
+//        }
 //
-//                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-//                strokeColor = [self colorWithHexString:color];
+//
+//        //[self HideLable];
+//        int x1position;
+//        int y1position;
+//        int x2position;
+//        int y2position;
+//
+//        int BASE_X = 280;
+//        NSMutableArray *onescount = [[NSMutableArray alloc]init];
+//        NSMutableArray *twoscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *threescount = [[NSMutableArray alloc]init];
+//        NSMutableArray *fourscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *sixscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+//        NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
+//
+//        for(int i=0; i<sepArray.count;i++)
+//        {
+//            //SpiderWagonRecords * objRecord =(SpiderWagonRecords *)[_spiderWagonArray objectAtIndex:i];
+//
+//
+//            if(IS_IPHONE_DEVICE)
+//            {
+//                x1position = 65;
+//                y1position = 55;
+//
+//                x2position  = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*130);
+//                y2position  = (([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*130);
+//            }
+//
+//            else
+//            {
+////                x1position = [[[sepArray valueForKey:@"WWX1"] objectAtIndex:i] intValue];
+////                y1position = [[[sepArray valueForKey:@"WWY1"] objectAtIndex:i] intValue];
+////                x2position  =[[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] intValue]-40;
+////                y2position  =[[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] intValue]-80;
+//
+//                x1position = 100;
+//                y1position = 84.7;
+//                //                    x2position  =196;
+//                //                    y2position  =109;
+//
+//                x2position = (([[[sepArray valueForKey:@"WWX2"] objectAtIndex:i] floatValue ]/322)*200);
+//                y2position = ([[[sepArray valueForKey:@"WWY2"] objectAtIndex:i] floatValue]/284)*200;
 //
 //            }
-            
-            
-            //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-            //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-            //        }
-            //
-            shapeLayer.strokeColor = strokeColor.CGColor;
-            shapeLayer.lineWidth = 2.0f;
-            shapeLayer.fillRule = kCAFillRuleNonZero;
-            shapeLayer.name = @"DrawLine";
-            [cell.WagonImg.layer addSublayer:shapeLayer];
-            
-            //}
-            
-           
-        }
-        }
-        }
-        
-                 //pitch map
-           if(self.pitchData2.count>0)
-           {
-               NSMutableArray *sepArray = [[NSMutableArray alloc]init];
-               sepArray= [[self.pitchData2 valueForKey:@"Value"]objectAtIndex:indexPath.row];
-               
-            for(UIImageView * obj in [cell.PitchImg subviews])
-            {
-                NSLog(@"%@",obj);
-                [obj removeFromSuperview];
-            }
-            
-            
-            int xposition;
-            int yposition;
-            
-               if(![sepArray isEqual:[NSNull null]])
-               {
-
-            for(int i=0; i<sepArray.count;i++)
-            {
-                //PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
-                
-                if(IS_IPHONE_DEVICE)
-                {
-                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
-                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
-                }
-                else
-                {
-                    
-                    
-//                    xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-97;
-//                    yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-25;
-                    
-                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*200)-4;
-                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*200)-1;
-                    
-                }
-                
-                
-//                if([[[self.pitchData2 valueForKey:@"Battingstyle"] objectAtIndex:indexPath.row] isEqualToString:@"RIGHT"])
+//
+//            self.selectRuns =[[sepArray valueForKey:@"Runs"] objectAtIndex:i];
+//
+//
+//
+//            int Xposition = x1position;
+//            int Yposition = y1position;
+//
+//
+//            CGMutablePathRef straightLinePath = CGPathCreateMutable();
+//            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+//            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+//            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//            //[shapeLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(Xposition, Xposition, 200, 2)] CGPath]];
+//            shapeLayer.path = straightLinePath;
+//            UIColor *fillColor = [UIColor redColor];
+//            shapeLayer.fillColor = fillColor.CGColor;
+//
+//
+//            //NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//
+//            if ([self.selectRuns isEqualToString: @"1"]) {
+//
+//
+//                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//
+//                [onescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)onescount.count];
+//                [cell.onesBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                if(isOnes == YES)
 //                {
-//                    
-//                    cell.PitchImg.image = [UIImage imageNamed:@"Pitchmap"];
+//                    strokeColor = [self colorWithHexString:color];
 //                }
 //                else
 //                {
-//                    cell.PitchImg.image = [UIImage imageNamed:@"PitchmapLefthand"];
+//                    strokeColor = [UIColor clearColor];
 //                }
 //
-                
-                
-                
-                NSString * run;
-                run =[[sepArray valueForKey:@"Runs"] objectAtIndex:i] ;
-                
-                if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
-                    
-                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+7,yposition,6, 6)];
-                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                    
-                    Img_ball.layer.cornerRadius =3;
-                    Img_ball.layer.masksToBounds=YES;
-                    if ([run isEqualToString: @"1"]) {
-                        
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        // else{
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                        if(isOnes == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        // }
-                    }else if ([run isEqualToString: @"2"]){
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
-                        if(isTwos == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"ff6c00"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                    }else if ([run isEqualToString: @"3"]){
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                        
-                        if(isThrees == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"A305C0"];
-                        }
-                        
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                    }else if ([run isEqualToString: @"4"]){
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                        if(isFours == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"2454f1"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                        
-                    }else if ([run isEqualToString: @"5"]){
-                        // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
-                        if(isFours == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                        
-                    }else if ([run isEqualToString: @"6"]){
-                        // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                        
-                        if(isSixes == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"ff00ea"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                        
-                    }else if ([run isEqualToString: @"90"]){
-                        
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                        
-                        if(isDotBall == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                    }
-                    else if ([run isEqualToString: @"80"]){
-                        //ed1d24
-                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                        
-                        
-                        if(isWkt == YES)
-                        {
-                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
-                        }
-                        else
-                        {
-                            Img_ball.backgroundColor =[UIColor clearColor];
-                        }
-                        
-                    }
-                    [cell.PitchImg addSubview:Img_ball];
-                    
-                    
-                }
-            }
-           }
-        }
+//
+//            }else if ([self.selectRuns isEqualToString: @"2"]){
+//
+//
+//                //strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+//                [twoscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)twoscount.count];
+//                [cell.twoBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                //strokeColor = [self colorWithHexString:color];
+//
+//                if(isTwos == YES)
+//                {
+//                    strokeColor = [self colorWithHexString:color];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//
+//
+//            }else if ([self.selectRuns isEqualToString: @"3"]){
+//
+//
+//                //strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//
+//                [threescount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)threescount.count];
+//                [cell.threeBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                // strokeColor = [self colorWithHexString:color];
+//                if(isThrees == YES)
+//                {
+//                    strokeColor = [self colorWithHexString:color];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//
+//
+//            }else if ([self.selectRuns isEqualToString: @"4"]){
+//
+//
+//                //strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                [fourscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)fourscount.count];
+//                [cell.fourBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                //strokeColor = [self colorWithHexString:color];
+//
+//                if(isFours == YES)
+//                {
+//                    strokeColor = [self colorWithHexString:color];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//
+//
+//                //                }else if ([self.selectRuns isEqualToString: @"5"]){
+//                //                   // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                //                    strokeColor = [self colorWithHexString:color];
+//
+//            }else if ([self.selectRuns isEqualToString: @"6"]){
+//
+//
+//                // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                [sixscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)sixscount.count];
+//                [cell.sixBtn setTitle:ss forState:UIControlStateNormal];
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//
+//                //strokeColor = [self colorWithHexString:color];
+//
+//                if(isSixes == YES)
+//                {
+//                    strokeColor = [self colorWithHexString:color];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//            }
+//            else if ([self.selectRuns isEqualToString: @"90"]){
+//
+//
+//
+//                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+//                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+//                [cell.dotBtn setTitle:ss forState:UIControlStateNormal];
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                //strokeColor = [self colorWithHexString:@"#eee"];
+//
+//                if(isDotBall == YES)
+//                {
+//                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//                //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+//
+//            }
+//            else if ([self.selectRuns isEqualToString: @"80"]){
+//
+//
+//                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+//                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//                if(isWkt == YES)
+//                {
+//                    strokeColor = [self colorWithHexString:color];
+//                }
+//                else
+//                {
+//                    strokeColor = [UIColor clearColor];
+//                }
+//
+//
+//            }//            else if ([self.selectRuns isEqualToString: @"0"]){
+////
+////                //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+////                strokeColor = [self colorWithHexString:color];
+////
+////            }
+//
+//
+//            //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+//            //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+//            //        }
+//            //
+//            shapeLayer.strokeColor = strokeColor.CGColor;
+//            shapeLayer.lineWidth = 2.0f;
+//            shapeLayer.fillRule = kCAFillRuleNonZero;
+//            shapeLayer.name = @"DrawLine";
+//            [cell.WagonImg.layer addSublayer:shapeLayer];
+//
+//            //}
+//
+//
+//        }
+//        }
+//        }
+        
+                 //pitch map
+//           if(self.pitchData2.count>0)
+//           {
+//               NSMutableArray *sepArray = [[NSMutableArray alloc]init];
+//               sepArray= [[self.pitchData2 valueForKey:@"Value"]objectAtIndex:indexPath.row];
+//
+//            for(UIImageView * obj in [cell.PitchImg subviews])
+//            {
+//                NSLog(@"%@",obj);
+//                [obj removeFromSuperview];
+//            }
+//
+//
+//            int xposition;
+//            int yposition;
+//
+//               if(![sepArray isEqual:[NSNull null]])
+//               {
+//
+//            for(int i=0; i<sepArray.count;i++)
+//            {
+//                //PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
+//
+//                if(IS_IPHONE_DEVICE)
+//                {
+//                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*130)-4;
+//                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*130)-1;
+//                }
+//                else
+//                {
+//
+//
+////                    xposition = [[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] intValue]-97;
+////                    yposition = [[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] intValue]-25;
+//
+//                    xposition = (([[[sepArray valueForKey:@"PMX2"] objectAtIndex:i] floatValue ]/380)*200)-4;
+//                    yposition = (([[[sepArray valueForKey:@"PMY2"] objectAtIndex:i] floatValue]/295)*200)-1;
+//
+//                }
+//
+//
+////                if([[[self.pitchData2 valueForKey:@"Battingstyle"] objectAtIndex:indexPath.row] isEqualToString:@"RIGHT"])
+////                {
+////
+////                    cell.PitchImg.image = [UIImage imageNamed:@"Pitchmap"];
+////                }
+////                else
+////                {
+////                    cell.PitchImg.image = [UIImage imageNamed:@"PitchmapLefthand"];
+////                }
+////
+//
+//
+//
+//                NSString * run;
+//                run =[[sepArray valueForKey:@"Runs"] objectAtIndex:i] ;
+//
+//                if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
+//
+//                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+7,yposition,6, 6)];
+//                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+//
+//                    Img_ball.layer.cornerRadius =3;
+//                    Img_ball.layer.masksToBounds=YES;
+//                    if ([run isEqualToString: @"1"]) {
+//
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        // else{
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//                        if(isOnes == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//                        // }
+//                    }else if ([run isEqualToString: @"2"]){
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+//                        if(isTwos == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"ff6c00"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//                    }else if ([run isEqualToString: @"3"]){
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//
+//                        if(isThrees == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"A305C0"];
+//                        }
+//
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//                    }else if ([run isEqualToString: @"4"]){
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                        if(isFours == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"2454f1"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//
+//                    }else if ([run isEqualToString: @"5"]){
+//                        // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                        if(isFours == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"22beef"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//
+//                    }else if ([run isEqualToString: @"6"]){
+//                        // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//
+//                        if(isSixes == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"ff00ea"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//
+//                    }else if ([run isEqualToString: @"90"]){
+//
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//
+//                        if(isDotBall == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//                    }
+//                    else if ([run isEqualToString: @"80"]){
+//                        //ed1d24
+//                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//
+//
+//
+//                        if(isWkt == YES)
+//                        {
+//                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+//                        }
+//                        else
+//                        {
+//                            Img_ball.backgroundColor =[UIColor clearColor];
+//                        }
+//
+//                    }
+//                    [cell.PitchImg addSubview:Img_ball];
+//
+//
+//                }
+//            }
+//           }
+//        }
 
         return cell;
         
@@ -1800,6 +1825,22 @@
     
 }
 
+-(IBAction)myActionplayerWkt:(id)sender
+{
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    ScoreCardCell * cell = [self.listTbl cellForRowAtIndexPath:indexPath];
+    
+    //NSLog(@"%@",[[CommonArray valueForKey:@"BowlerCode"] objectAtIndex:indexPath.row]);
+    // NSLog(@"Selected row: %ld", (long)indexPath.row);
+    //......
+    
+    NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
+    
+    // [self loadVideoPaths:Batsmancode :@"WKT" :@"BOWLING"];
+    [self loadVideoPlayer:Batsmancode :@"WKT" :@"BATTING" innings:innno];
+    
+}
 
 -(IBAction)myActionOversBowling:(id)sender
 {
@@ -1834,6 +1875,8 @@
     [self loadVideoPlayer:Batsmancode :@"RUNS" :@"BOWLING" innings:innno];
     
 }
+
+
 
 -(IBAction)myActionWktsBowling:(id)sender
 {
@@ -1877,15 +1920,15 @@
     {
         if(indexPath.row ==  selectedIndex)
         {
-            if(IS_IPHONE_DEVICE)
-            {
-                return 220;
-            }
-            else
-            {
-                return 300;
-            }
-                
+//            if(IS_IPHONE_DEVICE)
+//            {
+//                return 220;
+//            }
+//            else
+//            {
+//                return 300;
+//            }
+            
         }
         else
         {
@@ -1915,133 +1958,134 @@
 {
     
     
-    if(tableView == self.listTbl)
-    {
-        static NSString *MyIdentifier = @"MyIdentifier";
-        
-        ScoreCardCell *cell = [self.listTbl dequeueReusableCellWithIdentifier:MyIdentifier];
-        
-        [self.listTbl beginUpdates];
-        
-        
-        if(indexPath.row == selectedIndex)
-        {
-            selectedIndex = -1;
-            
-            lastIndex = NULL;
-            
-            isOnes = YES;
-            isTwos = YES;
-            isThrees = YES;
-            isFours = YES;
-            isSixes = YES;
-            isWkt = YES;
-            isDotBall = YES;
-            
-        }
-        else
-        {
-            
-            if(lastIndex != nil){
-                
-                [self.listTbl reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                isSelected =YES;
-                
-                isOnes = YES;
-                isTwos = YES;
-                isThrees = YES;
-                isFours = YES;
-                isSixes = YES;
-                isWkt = YES;
-                isDotBall = YES;
-                
-                //self.tableHeight.constant = self.listTbl.frame.size.height-300;
-                
-                // self.tableHeight.constant = self.listTbl.frame.size.height300;
-                // [self.listTbl reloadData];
-            }
-            
-            lastIndex = indexPath;
-            selectedIndex = indexPath.row;
-            
-        }
-        [self.listTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-       // self.tableYposition.constant = 0;
-        [self.listTbl endUpdates];
-        
-        [self.listTbl reloadData];
-        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-        self.tableHeight.constant = height;
-        [self.view layoutIfNeeded];
-        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-        self.tableHeight2.constant = height1;
-        [self.view layoutIfNeeded];
-        
-    }
+//    if(tableView == self.listTbl)
+//    {
+//
+//        static NSString *MyIdentifier = @"MyIdentifier";
+//
+//        ScoreCardCell *cell = [self.listTbl dequeueReusableCellWithIdentifier:MyIdentifier];
+//
+//        [self.listTbl beginUpdates];
+//
+//
+//        if(indexPath.row == selectedIndex)
+//        {
+//            selectedIndex = -1;
+//
+//            lastIndex = NULL;
+//
+//            isOnes = YES;
+//            isTwos = YES;
+//            isThrees = YES;
+//            isFours = YES;
+//            isSixes = YES;
+//            isWkt = YES;
+//            isDotBall = YES;
+//
+//        }
+//        else
+//        {
+//
+//            if(lastIndex != nil){
+//
+//                [self.listTbl reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+//                isSelected =YES;
+//
+//                isOnes = YES;
+//                isTwos = YES;
+//                isThrees = YES;
+//                isFours = YES;
+//                isSixes = YES;
+//                isWkt = YES;
+//                isDotBall = YES;
+//
+//                //self.tableHeight.constant = self.listTbl.frame.size.height-300;
+//
+//                // self.tableHeight.constant = self.listTbl.frame.size.height300;
+//                // [self.listTbl reloadData];
+//            }
+//
+//            lastIndex = indexPath;
+//            selectedIndex = indexPath.row;
+//
+//        }
+//        [self.listTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//
+//       // self.tableYposition.constant = 0;
+//        [self.listTbl endUpdates];
+//
+//        [self.listTbl reloadData];
+//        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
+//        self.tableHeight.constant = height;
+//        [self.view layoutIfNeeded];
+//        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
+//        self.tableHeight2.constant = height1;
+//        [self.view layoutIfNeeded];
+//
+//    }
     
     
-    if(tableView == self.bowlingTbl)
-    {
-        static NSString *MyIdentifier = @"myid";
-        
-        ScorecardBowlCell *cell = [self.bowlingTbl dequeueReusableCellWithIdentifier:MyIdentifier];
-        
-        [self.bowlingTbl beginUpdates];
-        if(indexPath.row == selectedIndex)
-        {
-            selectedIndex = -1;
-            lastIndex = NULL;
-            
-            isOnes = YES;
-            isTwos = YES;
-            isThrees = YES;
-            isFours = YES;
-            isSixes = YES;
-            isWkt = YES;
-            isDotBall = YES;
-        }
-        else
-        {
-            
-            if(lastIndex != nil){
-                
-                
-                
-                [self.bowlingTbl reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                isSelected =YES;
-                
-                
-                isOnes = YES;
-                isTwos = YES;
-                isThrees = YES;
-                isFours = YES;
-                isSixes = YES;
-                isWkt = YES;
-                isDotBall = YES;
-                
-                
-            }
-            lastIndex = indexPath;
-            selectedIndex = indexPath.row;
-            
-        }
-        
-        [self.bowlingTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        
-        
-        [self.bowlingTbl endUpdates];
-        [self.bowlingTbl reloadData];
-      
-        
-        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-        self.tableHeight.constant = height;
-        [self.view layoutIfNeeded];
-        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-        self.tableHeight2.constant = height1;
-        [self.view layoutIfNeeded];
-    }
+//    if(tableView == self.bowlingTbl)
+//    {
+//        static NSString *MyIdentifier = @"myid";
+//
+//        ScorecardBowlCell *cell = [self.bowlingTbl dequeueReusableCellWithIdentifier:MyIdentifier];
+//
+//        [self.bowlingTbl beginUpdates];
+//        if(indexPath.row == selectedIndex)
+//        {
+//            selectedIndex = -1;
+//            lastIndex = NULL;
+//
+//            isOnes = YES;
+//            isTwos = YES;
+//            isThrees = YES;
+//            isFours = YES;
+//            isSixes = YES;
+//            isWkt = YES;
+//            isDotBall = YES;
+//        }
+//        else
+//        {
+//
+//            if(lastIndex != nil){
+//
+//
+//
+//                [self.bowlingTbl reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+//                isSelected =YES;
+//
+//
+//                isOnes = YES;
+//                isTwos = YES;
+//                isThrees = YES;
+//                isFours = YES;
+//                isSixes = YES;
+//                isWkt = YES;
+//                isDotBall = YES;
+//
+//
+//            }
+//            lastIndex = indexPath;
+//            selectedIndex = indexPath.row;
+//
+//        }
+//
+//        [self.bowlingTbl reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//
+//
+//
+//        [self.bowlingTbl endUpdates];
+//        [self.bowlingTbl reloadData];
+//
+//
+//        CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
+//        self.tableHeight.constant = height;
+//        [self.view layoutIfNeeded];
+//        CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
+//        self.tableHeight2.constant = height1;
+//        [self.view layoutIfNeeded];
+//    }
     if(tableView == self.popTbl)
     {
         //isPoP = NO;
@@ -2127,28 +2171,28 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if(tableView== self.listTbl ||tableView== self.bowlingTbl )
-    {
-        if (selectedIndex == indexPath.row)
-        {
-
-            [cell setBackgroundColor:[UIColor lightGrayColor]];
-            [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
-        }
-        else
-        {
-            [cell setBackgroundColor:[UIColor clearColor]];
-            [cell setAccessibilityTraits:0];
-            
-        }
-
-    }
-    else if(tableView == self.popTbl)
-    {
-        [cell setBackgroundColor:[UIColor clearColor]];
-        [cell setAccessibilityTraits:0];
-       
-    }
+//    if(tableView== self.listTbl ||tableView== self.bowlingTbl )
+//    {
+//        if (selectedIndex == indexPath.row)
+//        {
+//
+//            [cell setBackgroundColor:[UIColor lightGrayColor]];
+//            [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
+//        }
+//        else
+//        {
+//            [cell setBackgroundColor:[UIColor clearColor]];
+//            [cell setAccessibilityTraits:0];
+//
+//        }
+//
+//    }
+//    else if(tableView == self.popTbl)
+//    {
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        [cell setAccessibilityTraits:0];
+//
+//    }
 
 
 }
@@ -2157,9 +2201,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-    float scrollViewHeight = self.commonScroll.frame.size.height;
+    float scrollViewHeight = scrollView.frame.size.height;
     float scrollContentSizeHeight = self.commonScroll.contentSize.height;
-    float scrollOffset = self.commonScroll.contentOffset.y;
+    float scrollOffset = scrollView.contentOffset.y;
 
 
     if(IS_IPHONE_DEVICE)
@@ -2718,7 +2762,7 @@
 
 -(IBAction)Team1Action:(id)sender
 {
-    [AppCommon showLoading];
+    //[AppCommon showLoading];
     [self buttonclicked:sender];
     NSLog(@"%@", self.Team1);
     [self setInningsBySelection:@"1"];
@@ -2728,67 +2772,67 @@
     CommonArray2 = BowlingDetailsArray1;
     
     //Wagon Wheel and pitchmap Details
-    self.wwd1 = [[NSMutableArray alloc]init];
-    self.ppd1 = [[NSMutableArray alloc]init];
+//    self.wwd1 = [[NSMutableArray alloc]init];
+//    self.ppd1 = [[NSMutableArray alloc]init];
+//
+//    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
+//    {
+//        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
+//        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self WagonWheelWebservice];
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.wwd1 addObject:dict];
+//        }
+//
+//    }
+//
+//    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
+//    {
+//        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
+//        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self PitchmapWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.ppd1 addObject:dict];
+//        }
+//
+//
+//    }
+//
+//    self.Bwwd1 = [[NSMutableArray alloc]init];
+//    self.Bppd1 = [[NSMutableArray alloc]init];
     
-    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-    {
-        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self WagonWheelWebservice];
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.wwd1 addObject:dict];
-        }
-        
-    }
+//    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
+//    {
+//        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
+//        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self WagonWheelbowlWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.Bwwd1 addObject:dict];
+//        }
+//
+//    }
     
-    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-    {
-        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self PitchmapWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.ppd1 addObject:dict];
-        }
-        
-        
-    }
-    
-    self.Bwwd1 = [[NSMutableArray alloc]init];
-    self.Bppd1 = [[NSMutableArray alloc]init];
-    
-    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-    {
-        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self WagonWheelbowlWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.Bwwd1 addObject:dict];
-        }
-        
-    }
-    
-    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-    {
-        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self PitchmapbowlWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.Bppd1 addObject:dict];
-        }
-        
-    }
+//    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
+//    {
+//        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
+//        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self PitchmapbowlWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.Bppd1 addObject:dict];
+//        }
+//
+//    }
     
     //Wagon Wheel and pitchmap Details end
 
@@ -2800,19 +2844,19 @@
     self.didNotbatlbl.text = [[didNotbatArray1 valueForKey:@"PlayerName"] objectAtIndex:0];
     
     
-    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
-    self.pitchData = [[NSMutableArray alloc]init];
-    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
-    self.pitchData2 = [[NSMutableArray alloc]init];
+//    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
+//    self.pitchData = [[NSMutableArray alloc]init];
+//    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
+//    self.pitchData2 = [[NSMutableArray alloc]init];
     
     innno =@"1";
     
     
-    self.wagonWheelDrawData = self.wwd1;
-    self.pitchData = self.ppd1;
-    
-    self.wagonWheelDrawData2 = self.Bwwd1;
-    self.pitchData2 = self.Bppd1;
+//    self.wagonWheelDrawData = self.wwd1;
+//    self.pitchData = self.ppd1;
+//
+//    self.wagonWheelDrawData2 = self.Bwwd1;
+//    self.pitchData2 = self.Bppd1;
 
     
     isOnes = YES;
@@ -2843,7 +2887,7 @@
 
 -(IBAction)Team2Action:(id)sender
 {
-   [AppCommon showLoading];
+  // [AppCommon showLoading];
   
     [self buttonclicked:sender];
     [self setInningsBySelection:@"2"];
@@ -2854,68 +2898,68 @@
     
     
     //Wagon Wheel and pitchmap Details
-    self.wwd2 = [[NSMutableArray alloc]init];
-    self.ppd2 = [[NSMutableArray alloc]init];
-    
-    
-    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-    {
-        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self WagonWheelWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.wwd2 addObject:dict];
-        }
-        
-    }
-    
-    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-    {
-        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self PitchmapWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.ppd2 addObject:dict];
-        }
-        
-    }
-    
-    
-    self.Bwwd2 = [[NSMutableArray alloc]init];
-    self.Bppd2 = [[NSMutableArray alloc]init];
-    
-    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-    {
-        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self WagonWheelbowlWebservice];
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.Bwwd2 addObject:dict];
-        }
-        
-    }
-    
-    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-    {
-        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-        dict = [self PitchmapbowlWebservice];
-        
-        if(![dict isEqual:[NSNull null]])
-        {
-            [self.Bppd2 addObject:dict];
-        }
-        
-    }
+//    self.wwd2 = [[NSMutableArray alloc]init];
+//    self.ppd2 = [[NSMutableArray alloc]init];
+//
+//
+//    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
+//    {
+//        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
+//        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self WagonWheelWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.wwd2 addObject:dict];
+//        }
+//
+//    }
+//
+//    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
+//    {
+//        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
+//        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self PitchmapWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.ppd2 addObject:dict];
+//        }
+//
+//    }
+//
+//
+//    self.Bwwd2 = [[NSMutableArray alloc]init];
+//    self.Bppd2 = [[NSMutableArray alloc]init];
+//
+//    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
+//    {
+//        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
+//        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self WagonWheelbowlWebservice];
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.Bwwd2 addObject:dict];
+//        }
+//
+//    }
+//
+//    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
+//    {
+//        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
+//        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+//        dict = [self PitchmapbowlWebservice];
+//
+//        if(![dict isEqual:[NSNull null]])
+//        {
+//            [self.Bppd2 addObject:dict];
+//        }
+//
+//    }
     
     
     
@@ -2932,15 +2976,15 @@
     self.fallofWicketslbl.text = [fallOfWicketArray2 objectAtIndex:0];
     
     
-    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
-    self.pitchData = [[NSMutableArray alloc]init];
-    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
-    self.pitchData2 = [[NSMutableArray alloc]init];
-
-    self.wagonWheelDrawData = self.wwd2;
-    self.pitchData = self.ppd2;
-    self.wagonWheelDrawData2 = self.Bwwd2;
-    self.pitchData2 = self.Bppd2;
+//    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
+//    self.pitchData = [[NSMutableArray alloc]init];
+//    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
+//    self.pitchData2 = [[NSMutableArray alloc]init];
+//
+//    self.wagonWheelDrawData = self.wwd2;
+//    self.pitchData = self.ppd2;
+//    self.wagonWheelDrawData2 = self.Bwwd2;
+//    self.pitchData2 = self.Bppd2;
 
 
     isOnes = YES;
@@ -3397,7 +3441,7 @@
             if(responseObject >0)
             {
                 
-
+                
                 //first button details
                 NSMutableArray *array1 = [[NSMutableArray alloc]init];
                 array1 = [responseObject valueForKey:@"firstlstFallofWickets"];
@@ -3406,7 +3450,7 @@
                 BatsmanDetailsArray1 = [[NSMutableArray alloc]init];
                 BatsmanDetailsArray1 = [[array1 valueForKey:@"lstSCBatsmanDetails"] objectAtIndex:0];
                 
-    
+                
                 ExtrasArray = [[NSMutableArray alloc]init];
                 ExtrasArray = [[array1 valueForKey:@"SCExtras"] objectAtIndex:0];
                 
@@ -3424,6 +3468,29 @@
                 
                 
                 
+                
+                
+                self.competitionTypelbl.text = [[matchDetailsImageArray valueForKey:@"Tournament"] objectAtIndex:0];
+                self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetails valueForKey:@"result"] objectAtIndex:0]];
+                
+                self.teamAlbl.text = [[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0];
+                self.teamBlbl.text = [[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0];
+                
+                
+                
+                self.teamAScorelbl.text = [[matchDetailsImageArray valueForKey:@"TeamAScore"] objectAtIndex:0];
+                self.teamBScorelbl.text = [[matchDetailsImageArray valueForKey:@"TeamBScore"] objectAtIndex:0];
+                self.groundlbl.text = [[matchDetailsImageArray valueForKey:@"Venue"] objectAtIndex:0];
+                self.resultlbl.text = [[matchDetailsImageArray valueForKey:@"MatchResult"] objectAtIndex:0];
+                
+                
+                [self.Team1 setTitle:[[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                [self.Team2 setTitle:[[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                
+                //                [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+                //                [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
+                //                [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
+                //                [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
                 
                 NSString * imgStr1 = ([[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"]==[NSNull null])?@"":[[matchDetailsImageArray objectAtIndex:0] valueForKey:@"BattingTeamlogo"];
                 NSString *teamAString = [NSString stringWithFormat:@"%@",imgStr1];
@@ -3462,7 +3529,7 @@
                 
                 
                 //second button details
-
+                
                 NSMutableArray *array2 = [[NSMutableArray alloc]init];
                 array2 = [responseObject valueForKey:@"secondlstFallofWickets"];
                 
@@ -3486,28 +3553,28 @@
                 
                 if(![[responseObject valueForKey:@"thirdlstFallofWickets"] isEqual:[NSNull null]])
                 {
-                NSMutableArray *array3 = [[NSMutableArray alloc]init];
-                array3 = [responseObject valueForKey:@"thirdlstFallofWickets"];
+                    NSMutableArray *array3 = [[NSMutableArray alloc]init];
+                    array3 = [responseObject valueForKey:@"thirdlstFallofWickets"];
                     
-                  if(![[array3 valueForKey:@"lstSCBatsmanDetails"] isEqual:[NSNull null]])
-                  {
-                
-                BatsmanDetailsArray3 = [[NSMutableArray alloc]init];
-                BatsmanDetailsArray3 = [[array3 valueForKey:@"lstSCBatsmanDetails"] objectAtIndex:0];
-                
-                
-                ExtrasArray3 = [[NSMutableArray alloc]init];
-                ExtrasArray3 = [[array3 valueForKey:@"SCExtras"] objectAtIndex:0];
-                
-                didNotbatArray3 = [[NSMutableArray alloc]init];
-                didNotbatArray3 = [[array3 valueForKey:@"lstSCDidNotBat"] objectAtIndex:0];
-                
-                fallOfWicketArray3 = [[NSMutableArray alloc]init];
-                fallOfWicketArray3 = [[array3 valueForKey:@"SCFallofWickets"] objectAtIndex:0];
-                
-                BowlingDetailsArray3 = [[NSMutableArray alloc]init];
-                BowlingDetailsArray3 = [[array3 valueForKey:@"lstSEBowlerDetails"] objectAtIndex:0];
-                  }
+                    if(![[array3 valueForKey:@"lstSCBatsmanDetails"] isEqual:[NSNull null]])
+                    {
+                        
+                        BatsmanDetailsArray3 = [[NSMutableArray alloc]init];
+                        BatsmanDetailsArray3 = [[array3 valueForKey:@"lstSCBatsmanDetails"] objectAtIndex:0];
+                        
+                        
+                        ExtrasArray3 = [[NSMutableArray alloc]init];
+                        ExtrasArray3 = [[array3 valueForKey:@"SCExtras"] objectAtIndex:0];
+                        
+                        didNotbatArray3 = [[NSMutableArray alloc]init];
+                        didNotbatArray3 = [[array3 valueForKey:@"lstSCDidNotBat"] objectAtIndex:0];
+                        
+                        fallOfWicketArray3 = [[NSMutableArray alloc]init];
+                        fallOfWicketArray3 = [[array3 valueForKey:@"SCFallofWickets"] objectAtIndex:0];
+                        
+                        BowlingDetailsArray3 = [[NSMutableArray alloc]init];
+                        BowlingDetailsArray3 = [[array3 valueForKey:@"lstSEBowlerDetails"] objectAtIndex:0];
+                    }
                 }
                 
                 
@@ -3516,28 +3583,28 @@
                 
                 if(![[responseObject valueForKey:@"fouthlstFallofWickets"] isEqual:[NSNull null]])
                 {
-                NSMutableArray *array4 = [[NSMutableArray alloc]init];
-                array4 = [responseObject valueForKey:@"fouthlstFallofWickets"];
+                    NSMutableArray *array4 = [[NSMutableArray alloc]init];
+                    array4 = [responseObject valueForKey:@"fouthlstFallofWickets"];
                     
                     if(![[array4 valueForKey:@"lstSCBatsmanDetails"] isEqual:[NSNull null]])
                     {
-                
-                BatsmanDetailsArray4 = [[NSMutableArray alloc]init];
-                BatsmanDetailsArray4 = [[array4 valueForKey:@"lstSCBatsmanDetails"] objectAtIndex:0];
-                
-                
-                ExtrasArray4 = [[NSMutableArray alloc]init];
-                ExtrasArray4 = [[array4 valueForKey:@"SCExtras"] objectAtIndex:0];
-                
-                didNotbatArray4 = [[NSMutableArray alloc]init];
-                didNotbatArray4 = [[array4 valueForKey:@"lstSCDidNotBat"] objectAtIndex:0];
-                
-                fallOfWicketArray4 = [[NSMutableArray alloc]init];
-                fallOfWicketArray4 = [[array4 valueForKey:@"SCFallofWickets"] objectAtIndex:0];
-                
-                BowlingDetailsArray4 = [[NSMutableArray alloc]init];
-                BowlingDetailsArray4 = [[array4 valueForKey:@"lstSEBowlerDetails"] objectAtIndex:0];
-                }
+                        
+                        BatsmanDetailsArray4 = [[NSMutableArray alloc]init];
+                        BatsmanDetailsArray4 = [[array4 valueForKey:@"lstSCBatsmanDetails"] objectAtIndex:0];
+                        
+                        
+                        ExtrasArray4 = [[NSMutableArray alloc]init];
+                        ExtrasArray4 = [[array4 valueForKey:@"SCExtras"] objectAtIndex:0];
+                        
+                        didNotbatArray4 = [[NSMutableArray alloc]init];
+                        didNotbatArray4 = [[array4 valueForKey:@"lstSCDidNotBat"] objectAtIndex:0];
+                        
+                        fallOfWicketArray4 = [[NSMutableArray alloc]init];
+                        fallOfWicketArray4 = [[array4 valueForKey:@"SCFallofWickets"] objectAtIndex:0];
+                        
+                        BowlingDetailsArray4 = [[NSMutableArray alloc]init];
+                        BowlingDetailsArray4 = [[array4 valueForKey:@"lstSEBowlerDetails"] objectAtIndex:0];
+                    }
                 }
                 
                 array = [[NSMutableArray alloc]init];
@@ -3546,8 +3613,8 @@
                 {
                     self.headerUIView.hidden = NO;
                     self.headerUIViewTestmatch.hidden = YES;
-                    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-                    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+                    //self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+                    // self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
                     isTestmatch=NO;
                     [self.Team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
                     
@@ -3558,26 +3625,26 @@
                     self.headerUIViewTestmatch.hidden = NO;
                     [self.Inn4 setUserInteractionEnabled:NO];
                     [self.Inn4 setTitle:[NSString stringWithFormat:@""] forState:UIControlStateNormal];
-                    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-                    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
-                    self.teamAinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn3Score"] objectAtIndex:0];
+                    //self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+                    //self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+                    //self.teamAinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn3Score"] objectAtIndex:0];
                     //self.teamBinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn4Score"] objectAtIndex:0];
                     isTestmatch=YES;
                     [self.Inn1 sendActionsForControlEvents:UIControlEventTouchUpInside];
                 }
-
+                
                 if(array.count==4)
                 {
                     self.headerUIView.hidden = YES;
                     self.headerUIViewTestmatch.hidden = NO;
-                    self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
-                    self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
-                    self.teamAinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn3Score"] objectAtIndex:0];
-                    self.teamBinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn4Score"] objectAtIndex:0];
+                    //self.teamAScorelbl.text = [[self.matchDetails valueForKey:@"Inn1Score"] objectAtIndex:0];
+                    //self.teamBScorelbl.text = [[self.matchDetails valueForKey:@"Inn2Score"] objectAtIndex:0];
+                    //self.teamAinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn3Score"] objectAtIndex:0];
+                    //self.teamBinn2Scorelbl.text = [[self.matchDetails valueForKey:@"Inn4Score"] objectAtIndex:0];
                     isTestmatch=YES;
                     [self.Inn1 sendActionsForControlEvents:UIControlEventTouchUpInside];
                 }
-
+                
                 
                 
                 

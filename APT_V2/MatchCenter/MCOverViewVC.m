@@ -346,6 +346,75 @@
             
            
         }
+        else{
+            
+            self.Teamnamelbl.text = @"";
+            
+            NSString *groundDetails = @"";
+            self.Groundmnamelbl.text = @"";
+            self.Captainnamelbl.text = @"";
+            
+            
+            
+            NSString * photourl = @"";
+            
+            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    self.TeamImgView.image = image;
+                    
+                    // cache the image for use later (when scrolling up)
+                    self.TeamImgView.image = image;
+                }
+                else
+                {
+                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
+                }
+            }];
+            
+            
+           
+                self.moreBtn.hidden = YES;
+            
+            
+            
+            
+            self.TotalMatcheslbl.text =  @"";
+            
+            self.winLosslbl.text = @"";
+            NSString *wincount = @"";
+            self.winLossCountlbl.text =@"";
+            
+            self.Forlbl.text = @"";
+            NSString *forcount = @"";
+            self.ForCountlbl.text =@"";
+            
+            
+            self.Againstlbl.text = @"";
+            NSString *Againstcount = @"";
+            self.AgainstCountlbl.text =@"";
+            
+            self.nrrlbl.text = @"";
+            
+            NSString *wkts = @"";
+            self.Wktslbl.text = @"";
+            
+            BatsmenArray = [[NSMutableArray alloc]init];
+            
+            
+            BowlersArray = [[NSMutableArray alloc]init];
+            
+            
+            FieldersArray = [[NSMutableArray alloc]init];
+           
+            recentMatchesArray =[[NSMutableArray alloc]init];
+            [self.resultCollectionView reloadData];
+            
+            CommonArray = [[NSMutableArray alloc]init];
+            [self SetValuesOfTopPlayers:CommonArray];
+            
+            
+        }
         [AppCommon hideLoading];
         
     }
@@ -600,7 +669,9 @@
 {
    if([self.PlayerTypelbl.text isEqualToString:@"Top Batsmens"])
    {
-       
+      if(ReqArray.count>0)
+      {
+          self.NodataView.hidden = YES;
        NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
        
        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -637,12 +708,18 @@
        
        
       
-       
+   }
+      else
+      {
+          self.NodataView.hidden = NO;
+      }
        
    }
    else if([self.PlayerTypelbl.text isEqualToString:@"Top Bowlers"])
    {
-       
+       if(ReqArray.count>0)
+       {
+           self.NodataView.hidden = YES;
        
        NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
        
@@ -677,10 +754,17 @@
        self.Player3SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:2];
        self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
        self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
+       }
+       else
+       {
+           self.NodataView.hidden = NO;
+       }
    }
    else if([self.PlayerTypelbl.text isEqualToString:@"Top Fielders"])
    {
-       
+       if(ReqArray.count>0)
+       {
+           self.NodataView.hidden = YES;
        NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
        
        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -715,7 +799,12 @@
        self.Player4SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:3];
        self.Player5SRlbl.text = [[ReqArray valueForKey:@"SR"] objectAtIndex:4];
    }
+       else
+       {
+           self.NodataView.hidden = NO;
+       }
     
+   }
     
     
 }
