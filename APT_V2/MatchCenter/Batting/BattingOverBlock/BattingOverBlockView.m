@@ -57,7 +57,7 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return 5;
-
+    
     if(collectionView == self.pp1CollectionView){
         return self.CollectionPowerPlayArray1.count;
     }else if(collectionView == self.pp2CollectionView){
@@ -70,7 +70,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     
     if(collectionView == self.pp1CollectionView){
         BattingOverBlockCVC * cell = [self.pp1CollectionView dequeueReusableCellWithReuseIdentifier:@"battingOverBlockCVC" forIndexPath:indexPath];
@@ -102,7 +102,7 @@
         }];
         
         
-      
+        
         
         return cell;
         
@@ -248,7 +248,7 @@
             self.bdryPerlbl3.text = [[self.ProgressPowerPlayArray3 valueForKey:@"BoundaryPercent"] objectAtIndex:0];
             
             
-          //runsprogress
+            //runsprogress
             float runscount1 = [self.runslbl1.text floatValue];
             float runscount2 = [self.runslbl2.text floatValue];
             float runscount3 = [self.runslbl3.text floatValue];
@@ -262,7 +262,7 @@
             self.runsPrgs3.progress = runsper3/100;
             
             
-          //runrate
+            //runrate
             
             float runRatecount1 = [self.runratelbl1.text floatValue];
             float runRatecount2 = [self.runratelbl2.text floatValue];
@@ -364,10 +364,10 @@
         [AppCommon hideLoading];
         
     }
-                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                             NSLog(@"failed");
-                             [COMMON webServiceFailureError:error];
-                         }];
+                             failure:^(AFHTTPRequestOperation *operation, id error) {
+                                 NSLog(@"failed");
+                                 [COMMON webServiceFailureError:error];
+                             }];
     
 }
 
@@ -413,7 +413,7 @@
 - (IBAction)onClickTeam:(id)sender
 {
     if(isTeam){
-    
+        
         isCompe = NO;
         isTeam = NO;
         self.PopTableView.hidden = YES;
@@ -444,7 +444,7 @@
 {
     
     
-     if(isCompe==YES)
+    if(isCompe==YES)
     {
         return appDel.ArrayCompetition.count;
     }
@@ -470,7 +470,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
-     if(isCompe ==YES)
+    if(isCompe ==YES)
     {
         cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
     }
@@ -493,7 +493,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     if(isCompe == YES)
+    if(isCompe == YES)
     {
         //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
         
@@ -536,3 +536,4 @@
 
 
 @end
+

@@ -762,6 +762,7 @@
     if ([sender tag] == 0) { // TEAM
         _CommonArray = appDel.ArrayTeam;
         
+        
 //        dropVC.array = appDel.ArrayTeam;
 //        dropVC.key = @"TeamName";
 //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
@@ -785,11 +786,10 @@
             [AppCommon showAlertWithMessage:@"Plaese select Team"];
             return;
         }
-        
-        if ([lblTeam.text isEqualToString:@"KKR"]) {
-            selectedTeamCode = @"TEA000008";
+        if([lblTeam.text isEqualToString:@"KKR"])
+        {
+            selectedTeamCode = @"TEA0000008";
         }
-
         _CommonArray = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
 
 //        dropVC.array = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];

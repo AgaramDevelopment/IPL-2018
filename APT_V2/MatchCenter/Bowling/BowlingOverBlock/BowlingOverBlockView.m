@@ -60,7 +60,7 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return 5;
-
+    
     if(collectionView == self.pp1CollectionView){
         return self.CollectionPowerPlayArray1.count;
     }else if(collectionView == self.pp2CollectionView){
@@ -73,7 +73,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     
     if(collectionView == self.pp1CollectionView){
         BowlingOverBlockCVC * cell = [self.pp1CollectionView dequeueReusableCellWithReuseIdentifier:@"bowlingOverBlockCVC" forIndexPath:indexPath];
@@ -88,7 +88,7 @@
         cell.Overslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Overs"]objectAtIndex:indexPath.row];
         cell.econlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
         cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
-       
+        
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray1 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -540,3 +540,4 @@
 }
 
 @end
+

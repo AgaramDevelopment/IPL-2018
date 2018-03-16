@@ -47,7 +47,6 @@
     isList = YES;
 //    self.competitionLbl.text = [[self.listCompArray valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
     competitionLbl.text = [AppCommon getCurrentCompetitionName];
-    
     [self ResultsWebservice];
     self.popTbl.hidden = YES;
     

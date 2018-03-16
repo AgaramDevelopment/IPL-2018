@@ -175,8 +175,8 @@
             //}
 
                 VC = [TabHomeVC new];
-            [COMMON getIPLCompetetion];
-
+                [COMMON getIPLteams];
+            
 //            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
 //            {
 //                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];

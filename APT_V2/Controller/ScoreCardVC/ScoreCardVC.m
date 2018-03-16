@@ -533,6 +533,8 @@
     //    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     
     self.popTbl.hidden=YES;
+    
+    
     [self ScoreWebservice];
     
     
@@ -558,7 +560,7 @@
     //    CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
     //    self.tableHeight.constant = height;
     //    [self.view layoutIfNeeded];
-    //
+    //    
     //    CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
     //    self.tableHeight2.constant = height1;
     //    [self.view layoutIfNeeded];
@@ -1843,6 +1845,8 @@
     
 }
 
+
+
 -(IBAction)myActionOversBowling:(id)sender
 {
     UIButton *button = sender;
@@ -2309,7 +2313,7 @@
         
         //        if(i>BowlingDetailsArray1.count)
         //        {
-        //
+        //            
         //        }
         
         if(![dict isEqual:[NSNull null]])
@@ -3931,7 +3935,7 @@
         //        if(isBoundaries==YES)
         //        {
         //            self.selectRuns =([[[self.wagonWheelDrawData valueForKey:@"ISB4"] objectAtIndex:i] isEqual:[NSNull null]])?@"":[[self.wagonWheelDrawData valueForKey:@"ISB4"] objectAtIndex:i];
-        //
+        //            
         //            if( [self.selectRuns isEqualToString:@""])
         //            {
         //                self.selectRuns =([[[self.wagonWheelDrawData valueForKey:@"ISB6"] objectAtIndex:i] isEqual:[NSNull null]])?@"":[[self.wagonWheelDrawData valueForKey:@"ISB6"] objectAtIndex:i];
@@ -4220,3 +4224,4 @@
 
 
 @end
+
