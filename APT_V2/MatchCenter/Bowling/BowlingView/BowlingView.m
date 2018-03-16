@@ -538,10 +538,10 @@ BOOL isTeamp;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
