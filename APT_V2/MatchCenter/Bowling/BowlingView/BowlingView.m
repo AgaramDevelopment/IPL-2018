@@ -801,8 +801,8 @@ BOOL wicketSortingKey;
                         }
                     
                     
-                    [self loadChart];
-                    [self.resultCollectionView reloadData];
+//                    [self loadChart];
+//                    [self.resultCollectionView reloadData];
                 }
                 
                 
@@ -810,6 +810,7 @@ BOOL wicketSortingKey;
 //                [self.resultCollectionView reloadData];
                 [self WicketsSorting];
             }
+                }
             
             [AppCommon hideLoading];
             
