@@ -22,6 +22,7 @@ BOOL isBowlOverview;
 BOOL isBowlRun;
 BOOL isCompt;
 BOOL isTeamp;
+BOOL wicketSortingKey;
 
 /* Filter */
 
@@ -364,6 +365,7 @@ BOOL isTeamp;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
@@ -372,7 +374,6 @@ BOOL isTeamp;
         }
         else
         {
-            
             return CGSizeMake(150, 40);
         }
     }
@@ -409,6 +410,11 @@ BOOL isTeamp;
                 break;
             }
         }
+        
+        if ([cell.btnName.currentTitle isEqualToString:@"Wkts"]) {
+            [cell.btnName addTarget:self action:@selector(WicketsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -469,6 +475,7 @@ BOOL isTeamp;
                         str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
                         }
                 }
+                
                 
                 if([temp isEqualToString:@"Player"])
                 {
@@ -538,10 +545,10 @@ BOOL isTeamp;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
@@ -777,7 +784,7 @@ BOOL isTeamp;
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
-                {
+            {
                 self.ChartValuesArray = [[NSMutableArray alloc]init];
                 self.TableValuesArray = [[NSMutableArray alloc]init];
                 
@@ -788,17 +795,15 @@ BOOL isTeamp;
                 
                 if (self.ChartValuesArray.count) {
                     for(int i=0;i<self.ChartValuesArray.count;i++)
-                        {
+                    {
                         NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
                         [self.ChartXAxisValuesArray addObject:value];
-                        }
-                    
-                    
-                    [self loadChart];
-                    [self.resultCollectionView reloadData];
+                    }
                 }
                 
-                }
+                [self loadChart];
+                [self WicketsSorting];
+            }
             
             [AppCommon hideLoading];
             
@@ -809,13 +814,25 @@ BOOL isTeamp;
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
             
-            
         }];
     }
     
 }
 
+-(void)WicketsSorting
+{
+    NSLog(@"SORTING ORDER %ld",wicketSortingKey);
 
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Wickets" ascending:wicketSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        wicketSortingKey = !wicketSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        [self.resultCollectionView reloadData];
+    }
+    
+}
 
 
 @end

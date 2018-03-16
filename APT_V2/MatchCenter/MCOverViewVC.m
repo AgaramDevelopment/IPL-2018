@@ -562,8 +562,8 @@
 
 - (IBAction)onClickMoreMatches:(id)sender
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
     //[self.navigationController pushViewController:objFix animated:YES];
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
@@ -614,6 +614,7 @@
     
     if ([sender tag] == 1) { // TEAM
         
+        
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
@@ -646,6 +647,8 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        
         
         
     }

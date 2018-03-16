@@ -19,19 +19,14 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 #pragma Testing Url
 
-
+// LOCAL 1
 //#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.0.151:8045/"
-//#define Video_URL   @"http://192.168.0.151:8044/"
-//#define BASE_Image_URL @"http://192.168.0.151:8045/bcciapp/"
 
+// LOCAL 2
 //#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
 
-
+// LIVE
 #define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
-//#define Video_URL   @"http://13.126.151.253:9001/"
-//#define IMAGE_URL   @"http://13.126.151.253:9001/"
-//#define BASE_Image_URL @"http://192.168.0.151:8045/bcciapp/"
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 
@@ -46,7 +41,6 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //                     failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)cancelRequest;
-
 
 
 -(void)getLogin :(NSString *) loginValue :(NSString *) userName:(NSString *)password success:(WebserviceRequestSuccessHandler)success

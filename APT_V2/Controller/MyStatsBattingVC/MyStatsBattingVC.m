@@ -2523,8 +2523,8 @@
 //    scoreObj = (ScoreCardVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
 //    [appDel.frontNavigationController pushViewController:scoreObj animated:YES];
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
 //    appDel.Currentmatchcode = displayMatchCode;
 //    appDel.Scorearray = scoreArray;
         //objtab.backkey = @"yes";

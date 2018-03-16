@@ -24,6 +24,7 @@ BOOL isOverview;
 BOOL isRun;
 BOOL isComp;
 BOOL isTeams;
+BOOL runSortingKey;
 
 
 /* Filter */
@@ -396,6 +397,10 @@ BOOL isTeams;
                 break;
             }
         }
+        if ([cell.btnName.currentTitle isEqualToString:@"Runs"]) {
+            [cell.btnName addTarget:self action:@selector(RunsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -516,10 +521,10 @@ BOOL isTeams;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:8.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    //xAxis.labelCount = self.ChartXAxisValuesArray.count;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
@@ -722,6 +727,11 @@ BOOL isTeams;
                     [self barchartloadValues];
                     [self.resultCollectionView reloadData];
                 }
+                
+                
+                [self barchartloadValues];
+                [self RunsSorting];
+//                [self.resultCollectionView reloadData];
             }
             
             [AppCommon hideLoading];
@@ -751,6 +761,21 @@ BOOL isTeams;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self BattingWebservice];
+    
+}
+
+-(void)RunsSorting
+{
+    NSLog(@"SORTING ORDER %ld",runSortingKey);
+    
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Runs" ascending:runSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        runSortingKey = !runSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        [self.resultCollectionView reloadData];
+    }
     
 }
 
