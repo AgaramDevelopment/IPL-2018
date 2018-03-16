@@ -533,8 +533,6 @@
     //    [self.Inn4 setTitle:[NSString stringWithFormat:@"Inn4-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
     
     self.popTbl.hidden=YES;
-    
-    
     [self ScoreWebservice];
     
     
@@ -1844,8 +1842,6 @@
     [self loadVideoPlayer:Batsmancode :@"WKT" :@"BATTING" innings:innno];
     
 }
-
-
 
 -(IBAction)myActionOversBowling:(id)sender
 {

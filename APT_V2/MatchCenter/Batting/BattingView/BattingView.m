@@ -715,23 +715,18 @@ BOOL runSortingKey;
                 
                 self.ChartValuesArray = [responseObject valueForKey:@"bCharList"];
                 self.TableValuesArray = [responseObject valueForKey:@"plyrBattingList"];
-                
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
-            
-                if (self.ChartValuesArray.count) {
+               
+                
                     for(int i=0;i<self.ChartValuesArray.count;i++)
-                        {
+                    {
                         NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
                         [self.ChartXAxisValuesArray addObject:value];
-                        }
-                    [self barchartloadValues];
-                    [self.resultCollectionView reloadData];
-                }
-                
+                    }
                 
                 [self barchartloadValues];
-                [self RunsSorting];
-//                [self.resultCollectionView reloadData];
+                [self.resultCollectionView reloadData];
+                
             }
             
             [AppCommon hideLoading];
