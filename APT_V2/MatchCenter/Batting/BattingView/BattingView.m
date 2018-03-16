@@ -501,6 +501,7 @@ BOOL isTeams;
 -(void)barchartloadValues
 {
     
+    
 //    [self setupBarLineChartView:_chartView];
     
     _chartView.delegate = self;

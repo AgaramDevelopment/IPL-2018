@@ -58,10 +58,12 @@
     self.standingsCollectionView.delegate = self;
     self.standingsCollectionView.dataSource = self;
     
-    [self StandingsWebservice];
-    
     lblTeam.text = [AppCommon getCurrentTeamName];
     lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+    
+    [self StandingsWebservice];
+    
+    
 
 }
 
@@ -376,6 +378,7 @@
             DetailsArray = [[NSMutableArray alloc]init];
             DetailsArray = [responseObject valueForKey:@"TeamResult"];
             
+            self.standingsCollectionView.hidden = NO;
             
             [self.standingsCollectionView reloadData];
             
