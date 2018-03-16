@@ -306,7 +306,7 @@
         ResultCell* cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         
         
-        
+        NSLog(@"DATE FORMAT %@ ",[[objarray valueForKey:@"date"] objectAtIndex:indexPath.row]);
         cell.datelbl.text = [[objarray valueForKey:@"date"] objectAtIndex:indexPath.row];
         // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[objarray valueForKey:@"ground"] objectAtIndex:indexPath.row];
@@ -652,6 +652,7 @@
                         
                         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                         
+                        NSLog(@"SET DATE FORMAT %@ ",realdate);
                         [dic setValue:realdate forKey:@"date"];
                         [dic setValue:realtime forKey:@"time"];
                         [dic setValue:realGroundname forKey:@"ground"];

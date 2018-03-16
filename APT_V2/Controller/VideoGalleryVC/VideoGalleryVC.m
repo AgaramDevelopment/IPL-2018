@@ -278,16 +278,16 @@
     CGFloat width = collectionView.frame.size.width;
 //    CGFloat height = collectionView.frame.size.height;
     
-    if(IS_IPHONE5)
-    {
+    if(IS_IPHONE5) {
+        
         width = width/3;
     }
-    else if(!IS_IPAD && !IS_IPHONE5)
-    {
+    else if(!IS_IPAD && !IS_IPHONE5) {
+        
         width = width/4;
     }
-    else if(IS_IPAD)
-    {
+    else if(IS_IPAD) {
+        
         width = width/5;
     }
     
@@ -551,6 +551,7 @@
     if (selectedButtonTag == 0) {
         lblTeam.text = [[self.CommonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
         selectedTeamCode = [[self.CommonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
+        lblPlayer.text = @"Player";
     }
     else if (selectedButtonTag == 1) {
         
@@ -765,6 +766,18 @@
 //        dropVC.key = @"TeamName";
 //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
         
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+        
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnTeam.superview.frame), 0, CGRectGetWidth(btnTeam.superview.frame), height)];
+        
     }
     else if([sender tag] == 1) // player
     {
@@ -777,6 +790,19 @@
 //        dropVC.array = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
 //        dropVC.key = @"PlayerName";
 //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnPlayer.superview.frame), 0, CGRectGetWidth(btnPlayer.superview.frame), height)];
+
 
     }
     else if([sender tag] == 2) // Category
@@ -784,6 +810,9 @@
         
         NSArray* typeArray = @[@{@"category":@"BATTING"},@{@"category":@"BOWLING"}];
         _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnCategory.superview.frame), 0, CGRectGetWidth(btnCategory.superview.frame), 50*_CommonArray.count)];
+
 
         
 //        dropVC.array = typeArray;
@@ -806,6 +835,9 @@
         
         NSArray* typeArray = @[@{@"type":@"BEATEN&UNCOMFORT"},@{@"type":@"BOUNDARIES"},@{@"type":@"DOTBALLS"},@{@"type":temp}];
         _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnType.superview.frame), 0, CGRectGetWidth(btnType.superview.frame), 50*_CommonArray.count)];
+
         
 //        [dropVC.tblDropDown setFrame:CGRectMake(leading, CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
 

@@ -24,6 +24,7 @@ BOOL isOverview;
 BOOL isRun;
 BOOL isComp;
 BOOL isTeams;
+BOOL runSortingKey;
 
 
 /* Filter */
@@ -396,6 +397,10 @@ BOOL isTeams;
                 break;
             }
         }
+        if ([cell.btnName.currentTitle isEqualToString:@"Runs"]) {
+            [cell.btnName addTarget:self action:@selector(RunsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -714,7 +719,8 @@ BOOL isTeams;
                 
                 
                 [self barchartloadValues];
-                [self.resultCollectionView reloadData];
+                [self RunsSorting];
+//                [self.resultCollectionView reloadData];
             }
             
             [AppCommon hideLoading];
@@ -744,6 +750,21 @@ BOOL isTeams;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self BattingWebservice];
+    
+}
+
+-(void)RunsSorting
+{
+    NSLog(@"SORTING ORDER %ld",runSortingKey);
+    
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Runs" ascending:runSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        runSortingKey = !runSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        [self.resultCollectionView reloadData];
+    }
     
 }
 
