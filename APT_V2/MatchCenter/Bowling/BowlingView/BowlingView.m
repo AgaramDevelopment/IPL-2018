@@ -784,7 +784,7 @@ BOOL wicketSortingKey;
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
-                {
+            {
                 self.ChartValuesArray = [[NSMutableArray alloc]init];
                 self.TableValuesArray = [[NSMutableArray alloc]init];
                 
@@ -795,22 +795,15 @@ BOOL wicketSortingKey;
                 
                 if (self.ChartValuesArray.count) {
                     for(int i=0;i<self.ChartValuesArray.count;i++)
-                        {
+                    {
                         NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
                         [self.ChartXAxisValuesArray addObject:value];
-                        }
-                    
-                    
-//                    [self loadChart];
-//                    [self.resultCollectionView reloadData];
+                    }
                 }
-                
                 
                 [self loadChart];
-//                [self.resultCollectionView reloadData];
                 [self WicketsSorting];
             }
-                }
             
             [AppCommon hideLoading];
             

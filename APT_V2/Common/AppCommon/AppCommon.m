@@ -358,7 +358,7 @@ AppCommon *sharedCommon = nil;
 //        return ;
     }
     
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"competetionCode == %@", competetionName];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
     NSArray* result = [appDel.ArrayCompetition filteredArrayUsingPredicate:resultPredicate];
     if (result.count > 0) {
         appDel.ArrayTeam = [NSMutableArray new];
