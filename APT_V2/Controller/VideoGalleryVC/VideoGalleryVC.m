@@ -785,6 +785,11 @@
             [AppCommon showAlertWithMessage:@"Plaese select Team"];
             return;
         }
+        
+        if ([lblTeam.text isEqualToString:@"KKR"]) {
+            selectedTeamCode = @"TEA000008";
+        }
+
         _CommonArray = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
 
 //        dropVC.array = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];

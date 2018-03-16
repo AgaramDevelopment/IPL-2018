@@ -110,16 +110,16 @@
     }else if(collectionView == self.pp2CollectionView){
         BowlingOverBlockCVC * cell = [self.pp1CollectionView dequeueReusableCellWithReuseIdentifier:@"bowlingOverBlockCVC" forIndexPath:indexPath];
         
-        cell.playerNamelbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"PlayerName"]objectAtIndex:indexPath.row];
-        cell.playerStylelbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row];
-        cell.runslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Runs"]objectAtIndex:indexPath.row];
-        cell.srlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"StrikRate"]objectAtIndex:indexPath.row];
-        cell.avglbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Average"]objectAtIndex:indexPath.row];
-        cell.dbPrrlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"DotBallPercent"]objectAtIndex:indexPath.row];
-        cell.bdryPerlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"BoundaryPercent"]objectAtIndex:indexPath.row];
-        cell.Overslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Overs"]objectAtIndex:indexPath.row];
-        cell.econlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
-        cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
+        cell.playerNamelbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"PlayerName"]objectAtIndex:indexPath.row];
+        cell.playerStylelbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row];
+        cell.runslbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"Runs"]objectAtIndex:indexPath.row];
+        cell.srlbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"StrikRate"]objectAtIndex:indexPath.row];
+        cell.avglbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"Average"]objectAtIndex:indexPath.row];
+        cell.dbPrrlbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"DotBallPercent"]objectAtIndex:indexPath.row];
+        cell.bdryPerlbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"BoundaryPercent"]objectAtIndex:indexPath.row];
+        cell.Overslbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"Overs"]objectAtIndex:indexPath.row];
+        cell.econlbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
+        cell.Wktslbl.text = [[self.CollectionPowerPlayArray2 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray2 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -144,16 +144,16 @@
         
         
         
-        cell.playerNamelbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"PlayerName"]objectAtIndex:indexPath.row];
-        cell.playerStylelbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row];
-        cell.runslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Runs"]objectAtIndex:indexPath.row];
-        cell.srlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"StrikRate"]objectAtIndex:indexPath.row];
-        cell.avglbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Average"]objectAtIndex:indexPath.row];
-        cell.dbPrrlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"DotBallPercent"]objectAtIndex:indexPath.row];
-        cell.bdryPerlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"BoundaryPercent"]objectAtIndex:indexPath.row];
-        cell.Overslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Overs"]objectAtIndex:indexPath.row];
-        cell.econlbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
-        cell.Wktslbl.text = [[self.CollectionPowerPlayArray1 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
+        cell.playerNamelbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"PlayerName"]objectAtIndex:indexPath.row];
+        cell.playerStylelbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row];
+        cell.runslbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"Runs"]objectAtIndex:indexPath.row];
+        cell.srlbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"StrikRate"]objectAtIndex:indexPath.row];
+        cell.avglbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"Average"]objectAtIndex:indexPath.row];
+        cell.dbPrrlbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"DotBallPercent"]objectAtIndex:indexPath.row];
+        cell.bdryPerlbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"BoundaryPercent"]objectAtIndex:indexPath.row];
+        cell.Overslbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"Overs"]objectAtIndex:indexPath.row];
+        cell.econlbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"Econ"]objectAtIndex:indexPath.row];
+        cell.Wktslbl.text = [[self.CollectionPowerPlayArray3 valueForKey:@"Wickets"]objectAtIndex:indexPath.row];
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.CollectionPowerPlayArray3 valueForKey:@"PlayerPhotoLink"] objectAtIndex:indexPath.row]];
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
@@ -503,7 +503,8 @@
     {
         //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
         
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+        NSLog(@"Competition:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
@@ -530,5 +531,12 @@
     
 }
 
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
 
 @end

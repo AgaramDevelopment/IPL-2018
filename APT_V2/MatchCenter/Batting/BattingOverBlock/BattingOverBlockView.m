@@ -497,7 +497,8 @@
     {
         //        cell..text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
         
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+        NSLog(@"Competition:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
@@ -522,6 +523,14 @@
     
     [self OverblockWebservice];
     
+}
+
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 
 

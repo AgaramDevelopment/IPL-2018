@@ -197,7 +197,7 @@
         
         NSString *matchdate = [[recentMatchesArray valueForKey:@"ATMatchDate"] objectAtIndex:indexPath.row];
         NSArray *arr = [matchdate componentsSeparatedByString:@" "];
-        cell.Datelbl.text = arr[0];
+        cell.Datelbl.text = matchdate;
         
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
@@ -647,7 +647,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [COMMON getCorrespondingTeamName:lblCompetetion.text];
+//        [COMMON getCorrespondingTeamName:lblCompetetion.text];
         
         
         
