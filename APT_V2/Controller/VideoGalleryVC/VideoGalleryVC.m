@@ -84,9 +84,9 @@
     self.clearBtn.hidden = NO;
     [self.view_datepicker setHidden:YES];
     
-    [btnUpload setHidden:![AppCommon isCoach]];
+//    [btnUpload setHidden:![AppCommon isCoach]];
     
-//    [self videoGalleryWebservice];
+    
 
 }
 
@@ -96,6 +96,14 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+    
+    lblTeam.text = @"KKR";
+    lblPlayer.text = @"Chris Lynn";
+    lblcategory.text = @"BATTING";
+    lblType.text = @"BEATEN&UNCOMFORT";
+    
+    [self newVideoListingwebservice];
+
 }
 
 - (void)showAnimate
@@ -121,11 +129,11 @@
     }];
 }
 
--(NSArray *)getCorrespoingPlayerForthisTeamCode:(NSString* )teamcode
+-(NSArray *)getCorrespoingPlayerForthisTeamCode:(NSString* )teamCode
 {
     NSArray* result;
     
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"TeamCode == %@", teamcode];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"TeamCode == %@", teamCode];
     result = [appDel.ArrayIPL_teamplayers filteredArrayUsingPredicate:resultPredicate];
     
     return result;
@@ -266,37 +274,57 @@
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
-    {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-            if(collectionView == self.videoCollectionview1)
-            {
-                return CGSizeMake(224, 135);
-            }
-            else
-            {
-                return CGSizeMake(120, 180);
-            }
-        }
+    
+    CGFloat width = collectionView.frame.size.width;
+//    CGFloat height = collectionView.frame.size.height;
+    
+    if(IS_IPHONE5) {
+        
+        width = width/3;
     }
-    else
-    {
-        //return CGSizeMake(160, 140);
+    else if(!IS_IPAD && !IS_IPHONE5) {
+        
+        width = width/4;
+    }
+    else if(IS_IPAD) {
+        
+        width = width/5;
+    }
+    
+    return CGSizeMake(width-20, width-20);
 
-        if(collectionView == self.videoCollectionview1)
-        {
-            return CGSizeMake(224, 135);
-        }
-        else
-        {
-            return CGSizeMake(150, 122);
-        }
-    }
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//            if(collectionView == self.videoCollectionview1)
+//            {
+//                return CGSizeMake(224, 135);
+//            }
+//            else
+//            {
+//                return CGSizeMake(120, 180);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //return CGSizeMake(160, 140);
+//
+//        if(collectionView == self.videoCollectionview1)
+//        {
+//            return CGSizeMake(224, 135);
+//        }
+//        else
+//        {
+//            return CGSizeMake(150, 122);
+//        }
+//    }
     
     
     
@@ -523,6 +551,7 @@
     if (selectedButtonTag == 0) {
         lblTeam.text = [[self.CommonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
         selectedTeamCode = [[self.CommonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
+        lblPlayer.text = @"Player";
     }
     else if (selectedButtonTag == 1) {
         
@@ -737,6 +766,18 @@
 //        dropVC.key = @"TeamName";
 //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
         
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+        
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnTeam.superview.frame), 0, CGRectGetWidth(btnTeam.superview.frame), height)];
+        
     }
     else if([sender tag] == 1) // player
     {
@@ -749,6 +790,19 @@
 //        dropVC.array = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
 //        dropVC.key = @"PlayerName";
 //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnPlayer.superview.frame), 0, CGRectGetWidth(btnPlayer.superview.frame), height)];
+
 
     }
     else if([sender tag] == 2) // Category
@@ -756,6 +810,9 @@
         
         NSArray* typeArray = @[@{@"category":@"BATTING"},@{@"category":@"BOWLING"}];
         _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnCategory.superview.frame), 0, CGRectGetWidth(btnCategory.superview.frame), 50*_CommonArray.count)];
+
 
         
 //        dropVC.array = typeArray;
@@ -778,6 +835,9 @@
         
         NSArray* typeArray = @[@{@"type":@"BEATEN&UNCOMFORT"},@{@"type":@"BOUNDARIES"},@{@"type":@"DOTBALLS"},@{@"type":temp}];
         _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnType.superview.frame), 0, CGRectGetWidth(btnType.superview.frame), 50*_CommonArray.count)];
+
         
 //        [dropVC.tblDropDown setFrame:CGRectMake(leading, CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
 
@@ -865,19 +925,19 @@
     if(![COMMON isInternetReachable])
         return;
     
-    if ([lblTeam.text isEqualToString:@"Team"]) {
+    if (lblTeam.text == nil || [lblTeam.text isEqualToString:@"Team"]) {
         [AppCommon showAlertWithMessage:@"Please select Team"];
         return;
     }
-    else if ([lblPlayer.text isEqualToString:@"Player"]) {
+    else if (lblPlayer.text == nil || [lblPlayer.text isEqualToString:@"Player"]) {
         [AppCommon showAlertWithMessage:@"Please select Player"];
         return;
     }
-    else if ([lblType.text isEqualToString:@"Type"]) {
+    else if (lblType.text == nil || [lblType.text isEqualToString:@"Type"]) {
         [AppCommon showAlertWithMessage:@"Please select type"];
         return;
     }
-    else if ([lblType.text isEqualToString:@"category"]) {
+    else if (lblcategory.text == nil || [lblcategory.text isEqualToString:@"category"]) {
         [AppCommon showAlertWithMessage:@"Please select Category"];
         return;
     }
@@ -890,7 +950,6 @@
     [paramDict setValue:lblcategory.text forKey:@"Category"];
     
     [AppCommon showLoading];
-//    NSString *URLString = [NSString stringWithFormat:@"%@FETCH_AMAZONFILES/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),lblTeam.text,lblPlayer.text,lblcategory.text,lblType.text];
     
     NSString* URLString = URL_FOR_RESOURCE(@"FETCH_AMAZONFILES");
     

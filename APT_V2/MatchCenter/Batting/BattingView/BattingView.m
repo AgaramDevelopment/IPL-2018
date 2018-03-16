@@ -24,6 +24,7 @@ BOOL isOverview;
 BOOL isRun;
 BOOL isComp;
 BOOL isTeams;
+BOOL runSortingKey;
 
 
 /* Filter */
@@ -157,14 +158,14 @@ BOOL isTeams;
     }
     else if(isComp==YES)
     {
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+    
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+    NSLog(@"Competition:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
-        
+    NSLog(@"Competetioncode:%@", Competetioncode);
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-
     }
     else if(isTeams==YES)
     {
@@ -396,6 +397,10 @@ BOOL isTeams;
                 break;
             }
         }
+        if ([cell.btnName.currentTitle isEqualToString:@"Runs"]) {
+            [cell.btnName addTarget:self action:@selector(RunsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -422,18 +427,21 @@ BOOL isTeams;
         for (id temp in headingKeyArray) {
             if ([headingKeyArray indexOfObject:temp] == indexPath.row) {
                  //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                
                 NSString *str;
-                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
-                {
+                if (self.TableValuesArray.count) {
                     
-                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                    str = [vv stringValue];
+                    if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                        {
+                        
+                        NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        str = [vv stringValue];
+                        }
+                    else
+                        {
+                        str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        }
                 }
-                else
-                {
-                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                }
+                
                 
                 if([temp isEqualToString:@"Player"])
                 {
@@ -498,6 +506,7 @@ BOOL isTeams;
 -(void)barchartloadValues
 {
     
+    
 //    [self setupBarLineChartView:_chartView];
     
     _chartView.delegate = self;
@@ -512,10 +521,10 @@ BOOL isTeams;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:8.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    //xAxis.labelCount = self.ChartXAxisValuesArray.count;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
@@ -589,21 +598,24 @@ BOOL isTeams;
     
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < self.ChartValuesArray.count; i++)
-    {
-//        double mult = (range + 1);
-//        double val = (double) (arc4random_uniform(mult));
-//        if (arc4random_uniform(100) < 25) {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-//        } else {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-//        }
-        
-        
-        double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
-        
+    if (self.ChartValuesArray.count) {
+        for (int i = 0; i < self.ChartValuesArray.count; i++)
+            {
+                //        double mult = (range + 1);
+                //        double val = (double) (arc4random_uniform(mult));
+                //        if (arc4random_uniform(100) < 25) {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+                //        } else {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+                //        }
+            
+            
+            double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
+            
             [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*start y:val]];
+            }
     }
+    
     
     BarChartDataSet *set1 = nil;
     if (_chartView.data.dataSetCount > 0)
@@ -744,6 +756,21 @@ BOOL isTeams;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self BattingWebservice];
+    
+}
+
+-(void)RunsSorting
+{
+    NSLog(@"SORTING ORDER %ld",runSortingKey);
+    
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Runs" ascending:runSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        runSortingKey = !runSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        [self.resultCollectionView reloadData];
+    }
     
 }
 

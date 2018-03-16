@@ -22,6 +22,7 @@ BOOL isBowlOverview;
 BOOL isBowlRun;
 BOOL isCompt;
 BOOL isTeamp;
+BOOL wicketSortingKey;
 
 /* Filter */
 
@@ -42,7 +43,7 @@ BOOL isTeamp;
     }
     if(isBowlRun==YES)
     {
-        return 4;
+        return 5;
 
     }else if(isCompt==YES){
         return appDel.ArrayCompetition.count;
@@ -73,12 +74,12 @@ BOOL isTeamp;
 
     }else if(isBowlRun==YES)
     {
-        cell.textLabel.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
+        cell.textLabel.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" :indexPath.row == 3 ? @"Economy": @"Dot Balls";
 
     }else if(isCompt==YES){
         
         cell.textLabel.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
-        
+        NSLog(@"Cell:%@", [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]);
     }else if(isTeamp==YES){
         
         cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
@@ -137,7 +138,7 @@ BOOL isTeamp;
         
     }else if(isBowlRun==YES)
     {
-        self.runslbl.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" : @"Dot Balls";
+        self.runslbl.text = indexPath.row == 0 ? @"Wickets" : indexPath.row == 1 ? @"Strike Rate" : indexPath.row == 2 ? @"Average" :indexPath.row == 3 ? @"Economy": @"Dot Balls";
         
         if(indexPath.row==0)
         {
@@ -153,13 +154,18 @@ BOOL isTeamp;
         }
         else if(indexPath.row==3)
         {
+            types =@"ECONOMY";
+        }
+        else if(indexPath.row==4)
+        {
             types =@"DOTS";
         }
     }
     
     else if(isCompt==YES)
     {
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+        NSLog(@"lblCompetetion:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
@@ -359,6 +365,7 @@ BOOL isTeamp;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if(IS_IPHONE_DEVICE)
     {
         if(!IS_IPHONE5)
@@ -367,7 +374,6 @@ BOOL isTeamp;
         }
         else
         {
-            
             return CGSizeMake(150, 40);
         }
     }
@@ -404,6 +410,11 @@ BOOL isTeamp;
                 break;
             }
         }
+        
+        if ([cell.btnName.currentTitle isEqualToString:@"Wkts"]) {
+            [cell.btnName addTarget:self action:@selector(WicketsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -452,16 +463,19 @@ BOOL isTeamp;
                 //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
                 
                 NSString *str;
-                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
-                {
-                    
-                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                    str = [vv stringValue];
+                if (self.TableValuesArray.count) {
+                    if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                        {
+                        
+                        NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        str = [vv stringValue];
+                        }
+                    else
+                        {
+                        str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        }
                 }
-                else
-                {
-                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                }
+                
                 
                 if([temp isEqualToString:@"Player"])
                 {
@@ -531,10 +545,10 @@ BOOL isTeamp;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:10.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    xAxis.labelCount = 7;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
@@ -779,15 +793,16 @@ BOOL isTeamp;
                 
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
                 
-                for(int i=0;i<self.ChartValuesArray.count;i++)
-                {
-                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
-                    [self.ChartXAxisValuesArray addObject:value];
+                if (self.ChartValuesArray.count) {
+                    for(int i=0;i<self.ChartValuesArray.count;i++)
+                    {
+                        NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                        [self.ChartXAxisValuesArray addObject:value];
+                    }
                 }
                 
-                
                 [self loadChart];
-                [self.resultCollectionView reloadData];
+                [self WicketsSorting];
             }
             
             [AppCommon hideLoading];
@@ -799,13 +814,25 @@ BOOL isTeamp;
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
             
-            
         }];
     }
     
 }
 
+-(void)WicketsSorting
+{
+    NSLog(@"SORTING ORDER %ld",wicketSortingKey);
 
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Wickets" ascending:wicketSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        wicketSortingKey = !wicketSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        [self.resultCollectionView reloadData];
+    }
+    
+}
 
 
 @end

@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "ResultsVc.h"
+#import "TabbarVC.h"
 
 @interface MCOverViewVC ()
 {
@@ -26,8 +27,11 @@
     NSMutableArray *FieldersArray;
     NSArray* competetinArray;
     
+    TabbarVC *objtab;
+    
     NSString *CompetitionCode;
     NSString *teamcode;
+    NSString *displayMatchCode;
     
     BOOL isComp;
     BOOL isTeam;
@@ -197,7 +201,7 @@
         
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
-        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
+        NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];
 
         [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
@@ -215,7 +219,7 @@
         
         
 //        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
-        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
+        NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:indexPath.row]];
 
         [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
@@ -239,12 +243,67 @@
     
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+        displayMatchCode = [[recentMatchesArray valueForKey:@"ATMatchCode"] objectAtIndex:indexPath.row];
+        NSMutableArray *scoreArray = [[NSMutableArray alloc]init];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        
+        NSString *ground = @"";
+        NSString *place = [[recentMatchesArray valueForKey:@"Venue"]objectAtIndex:indexPath.row];
+        
+        [dic setValue:[NSString stringWithFormat:@"%@,%@",ground,place] forKey:@"ground"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATName"] objectAtIndex:indexPath.row] forKey:@"team1"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"BTName"] objectAtIndex:indexPath.row] forKey:@"team2"];
+    
+    NSString * team1Score = [NSString stringWithFormat:@"%@/%@(%@)",[[recentMatchesArray valueForKey:@"ATMaxInnsTotal"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"ATMaxInnsWckts"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"ATOvers"] objectAtIndex:indexPath.row]];
+        [dic setValue:team1Score forKey:@"Inn1Score"];
+    
+    NSString * team2Score = [NSString stringWithFormat:@"%@/%@(%@)",[[recentMatchesArray valueForKey:@"BTMaxInnsTotal"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"BTMaxInnsWckts"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"BTOvers"] objectAtIndex:indexPath.row]];
+        [dic setValue:team2Score forKey:@"Inn2Score"];
+    
+        [dic setValue:@"" forKey:@"Inn3Score"];
+        [dic setValue:@"" forKey:@"Inn4Score"];
+        [dic setValue:@"" forKey:@"result"];
+        [dic setValue:@"" forKey:@"Competition"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row] forKey:@"TeamALogo"];
+        [dic setValue:[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row] forKey:@"TeamBLogo"];
+        
+        [scoreArray addObject:dic];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+        appDel.Currentmatchcode = displayMatchCode;
+        appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+        [appDel.frontNavigationController pushViewController:objtab animated:YES];
+        
+        
+    
+    
+}
+
+
+
+
 -(void)OverviewWebservice // :(NSString *)compCode :(NSString *)temCode
 {
     
     if (![COMMON isInternetReachable]) {
         return;
     }
+    
+    if ([lblTeamName.text isEqualToString:@""]) {
+        [AppCommon showAlertWithMessage:@"Please select Team"];
+        return;
+    }
+    else if([lblCompetetion.text isEqualToString:@""]) {
+        
+        [AppCommon showAlertWithMessage:@"Please select Comptetion"];
+        return;
+    }
+    
     
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
@@ -514,8 +573,8 @@
 
 - (IBAction)onClickMoreMatches:(id)sender
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    objresult = (ResultsVc *)[storyboard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objresult = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
     //[self.navigationController pushViewController:objFix animated:YES];
     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
@@ -563,13 +622,13 @@
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-    
     if ([sender tag] == 1) { // TEAM
+        
+//        [COMMON getCorrespondingTeamName:lblCompetetion.text];
         
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
-        
         
     }
     else // COMPETETION
@@ -577,7 +636,6 @@
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
-        
     }
     
     
@@ -599,7 +657,6 @@
         [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        
     }
     else
     {
@@ -609,6 +666,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        lblTeamName.text = @"";
         
     }
     
@@ -891,6 +949,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
     
     
 //    self.CompetitionListtbl.hidden = YES;

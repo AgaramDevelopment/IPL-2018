@@ -456,8 +456,8 @@
 //        objFix.backkey = @"yes";
 //        [self.navigationController pushViewController:objFix animated:YES];
         
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
         appDel.Scorearray = scoreArray;
         //objtab.backkey = @"yes";
