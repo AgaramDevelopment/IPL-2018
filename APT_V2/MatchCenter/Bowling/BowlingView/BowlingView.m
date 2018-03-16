@@ -78,7 +78,7 @@ BOOL isTeamp;
     }else if(isCompt==YES){
         
         cell.textLabel.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
-        
+        NSLog(@"Cell:%@", [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]);
     }else if(isTeamp==YES){
         
         cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
@@ -159,7 +159,8 @@ BOOL isTeamp;
     
     else if(isCompt==YES)
     {
-        self.lblCompetetion.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetetionName"];
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+        NSLog(@"lblCompetetion:%@", self.lblCompetetion.text);
         NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
