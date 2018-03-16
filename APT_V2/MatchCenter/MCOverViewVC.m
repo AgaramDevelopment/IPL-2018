@@ -294,6 +294,17 @@
         return;
     }
     
+    if ([lblTeamName.text isEqualToString:@""]) {
+        [AppCommon showAlertWithMessage:@"Please select Team"];
+        return;
+    }
+    else if([lblCompetetion.text isEqualToString:@""]) {
+        
+        [AppCommon showAlertWithMessage:@"Please select Comptetion"];
+        return;
+    }
+    
+    
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
     self.moreBtn.hidden = YES;
@@ -611,14 +622,13 @@
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-    
     if ([sender tag] == 1) { // TEAM
         
+//        [COMMON getCorrespondingTeamName:lblCompetetion.text];
         
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
-        
         
     }
     else // COMPETETION
@@ -626,7 +636,6 @@
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
-        
     }
     
     
@@ -647,9 +656,6 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [COMMON getCorrespondingTeamName:lblCompetetion.text];
-        
-        
         
     }
     else
@@ -660,6 +666,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblTeamName.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        lblTeamName.text = @"";
         
     }
     
@@ -942,6 +949,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
     
     
 //    self.CompetitionListtbl.hidden = YES;

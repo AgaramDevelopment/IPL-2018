@@ -69,12 +69,19 @@ AppCommon *sharedCommon = nil;
             appDel.ArrayCompetition = [NSMutableArray new];
             appDel.ArrayCompetition = responseObject;
             
+//            NSSet* set = [NSSet setValue:responseObject forKey:@"CompetitionName"];
+//            NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:responseObject];
+//            NSArray *arrayWithoutDuplicates = [orderedSet array];
+
+            
             NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
             NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
             NSLog(@"IPL COMPETETION %@ ",responseObject);
             [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
             [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+
 
         }
 //        [AppCommon hideLoading];
@@ -118,30 +125,39 @@ AppCommon *sharedCommon = nil;
         
         if(responseObject >0)
         {
-            appDel.ArrayTeam = [NSMutableArray new];
-            appDel.ArrayTeam = responseObject;
+//            NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:responseObject];
+//            NSArray *arrayWithoutDuplicates = [orderedSet array];
+
+            
+            appDel.ArrayMainTeams = [NSMutableArray new];
+            appDel.ArrayMainTeams = responseObject;
+            
+//            appDel.ArrayCompetition = [NSMutableArray new];
+//            appDel.ArrayCompetition = responseObject;
+
             NSLog(@"IPL TEAMS %@ ",responseObject);
-            NSString* Teamcode = [[appDel.ArrayTeam objectAtIndex:9] valueForKey:@"TeamCode"];
-            NSString* TeamName = [[appDel.ArrayTeam objectAtIndex:9] valueForKey:@"TeamName"];
+            NSString* Teamcode = [[appDel.ArrayMainTeams firstObject] valueForKey:@"TeamCode"];
+            NSString* TeamName = [[appDel.ArrayMainTeams firstObject] valueForKey:@"TeamName"];
             
             [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
             [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
             
-            NSLog(@"IPL COMPETETION %@ ",responseObject);
-            NSString* Competetioncode = [[appDel.ArrayTeam objectAtIndex:9] valueForKey:@"CompetitionCode"];
-            NSString* CompetetionName = [[appDel.ArrayTeam objectAtIndex:9] valueForKey:@"CompetitionName"];
-            
-            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
-            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            NSLog(@"IPL COMPETETION %@ ",responseObject);
+//            NSString* Competetioncode = [[appDel.ArrayMainTeams firstObject] valueForKey:@"CompetitionCode"];
+//            NSString* CompetetionName = [[appDel.ArrayMainTeams firstObject] valueForKey:@"CompetitionName"];
+//
+//            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
+//            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self getIPLCompetetion];
+            });
 
             
         }
 //        [AppCommon hideLoading];
         
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self getIPLCompetetion];
-//        });
 
     } failure:^(AFHTTPRequestOperation *operation, id error) {
 //        [AppCommon hideLoading];
@@ -354,12 +370,10 @@ AppCommon *sharedCommon = nil;
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"]) {
         NSLog(@"Please select Competetion");
-//        [AppCommon showAlertWithMessage:@"Please select Competetion"];
-//        return ;
     }
     
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
-    NSArray* result = [appDel.ArrayCompetition filteredArrayUsingPredicate:resultPredicate];
+    NSArray* result = [appDel.ArrayMainTeams filteredArrayUsingPredicate:resultPredicate];
     if (result.count > 0) {
         appDel.ArrayTeam = [NSMutableArray new];
         [appDel.ArrayTeam addObjectsFromArray:result];
