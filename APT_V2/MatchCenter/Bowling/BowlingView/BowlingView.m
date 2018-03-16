@@ -457,15 +457,17 @@ BOOL isTeamp;
                 //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
                 
                 NSString *str;
-                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
-                {
-                    
-                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                    str = [vv stringValue];
-                }
-                else
-                {
-                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                if (self.TableValuesArray.count) {
+                    if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                        {
+                        
+                        NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        str = [vv stringValue];
+                        }
+                    else
+                        {
+                        str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        }
                 }
                 
                 if([temp isEqualToString:@"Player"])
@@ -775,7 +777,7 @@ BOOL isTeamp;
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
-            {
+                {
                 self.ChartValuesArray = [[NSMutableArray alloc]init];
                 self.TableValuesArray = [[NSMutableArray alloc]init];
                 
@@ -784,16 +786,19 @@ BOOL isTeamp;
                 
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
                 
-                for(int i=0;i<self.ChartValuesArray.count;i++)
-                {
-                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
-                    [self.ChartXAxisValuesArray addObject:value];
+                if (self.ChartValuesArray.count) {
+                    for(int i=0;i<self.ChartValuesArray.count;i++)
+                        {
+                        NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                        [self.ChartXAxisValuesArray addObject:value];
+                        }
+                    
+                    
+                    [self loadChart];
+                    [self.resultCollectionView reloadData];
                 }
                 
-                
-                [self loadChart];
-                [self.resultCollectionView reloadData];
-            }
+                }
             
             [AppCommon hideLoading];
             

@@ -422,18 +422,21 @@ BOOL isTeams;
         for (id temp in headingKeyArray) {
             if ([headingKeyArray indexOfObject:temp] == indexPath.row) {
                  //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                
                 NSString *str;
-                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
-                {
+                if (self.TableValuesArray.count) {
                     
-                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                    str = [vv stringValue];
+                    if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                        {
+                        
+                        NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        str = [vv stringValue];
+                        }
+                    else
+                        {
+                        str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        }
                 }
-                else
-                {
-                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                }
+                
                 
                 if([temp isEqualToString:@"Player"])
                 {
@@ -589,21 +592,24 @@ BOOL isTeams;
     
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < self.ChartValuesArray.count; i++)
-    {
-//        double mult = (range + 1);
-//        double val = (double) (arc4random_uniform(mult));
-//        if (arc4random_uniform(100) < 25) {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-//        } else {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-//        }
-        
-        
-        double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
-        
+    if (self.ChartValuesArray.count) {
+        for (int i = 0; i < self.ChartValuesArray.count; i++)
+            {
+                //        double mult = (range + 1);
+                //        double val = (double) (arc4random_uniform(mult));
+                //        if (arc4random_uniform(100) < 25) {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+                //        } else {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+                //        }
+            
+            
+            double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
+            
             [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*start y:val]];
+            }
     }
+    
     
     BarChartDataSet *set1 = nil;
     if (_chartView.data.dataSetCount > 0)
@@ -705,16 +711,16 @@ BOOL isTeams;
                 self.TableValuesArray = [responseObject valueForKey:@"plyrBattingList"];
                 
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
-                
-                for(int i=0;i<self.ChartValuesArray.count;i++)
-                {
-                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
-                    [self.ChartXAxisValuesArray addObject:value];
+            
+                if (self.ChartValuesArray.count) {
+                    for(int i=0;i<self.ChartValuesArray.count;i++)
+                        {
+                        NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                        [self.ChartXAxisValuesArray addObject:value];
+                        }
+                    [self barchartloadValues];
+                    [self.resultCollectionView reloadData];
                 }
-                
-                
-                [self barchartloadValues];
-                [self.resultCollectionView reloadData];
             }
             
             [AppCommon hideLoading];
