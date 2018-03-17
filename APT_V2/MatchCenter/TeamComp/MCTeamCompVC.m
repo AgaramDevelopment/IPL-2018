@@ -78,7 +78,7 @@
 //        self.dropviewComp2.hidden = NO;
 //    }
     
-    [self.dropviewComp2 setHidden:![AppCommon isCoach]];
+   // [self.dropviewComp2 setHidden:![AppCommon isCoach]];
 
     [self.teamCompCollectionView registerNib:[UINib nibWithNibName:@"MCTeamCompCVC" bundle:nil] forCellWithReuseIdentifier:@"mcTeamCompCVC"];
     

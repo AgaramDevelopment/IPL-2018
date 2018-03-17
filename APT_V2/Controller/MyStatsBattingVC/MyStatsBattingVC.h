@@ -50,5 +50,7 @@
 @property (nonatomic,strong) NSMutableArray * pitchData;
 
 @property (strong,nonatomic) NSString* selectedPlayerCode;
+@property (strong,nonatomic) NSString* selectedPlayerName;
+@property (strong,nonatomic)IBOutlet UILabel* PlayerNamelbl;
 
 @end

@@ -63,7 +63,7 @@
 //        self.viewTeam.hidden = NO;
 //    }
     
-    [self.viewTeam setHidden:![AppCommon isCoach]];
+   // [self.viewTeam setHidden:![AppCommon isCoach]];
 
     
     
@@ -388,7 +388,7 @@
             [self.resultCollectionView reloadData];
             
             [self.nextBtn setTag:0];
-            self.prevBtn.hidden = NO;
+            self.nextBtn.hidden = NO;
             self.prevBtn.hidden = YES;
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             
@@ -457,6 +457,11 @@
             
             recentMatchesArray =[[NSMutableArray alloc]init];
             [self.resultCollectionView reloadData];
+            
+//            [self.nextBtn setTag:0];
+//            self.prevBtn.hidden = NO;
+//            self.prevBtn.hidden = YES;
+//            [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             
             CommonArray = [[NSMutableArray alloc]init];
             [self SetValuesOfTopPlayers:CommonArray];

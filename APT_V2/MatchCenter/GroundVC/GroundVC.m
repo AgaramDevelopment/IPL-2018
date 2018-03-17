@@ -78,18 +78,18 @@
     
     //To Hide Team Code For Player
   
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
-    
-    if([rolecode isEqualToString:plyRolecode])
-        {
-        self.teamView.hidden = YES;
-        }
-    else
-        {
-        self.teamView.hidden = NO;
-        }
-   
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//
+//    if([rolecode isEqualToString:plyRolecode])
+//        {
+//        self.teamView.hidden = YES;
+//        }
+//    else
+//        {
+//        self.teamView.hidden = NO;
+//        }
+//
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;

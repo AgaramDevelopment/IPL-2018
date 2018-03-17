@@ -65,7 +65,7 @@
 //        self.viewTeam.hidden = NO;
 //    }
 //
-    [self.viewTeam setHidden:![AppCommon isCoach]];
+   // [self.viewTeam setHidden:![AppCommon isCoach]];
 
     [[NSUserDefaults standardUserDefaults] setInteger: 13 forKey:@"requiredColumn"];
     [self customnavigationmethod];

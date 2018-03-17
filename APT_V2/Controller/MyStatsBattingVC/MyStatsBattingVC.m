@@ -70,6 +70,8 @@
     battingWagonWheelDrawData = [NSMutableArray new];
     battingPitchData = [NSMutableArray new];
     
+    
+    self.PlayerNamelbl.text = self.selectedPlayerName;
 //    lastIndex = NULL;
 //    selectedIndex = -1;
 //
@@ -649,7 +651,7 @@
                                 
                                 }
                             
-                            if([[self.pitchData valueForKey:@"Battingstyle"] isEqualToString:@"RIGHT"])
+                            if([[self.pitchData valueForKey:@"BattingStyle"] isEqualToString:@"RIGHT"])
                                 {
                                 
                                 cell.PitchImgiPad.image = [UIImage imageNamed:@"Pitchmap"];

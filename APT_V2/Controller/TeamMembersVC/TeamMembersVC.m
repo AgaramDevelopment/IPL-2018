@@ -271,6 +271,7 @@
     
     MyStatsBattingVC* objStats = [MyStatsBattingVC new];
     objStats.selectedPlayerCode = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteCode"];
+    objStats.selectedPlayerName = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteName"];
 //    [objStats viewDidLoad];
 //    objStats.myStatsViewHeight.constant = 60;
 //    objStats.navViewHeight.constant = 35;

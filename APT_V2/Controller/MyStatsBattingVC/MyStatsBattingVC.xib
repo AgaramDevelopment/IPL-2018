@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStatsBattingVC">
             <connections>
+                <outlet property="PlayerNamelbl" destination="ZEe-5Q-o71" id="GJx-s0-x2j"/>
                 <outlet property="battingBtn" destination="SUj-T3-4tx" id="Pji-LH-fJx"/>
                 <outlet property="batttingTableView" destination="XPT-Xj-oAx" id="RcD-KJ-qdg"/>
                 <outlet property="bowlingBtn" destination="daN-fB-lgl" id="kRf-gK-rHu"/>
@@ -41,7 +42,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfY-rn-sXy">
                             <rect key="frame" x="0.0" y="60" width="320" height="35"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Stats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-5Q-o71">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-5Q-o71">
                                     <rect key="frame" x="15" y="0.0" width="305" height="35"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
