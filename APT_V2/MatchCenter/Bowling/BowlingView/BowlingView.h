@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
 @import Charts;
 
-@interface BowlingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
+@interface BowlingView : UIView <ChartViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,selectedDropDown>
 {
     NSString *innNum;
     NSString *Result;

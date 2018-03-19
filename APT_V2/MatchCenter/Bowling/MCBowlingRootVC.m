@@ -64,6 +64,8 @@
         bowView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self removePreviousView:bowView FromSuperView: self.containerView];
         [self.containerView addSubview:bowView];
+        bowView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        bowView.lblteam.text = [AppCommon getCurrentCompetitionName];
         
        // [bowView loadChart];
         [bowView loadTableFreez];
@@ -77,6 +79,9 @@
         }
         
         overView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        overView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        overView.teamlbl.text = [AppCommon getCurrentCompetitionName];
+
         overView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self removePreviousView:overView FromSuperView: self.containerView];
         [self.containerView addSubview:overView];
@@ -97,6 +102,9 @@
         }
         
         bowlOverBlockView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        bowlOverBlockView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        bowlOverBlockView.teamlbl.text = [AppCommon getCurrentCompetitionName];
+
         bowlOverBlockView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self removePreviousView:bowlOverBlockView FromSuperView: self.containerView];
         [self.containerView addSubview:bowlOverBlockView];

@@ -25,5 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *Teamnamelbl;
 
 @property (strong, nonatomic) IBOutlet UIView *teamView;
+- (IBAction)actionCompetetionTeam:(id)sender;
 
 @end

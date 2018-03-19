@@ -15,7 +15,7 @@
 #import "WebService.h"
 #import "Config.h"
 
-@interface MCTeamCompVC ()
+@interface MCTeamCompVC () <selectedDropDown>
 {
 //    NSString *BatsmenCount;
 //    NSString *BowlerCount;
@@ -23,6 +23,8 @@
     
     BOOL isComp;
     BOOL isTeam;
+    WebService *objWebservice;
+
     
 }
 
@@ -58,13 +60,16 @@
 @end
 
 @implementation MCTeamCompVC
+@synthesize Teamnamelbl,Competitionlbl;
 
+@synthesize dropviewComp1,dropviewComp2;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
-    
+    objWebservice = [[WebService alloc]init];
+
     
 //    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
 //    NSString *plyRolecode = @"ROL0000002";
@@ -89,8 +94,13 @@
     
     self.PopTableView.hidden = YES;
     
+    Competitionlbl.text = [AppCommon getCurrentCompetitionName];
+    Teamnamelbl.text = [AppCommon getCurrentTeamName];
+    
+//    CompetitionCode = [AppCommon getCurrentCompetitionCode];
+//    teamcode = [AppCommon getCurrentTeamCode];
+    
     [self TeamWebservice];
-
     
 }
 
@@ -1998,21 +2008,29 @@
 
 -(void)TeamWebservice
 {
+    
+    if(![COMMON isInternetReachable]) {
+        return;
+
+    }
+    else if ([Competitionlbl.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+    else if([Teamnamelbl.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
+    
+    
     [AppCommon showLoading ];
     
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
-    WebService *objWebservice;
-    
-    //NSString *teamcode = @"TEA0000008";
-    //NSString *CompetitionCode = @"UCC0000008";
     NSString *teamcode = [AppCommon getCurrentTeamCode];
-    self.Teamnamelbl.text = [AppCommon getCurrentTeamName];
     
     NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    self.Competitionlbl.text = [AppCommon getCurrentCompetitionName];
-    objWebservice = [[WebService alloc]init];
+    
     
     
     [objWebservice TeamComposition :TeamCompoKey :CompetitionCode :teamcode success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -2274,7 +2292,7 @@
         self.Competitionlbl.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"]objectAtIndex:indexPath.row];
         NSString *selectedCode = [[appDel.ArrayCompetition valueForKey:@"CompetitionCode"]objectAtIndex:indexPath.row];
         
-        [[NSUserDefaults standardUserDefaults] setValue:_Competitionlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competitionlbl.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:selectedCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -2287,7 +2305,7 @@
         self.Teamnamelbl.text = [[appDel.ArrayTeam valueForKey:@"TeamName"]objectAtIndex:indexPath.row];
         NSString *selectedCode = [[appDel.ArrayTeam valueForKey:@"TeamCode"]objectAtIndex:indexPath.row];
         
-        [[NSUserDefaults standardUserDefaults] setValue:self.Teamnamelbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamnamelbl.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:selectedCode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -2298,6 +2316,69 @@
 }
 
 
+
+- (IBAction)actionCompetetionTeam:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 1) { // TEAM
+        
+        dropVC.array = [COMMON getCorrespondingTeamName:Competitionlbl.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp2.frame), CGRectGetMaxY(dropviewComp2.superview.frame)+60, CGRectGetWidth(dropviewComp2.frame), 300)];
+        
+        
+    }
+    else // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp1.frame), CGRectGetMaxY(dropviewComp1.superview.frame)+60, CGRectGetWidth(dropviewComp1.frame), 300)];
+        
+    }
+    
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        Competitionlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:Competitionlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        Teamnamelbl.text = @"Team Name";
+        
+    }
+    else
+    {
+        Teamnamelbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:Teamnamelbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+    [self TeamWebservice];
+
+    
+}
 
 @end
 

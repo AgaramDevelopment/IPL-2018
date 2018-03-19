@@ -43,6 +43,7 @@
 @property (strong, nonatomic) NSMutableArray *ArrayCompetition;
 @property (strong, nonatomic) NSMutableArray *ArrayTeam;
 @property (strong, nonatomic) NSMutableArray *ArrayIPL_teamplayers;
+@property (strong, nonatomic) NSMutableArray *MainArray;
 
 
 

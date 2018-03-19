@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -38,7 +39,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZz-Nf-CAe">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickOverViewDD:" destination="iN0-l3-epB" eventType="touchUpInside" id="NzG-z7-zzT"/>
+                                                                <action selector="actionDropDowns:" destination="iN0-l3-epB" eventType="touchUpInside" id="ELW-JT-dCV"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-g9-9CW">
@@ -89,10 +90,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7M-qI-0iv">
                                                     <rect key="frame" x="165" y="13" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-Nh-sST">
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYz-Nh-sST">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickRunsDD:" destination="iN0-l3-epB" eventType="touchUpInside" id="okC-7d-1Vw"/>
+                                                                <action selector="actionDropDowns:" destination="iN0-l3-epB" eventType="touchUpInside" id="rLr-K1-PSi"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xl-Hi-xFz">
@@ -157,13 +158,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1as-iR-58A">
                                                     <rect key="frame" x="10" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0D-wZ-PgM">
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H0D-wZ-PgM">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickCompetition:" destination="iN0-l3-epB" eventType="touchUpInside" id="ecF-tQ-mYG"/>
+                                                                <action selector="actionDropDowns:" destination="iN0-l3-epB" eventType="touchUpInside" id="9ZT-cZ-Izs"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-Iy-8hN">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze3-Iy-8hN">
                                                             <rect key="frame" x="5" y="3" width="118" height="25"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="highlightedColor"/>
@@ -211,13 +212,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLd-bZ-bcc">
                                                     <rect key="frame" x="165" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Cc-fR-2oR">
+                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Cc-fR-2oR">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickTeam:" destination="iN0-l3-epB" eventType="touchUpInside" id="YWb-Fl-mfg"/>
+                                                                <action selector="actionDropDowns:" destination="iN0-l3-epB" eventType="touchUpInside" id="oE8-MA-Q6F"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01H-B1-D4P">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01H-B1-D4P">
                                                             <rect key="frame" x="5" y="3" width="118" height="25"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="highlightedColor"/>
@@ -436,7 +437,64 @@
                 <outlet property="tableYposition" destination="U9y-yI-Cfb" id="oHV-3W-joP"/>
                 <outlet property="teamView" destination="tLd-bZ-bcc" id="3Sf-Nm-fQO"/>
             </connections>
-            <point key="canvasLocation" x="-53" y="184"/>
+            <point key="canvasLocation" x="804" y="203"/>
+        </view>
+        <view contentMode="scaleToFill" restorationIdentifier="battingView" id="r5A-3O-APr" customClass="BattingView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fby-uR-nzM">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvI-a9-V7n">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tc5-dd-lJS" customClass="BarChartView" customModule="Charts">
+                                    <rect key="frame" x="5" y="5" width="310" height="300"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="tc5-dd-lJS" secondAttribute="bottom" constant="5" id="3nW-pz-EEy"/>
+                                <constraint firstItem="tc5-dd-lJS" firstAttribute="top" secondItem="QvI-a9-V7n" secondAttribute="top" constant="5" id="PUq-ss-h64"/>
+                                <constraint firstItem="tc5-dd-lJS" firstAttribute="leading" secondItem="QvI-a9-V7n" secondAttribute="leading" constant="5" id="ono-6t-TDF"/>
+                                <constraint firstAttribute="trailing" secondItem="tc5-dd-lJS" secondAttribute="trailing" constant="5" id="rRi-0E-n6w"/>
+                                <constraint firstAttribute="height" constant="310" id="sYa-1A-7Mw"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Pp9-XN-1Ih">
+                            <rect key="frame" x="0.0" y="310" width="320" height="258"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionViewLayout key="collectionViewLayout" id="eyd-Rx-CuQ" customClass="CustomCollectionPlayer" customModule="APT_Cricket" customModuleProvider="target"/>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="QvI-a9-V7n" firstAttribute="leading" secondItem="Fby-uR-nzM" secondAttribute="leading" id="QSK-dN-zWe"/>
+                        <constraint firstAttribute="trailing" secondItem="QvI-a9-V7n" secondAttribute="trailing" id="Sa5-p2-p0J"/>
+                        <constraint firstItem="QvI-a9-V7n" firstAttribute="top" secondItem="Fby-uR-nzM" secondAttribute="top" id="UVB-wg-Gg1"/>
+                        <constraint firstItem="Pp9-XN-1Ih" firstAttribute="leading" secondItem="Fby-uR-nzM" secondAttribute="leading" id="Usc-pV-s25"/>
+                        <constraint firstAttribute="trailing" secondItem="Pp9-XN-1Ih" secondAttribute="trailing" id="XCT-fy-lBe"/>
+                        <constraint firstItem="Pp9-XN-1Ih" firstAttribute="top" secondItem="QvI-a9-V7n" secondAttribute="bottom" id="k3S-Jq-KOH"/>
+                        <constraint firstAttribute="bottom" secondItem="Pp9-XN-1Ih" secondAttribute="bottom" id="rMu-HK-Tgh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.79992043970000004" green="0.80005568270000005" blue="0.79990267749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Fby-uR-nzM" secondAttribute="trailing" id="1mY-Ii-10k"/>
+                <constraint firstItem="Fby-uR-nzM" firstAttribute="leading" secondItem="r5A-3O-APr" secondAttribute="leading" id="aC1-N9-jzO"/>
+                <constraint firstAttribute="bottom" secondItem="Fby-uR-nzM" secondAttribute="bottom" id="aa2-CM-sSw"/>
+                <constraint firstItem="Fby-uR-nzM" firstAttribute="top" secondItem="r5A-3O-APr" secondAttribute="top" id="fRP-6K-dxh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="CUX-s3-oAD"/>
+            <connections>
+                <outlet property="chartView" destination="tc5-dd-lJS" id="Nh0-70-Ool"/>
+                <outlet property="resultCollectionView" destination="Pp9-XN-1Ih" id="twk-th-8Nc"/>
+            </connections>
+            <point key="canvasLocation" x="351" y="184"/>
         </view>
     </objects>
     <resources>

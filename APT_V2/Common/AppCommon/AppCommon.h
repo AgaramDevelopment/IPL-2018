@@ -55,7 +55,7 @@
 +(BOOL)isCoach;
 +(void)getTeamAndPlayerCode;
 +(NSString *)checkNull:(NSString *)_value;
--(void)getCorrespondingTeamName:(NSString *)competetionName;
+-(NSArray *)getCorrespondingTeamName:(NSString *)competetionName;
 
 @end
 

@@ -39,7 +39,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUz-TZ-rCN">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickCompetition:" destination="IZM-LB-5CT" eventType="touchUpInside" id="cEy-BT-hb5"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="zd8-sI-0Sp"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuX-1z-567">
@@ -90,10 +90,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKT-Vf-Hwj">
                                                     <rect key="frame" x="165" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvH-eS-ujb">
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvH-eS-ujb">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickTeam:" destination="IZM-LB-5CT" eventType="touchUpInside" id="0o9-pD-5EL"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="ohv-Py-8hk"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mg6-f2-nuS">
@@ -159,10 +159,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-oY-MD9">
                                                     <rect key="frame" x="10" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO9-Fh-Nrl">
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO9-Fh-Nrl">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickOverViewDD:" destination="IZM-LB-5CT" eventType="touchUpInside" id="Hfi-3B-KLy"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="Hza-SD-9K0"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnI-6g-IlZ">
@@ -213,10 +213,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXR-Sy-kSX">
                                                     <rect key="frame" x="165" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puV-Dm-G2d">
+                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puV-Dm-G2d">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickRunsDD:" destination="IZM-LB-5CT" eventType="touchUpInside" id="sLJ-6P-KSa"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="0FD-2Z-dwV"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-6c-TeM">
@@ -286,7 +286,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-6 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTe-Hn-Wj3">
-                                                    <rect key="frame" x="0.0" y="313" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="313" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -314,7 +314,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-15 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1U8-Dy-fA8">
-                                                    <rect key="frame" x="0.0" y="313" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="313" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -342,7 +342,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16-20 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfH-Zq-8MI">
-                                                    <rect key="frame" x="0.0" y="313" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="313" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

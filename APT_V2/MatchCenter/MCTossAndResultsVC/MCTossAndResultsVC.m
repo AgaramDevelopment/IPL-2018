@@ -416,6 +416,16 @@
     
         if(![COMMON isInternetReachable])
             return;
+    
+    if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+    else if([lblTeam.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
         
         [AppCommon showLoading];
     
@@ -634,7 +644,7 @@
 
     if ([sender tag] == 1) { // TEAM
         
-        dropVC.array = appDel.ArrayTeam;
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
 
@@ -667,6 +677,8 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        lblTeam.text = @"Team Name";
         
     }
     else

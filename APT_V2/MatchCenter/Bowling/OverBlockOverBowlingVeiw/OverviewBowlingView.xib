@@ -39,7 +39,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUz-TZ-rCN">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickOverViewDD:" destination="IZM-LB-5CT" eventType="touchUpInside" id="o9q-eu-T6r"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="cRR-qv-vBm"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuX-1z-567">
@@ -87,10 +87,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKT-Vf-Hwj">
                                                     <rect key="frame" x="165" y="13" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvH-eS-ujb">
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvH-eS-ujb">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickRunsDD:" destination="IZM-LB-5CT" eventType="touchUpInside" id="qsQ-q6-UW5"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="ZZw-XU-blY"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mg6-f2-nuS">
@@ -158,10 +158,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wF9-Gc-NKU">
                                                     <rect key="frame" x="10" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ek-cc-ujT">
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ek-cc-ujT">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickCompetition:" destination="IZM-LB-5CT" eventType="touchUpInside" id="zDv-p7-SKF"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="ETo-zo-5Ge"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CU-wg-rEN">
@@ -212,10 +212,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02C-QK-pZF">
                                                     <rect key="frame" x="165" y="15" width="145" height="30"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwO-Fc-4Lb">
+                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwO-Fc-4Lb">
                                                             <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                             <connections>
-                                                                <action selector="onClickTeam:" destination="IZM-LB-5CT" eventType="touchUpInside" id="oWp-WU-IZo"/>
+                                                                <action selector="actionDropDowns:" destination="IZM-LB-5CT" eventType="touchUpInside" id="ecp-pE-nTh"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4K-Hx-7Iz">

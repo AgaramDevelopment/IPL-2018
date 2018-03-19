@@ -13,6 +13,11 @@
 
 @implementation OverviewView
 
+@synthesize runslbl,overViewlbl;
+
+@synthesize lblCompetetion,teamlbl;
+
+@synthesize competView,teamView,barView,lineView;
 
 BOOL isXAxis;
 BOOL isYAxis;
@@ -877,11 +882,21 @@ NSMutableArray *months;
 
 -(void)ChartsWebservice
 {
-    [AppCommon showLoading];
-    if([COMMON isInternetReachable])
+    if(![COMMON isInternetReachable])
     {
+        return;
+    }
+    else if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
         
-        
+        return;
+    }
+    else if([teamlbl.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
+        [AppCommon showLoading];
+
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",battingOverViewkKey]];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -897,8 +912,8 @@ NSMutableArray *months;
         
         NSString *COMPETITIONCODE = [AppCommon getCurrentCompetitionCode];
         NSString *TEAMCODE = [AppCommon getCurrentTeamCode];
-        self.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
-        self.teamlbl.text = [AppCommon getCurrentTeamName];
+//        self.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+//        self.teamlbl.text = [AppCommon getCurrentTeamName];
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -993,7 +1008,6 @@ NSMutableArray *months;
             [COMMON webServiceFailureError:error];
             
         }];
-    }
     
 }
 
@@ -1006,6 +1020,108 @@ NSMutableArray *months;
 }
 
 
+- (IBAction)actionDropDowns:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+ if ([sender tag] == 0) // Competitions
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+60+50, CGRectGetWidth(competView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 1) // Teams
+    {
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 2) { // X Axis value
+        
+        NSArray* arr = @[@{@"Xvalue":@"Runs"},
+                         @{@"Xvalue":@"Wickets"},
+                         @{@"Xvalue":@"Strike Rate"},
+                         @{@"Xvalue":@"Runs per over"},
+                         @{@"Xvalue":@"Dot balls %"},
+                         @{@"Xvalue":@"Boundaries %"}];
+        
+        
+        dropVC.array = arr;
+        dropVC.key = @"Xvalue";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(barView.frame), CGRectGetMaxY(barView.superview.frame)+60+50, CGRectGetWidth(barView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 3) // Y Axis value
+    {
+        
+        NSArray* arr = @[@{@"Yvalue":@"Runs"},
+                         @{@"Yvalue":@"Wickets"},
+                         @{@"Yvalue":@"Strike Rate"},
+                         @{@"Yvalue":@"Runs per over"},
+                         @{@"Yvalue":@"Dot balls %"},
+                         @{@"Yvalue":@"Boundaries %"}];
+        
+        dropVC.array = arr;
+        dropVC.key = @"Yvalue";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+60+50, CGRectGetWidth(lineView.frame), 300)];
+        
+    }
+
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        teamlbl.text = @"Team Name";
+        
+    }
+    else if([key isEqualToString:@"TeamName"])
+    {
+        teamlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    else if([key isEqualToString:@"Xvalue"])
+    {
+        overViewlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+//        Result = [[array objectAtIndex:Index.row] valueForKey:@"result"];
+//        innNum = [[array objectAtIndex:Index.row] valueForKey:@"inns"];
+        
+    }
+    else if([key isEqualToString:@"Yvalue"])
+    {
+        runslbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+//        types = [[array objectAtIndex:Index.row] valueForKey:@"types"];
+    }
+    
+    [self ChartsWebservice];
+    
+    
+}
 
 
 @end

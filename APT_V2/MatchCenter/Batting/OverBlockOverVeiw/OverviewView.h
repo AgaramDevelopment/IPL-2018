@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
 @import Charts;
 
-@interface OverviewView : UIView<ChartViewDelegate,IChartAxisValueFormatter,UITableViewDelegate,UITableViewDataSource>
+@interface OverviewView : UIView<ChartViewDelegate,IChartAxisValueFormatter,UITableViewDelegate,UITableViewDataSource,selectedDropDown>
 {
     NSString *Barvalue;
     NSString *linevalue;

@@ -655,7 +655,9 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 
 -(void)getIPLTeamCodessuccess:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
 {
-    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMSTEMP");
+    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMS");
+
+//    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMSTEMP");
     [self GET:URL parameters:nil
       success:^(AFHTTPRequestOperation *operation, id responseDict)
      {

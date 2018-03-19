@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Header.h"
 
-@interface BowlingOverBlockView : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface BowlingOverBlockView : UIView <UICollectionViewDelegate,UICollectionViewDataSource,selectedDropDown>
 {
     BOOL isCompe;
     BOOL isTeam;

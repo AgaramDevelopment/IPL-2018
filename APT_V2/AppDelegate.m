@@ -34,7 +34,7 @@
 
 @synthesize ArrayTeam,ArrayCompetition;
 
-@synthesize ArrayIPL_teamplayers;
+@synthesize ArrayIPL_teamplayers,MainArray;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

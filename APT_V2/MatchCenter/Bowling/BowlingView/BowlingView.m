@@ -16,6 +16,10 @@
 
 @implementation BowlingView
 
+@synthesize lblCompetetion,lblteam,runslbl,overViewlbl;
+
+@synthesize overallView,runsView,CompetitionView,teamView;
+
 NSArray* headingBowlKeyArray;
 NSArray* headingBowlButtonNames;
 BOOL isBowlOverview;
@@ -745,8 +749,19 @@ BOOL wicketSortingKey;
 -(void) BowlingWebservice
 {
     
-    if([COMMON isInternetReachable])
-    {
+        if(![COMMON isInternetReachable])
+        {
+            return;
+        }
+        else if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+            
+            return;
+        }
+        else if([lblteam.text isEqualToString:@"Team Name"])
+        {
+            return;
+        }
+
         [AppCommon showLoading];
         
         NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",TeambowlingKey]];
@@ -757,16 +772,9 @@ BOOL wicketSortingKey;
         manager.requestSerializer = requestSerializer;
         
     
-        //NSString *CompetitionCode = @"UCC0000008";
-        //NSString *teamcode = @"TEA0000008";
-        //NSString *result = @"WON";
-        // NSString *innNo = @"1";
-        // NSString *type = @"DOTS";
         
         NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-        self.lblCompetetion.text= [AppCommon getCurrentCompetitionName];
         NSString *teamcode = [AppCommon getCurrentTeamCode];
-        self.lblteam.text= [AppCommon getCurrentTeamName];
         
         
         
@@ -815,7 +823,6 @@ BOOL wicketSortingKey;
             [COMMON webServiceFailureError:error];
             
         }];
-    }
     
 }
 
@@ -834,6 +841,127 @@ BOOL wicketSortingKey;
     
 }
 
+- (IBAction)actionDropDowns:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 0) { // OverAll
+        
+        NSArray* arr = @[@{@"overall":@"Overall",
+                           @"inns":@"",
+                           @"result":@""},
+                         @{@"overall":@"Batting 1st",
+                           @"inns":@"1",
+                           @"result":@""},
+                         @{@"overall":@"Batting 2nd",
+                           @"inns":@"2",
+                           @"result":@""},
+                         @{@"overall":@"Batting 1st Won",
+                           @"inns":@"1"
+                           ,@"result":@"won"},
+                         @{@"overall":@"Batting 2nd Won",
+                           @"inns":@"2"
+                           ,@"result":@"won"},
+                         @{@"overall":@"Batting 1st Lost",
+                           @"inns":@"1"
+                           ,@"result":@"loss"},
+                         @{@"overall":@"Batting 2nd Lost",
+                           @"inns":@"2",@"result":@"loss"}];
+        
+        
+        dropVC.array = arr;
+        dropVC.key = @"overall";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(overallView.frame), CGRectGetMaxY(overallView.superview.frame)+60+50, CGRectGetWidth(overallView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 1) // Runs
+    {
+        
+
+        NSArray* arr = @[@{@"Runs":@"Wickets"
+                           ,@"types":@"WICKETS"},
+                         @{@"Runs":@"Strike Rate",
+                           @"types":@"STRIKERATE"},
+                         @{@"Runs":@"Average",
+                           @"types":@"AVERAGE"},
+                         @{@"Runs":@"Economy",
+                           @"types":@"ECONOMY"},
+                         @{@"Runs":@"Dot Balls",
+                           @"types":@"DOTS"}];
+        
+        dropVC.array = arr;
+        dropVC.key = @"Runs";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(runsView.frame), CGRectGetMaxY(runsView.superview.frame)+60+50, CGRectGetWidth(runsView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 2) // Competitions
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(CompetitionView.frame), CGRectGetMaxY(CompetitionView.superview.frame)+60+50, CGRectGetWidth(CompetitionView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 3) // Teams
+    {
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        
+    }
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        lblteam.text = @"Team Name";
+        
+    }
+    else if([key isEqualToString:@"TeamName"])
+    {
+        lblteam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblteam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    else if([key isEqualToString:@"overall"])
+    {
+        overViewlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        Result = [[array objectAtIndex:Index.row] valueForKey:@"result"];
+        innNum = [[array objectAtIndex:Index.row] valueForKey:@"inns"];
+        
+    }
+    else if([key isEqualToString:@"Runs"])
+    {
+        runslbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        types = [[array objectAtIndex:Index.row] valueForKey:@"types"];
+    }
+    
+    [self BowlingWebservice];
+    
+    
+}
 
 
 

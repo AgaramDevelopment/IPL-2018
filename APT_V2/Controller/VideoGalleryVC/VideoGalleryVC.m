@@ -86,7 +86,14 @@
     
 //    [btnUpload setHidden:![AppCommon isCoach]];
     
+    lblTeam.text = @"KKR";
+    lblPlayer.text = @"Chris Lynn";
+    lblcategory.text = @"BATTING";
+    lblType.text = @"BEATEN&UNCOMFORT";
+    [self newVideoListingwebservice];
     
+//    view
+
 
 }
 
@@ -96,13 +103,6 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-    
-    lblTeam.text = @"KKR";
-    lblPlayer.text = @"Chris Lynn";
-    lblcategory.text = @"BATTING";
-    lblType.text = @"BEATEN&UNCOMFORT";
-    
-    [self newVideoListingwebservice];
 
 }
 
@@ -399,6 +399,7 @@
         cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
         return cell;
     }
+    
     if(collectionView==self.videoCollectionview2)
     {
         VideoGalleryUploadCell* cell = [self.videoCollectionview2 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
@@ -426,6 +427,22 @@
         
         cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
 //        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+        
+//        if (indexPath.row % 2 == 1) {
+//
+            cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        }
+//        else {
+//            cell.layer.shadowColor = [UIColor redColor].CGColor;
+//        }
+        
+
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
         
         return cell;
     }

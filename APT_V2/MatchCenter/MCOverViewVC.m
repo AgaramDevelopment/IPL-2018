@@ -150,8 +150,6 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    
     CGFloat widthF = self.resultCollectionView.superview.frame.size.width-20;
     CGFloat HeightF = self.resultCollectionView.superview.frame.size.height-20;
     
@@ -236,6 +234,15 @@
         }];
         
         
+        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 5.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
+        
         return cell;
         
     }
@@ -287,12 +294,22 @@
 
 
 
--(void)OverviewWebservice // :(NSString *)compCode :(NSString *)temCode
+-(void)OverviewWebservice
 {
     
     if (![COMMON isInternetReachable]) {
         return;
     }
+    
+    if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+    else if([lblTeamName.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+    
     
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);
@@ -319,7 +336,7 @@
             
                 NSString *groundDetails = [NSString stringWithFormat:@"%@,%@",[[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0], [[teamDetailsArray valueForKey:@"Venue"] objectAtIndex:0]];
                 self.Groundmnamelbl.text = [[teamDetailsArray valueForKey:@"GroundName"] objectAtIndex:0];
-                self.Captainnamelbl.text = [NSString stringWithFormat:@"Captain :%@",[[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0]];
+                self.Captainnamelbl.text = [NSString stringWithFormat:@"Captain : %@",[[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0]];
             
 //                [[teamDetailsArray valueForKey:@"PlayerName"] objectAtIndex:0];
             
@@ -620,10 +637,9 @@
     if ([sender tag] == 1) { // TEAM
         
         
-        dropVC.array = appDel.ArrayTeam;
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
-        
         
     }
     else // COMPETETION
@@ -652,7 +668,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:CompetitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-//        [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        lblTeamName.text = @"Team Name";
         
         
         

@@ -15,6 +15,9 @@
 
 @implementation BowlingOverBlockView
 
+@synthesize lblCompetetion,teamlbl;
+
+@synthesize competView,teamView;
 
 -(void) loadPowerPlayDetails {
     
@@ -183,6 +186,20 @@
 
 -(void)OverblockWebservice
 {
+    
+    if(![COMMON isInternetReachable])
+    {
+        return;
+    }
+    else if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+    else if([teamlbl.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
     [AppCommon showLoading ];
     
     //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
@@ -537,6 +554,69 @@
         _value=@"";
     }
     return _value;
+}
+
+- (IBAction)actionCompetetionTeam:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    
+    if ([sender tag] == 1) { // TEAM
+        
+        
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60, CGRectGetWidth(teamView.frame), 300)];
+        
+    }
+    else // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+60, CGRectGetWidth(competView.frame), 300)];
+        
+    }
+    
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* competitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        teamlbl.text = @"Team Name";
+        
+        
+        
+    }
+    else
+    {
+        NSString* TeamCode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        teamlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        [[NSUserDefaults standardUserDefaults] setValue:teamlbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:TeamCode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+    
+    [self OverblockWebservice];
+    
+    
 }
 
 @end

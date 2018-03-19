@@ -62,7 +62,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQj-9t-HFM">
                                                     <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
                                                     <connections>
-                                                        <action selector="onClickCompetitionBtn:" destination="-1" eventType="touchUpInside" id="T2h-L5-VyQ"/>
+                                                        <action selector="actionCompetetionTeam:" destination="-1" eventType="touchUpInside" id="4XS-ul-sW0"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="competition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8R6-L6-2gC">
@@ -113,10 +113,10 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5OD-Rf-BYB">
                                             <rect key="frame" x="182.5" y="13" width="162.5" height="30"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZZ-N2-YbR">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZZ-N2-YbR">
                                                     <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
                                                     <connections>
-                                                        <action selector="onClickTeamBtn:" destination="-1" eventType="touchUpInside" id="JEX-Lm-lmM"/>
+                                                        <action selector="actionCompetetionTeam:" destination="-1" eventType="touchUpInside" id="iys-3V-zbZ"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9R-9J-kg8">

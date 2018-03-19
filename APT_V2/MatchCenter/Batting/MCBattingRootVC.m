@@ -24,6 +24,7 @@
 
 @implementation MCBattingRootVC
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self customnavigationmethod];
@@ -45,6 +46,7 @@
     
 
 }
+
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
     for (UIView *subView in view.subviews) {
         if (![subView isKindOfClass:[previousView class]]) {
@@ -53,9 +55,10 @@
     }
 }
 
-
 -(void) loadContainerView : (NSString *) position{
     
+    [self removePreviousView:btView FromSuperView: self.containerView];
+
     if([position isEqualToString:@"1"]){
 
         if(btView == nil){
@@ -64,9 +67,9 @@
         
         btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
         btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:btView FromSuperView: self.containerView];
         [self.containerView addSubview:btView];
         btView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        btView.lblteam.text = [AppCommon getCurrentTeamName];
         [btView loadChart];
         [btView loadTableFreez];
 
@@ -79,18 +82,16 @@
         }
         
         overView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        overView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        overView.teamlbl.text = [AppCommon getCurrentTeamName];
+
         overView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:overView FromSuperView: self.containerView];
         [self.containerView addSubview:overView];
         
         [overView loadChart];
        
     }
     else if([position isEqualToString:@"3"]){
-        
-      //  [self setInningsButtonSelect:self.overBlockBtn];
-        
-        
         
         if(battingOverBlockView == nil){
             
@@ -99,8 +100,9 @@
         }
         
         battingOverBlockView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        battingOverBlockView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        battingOverBlockView.teamlbl.text = [AppCommon getCurrentTeamName];
         battingOverBlockView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:battingOverBlockView FromSuperView: self.containerView];
         [self.containerView addSubview:battingOverBlockView];
         
         [battingOverBlockView loadPowerPlayDetails];
@@ -220,9 +222,10 @@
 }
 
 - (IBAction)onClickOverBlock:(id)sender {
+    
     [self setInningsBySelection:@"3"];
     [self loadContainerView : @"3"];
-
+    
 }
 
 

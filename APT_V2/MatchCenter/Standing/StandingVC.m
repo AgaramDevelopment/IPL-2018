@@ -360,6 +360,21 @@
 
 -(void)StandingsWebservice
 {
+    
+    if(![COMMON isInternetReachable])
+    {
+        return;
+    }
+    else if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+    else if([lblTeam.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
+    
     [AppCommon showLoading ];
     
     
@@ -435,6 +450,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        lblTeam.text =@"Team Name";
         
         
     }
