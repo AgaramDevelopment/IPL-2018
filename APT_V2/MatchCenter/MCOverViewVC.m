@@ -305,11 +305,11 @@
         
         return;
     }
-    else if([lblTeamName.text isEqualToString:@"Team Name"])
+    else if([AppCommon isCoach] && [lblTeamName.text isEqualToString:@"Team Name"])
     {
         return;
     }
-    
+
     
     [AppCommon showLoading ];
     NSLog(@"TEAM CODE %@",appDel.ArrayTeam);

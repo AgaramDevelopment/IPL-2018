@@ -11,9 +11,10 @@
 #import "Config.h"
 #import "CustomNavigation.h"
 #import "WebService.h"
+#import "Header.h"
 
-
-@interface StandingVC (){
+@interface StandingVC ()<selectedDropDown>
+{
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
     BOOL isYear;
@@ -369,10 +370,10 @@
         
         return;
     }
-    else if([lblTeam.text isEqualToString:@"Team Name"])
-    {
-        return;
-    }
+//    else if([AppCommon isCoach] && [lblTeam.text isEqualToString:@"Team Name"])
+//    {
+//        return;
+//    }
 
     
     [AppCommon showLoading ];
@@ -410,7 +411,6 @@
 
 
 - (IBAction)actionDropDown:(id)sender {
-    
     
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;

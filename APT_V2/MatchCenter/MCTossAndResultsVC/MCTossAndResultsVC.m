@@ -421,7 +421,7 @@
         
         return;
     }
-    else if([lblTeam.text isEqualToString:@"Team Name"])
+    else if([AppCommon isCoach] && [lblTeam.text isEqualToString:@"Team Name"])
     {
         return;
     }

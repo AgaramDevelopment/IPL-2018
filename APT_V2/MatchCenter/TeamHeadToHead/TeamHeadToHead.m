@@ -12,9 +12,9 @@
 #import "Config.h"
 #import "WebService.h"
 #import "AppCommon.h"
+#import "Header.h"
 
-
-@interface TeamHeadToHead ()
+@interface TeamHeadToHead () <selectedDropDown>
 {
     BOOL isteam1;
     BOOL isteam2;
@@ -28,7 +28,9 @@
     
     NSString *team1InnsNum, *team2InnsNum, *tossWonTeamCode, *fromOver, *toOver;
     NSString *teamName, *competitionName;
+    NSInteger teamCount;
 }
+
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray1;
 //@property (nonatomic, strong) IBOutlet NSMutableArray *h2hResultsArray;
@@ -40,7 +42,12 @@
 
 @implementation TeamHeadToHead
 
-- (void)viewDidLoad {
+@synthesize competitionTF,team1TF,team2TF,groundTF;
+
+@synthesize competitionView,team1View,team2View,groundView;
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     groundCode = @"";
@@ -114,13 +121,26 @@
 
 - (IBAction)GroundBtnAction:(id)sender
 {
+    
+    
     isteam1 = NO;
     isteam2 = NO;
     isGround = YES;
     isCompetition = NO;
     self.Poptable.hidden = NO;
     self.commonArray = [NSMutableArray new];
-    self.commonArray = self.commonArray1;
+//    self.commonArray = self.commonArray1;
+    NSArray* temparray = [self getCorrespondingGrounds:competitionTF.text];
+    
+    for (NSDictionary* temp1 in temparray) {
+        if (![[self.commonArray valueForKey:@"Groundcode"] containsObject:[temp1 valueForKey:@"Groundcode"]]) {
+            [self.commonArray addObject:temp1];
+        }
+    }
+    
+    
+//    NSSet* set1 = [[NSSet setWithArray:[self.commonArray1 valueForKey:@""]]
+
     self.tableWidth.constant = self.groundView.frame.size.width;
     self.tableXposition.constant = self.groundView.frame.origin.x+5;
     self.tableYposition.constant = self.groundView.frame.origin.y+self.groundView.frame.size.height+20;
@@ -128,6 +148,16 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.Poptable reloadData];
     });
+}
+
+-(NSArray *)getCorrespondingGrounds:(NSString *)CompetitionName
+{
+    NSArray* result;
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@",CompetitionName];
+    result = [self.commonArray1 filteredArrayUsingPredicate:predicate];
+    
+    return result;
 }
 
 - (IBAction)CompetitionBtnAction:(id)sender {
@@ -639,6 +669,120 @@
         _value=@"";
     }
     return _value;
+}
+
+- (IBAction)actionDropDowns:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    
+    if ([sender tag] == 0) // Competitions
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(CompetitionView.frame), CGRectGetMaxY(CompetitionView.superview.frame)+60+50, CGRectGetWidth(CompetitionView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 1) // Ground
+    {
+        
+        NSArray* temparray = [self getCorrespondingGrounds:competitionTF.text];
+        NSMutableArray* arr = [NSMutableArray new];
+        for (NSDictionary* temp1 in temparray) {
+            if (![[arr valueForKey:@"Groundcode"] containsObject:[temp1 valueForKey:@"Groundcode"]]) {
+                [arr addObject:temp1];
+            }
+        }
+
+        dropVC.array = arr;
+        dropVC.key = @"Ground";
+        
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 2) { // Teams 1
+        teamCount = 1;
+        dropVC.array = [COMMON getCorrespondingTeamName:competitionTF.text];
+        dropVC.key = @"TeamName";
+        
+        //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(overallView.frame), CGRectGetMaxY(overallView.superview.frame)+60+50, CGRectGetWidth(overallView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 3) // Teams 2
+    {
+        
+        teamCount = 2;
+        NSMutableArray* team2 = [NSMutableArray new];
+        [team2 addObjectsFromArray:[COMMON getCorrespondingTeamName:competitionTF.text]];
+        
+        for (NSDictionary* tempDict in team2) {
+            if ([[team2 valueForKey:@"TeamCode"]containsObject:team1Code]) {
+                NSInteger index = [team2 indexOfObject:tempDict];
+                [team2 removeObjectAtIndex:index];
+                break;
+            }
+        }
+        
+        dropVC.array = team2;
+        dropVC.key = @"TeamName";
+        
+        //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(runsView.frame), CGRectGetMaxY(runsView.superview.frame)+60+50, CGRectGetWidth(runsView.frame), 300)];
+        
+    }
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        competitionTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:competitionTF.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        team1TF.text = @"";
+        team2TF.text = @"";
+        groundTF.text = @"Ground Name";
+    }
+    else if([key isEqualToString:@"TeamName"] && teamCount == 1)
+    {
+        team1TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        team1Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        team2TF.text = @"";
+    }
+    else if([key isEqualToString:@"TeamName"] && teamCount == 2)
+    {
+        team2Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+
+        if ([team1Code isEqualToString:team2Code]) {
+            [AppCommon showAlertWithMessage:@"Please Select Different team in Team-B"];
+            return;
+        }
+        
+        team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+    }
+    else if([key isEqualToString:@"Ground"])
+    {
+        groundTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        groundCode = [[array objectAtIndex:Index.row] valueForKey:@"Groundcode"];
+    }
+    
+    
+    
 }
 
 @end

@@ -682,7 +682,7 @@ BOOL runSortingKey;
     {
         return;
     }
-    else if ([lblteam.text isEqualToString:@"Team Name"])
+    else if([AppCommon isCoach] && [lblteam.text isEqualToString:@"Team Name"])
     {
         return;
     }

@@ -69,13 +69,26 @@
 
 @implementation GroundVC
 
+@synthesize teamView,competitionView,groundView;
+
+@synthesize groundLbl,teamCodeTF,competitionCodeTF;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self customnavigationmethod];
+    
+    
     
     competitionCode = [AppCommon getCurrentCompetitionCode];
     competitionName = [AppCommon getCurrentCompetitionName];
     
+    competitionCodeTF.text = [AppCommon getCurrentCompetitionName];
+    teamCodeTF.text = [AppCommon getCurrentTeamName];
+    
+    //Ground List Get Service Call dropdown
+    [self groundListGetService];
+
     //To Hide Team Code For Player
   
 //    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
@@ -108,11 +121,7 @@
     self.competitionTeamCodesTblView.hidden = YES;
    // [self barchartMultiple];
     
-    //Ground List Get Service Call
-    [self groundListGetService];
     
-//    [self groundGetService];
-//    [self groundDimensions];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -127,12 +136,13 @@
     mask.frame = self.ColorView.bounds;
     mask.path = path.CGPath;
     self.ColorView.layer.mask = mask;
+    
+
 }
 
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation;
-    
     
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
     
@@ -185,6 +195,7 @@
     
     [AppCommon showLoading];
     
+    
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, competitionCode];
 //    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),GroundList, @"UCC0000008"];
     
@@ -194,10 +205,14 @@
     manager.requestSerializer = requestSerializer;
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        NSLog(@"groundListGetService RESPONSE:%@",responseObject);
         
-        groundResultsArray = [NSMutableArray new];
-        groundResultsArray = [responseObject valueForKey:@"GroundResults"];
+        if (responseObject) {
+            
+            groundResultsArray = [NSMutableArray new];
+            groundResultsArray = [responseObject valueForKey:@"GroundResults"];
+        }
+        
         
         [AppCommon hideLoading];
         
@@ -299,12 +314,23 @@
      */
     // PARAMETER  :   {COMPETITIONCODE}/{GROUNDCODE}
     //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/UCC0000008/GRD0000006
+    
     if(![COMMON isInternetReachable])
+    {
         return;
+    }
+    else if([competitionCodeTF.text isEqualToString:@"Competition Name"])
+    {
+        return;
+    }
+    else if([teamCodeTF.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
     
     [AppCommon showLoading];
     
-//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, @"UCC0000008", @"GRD0000006"];
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, competitionCode, groundCode];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -409,8 +435,11 @@
 //            self.groundBottomRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GBottomLeft"]];
         }
     
+        dispatch_async(dispatch_get_main_queue(), ^{
             //GroundOverResults Get Service Method
-        [self groundOverResultsGetService];
+            [self groundOverResultsGetService];
+        });
+
         
         [AppCommon hideLoading];
         
@@ -433,6 +462,7 @@
     [AppCommon showLoading];
     
 //    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
+    
     //Doubt --->
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, @"0", @"5"];
     
@@ -723,8 +753,25 @@
         MCOverViewResultCVC* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"mcResultCVC" forIndexPath:indexPath];
         
 //        cell.team1Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"] ];
-        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"]] placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
         
+        NSString* ATPhoto = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATPhoto"];
+        
+//        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:ATPhoto ]placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
+        
+        [self downloadImageWithURL:[NSURL URLWithString:ATPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.team1Img.image = image;
+                
+                // cache the image for use later (when scrolling up)
+                cell.team1Img.image = image;
+            }
+            else
+            {
+                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+
         cell.Teamname1lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATName"]];
         
         NSString *team1RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsWckts"]]];
@@ -736,11 +783,31 @@
         NSString *team1crr = [NSString stringWithFormat:@"CRR:%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATRR"]]];
         cell.runrate1lbl.text = team1crr;
         
-        
 //                cell.team2Img.image = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"] ];
-        [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"]] placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
+        
+        NSLog(@"IMage URL %@",[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"]);
+        
+         NSString* BTPhoto = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTPhoto"];
+        NSURL* url1 = [NSURL URLWithString:BTPhoto];
+        
+//        [cell.team2Img sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
+        
         cell.Teamname2lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTName"]];
         
+        [self downloadImageWithURL:[NSURL URLWithString:BTPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.team2Img.image = image;
+
+                // cache the image for use later (when scrolling up)
+                cell.team2Img.image = image;
+            }
+            else
+            {
+                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
+            }
+        }];
+
         NSString *team2RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsWckts"]]];
         cell.runs2lbl.text = team2RunsWickets;
         
@@ -1308,6 +1375,121 @@
         _value=@"";
     }
     return _value;
+}
+
+- (IBAction)actionDropDowns:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 0) // Competitions
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60+50, CGRectGetWidth(competitionView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 1) // Teams
+    {
+        dropVC.array = [COMMON getCorrespondingTeamName:competitionCodeTF.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 2) { // X Axis value
+        
+//        NSArray* arr = @[@{@"Xvalue":@"Runs"},
+//                         @{@"Xvalue":@"Wickets"},
+//                         @{@"Xvalue":@"Strike Rate"},
+//                         @{@"Xvalue":@"Runs per over"},
+//                         @{@"Xvalue":@"Dot balls %"},
+//                         @{@"Xvalue":@"Boundaries %"}];
+        
+        if (!groundResultsArray.count) {
+            [self groundListGetService];
+        }
+        
+        dropVC.array = groundResultsArray;
+        dropVC.key = @"GroundName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60+50, CGRectGetWidth(groundView.frame), 300)];
+        
+    }
+//    else if ([sender tag] == 3) // Y Axis value
+//    {
+//
+//        NSArray* arr = @[@{@"Yvalue":@"Runs"},
+//                         @{@"Yvalue":@"Wickets"},
+//                         @{@"Yvalue":@"Strike Rate"},
+//                         @{@"Yvalue":@"Runs per over"},
+//                         @{@"Yvalue":@"Dot balls %"},
+//                         @{@"Yvalue":@"Boundaries %"}];
+//
+//        dropVC.array = arr;
+//        dropVC.key = @"Yvalue";
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+60+50, CGRectGetWidth(lineView.frame), 300)];
+//
+//    }
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        competitionCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCodeTF.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        teamCodeTF.text = @"Team Name";
+        
+    }
+    else if([key isEqualToString:@"TeamName"])
+    {
+        teamCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    else //if([key isEqualToString:@"GroundName"])
+    {
+        groundLbl.text = [NSString stringWithFormat:@"%@ %@", [[array objectAtIndex:Index.row] valueForKey:@"GroundName"], [[array objectAtIndex:Index.row] valueForKey:@"Venue"]];
+        
+        groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
+
+    }
+    [self groundGetService];
+    
+    
+}
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
 }
 
 @end

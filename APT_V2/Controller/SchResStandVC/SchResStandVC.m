@@ -300,6 +300,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     if(collectionView==self.scheduleCollectionView)
     {
         

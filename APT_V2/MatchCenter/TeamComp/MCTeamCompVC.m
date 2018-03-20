@@ -2017,7 +2017,7 @@
         
         return;
     }
-    else if([Teamnamelbl.text isEqualToString:@"Team Name"])
+    else if([AppCommon isCoach] && [Teamnamelbl.text isEqualToString:@"Team Name"])
     {
         return;
     }
