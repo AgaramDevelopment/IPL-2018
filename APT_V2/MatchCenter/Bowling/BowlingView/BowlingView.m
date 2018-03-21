@@ -74,7 +74,7 @@ BOOL wicketSortingKey;
     
     if(isBowlOverview==YES)
     {
-        cell.textLabel.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
+        cell.textLabel.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Bowling 1st" : indexPath.row == 2 ? @"Bowling 2nd" :  indexPath.row == 3 ? @"Bowling 1st Won" :  indexPath.row == 4 ? @"Bowling 2nd Won" :  indexPath.row == 5 ? @"Bowling 1st Lost" :  @"Bowling 2nd Lost";
 
     }else if(isBowlRun==YES)
     {
@@ -102,7 +102,7 @@ BOOL wicketSortingKey;
 {
     if(isBowlOverview==YES)
     {
-        self.overViewlbl.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Batting 1st" : indexPath.row == 2 ? @"Batting 2nd" :  indexPath.row == 3 ? @"Batting 1st Won" :  indexPath.row == 4 ? @"Batting 2nd Won" :  indexPath.row == 5 ? @"Batting 1st Lost" :  @"Batting 2nd Lost";
+        self.overViewlbl.text = indexPath.row == 0 ? @"Overall" : indexPath.row == 1 ? @"Bowling 1st" : indexPath.row == 2 ? @"Bowling 2nd" :  indexPath.row == 3 ? @"Bowling 1st Won" :  indexPath.row == 4 ? @"Bowling 2nd Won" :  indexPath.row == 5 ? @"Bowling 1st Lost" :  @"Bowling 2nd Lost";
         
         if(indexPath.row==0)
         {
