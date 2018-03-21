@@ -11,8 +11,7 @@
 #import "ScoreCardCell.h"
 #import "ScorecardBowlCell.h"
 #import "CustomNavigation.h"
-//#import "UIScrollView+VGParallaxHeader.h"
-//#import "MDCParallaxView.h"
+
 #import "AppCommon.h"
 #import "WebService.h"
 #import "PlayersVC.h"
@@ -21,8 +20,10 @@
 #import "BallsInVideosCVC.h"
 #import "AppDelegate.h"
 #import "VideoPlayerViewController.h"
-//#import "UIScrollView+APParallaxHeader.h"
-//#import "ScoreCardHeader.h"
+#import "ScoreCardHeader.h"
+#import "UIScrollView+APParallaxHeader.h"
+
+
 
 
 
@@ -271,6 +272,9 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * tableHeight2;
 
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * ScrollyPosition;
+
+
 
 
 //wagon
@@ -414,6 +418,32 @@
         mask1.path = path1.CGPath;
         self.Team2.layer.mask = mask1;
         
+        
+        UIBezierPath *path2 = [UIBezierPath new];
+        
+        [path2 moveToPoint:(CGPoint){self.StickyTeam1.frame.size.width+50,0 }];//w0
+        [path2 addLineToPoint:(CGPoint){0, 0}];//00
+        [path2 addLineToPoint:(CGPoint){0,self.StickyTeam1.frame.size.height }];//0h
+        [path2 addLineToPoint:(CGPoint){self.StickyTeam1.frame.size.width+50, self.StickyTeam1.frame.size.height}];//wh20
+        
+        CAShapeLayer *mask2 = [CAShapeLayer new];
+        mask2.frame = self.StickyTeam1.bounds;
+        mask2.path = path2.CGPath;
+        self.StickyTeam1.layer.mask = mask2;
+        
+        
+        UIBezierPath *path3 = [UIBezierPath new];
+        
+        [path3 moveToPoint:(CGPoint){self.StickyTeam2.frame.size.width+30,0 }];//w0
+        [path3 addLineToPoint:(CGPoint){15, 0}];//00
+        [path3 addLineToPoint:(CGPoint){0,self.StickyTeam2.frame.size.height }];//0h
+        [path3 addLineToPoint:(CGPoint){self.StickyTeam2.frame.size.width+30, self.StickyTeam2.frame.size.height}];//wh20
+        
+        CAShapeLayer *mask3 = [CAShapeLayer new];
+        mask3.frame = self.StickyTeam2.bounds;
+        mask3.path = path3.CGPath;
+        self.StickyTeam2.layer.mask = mask3;
+        
     }else
     {
         //odi ,t20 match buttons
@@ -437,6 +467,31 @@
         mask1.frame = self.Team2.bounds;
         mask1.path = path1.CGPath;
         self.Team2.layer.mask = mask1;
+        
+        
+        UIBezierPath *pathsticky1 = [UIBezierPath new];
+        [pathsticky1 moveToPoint:(CGPoint){self.StickyTeam1.frame.size.width,0 }];//w0
+        [pathsticky1 addLineToPoint:(CGPoint){0, 0}];//00
+        [pathsticky1 addLineToPoint:(CGPoint){0,self.StickyTeam1.frame.size.height }];//0h
+        [pathsticky1 addLineToPoint:(CGPoint){self.StickyTeam1.frame.size.width-25, self.StickyTeam1.frame.size.height}];//wh20
+        CAShapeLayer *maskst1 = [CAShapeLayer new];
+        maskst1.frame = self.StickyTeam1.bounds;
+        maskst1.path = pathsticky1.CGPath;
+        self.StickyTeam1.layer.mask = maskst1;
+        
+        
+        UIBezierPath *pathsticky2 = [UIBezierPath new];
+        [pathsticky2 moveToPoint:(CGPoint){self.StickyTeam2.frame.size.width,0 }];//w0
+        [pathsticky2 addLineToPoint:(CGPoint){25, 0}];//00
+        [pathsticky2 addLineToPoint:(CGPoint){0,self.StickyTeam2.frame.size.height }];//0h
+        [pathsticky2 addLineToPoint:(CGPoint){self.StickyTeam2.frame.size.width, self.StickyTeam2.frame.size.height}];//wh20
+        CAShapeLayer *maskst2 = [CAShapeLayer new];
+        maskst2.frame = self.StickyTeam2.bounds;
+        maskst2.path = pathsticky2.CGPath;
+        self.StickyTeam2.layer.mask = maskst2;
+        
+        
+       
         
         
         
@@ -515,83 +570,140 @@
     
     // [self.Team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
     
+    
+    
+    
+    
+    
 }
 
 
-//- (void)toggle:(id)sender {
-//    /**
-//     *  For demo purposes this view controller either adds a parallaxView with a custom view
-//     *  or a parallaxView with an image.
-//     */
-//    //if(parallaxWithView == NO) {
-//        // add parallax with view
-//
-//       [self ScoreWebservice];
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LiveBgimg"]];
-//        [imageView setFrame:CGRectMake(0, 0, 320, 160)];
-//        [imageView setContentMode:UIViewContentModeScaleAspectFill];
-//
-//
-//        UIView *l = [[UIView alloc]init];
-//        [l setFrame:CGRectMake(0, 0, self.view.frame.size.width, 240)];
-//
-//
-//
-//        ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
-//        header.matchDetailsArray = matchDetailsImageArray;
-//        header.view.frame = CGRectMake(0, 0, self.view.frame.size.width,240);
-//        [l addSubview:header.view];
-//
-//        [self.commonScroll addParallaxWithView:header.view andHeight:240];
-//
-//
-//        parallaxWithView = YES;
+- (void)toggle:(id)sender {
+    /**
+     *  For demo purposes this view controller either adds a parallaxView with a custom view
+     *  or a parallaxView with an image.
+     */
+    //if(parallaxWithView == NO) {
+        // add parallax with view
+
+       //[self ScoreWebservice];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LiveBgimg"]];
+        [imageView setFrame:CGRectMake(0, 0, 320, 160)];
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+
+
+        UIView *l = [[UIView alloc]init];
+        [l setFrame:CGRectMake(0, 0, self.view.frame.size.width, 240)];
+
+
+
+        ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
+        header.matchDetailsArray = matchDetailsImageArray;
+        header.view.frame = CGRectMake(0, 0, self.view.frame.size.width,240);
+        [l addSubview:header.view];
+
+   // NSString *size = @"{{0, 0}, {768, 240}}";
+    
+    NSString *size = [NSString stringWithFormat:@"{{0, 0}, {%ld, 240}}",self.view.frame.size.width];
+    
+    [self.commonScroll addParallaxWithView:header.view andHeight:240];
+    [self.commonScroll scrollRectToVisible:CGRectFromString(size) animated:YES];
+//    self.commonScroll.parallaxView
+    
+    //APParallaxTrackingActive
+    
+
+        parallaxWithView = YES;
+
+        // Update the toggle button
+        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"with image" style:UIBarButtonItemStylePlain target:self action:@selector(toggle:)];
+        [self.navigationItem setRightBarButtonItem:barButton];
+
+ //   }
+//    else {
+//        // add parallax with image
+//        [self.commonScroll addParallaxWithImage:[UIImage imageNamed:@"ParallaxImage.jpg"] andHeight:160 andShadow:YES];
+//        parallaxWithView = NO;
 //
 //        // Update the toggle button
-//        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"with image" style:UIBarButtonItemStylePlain target:self action:@selector(toggle:)];
+//        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"with view" style:UIBarButtonItemStylePlain target:self action:@selector(toggle:)];
 //        [self.navigationItem setRightBarButtonItem:barButton];
+//    }
+
+    /**
+     *  Setting a delegate for the parallaxView will allow you to get callbacks for when the
+     *  frame of the parallaxView changes.
+     *  Totally optional thou.
+     */
+    self.commonScroll.parallaxView.delegate = self;
+    
+//    APParallaxView *view;
+    //view.frame = CGRectMake(0, -240, self.view.frame.size.width, 240);
+    
+    //NSString *size = @"{{0, -240}, {768, 240}}";
+    //view.frame = CGRectFromString(size);
+    
+   // self.ScrollyPosition.constant = 240;
+
+}
+
+
+
+#pragma mark - APParallaxViewDelegate
+
+- (void)parallaxView:(APParallaxView *)view willChangeFrame:(CGRect)frame {
+    // Do whatever you need to do to the parallaxView or your subview before its frame changes
+    NSLog(@"parallaxView:willChangeFrame: %@", NSStringFromCGRect(frame));
+    
+    //NSString *size = @"{{0, -240}, {768, 240}}";
+    
+    //frame = CGRectFromString(size);
+    
+    
+    
+//    if (frame.origin.y <= 0) {
+//        self.StickyView.hidden = NO;
 //
-// //   }
-////    else {
-////        // add parallax with image
-////        [self.commonScroll addParallaxWithImage:[UIImage imageNamed:@"ParallaxImage.jpg"] andHeight:160 andShadow:YES];
-////        parallaxWithView = NO;
-////
-////        // Update the toggle button
-////        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"with view" style:UIBarButtonItemStylePlain target:self action:@selector(toggle:)];
-////        [self.navigationItem setRightBarButtonItem:barButton];
-////    }
-//
-//    /**
-//     *  Setting a delegate for the parallaxView will allow you to get callbacks for when the
-//     *  frame of the parallaxView changes.
-//     *  Totally optional thou.
-//     */
-//    self.commonScroll.parallaxView.delegate = self;
-//
-//}
-//
-//
-//
-//#pragma mark - APParallaxViewDelegate
-//
-//- (void)parallaxView:(APParallaxView *)view willChangeFrame:(CGRect)frame {
-//    // Do whatever you need to do to the parallaxView or your subview before its frame changes
-//    NSLog(@"parallaxView:willChangeFrame: %@", NSStringFromCGRect(frame));
-//}
-//
-//- (void)parallaxView:(APParallaxView *)view didChangeFrame:(CGRect)frame {
-//    // Do whatever you need to do to the parallaxView or your subview after its frame changed
-//    NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
-//
-//}
+//    }
+//    else
+//    {
+//        self.StickyView.hidden = YES;
+//    }
+    
+    
+    
+}
+
+- (void)parallaxView:(APParallaxView *)view didChangeFrame:(CGRect)frame {
+    // Do whatever you need to do to the parallaxView or your subview after its frame changed
+    NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
+    
+    NSString *ff = [NSString stringWithFormat:@"%@",NSStringFromCGRect(frame)];
+//    NSArray *arr = [ff componentsSeparatedByString:@","];
+//    NSString *str = arr[0];
+//    NSArray *arr1 = [str componentsSeparatedByString:@""];
+    
+    
+    if([ff isEqualToString: @"{{0, 0}, {768, -0}}"] || [ff isEqualToString: @"{{0, -0.5}, {768, 0.5}}"]  )
+    {
+        NSLog(@"yes");
+        self.StickyView.hidden = NO;
+        //[self.StickyView addSubview:self.teamsUIView];
+    }
+    else
+    {
+        self.StickyView.hidden = YES;
+    }
+    
+
+}
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // just add this line to the end of this method or create it if it does not exist
     // [self.listTbl reloadData];
-    //[self toggle:nil];
+    [self toggle:nil];
     
     
 }
@@ -1294,43 +1406,43 @@
 }
 
 
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    float scrollViewHeight = scrollView.frame.size.height;
-    float scrollContentSizeHeight = self.commonScroll.contentSize.height;
-    float scrollOffset = scrollView.contentOffset.y;
-    
-    
-    if(IS_IPHONE_DEVICE)
-    {
-        if(scrollOffset <=153 )
-        {
-            self.ContainerYposition.constant = -scrollOffset+70;
-            
-            
-        }
-        else
-        {
-            self.ContainerYposition.constant = -90;
-        }
-    }
-    else
-    {
-        if(scrollOffset <=153 )
-        {
-            self.ContainerYposition.constant = -scrollOffset+60;
-            
-        }
-        else
-        {
-            self.ContainerYposition.constant = -190;
-        }
-        
-    }
-    
-    NSLog(@"%f",scrollOffset);
-}
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//
+//    float scrollViewHeight = scrollView.frame.size.height;
+//    float scrollContentSizeHeight = self.commonScroll.contentSize.height;
+//    float scrollOffset = scrollView.contentOffset.y;
+//
+//
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(scrollOffset <=153 )
+//        {
+//            self.ContainerYposition.constant = -scrollOffset+70;
+//
+//
+//        }
+//        else
+//        {
+//            self.ContainerYposition.constant = -90;
+//        }
+//    }
+//    else
+//    {
+//        if(scrollOffset <=153 )
+//        {
+//            self.ContainerYposition.constant = -scrollOffset+60;
+//
+//        }
+//        else
+//        {
+//            self.ContainerYposition.constant = -190;
+//        }
+//
+//    }
+//
+//    NSLog(@"%f",scrollOffset);
+//}
 -(IBAction)Inn1Action:(id)sender
 {
     
@@ -1867,70 +1979,7 @@
     CommonArray2 = [[NSMutableArray alloc]init];
     CommonArray2 = BowlingDetailsArray1;
     
-    //Wagon Wheel and pitchmap Details
-    //    self.wwd1 = [[NSMutableArray alloc]init];
-    //    self.ppd1 = [[NSMutableArray alloc]init];
-    //
-    //    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-    //    {
-    //        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-    //        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self WagonWheelWebservice];
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.wwd1 addObject:dict];
-    //        }
-    //
-    //    }
-    //
-    //    for(int i= 0 ;i<BatsmanDetailsArray1.count;i++)
-    //    {
-    //        playercode = [[BatsmanDetailsArray1 valueForKey:@"Batsmencode"] objectAtIndex:i];
-    //        innno = [[BatsmanDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self PitchmapWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.ppd1 addObject:dict];
-    //        }
-    //
-    //
-    //    }
-    //
-    //    self.Bwwd1 = [[NSMutableArray alloc]init];
-    //    self.Bppd1 = [[NSMutableArray alloc]init];
     
-    //    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-    //    {
-    //        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-    //        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self WagonWheelbowlWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.Bwwd1 addObject:dict];
-    //        }
-    //
-    //    }
-    
-    //    for(int i= 0 ;i<BowlingDetailsArray1.count;i++)
-    //    {
-    //        playercode = [[BowlingDetailsArray1 valueForKey:@"BowlerCode"] objectAtIndex:i];
-    //        innno = [[BowlingDetailsArray1 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self PitchmapbowlWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.Bppd1 addObject:dict];
-    //        }
-    //
-    //    }
-    
-    //Wagon Wheel and pitchmap Details end
     
     self.extrastypelbl.text = [ExtrasArray objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray objectAtIndex:1];
@@ -1939,20 +1988,7 @@
     self.fallofWicketslbl.text = [fallOfWicketArray1 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray1 valueForKey:@"PlayerName"] objectAtIndex:0];
     
-    
-    //    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
-    //    self.pitchData = [[NSMutableArray alloc]init];
-    //    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
-    //    self.pitchData2 = [[NSMutableArray alloc]init];
-    
     innno =@"1";
-    
-    
-    //    self.wagonWheelDrawData = self.wwd1;
-    //    self.pitchData = self.ppd1;
-    //
-    //    self.wagonWheelDrawData2 = self.Bwwd1;
-    //    self.pitchData2 = self.Bppd1;
     
     
     isOnes = YES;
@@ -1976,6 +2012,8 @@
     CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
     self.tableHeight2.constant = height1;
     [self.view layoutIfNeeded];
+    
+    //[self.StickyTeam1 sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     
     //[self.listTbl reloadData];
@@ -1993,74 +2031,6 @@
     CommonArray2 = BowlingDetailsArray2;
     
     
-    //Wagon Wheel and pitchmap Details
-    //    self.wwd2 = [[NSMutableArray alloc]init];
-    //    self.ppd2 = [[NSMutableArray alloc]init];
-    //
-    //
-    //    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-    //    {
-    //        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-    //        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self WagonWheelWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.wwd2 addObject:dict];
-    //        }
-    //
-    //    }
-    //
-    //    for(int i= 0 ;i<BatsmanDetailsArray2.count;i++)
-    //    {
-    //        playercode = [[BatsmanDetailsArray2 valueForKey:@"Batsmencode"] objectAtIndex:i];
-    //        innno = [[BatsmanDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self PitchmapWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.ppd2 addObject:dict];
-    //        }
-    //
-    //    }
-    //
-    //
-    //    self.Bwwd2 = [[NSMutableArray alloc]init];
-    //    self.Bppd2 = [[NSMutableArray alloc]init];
-    //
-    //    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-    //    {
-    //        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-    //        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self WagonWheelbowlWebservice];
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.Bwwd2 addObject:dict];
-    //        }
-    //
-    //    }
-    //
-    //    for(int i= 0 ;i<BowlingDetailsArray2.count;i++)
-    //    {
-    //        playercode = [[BowlingDetailsArray2 valueForKey:@"BowlerCode"] objectAtIndex:i];
-    //        innno = [[BowlingDetailsArray2 valueForKey:@"Inningsno"] objectAtIndex:i];
-    //        NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-    //        dict = [self PitchmapbowlWebservice];
-    //
-    //        if(![dict isEqual:[NSNull null]])
-    //        {
-    //            [self.Bppd2 addObject:dict];
-    //        }
-    //
-    //    }
-    
-    
-    
-    //Wagon Wheel and pitchmap Details end
-    
     
     
     self.extrastypelbl.text = [ExtrasArray2 objectAtIndex:0];
@@ -2074,15 +2044,7 @@
     innno =@"2";
     
     
-    //    self.wagonWheelDrawData = [[NSMutableArray alloc]init];
-    //    self.pitchData = [[NSMutableArray alloc]init];
-    //    self.wagonWheelDrawData2 = [[NSMutableArray alloc]init];
-    //    self.pitchData2 = [[NSMutableArray alloc]init];
-    //
-    //    self.wagonWheelDrawData = self.wwd2;
-    //    self.pitchData = self.ppd2;
-    //    self.wagonWheelDrawData2 = self.Bwwd2;
-    //    self.pitchData2 = self.Bppd2;
+   
     
     
     isOnes = YES;
@@ -2104,6 +2066,8 @@
     CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
     self.tableHeight2.constant = height1;
     [self.view layoutIfNeeded];
+    
+    //[self.StickyTeam2 sendActionsForControlEvents:UIControlEventTouchUpInside];
     
 }
 -(IBAction)didClickAllBatting:(id)sender
@@ -2440,14 +2404,19 @@
     [self setInningsButtonUnselect:self.Team1];
     [self setInningsButtonUnselect:self.Team2];
     
+    
+    [self setInningsButtonUnselect:self.StickyTeam1];
+    [self setInningsButtonUnselect:self.StickyTeam2];
+    
     if([innsNo isEqualToString:@"1"]){
         
-        
         [self setInningsButtonSelect:self.Team1];
+        [self setInningsButtonSelect:self.StickyTeam1];
         
     }else if([innsNo isEqualToString:@"2"]){
         
         [self setInningsButtonSelect:self.Team2];
+        [self setInningsButtonSelect:self.StickyTeam2];
     }
     
 }
@@ -2616,6 +2585,9 @@
                 [self.Team1 setTitle:[[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
                 [self.Team2 setTitle:[[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
                 
+                [self.StickyTeam1 setTitle:[[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                [self.StickyTeam2 setTitle:[[matchDetailsImageArray valueForKey:@"BowlingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];
+                
                 //                [self.Inn1 setTitle:[NSString stringWithFormat:@"Inn1-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
                 //                [self.Inn2 setTitle:[NSString stringWithFormat:@"Inn2-%@" ,[[self.matchDetails valueForKey:@"team2"] objectAtIndex:0]] forState:UIControlStateNormal];
                 //                [self.Inn3 setTitle:[NSString stringWithFormat:@"Inn3-%@" , [[self.matchDetails valueForKey:@"team1"] objectAtIndex:0]] forState:UIControlStateNormal];
@@ -2657,10 +2629,10 @@
                 }];
                 
         
-                //ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
-               // header.matchDetailsArray = matchDetailsImageArray;
+                ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
+                header.matchDetailsArray = matchDetailsImageArray;
             
-                //[self toggle:nil];
+                [self toggle:nil];
                 
                 
                 

@@ -55,6 +55,9 @@
 		189FF1E2204FD1AC00F2BFCE /* ResultsCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189FF1DF204FD1AC00F2BFCE /* ResultsCell_iPad.xib */; };
 		189FF1E3204FD1AC00F2BFCE /* ResultsCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189FF1E0204FD1AC00F2BFCE /* ResultsCell_iPhone.xib */; };
 		189FF1E6204FFD1400F2BFCE /* BattingOverBlockCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189FF1E5204FFD1300F2BFCE /* BattingOverBlockCVC.m */; };
+		18A150D620625DA600729375 /* ScoreCardHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A150D320625DA400729375 /* ScoreCardHeader.xib */; };
+		18A150D720625DA600729375 /* ScoreCardHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A150D520625DA600729375 /* ScoreCardHeader.m */; };
+		18A150E1206264F800729375 /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A150DF206264F700729375 /* UIScrollView+APParallaxHeader.m */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
@@ -347,6 +350,11 @@
 		189FF1E0204FD1AC00F2BFCE /* ResultsCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPhone.xib; sourceTree = "<group>"; };
 		189FF1E4204FFD1300F2BFCE /* BattingOverBlockCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingOverBlockCVC.h; sourceTree = "<group>"; };
 		189FF1E5204FFD1300F2BFCE /* BattingOverBlockCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingOverBlockCVC.m; sourceTree = "<group>"; };
+		18A150D320625DA400729375 /* ScoreCardHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardHeader.xib; sourceTree = "<group>"; };
+		18A150D420625DA500729375 /* ScoreCardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardHeader.h; sourceTree = "<group>"; };
+		18A150D520625DA600729375 /* ScoreCardHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardHeader.m; sourceTree = "<group>"; };
+		18A150DF206264F700729375 /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
+		18A150E0206264F700729375 /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
@@ -1217,8 +1225,13 @@
 		CE6C160D2045205400672253 /* ScoreCardVC */ = {
 			isa = PBXGroup;
 			children = (
+				18A150D420625DA500729375 /* ScoreCardHeader.h */,
+				18A150D520625DA600729375 /* ScoreCardHeader.m */,
+				18A150D320625DA400729375 /* ScoreCardHeader.xib */,
 				CE6C160E2045205400672253 /* ScoreCardVC.h */,
 				CE6C160F2045205400672253 /* ScoreCardVC.m */,
+				18A150E0206264F700729375 /* UIScrollView+APParallaxHeader.h */,
+				18A150DF206264F700729375 /* UIScrollView+APParallaxHeader.m */,
 			);
 			path = ScoreCardVC;
 			sourceTree = "<group>";
@@ -1898,6 +1911,7 @@
 				042381C72041539100212684 /* OverviewView.xib in Resources */,
 				CEB2B9A8202592D900E7D5E4 /* CustomNavigation.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
+				18A150D620625DA600729375 /* ScoreCardHeader.xib in Resources */,
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
 				CEB2B99220257BBD00E7D5E4 /* MontserratAlternates-SemiBold.otf in Resources */,
 				CEB2B98720257BBD00E7D5E4 /* MontserratAlternates-BoldItalic.otf in Resources */,
@@ -2027,8 +2041,10 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/VGParallaxHeader/VGParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/drCharts/drCharts.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2036,8 +2052,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RGSColorSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VGParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/drCharts.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2083,6 +2101,7 @@
 				04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */,
 				CEC34C272046B1830058ACC3 /* GroundVC.m in Sources */,
 				CE6C161F204520B300672253 /* PlayersVC.m in Sources */,
+				18A150D720625DA600729375 /* ScoreCardHeader.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				18AC3462203EF453003EE0F0 /* SwipeView.m in Sources */,
@@ -2121,6 +2140,7 @@
 				CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */,
 				18BBECD120297D8900BAAFAA /* ScheduleCell.m in Sources */,
 				18A68AB2203719B700EBA479 /* MyStatsBattingCell.m in Sources */,
+				18A150E1206264F800729375 /* UIScrollView+APParallaxHeader.m in Sources */,
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
