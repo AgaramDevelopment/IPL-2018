@@ -160,6 +160,9 @@ failure:(WebserviceRequestFailureHandler)failure;
 -(void)TeamComposition :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode success:(WebserviceRequestSuccessHandler)success
                 failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)Bowlingpitchmap :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure;
+
 
 @end
 
