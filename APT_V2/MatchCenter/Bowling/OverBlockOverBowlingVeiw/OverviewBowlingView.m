@@ -403,6 +403,9 @@ NSMutableArray *bowlMonths;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
     
+    //Center X-Label
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     
     [self setChartData];
 
@@ -601,6 +604,9 @@ NSMutableArray *bowlMonths;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
     
+    //Center X-Label
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     
     [self setChartData2];
     
@@ -772,6 +778,9 @@ NSMutableArray *bowlMonths;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
     
+    //Center X-Label
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     
     [self setChartData3];
     

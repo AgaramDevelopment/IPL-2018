@@ -250,6 +250,9 @@
 
     
             //Drop Down Action For Expanded Cell
+        [[cell dropDowniPhoneBtn] setTag:[indexPath row]];
+        [cell.dropDowniPhoneBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
+        
         [[cell dropDowniPadBtn] setTag:[indexPath row]];
         [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -815,10 +818,14 @@
                 {
                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                 }
-            else
+            else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                 {
                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
                 }
+             else
+               {
+                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"no-image"];
+               }
             
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 
@@ -1407,6 +1414,9 @@
             
                 //Drop Down Action For Expanded Cell
             [[cell dropDowniPhoneBtn] setTag:[indexPath row]];
+            [cell.dropDowniPhoneBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [[cell dropDowniPadBtn] setTag:[indexPath row]];
             [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
             
             
@@ -2505,6 +2515,7 @@
                         }
                 }
             }
+            cell.selectionStyle = UIAccessibilityTraitNone;
         }
         return cell;
     }
@@ -2618,8 +2629,6 @@
             [self myStatsBowlingPostMethodWebService];
         });
         
-
-    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
@@ -2649,7 +2658,7 @@
     if (isBowling) {
         API_URL = [NSString stringWithFormat:@"%@GETMATCHBOWLINGPERFORMANCE/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),clientCode,userRefCode,playerCode, matchCode, innings];
     }
-    __block NSMutableArray *bbPerformanceArray = [[NSMutableArray alloc] init];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -2657,11 +2666,9 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        NSMutableArray *bbPerformanceArray = [[NSMutableArray alloc] init];
         bbPerformanceArray = [responseObject valueForKey:@"PlayerMatchDetailsList"];
-
-        
         NSLog(@"%@", matchCode);
-        [AppCommon hideLoading];
         
         if(isBatting){
             
@@ -2722,13 +2729,13 @@
             }
         }
         
-        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
     }];
-    NSLog(@"bbPerformanceArray:%@", bbPerformanceArray);
+    
 }
 
 -(void)wagonWheelWebservicePlayerCode:(NSString*)playerCode andMatchCode:(NSString*)matchCode andInningsNo:(NSString*)innings  : (int) loopCount : (int) totalCount
@@ -2746,7 +2753,7 @@
     [AppCommon showLoading];
     
     NSString *API_URL = [NSString stringWithFormat:@"%@GETSCORECARDBATTINGSPIDERWAGONWHEEL/%@/%@/%@",URL_FOR_RESOURCE(@""),playerCode, matchCode, innings];
-     __block NSMutableArray *bbWagonWheelArray = [[NSMutableArray alloc] init];
+    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -2755,10 +2762,8 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        NSMutableArray *bbWagonWheelArray = [[NSMutableArray alloc] init];
         bbWagonWheelArray = responseObject;
-    
-        [AppCommon hideLoading];
-        
         
         if(isBatting){
             if (bbWagonWheelArray.count) {
@@ -2815,7 +2820,7 @@
                 [self wagonWheelWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs:(loopCount+1): (int)bowlingRecentMatchesArray.count];
             }
         }
-        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
@@ -2835,9 +2840,14 @@
         return ;
     
     [AppCommon showLoading];
+    NSString *API_URL;
+    if (isBatting) {
+        API_URL = [NSString stringWithFormat:@"%@%@/%@/%@/%@",URL_FOR_RESOURCE(@""), ScorecardPitchmapKey, playerCode, matchCode, innings];
+    } else {
+        API_URL = [NSString stringWithFormat:@"%@%@/%@/%@/%@",URL_FOR_RESOURCE(@""), ScorecardPitchbowlmapKey, playerCode, matchCode, innings];
+    }
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@FETCH_SCORECARD_PITCHMAP/%@/%@/%@",URL_FOR_RESOURCE(@""),playerCode, matchCode, innings];
-    __block NSMutableArray *bbPitchDataArray = [[NSMutableArray alloc] init];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -2846,9 +2856,8 @@
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
 
+        NSMutableArray *bbPitchDataArray = [[NSMutableArray alloc] init];
         bbPitchDataArray = responseObject;
-        [AppCommon hideLoading];
-        
         
         if(isBatting){
         
@@ -2894,6 +2903,7 @@
                 [self pitchMapWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs:(loopCount+1): (int)bowlingRecentMatchesArray.count];
             }
         }
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
@@ -3096,20 +3106,23 @@
     
     if (indexPath.section == 1) {
         
-            //        [self.batttingTableView reloadData];
         matchDetailsArray = [NSMutableArray new];
         self.wagonWheelDrawData = [NSMutableArray new];
         self.pitchData = [NSMutableArray new];
-        NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
-        NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
-        NSLog(@"battingPitchData:%@", battingPitchData);
+        
         if (isBatting) {
+            NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
+            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
+            NSLog(@"battingPitchData:%@", battingPitchData);
             matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
         }
         
         if (isBowling) {
+            NSLog(@"bowlingmatchDetailsArray:%@", bowlingmatchDetailsArray);
+            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
+            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
             matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];

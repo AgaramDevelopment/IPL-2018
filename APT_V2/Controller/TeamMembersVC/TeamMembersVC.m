@@ -136,7 +136,7 @@
         widthF = self.playesTable.superview.frame.size.width/4;
     }
     
-    return CGSizeMake(widthF-20, widthF-20);
+    return CGSizeMake(widthF-20, widthF);
     
 //    return UICollectionViewFlowLayoutAutomaticSize;
     

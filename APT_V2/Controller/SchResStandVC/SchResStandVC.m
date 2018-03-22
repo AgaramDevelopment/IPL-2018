@@ -397,7 +397,11 @@
         
         
         cell.competitionNamelbl.text = [[self.commonArray2 valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
-        cell.datelbl.text = [[self.commonArray2 valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
+        
+        NSString *curdate = [[self.commonArray2 valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
+        NSArray *arr = [curdate componentsSeparatedByString:@" "];
+        
+        cell.datelbl.text = [NSString stringWithFormat:@"%@ %@",arr[0],arr[1]];
 //        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
 //        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];

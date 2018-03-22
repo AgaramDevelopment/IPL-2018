@@ -402,6 +402,8 @@ NSMutableArray *months;
     
     ChartXAxis *xAxis = self.barChartPP1.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     xAxis.axisMinimum = 0.0;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
@@ -596,6 +598,8 @@ NSMutableArray *months;
     
     ChartXAxis *xAxis = self.barChartPP2.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     xAxis.axisMinimum = 0.0;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
@@ -767,6 +771,8 @@ NSMutableArray *months;
     
     ChartXAxis *xAxis = self.barChartPP3.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBothSided;
+    xAxis.granularityEnabled = true;
+    xAxis.centerAxisLabelsEnabled = true;
     xAxis.axisMinimum = 0.0;
     xAxis.granularity = 1.0;
     xAxis.valueFormatter = self;
