@@ -46,10 +46,18 @@
 
 @synthesize competitionView,team1View,team2View,groundView;
 
+@synthesize firstInn,secondInn;
+
+@synthesize team1win,team2win;
+
+@synthesize spell1Inn,spell2Inn,spell3Inn;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    
+    // For initial API call no need any below values
     groundCode = @"";
     team1InnsNum = @"" ;
     team2InnsNum = @"";
@@ -57,17 +65,12 @@
     fromOver = @"";
     toOver = @"";
     
-    team1Code = [AppCommon getCurrentTeamCode];
-    teamName = [AppCommon getCurrentTeamName];
-    competitionCode = [AppCommon getCurrentCompetitionCode];
-    competitionName = [AppCommon getCurrentCompetitionName];
-
-    self.team1TF.text = teamName;
-    self.competitionTF.text = competitionName;
+    team1Code = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
+    team1TF.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedTeamName"];
     
+
     self.Poptable.hidden = YES;
     [self customnavigationmethod];
-    [self setBorderForButtons];
     [self headToHeadPageLoadGetService];
 }
 
@@ -129,8 +132,7 @@
     isCompetition = NO;
     self.Poptable.hidden = NO;
     self.commonArray = [NSMutableArray new];
-//    self.commonArray = self.commonArray1;
-    NSArray* temparray = [self getCorrespondingGrounds:competitionTF.text];
+    NSArray* temparray = [self getCorrespondingGrounds];
     
     for (NSDictionary* temp1 in temparray) {
         if (![[self.commonArray valueForKey:@"Groundcode"] containsObject:[temp1 valueForKey:@"Groundcode"]]) {
@@ -139,8 +141,6 @@
     }
     
     
-//    NSSet* set1 = [[NSSet setWithArray:[self.commonArray1 valueForKey:@""]]
-
     self.tableWidth.constant = self.groundView.frame.size.width;
     self.tableXposition.constant = self.groundView.frame.origin.x+5;
     self.tableYposition.constant = self.groundView.frame.origin.y+self.groundView.frame.size.height+20;
@@ -150,15 +150,6 @@
     });
 }
 
--(NSArray *)getCorrespondingGrounds:(NSString *)CompetitionName
-{
-    NSArray* result;
-    
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@",CompetitionName];
-    result = [self.commonArray1 filteredArrayUsingPredicate:predicate];
-    
-    return result;
-}
 
 - (IBAction)CompetitionBtnAction:(id)sender {
     isteam1 = NO;
@@ -359,10 +350,9 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, team1Code];
-    
-//     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, @"TEA0000001"];
-    
+    NSString* CAP_teamcode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@%@/%@",URL_FOR_RESOURCE(@""),HTHPageLoad, CAP_teamcode];
+    NSLog(@"API URL %@ ",API_URL);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -370,8 +360,29 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
-        self.commonArray1 = [[NSMutableArray alloc] init];
-        self.commonArray1 = responseObject;
+        
+        if (responseObject) {
+            self.commonArray1 = [[NSMutableArray alloc] init];
+            self.commonArray1 = responseObject;
+            
+            if (self.commonArray1.count) {
+                
+                   // To get team name by logined team code
+                
+                team2TF.text = [[self.commonArray1 firstObject] valueForKey:@"TeamBName"];
+                team2Code = [[self.commonArray1 firstObject] valueForKey:@"TeamBcode"];
+                competitionTF.text = [[self.commonArray1 firstObject] valueForKey:@"CompetitionName"];
+                competitionCode = [[self.commonArray1 firstObject] valueForKey:@"CompetitionCode"];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self headToHeadResultsPostService];
+                });
+
+
+            }
+            
+
+        }
         [AppCommon hideLoading];
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -379,6 +390,38 @@
         [COMMON webServiceFailureError:error];
     }];
 }
+
+-(NSArray *)getCorrespondingOppenentTeams
+{
+//    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@ AND Groundcode == %@ AND TeamBcode == %@",competitionCode,groundCode,team1Code];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+
+    NSArray* temparray = [self.commonArray1 filteredArrayUsingPredicate:predicate];
+    
+    NSMutableArray* resultedArray = [NSMutableArray new];
+    for (NSDictionary* dict in temparray) {
+        if (![[resultedArray valueForKey:@"TeamBcode"] containsObject:[dict valueForKey:@"TeamBcode"]]) {
+            [resultedArray addObject:dict];
+        }
+    }
+    
+    return resultedArray;
+}
+
+
+-(NSArray *)getCorrespondingGrounds
+{
+    // based on competetion code and logined team code
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@ AND TeamBcode == %@",competitionCode,team2Code];
+    
+//    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+
+    NSArray* result = [self.commonArray1 filteredArrayUsingPredicate:predicate];
+    
+    return result;
+}
+
 
 - (void)checkValidations {
     
@@ -394,7 +437,6 @@
         [self altermsg:@"Please Select Ground"];
     } */
     else {
-//        [self headToHeadResultsGetService];
          [self headToHeadResultsPostService];
     }
 }
@@ -418,10 +460,17 @@
     if(![COMMON isInternetReachable])
         return;
     
+    else if (!team1TF.hasText || !team2TF.hasText)
+    {
+        return;
+    }
+    
     [AppCommon showLoading];
     
     NSString *URLString =  URL_FOR_RESOURCE(HTHResults);
     
+    
+    NSLog(@"URL %@ ",URLString);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -442,11 +491,12 @@
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
-            
-            NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        
+        if (responseObject) {
             NSMutableDictionary *h2hResultsDict = [[NSMutableDictionary alloc] init];
             h2hResultsDict = responseObject;
             [self assignH2HResultsArrayValuesToView:h2hResultsDict];
+        }
         
         [AppCommon hideLoading];
         
@@ -458,48 +508,48 @@
     }];
     
 }
-- (void)headToHeadResultsGetService {
-    /*
-     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
-     METHOD     :   GET
-     PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
-     */
-    
-    /*
-     http://localhost:58774/AGAPTService.svc/APT_HTHRESULTS
-     {"CompetitionCode":"UCC0000008",
-     "TeamACode":"TEA0000008",
-     "TeamBCode":"TEA0000010",
-     "GroundCode":"",
-     "ATInnsNum":"",
-     "BTInnsNum":"",
-     "TossWonTeamCode":"TEA0000010",
-     "FromOver":"0",
-     "ToOver":"19"
-     }
-     */
-    if(![COMMON isInternetReachable])
-        return;
-    
-    [AppCommon showLoading];
-    
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, competitionCode, team1Code, team2Code, groundCode];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    manager.requestSerializer = requestSerializer;
-    
-    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
-        NSMutableDictionary *h2hResultsDict = [[NSMutableDictionary alloc] init];
-        h2hResultsDict = responseObject;
-        [self assignH2HResultsArrayValuesToView:h2hResultsDict];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"FAILURE RESPONSE %@",error.description);
-        [COMMON webServiceFailureError:error];
-    }];
-}
+//- (void)headToHeadResultsGetService {
+//    /*
+//     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
+//     METHOD     :   GET
+//     PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
+//     */
+//
+//    /*
+//     http://localhost:58774/AGAPTService.svc/APT_HTHRESULTS
+//     {"CompetitionCode":"UCC0000008",
+//     "TeamACode":"TEA0000008",
+//     "TeamBCode":"TEA0000010",
+//     "GroundCode":"",
+//     "ATInnsNum":"",
+//     "BTInnsNum":"",
+//     "TossWonTeamCode":"TEA0000010",
+//     "FromOver":"0",
+//     "ToOver":"19"
+//     }
+//     */
+//    if(![COMMON isInternetReachable])
+//        return;
+//
+//    [AppCommon showLoading];
+//
+//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, competitionCode, team1Code, team2Code, groundCode];
+//
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+//    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    manager.requestSerializer = requestSerializer;
+//
+//    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+//        NSMutableDictionary *h2hResultsDict = [[NSMutableDictionary alloc] init];
+//        h2hResultsDict = responseObject;
+//        [self assignH2HResultsArrayValuesToView:h2hResultsDict];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"FAILURE RESPONSE %@",error.description);
+//        [COMMON webServiceFailureError:error];
+//    }];
+//}
 
 - (void)assignH2HResultsArrayValuesToView:(NSMutableDictionary *)h2hResultsDict {
     
@@ -673,6 +723,9 @@
 
 - (IBAction)actionDropDowns:(id)sender {
     
+
+
+
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
     dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -680,18 +733,30 @@
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([sender tag] == 0) // Competitions
+    if ([sender tag] == 2) // Competitions
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
         
-//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(CompetitionView.frame), CGRectGetMaxY(CompetitionView.superview.frame)+60+50, CGRectGetWidth(CompetitionView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60, CGRectGetWidth(competitionView.frame), 300)];
         
     }
-    else if ([sender tag] == 1) // Ground
+    else if ([sender tag] == 3) // Ground
     {
-        
-        NSArray* temparray = [self getCorrespondingGrounds:competitionTF.text];
+        if (!competitionTF.hasText) {
+            [AppCommon showAlertWithMessage:@"Please select Competetion Name"];
+            return;
+        }
+//        else if (!groundTF.hasText) {
+//            [AppCommon showAlertWithMessage:@"Please select Ground Name"];
+//            return;
+//        }
+        else if (!team2TF.hasText) {
+            [AppCommon showAlertWithMessage:@"Please select opponent Team"];
+            return;
+        }
+
+        NSArray* temparray = [self getCorrespondingGrounds];
         NSMutableArray* arr = [NSMutableArray new];
         for (NSDictionary* temp1 in temparray) {
             if (![[arr valueForKey:@"Groundcode"] containsObject:[temp1 valueForKey:@"Groundcode"]]) {
@@ -702,36 +767,40 @@
         dropVC.array = arr;
         dropVC.key = @"Ground";
         
-//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
         
     }
-    else if ([sender tag] == 2) { // Teams 1
+    else if ([sender tag] == 0) { // Teams 1
         teamCount = 1;
-        dropVC.array = [COMMON getCorrespondingTeamName:competitionTF.text];
-        dropVC.key = @"TeamName";
+        dropVC.array = [self getCorrespondingOppenentTeams];
+
+        dropVC.key = @"TeamBName";
         
-        //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(overallView.frame), CGRectGetMaxY(overallView.superview.frame)+60+50, CGRectGetWidth(overallView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team1View.frame), CGRectGetMaxY(team1View.superview.frame)+60, CGRectGetWidth(team1View.frame), 300)];
         
     }
-    else if ([sender tag] == 3) // Teams 2
+    else if ([sender tag] == 1) // Teams 2
     {
         
-        teamCount = 2;
-        NSMutableArray* team2 = [NSMutableArray new];
-        [team2 addObjectsFromArray:[COMMON getCorrespondingTeamName:competitionTF.text]];
-        
-        for (NSDictionary* tempDict in team2) {
-            if ([[team2 valueForKey:@"TeamCode"]containsObject:team1Code]) {
-                NSInteger index = [team2 indexOfObject:tempDict];
-                [team2 removeObjectAtIndex:index];
-                break;
-            }
+        if (!competitionTF.hasText) {
+            [AppCommon showAlertWithMessage:@"Please select Competetion Name"];
+            return;
         }
+//        else if (!groundTF.hasText) {
+//            [AppCommon showAlertWithMessage:@"Please select Ground Name"];
+//            return;
+//        }
+//        else if (!team2TF.hasText) {
+//            [AppCommon showAlertWithMessage:@"Please select opponent Team"];
+//            return;
+//        }
+
+        teamCount = 2;
+        dropVC.array = [self getCorrespondingOppenentTeams];
+//        dropVC.array = self.commonArray1;
+        dropVC.key = @"TeamBName";
         
-        dropVC.array = team2;
-        dropVC.key = @"TeamName";
-        
-        //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(runsView.frame), CGRectGetMaxY(runsView.superview.frame)+60+50, CGRectGetWidth(runsView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team2View.frame), CGRectGetMaxY(team2View.superview.frame)+60, CGRectGetWidth(team2View.frame), 300)];
         
     }
     
@@ -748,41 +817,164 @@
         NSLog(@"%@",array[Index.row]);
         NSLog(@"selected value %@",key);
         competitionTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        competitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:competitionTF.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        team1TF.text = @"";
         team2TF.text = @"";
-        groundTF.text = @"Ground Name";
-    }
-    else if([key isEqualToString:@"TeamName"] && teamCount == 1)
-    {
-        team1TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        team1Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
-        team2TF.text = @"";
-    }
-    else if([key isEqualToString:@"TeamName"] && teamCount == 2)
-    {
-        team2Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
-
-        if ([team1Code isEqualToString:team2Code]) {
-            [AppCommon showAlertWithMessage:@"Please Select Different team in Team-B"];
-            return;
-        }
-        
-        team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        groundTF.text = @"";
     }
     else if([key isEqualToString:@"Ground"])
     {
         groundTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
         groundCode = [[array objectAtIndex:Index.row] valueForKey:@"Groundcode"];
+//        team2TF.text = @"";
+        
+    }
+    else if([key isEqualToString:@"TeamBName"] && teamCount == 1)
+    {
+        
+        if (team1TF.text.length > 0 && team1TF.text.length > 0 && [team1TF.text isEqualToString:team2TF.text]) {
+
+            [AppCommon showAlertWithMessage:@"Please Select Different team in Team-A"];
+            return;
+        }
+        
+        team1Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamBcode"];
+        team1TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+    }
+    else if([key isEqualToString:@"TeamBName"] && teamCount == 2)
+    {
+
+        if (team1TF.text.length > 0 && team1TF.text.length > 0 && [team1TF.text isEqualToString:team2TF.text]) {
+            team2TF.text = @"";
+            [AppCommon showAlertWithMessage:@"Please Select Different team in Team-B"];
+            return;
+        }
+        
+        team2Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamBcode"];
+        team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        groundTF.text = @"";
     }
     
     
+    [self headToHeadResultsPostService];
+    
+    
+    }
+
+- (IBAction)TeamInnsOversSelection:(id)sender {
+    
+    UIImage* check = [UIImage imageNamed:@"check"];
+    UIImage* uncheck = [UIImage imageNamed:@"uncheck"];
+    
+    
+    if ([sender tag] == 0) // 1st Innings
+    {
+        if ([[firstInn currentImage] isEqual:uncheck]) {
+            [firstInn setImage:check forState:UIControlStateNormal];
+            [secondInn setImage:uncheck forState:UIControlStateNormal];
+
+            team1InnsNum = @"1";
+            team2InnsNum = @"1";
+
+            [self headToHeadResultsPostService];
+        }
+
+    }
+    else if ([sender tag] == 1) // 2nd Innings
+    {
+        if ([[secondInn currentImage] isEqual:uncheck]) {
+            [secondInn setImage:check forState:UIControlStateNormal];
+            [firstInn setImage:uncheck forState:UIControlStateNormal];
+            
+            team1InnsNum = @"2";
+            team2InnsNum = @"2";
+            [self headToHeadResultsPostService];
+
+        }
+
+    }
+    else if ([sender tag] == 2) // 1st Team Win
+    {
+        if ([[team1win currentImage] isEqual:uncheck]) {
+            [team2win setImage:uncheck forState:UIControlStateNormal];
+            [team1win setImage:check forState:UIControlStateNormal];
+            
+            tossWonTeamCode = team1Code;
+            
+            [self headToHeadResultsPostService];
+
+
+        }
+        
+    }
+    else if ([sender tag] == 3) // 2nd Team Win
+    {
+        if ([[team2win currentImage] isEqual:uncheck]) {
+            [team2win setImage:check forState:UIControlStateNormal];
+            [team1win setImage:uncheck forState:UIControlStateNormal];
+            
+            tossWonTeamCode = team2Code;
+            
+            [self headToHeadResultsPostService];
+
+
+        }
+        
+    }
+    else if ([sender tag] == 4) // 1-6 overs
+    {
+        if ([[spell1Inn currentImage] isEqual:uncheck]) {
+            [spell1Inn setImage:check forState:UIControlStateNormal];
+            [spell2Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell3Inn setImage:uncheck forState:UIControlStateNormal];
+
+            fromOver = @"0";
+            toOver = @"5";
+            
+            [self headToHeadResultsPostService];
+
+
+        }
+
+    }
+    else if ([sender tag] == 5) // 7-15 overs
+    {
+        if ([[spell2Inn currentImage] isEqual:uncheck]) {
+            [spell2Inn setImage:check forState:UIControlStateNormal];
+            [spell1Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell3Inn setImage:uncheck forState:UIControlStateNormal];
+            
+            fromOver = @"6";
+            toOver = @"14";
+            
+            [self headToHeadResultsPostService];
+
+        }
+
+    }
+    else if ([sender tag] == 6) // 16-20 overs
+    {
+        if ([[spell3Inn currentImage] isEqual:uncheck]) {
+            [spell3Inn setImage:check forState:UIControlStateNormal];
+            [spell1Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell2Inn setImage:uncheck forState:UIControlStateNormal];
+            
+            fromOver = @"15";
+            toOver = @"19";
+
+            [self headToHeadResultsPostService];
+
+            
+        }
+
+    }
+    
     
 }
+
 
 @end

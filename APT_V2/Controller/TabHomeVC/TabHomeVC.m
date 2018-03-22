@@ -48,13 +48,8 @@
     objPlayersVC = [TeamMembersVC new];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
     
-    if ([AppCommon isCoach]) {
-        
-        titleArray = @[@"Home",@"My Teams"];
-    }
-    else {
-        titleArray = @[@"Home",@"My Stats"];
-    }
+    
+    titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
     
 
 }

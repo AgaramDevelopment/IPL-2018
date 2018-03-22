@@ -818,10 +818,14 @@
                 {
                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                 }
-            else
+            else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                 {
                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
                 }
+             else
+               {
+                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"no-image"];
+               }
             
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 

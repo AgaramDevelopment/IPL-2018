@@ -854,24 +854,23 @@ BOOL wicketSortingKey;
         NSArray* arr = @[@{@"overall":@"Overall",
                            @"inns":@"",
                            @"result":@""},
-                         @{@"overall":@"Batting 1st",
+                         @{@"overall":@"Bowling 1st",
                            @"inns":@"1",
                            @"result":@""},
-                         @{@"overall":@"Batting 2nd",
+                         @{@"overall":@"Bowling 2nd",
                            @"inns":@"2",
                            @"result":@""},
-                         @{@"overall":@"Batting 1st Won",
+                         @{@"overall":@"Bowling 1st Won",
                            @"inns":@"1"
                            ,@"result":@"won"},
-                         @{@"overall":@"Batting 2nd Won",
+                         @{@"overall":@"Bowling 2nd Won",
                            @"inns":@"2"
                            ,@"result":@"won"},
-                         @{@"overall":@"Batting 1st Lost",
+                         @{@"overall":@"Bowling 1st Lost",
                            @"inns":@"1"
                            ,@"result":@"loss"},
-                         @{@"overall":@"Batting 2nd Lost",
+                         @{@"overall":@"Bowling 2nd Lost",
                            @"inns":@"2",@"result":@"loss"}];
-        
         
         dropVC.array = arr;
         dropVC.key = @"overall";
