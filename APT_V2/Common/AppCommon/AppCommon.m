@@ -212,7 +212,7 @@ AppCommon *sharedCommon = nil;
 {
    //  ROL0000002 player code
     
-    return ([[AppCommon GetUserRoleCode] isEqualToString:@"ROL0000003"]);
+    return (![[AppCommon GetUserRoleCode] isEqualToString:@"ROL0000002"]);
 }
 
 #pragma mark - Get Height of Control

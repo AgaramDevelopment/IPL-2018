@@ -75,5 +75,7 @@
 @property (strong, nonatomic) IBOutlet UIView *groundView;
 @property (strong, nonatomic) IBOutlet UILabel *groundLbl;
 @property (strong, nonatomic) IBOutlet UILabel *homeGroundLbl;
+@property (weak, nonatomic) IBOutlet UICollectionView *Titlecollview;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *overBlockbtn;
 
 @end

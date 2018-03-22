@@ -7,7 +7,7 @@
 //
 
 #import "GroundVC.h"
-
+#import "TabHomeCell.h"
 #import "MCOverViewResultCVC.h"
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
@@ -15,6 +15,8 @@
 //#import "IntAxisValueFormatter.h"
 #import "HorizontalXLblFormatter.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ResultsVc.h"
+
 @import drCharts;
 
 
@@ -40,7 +42,7 @@
     NSMutableArray *commonArray;
     NSMutableArray *groundResultsArray;
     //Bar Charts
-    NSArray *arr;
+    NSArray *arr,*titleArray;
     NSArray *arr1;
     
     UIColor *strokeColor;
@@ -51,6 +53,10 @@
     NSString *teamCode;
     NSString *competitionCode, *competitionName;
     NSString *groundCode;
+    NSIndexPath* selectedIndex;
+    NSString* fromOver,* toOver;
+
+    
 }
 @property (strong, nonatomic) IBOutlet PieChartView *battingFstPie;
 @property (strong, nonatomic) IBOutlet PieChartView *battingSecPie;
@@ -73,12 +79,17 @@
 
 @synthesize groundLbl,teamCodeTF,competitionCodeTF;
 
+@synthesize Titlecollview,overBlockbtn;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    fromOver = @"0";
+    toOver = @"5";
 
     [self customnavigationmethod];
-    
-    
+    selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
+    titleArray = @[@"Innings1",@"Innings2"];
     
     competitionCode = [AppCommon getCurrentCompetitionCode];
     competitionName = [AppCommon getCurrentCompetitionName];
@@ -88,6 +99,9 @@
     
     //Ground List Get Service Call dropdown
     [self groundListGetService];
+    
+    [Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+
 
     //To Hide Team Code For Player
   
@@ -211,6 +225,11 @@
             
             groundResultsArray = [NSMutableArray new];
             groundResultsArray = [responseObject valueForKey:@"GroundResults"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self groundGetService];
+            });
+
         }
         
         
@@ -331,24 +350,25 @@
     
     [AppCommon showLoading];
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",URL_FOR_RESOURCE(@""),Ground, competitionCode, groundCode];
+    
+    
+    
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",Ground, competitionCode, groundCode];
+    
+    NSString* main_URL = URL_FOR_RESOURCE(API_URL);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = requestSerializer;
     
-    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:main_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
         
         //Recent Matches
         recentMatchesArray = [[NSMutableArray alloc] init];
         recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
 
-            //Re-load Table View
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.resultCollectionView reloadData];
-        });
         
         //Pie Chart
 //        markers = [[NSMutableArray alloc] initWithObjects:@"1", @"4", nil];
@@ -402,10 +422,6 @@
         self.battingSecondMatchWonLbl.text = secondWon;
         self.battingSecondMatchLostLbl.text = secondLoss;
             //Re-load Table View
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.battingFstPie reloadData];
-            [self.battingSecPie reloadData];
-        });
         
         NSMutableArray *battingScoreResultsArray = [responseObject valueForKey:@"BattingScoreResults"];
         for (id key in battingScoreResultsArray) {
@@ -436,7 +452,13 @@
         }
     
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.battingFstPie reloadData];
+            [self.battingSecPie reloadData];
+
             //GroundOverResults Get Service Method
+            [self.resultCollectionView reloadData];
+
             [self groundOverResultsGetService];
         });
 
@@ -476,8 +498,9 @@
         
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
-        [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-        
+//        [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+//        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        [self loadGraphdata];
         
         [AppCommon hideLoading];
         
@@ -740,10 +763,54 @@
     
     if(collectionView == _resultCollectionView){
         return recentMatchesArray.count;
-    }else{
+    }
+    else if(collectionView == Titlecollview)
+    {
+        return 2;
+    }
+    else{
         return 0;
     }
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(collectionView == Titlecollview)
+    {
+        CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
+        CGFloat HeightF = self.Titlecollview.superview.frame.size.height;
+        
+        return CGSizeMake(widthF, HeightF);
+    }
+    else
+    {
+        CGFloat width = collectionView.frame.size.width;
+        CGFloat height = collectionView.frame.size.height;
+        
+        if(!IS_IPHONE5)
+        {
+            width = width/2;
+        }
+        
+        return CGSizeMake(width, height);
+    }
+
+    
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+    
+}
+
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return 10.0;
+    
+}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -833,11 +900,68 @@
         return cell;
         
     }
+    else if(collectionView == Titlecollview)
+    {
+        TabHomeCell* cell = [self.Titlecollview dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        cell.Title.text = titleArray[indexPath.row];
+        [cell setTag:indexPath.row];
+        
+        if (indexPath == selectedIndex) {
+            cell.selectedLineView.backgroundColor = [UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f];
+        }
+        else {
+            cell.selectedLineView.backgroundColor = [UIColor clearColor];
+        }
+        
+        return cell;
+
+    }
     return nil;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if(collectionView == Titlecollview)
+    {
+        selectedIndex = indexPath;
+        [collectionView reloadData];
+        [self loadGraphdata];
+    
+    }
+
+}
 
 
+-(void)loadGraphdata
+{
+    NSString* str_Result = (selectedIndex.item == 0 ? @"BattingInnFirstResults" :@"BattingInnSecondResults");
+    
+    NSMutableArray *battingInnFirstResultsArray = [self checkNull:[battingDict valueForKey:str_Result]];
+    
+    for (id key in battingInnFirstResultsArray) {
+        //Batting 1st  Values Assign to Label Properties
+        self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BFAvgWonScore"]];
+        self.OBHighScore.text = [self checkNull:[key valueForKey:@"BFHighScore"]];
+        self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BFScore"]];
+        self.OBLowScore.text = [self checkNull:[key valueForKey:@"BFLowScore"]];
+    }
+    
+    commonArray = [NSMutableArray new];
+    NSString* str_BlockResult = (selectedIndex.item == 0 ? @"PPOneBlockResult" :@"PPTwoBlockResult");
+    
+    commonArray = [self checkNull:[battingDict valueForKey:str_BlockResult]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.BowlTypeTbl reloadData];
+    });
+    
+    arr = [NSArray new];
+    NSString* str_ChartResult = (selectedIndex.item == 0 ? @"BattingInnFirstChartResults" :@"BattingInnSecondChartResults");
+    
+    arr = [self checkNull:[battingDict valueForKey:str_ChartResult]];
+    //Bar Charts
+    [self createBarChart];
+    
+}
 #pragma mark -    PieChartViewDelegate
 -(CGFloat)centerCircleRadius
 {
@@ -1270,15 +1394,27 @@
 
 
 - (void)createBarChart{
-    _barChartMultipleView = [[BarChart alloc] initWithFrame:CGRectMake(0, 0, self.barchart.frame.size.width+self.barchart.frame.size.width, self.barchart.frame.size.height)];
-    //_barChartMultipleView = [[BarChart alloc]init];
-    [_barChartMultipleView setDataSource:self];
-    [_barChartMultipleView setDelegate:self];
-    [_barChartMultipleView setLegendViewType:LegendTypeHorizontal];
-    [_barChartMultipleView setShowCustomMarkerView:TRUE];
-    [_barChartMultipleView drawBarGraph];
-    [_barChartMultipleView setLegendViewType:@"fff"];
-    [self.barchart addSubview:_barChartMultipleView];
+    
+    if (self.barChartMultipleView == nil) {
+    
+        _barChartMultipleView = [[BarChart alloc] initWithFrame:CGRectMake(0, 0, self.barchart.frame.size.width+self.barchart.frame.size.width, self.barchart.frame.size.height)];
+        //_barChartMultipleView = [[BarChart alloc]init];
+        [_barChartMultipleView setDataSource:self];
+        [_barChartMultipleView setDelegate:self];
+        [_barChartMultipleView setLegendViewType:LegendTypeHorizontal];
+        [_barChartMultipleView setShowCustomMarkerView:TRUE];
+        [_barChartMultipleView drawBarGraph];
+        [_barChartMultipleView setLegendViewType:@"fff"];
+        
+//        [_barChartMultipleView removeFromSuperview];
+        [self.barchart addSubview:_barChartMultipleView];
+    }
+    else{
+        [_barChartMultipleView setLegendViewType:LegendTypeHorizontal];
+        [_barChartMultipleView setShowCustomMarkerView:TRUE];
+
+        [self.barChartMultipleView reloadBarGraph];
+    }
 }
 #pragma mark BarChartDataSource
 - (NSMutableArray *)xDataForBarChart{
@@ -1389,14 +1525,14 @@
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60+50, CGRectGetWidth(competitionView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60, CGRectGetWidth(competitionView.frame), 300)];
         
     }
     else if ([sender tag] == 1) // Teams
     {
         dropVC.array = [COMMON getCorrespondingTeamName:competitionCodeTF.text];
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60, CGRectGetWidth(teamView.frame), 300)];
         
     }
     else if ([sender tag] == 2) { // X Axis value
@@ -1414,7 +1550,7 @@
         
         dropVC.array = groundResultsArray;
         dropVC.key = @"GroundName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60+50, CGRectGetWidth(groundView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
         
     }
 //    else if ([sender tag] == 3) // Y Axis value
@@ -1467,7 +1603,7 @@
     }
     else //if([key isEqualToString:@"GroundName"])
     {
-        groundLbl.text = [NSString stringWithFormat:@"%@ %@", [[array objectAtIndex:Index.row] valueForKey:@"GroundName"], [[array objectAtIndex:Index.row] valueForKey:@"Venue"]];
+        groundLbl.text = [NSString stringWithFormat:@"%@, %@", [[array objectAtIndex:Index.row] valueForKey:@"GroundName"], [[array objectAtIndex:Index.row] valueForKey:@"Venue"]];
         
         groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
 
@@ -1491,5 +1627,49 @@
                                }
                            }];
 }
+
+- (IBAction)onClickMoreMatches:(id)sender
+{
+    ResultsVc* objresult = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+    [appDel.frontNavigationController pushViewController:objresult animated:YES];
+    
+}
+
+- (IBAction)resultOverwise:(id)sender {
+    
+    for (UIButton* btn in overBlockbtn) {
+        if ([sender isEqual:btn]) {
+            [[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Bold" size:13]];
+            [btn  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+        else{
+            [[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Regular" size:13]];
+            [btn  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
+    
+    if ([sender tag] == 0) // over 1-6
+    {
+        fromOver = @"0";
+        toOver = @"5";
+
+    }
+    else if ([sender tag] == 1) // over 7-15
+    {
+        fromOver = @"6";
+        toOver = @"14";
+
+    }
+    else if ([sender tag] == 2) // over 16-20
+    {
+        fromOver = @"15";
+        toOver = @"19";
+
+    }
+
+    [self groundOverResultsGetService];
+
+}
+
 
 @end
