@@ -131,28 +131,38 @@
         
         
         NSMutableArray *teamArray = [[NSMutableArray alloc]init];
+        [teamArray addObjectsFromArray:[COMMON getCorrespondingTeamName:competitionLbl.text]];
+        
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
         [dic setObject:@"All" forKey:@"TeamName"];
         [dic setObject:@"" forKey:@"TeamCode"];
-        [teamArray addObject:dic];
+        [teamArray insertObject:dic atIndex:0];
+        //[teamArray addObject:dic];
         
-        for(int i=0;i<appDel.ArrayTeam.count;i++)
-        {
-            [teamArray addObject:[appDel.ArrayTeam objectAtIndex:i]];
-        }
-        dropVC.array = teamArray;
+//        for(int i=0;i<appDel.ArrayTeam.count;i++)
+//        {
+//            [teamArray addObject:[appDel.ArrayTeam objectAtIndex:i]];
+//        }
+        
+        dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v2.frame), CGRectGetMaxY(self.v2.frame)+self.v2.frame.size.height+20, CGRectGetWidth(self.v2.frame), 300)];
         
         
     }
-    else // COMPETETION
+    else if ([sender tag] == 0) //competition
         {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v1.frame), CGRectGetMaxY(self.v1.frame)+self.v1.frame.size.height+20, CGRectGetWidth(self.v1.frame), 300)];
         
-        }
+    }
+    else if ([sender tag] == 2)  //venue
+    {
+        dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
+        dropVC.key = @"Venue";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v3.frame), CGRectGetMaxY(self.v3.frame)+self.v3.frame.size.height+20, CGRectGetWidth(self.v3.frame), 300)];
+    }
     
     
     [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
@@ -234,11 +244,11 @@
             
             if(IS_IPHONE_DEVICE)
             {
-                [[NSBundle mainBundle] loadNibNamed:@"ResultsCell_iPhone" owner:self options:nil];
+                cell =[[NSBundle mainBundle] loadNibNamed:@"ResultsCell_iPhone" owner:self options:nil];
             }
             else
             {
-                [[NSBundle mainBundle] loadNibNamed:@"ResultsCell_iPad" owner:self options:nil];
+               cell = [[NSBundle mainBundle] loadNibNamed:@"ResultsCell_iPad" owner:self options:nil];
             }
         }
         cell = self.objCell;
@@ -562,7 +572,9 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self ResultsWebservice];
         
-    } else {
+    }
+    else if ([key  isEqualToString: @"TeamName"])
+    {
         
         self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
@@ -570,9 +582,18 @@
         [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    
          [self setFilterResults];
-        }
+    }
+    else
+    {
+        self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self setFilterResults];
+    }
     
 }
 
@@ -609,7 +630,10 @@
                 }
             }
         }
-        [self.ListTbl reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.ListTbl reloadData];
+        });
+        
     
     }
 }

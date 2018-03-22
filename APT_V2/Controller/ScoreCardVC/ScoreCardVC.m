@@ -558,7 +558,7 @@
     NSLog(@"matchCode:%@", self.matchCode);
     NSLog(@"matchDetails:%@", self.matchDetails);
     
-    
+    self.commonScroll.delegate=self;
     
     self.popTbl.hidden=YES;
     
@@ -636,6 +636,7 @@
      *  Totally optional thou.
      */
     self.commonScroll.parallaxView.delegate = self;
+    self.commonScroll.scrollsToTop =YES;
     
 //    APParallaxView *view;
     //view.frame = CGRectMake(0, -240, self.view.frame.size.width, 240);
@@ -678,24 +679,116 @@
     // Do whatever you need to do to the parallaxView or your subview after its frame changed
     NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
     
-    NSString *ff = [NSString stringWithFormat:@"%@",NSStringFromCGRect(frame)];
+//    NSString *ff = [NSString stringWithFormat:@"%@",NSStringFromCGRect(frame)];
 //    NSArray *arr = [ff componentsSeparatedByString:@","];
-//    NSString *str = arr[0];
-//    NSArray *arr1 = [str componentsSeparatedByString:@""];
-    
-    
-    if([ff isEqualToString: @"{{0, 0}, {768, -0}}"] || [ff isEqualToString: @"{{0, -0.5}, {768, 0.5}}"]  )
-    {
-        NSLog(@"yes");
-        self.StickyView.hidden = NO;
-        //[self.StickyView addSubview:self.teamsUIView];
-    }
-    else
-    {
-        self.StickyView.hidden = YES;
-    }
+//    NSString *str = arr[1];
+//    NSArray *arr1 = [str componentsSeparatedByString:@"}"];
+//    int reqCount = [arr1[0] intValue];
+//    
+//    if(reqCount==0)
+//    {
+//        self.StickyView.hidden = NO;
+//    }
+//    else
+//    {
+//        self.StickyView.hidden = YES;
+//    }
+
+//    NSString *reqframe = [NSString stringWithFormat:@"{{0, 0}, {%ld, -0}}",self.view.frame.size.width];
+//    NSLog(@"%@",reqframe);
+//
+//    if([ff isEqualToString: @"{{0, 0}, {320, -0}}"] || [ff isEqualToString: @"{{0, -0.5}, {768, 0.5}}"]  )
+//    {
+//        NSLog(@"yes");
+//        self.StickyView.hidden = NO;
+//        //[self.StickyView addSubview:self.teamsUIView];
+//    }
+//    else
+//    {
+//        self.StickyView.hidden = YES;
+//    }
     
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"yes");
+    NSLog(@"%f", scrollView.contentOffset.y);
+    
+    
+    
+    float f = scrollView.contentOffset.y;
+    
+    
+  if(isSelected ==NO)
+  {
+      if(f>=1.000000 && f<=645.500000)
+      {
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = NO;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+      else if(f>=645.500000 && f<=804.500000)
+      {
+          
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = NO;
+      }
+      else if(f>=804.500000)
+      {
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = NO;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+      else{
+          
+          self.StickyView.hidden = YES;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+  }
+  else
+  {
+      if(f>=1.000000 && f<=904.000000)
+      {
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = NO;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+      else if(f>=904.000000 && f<=1065.000000 )
+      {
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = NO;
+      }else if(f>=1065.000000)
+      {
+          self.StickyView.hidden = NO;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = NO;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+      else{
+          
+          self.StickyView.hidden = YES;
+          self.StickyBattingHeader.hidden = YES;
+          self.StickyBowlingHeader.hidden = YES;
+          self.StickyFallofWktsHeader.hidden = YES;
+      }
+  }
+  
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView;
+{
+    NSLog(@"yes yesssss");
 }
 
 
@@ -889,6 +982,7 @@
         [[cell dotsBtn] setTag:[indexPath row]];
         [[cell wktsBtn] setTag:[indexPath row]];
         
+        
         [cell.runsBtn addTarget:self action:@selector(myActionRuns:) forControlEvents:UIControlEventTouchUpInside];
         [cell.ballsBtn addTarget:self action:@selector(myActionBalls:) forControlEvents:UIControlEventTouchUpInside];
         [cell.foursBtn addTarget:self action:@selector(myActionFours:) forControlEvents:UIControlEventTouchUpInside];
@@ -965,6 +1059,21 @@
 //    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
 //    dict = [self WagonWheelWebservice];
     
+}
+
+-(IBAction)myExtras:(id)sender
+{
+    
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
+    ScoreCardCell * cell = [self.listTbl cellForRowAtIndexPath:indexPath];
+    NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
+    //[self loadVideoPlayer1:@"" :self.matchCode :innno : @"":@"EXTRAS"];
+    //[self loadVideoPlayer:@"0":self.matchCode:innno:@"0":@"EXTRAS"];
+    [self loadVideoPlayer:@"0" :@"0" :@"EXTRAS" innings:innno];
+    
+    
+   // http://13.126.151.253:9001/AGAPTService.svc/GETSCORECARDVIDEOSFILEPATH/0/DMSC11600224DB2663B20170414152400012/1/0/EXTRAS
 }
 -(IBAction)myActionRuns:(id)sender
 {
@@ -1153,6 +1262,7 @@
             if(indexPath.row == selectedIndex)
             {
                 selectedIndex = -1;
+                isSelected =NO;
     
                 lastIndex = NULL;
     
@@ -1186,12 +1296,13 @@
                     // self.tableHeight.constant = self.listTbl.frame.size.height300;
                     // [self.listTbl reloadData];
                 }
+                
+                isSelected =YES;
     
                 lastIndex = indexPath;
                 selectedIndex = indexPath.row;
     
             }
-            
             seletedPath = indexPath;
             playercode = [[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
             innno = [[CommonArray valueForKey:@"Inningsno"] objectAtIndex:indexPath.row];
@@ -1254,7 +1365,7 @@
     
     
                     [self.bowlingTbl reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                    isSelected =YES;
+//                    isSelected =YES;
     
     
                     isOnes = YES;
@@ -2790,6 +2901,8 @@
                 appDel.isTest = isTestmatch;
                 
                 
+                [self.ExtrasBtn addTarget:self action:@selector(myExtras:) forControlEvents:UIControlEventTouchUpInside];
+                
             }
             
             
@@ -3206,6 +3319,21 @@
     
     [self.ballsColView reloadData];
     
+}
+
+-(void)loadVideoPlayer1: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo :(NSString*)TYPE
+{
+    //NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
+    
+    VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
+    videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+    videoPlayerVC.MatchCode = self.matchCode;
+    videoPlayerVC.PlayerCode = playercode;
+    videoPlayerVC.VideoValue = value;
+    videoPlayerVC.Innings = innNo;
+    videoPlayerVC.Type = batOrBowl;
+    [self.navigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    //[self.navigationController popToViewController:videoPlayerVC animated:YES];
 }
 
 -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo

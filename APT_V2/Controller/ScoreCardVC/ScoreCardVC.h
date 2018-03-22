@@ -19,6 +19,11 @@
 
 @property (nonatomic,strong) IBOutlet UIButton * StickyTeam1;
 @property (nonatomic,strong) IBOutlet UIButton * StickyTeam2;
+@property (nonatomic,strong) IBOutlet UIView * StickyView;
+
+@property (nonatomic,strong) IBOutlet UIView * StickyBattingHeader;
+@property (nonatomic,strong) IBOutlet UIView * StickyBowlingHeader;
+@property (nonatomic,strong) IBOutlet UIView * StickyFallofWktsHeader;
 
 @property (nonatomic,strong) IBOutlet UIButton * Team3;
 @property (nonatomic,strong) IBOutlet UIButton * Team4;
@@ -29,6 +34,9 @@
 @property (nonatomic,strong) IBOutlet UIButton * Inn2;
 @property (nonatomic,strong) IBOutlet UIButton * Inn3;
 @property (nonatomic,strong) IBOutlet UIButton * Inn4;
+
+
+@property (nonatomic,strong) IBOutlet UIButton * ExtrasBtn;
 
 
 @property (nonatomic,strong) IBOutlet UIScrollView * commonScroll;
@@ -42,7 +50,7 @@
 @property (nonatomic,strong) IBOutlet UIView * headerUIView;
 @property (nonatomic,strong) IBOutlet UIView * headerUIViewTestmatch;
 
-@property (nonatomic,strong) IBOutlet UIView * StickyView;
+
 
 @property (nonatomic,strong)  NSString * matchCode;
 @property (nonatomic,strong)  NSString * backkey;
