@@ -3107,23 +3107,25 @@
         self.pitchData = [NSMutableArray new];
         
         if (isBatting) {
-            NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
-            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
-            NSLog(@"battingPitchData:%@", battingPitchData);
+//            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
+//            NSLog(@"battingPitchData:%@", battingPitchData);
             matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
         }
         
         if (isBowling) {
-            NSLog(@"bowlingmatchDetailsArray:%@", bowlingmatchDetailsArray);
-            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
-            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
+//            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
+//            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
             matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
         }
-            //        [self.batttingTableView reloadData];
+    
         [self.batttingTableView beginUpdates];
         
         if(indexPath.row == selectedIndex) {
@@ -3148,10 +3150,12 @@
             selectedIndex = indexPath.row;
         }
         
+        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
         [self.batttingTableView endUpdates];
         
-        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.batttingTableView reloadData];
+        
+//        [self.batttingTableView reloadData];
     }
     
 }
