@@ -656,20 +656,6 @@
     // Do whatever you need to do to the parallaxView or your subview before its frame changes
     NSLog(@"parallaxView:willChangeFrame: %@", NSStringFromCGRect(frame));
     
-    //NSString *size = @"{{0, -240}, {768, 240}}";
-    
-    //frame = CGRectFromString(size);
-    
-    
-    
-//    if (frame.origin.y <= 0) {
-//        self.StickyView.hidden = NO;
-//
-//    }
-//    else
-//    {
-//        self.StickyView.hidden = YES;
-//    }
     
     
     
@@ -679,34 +665,7 @@
     // Do whatever you need to do to the parallaxView or your subview after its frame changed
     NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
     
-//    NSString *ff = [NSString stringWithFormat:@"%@",NSStringFromCGRect(frame)];
-//    NSArray *arr = [ff componentsSeparatedByString:@","];
-//    NSString *str = arr[1];
-//    NSArray *arr1 = [str componentsSeparatedByString:@"}"];
-//    int reqCount = [arr1[0] intValue];
-//    
-//    if(reqCount==0)
-//    {
-//        self.StickyView.hidden = NO;
-//    }
-//    else
-//    {
-//        self.StickyView.hidden = YES;
-//    }
 
-//    NSString *reqframe = [NSString stringWithFormat:@"{{0, 0}, {%ld, -0}}",self.view.frame.size.width];
-//    NSLog(@"%@",reqframe);
-//
-//    if([ff isEqualToString: @"{{0, 0}, {320, -0}}"] || [ff isEqualToString: @"{{0, -0.5}, {768, 0.5}}"]  )
-//    {
-//        NSLog(@"yes");
-//        self.StickyView.hidden = NO;
-//        //[self.StickyView addSubview:self.teamsUIView];
-//    }
-//    else
-//    {
-//        self.StickyView.hidden = YES;
-//    }
     
 
 }
@@ -801,20 +760,6 @@
     
 }
 
--(void)viewDidLayoutSubviews
-{
-    //    CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-    //    self.tableHeight.constant = height;
-    //    [self.view layoutIfNeeded];
-    
-    //    CGFloat height = MIN(self.view.bounds.size.height, self.listTbl.contentSize.height);
-    //    self.tableHeight.constant = height;
-    //    [self.view layoutIfNeeded];
-    //    
-    //    CGFloat height1 = MIN(self.view.bounds.size.height, self.bowlingTbl.contentSize.height);
-    //    self.tableHeight2.constant = height1;
-    //    [self.view layoutIfNeeded];
-}
 
 -(void)buttonclicked:(UIButton*)selectedBtn
 {

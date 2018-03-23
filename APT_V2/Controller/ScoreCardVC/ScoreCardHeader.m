@@ -19,8 +19,11 @@
     // Do any additional setup after loading the view from its nib.
     
     
+    self.resultlbl.layer.masksToBounds = YES;
+    self.resultlbl.layer.cornerRadius = 8;
+    
     self.competitionTypelbl.text = [[self.matchDetailsArray valueForKey:@"Tournament"] objectAtIndex:0];
-    self.resultlbl.text = [NSString stringWithFormat:@" %@ " ,  [[self.matchDetailsArray valueForKey:@"result"] objectAtIndex:0]];
+    //self.resultlbl.text = [NSString stringWithFormat:@"   %@ " ,  [[self.matchDetailsArray valueForKey:@"MatchResult"] objectAtIndex:0]];
     
     self.teamAlbl.text = [[self.matchDetailsArray valueForKey:@"BattingTeamName"] objectAtIndex:0];
     self.teamBlbl.text = [[self.matchDetailsArray valueForKey:@"BowlingTeamName"] objectAtIndex:0];
@@ -33,7 +36,7 @@
     self.teamAScorelbl.text = [[self.matchDetailsArray valueForKey:@"TeamAScore"] objectAtIndex:0];
     self.teamBScorelbl.text = [[self.matchDetailsArray valueForKey:@"TeamBScore"] objectAtIndex:0];
     self.groundlbl.text = [[self.matchDetailsArray valueForKey:@"Venue"] objectAtIndex:0];
-    self.resultlbl.text = [[self.matchDetailsArray valueForKey:@"MatchResult"] objectAtIndex:0];
+    self.resultlbl.text = [NSString stringWithFormat:@"   %@ " ,  [[self.matchDetailsArray valueForKey:@"MatchResult"] objectAtIndex:0]];
     
     
     //[self.Team1 setTitle:[[matchDetailsImageArray valueForKey:@"BattingTeamName"] objectAtIndex:0] forState:UIControlStateNormal];

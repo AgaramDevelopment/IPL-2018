@@ -439,7 +439,7 @@ NSMutableArray *bowlMonths;
     {
         //[entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(65) + 5)]];
         
-        int value = [[self.lineValuesArray1 objectAtIndex:index] intValue];
+        float value = [[self.lineValuesArray1 objectAtIndex:index] floatValue];
         
         [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
@@ -473,7 +473,7 @@ NSMutableArray *bowlMonths;
         // [entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(15) + 5)]];
         
         
-        int value = [[self.BarValuesArray1 objectAtIndex:index] intValue];
+        float value = [[self.BarValuesArray1 objectAtIndex:index] floatValue];
         [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
         
         // stacked
@@ -641,7 +641,7 @@ NSMutableArray *bowlMonths;
     {
         //[entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(35) + 5)]];
         
-        int value = [[self.lineValuesArray2 objectAtIndex:index] intValue];
+        float value = [[self.lineValuesArray2 objectAtIndex:index] floatValue];
         
         [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
@@ -676,7 +676,7 @@ NSMutableArray *bowlMonths;
         //[entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(45) + 5)]];
         
         
-        int value = [[self.BarValuesArray2 objectAtIndex:index] intValue];
+        float value = [[self.BarValuesArray2 objectAtIndex:index] floatValue];
         [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
         //
         // stacked
@@ -816,7 +816,7 @@ NSMutableArray *bowlMonths;
     {
         // [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(135) + 5)]];
         
-        int value = [[self.lineValuesArray3 objectAtIndex:index] intValue];
+        float value = [[self.lineValuesArray3 objectAtIndex:index] floatValue];
         
         [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
@@ -850,7 +850,7 @@ NSMutableArray *bowlMonths;
         //[entries1 addObject:[[BarChartDataEntry alloc] initWithX:index + 0.5 y:(arc4random_uniform(85) + 5)]];
         
         
-        int value = [[self.BarValuesArray3 objectAtIndex:index] intValue];
+        float value = [[self.BarValuesArray3 objectAtIndex:index] floatValue];
         [entries1 addObject:[[BarChartDataEntry alloc] initWithX:0.0 y:value]];
         //
         // stacked
@@ -1113,10 +1113,72 @@ NSMutableArray *bowlMonths;
     {
         overViewlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         
+        
+        
+        
+        if(Index.row == 0)
+        {
+            Barvalue = @"RUNS";
+        }
+        else if(Index.row == 1)
+        {
+            Barvalue = @"WICKETS";
+        }
+        else if(Index.row == 2)
+        {
+            Barvalue = @"AVERAGE";
+        }
+        else if(Index.row == 3)
+        {
+            Barvalue = @"STRIKERATE";
+        }
+        else if(Index.row == 4)
+        {
+            Barvalue = @"RUNSPEROVER";
+        }
+        else if(Index.row == 5)
+        {
+            Barvalue = @"DOTBALLPER";
+        }
+        else if( Index.row == 6)
+        {
+            Barvalue = @"BOUNDARIESPER";
+        }
+        
     }
     else if([key isEqualToString:@"Yvalue"])
     {
         runslbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+        if(Index.row == 0)
+        {
+            linevalue = @"RUNS";
+        }
+        else if(Index.row == 1)
+        {
+            linevalue = @"WICKETS";
+        }
+        else if(Index.row == 2)
+        {
+            linevalue = @"AVERAGE";
+        }
+        else if(Index.row == 3)
+        {
+            linevalue = @"STRIKERATE";
+        }
+        else if(Index.row == 4)
+        {
+            linevalue = @"RUNSPEROVER";
+        }
+        else if(Index.row == 5)
+        {
+            linevalue = @"DOTBALLPER";
+        }
+        else if( Index.row == 6)
+        {
+            linevalue = @"BOUNDARIESPER";
+        }
+        
     }
     
     [self ChartsWebservice];

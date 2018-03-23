@@ -281,9 +281,13 @@
             {
                 cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
             }
-            else
+            else  if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
             {
                 cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+            }
+            else
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
             }
            
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -824,7 +828,7 @@
                 }
              else
                {
-                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"no-image"];
+                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
                }
             
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -1443,11 +1447,15 @@
                 
                 if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
                     {
-                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
                     }
-                else
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                     {
-                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                    else
+                    {
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
                     }
                 
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -1991,10 +1999,14 @@
                     {
                     cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                     }
-                else
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                     {
                     cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
                     }
+                else
+                {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
+                }
                 
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
@@ -3111,23 +3123,25 @@
         self.pitchData = [NSMutableArray new];
         
         if (isBatting) {
-            NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
-            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
-            NSLog(@"battingPitchData:%@", battingPitchData);
+//            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
+//            NSLog(@"battingPitchData:%@", battingPitchData);
             matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
         }
         
         if (isBowling) {
-            NSLog(@"bowlingmatchDetailsArray:%@", bowlingmatchDetailsArray);
-            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
-            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
+//            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
+//            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
             matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
             self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
             self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
         }
-            //        [self.batttingTableView reloadData];
+    
         [self.batttingTableView beginUpdates];
         
         if(indexPath.row == selectedIndex) {
@@ -3152,10 +3166,12 @@
             selectedIndex = indexPath.row;
         }
         
+        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
         [self.batttingTableView endUpdates];
         
-        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.batttingTableView reloadData];
+        
+//        [self.batttingTableView reloadData];
     }
     
 }

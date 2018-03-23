@@ -33,20 +33,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAu-OJ-mMM">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed 01,Nov 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-ly-XQe">
-                                        <rect key="frame" x="10" y="2" width="165.5" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="o74-sP-lQN"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-ly-XQe">
+                                        <rect key="frame" x="5" y="2" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZs-p0-JRQ">
-                                        <rect key="frame" x="199.5" y="2" width="165.5" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="6Gf-FJ-9Wc"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZs-p0-JRQ">
+                                        <rect key="frame" x="370" y="2" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -54,13 +48,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.65490196079999996" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="BZs-p0-JRQ" firstAttribute="top" secondItem="RAu-OJ-mMM" secondAttribute="top" constant="2" id="B2z-Bf-7No"/>
-                                    <constraint firstAttribute="trailing" secondItem="BZs-p0-JRQ" secondAttribute="trailing" constant="10" id="Ccu-2r-mKB"/>
-                                    <constraint firstItem="rfp-ly-XQe" firstAttribute="leading" secondItem="RAu-OJ-mMM" secondAttribute="leading" constant="10" id="WVs-5Y-6zu"/>
-                                    <constraint firstItem="BZs-p0-JRQ" firstAttribute="leading" secondItem="rfp-ly-XQe" secondAttribute="trailing" constant="24" id="b07-DN-gRD"/>
+                                    <constraint firstAttribute="trailing" secondItem="BZs-p0-JRQ" secondAttribute="trailing" constant="5" id="L0u-Zh-TbR"/>
+                                    <constraint firstItem="rfp-ly-XQe" firstAttribute="leading" secondItem="RAu-OJ-mMM" secondAttribute="leading" constant="5" id="ck0-m9-Zyw"/>
                                     <constraint firstAttribute="height" constant="25" id="fPS-vy-7OA"/>
-                                    <constraint firstItem="rfp-ly-XQe" firstAttribute="top" secondItem="RAu-OJ-mMM" secondAttribute="top" constant="2" id="hp9-oa-6HA"/>
-                                    <constraint firstItem="BZs-p0-JRQ" firstAttribute="width" secondItem="rfp-ly-XQe" secondAttribute="width" id="leq-on-dcF"/>
+                                    <constraint firstItem="BZs-p0-JRQ" firstAttribute="top" secondItem="RAu-OJ-mMM" secondAttribute="top" constant="2" id="qFm-N3-iUi"/>
+                                    <constraint firstItem="rfp-ly-XQe" firstAttribute="top" secondItem="RAu-OJ-mMM" secondAttribute="top" constant="2" id="yKt-VY-zf9"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkM-2w-VV9">
