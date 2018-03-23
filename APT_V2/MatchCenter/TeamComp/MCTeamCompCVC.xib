@@ -552,9 +552,9 @@
                                 <rect key="frame" x="0.0" y="685" width="404" height="140"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-nj-u07">
-                                        <rect key="frame" x="8" y="8" width="388" height="90"/>
+                                        <rect key="frame" x="5" y="3" width="394" height="51.5"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
@@ -572,16 +572,30 @@
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                         </variation>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udw-5z-Rke">
+                                        <rect key="frame" x="5" y="54.5" width="394" height="51.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97611588240000002" green="0.059988744560000001" blue="0.0045252409760000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="rGN-MH-uWR" firstAttribute="top" secondItem="Ijl-nj-u07" secondAttribute="bottom" constant="8" id="14h-dg-9ag"/>
+                                    <constraint firstItem="rGN-MH-uWR" firstAttribute="top" secondItem="udw-5z-Rke" secondAttribute="bottom" id="Grl-iw-82i"/>
                                     <constraint firstAttribute="bottom" secondItem="rGN-MH-uWR" secondAttribute="bottom" constant="5" id="JRy-8O-nM4"/>
+                                    <constraint firstAttribute="trailing" secondItem="udw-5z-Rke" secondAttribute="trailing" constant="5" id="Ke6-3p-FAI"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="top" secondItem="Ijl-nj-u07" secondAttribute="bottom" constant="3" id="Xa2-p0-b7R"/>
                                     <constraint firstItem="rGN-MH-uWR" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="8" id="Y0E-PV-Xe2"/>
-                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="top" secondItem="qH6-Y7-PaT" secondAttribute="top" constant="8" id="cUG-f8-7Iy"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="top" secondItem="Ijl-nj-u07" secondAttribute="bottom" id="ZfL-rU-Pcs"/>
+                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="top" secondItem="qH6-Y7-PaT" secondAttribute="top" constant="3" id="bI7-U5-Shm"/>
                                     <constraint firstAttribute="trailing" secondItem="rGN-MH-uWR" secondAttribute="trailing" constant="8" id="ezy-kM-Ev4"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ijl-nj-u07" secondAttribute="trailing" constant="8" id="kf5-KZ-d6B"/>
-                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="8" id="xGK-rD-avv"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="height" secondItem="Ijl-nj-u07" secondAttribute="height" id="fTb-Qt-GFg"/>
+                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="5" id="k30-iL-qEt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ijl-nj-u07" secondAttribute="trailing" constant="5" id="vT8-pt-ln7"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="5" id="xoZ-rW-JXQ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -673,6 +687,7 @@
                 <outlet property="TeamVenuelbl" destination="3jI-1B-Vfv" id="AIC-O7-KAs"/>
                 <outlet property="WonStatuslbl" destination="rGN-MH-uWR" id="5cP-gA-Pcg"/>
                 <outlet property="datelbl" destination="VWh-8T-ql0" id="Ek4-pZ-Y4s"/>
+                <outlet property="outPlayerslbl" destination="udw-5z-Rke" id="rJe-qz-GMC"/>
                 <outlet property="replacePlayersCountlbl" destination="wLe-yg-pKb" id="a0Z-vz-tZ7"/>
                 <outlet property="replacePlayerslbl" destination="Ijl-nj-u07" id="myN-lK-QpK"/>
             </connections>

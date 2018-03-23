@@ -447,8 +447,8 @@
             self.groundTopRight.text = [key valueForKey:@"GTopRight"];
             self.groundBottomLeft.text = [key valueForKey:@"GTopRight"];
             self.groundBottomRight.text = [key valueForKey:@"GBottomLeft"];
-            self.groundLight.text = @"";
-            self.groundRight.text = @"";
+            self.groundLight.text = [key valueForKey:@"GSTop"];
+            self.groundRight.text = [key valueForKey:@"GSBottom"];
             
 //            self.groundTopLeft.text = [NSString stringWithFormat:@"%@",[key valueForKey:@"GTopLeft"]];
 //            self.groundTopRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
