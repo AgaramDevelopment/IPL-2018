@@ -21,6 +21,9 @@
     BOOL isPop;
     BOOL isList;
     
+    NSMutableArray* VenuesArray;
+    NSMutableArray* SelectedResultsArray;
+    
     TabbarVC *objtab;
     NSString *displayMatchCode;
     NSString* Teamcode;
@@ -159,8 +162,8 @@
     }
     else if ([sender tag] == 2)  //venue
     {
-        dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
-        dropVC.key = @"Venue";
+        dropVC.array = VenuesArray;
+        dropVC.key = @"GROUND";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v3.frame), CGRectGetMaxY(self.v3.frame)+self.v3.frame.size.height+20, CGRectGetWidth(self.v3.frame), 300)];
     }
     
@@ -267,7 +270,7 @@
         NSString *local = components[3];
         
         cell.date.text = [NSString stringWithFormat:@"%@ %@",day,monthyear];
-        cell.time.text = [NSString stringWithFormat:@"%@ %@",time,local];
+        cell.time.text = [firstobj valueForKey:@"Ground"];
         
         
         
@@ -306,23 +309,7 @@
             }
         }];
         
-//        NSString *key = [firstobj valueForKey:@"TeamA"];
-//
-//        if([ key isEqualToString:@"India"])
-//        {
-//            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
-//            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
-//        }
-//        else
-//        {
-//            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
-//            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
-//        }
-        
-        
-        //        NSString *ground = [firstobj valueForKey:@"Ground"];
-        //        NSString *place = [firstobj valueForKey:@"GroundCode"];
-        //        cell.groundName.text = [NSString stringWithFormat:@"%@,%@",ground,place];
+
         
         
         if(![[firstobj valueForKey:@"FIRSTINNINGSSCORE"] isEqual:[NSNull null]])
@@ -459,14 +446,7 @@
         
         [scoreArray addObject:dic];
         
-//        ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
-//        objFix = (ScoreCardVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
-//        objFix.matchCode = displayMatchCode;
-//        objFix.matchDetails = scoreArray;
-//        objFix.backkey = @"yes";
-//        [self.navigationController pushViewController:objFix animated:YES];
-        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+
         objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
         appDel.Scorearray = scoreArray;
@@ -532,6 +512,26 @@
                 
                 self.teamLbl.text = @"All";
                 Teamcode = @"";
+                
+                
+                NSArray* temparray = [responseObject valueForKey:@"lstFixturesOppoTeam"];
+              NSMutableArray *FilterVenuesArray = [NSMutableArray new];
+                VenuesArray = [NSMutableArray new];
+                for (NSDictionary* temp1 in temparray) {
+                    if (![[VenuesArray valueForKey:@"GROUND"] containsObject:[temp1 valueForKey:@"GROUND"]]) {
+                        [VenuesArray addObject:temp1];
+                    }
+                }
+                
+                
+                
+//                for(int i=0;i<FilterVenuesArray.count;i++)
+//                {
+//                    NSString *str= [[FilterVenuesArray valueForKey:@"GROUND"] objectAtIndex:i];
+//                    [VenuesArray addObject:str];
+//                }
+                
+                
                 [self setFilterResults];
                 
                 
@@ -566,6 +566,7 @@
         
         competitionLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        self.venueLbl.text = @"";
         
         [[NSUserDefaults standardUserDefaults] setValue:competitionLbl.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
@@ -577,6 +578,7 @@
     {
         
         self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        self.venueLbl.text = @"";
         Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
@@ -586,13 +588,30 @@
     }
     else
     {
-        self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        self.venueLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+       // Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self setFilterResults];
+        NSMutableArray *loadedVenuesArray = [[NSMutableArray alloc]init];
+        loadedVenuesArray = SelectedResultsArray;
+        
+        self.resultArr = [[NSMutableArray alloc]init];
+        for(int i=0;i<loadedVenuesArray.count;i++)
+        {
+            NSString *selectedVenue = self.venueLbl.text;
+            NSString *currentVenue = [[loadedVenuesArray valueForKey:@"Ground"] objectAtIndex:i];
+            
+            if( [selectedVenue isEqualToString:currentVenue])
+            {
+                [self.resultArr addObject:[loadedVenuesArray objectAtIndex:i]];
+            }
+            
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.ListTbl reloadData];
+        });
+        
+        
     }
     
 }
@@ -629,7 +648,12 @@
                     [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
                 }
             }
+            
+            
         }
+        
+        SelectedResultsArray =[NSMutableArray new];
+        SelectedResultsArray = self.resultArr;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.ListTbl reloadData];
         });

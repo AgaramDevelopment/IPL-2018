@@ -46,14 +46,14 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_userimage" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-gj-BpT">
-                            <rect key="frame" x="25" y="45" width="100" height="100"/>
+                            <rect key="frame" x="25" y="44" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="gql-YI-Fcq"/>
                                 <constraint firstAttribute="height" constant="100" id="zj6-op-xix"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSQ-3p-Ile">
-                            <rect key="frame" x="25" y="165" width="245" height="20"/>
+                            <rect key="frame" x="25" y="164" width="245" height="21"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -73,13 +73,22 @@
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="xjh-RC-qh3"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgaramImage" translatesAutoresizingMaskIntoConstraints="NO" id="8Za-q3-e2O">
+                    <rect key="frame" x="60" y="348" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="8xZ-eq-sWe"/>
+                        <constraint firstAttribute="height" constant="200" id="dad-Xt-LnN"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="8Za-q3-e2O" secondAttribute="bottom" constant="20" id="7uX-2n-HWj"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="ALU-Y0-oT2"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="bottom" id="Hah-fe-aCL"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Oqy-mj-KdO"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="PoT-Oc-GoJ"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="c1D-I3-WZP"/>
+                <constraint firstItem="8Za-q3-e2O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gEN-Z8-JFN"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iWj-vw-ILj"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lxr-Pg-W1H"/>
             </constraints>
@@ -87,6 +96,7 @@
         </view>
     </objects>
     <resources>
+        <image name="AgaramImage" width="100" height="29"/>
         <image name="Default_userimage" width="500" height="500"/>
     </resources>
 </document>

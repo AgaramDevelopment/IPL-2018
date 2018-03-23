@@ -1113,10 +1113,69 @@ NSMutableArray *bowlMonths;
     {
         overViewlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         
+        if(Index.row == 0)
+        {
+            Barvalue = @"RUNS";
+        }
+        else if(Index.row == 1)
+        {
+            Barvalue = @"WICKETS";
+        }
+        else if(Index.row == 2)
+        {
+            Barvalue = @"STRIKERATE";
+        }
+        else if(Index.row == 3)
+        {
+            Barvalue = @"RUNSPEROVER";
+        }
+        else if(Index.row == 4)
+        {
+            Barvalue = @"AVERAGE";
+        }
+        else if(Index.row == 5)
+        {
+            Barvalue = @"DOTBALLPER";
+        }
+        else if( Index.row == 6)
+        {
+            Barvalue = @"BOUNDARIESPER";
+        }
+        
     }
     else if([key isEqualToString:@"Yvalue"])
     {
         runslbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+        if(Index.row == 0)
+        {
+            linevalue = @"RUNS";
+        }
+        else if(Index.row == 1)
+        {
+            linevalue = @"WICKETS";
+        }
+        else if(Index.row == 2)
+        {
+            linevalue = @"STRIKERATE";
+        }
+        else if(Index.row == 3)
+        {
+            linevalue = @"RUNSPEROVER";
+        }
+        else if(Index.row == 4)
+        {
+            linevalue = @"AVERAGE";
+        }
+        else if(Index.row == 5)
+        {
+            linevalue = @"DOTBALLPER";
+        }
+        else if( Index.row == 6)
+        {
+            linevalue = @"BOUNDARIESPER";
+        }
+        
     }
     
     [self ChartsWebservice];

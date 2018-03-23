@@ -281,9 +281,13 @@
             {
                 cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
             }
-            else
+            else  if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
             {
                 cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+            }
+            else
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
             }
            
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -824,7 +828,7 @@
                 }
              else
                {
-                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"no-image"];
+                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
                }
             
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -1443,11 +1447,15 @@
                 
                 if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
                     {
-                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
                     }
-                else
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                     {
-                    cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                    else
+                    {
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
                     }
                 
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
@@ -1991,10 +1999,14 @@
                     {
                     cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
                     }
-                else
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
                     {
                     cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
                     }
+                else
+                {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
+                }
                 
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
