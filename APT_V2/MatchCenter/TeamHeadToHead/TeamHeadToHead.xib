@@ -77,10 +77,12 @@
                 <outlet property="homeT2PV" destination="8ts-As-xve" id="udt-WP-ZKP"/>
                 <outlet property="lowScoreT1Lbl" destination="nHH-Kd-W9X" id="nlp-Kt-d1n"/>
                 <outlet property="lowScoreT2Lbl" destination="7EB-t9-7dG" id="yaw-kT-xtw"/>
+                <outlet property="nrORtieLbl" destination="XWm-Mh-Gdk" id="sGG-HZ-V9D"/>
                 <outlet property="playOffsT1Lbl" destination="qTs-P5-OD2" id="kHR-AR-wq0"/>
                 <outlet property="playOffsT1PV" destination="ATg-Xn-qI9" id="kGA-Ur-eB7"/>
                 <outlet property="playOffsT2Lbl" destination="M03-NQ-yOw" id="edq-z1-nZE"/>
                 <outlet property="playOffsT2PV" destination="pZO-zk-hGf" id="LrB-b1-t1k"/>
+                <outlet property="playedLbl" destination="hAz-NK-0rn" id="4s6-km-5Y5"/>
                 <outlet property="playedT1Lbl" destination="8fp-83-Kqv" id="nbt-Pb-ZLc"/>
                 <outlet property="playedT1PV" destination="Ykj-wx-PcF" id="2I0-oR-LNY"/>
                 <outlet property="playedT2Lbl" destination="Q4G-Jt-n5U" id="dmy-Xl-f7i"/>
@@ -92,16 +94,20 @@
                 <outlet property="runsScoredT1Lbl" destination="EP5-1T-bLT" id="2FU-2g-dyh"/>
                 <outlet property="runsScoredT1PV" destination="qYn-dd-rTV" id="fFw-r5-Wxo"/>
                 <outlet property="runsScoredT2Lbl" destination="36X-EM-ia0" id="AJd-Am-LOY"/>
-                <outlet property="runsScoredT2PV" destination="Iih-m3-tha" id="Dm6-ai-Iqd"/>
+                <outlet property="runsScoredT2PV" destination="ZLA-fh-0Rq" id="4pn-C0-wYQ"/>
                 <outlet property="secondInn" destination="Vwu-Om-ciA" id="f98-Mm-o3s"/>
                 <outlet property="spell1Inn" destination="wxA-SB-MNx" id="Apo-P6-zAE"/>
                 <outlet property="spell2Inn" destination="6sF-eE-HqP" id="QX8-Dq-PY4"/>
                 <outlet property="spell3Inn" destination="Y9n-LT-Ins" id="7hB-S3-FB1"/>
+                <outlet property="team1ImageView" destination="DSg-fX-agz" id="hiX-Ne-qrs"/>
                 <outlet property="team1TF" destination="atK-wi-HS1" id="2eX-2B-AML"/>
                 <outlet property="team1View" destination="6fE-Xq-nCK" id="XHD-6a-cci"/>
+                <outlet property="team1Win" destination="ogW-fY-c6H" id="DvI-wO-cLw"/>
                 <outlet property="team1win" destination="J64-1b-OFW" id="oEW-sD-dWe"/>
+                <outlet property="team2ImageView" destination="cuO-q5-FWf" id="vDt-ke-ufc"/>
                 <outlet property="team2TF" destination="2ej-dX-qrf" id="rap-jL-E7m"/>
                 <outlet property="team2View" destination="6AL-dz-nOM" id="2FS-WD-Mtm"/>
+                <outlet property="team2Win" destination="bEd-DJ-EiF" id="kdJ-sl-iPb"/>
                 <outlet property="team2win" destination="cdh-hn-3ff" id="A0m-1m-22C"/>
                 <outlet property="tossWonT1Lbl" destination="RGN-02-4Pj" id="Rsz-mt-vel"/>
                 <outlet property="tossWonT1PV" destination="yOA-JX-zfr" id="UZA-v2-Gpa"/>
@@ -272,6 +278,9 @@
                                                                 </imageView>
                                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vsy-Mx-rbB">
                                                                     <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
+                                                                    <connections>
+                                                                        <action selector="actionDropDowns:" destination="-1" eventType="touchUpInside" id="1NF-DG-Vgj"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,7 +339,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdn-93-GWY">
-                                                            <rect key="frame" x="172.5" y="8.5" width="30" height="13.5"/>
+                                                            <rect key="frame" x="172.5" y="9" width="30" height="13.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="Mfw-9T-ewC"/>
                                                             </constraints>
@@ -470,7 +479,7 @@
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAz-NK-0rn">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAz-NK-0rn">
                                                                             <rect key="frame" x="0.0" y="18" width="70" height="14"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="14" id="ezL-Kx-vaP"/>
@@ -482,7 +491,7 @@
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NR 0 Tie 2" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWm-Mh-Gdk">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWm-Mh-Gdk">
                                                                             <rect key="frame" x="0.0" y="33" width="70" height="14"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="14" id="lAn-Xq-4jb"/>
@@ -1670,7 +1679,7 @@
                                                                                         <action selector="TeamInnsOversSelection:" destination="-1" eventType="touchUpInside" id="TEI-ep-Tma"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CSK Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogW-fY-c6H">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogW-fY-c6H">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
                                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                                     <nil key="textColor"/>
@@ -1691,7 +1700,7 @@
                                                                                         <action selector="TeamInnsOversSelection:" destination="-1" eventType="touchUpInside" id="ZfS-ag-E8k"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MI Win" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEd-DJ-EiF">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEd-DJ-EiF">
                                                                                     <rect key="frame" x="20" y="0.0" width="70" height="15"/>
                                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                                                     <nil key="textColor"/>
@@ -1835,7 +1844,7 @@
                                                                 <constraint firstItem="L7r-AX-Kgp" firstAttribute="width" secondItem="mEm-fD-tef" secondAttribute="width" id="xn6-wm-TdT"/>
                                                             </constraints>
                                                         </view>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_logo_csk" translatesAutoresizingMaskIntoConstraints="NO" id="DSg-fX-agz">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DSg-fX-agz">
                                                             <rect key="frame" x="157.5" y="95" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="ZDR-N6-uz7">
@@ -2124,7 +2133,7 @@
                                                             </constraints>
                                                             <variation key="heightClass=regular-widthClass=regular" spacing="25"/>
                                                         </stackView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="srh_lgo" translatesAutoresizingMaskIntoConstraints="NO" id="cuO-q5-FWf">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cuO-q5-FWf">
                                                             <rect key="frame" x="157.5" y="315" width="50" height="50"/>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Lp-O6-e4C">
@@ -3418,8 +3427,6 @@
     </objects>
     <resources>
         <image name="down-arrow" width="21" height="21"/>
-        <image name="srh_lgo" width="345" height="345"/>
-        <image name="team_logo_csk" width="400" height="400"/>
         <image name="uncheck" width="50" height="50"/>
     </resources>
 </document>
