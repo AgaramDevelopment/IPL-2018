@@ -120,14 +120,14 @@ AppCommon *sharedCommon = nil;
         {
             appDel.MainArray = [NSMutableArray new];
             appDel.MainArray = responseObject;
-            NSLog(@"IPL TEAMS %@ ",responseObject);
+            NSLog(@"IPL TEAMS %@ ",appDel.MainArray);
             NSString* Teamcode = [[responseObject firstObject] valueForKey:@"TeamCode"];
             NSString* TeamName = [[responseObject firstObject] valueForKey:@"TeamName"];
             
             [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
             [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
             
-            NSLog(@"IPL COMPETETION %@ ",responseObject);
+            NSLog(@"IPL COMPETETION %@ ",appDel.MainArray);
             NSString* Competetioncode = [[responseObject firstObject] valueForKey:@"CompetitionCode"];
             NSString* CompetetionName = [[responseObject firstObject] valueForKey:@"CompetitionName"];
 
@@ -150,6 +150,8 @@ AppCommon *sharedCommon = nil;
                 }
                 
             }
+            NSString* lastYearTeams = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSArray* temp = [COMMON getCorrespondingTeamName:lastYearTeams];
 //            appDel.ArrayCompetition = temp;
             NSLog(@"appDel.ArrayCompetition %@ ",appDel.ArrayCompetition);
 
@@ -375,6 +377,7 @@ AppCommon *sharedCommon = nil;
 //        return ;
     }
     
+    NSLog(@"competetionName %@",appDel.MainArray);
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
     NSArray* result = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
     

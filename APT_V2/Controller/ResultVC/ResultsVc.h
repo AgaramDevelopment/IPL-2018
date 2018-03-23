@@ -35,6 +35,7 @@
 
 @property (nonatomic,strong)IBOutlet  UILabel * competitionLbl;
 @property (strong, nonatomic) IBOutlet UILabel *teamLbl;
+@property (strong, nonatomic) IBOutlet UILabel *venueLbl;
 
 @property (nonatomic,strong)  NSMutableArray * listCompArray;
 

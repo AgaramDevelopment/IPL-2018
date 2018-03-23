@@ -289,7 +289,9 @@
 
 -(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
 {
+    
         _teamTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"loginedUserTeam"];
         NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"Teamcode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"SelectedTeamName"];

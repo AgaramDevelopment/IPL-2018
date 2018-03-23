@@ -73,12 +73,21 @@
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="xjh-RC-qh3"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgaramImage" translatesAutoresizingMaskIntoConstraints="NO" id="8Za-q3-e2O">
+                    <rect key="frame" x="110" y="458" width="200" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="B7B-W9-tiQ"/>
+                        <constraint firstAttribute="width" constant="200" id="C2M-fJ-mMW"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="8Za-q3-e2O" secondAttribute="trailing" constant="10" id="41R-vH-xf1"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="ALU-Y0-oT2"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="bottom" id="Hah-fe-aCL"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Oqy-mj-KdO"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="PoT-Oc-GoJ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="8Za-q3-e2O" secondAttribute="bottom" constant="10" id="Zcj-EX-U1z"/>
                 <constraint firstItem="5Q1-BQ-lIg" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="c1D-I3-WZP"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iWj-vw-ILj"/>
                 <constraint firstItem="gX7-q3-OzD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lxr-Pg-W1H"/>
@@ -87,6 +96,7 @@
         </view>
     </objects>
     <resources>
+        <image name="AgaramImage" width="100" height="29"/>
         <image name="Default_userimage" width="500" height="500"/>
     </resources>
 </document>

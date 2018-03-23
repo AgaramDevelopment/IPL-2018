@@ -52,6 +52,8 @@
 @property (strong, nonatomic)  NSMutableArray *replaceArray4;
 @property (strong, nonatomic)  NSMutableArray *replaceArray5;
 
+@property (strong, nonatomic)  NSMutableArray *outPlayersArray;
+
 
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
@@ -297,10 +299,20 @@
                     [placedArray addObject:str];
                 }
                 
+                
+               NSMutableArray *outArray = [[NSMutableArray alloc]init];
+                NSMutableArray *outplayer = [[NSMutableArray alloc]init];
+                outplayer = [[self.replaceArray1 objectAtIndex:indexPath.row]valueForKey:@"lstplayerstoOut"];
+                for(int i=0;i<outplayer.count;i++)
+                {
+                    NSString *str = [[outplayer objectAtIndex:i] valueForKey:@"PlayerName"];
+                    [outArray addObject:str];
+                }
+                
                 if(placedArray.count>0)
                 {
                     NSString *players = [placedArray componentsJoinedByString:@","];
-                    cell.replacePlayerslbl.text = players;
+                    cell.replacePlayerslbl.text =[NSString stringWithFormat:@"IN: %@", players];
                     cell.replacePlayersCountlbl.text = [NSString stringWithFormat:@"%d",placedArray.count];
                 }
                 else
@@ -308,6 +320,16 @@
                     
                     cell.replacePlayerslbl.text = @"";
                     cell.replacePlayersCountlbl.text = @"-";
+                }
+                
+                if(outArray.count>0)
+                {
+                    NSString *players = [outArray componentsJoinedByString:@","];
+                    cell.outPlayerslbl.text = [NSString stringWithFormat:@"OUT: %@", players];
+                }
+                else
+                {
+                    cell.outPlayerslbl.text = @"";
                 }
             
             cell.Player1.text = [[reqArray valueForKey:@"PlayerName"]objectAtIndex:0];

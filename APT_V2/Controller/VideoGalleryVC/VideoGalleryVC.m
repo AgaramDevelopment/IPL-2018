@@ -375,30 +375,30 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(collectionView==self.videoCollectionview1)
-    {
-        
-        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        
-        cell.contentView.layer.cornerRadius = 2.0f;
-        cell.contentView.layer.borderWidth = 1.0f;
-        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
-        
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
-        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
-        
-        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
-        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
-        return cell;
-    }
+//    if(collectionView==self.videoCollectionview1)
+//    {
+//
+//        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+//
+//        cell.contentView.layer.cornerRadius = 2.0f;
+//        cell.contentView.layer.borderWidth = 1.0f;
+//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+//        cell.contentView.layer.masksToBounds = YES;
+//
+//        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+//        cell.layer.shadowRadius = 2.0f;
+//        cell.layer.shadowOpacity = 1.0f;
+//        cell.layer.masksToBounds = NO;
+//        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+//        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+//        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+//
+//        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+//        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
+//        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+//        return cell;
+//    }
     
     if(collectionView==self.videoCollectionview2)
     {
@@ -778,6 +778,8 @@
 
     if ([sender tag] == 0) { // TEAM
         _CommonArray = appDel.ArrayTeam;
+//        _CommonArray = appDel.MainArray;
+
         
         
 //        dropVC.array = appDel.ArrayTeam;
@@ -803,6 +805,7 @@
             [AppCommon showAlertWithMessage:@"Plaese select Team"];
             return;
         }
+        
         if([lblTeam.text isEqualToString:@"KKR"])
         {
             selectedTeamCode = @"TEA0000008";

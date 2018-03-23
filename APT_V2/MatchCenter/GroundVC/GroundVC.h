@@ -72,6 +72,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *groundTopRight;
 @property (strong, nonatomic) IBOutlet UILabel *groundBottomLeft;
 @property (strong, nonatomic) IBOutlet UILabel *groundBottomRight;
+@property (strong, nonatomic) IBOutlet UILabel *groundRight;
+@property (strong, nonatomic) IBOutlet UILabel *groundLight;
 @property (strong, nonatomic) IBOutlet UIView *groundView;
 @property (strong, nonatomic) IBOutlet UILabel *groundLbl;
 @property (strong, nonatomic) IBOutlet UILabel *homeGroundLbl;

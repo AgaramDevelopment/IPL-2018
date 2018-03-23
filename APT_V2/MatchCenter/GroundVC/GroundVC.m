@@ -16,6 +16,7 @@
 #import "HorizontalXLblFormatter.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ResultsVc.h"
+#import "TabbarVC.h"
 
 @import drCharts;
 
@@ -35,6 +36,8 @@
     float num2;
     float num3;
     float num4;
+    
+    TabbarVC *objtab;
     
     NSArray<NSString *> *months;
     NSMutableArray *recentMatchesArray;
@@ -444,6 +447,8 @@
             self.groundTopRight.text = [key valueForKey:@"GTopRight"];
             self.groundBottomLeft.text = [key valueForKey:@"GTopRight"];
             self.groundBottomRight.text = [key valueForKey:@"GBottomLeft"];
+            self.groundLight.text = [key valueForKey:@"GSTop"];
+            self.groundRight.text = [key valueForKey:@"GSBottom"];
             
 //            self.groundTopLeft.text = [NSString stringWithFormat:@"%@",[key valueForKey:@"GTopLeft"]];
 //            self.groundTopRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
@@ -486,7 +491,7 @@
 //    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
     
     //Doubt --->
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, @"0", @"5"];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, fromOver, toOver];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -498,8 +503,8 @@
         
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
-//        [self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-//        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        //[self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         [self loadGraphdata];
         
         [AppCommon hideLoading];
@@ -923,10 +928,28 @@
 {
     if(collectionView == Titlecollview)
     {
+        if(indexPath.row ==0)
+        {
+            [self innings1ButtonTapped:nil];
+        }
+        else if(indexPath.row==1)
+        {
+            [self innings2ButtonTapped:nil];
+        }
         selectedIndex = indexPath;
         [collectionView reloadData];
         [self loadGraphdata];
     
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+        appDel.Currentmatchcode = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMatchCode"]];
+        //appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+        [appDel.frontNavigationController pushViewController:objtab animated:YES];
     }
 
 }

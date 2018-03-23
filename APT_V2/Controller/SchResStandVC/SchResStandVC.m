@@ -19,6 +19,7 @@
 #import "HomeScreenStandingsVC.h"
 #import "TabbarVC.h"
 #import "ResultsVc.h"
+#import "DocumentViewController.h"
 
 
 @interface SchResStandVC ()
@@ -31,6 +32,7 @@
     SWRevealViewController *revealController;
     NSMutableArray *objarray;
     ResultsVc *objresult;
+    DocumentViewController* docVC;
     
 }
 
@@ -40,6 +42,7 @@
 @end
 
 @implementation SchResStandVC
+@synthesize documentView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,6 +63,10 @@
     objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
     objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
     [self.videoView addSubview:objVideo.view];
+    
+    docVC = [DocumentViewController new];
+    [docVC.view setFrame:CGRectMake(0, 0, documentView.frame.size.width, documentView.frame.size.height)];
+    [documentView addSubview:docVC.view];
 
 //    objStands = [[HomeScreenStandingsVC alloc] initWithNibName:@"HomeScreenStandingsVC" bundle:nil];
 //    objStands.view.frame = CGRectMake(0, 0, self.standingsView.bounds.size.width, self.standingsView.bounds.size.height);

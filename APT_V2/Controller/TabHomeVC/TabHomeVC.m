@@ -77,6 +77,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    if (!appDel.MainArray.count) {
+        [COMMON getIPLteams];
+    }
+    
+//    NSString* CompetetionName = [[appDel.MainArray firstObject] valueForKey:@"CompetitionName"];
+//    NSArray* temp1 = [COMMON getCorrespondingTeamName:CompetetionName];
+    
 //    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
 //    [self.Titlecollview selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionBottom];
     
