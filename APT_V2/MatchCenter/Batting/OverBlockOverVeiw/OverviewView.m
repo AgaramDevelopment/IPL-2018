@@ -443,6 +443,7 @@ NSMutableArray *months;
 
         
         float value = [[self.lineValuesArray1 objectAtIndex:index] floatValue];
+        //NSNumber *value= [self.lineValuesArray1 objectAtIndex:index];
 
         [entries addObject:[[ChartDataEntry alloc] initWithX:index + 0.5 y:value]];
     }
@@ -1134,15 +1135,12 @@ NSMutableArray *months;
         {
             Barvalue = @"RUNSPEROVER";
         }
+        
         else if(Index.row == 4)
-        {
-            Barvalue = @"AVERAGE";
-        }
-        else if(Index.row == 5)
         {
             Barvalue = @"DOTBALLPER";
         }
-        else if(Index.row == 6)
+        else if(Index.row == 5)
         {
             Barvalue = @"BOUNDARIESPER";
         }
@@ -1155,31 +1153,28 @@ NSMutableArray *months;
         
         if(Index.row == 0)
         {
-            Barvalue = @"RUNS";
+            linevalue = @"RUNS";
         }
         else if(Index.row == 1)
         {
-            Barvalue = @"WICKETS";
+            linevalue = @"WICKETS";
         }
         else if(Index.row == 2)
         {
-            Barvalue = @"STRIKERATE";
+            linevalue = @"STRIKERATE";
         }
         else if(Index.row == 3)
         {
-            Barvalue = @"RUNSPEROVER";
+            linevalue = @"RUNSPEROVER";
         }
+        
         else if(Index.row == 4)
         {
-            Barvalue = @"AVERAGE";
+            linevalue = @"DOTBALLPER";
         }
         else if(Index.row == 5)
         {
-            Barvalue = @"DOTBALLPER";
-        }
-        else if(Index.row == 6)
-        {
-            Barvalue = @"BOUNDARIESPER";
+            linevalue = @"BOUNDARIESPER";
         }
     }
     
