@@ -178,6 +178,8 @@
 		CEA4210E203161A900B2DAB5 /* VideoGalleryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA42100203161A800B2DAB5 /* VideoGalleryVC.xib */; };
 		CEA4210F203161A900B2DAB5 /* VideoPlayerUploadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA42102203161A800B2DAB5 /* VideoPlayerUploadVC.m */; };
 		CEA42110203161A900B2DAB5 /* VideoPlayerUploadVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA42103203161A800B2DAB5 /* VideoPlayerUploadVC.xib */; };
+		CEA4DA4D2064C3CC00120E5B /* DocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4DA4B2064C3CC00120E5B /* DocumentViewController.m */; };
+		CEA4DA4E2064C3CC00120E5B /* DocumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA4DA4C2064C3CC00120E5B /* DocumentViewController.xib */; };
 		CEAE88B8204809CF00FCE39D /* MCTossAndResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE88B6204809CF00FCE39D /* MCTossAndResultsVC.m */; };
 		CEAE88B9204809CF00FCE39D /* MCTossAndResultsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE88B7204809CF00FCE39D /* MCTossAndResultsVC.xib */; };
 		CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAF5B6D20384D3200045C91 /* UITextField+testCode.m */; };
@@ -553,6 +555,9 @@
 		CEA42101203161A800B2DAB5 /* VideoPlayerUploadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerUploadVC.h; sourceTree = "<group>"; };
 		CEA42102203161A800B2DAB5 /* VideoPlayerUploadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerUploadVC.m; sourceTree = "<group>"; };
 		CEA42103203161A800B2DAB5 /* VideoPlayerUploadVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerUploadVC.xib; sourceTree = "<group>"; };
+		CEA4DA4A2064C3CC00120E5B /* DocumentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentViewController.h; sourceTree = "<group>"; };
+		CEA4DA4B2064C3CC00120E5B /* DocumentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentViewController.m; sourceTree = "<group>"; };
+		CEA4DA4C2064C3CC00120E5B /* DocumentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentViewController.xib; sourceTree = "<group>"; };
 		CEAE88B5204809CF00FCE39D /* MCTossAndResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTossAndResultsVC.h; sourceTree = "<group>"; };
 		CEAE88B6204809CF00FCE39D /* MCTossAndResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTossAndResultsVC.m; sourceTree = "<group>"; };
 		CEAE88B7204809CF00FCE39D /* MCTossAndResultsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTossAndResultsVC.xib; sourceTree = "<group>"; };
@@ -1429,6 +1434,16 @@
 			path = VideoGalleryVC;
 			sourceTree = "<group>";
 		};
+		CEA4DA492064C3B400120E5B /* DocumentView */ = {
+			isa = PBXGroup;
+			children = (
+				CEA4DA4A2064C3CC00120E5B /* DocumentViewController.h */,
+				CEA4DA4B2064C3CC00120E5B /* DocumentViewController.m */,
+				CEA4DA4C2064C3CC00120E5B /* DocumentViewController.xib */,
+			);
+			path = DocumentView;
+			sourceTree = "<group>";
+		};
 		CEAE88B4204809CF00FCE39D /* MCTossAndResultsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1552,6 +1567,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CEA4DA492064C3B400120E5B /* DocumentView */,
 				189FF1D9204FD10700F2BFCE /* ResultVC */,
 				188E55E8204EAD0A001EFA40 /* TabbarVC */,
 				18E0710E204702920020D8EE /* InjuryAndIllnessVC */,
@@ -1856,7 +1872,7 @@
 				TargetAttributes = {
 					CE3E740A20248BF100F10917 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1892,6 +1908,7 @@
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
 				18A68AC120371A2C00EBA479 /* TrainingLoadUpdateVC.xib in Resources */,
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
+				CEA4DA4E2064C3CC00120E5B /* DocumentViewController.xib in Resources */,
 				CEA4210C203161A900B2DAB5 /* VideoGalleryUploadCell.xib in Resources */,
 				043828D22031DD8300B32899 /* TeamMembersVC.xib in Resources */,
 				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
@@ -2201,6 +2218,7 @@
 				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
 				18E07115204702930020D8EE /* InjuryAndIllnessCell.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
+				CEA4DA4D2064C3CC00120E5B /* DocumentViewController.m in Sources */,
 				18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
 				043828D32031DD8300B32899 /* TeamMembersVC.m in Sources */,
@@ -2277,7 +2295,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2332,7 +2351,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2357,15 +2377,17 @@
 			baseConfigurationReference = F768FE1F7DDD50DD60206473 /* Pods-APT_V2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5S8VPA4A5;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LZ7UNGW43T;
 				INFOPLIST_FILE = APT_V2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipl.app;
 				PRODUCT_NAME = "APT Cricket";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dbacd2b1-dcef-4592-b767-525dcd05c394";
+				PROVISIONING_PROFILE_SPECIFIER = AppStore_IPL_2018;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2376,15 +2398,17 @@
 			baseConfigurationReference = D2B0EB9CC9DCC379A1C41C4A /* Pods-APT_V2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5S8VPA4A5;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LZ7UNGW43T;
 				INFOPLIST_FILE = APT_V2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipl.app;
 				PRODUCT_NAME = "APT Cricket";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dbacd2b1-dcef-4592-b767-525dcd05c394";
+				PROVISIONING_PROFILE_SPECIFIER = AppStore_IPL_2018;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

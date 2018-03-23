@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="MoreBtn" destination="POl-lM-n5v" id="Ndf-BR-yCl"/>
                 <outlet property="commonView" destination="Lno-E5-Jbz" id="CW6-4o-g1S"/>
+                <outlet property="documentView" destination="rCt-ai-XAQ" id="ZQt-pM-6r0"/>
                 <outlet property="resultCollectionView" destination="RAQ-ix-iEM" id="oKh-I3-2vg"/>
                 <outlet property="resultView" destination="Spk-sB-6vo" id="J7I-1T-5Y9"/>
                 <outlet property="scheduleCollectionView" destination="lA7-yQ-CRu" id="R5h-gP-MHr"/>
@@ -144,19 +145,27 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzK-93-hVw">
-                                    <rect key="frame" x="5" y="430" width="365" height="755"/>
+                                    <rect key="frame" x="5" y="430" width="365" height="400"/>
+                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="755" id="xkP-cr-NxC"/>
+                                        <constraint firstAttribute="height" constant="400" id="xkP-cr-NxC"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCt-ai-XAQ">
+                                    <rect key="frame" x="5" y="835" width="365" height="370"/>
+                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="5m5-b0-pkJ" secondAttribute="trailing" constant="5" id="0A8-yd-Fe8"/>
+                                <constraint firstAttribute="bottom" secondItem="rCt-ai-XAQ" secondAttribute="bottom" constant="5" id="3II-C5-1ad"/>
                                 <constraint firstItem="5m5-b0-pkJ" firstAttribute="top" secondItem="luD-uz-8Zs" secondAttribute="bottom" constant="5" id="4fj-GX-RPN"/>
                                 <constraint firstItem="PzK-93-hVw" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="7HV-o2-zjW"/>
+                                <constraint firstItem="rCt-ai-XAQ" firstAttribute="top" secondItem="PzK-93-hVw" secondAttribute="bottom" constant="5" id="DH1-w8-UF7"/>
                                 <constraint firstAttribute="height" constant="1210" id="JZS-rv-iuJ"/>
                                 <constraint firstItem="Spk-sB-6vo" firstAttribute="top" secondItem="vQ0-RB-pze" secondAttribute="bottom" constant="5" id="PTy-tE-2Ky"/>
+                                <constraint firstItem="rCt-ai-XAQ" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="SBx-MK-Rpg"/>
+                                <constraint firstAttribute="trailing" secondItem="rCt-ai-XAQ" secondAttribute="trailing" constant="5" id="SKl-Di-h7s"/>
                                 <constraint firstItem="PzK-93-hVw" firstAttribute="top" secondItem="Spk-sB-6vo" secondAttribute="bottom" constant="5" id="TbQ-6s-Zwa"/>
                                 <constraint firstItem="vQ0-RB-pze" firstAttribute="top" secondItem="5m5-b0-pkJ" secondAttribute="bottom" constant="5" id="UcS-2b-kPS"/>
                                 <constraint firstItem="Spk-sB-6vo" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="Z8V-Qz-ohn"/>

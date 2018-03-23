@@ -27,6 +27,7 @@
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+@property (weak, nonatomic) IBOutlet UIView *documentView;
 
 
 @end
