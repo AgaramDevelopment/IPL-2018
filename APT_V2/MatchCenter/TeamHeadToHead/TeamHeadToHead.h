@@ -35,6 +35,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *awayT1Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *playOffsT1Lbl;
 
+@property (strong, nonatomic) IBOutlet UILabel *playedLbl;
+
+
 //Team-1 Matches Win/Loss Progress View Properties
 @property (strong, nonatomic) IBOutlet UIProgressView *playedT1PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *homeT1PV;
@@ -94,6 +97,9 @@
 @property (nonatomic, strong) IBOutlet UIButton *spell3Inn;
 
 //Team-1 Properties
+
+@property (strong, nonatomic) IBOutlet UILabel *team1Win;
+@property (strong, nonatomic) IBOutlet UIImageView *team1ImageView;
 @property (strong, nonatomic) IBOutlet UILabel *avgRunsT1Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *avgWicketsT1Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *avgRunsOrWicketsT1Lbl;
@@ -101,6 +107,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lowScoreT1Lbl;
 
 //Team-2 Properties
+
+@property (strong, nonatomic) IBOutlet UILabel *team2Win;
+@property (strong, nonatomic) IBOutlet UIImageView *team2ImageView;
 @property (strong, nonatomic) IBOutlet UILabel *avgRunsT2Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *avgWicketsT2Lbl;
 @property (strong, nonatomic) IBOutlet UILabel *avgRunsOrWicketsT2Lbl;
@@ -138,6 +147,8 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *boundariesPercentT1PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingSRT1PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingAvgT1PV;
+@property (strong, nonatomic) IBOutlet UILabel *nrORtieLbl;
+
 
 //Team-2  Progress View Properties
 @property (strong, nonatomic) IBOutlet UIProgressView *runsScoredT2PV;
