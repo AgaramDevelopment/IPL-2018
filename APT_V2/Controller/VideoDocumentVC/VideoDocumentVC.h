@@ -1,14 +1,15 @@
 //
-//  DocumentViewController.h
+//  VideoDocumentVC.h
 //  APT_V2
 //
-//  Created by user on 23/03/18.
+//  Created by Apple on 26/03/18.
 //  Copyright © 2018 user. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface DocumentViewController : UIViewController
+@interface VideoDocumentVC : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIView *docView;
 @property (weak, nonatomic) IBOutlet UICollectionView *docCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tblDropDown;
@@ -22,7 +23,5 @@
 @property (strong, nonatomic) IBOutlet UIViewController *pdfView;
 @property (weak, nonatomic) IBOutlet UIWebView *docWebview;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
-
-
 
 @end

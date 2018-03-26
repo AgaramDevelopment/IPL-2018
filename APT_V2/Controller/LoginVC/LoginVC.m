@@ -200,6 +200,8 @@
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
             
+            NSString * string =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+
         }
         else{
             [AppCommon showAlertWithMessage:@"Invalid Login"];

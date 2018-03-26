@@ -48,6 +48,8 @@
 		1850ECA82029E0FF00B48BA1 /* TabHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECA62029E0FF00B48BA1 /* TabHomeVC.xib */; };
 		1850ECAC2029E1A200B48BA1 /* TabHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */; };
 		1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */; };
+		185192282068FC1F007CC0CE /* VideoDocumentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185192262068FC1F007CC0CE /* VideoDocumentVC.m */; };
+		185192292068FC1F007CC0CE /* VideoDocumentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185192272068FC1F007CC0CE /* VideoDocumentVC.xib */; };
 		188E55EB204EAD21001EFA40 /* TabbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E55EA204EAD21001EFA40 /* TabbarVC.m */; };
 		189FF1D8204FB9B900F2BFCE /* PlayersVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 189FF1D7204FB9B900F2BFCE /* PlayersVC2.m */; };
 		189FF1DC204FD15E00F2BFCE /* ResultsVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 189FF1DB204FD15E00F2BFCE /* ResultsVc.m */; };
@@ -340,6 +342,9 @@
 		1850ECA92029E1A200B48BA1 /* TabHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabHomeCell.h; sourceTree = "<group>"; };
 		1850ECAA2029E1A200B48BA1 /* TabHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabHomeCell.m; sourceTree = "<group>"; };
 		1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabHomeCell.xib; sourceTree = "<group>"; };
+		185192252068FC1F007CC0CE /* VideoDocumentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDocumentVC.h; sourceTree = "<group>"; };
+		185192262068FC1F007CC0CE /* VideoDocumentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDocumentVC.m; sourceTree = "<group>"; };
+		185192272068FC1F007CC0CE /* VideoDocumentVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoDocumentVC.xib; sourceTree = "<group>"; };
 		188E55E9204EAD21001EFA40 /* TabbarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabbarVC.h; sourceTree = "<group>"; };
 		188E55EA204EAD21001EFA40 /* TabbarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabbarVC.m; sourceTree = "<group>"; };
 		189FF1D6204FB9B900F2BFCE /* PlayersVC2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayersVC2.h; sourceTree = "<group>"; };
@@ -865,6 +870,16 @@
 				1850ECAB2029E1A200B48BA1 /* TabHomeCell.xib */,
 			);
 			path = TabHomeVC;
+			sourceTree = "<group>";
+		};
+		185192242068FBE7007CC0CE /* VideoDocumentVC */ = {
+			isa = PBXGroup;
+			children = (
+				185192252068FC1F007CC0CE /* VideoDocumentVC.h */,
+				185192262068FC1F007CC0CE /* VideoDocumentVC.m */,
+				185192272068FC1F007CC0CE /* VideoDocumentVC.xib */,
+			);
+			path = VideoDocumentVC;
 			sourceTree = "<group>";
 		};
 		188E55E8204EAD0A001EFA40 /* TabbarVC */ = {
@@ -1567,6 +1582,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				185192242068FBE7007CC0CE /* VideoDocumentVC */,
 				CEA4DA492064C3B400120E5B /* DocumentView */,
 				189FF1D9204FD10700F2BFCE /* ResultVC */,
 				188E55E8204EAD0A001EFA40 /* TabbarVC */,
@@ -1872,7 +1888,7 @@
 				TargetAttributes = {
 					CE3E740A20248BF100F10917 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -2006,6 +2022,7 @@
 				18A5CAC02038600D00586896 /* TeamMemebersCell.xib in Resources */,
 				CEAE88B9204809CF00FCE39D /* MCTossAndResultsVC.xib in Resources */,
 				18BBECCD2029760A00BAAFAA /* SchResStandVC.xib in Resources */,
+				185192292068FC1F007CC0CE /* VideoDocumentVC.xib in Resources */,
 				18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
 				1850ECAD2029E1A200B48BA1 /* TabHomeCell.xib in Resources */,
@@ -2171,6 +2188,7 @@
 				CEB2B9D42025C55500E7D5E4 /* LoginVC.m in Sources */,
 				CE6C16582045213C00672253 /* SACalendar.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
+				185192282068FC1F007CC0CE /* VideoDocumentVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
 				CEB2B9A7202592D900E7D5E4 /* CustomNavigation.m in Sources */,
 				18A68ABE20371A2C00EBA479 /* TrainingLoadUpdateVC.m in Sources */,
@@ -2378,16 +2396,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = LZ7UNGW43T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				INFOPLIST_FILE = APT_V2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipl.app;
 				PRODUCT_NAME = "APT Cricket";
-				PROVISIONING_PROFILE = "dbacd2b1-dcef-4592-b767-525dcd05c394";
-				PROVISIONING_PROFILE_SPECIFIER = AppStore_IPL_2018;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2399,16 +2417,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AGARAM INFOTECH PRIVATE LIMITED (LZ7UNGW43T)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = LZ7UNGW43T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				INFOPLIST_FILE = APT_V2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipl.app;
 				PRODUCT_NAME = "APT Cricket";
-				PROVISIONING_PROFILE = "dbacd2b1-dcef-4592-b767-525dcd05c394";
-				PROVISIONING_PROFILE_SPECIFIER = AppStore_IPL_2018;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

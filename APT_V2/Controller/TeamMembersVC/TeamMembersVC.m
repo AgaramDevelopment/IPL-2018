@@ -125,7 +125,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat widthF = self.playesTable.superview.frame.size.width/3;
+    CGFloat widthF = self.playesTable.superview.frame.size.width/2;
 
     if(IS_IPHONE5)
     {
@@ -211,7 +211,7 @@
     
     NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
-    cell.BowlingStylelbl.text = bowlingStyle;
+    cell.BowlingStylelbl.text = [NSString stringWithFormat:@"/%@", bowlingStyle];
     
     NSString *battingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
