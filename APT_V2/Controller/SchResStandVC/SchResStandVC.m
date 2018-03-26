@@ -20,6 +20,7 @@
 #import "TabbarVC.h"
 #import "ResultsVc.h"
 #import "DocumentViewController.h"
+#import "VideoDocumentVC.h"
 
 
 @interface SchResStandVC ()
@@ -33,6 +34,8 @@
     NSMutableArray *objarray;
     ResultsVc *objresult;
     DocumentViewController* docVC;
+    
+    VideoDocumentVC *objVDocut;
     
 }
 
@@ -60,9 +63,13 @@
     
     self.scroll.contentSize =  self.commonView.frame.size;
     
-    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
-    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
-    [self.videoView addSubview:objVideo.view];
+//    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
+//    objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
+//    [self.videoView addSubview:objVideo.view];
+    
+    objVDocut = [[VideoDocumentVC alloc] initWithNibName:@"VideoDocumentVC" bundle:nil];
+    objVDocut.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
+    [self.videoView addSubview:objVDocut.view];
     
     docVC = [DocumentViewController new];
     [docVC.view setFrame:CGRectMake(0, 0, documentView.frame.size.width, documentView.frame.size.height)];

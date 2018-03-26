@@ -32,7 +32,7 @@
 
 @synthesize tblDropDown,lblTeam,lblVenue;
 
-@synthesize lblNoDoc;fcellid
+@synthesize lblNoDoc;
 
 @synthesize pdfView,docWebview;
 
@@ -159,7 +159,7 @@
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
     if (![[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"folderName"] isEqualToString:@""]) {
-        [cell.imgView setImage:[UIImage imageNamed:@"FolderBlue"]];
+        [cell.imgView setImage:[UIImage imageNamed:@"folderBlue-icon"]];
         cell.lblfileName.text = [[docResultArray objectAtIndex:indexPath.item] valueForKey:@"folderName"];
     }
     else{
