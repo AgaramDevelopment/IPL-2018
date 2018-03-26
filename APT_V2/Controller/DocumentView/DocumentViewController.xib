@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,6 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DocumentViewController">
             <connections>
+                <outlet property="backBtn" destination="Mju-2s-oaE" id="MUD-M7-UAG"/>
                 <outlet property="docCollectionView" destination="dm3-Xv-sE8" id="j9z-BN-UpH"/>
                 <outlet property="docView" destination="Hvt-9e-C3r" id="CZ5-2e-iNN"/>
                 <outlet property="docWebview" destination="Awi-MJ-8zb" id="npt-Ax-U0V"/>

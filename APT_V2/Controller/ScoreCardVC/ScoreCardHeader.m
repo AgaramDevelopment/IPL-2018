@@ -18,7 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+   if( self.matchDetailsArray.count>0)
+   {
     self.resultlbl.layer.masksToBounds = YES;
     self.resultlbl.layer.cornerRadius = 8;
     
@@ -81,6 +82,7 @@
             self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
         }
     }];
+   }
     
 }
 
