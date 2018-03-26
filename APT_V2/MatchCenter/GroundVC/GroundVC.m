@@ -98,10 +98,17 @@
     competitionName = [AppCommon getCurrentCompetitionName];
     
     competitionCodeTF.text = [AppCommon getCurrentCompetitionName];
-    teamCodeTF.text = [AppCommon getCurrentTeamName];
+    
+    NSArray* temp = [COMMON getCorrespondingTeamName:competitionName];
+    teamCodeTF.text = [[temp firstObject] valueForKey:@"TeamName"];
+    groundLbl.text = [[temp firstObject] valueForKey:@"GroundName"];
+    groundCode = [[temp firstObject] valueForKey:@"GroundCode"];
+
     
     //Ground List Get Service Call dropdown
-    [self groundListGetService];
+//    [self groundListGetService];
+    
+    [self groundGetService];
     
     [Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
 
@@ -120,6 +127,10 @@
 //        self.teamView.hidden = NO;
 //        }
 //
+    
+    
+   // self.barchart.frame = CGRectMake(0, 0, self.view.frame.size.width, 338);
+    //[self.reqBarChartView addSubview:self.barchart];
     
     self.battingFstPie.delegate = self;
     self.battingFstPie.datasource = self;
@@ -299,6 +310,12 @@
         [self.BowlTypeTbl reloadData];
     });
     
+//    UIButton *btn = self.overBlockbtn[0];
+    
+    [overBlockbtn.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    //[self resultOverwise:self.overBlockbtn[0]];
+    
     arr = [NSArray new];
     arr = [self checkNull:[battingDict valueForKey:@"BattingInnFirstChartResults"]];
     //Bar Charts
@@ -370,17 +387,22 @@
         
         //Recent Matches
         recentMatchesArray = [[NSMutableArray alloc] init];
+        if(![[responseObject valueForKey:@"OvBatRecentmatch"] isEqual:[NSNull null]])
+        {
         recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
+        }
 
         
         //Pie Chart
 //        markers = [[NSMutableArray alloc] initWithObjects:@"1", @"4", nil];
 
         markers1 = [NSMutableArray new];
-        NSMutableArray *batFirstTosswonReslts = [responseObject valueForKey:@"BatFirstTosswonReslts"];
+//        NSMutableArray *batFirstTosswonReslts = [responseObject valueForKey:@"BatFirstTosswonReslts"];
 
+        if(![[responseObject valueForKey:@"BatFirstTosswonReslts"] isEqual:[NSNull null]])
+        {
         NSString *firstTotal, *firstWon, *firstLoss;
-        for (id key in batFirstTosswonReslts) {
+        for (id key in [responseObject valueForKey:@"BatFirstTosswonReslts"]) {
                 //Batting 1st  Values Assign to Label Properties
             firstTotal = [self checkNull:[key valueForKey:@"Total"]];
             firstWon = [self checkNull:[key valueForKey:@"Won"]];
@@ -397,9 +419,13 @@
             [markers1 addObject:firstWon];
             [markers1 addObject:firstLoss];
         }
-        
+            self.battingFirstMatchWonLbl.text = firstWon;
+            self.battingFirstMatchLostLbl.text = firstLoss;
+    }
         
         markers2 = [NSMutableArray new];
+        if(![[responseObject valueForKey:@"BatSecondTosswonReslts"] isEqual:[NSNull null]])
+        {
         NSMutableArray *batSecondTosswonReslts = [responseObject valueForKey:@"BatSecondTosswonReslts"];
         NSString *secondTotal, *secondWon, *secondLoss;
         for (id key in batSecondTosswonReslts) {
@@ -420,12 +446,14 @@
         }
         
  
-        self.battingFirstMatchWonLbl.text = firstWon;
-        self.battingFirstMatchLostLbl.text = firstLoss;
+        
         self.battingSecondMatchWonLbl.text = secondWon;
         self.battingSecondMatchLostLbl.text = secondLoss;
+        }
             //Re-load Table View
         
+        if(![[responseObject valueForKey:@"BattingScoreResults"] isEqual:[NSNull null]])
+        {
         NSMutableArray *battingScoreResultsArray = [responseObject valueForKey:@"BattingScoreResults"];
         for (id key in battingScoreResultsArray) {
             //Batting 1st  Values Assign to Label Properties
@@ -440,7 +468,10 @@
             self.BSAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
             self.BSLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
         }
+        }
         
+        if(![[responseObject valueForKey:@"GroundDimensionResults"] isEqual:[NSNull null]])
+        {
         NSMutableArray *groundDimensionResults = [responseObject valueForKey:@"GroundDimensionResults"];
         for (id key in groundDimensionResults) {
             self.groundTopLeft.text = [key valueForKey:@"GTopLeft"];
@@ -455,6 +486,7 @@
 //            self.groundBottomLeft.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GTopRight"]];
 //            self.groundBottomRight.text = [NSString stringWithFormat:@"%@", [key valueForKey:@"GBottomLeft"]];
         }
+        }
     
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -463,8 +495,7 @@
 
             //GroundOverResults Get Service Method
             [self.resultCollectionView reloadData];
-
-            [self groundOverResultsGetService];
+            [overBlockbtn.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
         });
 
         
@@ -482,15 +513,11 @@
      METHOD     :   GET
      PARAMETER  :   {COMPETITIONCODE}/{GROUNDCODE}/{FromOver}/{ToOver}
      */
-        //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUNDOVERRESULTS/UCC0000008/GRD0000006/0/5
     if(![COMMON isInternetReachable])
         return;
     
     [AppCommon showLoading];
     
-//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
-    
-    //Doubt --->
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, fromOver, toOver];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -503,10 +530,8 @@
         
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
-        //[self.innings1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        [self loadGraphdata];
         
+        [self loadGraphdata];
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -911,8 +936,11 @@
         cell.Title.text = titleArray[indexPath.row];
         [cell setTag:indexPath.row];
         
+        
+        
         if (indexPath == selectedIndex) {
             cell.selectedLineView.backgroundColor = [UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f];
+           
         }
         else {
             cell.selectedLineView.backgroundColor = [UIColor clearColor];
@@ -961,12 +989,25 @@
     
     NSMutableArray *battingInnFirstResultsArray = [self checkNull:[battingDict valueForKey:str_Result]];
     
+    if( [str_Result isEqualToString:@"BattingInnFirstResults"])
+    {
     for (id key in battingInnFirstResultsArray) {
         //Batting 1st  Values Assign to Label Properties
         self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BFAvgWonScore"]];
         self.OBHighScore.text = [self checkNull:[key valueForKey:@"BFHighScore"]];
         self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BFScore"]];
         self.OBLowScore.text = [self checkNull:[key valueForKey:@"BFLowScore"]];
+    }
+    }
+    else if( [str_Result isEqualToString:@"BattingInnSecondResults"])
+    {
+        for (id key in battingInnFirstResultsArray) {
+            //Batting 1st  Values Assign to Label Properties
+            self.OBAvgWinScore.text = [self checkNull:[key valueForKey:@"BSAvgWonScore"]];
+            self.OBHighScore.text = [self checkNull:[key valueForKey:@"BSHighScore"]];
+            self.OBAvgScore.text = [self checkNull:[key valueForKey:@"BSScore"]];
+            self.OBLowScore.text = [self checkNull:[key valueForKey:@"BSLowScore"]];
+        }
     }
     
     commonArray = [NSMutableArray new];
@@ -1420,7 +1461,7 @@
     
     if (self.barChartMultipleView == nil) {
     
-        _barChartMultipleView = [[BarChart alloc] initWithFrame:CGRectMake(0, 0, self.barchart.frame.size.width+self.barchart.frame.size.width, self.barchart.frame.size.height)];
+        _barChartMultipleView = [[BarChart alloc] initWithFrame:CGRectMake(0, 0, self.barchart.frame.size.width, self.barchart.frame.size.height)];
         //_barChartMultipleView = [[BarChart alloc]init];
         [_barChartMultipleView setDataSource:self];
         [_barChartMultipleView setDelegate:self];
@@ -1442,7 +1483,7 @@
 #pragma mark BarChartDataSource
 - (NSMutableArray *)xDataForBarChart{
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    [array addObject:@""];
+    //[array addObject:@""];
     for (int i = 0; i < arr.count; i++) {
             [array addObject:[NSString stringWithFormat:@"%@", [[arr objectAtIndex:i] valueForKey:@"BFOvers"]]];
     }
@@ -1488,7 +1529,7 @@
         array = [[NSMutableArray alloc] init];
         for (int i = 0; i < arr.count; i++) {
             // [array addObject:[NSNumber numberWithLong:random() % 100]];
-            [array addObject:[[arr objectAtIndex:i]valueForKey:@"BFRuns"]];
+            [array addObject:[[arr objectAtIndex:i]valueForKey:@"BFScore"]];
         }
     }
     if(barNumber==1)
@@ -1567,11 +1608,11 @@
 //                         @{@"Xvalue":@"Dot balls %"},
 //                         @{@"Xvalue":@"Boundaries %"}];
         
-        if (!groundResultsArray.count) {
-            [self groundListGetService];
-        }
+//        if (!groundResultsArray.count) {
+//            [self groundListGetService];
+//        }
         
-        dropVC.array = groundResultsArray;
+        dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"GroundName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
         
@@ -1622,6 +1663,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+//        groundLbl.text = @"";
         
     }
     else //if([key isEqualToString:@"GroundName"])
@@ -1662,12 +1704,12 @@
     
     for (UIButton* btn in overBlockbtn) {
         if ([sender isEqual:btn]) {
-            [[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Bold" size:13]];
+            //[[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Bold" size:13]];
             [btn  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
         else{
-            [[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Regular" size:13]];
-            [btn  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            //[[btn titleLabel] setFont:[UIFont fontWithName:@"Montserrat Regular" size:13]];
+            [btn  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
     }
     

@@ -404,9 +404,24 @@
 
 -(NSArray *)getCorrespondingOppenentTeams
 {
-    //    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@ AND Groundcode == %@ AND TeamBcode == %@",competitionCode,groundCode,team1Code];
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
-    
+
+//    NSString* loginTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
+    NSPredicate* predicate;
+//
+    if ([competitionTF.text isEqualToString:@"All"] || [groundTF.text isEqualToString:@"All"]) {
+//        return  appDel.ArrayTeam;
+
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode != %@",@""];
+        
+
+    }
+    else{
+
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+    }
+
+//    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+
     NSArray* temparray = [self.commonArray1 filteredArrayUsingPredicate:predicate];
     
     NSMutableArray* resultedArray = [NSMutableArray new];
@@ -422,11 +437,29 @@
 {
     // based on competetion code and logined team code
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@ AND TeamBcode == %@",competitionCode,team2Code];
+    NSPredicate* predicate;
     
-    //    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+    if ([competitionTF.text isEqualToString:@"All"]) {
+        
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode != %@",@""];
+
+    }
+//    else if ([competitionTF.text isEqualToString:@"All"]) {
+//
+//        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode != %@ AND TeamBcode == %@",competitionCode,team2Code];
+//
+//    }
+//    else if ([team2TF.text isEqualToString:@"All"]) {
+//
+//        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@ AND TeamBcode != %@",competitionCode,team2Code];
+//
+//    }
+    else{
+        
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+    }
     
-    NSArray* result = [self.commonArray1 filteredArrayUsingPredicate:predicate];
+    NSArray* result = [appDel.MainArray filteredArrayUsingPredicate:predicate];
     
     return result;
 }
@@ -856,34 +889,32 @@
             [AppCommon showAlertWithMessage:@"Please select Competetion Name"];
             return;
         }
-        //        else if (!groundTF.hasText) {
-        //            [AppCommon showAlertWithMessage:@"Please select Ground Name"];
-        //            return;
-        //        }
-        else if (!team2TF.hasText) {
-            [AppCommon showAlertWithMessage:@"Please select opponent Team"];
-            return;
-        }
+//        else if (!team2TF.hasText) {
+//            [AppCommon showAlertWithMessage:@"Please select opponent Team"];
+//            return;
+//        }
+        
         
         NSArray* temparray = [self getCorrespondingGrounds];
         NSMutableArray* arr = [NSMutableArray new];
         for (NSDictionary* temp1 in temparray) {
-            if (![[arr valueForKey:@"Groundcode"] containsObject:[temp1 valueForKey:@"Groundcode"]]) {
+            if (![[arr valueForKey:@"GroundCode"] containsObject:[temp1 valueForKey:@"GroundCode"]]) {
                 [arr addObject:temp1];
             }
         }
         NSDictionary* temp = @{
                                @"CompetitionCode": @"",
                                @"CompetitionName": @"All",
-                               @"Groundcode": @"",
-                               @"Ground": @"All"
+                               @"GroundCode": @"",
+                               @"GroundName": @"All"
                                };
         [arr insertObject:temp atIndex:0];
         
         dropVC.array = arr;
-        dropVC.key = @"Ground";
+        dropVC.key = @"GroundName";
         
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
+        
         
     }
     else if ([sender tag] == 0) { // Teams 1
@@ -906,10 +937,10 @@
         //            [AppCommon showAlertWithMessage:@"Please select Ground Name"];
         //            return;
         //        }
-        //        else if (!team2TF.hasText) {
-        //            [AppCommon showAlertWithMessage:@"Please select opponent Team"];
-        //            return;
-        //        }
+//        else if (!groundTF.hasText) {
+//            [AppCommon showAlertWithMessage:@"Please select Ground"];
+//            return;
+//        }
         
         teamCount = 2;
         dropVC.array = [self getCorrespondingOppenentTeams];
@@ -942,11 +973,11 @@
         team2TF.text = @"";
         groundTF.text = @"";
     }
-    else if([key isEqualToString:@"Ground"])
+    else if([key isEqualToString:@"GroundName"])
     {
         groundTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        groundCode = [[array objectAtIndex:Index.row] valueForKey:@"Groundcode"];
-        //        team2TF.text = @"";
+        groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
+        team2TF.text = @"";
         
     }
     else if([key isEqualToString:@"TeamBName"] && teamCount == 1)
@@ -976,7 +1007,7 @@
         team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString *team2Win = [NSString stringWithFormat:@"%@ Win", [[array objectAtIndex:Index.row] valueForKey:key]];
         self.team2Win.text = team2Win;
-        groundTF.text = @"";
+//        groundTF.text = @"";
     }
     [self headToHeadResultsPostService];
 }
