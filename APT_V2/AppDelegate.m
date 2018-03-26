@@ -12,6 +12,7 @@
 #import "TeamsVC.h"
 #import "TabHomeVC.h"
 #import "TeamMembersVC.h"
+#import "ScoreCardVideoPlayer.h"
 
 @interface AppDelegate ()
 {
@@ -325,6 +326,50 @@
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
 }
+
+/*
+#pragma mark - VideoPlayer Landscape Orientation
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+//    UIViewController *vc = self.window.rootViewController.presentedViewController;
+    UIViewController *vc2 = [self.window.rootViewController presentedViewController];
+//    UIViewController *vc2=vc.presentedViewController;
+    
+    if ([vc2 isKindOfClass:[ScoreCardVideoPlayer class]]) {
+        return UIInterfaceOrientationMaskAll;
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    
+    if ([self.window.rootViewController.presentedViewController isKindOfClass: [ScoreCardVideoPlayer class]]) {
+        return UIInterfaceOrientationMaskAll;
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+*/
+
+//-(UIInterfaceOrientationMask) application:(UIApplication *)application supportedInterfaceOrientationsForWindow :(UIWindow *)window
+//{
+//    UIViewController *currentVC = [(UINavigationController *)[UIApplication sharedApplication].delegate.window.rootViewController presentedViewController];
+//    if ([currentVC isKindOfClass:[ScoreCardVideoPlayer class]])
+//    {
+//        return UIInterfaceOrientationMaskAll;
+//    }
+//
+//    return UIInterfaceOrientationMaskPortrait;
+//}
 
 @end
 

@@ -469,6 +469,14 @@
         [self.playAndPauseBtn setImage:play forState:UIControlStateNormal];
     }
 }
+/*
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+*/
+
+
 
 @end
 

@@ -1058,12 +1058,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0t-Tj-4Gr">
-                                <rect key="frame" x="30" y="212" width="708" height="600"/>
+                                <rect key="frame" x="30" y="70" width="708" height="904"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bsz-MW-hW8">
-                                        <rect key="frame" x="8" y="40" width="692" height="500"/>
+                                        <rect key="frame" x="8" y="40" width="692" height="804"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Research Purpose Only. Not For Commercial Use." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-Es-3st">
+                                        <rect key="frame" x="8" y="3" width="659" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="c3U-Bh-uaR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                        </variation>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AE6-sJ-wxI">
                                         <rect key="frame" x="675" y="3" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1083,7 +1095,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckt-Rj-8ze">
-                                        <rect key="frame" x="8" y="480" width="692" height="60"/>
+                                        <rect key="frame" x="8" y="784" width="692" height="60"/>
                                         <subviews>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M9O-x8-Qei">
                                                 <rect key="frame" x="0.0" y="0.0" width="692" height="2"/>
@@ -1287,7 +1299,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G7k-8P-JzP">
-                                        <rect key="frame" x="8" y="540" width="692" height="50"/>
+                                        <rect key="frame" x="8" y="844" width="692" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="AGD-Ky-Sxk">
@@ -1312,7 +1324,9 @@
                                                             <rect key="frame" x="5" y="5" width="40" height="40"/>
                                                             <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="40" id="DHC-Th-Vwm"/>
+                                                                <constraint firstAttribute="width" constant="40" id="DHC-Th-Vwm">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                                </constraint>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -1343,11 +1357,15 @@
                                     <constraint firstItem="AE6-sJ-wxI" firstAttribute="top" secondItem="R0t-Tj-4Gr" secondAttribute="top" constant="3" id="Jab-H4-Otf"/>
                                     <constraint firstItem="G7k-8P-JzP" firstAttribute="top" secondItem="Bsz-MW-hW8" secondAttribute="bottom" id="MaE-3V-tQR"/>
                                     <constraint firstAttribute="trailing" secondItem="G7k-8P-JzP" secondAttribute="trailing" constant="8" id="Mqn-8s-XHt"/>
+                                    <constraint firstItem="AE6-sJ-wxI" firstAttribute="leading" secondItem="3bd-Es-3st" secondAttribute="trailing" constant="8" id="R2C-Ew-KLR"/>
                                     <constraint firstAttribute="trailing" secondItem="ckt-Rj-8ze" secondAttribute="trailing" constant="8" id="TDv-4D-pLq"/>
                                     <constraint firstAttribute="trailing" secondItem="AE6-sJ-wxI" secondAttribute="trailing" constant="3" id="XMg-ax-BOj"/>
                                     <constraint firstItem="ckt-Rj-8ze" firstAttribute="leading" secondItem="R0t-Tj-4Gr" secondAttribute="leading" constant="8" id="ZQP-rV-Qgd"/>
+                                    <constraint firstItem="3bd-Es-3st" firstAttribute="leading" secondItem="R0t-Tj-4Gr" secondAttribute="leading" constant="8" id="ZeN-dZ-wy7"/>
                                     <constraint firstAttribute="trailing" secondItem="Bsz-MW-hW8" secondAttribute="trailing" constant="8" id="fdg-g2-TR6"/>
                                     <constraint firstItem="Bsz-MW-hW8" firstAttribute="top" secondItem="AE6-sJ-wxI" secondAttribute="bottom" constant="7" id="iTW-20-hLb"/>
+                                    <constraint firstItem="Bsz-MW-hW8" firstAttribute="top" secondItem="3bd-Es-3st" secondAttribute="bottom" constant="7" id="tk2-jt-Fay"/>
+                                    <constraint firstItem="3bd-Es-3st" firstAttribute="top" secondItem="R0t-Tj-4Gr" secondAttribute="top" constant="3" id="tn9-M1-wF8"/>
                                     <constraint firstItem="Bsz-MW-hW8" firstAttribute="leading" secondItem="R0t-Tj-4Gr" secondAttribute="leading" constant="8" id="wes-ph-GtV"/>
                                     <constraint firstAttribute="bottom" secondItem="G7k-8P-JzP" secondAttribute="bottom" constant="10" id="xgq-NC-Jaq"/>
                                 </constraints>
@@ -1356,19 +1374,30 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yhB-9g-K4j" firstAttribute="trailing" secondItem="R0t-Tj-4Gr" secondAttribute="trailing" constant="10" id="2AJ-WZ-m7L">
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
                             <constraint firstItem="R0t-Tj-4Gr" firstAttribute="top" secondItem="pgb-gG-rrX" secondAttribute="bottom" constant="70" id="DTw-0F-2Nc">
-                                <variation key="heightClass=regular-widthClass=regular" constant="192"/>
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
                             </constraint>
                             <constraint firstItem="SEA-5B-7e4" firstAttribute="top" secondItem="R0t-Tj-4Gr" secondAttribute="bottom" constant="70" id="EnJ-FS-mgC">
-                                <variation key="heightClass=regular-widthClass=regular" constant="212"/>
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
                             </constraint>
                             <constraint firstItem="R0t-Tj-4Gr" firstAttribute="leading" secondItem="yhB-9g-K4j" secondAttribute="leading" constant="10" id="LBu-YE-WxF">
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                             </constraint>
                             <constraint firstItem="R0t-Tj-4Gr" firstAttribute="centerX" secondItem="buD-hL-LND" secondAttribute="centerX" id="VMr-h0-RrH"/>
-                            <constraint firstItem="R0t-Tj-4Gr" firstAttribute="centerY" secondItem="buD-hL-LND" secondAttribute="centerY" id="a3D-gH-6tx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yhB-9g-K4j"/>
                     </view>
@@ -1391,7 +1420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C8I-LL-tSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5788" y="-1282"/>
+            <point key="canvasLocation" x="5787.5" y="-1282.03125"/>
         </scene>
         <!--BattingKPI-->
         <scene sceneID="Udz-5t-rQD">
@@ -1702,7 +1731,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbU-kC-Mt9">
                                                 <rect key="frame" x="10" y="69" width="227.5" height="2"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="HqW-k2-JMs"/>
                                                 </constraints>
@@ -1767,7 +1796,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lX-N6-9RJ">
                                                 <rect key="frame" x="10" y="69" width="228" height="2"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="dgf-Sd-kaw"/>
                                                 </constraints>
@@ -1818,7 +1847,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="7yz-rR-JIp"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAD-lE-32T">
@@ -1832,7 +1861,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owx-gc-1DM">
                                                 <rect key="frame" x="10" y="69" width="227.5" height="2"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="8nP-1t-nDp"/>
                                                 </constraints>
