@@ -32,7 +32,7 @@
 
 @synthesize tblDropDown,lblTeam,lblVenue;
 
-@synthesize lblNoDoc;
+@synthesize lblNoDoc;fcellid
 
 @synthesize pdfView,docWebview;
 
