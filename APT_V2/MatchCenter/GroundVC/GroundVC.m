@@ -98,7 +98,12 @@
     competitionName = [AppCommon getCurrentCompetitionName];
     
     competitionCodeTF.text = [AppCommon getCurrentCompetitionName];
-    teamCodeTF.text = [AppCommon getCurrentTeamName];
+    
+    NSArray* temp = [COMMON getCorrespondingTeamName:competitionName];
+    teamCodeTF.text = [[temp firstObject] valueForKey:@"TeamName"];
+    groundLbl.text = [[temp firstObject] valueForKey:@"GroundName"];
+    groundCode = [[temp firstObject] valueForKey:@"GroundCode"];
+
     
     //Ground List Get Service Call dropdown
 //    [self groundListGetService];
@@ -490,8 +495,7 @@
 
             //GroundOverResults Get Service Method
             [self.resultCollectionView reloadData];
-
-            [self groundOverResultsGetService];
+            [overBlockbtn.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
         });
 
         
@@ -509,15 +513,11 @@
      METHOD     :   GET
      PARAMETER  :   {COMPETITIONCODE}/{GROUNDCODE}/{FromOver}/{ToOver}
      */
-        //http://192.168.0.151:8044/AGAPTService.svc/APT_GROUNDOVERRESULTS/UCC0000008/GRD0000006/0/5
     if(![COMMON isInternetReachable])
         return;
     
     [AppCommon showLoading];
     
-//    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, @"GRD0000006", @"0", @"5"];
-    
-    //Doubt --->
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),groundOverResults, competitionCode, groundCode, fromOver, toOver];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -531,12 +531,7 @@
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
         
-        
-//        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         [self loadGraphdata];
-//        [self innings1ButtonTapped:nil];
-
-        
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1613,11 +1608,11 @@
 //                         @{@"Xvalue":@"Dot balls %"},
 //                         @{@"Xvalue":@"Boundaries %"}];
         
-        if (!groundResultsArray.count) {
-            [self groundListGetService];
-        }
+//        if (!groundResultsArray.count) {
+//            [self groundListGetService];
+//        }
         
-        dropVC.array = groundResultsArray;
+        dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"GroundName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
         
@@ -1668,6 +1663,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+//        groundLbl.text = @"";
         
     }
     else //if([key isEqualToString:@"GroundName"])
