@@ -1058,14 +1058,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0t-Tj-4Gr">
-                                <rect key="frame" x="30" y="70" width="708" height="904"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bsz-MW-hW8">
-                                        <rect key="frame" x="8" y="40" width="692" height="804"/>
+                                        <rect key="frame" x="8" y="40" width="752" height="904"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Research Purpose Only. Not For Commercial Use." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-Es-3st">
-                                        <rect key="frame" x="8" y="3" width="659" height="30"/>
+                                        <rect key="frame" x="8" y="3" width="719" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="c3U-Bh-uaR"/>
                                         </constraints>
@@ -1077,7 +1077,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AE6-sJ-wxI">
-                                        <rect key="frame" x="675" y="3" width="30" height="30"/>
+                                        <rect key="frame" x="735" y="3" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="EQ3-Nl-Qwu"/>
@@ -1095,24 +1095,24 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckt-Rj-8ze">
-                                        <rect key="frame" x="8" y="784" width="692" height="60"/>
+                                        <rect key="frame" x="8" y="884" width="752" height="60"/>
                                         <subviews>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M9O-x8-Qei">
-                                                <rect key="frame" x="0.0" y="0.0" width="692" height="2"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="752" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="evH-Hk-oYJ"/>
                                                 </constraints>
                                             </progressView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cpb-Sb-avf">
-                                                <rect key="frame" x="30" y="5" width="470" height="50"/>
+                                                <rect key="frame" x="30" y="5" width="530" height="50"/>
                                                 <subviews>
                                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZW-FW-Cgo" customClass="TappabbleView">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hX0-XI-0H6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="play"/>
                                                                 <connections>
                                                                     <action selector="playAndPause:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="oiV-Zg-5nh"/>
@@ -1130,11 +1130,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYA-v0-JCJ" customClass="TappabbleView">
-                                                        <rect key="frame" x="70" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="80" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udG-SD-nJq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="previuos_frame"/>
                                                                 <connections>
                                                                     <action selector="previousFrame:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="cqY-VT-oO0"/>
@@ -1150,11 +1150,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKp-SQ-xm2" customClass="TappabbleView">
-                                                        <rect key="frame" x="140" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="160" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBU-cz-ETR">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="next_frame"/>
                                                                 <connections>
                                                                     <action selector="nextFrame:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="p06-9D-t4P"/>
@@ -1170,11 +1170,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCW-u0-Su1" customClass="TappabbleView">
-                                                        <rect key="frame" x="210" y="0.0" width="50.5" height="50"/>
+                                                        <rect key="frame" x="240" y="0.0" width="50.5" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVI-zc-A4W">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50.5" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="slow_forward"/>
                                                                 <connections>
                                                                     <action selector="slowForward:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="JYQ-0l-z5t"/>
@@ -1190,11 +1190,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAZ-dj-lPn" customClass="TappabbleView">
-                                                        <rect key="frame" x="280" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="320" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixa-cn-Pbv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="fast_forward"/>
                                                                 <connections>
                                                                     <action selector="fastForward:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="K6O-hy-Fp1"/>
@@ -1210,11 +1210,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdm-gt-ly2" customClass="TappabbleView">
-                                                        <rect key="frame" x="350" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="400" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QO1-at-FR4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="previous"/>
                                                                 <connections>
                                                                     <action selector="previous:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="Nfg-GZ-xtW"/>
@@ -1230,11 +1230,11 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AP4-L9-nSw" customClass="TappabbleView">
-                                                        <rect key="frame" x="420" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="480" y="0.0" width="50" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6X-UQ-bVW">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" image="next"/>
                                                                 <connections>
                                                                     <action selector="next:" destination="GXH-Ya-OM7" eventType="touchUpInside" id="OPl-sx-bRr"/>
@@ -1267,7 +1267,7 @@
                                                 <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
                                             </stackView>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.60000002384185791" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Snf-Nf-bPf">
-                                                <rect key="frame" x="528" y="15" width="136" height="31"/>
+                                                <rect key="frame" x="588" y="15" width="136" height="31"/>
                                                 <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="dVg-i8-BsU">
@@ -1279,7 +1279,7 @@
                                                 </connections>
                                             </slider>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Snf-Nf-bPf" firstAttribute="leading" secondItem="Cpb-Sb-avf" secondAttribute="trailing" constant="5" id="0eI-vk-XGI">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="30"/>
@@ -1299,8 +1299,8 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G7k-8P-JzP">
-                                        <rect key="frame" x="8" y="844" width="692" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="8" y="944" width="752" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="AGD-Ky-Sxk">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="50"/>
@@ -1373,30 +1373,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yhB-9g-K4j" firstAttribute="trailing" secondItem="R0t-Tj-4Gr" secondAttribute="trailing" constant="10" id="2AJ-WZ-m7L">
-                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
-                            </constraint>
-                            <constraint firstItem="R0t-Tj-4Gr" firstAttribute="top" secondItem="pgb-gG-rrX" secondAttribute="bottom" constant="70" id="DTw-0F-2Nc">
-                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="70"/>
-                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
-                            </constraint>
-                            <constraint firstItem="SEA-5B-7e4" firstAttribute="top" secondItem="R0t-Tj-4Gr" secondAttribute="bottom" constant="70" id="EnJ-FS-mgC">
-                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="70"/>
-                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
-                            </constraint>
-                            <constraint firstItem="R0t-Tj-4Gr" firstAttribute="leading" secondItem="yhB-9g-K4j" secondAttribute="leading" constant="10" id="LBu-YE-WxF">
-                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
-                            </constraint>
+                            <constraint firstItem="yhB-9g-K4j" firstAttribute="trailing" secondItem="R0t-Tj-4Gr" secondAttribute="trailing" id="2AJ-WZ-m7L"/>
+                            <constraint firstItem="R0t-Tj-4Gr" firstAttribute="top" secondItem="pgb-gG-rrX" secondAttribute="bottom" id="DTw-0F-2Nc"/>
+                            <constraint firstItem="SEA-5B-7e4" firstAttribute="top" secondItem="R0t-Tj-4Gr" secondAttribute="bottom" id="EnJ-FS-mgC"/>
+                            <constraint firstItem="R0t-Tj-4Gr" firstAttribute="leading" secondItem="yhB-9g-K4j" secondAttribute="leading" id="LBu-YE-WxF"/>
                             <constraint firstItem="R0t-Tj-4Gr" firstAttribute="centerX" secondItem="buD-hL-LND" secondAttribute="centerX" id="VMr-h0-RrH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yhB-9g-K4j"/>
