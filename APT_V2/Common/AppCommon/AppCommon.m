@@ -373,26 +373,29 @@ AppCommon *sharedCommon = nil;
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"]) {
         NSLog(@"Please select Competetion");
-//        [AppCommon showAlertWithMessage:@"Please select Competetion"];
-//        return ;
     }
     
     NSLog(@"competetionName %@",appDel.MainArray);
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
-    NSArray* result = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
+    NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
     
-    if (result.count > 0) {
+    if (temparray.count > 0) {
         appDel.ArrayTeam = [NSMutableArray new];
-        [appDel.ArrayTeam addObjectsFromArray:result];
+
+        for (NSDictionary* temp1 in temparray) {
+            if (![[appDel.ArrayTeam valueForKey:@"TeamCode"] containsObject:[temp1 valueForKey:@"TeamCode"]]) {
+                [appDel.ArrayTeam addObject:temp1];
+            }
+        }
+
     }
     else
     {
         NSString* msg = [NSString stringWithFormat:@"NO Teams Founds in %@",competetionName];
         [AppCommon showAlertWithMessage:msg];
-//        return ;
     }
    
-    return result;
+    return appDel.ArrayTeam;
 }
 
 @end
