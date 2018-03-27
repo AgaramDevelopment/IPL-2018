@@ -408,19 +408,19 @@
 //    NSString* loginTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
 //    NSPredicate* predicate;
 //
-    if (([competitionTF.text isEqualToString:@"All"] && [groundTF.text isEqualToString:@"All"]) || ) {
-        return  appDel.ArrayTeam;
+    if ([competitionTF.text isEqualToString:@"All"] || [groundTF.text isEqualToString:@"All"]) {
+//        return  appDel.ArrayTeam;
 
-//        predicate = [NSPredicate predicateWithFormat:@"TeamBcode != %@ AND GroundCode == %@",@"",groundCode];
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode != %@",@""];
         
 
     }
-//    else{
-//
-//        predicate = [NSPredicate predicateWithFormat:@"TeamBcode == %@ AND GroundCode == %@",loginTeamCode,groundCode];
-//    }
+    else{
 
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+        predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
+    }
+
+//    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode == %@",competitionCode];
 
     NSArray* temparray = [self.commonArray1 filteredArrayUsingPredicate:predicate];
     
