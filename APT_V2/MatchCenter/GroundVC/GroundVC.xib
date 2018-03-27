@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -39,7 +38,7 @@
                 <outlet property="OBHighScore" destination="dqK-9h-bLr" id="Tzz-p1-YX7"/>
                 <outlet property="OBLowScore" destination="lGs-xb-f3b" id="Byc-n4-A6h"/>
                 <outlet property="Titlecollview" destination="hxL-Fi-ub9" id="65I-0R-75x"/>
-                <outlet property="barchart" destination="dZD-CR-Rqc" id="Myr-V6-fQ4"/>
+                <outlet property="barchart" destination="dZD-CR-Rqc" id="00K-EV-QBk"/>
                 <outlet property="battingFirstMatchLostLbl" destination="9jD-pY-zNO" id="Fla-RO-mdY"/>
                 <outlet property="battingFirstMatchWonLbl" destination="o7q-WR-smw" id="Z37-o6-ceB"/>
                 <outlet property="battingFstPie" destination="3PK-Sb-DOh" id="vQh-fa-bgc"/>
@@ -1154,7 +1153,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODe-tI-xyE">
                                                             <rect key="frame" x="245.5" y="0.0" width="115" height="40"/>
-                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="13"/>
                                                             <state key="normal" title="Over Block 15-20"/>
                                                             <connections>
                                                                 <action selector="resultOverwise:" destination="-1" eventType="touchUpInside" id="bIW-RY-XJD"/>
@@ -1162,7 +1161,7 @@
                                                         </button>
                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxZ-WY-I3j">
                                                             <rect key="frame" x="125.5" y="0.0" width="115" height="40"/>
-                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="13"/>
                                                             <state key="normal" title="Over Block 7-15"/>
                                                             <connections>
                                                                 <action selector="resultOverwise:" destination="-1" eventType="touchUpInside" id="qeT-rw-tqN"/>
