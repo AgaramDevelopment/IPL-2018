@@ -42,6 +42,7 @@
 		04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F1B202D7DD100ECB699 /* illnessTableViewCell.xib */; };
 		04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */; };
 		04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */; };
+		18291B33206AE8BB000D3362 /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18291B32206AE8BA000D3362 /* BPXLUUIDHandler.m */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
 		1850ECA72029E0FF00B48BA1 /* TabHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850ECA52029E0FF00B48BA1 /* TabHomeVC.m */; };
@@ -333,6 +334,8 @@
 		04B27F1F202DA48E00ECB699 /* PlayerProfileChartsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerProfileChartsVC.h; sourceTree = "<group>"; };
 		04B27F20202DA48E00ECB699 /* PlayerProfileChartsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerProfileChartsVC.m; sourceTree = "<group>"; };
 		04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerProfileChartsVC.xib; sourceTree = "<group>"; };
+		18291B31206AE8BA000D3362 /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
+		18291B32206AE8BA000D3362 /* BPXLUUIDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLUUIDHandler.m; sourceTree = "<group>"; };
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
@@ -857,6 +860,15 @@
 				04B27F21202DA48E00ECB699 /* PlayerProfileChartsVC.xib */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		18291B30206AE885000D3362 /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				18291B31206AE8BA000D3362 /* BPXLUUIDHandler.h */,
+				18291B32206AE8BA000D3362 /* BPXLUUIDHandler.m */,
+			);
+			path = UUID;
 			sourceTree = "<group>";
 		};
 		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
@@ -1545,6 +1557,7 @@
 		CEB2B9B92025938E00E7D5E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				18291B30206AE885000D3362 /* UUID */,
 				18A590632047C382002BBF64 /* Formatters */,
 				CE367C842046D72300A94B28 /* StepSlider */,
 				CE6C164C2045213C00672253 /* Calendar */,
@@ -2123,6 +2136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */,
+				18291B33206AE8BB000D3362 /* BPXLUUIDHandler.m in Sources */,
 				CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */,
 				CEB2B9DC2025C85100E7D5E4 /* AppCommon.m in Sources */,
 				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,

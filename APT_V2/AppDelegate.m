@@ -13,6 +13,7 @@
 #import "TabHomeVC.h"
 #import "TeamMembersVC.h"
 #import "ScoreCardVideoPlayer.h"
+#import "BPXLUUIDHandler.h"
 
 @interface AppDelegate ()
 {
@@ -44,6 +45,9 @@
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
     
+    // ***** UUID for installed Devices Checking in Server side ***** //
+    NSString *UDID = [BPXLUUIDHandler UUID];
+    NSLog(@"UDID:%@", UDID);
 
 //    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
 //    NSString *plyRolecode = @"ROL0000002";
