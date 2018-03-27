@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutletCollection(TappabbleView) NSArray *tappableViews;
 @end
 
+
 @implementation TappabbleView
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -79,15 +80,21 @@
     // Do any additional setup after loading the view.
     self.rootVideoView.hidden = YES;
     self.avPlayerViewController = [AVPlayerViewController new];
-    self.avPlayerViewController.showsPlaybackControls = NO;
     selectedVideo = 0;
     
     
+    
     if (isFromHome) {
+        self.avPlayerViewController.showsPlaybackControls = YES;
+        [self.customView setHidden:YES];
+        [self.ballsColView setHidden:YES];
         [self playHomeVideos:HomeVideoStr];
     }
     else
     {
+        self.avPlayerViewController.showsPlaybackControls = NO;
+        [self.customView setHidden:NO];
+        [self.ballsColView setHidden:NO];
         [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
     }
     

@@ -196,10 +196,30 @@
        // }];
         
         
-        videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
-        videoPlayerVC.objSelectVideoLink = fileName;
-        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+//        videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+//        videoPlayerVC.objSelectVideoLink = fileName;
+//        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
         
+        /*
+         VideoPlayerViewController * videoPlayerVC = [[VideoPlayerViewController alloc]init];
+         videoPlayerVC = (VideoPlayerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+         videoPlayerVC.MatchCode = self.matchCode;
+         videoPlayerVC.PlayerCode = playercode;
+         videoPlayerVC.VideoValue = value;
+         videoPlayerVC.Innings = innNo;
+         videoPlayerVC.Type = batOrBowl;
+         [self.navigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+
+         */
+        
+        
+        ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+        videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+        videoPlayerVC.isFromHome = YES;
+        videoPlayerVC.HomeVideoStr = fileName;
+        NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
+        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+
         
     }
     
