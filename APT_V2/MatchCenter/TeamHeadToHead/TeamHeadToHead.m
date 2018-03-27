@@ -406,7 +406,7 @@
 {
 
 //    NSString* loginTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
-//    NSPredicate* predicate;
+    NSPredicate* predicate;
 //
     if ([competitionTF.text isEqualToString:@"All"] || [groundTF.text isEqualToString:@"All"]) {
 //        return  appDel.ArrayTeam;

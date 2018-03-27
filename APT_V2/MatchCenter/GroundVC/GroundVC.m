@@ -101,7 +101,9 @@
     teamCodeTF.text = [AppCommon getCurrentTeamName];
     
     //Ground List Get Service Call dropdown
-    [self groundListGetService];
+//    [self groundListGetService];
+    
+    [self groundGetService];
     
     [Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
 
@@ -303,9 +305,9 @@
         [self.BowlTypeTbl reloadData];
     });
     
-    UIButton *btn = self.overBlockbtn[0];
+//    UIButton *btn = self.overBlockbtn[0];
     
-    [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [overBlockbtn.firstObject sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     //[self resultOverwise:self.overBlockbtn[0]];
     
@@ -529,11 +531,11 @@
         battingDict = [NSMutableDictionary new];
         battingDict = responseObject;
         
-        //[self innings1ButtonTapped:nil];
         
-        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//        [Titlecollview selectItemAtIndexPath:selectedIndex animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         [self loadGraphdata];
-        
+//        [self innings1ButtonTapped:nil];
+
         
         [AppCommon hideLoading];
         
