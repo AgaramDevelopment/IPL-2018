@@ -1612,7 +1612,14 @@
 //            [self groundListGetService];
 //        }
         
-        dropVC.array = appDel.ArrayTeam;
+        NSMutableArray* arr = [NSMutableArray new];
+        for (NSDictionary* temp1 in appDel.MainArray) {
+            if (![[arr valueForKey:@"GroundCode"] containsObject:[temp1 valueForKey:@"GroundCode"]]) {
+                [arr addObject:temp1];
+            }
+        }
+        
+        dropVC.array = arr;
         dropVC.key = @"GroundName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
         
