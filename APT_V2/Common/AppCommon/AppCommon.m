@@ -398,5 +398,12 @@ AppCommon *sharedCommon = nil;
     return appDel.ArrayTeam;
 }
 
+-(NSString *)getDeviceUUID
+{
+    NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSLog(@"output is : %@", Identifier);
+
+    return Identifier;
+}
 @end
 

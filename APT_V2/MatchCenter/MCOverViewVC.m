@@ -110,6 +110,11 @@
     CustomNavigation * objCustomNavigation;
     
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    [objCustomNavigation.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor];
+    [objCustomNavigation.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor];
+    [objCustomNavigation.view.heightAnchor constraintEqualToAnchor:self.headerView.heightAnchor];
+    [objCustomNavigation.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
+    [objCustomNavigation.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Overview";

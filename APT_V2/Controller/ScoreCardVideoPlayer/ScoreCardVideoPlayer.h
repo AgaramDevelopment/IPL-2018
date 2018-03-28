@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *ballsColView;
 @property (strong,nonatomic) AVPlayerViewController *avPlayerViewController;
 @property (strong,nonatomic) AVPlayer *avPlayer;
+@property (strong,nonatomic) AVQueuePlayer* avQplayer; 
 
 @property (strong,readwrite) NSString* MatchCode;
 @property (strong,readwrite) NSString* TeamCode;
@@ -41,5 +42,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *playAndPauseBtn;
 @property BOOL isFromHome;
 - (IBAction)closeVideo:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *playerIcons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *playerIconBottom;
+@property (weak, nonatomic) IBOutlet UISlider *SeekBarSlider;
+- (IBAction)actionSeekBarSlider:(id)sender;
 
 @end
