@@ -50,6 +50,9 @@
 @property (nonatomic,strong) IBOutlet UIView * headerUIView;
 @property (nonatomic,strong) IBOutlet UIView * headerUIViewTestmatch;
 
+@property (nonatomic,strong) IBOutlet UIView * FallofwktsUIView;
+@property (nonatomic,strong) IBOutlet UIView * BowlingUIView;
+
 
 
 @property (nonatomic,strong)  NSString * matchCode;
