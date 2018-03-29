@@ -387,6 +387,12 @@
     docWebview.scrollView.showsHorizontalScrollIndicator = NO;
     docWebview.scrollView.showsVerticalScrollIndicator = NO;
 //    NSURL*url=[[NSURL alloc]initWithString:str_file];
+    docWebview.scalesPageToFit = YES;
+    [docWebview setTranslatesAutoresizingMaskIntoConstraints: NO];
+    
+    // Fast scrolling   UIScrollViewDecelerationRateNormal UIScrollViewContentInsetAdjustmentAutomatic
+    docWebview.scrollView.decelerationRate = UIScrollViewContentInsetAdjustmentAutomatic;
+    
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:videoURL];
     [docWebview loadRequest:requestObj];
 }

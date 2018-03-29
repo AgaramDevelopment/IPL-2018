@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="btn_back" destination="umZ-K7-3eX" id="wJG-es-aKs"/>
                 <outlet property="menu_btn" destination="kJ1-fH-dIY" id="dO2-hO-RRb"/>
+                <outlet property="notificationBtn" destination="pd0-1G-EPo" id="N39-Xa-Cvw"/>
                 <outlet property="view" destination="tBS-kI-ybY" id="SRR-Dy-yns"/>
             </connections>
         </placeholder>
@@ -55,14 +56,24 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1G-EPo">
+                            <rect key="frame" x="320" y="5" width="50" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="2K6-tL-gNx"/>
+                                <constraint firstAttribute="width" constant="50" id="MZA-Zo-e5m"/>
+                            </constraints>
+                            <state key="normal" image="notification-icon1"/>
+                        </button>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="pd0-1G-EPo" secondAttribute="trailing" constant="5" id="8nv-7Y-Rog"/>
                         <constraint firstItem="kJ1-fH-dIY" firstAttribute="leading" secondItem="3Dy-4h-QvO" secondAttribute="leading" constant="5" id="GHK-LS-WGC"/>
                         <constraint firstItem="umZ-K7-3eX" firstAttribute="centerY" secondItem="3Dy-4h-QvO" secondAttribute="centerY" id="KwZ-hn-0Aa"/>
                         <constraint firstItem="kJ1-fH-dIY" firstAttribute="centerY" secondItem="3Dy-4h-QvO" secondAttribute="centerY" id="kd7-M7-6Cf"/>
                         <constraint firstItem="PZD-r9-Utf" firstAttribute="centerY" secondItem="3Dy-4h-QvO" secondAttribute="centerY" id="o6M-OI-Gpx"/>
                         <constraint firstItem="PZD-r9-Utf" firstAttribute="centerX" secondItem="3Dy-4h-QvO" secondAttribute="centerX" id="oZH-sm-hDK"/>
                         <constraint firstItem="umZ-K7-3eX" firstAttribute="leading" secondItem="3Dy-4h-QvO" secondAttribute="leading" constant="5" id="s9I-qd-8a3"/>
+                        <constraint firstItem="pd0-1G-EPo" firstAttribute="centerY" secondItem="3Dy-4h-QvO" secondAttribute="centerY" id="whh-q1-YbA"/>
                     </constraints>
                 </view>
             </subviews>
@@ -87,6 +98,7 @@
     <resources>
         <image name="ico-menu" width="18" height="18"/>
         <image name="ico_back_btn" width="15" height="15"/>
+        <image name="notification-icon1" width="1000" height="1080"/>
         <image name="withText" width="1920" height="360"/>
     </resources>
 </document>
