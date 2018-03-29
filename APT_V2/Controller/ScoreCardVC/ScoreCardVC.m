@@ -333,6 +333,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     Appobj = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     self.headerUIView.hidden = YES;
@@ -537,9 +539,7 @@
         mask5.frame = self.Inn4.bounds;
         mask5.path = path6.CGPath;
         self.Inn4.layer.mask = mask5;
-        
-        
-        
+  
         
     }
     
@@ -562,10 +562,12 @@
     
     self.popTbl.hidden=YES;
     
+   // [self toggle:nil];
+    
     
     [self ScoreWebservice];
     
-   // [self toggle:nil];
+    
     
     
     // [self.Team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -576,8 +578,6 @@
     
     
 }
-
-
 - (void)toggle:(id)sender {
     /**
      *  For demo purposes this view controller either adds a parallaxView with a custom view
@@ -599,14 +599,14 @@
 
         ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
         header.matchDetailsArray = matchDetailsImageArray;
-        header.view.frame = CGRectMake(0, 0, self.view.frame.size.width,240);
+        header.view.frame = CGRectMake(0, 0, self.view.frame.size.width,200);
         [l addSubview:header.view];
 
    // NSString *size = @"{{0, 0}, {768, 240}}";
     
     NSString *size = [NSString stringWithFormat:@"{{0, 0}, {%ld, 240}}",self.view.frame.size.width];
     
-    [self.commonScroll addParallaxWithView:header.view andHeight:240];
+    [self.commonScroll addParallaxWithView:header.view andHeight:200];
     [self.commonScroll scrollRectToVisible:CGRectFromString(size) animated:YES];
 //    self.commonScroll.parallaxView
     
@@ -655,18 +655,13 @@
 - (void)parallaxView:(APParallaxView *)view willChangeFrame:(CGRect)frame {
     // Do whatever you need to do to the parallaxView or your subview before its frame changes
     NSLog(@"parallaxView:willChangeFrame: %@", NSStringFromCGRect(frame));
-    
-    
-    
+
     
 }
 
 - (void)parallaxView:(APParallaxView *)view didChangeFrame:(CGRect)frame {
     // Do whatever you need to do to the parallaxView or your subview after its frame changed
     NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
-    
-
-    
 
 }
 
@@ -675,29 +670,46 @@
     NSLog(@"yes");
     NSLog(@"%f", scrollView.contentOffset.y);
     
+    float fScroll = scrollView.contentOffset.y;
+    
+    float fFallofWkts  = self.teamsUIView.frame.size.height+self.containerUIView.frame.size.height + self.headerUIView.frame.size.height + self.listTbl.frame.size.height+100;
+    
+    float fBowling  = self.teamsUIView.frame.size.height+self.containerUIView.frame.size.height + self.headerUIView.frame.size.height + self.listTbl.frame.size.height+100+self.FallofwktsUIView.frame.size.height;
     
     
-    float f = scrollView.contentOffset.y;
+//    if(fScroll == fFallofWkts)
+//    {
+//        self.StickyView.hidden = NO;
+//        self.StickyBattingHeader.hidden = YES;
+//        self.StickyBowlingHeader.hidden = YES;
+//        self.StickyFallofWktsHeader.hidden = NO;
+//    }
+//    else  if(fScroll == fBowling)
+//    {
+//        self.StickyView.hidden = NO;
+//        self.StickyBattingHeader.hidden = YES;
+//        self.StickyBowlingHeader.hidden = NO;
+//        self.StickyFallofWktsHeader.hidden = YES;
+//    }
     
-    
-  if(isSelected ==NO)
-  {
-      if(f>=1.000000 && f<=645.500000)
+//  if(isSelected ==NO)
+//  {
+      if(fScroll>=250.000000 && fScroll<=fFallofWkts)
       {
           self.StickyView.hidden = NO;
           self.StickyBattingHeader.hidden = NO;
           self.StickyBowlingHeader.hidden = YES;
           self.StickyFallofWktsHeader.hidden = YES;
       }
-      else if(f>=645.500000 && f<=804.500000)
+      else if(fScroll>=fFallofWkts && fScroll<=fBowling)  //
       {
-          
+
           self.StickyView.hidden = NO;
           self.StickyBattingHeader.hidden = YES;
           self.StickyBowlingHeader.hidden = YES;
           self.StickyFallofWktsHeader.hidden = NO;
       }
-      else if(f>=804.500000)
+      else if(fScroll>=fBowling)
       {
           self.StickyView.hidden = NO;
           self.StickyBattingHeader.hidden = YES;
@@ -705,59 +717,62 @@
           self.StickyFallofWktsHeader.hidden = YES;
       }
       else{
-          
+
           self.StickyView.hidden = YES;
           self.StickyBattingHeader.hidden = YES;
           self.StickyBowlingHeader.hidden = YES;
           self.StickyFallofWktsHeader.hidden = YES;
       }
-  }
-  else
-  {
-      if(f>=1.000000 && f<=904.000000)
-      {
-          self.StickyView.hidden = NO;
-          self.StickyBattingHeader.hidden = NO;
-          self.StickyBowlingHeader.hidden = YES;
-          self.StickyFallofWktsHeader.hidden = YES;
-      }
-      else if(f>=904.000000 && f<=1065.000000 )
-      {
-          self.StickyView.hidden = NO;
-          self.StickyBattingHeader.hidden = YES;
-          self.StickyBowlingHeader.hidden = YES;
-          self.StickyFallofWktsHeader.hidden = NO;
-      }else if(f>=1065.000000)
-      {
-          self.StickyView.hidden = NO;
-          self.StickyBattingHeader.hidden = YES;
-          self.StickyBowlingHeader.hidden = NO;
-          self.StickyFallofWktsHeader.hidden = YES;
-      }
-      else{
-          
-          self.StickyView.hidden = YES;
-          self.StickyBattingHeader.hidden = YES;
-          self.StickyBowlingHeader.hidden = YES;
-          self.StickyFallofWktsHeader.hidden = YES;
-      }
-  }
-  
+ // }
+  //else
+//  {
+//      if(fScroll>=232.000000 && fScroll<=1042.500000)
+//      {
+//          self.StickyView.hidden = NO;
+//          self.StickyBattingHeader.hidden = NO;
+//          self.StickyBowlingHeader.hidden = YES;
+//          self.StickyFallofWktsHeader.hidden = YES;
+//      }
+////      else if(f>=1042.500000 && f<=1203.500000 )
+////      {
+////          self.StickyView.hidden = NO;
+////          self.StickyBattingHeader.hidden = YES;
+////          self.StickyBowlingHeader.hidden = YES;
+////          self.StickyFallofWktsHeader.hidden = NO;
+////      }else if(f>=1203.500000)
+////      {
+////          self.StickyView.hidden = NO;
+////          self.StickyBattingHeader.hidden = YES;
+////          self.StickyBowlingHeader.hidden = NO;
+////          self.StickyFallofWktsHeader.hidden = YES;
+////      }
+//      else{
+//
+//          self.StickyView.hidden = YES;
+//          self.StickyBattingHeader.hidden = YES;
+//          self.StickyBowlingHeader.hidden = YES;
+//          self.StickyFallofWktsHeader.hidden = YES;
+//      }
+//  }
+
 }
 
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView;
-{
-    NSLog(@"yes yesssss");
-}
+
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // just add this line to the end of this method or create it if it does not exist
     // [self.listTbl reloadData];
-    [self toggle:nil];
+   // [self toggle:nil];
     
+    [super viewWillAppear:YES];
     
+}
+-(void)viewWillDisappear:(BOOL)animated {
+   // NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+   // [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+     [super viewWillDisappear:animated];
 }
 
 
@@ -2035,7 +2050,7 @@
     CommonArray2 = [[NSMutableArray alloc]init];
     CommonArray2 = BowlingDetailsArray1;
     
-    
+    isSelected = NO;
     
     self.extrastypelbl.text = [ExtrasArray objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray objectAtIndex:1];
@@ -2087,7 +2102,7 @@
     CommonArray2 = BowlingDetailsArray2;
     
     
-    
+    isSelected = NO;
     
     self.extrastypelbl.text = [ExtrasArray2 objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray2 objectAtIndex:1];
@@ -2688,7 +2703,7 @@
                 ScoreCardHeader *header = [[ScoreCardHeader alloc]init];
                 header.matchDetailsArray = matchDetailsImageArray;
             
-                [self toggle:nil];
+               // [self toggle:nil];
                 
                 
                 
