@@ -621,8 +621,8 @@
     NSLog(@"teamWideResultDict:%@", teamWideResultArray);
     for (id key in teamWideResultArray) {
         //Images
-        [self.team1ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"ATLogo"]]] placeholderImage:[UIImage imageNamed:@""]]; //team_logo_csk
-        [self.team2ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"BTLogo"]]] placeholderImage:[UIImage imageNamed:@""]]; //srh_lgo
+        [self.team1ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"ATLogo"]]] placeholderImage:[UIImage imageNamed:@"no-image"]]; //team_logo_csk
+        [self.team2ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"BTLogo"]]] placeholderImage:[UIImage imageNamed:@"no-image"]]; //srh_lgo
         
         NSLog(@"ATLogo:%@", [key valueForKey:@"ATLogo"]);
         NSLog(@"BTLogo:%@", [key valueForKey:@"BTLogo"]);
@@ -848,8 +848,8 @@
 
 - (NSString *)checkNull:(NSString *)_value
 {
-    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
-        _value=@"";
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"] || [_value isEqualToString:@""]) {
+        _value=@"0";
     }
     return _value;
 }

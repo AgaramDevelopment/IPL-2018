@@ -20,7 +20,7 @@
 #import "MyStatsBattingVC.h"
 #import "TeamMembersVC.h"
 
-@interface TabHomeVC ()
+@interface TabHomeVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     SchResStandVC *objSch;
     WellnessTrainingBowlingVC * objWell;
@@ -30,11 +30,29 @@
     NSIndexPath* selectedIndex;
     TeamMembersVC* objPlayersVC;
     NSArray* titleArray;
+    NSMutableArray* selectedUserArray;
+    NSArray* uploadDropDownArray;
+    
+    NSString *imgData,* imgFileName;
+    UIImagePickerController *videoPicker;
+    NSString * selectedPlayerCode;
+    NSString * selectedTeamCode;
+
 }
 
 @end
 
 @implementation TabHomeVC
+
+@synthesize tblList,lblTeam,lblPlayer;
+
+@synthesize lblCategory,lblShareUser;
+
+@synthesize txtKeyword,txtVideoDate,viewUpload;
+
+@synthesize selectedImageView,datePickerView;
+
+@synthesize datePicker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,13 +62,16 @@
     [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     
     objSch = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    objSch.Delegate = self;
     objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
     objPlayersVC = [TeamMembersVC new];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
-    
+    selectedUserArray = [NSMutableArray new];
     
     titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
     
+    [self FetchvideouploadWebservice];
+    [txtVideoDate setInputView:datePickerView];
 
 }
 
@@ -206,5 +227,351 @@
 
 
 
+
+- (IBAction)actionDatePicker:(id)sender {
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
+    
+    txtVideoDate.text = actualDate;
+    [txtVideoDate resignFirstResponder];
+
+}
+
+- (IBAction)actionDatePickerChange:(id)sender {
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
+    
+    txtVideoDate.text = actualDate;
+    [txtVideoDate resignFirstResponder];
+
+}
+
+
+- (IBAction)actionCameraGallery:(id)sender {
+    
+    if ([sender tag] == 0) // Camera
+    {
+        videoPicker = [[UIImagePickerController alloc]init];
+        videoPicker.delegate = self;
+        videoPicker.allowsEditing = YES;
+        
+        videoPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+        videoPicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+        videoPicker.videoMaximumDuration = 30;
+        [self presentViewController:videoPicker animated:YES completion:nil];
+
+    }
+    else // Gallery
+    {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        
+        imagePicker.delegate = self;
+        
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        
+        imagePicker.mediaTypes =  @[(NSString *) kUTTypeImage,(NSString *) kUTTypeMovie];
+        
+        imagePicker.allowsEditing = YES;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+
+    }
+    
+    
+}
+
+- (IBAction)actionUpload:(id)sender {
+    
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString * createdby = [AppCommon GetUsercode];
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    NSString *URLString =  URL_FOR_RESOURCE(VideoUpload);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSString * comments = @"";
+    NSString * videoCode= @"";
+    NSString * sharedUserID = [[selectedUserArray valueForKey:@"sharedUserCode"] componentsJoinedByString:@","];
+    
+    /*
+     plyer code
+     teamcode
+     category
+     type -keyword
+     */
+    
+    selectedTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+        if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
+//        if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+//        if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
+    if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"teamCode"];
+    
+//    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"playerCode"];
+        if(txtVideoDate.hasText)   [dic    setObject:txtVideoDate.text     forKey:@"videoDate"];
+//    if(category_lbl.text)   [dic    setObject:category_lbl.text     forKey:@"categoryCode"];
+    if(txtKeyword.hasText)   [dic    setObject:txtKeyword.text     forKey:@"keyWords"];
+    //    if(comments)   [dic    setObject:@""    forKey:@"comments"];
+    
+        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+            if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
+    //
+            if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
+    //    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
+            if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
+    
+    
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    
+    [AppCommon showLoading];
+    NSLog(@"USED PARAMS %@ ",dic);
+    
+    [manager POST:URLString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileURL:filePath name:@"image" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [AppCommon hideLoading];
+        
+        NSLog(@"Success: %@", responseObject);
+//        [self resetImageData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // Update the UI
+            [AppCommon hideLoading];
+            //                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AppCommon hideLoading];
+//        [self resetImageData];
+        NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+
+}
+
+- (IBAction)actionDropDown:(id)sender {
+    
+    if (tblList.isHidden) {
+        [tblList setHidden:NO];
+        [tblList reloadData];
+    }
+    else{
+        [tblList setHidden:YES];
+    }
+    
+}
+
+- (IBAction)actionCloseUpload:(id)sender {
+    
+    [viewUpload removeFromSuperview];
+}
+
+-(void)openVideoUploadViewInTabHomeVC
+{
+    NSLog(@"openVideoUploadViewInTabHomeVC called");
+    [viewUpload setFrame:self.view.frame];
+    [self.view addSubview:viewUpload];
+}
+
+-(void)FetchvideouploadWebservice
+{
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString *UserrefCode = [AppCommon GetuserReference];
+    NSString *usercode = [AppCommon GetUsercode];
+    
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    NSString *URLString =  URL_FOR_RESOURCE(FetchVideoUpload);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+    if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            uploadDropDownArray = [responseObject valueForKey:@"lstVideoUploadUser"];
+    
+        }
+        
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    //#warning Incomplete implementation, return the number of sections
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //#warning Incomplete implementation, return the number of rows
+    return uploadDropDownArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+    }
+    
+    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = [UIColor lightGrayColor];
+    cell.textLabel.numberOfLines = 2;
+    cell.textLabel.text = [[uploadDropDownArray objectAtIndex:indexPath.row] valueForKey:@"sharedUserName"];
+    
+//    for (NSDictionary* temp in selectedUserArray) {
+        if ([[selectedUserArray valueForKey:@"sharedUserName"] containsObject:cell.textLabel.text]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//            break;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+//            break;
+
+        }
+//    }
+
+    
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary* temp = [uploadDropDownArray objectAtIndex:indexPath.row];
+    NSString* currentlySelctedName = [temp valueForKey:@"sharedUserName"];
+
+//    for (NSDictionary* temp in uploadDropDownArray) {
+    
+//        if ([[temp valueForKey:@"sharedUserName"] isEqualToString:currentlySelctedName]) {
+        if ([[selectedUserArray valueForKey:@"sharedUserName"] containsObject:currentlySelctedName]) {
+
+            [selectedUserArray removeObject:temp];
+//            break;
+        }
+        else{
+            [selectedUserArray addObject:temp];
+//            break;
+        }
+//    }
+    [tableView reloadData];
+
+}
+
+#pragma mark UIImagePickerController Delegates
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    
+    NSLog(@"info[UIImagePickerControllerMediaType] %@",info[UIImagePickerControllerMediaType]);
+    UIImage* image;
+    NSData* imgDatas;
+    
+    if([info[UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
+    {
+        NSString* str = info[@"UIImagePickerControllerImageURL"];
+        
+        imgDatas = [[NSData alloc] initWithContentsOfFile:str];
+        imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+        
+    }
+    else
+    {
+        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
+        imgDatas = [[NSData alloc] initWithContentsOfURL:url];
+        
+        
+        imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
+        
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+    
+    
+    imgData = [imgDatas base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if (!imgFileName) {
+        
+        imgFileName = [self getFileName];
+    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        //_ImgViewBottomConst.constant = _imgView.frame.size.height;
+//        [_imgView updateConstraintsIfNeeded];
+        selectedImageView.image = image;
+        
+    }];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+//    [self.view setFrame:CGRectMake(0, 350, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
+}
+
+
+- (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+-(NSString *)getFileName
+{
+    
+    /*
+     EEEE, MMM d, yyyy
+     */
+    
+    NSString* filename;
+    NSDateFormatter* df = [NSDateFormatter new];
+    [df setDateFormat:@"EEEE_MMM_d_yyyy_HH_mm_ss"];
+    
+    filename = [df stringFromDate:[NSDate date]];
+    filename=[filename stringByAppendingPathExtension:@"png"];
+    NSLog(@"file name %@ ",filename);
+    
+    return filename;
+}
 
 @end

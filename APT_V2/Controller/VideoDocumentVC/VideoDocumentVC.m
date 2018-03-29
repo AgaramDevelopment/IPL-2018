@@ -35,7 +35,7 @@
 
 @synthesize tblDropDown,lblTeam,lblVenue;
 
-@synthesize lblNoDoc;
+@synthesize lblNoDoc,protocolUpload;
 
 @synthesize pdfView,docWebview;
 
@@ -435,6 +435,13 @@
 - (IBAction)closePDFDoc:(id)sender {
     
     [pdfView dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)actionUpload:(id)sender {
+    
+    [protocolUpload openVideoUploadView];
+//    TabHomeVC* vc = [TabHomeVC new];
+//    [vc.view addSubview:vc.viewUpload];
 }
 
 @end

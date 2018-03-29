@@ -371,15 +371,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="ZZG-PB-kXz" secondAttribute="trailing" id="xLJ-Xh-4Bx"/>
                                             </constraints>
                                         </view>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-Qz-kwo">
-                                            <rect key="frame" x="245" y="63" width="120" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <outlet property="dataSource" destination="-1" id="K5T-XV-ojI"/>
-                                                <outlet property="delegate" destination="-1" id="KwO-Vn-fEz"/>
-                                            </connections>
-                                        </tableView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -447,6 +438,15 @@
                         <constraint firstAttribute="trailing" secondItem="o5z-Lw-ZQk" secondAttribute="trailing" constant="5" id="sAW-6b-n0J"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-Qz-kwo">
+                    <rect key="frame" x="16" y="465" width="170" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="K5T-XV-ojI"/>
+                        <outlet property="delegate" destination="-1" id="KwO-Vn-fEz"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -503,7 +503,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Eoe-Yx-TgF"/>
-            <point key="canvasLocation" x="530.5" y="-704"/>
+            <point key="canvasLocation" x="-173" y="-470"/>
         </view>
     </objects>
     <resources>

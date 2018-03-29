@@ -23,7 +23,7 @@
 #import "VideoDocumentVC.h"
 
 
-@interface SchResStandVC ()
+@interface SchResStandVC ()<openUploadDelegate>
 {
     VideoGalleryVC *objVideo;
     NSString *displayMatchCode;
@@ -34,7 +34,6 @@
     NSMutableArray *objarray;
     ResultsVc *objresult;
     DocumentViewController* docVC;
-    
     VideoDocumentVC *objVDocut;
     
 }
@@ -47,6 +46,7 @@
 @implementation SchResStandVC
 @synthesize documentView;
 
+@synthesize Delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -68,6 +68,7 @@
 //    [self.videoView addSubview:objVideo.view];
     
     objVDocut = [[VideoDocumentVC alloc] initWithNibName:@"VideoDocumentVC" bundle:nil];
+    objVDocut.protocolUpload = self;
     objVDocut.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
     [self.videoView addSubview:objVDocut.view];
     
@@ -709,6 +710,13 @@
     objVideo.view.frame = CGRectMake(0, 0, self.videoView.bounds.size.width, self.videoView.bounds.size.height);
     [self.videoView addSubview:objVideo.view];
 
+}
+
+-(void)openVideoUploadView
+{
+    NSLog(@"openVideoUploadView called");
+
+    [Delegate openVideoUploadViewInTabHomeVC];
 }
 
 @end

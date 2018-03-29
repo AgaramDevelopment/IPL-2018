@@ -101,7 +101,9 @@
     
     NSArray* temp = [COMMON getCorrespondingTeamName:competitionName];
     teamCodeTF.text = [[temp firstObject] valueForKey:@"TeamName"];
-    groundLbl.text = [[temp firstObject] valueForKey:@"GroundName"];
+    NSString* groundName = [NSString stringWithFormat:@"%@, %@", [[temp firstObject] valueForKey:@"GroundName"], [[temp firstObject] valueForKey:@"City"]];
+    
+    groundLbl.text = groundName;
     groundCode = [[temp firstObject] valueForKey:@"GroundCode"];
 
     
@@ -1675,7 +1677,7 @@
     }
     else //if([key isEqualToString:@"GroundName"])
     {
-        groundLbl.text = [NSString stringWithFormat:@"%@, %@", [[array objectAtIndex:Index.row] valueForKey:@"GroundName"], [[array objectAtIndex:Index.row] valueForKey:@"Venue"]];
+        groundLbl.text = [NSString stringWithFormat:@"%@, %@", [[array objectAtIndex:Index.row] valueForKey:@"GroundName"], [[array objectAtIndex:Index.row] valueForKey:@"City"]];
         
         groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
 

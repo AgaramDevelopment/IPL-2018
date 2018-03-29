@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol openUploadDelegate <NSObject>
+
+-(void)openVideoUploadView;
+
+@end
+
+
 @interface VideoDocumentVC : UIViewController
+
+@property (strong, nonatomic)id<openUploadDelegate> protocolUpload;
 
 @property (weak, nonatomic) IBOutlet UIView *docView;
 @property (weak, nonatomic) IBOutlet UICollectionView *docCollectionView;

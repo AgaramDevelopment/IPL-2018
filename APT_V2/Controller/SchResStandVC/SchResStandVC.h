@@ -10,8 +10,16 @@
 #import "ScheduleCell.h"
 #import "ResultCell.h"
 
+@protocol openUploadDataSource <NSObject>
+
+-(void)openVideoUploadViewInTabHomeVC;
+
+@end
+
+
 @interface SchResStandVC : UIViewController
 
+@property (strong,nonatomic) id<openUploadDataSource> Delegate;
 @property (strong, nonatomic) IBOutlet UICollectionView *scheduleCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 
