@@ -17,6 +17,7 @@
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
 #import "TeamMembersVC.h"
+#import "PlannerVC.h"
 
 @interface RearViewController ()
 {
@@ -42,12 +43,12 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Match Center",@"Logout"];
+        arrItems = @[@"Home",@"Match Center",@"Planner",@"Logout"];
     }
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"My Team",@"Cricket Center",@"Logout"];
+       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -147,6 +148,11 @@
     {
 
         newFrontController = [MatchCenterTBC new];
+        
+    }else if(indexPath.row == 2)
+    {
+        
+        newFrontController = [PlannerVC new];
         
     }
     else if (indexPath.row == arrItems.count -1)

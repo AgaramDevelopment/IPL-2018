@@ -14,6 +14,7 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
+#import "PopOverVC.h"
 
 @interface MCTeamCompVC () <selectedDropDown>
 {
@@ -127,6 +128,8 @@
     
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     
+    //Notification Method
+    [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,7 +137,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(IBAction)didClickNotificationBtn:(id)sender
+{
+    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"Notification-1", @"Notification-2", @"Notification-3", @"Notification-4", @"Notification-5", nil];
+    NSLog(@"array:%@", array);
+    
+    PopOverVC *popOverObj = [[PopOverVC alloc] init];
+    popOverObj.listArray = array;
+    UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
+    CGSize size;
+    if (IS_IPAD) {
+        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
+    } else {
+        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
+    }
+    [popOver setPopoverContentSize:size];
+    [popOver setBackgroundColor:[UIColor whiteColor]];
+    [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
