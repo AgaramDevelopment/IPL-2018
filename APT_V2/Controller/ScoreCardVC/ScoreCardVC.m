@@ -694,7 +694,7 @@
     
 //  if(isSelected ==NO)
 //  {
-      if(fScroll>=250.000000 && fScroll<=fFallofWkts)
+      if(fScroll>=200.000000 && fScroll<=fFallofWkts)
       {
           self.StickyView.hidden = NO;
           self.StickyBattingHeader.hidden = NO;
