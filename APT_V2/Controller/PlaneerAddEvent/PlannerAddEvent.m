@@ -431,7 +431,8 @@
     {
         self.popviewTbl.hidden =NO;
         
-        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+10;
+        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+30;
+        self.popviewXposition.constant =self.eventTypeView.frame.origin.x;
         self.popviewWidth.constant =self.eventTypeView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
@@ -468,8 +469,10 @@
     if(isEventStatus == NO)
     {
         self.popviewTbl.hidden = NO;
-        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+self.eventTypeView.frame.size.height+20;
-        self.popviewWidth.constant =self.eventTypeView.frame.size.width;
+        
+        self.popviewYposition.constant =self.eventStatusView.frame.origin.y+30;
+        self.popviewXposition.constant =self.eventStatusView.frame.origin.x;
+        self.popviewWidth.constant =self.eventStatusView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
         
@@ -507,9 +510,13 @@
     if(isParticipantType == NO)
     {
         self.popviewTbl.hidden=NO;
-        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.x;
+        
+        
+        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-235;
         self.popviewWidth.constant =self.particiTypeView.frame.size.width;
-        self.popviewXposition.constant = self.mainParticipantTypeView.frame.origin.y;
+        self.popviewXposition.constant = self.mainParticipantTypeView.frame.origin.x+5;
+        
+        
         
         self.commonArray =[[NSMutableArray alloc]init];
         
@@ -593,7 +600,6 @@
         //self.popviewWidth.constant =self.particiView.frame.size.width;
         self.comPopview.hidden =NO;
         self.commonArray =[[NSMutableArray alloc]init];
-        
         NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
         [mutableDict setObject:@"" forKey:@"Participantcode"];
         [mutableDict setObject:@"Select" forKey:@"Participantname"];
@@ -697,6 +703,9 @@
     
 }
 
+
+
+
 #pragma participant addbtn Action
 
 -(IBAction)didClickPlusBtn:(id)sender
@@ -787,22 +796,35 @@
         if(![self.particiTypeLbl.text isEqualToString:@"Select"] && ![self.teamLbl.text isEqualToString:@"Select"] && ![self.particiLbl.text isEqualToString:@"Select"] && ![self.particiTypeLbl.text isEqualToString:@""] && ![self.teamLbl.text isEqualToString:@""] && ![self.particiLbl.text isEqualToString:@""] )
         {
             NSMutableArray *a1 = [[NSMutableArray alloc]init];
-            a1 = [selectedMarks valueForKey:@"Participantcode"];
+            a1 = selectedMarks;
             
+            BOOL isdata ;
+            isdata = YES;
             for(int i=0;i<selectedMarks.count;i++)
             {
-                NSString *ppcode = [a1 objectAtIndex:i];
+                NSString *ppcode = [[a1 valueForKey:@"Participantcode"] objectAtIndex:i];
                 NSMutableArray *add = [[NSMutableArray alloc]init];
-                add = [self.addParticipantArray valueForKey:@"Participantcode"];
-                
+                for( int j=0;j<self.addParticipantArray.count;j++)
+                {
+                    NSString *reCode = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
+                    [add addObject:reCode];
+                }
+            
                 if([add containsObject:ppcode])
                 {
                     [self altermsg:@"Please select different Participant"];
+                    isdata = YES;
+                    return;
                 }
                 else
                 {
-                    [self ParticipantAddMethod];
+                    isdata = NO;
                 }
+            }
+            if(!isdata)
+            {
+            [self ParticipantAddMethod];
+            }
                 
 //                if(self.addParticipantArray.count ==0)
 //                {
@@ -829,10 +851,7 @@
                 
                 
             }
-            
-            
-        }
-    }
+}
 
 
 #pragma participantAdd method
@@ -893,6 +912,7 @@
         
         //[self.addParticipantArray addObject:mutableDict];
     }
+    
     [self.participantTbl reloadData];
 
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
@@ -957,7 +977,7 @@
     
 }
 
--(void)startFetchPlayerByTeamAndParticipantType :(NSString *) participantType :(NSString *)team
+-(void)startFetchPlayerByTeamAndParticipantType :(NSString *) participantType
 {
     [AppCommon showLoading];
     if([COMMON isInternetReachable])
@@ -971,6 +991,9 @@
         
         manager.requestSerializer = requestSerializer;
         
+        
+        NSString *team = [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -1405,6 +1428,7 @@
         NSString *text = [[self.commonArray valueForKey:@"Participantname"] objectAtIndex:[indexPath row]];
         cell.isSelected = [[selectedMarks  valueForKey:@"Participantcode" ]containsObject:selectParticipantCode] ? YES : NO;
         cell.textLabel.text = text;
+        cell.contentView.backgroundColor = [UIColor lightGrayColor];
         
         return cell;
 
@@ -1423,15 +1447,18 @@
         if(isEventType)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
         }
         else if (isEventStatus)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"EventStatusname"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
             
         }
         else if (isParticipantType)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
             
         }
         else if (isteam)
@@ -1451,7 +1478,7 @@
 
        // }
         
-        cell.backgroundColor = [UIColor clearColor];
+        //cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
     return nil;
@@ -1475,13 +1502,14 @@
         self.particiTypeLbl.text =[[self.commonArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         selectParticipantType =[[self.commonArray valueForKey:@"ParticipantTypecode"] objectAtIndex:indexPath.row];
         [self startFetchTeamByParticipantType:selectParticipantType];
+         [self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
         self.popviewTbl.hidden =YES;
     }
     else if (isteam)
     {
         self.teamLbl.text =[[self.commonArray valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
         selectTeam  =[[self.commonArray valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
-        [self startFetchPlayerByTeamAndParticipantType:selectParticipantType :selectTeam];
+        [self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
         self.popviewTbl.hidden =YES;
     }
     else if (isParticipant)
@@ -1492,6 +1520,7 @@
             [selectedMarks removeObject:dic];
         else
             [selectedMarks addObject:dic];
+        self.particiLbl.text = @"";
         
         int a = selectedMarks.count;
         if(a == 0)
