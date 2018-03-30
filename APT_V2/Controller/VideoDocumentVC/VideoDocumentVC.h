@@ -32,5 +32,7 @@
 @property (strong, nonatomic) IBOutlet UIViewController *pdfView;
 @property (weak, nonatomic) IBOutlet UIWebView *docWebview;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIView *viewNavigation;
+@property (weak, nonatomic) IBOutlet UIStackView *btnStackView;
 
 @end

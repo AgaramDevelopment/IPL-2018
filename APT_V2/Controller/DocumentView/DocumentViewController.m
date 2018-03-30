@@ -32,7 +32,7 @@
 
 @synthesize tblDropDown,lblTeam,lblVenue;
 
-@synthesize lblNoDoc;
+@synthesize lblNoDoc,protocolUpload;
 
 @synthesize pdfView,docWebview;
 
@@ -89,6 +89,7 @@
 {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
     [lblNoDoc setHidden:docResultArray.count];
@@ -413,6 +414,9 @@
 - (IBAction)closePDFDoc:(id)sender {
     
     [pdfView dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)actionUpload:(id)sender {
+    [protocolUpload openDocumentUploadView];
 }
 
 @end

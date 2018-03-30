@@ -31,7 +31,9 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     self = [super init];
     if (self) {
         
-        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",nil];
+//        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",nil];
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",@"application/octest-stream",nil];
+
     }
     return self;
 }

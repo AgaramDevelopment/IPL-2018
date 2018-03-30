@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol openUploadDocumentDelegate <NSObject>
+
+-(void)openDocumentUploadView;
+
+@end
+
+
 @interface DocumentViewController : UIViewController
+
+@property (strong, nonatomic)id<openUploadDocumentDelegate> protocolUpload;
+
 @property (weak, nonatomic) IBOutlet UIView *docView;
 @property (weak, nonatomic) IBOutlet UICollectionView *docCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tblDropDown;

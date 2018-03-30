@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblShareUser;
 @property (weak, nonatomic) IBOutlet UITextField *txtVideoDate;
 @property (weak, nonatomic) IBOutlet UITextField *txtKeyword;
+@property (weak, nonatomic) IBOutlet UIButton *btnGallery;
 
 
 - (IBAction)actionDatePicker:(id)sender;

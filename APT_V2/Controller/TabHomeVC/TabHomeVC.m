@@ -20,7 +20,7 @@
 #import "MyStatsBattingVC.h"
 #import "TeamMembersVC.h"
 
-@interface TabHomeVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface TabHomeVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIDocumentMenuDelegate,UIDocumentPickerDelegate>
 {
     SchResStandVC *objSch;
     WellnessTrainingBowlingVC * objWell;
@@ -37,6 +37,9 @@
     UIImagePickerController *videoPicker;
     NSString * selectedPlayerCode;
     NSString * selectedTeamCode;
+    UIImage* thumbNailImage;
+    UIDocumentPickerViewController* docPicker;
+    NSURL* videofileURL;
 
 }
 
@@ -52,7 +55,7 @@
 
 @synthesize selectedImageView,datePickerView;
 
-@synthesize datePicker;
+@synthesize datePicker,btnGallery;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -269,29 +272,64 @@
     }
     else // Gallery
     {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        if ([[sender currentTitle]isEqualToString:@"Upload From Gallery"]) {
+            
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            
+            imagePicker.delegate = self;
+            
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            
+            imagePicker.mediaTypes =  @[(NSString *) kUTTypeImage,(NSString *) kUTTypeMovie];
+            
+            imagePicker.allowsEditing = YES;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
+        else
+        {
+            // ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"]
+            
+            [self showDocumentPickerInMode:UIDocumentPickerModeOpen];
+
+        }
         
-        imagePicker.delegate = self;
         
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         
-        imagePicker.mediaTypes =  @[(NSString *) kUTTypeImage,(NSString *) kUTTypeMovie];
-        
-        imagePicker.allowsEditing = YES;
-        [self presentViewController:imagePicker animated:YES completion:nil];
 
     }
     
     
 }
 
-- (IBAction)actionUpload:(id)sender {
-    
+-(void)uploadAPI
+{
     NSString *ClientCode = [AppCommon GetClientCode];
     NSString * createdby = [AppCommon GetUsercode];
     
     if(![COMMON isInternetReachable])
         return;
+    
+    if (imgData.length == 0) {
+        [AppCommon showAlertWithMessage:@"Please Select Video to upload"];
+        return;
+        
+    }
+    else if (!selectedUserArray.count) {
+        [AppCommon showAlertWithMessage:@"Please select atleast one user to share"];
+        return;
+    }
+    else if (!txtVideoDate.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please select Date"];
+        return;
+    }
+    else if (!txtKeyword.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please Enter Description or Keywords"];
+        return;
+    }
+    
+    
     
     [AppCommon showLoading];
     NSString *URLString =  URL_FOR_RESOURCE(VideoUpload);
@@ -312,30 +350,33 @@
     selectedTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
-        if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
-//        if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
-//        if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
+    //        if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+    //        if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
     if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"teamCode"];
     
-//    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"playerCode"];
-        if(txtVideoDate.hasText)   [dic    setObject:txtVideoDate.text     forKey:@"videoDate"];
-//    if(category_lbl.text)   [dic    setObject:category_lbl.text     forKey:@"categoryCode"];
+    //    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"playerCode"];
+    if(txtVideoDate.hasText)   [dic    setObject:txtVideoDate.text     forKey:@"videoDate"];
+    //    if(category_lbl.text)   [dic    setObject:category_lbl.text     forKey:@"categoryCode"];
     if(txtKeyword.hasText)   [dic    setObject:txtKeyword.text     forKey:@"keyWords"];
     //    if(comments)   [dic    setObject:@""    forKey:@"comments"];
     
-        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
-            if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
+    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"filename"];
     //
-            if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
     //    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
-            if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
+    
+    //            if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
+    
+    NSLog(@"USED PARAMS %@ ",dic);
+    
+    if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
     
     
     NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
     
     [AppCommon showLoading];
-    NSLog(@"USED PARAMS %@ ",dic);
     
     [manager POST:URLString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileURL:filePath name:@"image" error:nil];
@@ -344,7 +385,7 @@
         [AppCommon hideLoading];
         
         NSLog(@"Success: %@", responseObject);
-//        [self resetImageData];
+        //        [self resetImageData];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -357,10 +398,105 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppCommon hideLoading];
-//        [self resetImageData];
+        //        [self resetImageData];
         NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
         [COMMON webServiceFailureError:error];
     }];
+}
+
+-(void)newUploadAPI
+{
+    /*
+     API URL : /UploadFile?fileName={fileName}
+     MIME type : application/octet-stream
+     
+     */
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString * createdby = [AppCommon GetUsercode];
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+//    if (imgData.length == 0) {
+//        [AppCommon showAlertWithMessage:@"Please Select Video to upload"];
+//        return;
+//
+//    }
+//    else if (!selectedUserArray.count) {
+//        [AppCommon showAlertWithMessage:@"Please select atleast one user to share"];
+//        return;
+//    }
+//    else if (!txtVideoDate.hasText)
+//    {
+//        [AppCommon showAlertWithMessage:@"Please select Date"];
+//        return;
+//    }
+//    else if (!txtKeyword.hasText)
+//    {
+//        [AppCommon showAlertWithMessage:@"Please Enter Description or Keywords"];
+//        return;
+//    }
+    
+    
+    
+    [AppCommon showLoading];
+    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@",@"testFile1.mov"];
+    NSString *URLString =  URL_FOR_RESOURCE(str);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
+//    reqSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/octet-stream"];
+    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Accept"];
+
+    manager.requestSerializer = reqSerializer;
+
+    AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
+    serializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    manager.responseSerializer = serializer;
+    
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    
+    [AppCommon showLoading];
+    
+    [manager POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+//        NSError* formDataError;
+//        [formData appendPartWithFileURL:videofileURL name:@"image" error:&formDataError];
+//        NSLog(@"DATA FORMED %d ",formData);
+//        NSLog(@"ERROR %@",formDataError.description);
+        
+        NSData* data = [NSData dataWithContentsOfURL:videofileURL];
+        
+        [formData appendPartWithFileData:data name:@"image" fileName:@"test" mimeType:@"application/octet-stream"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSError* error;
+        NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+        [AppCommon hideLoading];
+        
+        NSLog(@"Success: %@", dict);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // Update the UI
+            [AppCommon hideLoading];
+        });
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AppCommon hideLoading];
+        //        [self resetImageData];
+        NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+
+}
+
+- (IBAction)actionUpload:(id)sender {
+    
+    [self newUploadAPI];
 
 }
 
@@ -462,18 +598,14 @@
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.text = [[uploadDropDownArray objectAtIndex:indexPath.row] valueForKey:@"sharedUserName"];
     
-//    for (NSDictionary* temp in selectedUserArray) {
         if ([[selectedUserArray valueForKey:@"sharedUserName"] containsObject:cell.textLabel.text]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//            break;
         }
         else
         {
             cell.accessoryType = UITableViewCellAccessoryNone;
-//            break;
 
         }
-//    }
 
     
     return cell;
@@ -485,21 +617,37 @@
     NSDictionary* temp = [uploadDropDownArray objectAtIndex:indexPath.row];
     NSString* currentlySelctedName = [temp valueForKey:@"sharedUserName"];
 
-//    for (NSDictionary* temp in uploadDropDownArray) {
     
-//        if ([[temp valueForKey:@"sharedUserName"] isEqualToString:currentlySelctedName]) {
         if ([[selectedUserArray valueForKey:@"sharedUserName"] containsObject:currentlySelctedName]) {
 
             [selectedUserArray removeObject:temp];
-//            break;
         }
         else{
             [selectedUserArray addObject:temp];
-//            break;
         }
-//    }
     [tableView reloadData];
+    
+    lblShareUser.text = [[selectedUserArray valueForKey:@"sharedUserName"]componentsJoinedByString:@","];
 
+}
+
+
+-(UIImage *)generateThumbImage : (NSURL *)filepath
+{
+//    NSURL *url = [NSURL fileURLWithPath:filepath];
+    
+    AVAsset *asset = [AVAsset assetWithURL:filepath];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 0;
+
+    NSError *err = NULL;
+
+        CGImageRef imgRef = [imageGenerator copyCGImageAtTime:CMTimeMake(1, 60) actualTime:NULL error:&err];
+        UIImage* thumbnail = [[UIImage alloc] initWithCGImage:imgRef scale:UIViewContentModeScaleAspectFit orientation:UIImageOrientationUp];
+
+    return thumbnail;
 }
 
 #pragma mark UIImagePickerController Delegates
@@ -522,9 +670,12 @@
     }
     else
     {
-        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
-        imgDatas = [[NSData alloc] initWithContentsOfURL:url];
+//        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
         
+        videofileURL = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
+        imgDatas = [[NSData alloc] initWithContentsOfURL:videofileURL];
+        
+        selectedImageView.image = [self generateThumbImage:videofileURL];
         
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
@@ -540,7 +691,7 @@
     [self dismissViewControllerAnimated:YES completion:^{
         //_ImgViewBottomConst.constant = _imgView.frame.size.height;
 //        [_imgView updateConstraintsIfNeeded];
-        selectedImageView.image = image;
+//        selectedImageView.image = image;
         
     }];
     
@@ -573,5 +724,41 @@
     
     return filename;
 }
+#pragma mark- Open Document Picker(Delegate) for PDF, DOC Slection from iCloud
+
+
+- (void)showDocumentPickerInMode:(UIDocumentPickerMode)mode
+{
+    
+    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"com.adobe.pdf"] inMode:UIDocumentPickerModeImport];
+    
+    picker.delegate = self;
+    
+    picker.modalPresentationStyle = UIModalPresentationPopover;
+//    picker.popoverPresentationController.sourceRect = btnGallery.frame;
+    picker.popoverPresentationController.sourceView = btnGallery;
+    
+
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
+-(void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker
+{
+    documentPicker.delegate = self;
+    [self presentViewController:documentPicker animated:YES completion:nil];
+}
+
+- (void)documentPicker:(UIDocumentPickerViewController *)controller
+  didPickDocumentAtURL:(NSURL *)url
+{
+    NSLog(@"selected file URL %@",url);
+//    PDFUrl= url;
+//    UploadType=@"PDF";
+//    [arrimg removeAllObjects];
+//    [arrimg addObject:url];
+    
+}
+
 
 @end

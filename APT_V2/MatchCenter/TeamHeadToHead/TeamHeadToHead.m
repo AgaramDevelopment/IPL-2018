@@ -961,26 +961,35 @@
 {
     if ([key  isEqualToString: @"CompetitionName"]) {
         
-        NSLog(@"%@",array[Index.row]);
-        NSLog(@"selected value %@",key);
-        competitionTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        competitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
-        [[NSUserDefaults standardUserDefaults] setValue:competitionTF.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"%@",array[Index.row]);
+            NSLog(@"selected value %@",key);
+            competitionTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+            competitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
+
+            [[NSUserDefaults standardUserDefaults] setValue:competitionTF.text forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        
         
         team2TF.text = @"";
         groundTF.text = @"";
     }
     else if([key isEqualToString:@"GroundName"])
     {
-        groundTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
+            groundTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+            groundCode = [[array objectAtIndex:Index.row] valueForKey:@"GroundCode"];
+//        if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
+//
+//        }
         team2TF.text = @"";
         
     }
-    else if([key isEqualToString:@"TeamBName"] && teamCount == 1)
+    else if([key isEqualToString:@"TeamBName"] && teamCount == 1) // currently fixed
     {
         
         if (team1TF.text.length > 0 && team1TF.text.length > 0 && [team1TF.text isEqualToString:team2TF.text]) {
@@ -989,6 +998,7 @@
             return;
         }
         
+
         team1Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamBcode"];
         team1TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString *team1Win = [NSString stringWithFormat:@"%@ Win", [[array objectAtIndex:Index.row] valueForKey:key]];
@@ -1003,10 +1013,14 @@
             return;
         }
         
-        team2Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamBcode"];
-        team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString *team2Win = [NSString stringWithFormat:@"%@ Win", [[array objectAtIndex:Index.row] valueForKey:key]];
-        self.team2Win.text = team2Win;
+//        if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
+            team2Code = [[array objectAtIndex:Index.row] valueForKey:@"TeamBcode"];
+            team2TF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+            NSString *team2Win = [NSString stringWithFormat:@"%@ Win", [[array objectAtIndex:Index.row] valueForKey:key]];
+            self.team2Win.text = team2Win;
+
+//        }
+
 //        groundTF.text = @"";
     }
     [self headToHeadResultsPostService];

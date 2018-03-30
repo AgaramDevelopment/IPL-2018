@@ -23,7 +23,7 @@
 #import "VideoDocumentVC.h"
 
 
-@interface SchResStandVC ()<openUploadDelegate>
+@interface SchResStandVC ()<openUploadDelegate,openUploadDocumentDelegate>
 {
     VideoGalleryVC *objVideo;
     NSString *displayMatchCode;
@@ -73,6 +73,7 @@
     [self.videoView addSubview:objVDocut.view];
     
     docVC = [DocumentViewController new];
+    docVC.protocolUpload = self;
     [docVC.view setFrame:CGRectMake(0, 0, documentView.frame.size.width, documentView.frame.size.height)];
     [documentView addSubview:docVC.view];
 
@@ -717,6 +718,14 @@
     NSLog(@"openVideoUploadView called");
 
     [Delegate openVideoUploadViewInTabHomeVC];
+}
+
+-(void)openDocumentUploadView
+{
+    NSLog(@"openVideoUploadView called");
+    
+    [Delegate openVideoUploadViewInTabHomeVC];
+
 }
 
 @end

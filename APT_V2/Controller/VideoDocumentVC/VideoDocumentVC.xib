@@ -18,12 +18,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoDocumentVC">
             <connections>
                 <outlet property="backBtn" destination="yFK-f5-u0C" id="gDr-8H-52C"/>
+                <outlet property="btnStackView" destination="Ebh-fl-0if" id="9d4-Yy-1XF"/>
                 <outlet property="docCollectionView" destination="hCj-Os-r4f" id="Szf-xa-Q0p"/>
                 <outlet property="docView" destination="sxn-na-rDy" id="AQ1-RY-N8S"/>
                 <outlet property="docWebview" destination="Rzd-5s-gdM" id="Skz-KH-Hm5"/>
                 <outlet property="lblNoDoc" destination="l5v-5j-HZ9" id="6O0-RK-Bgj"/>
                 <outlet property="pdfView" destination="Tjs-5y-8Zx" id="iX3-r4-Net"/>
                 <outlet property="view" destination="Chq-dF-3fQ" id="dkz-ix-rhu"/>
+                <outlet property="viewNavigation" destination="hMQ-Cy-alo" id="zfy-Iv-SV1"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -71,18 +73,38 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-Cy-alo" userLabel="View dropdown search">
                     <rect key="frame" x="0.0" y="60" width="375" height="35"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-f5-u0C">
-                            <rect key="frame" x="18" y="2" width="81" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-f5-u0C">
+                            <rect key="frame" x="10" y="2" width="80" height="30"/>
                             <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="E6I-Y4-bJI"/>
+                            </constraints>
                             <state key="normal" title="Back"/>
                             <connections>
                                 <action selector="actionBack:" destination="-1" eventType="touchUpInside" id="hhI-QH-SEW"/>
                             </connections>
                         </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ebh-fl-0if">
+                            <rect key="frame" x="95" y="0.0" width="275" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhg-is-gUs">
+                                    <rect key="frame" x="0.0" y="0.0" width="275" height="30"/>
+                                    <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </stackView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="yFK-f5-u0C" firstAttribute="leading" secondItem="hMQ-Cy-alo" secondAttribute="leading" constant="10" id="FdA-vd-agj"/>
+                        <constraint firstItem="yFK-f5-u0C" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="top" constant="2" id="Id4-kL-bex"/>
+                        <constraint firstAttribute="bottom" secondItem="yFK-f5-u0C" secondAttribute="bottom" constant="3" id="ads-Nw-aEL"/>
+                        <constraint firstAttribute="bottom" secondItem="Ebh-fl-0if" secondAttribute="bottom" constant="5" id="gia-cz-zPz"/>
                         <constraint firstAttribute="height" constant="35" id="iWa-ys-Lze"/>
+                        <constraint firstAttribute="trailing" secondItem="Ebh-fl-0if" secondAttribute="trailing" constant="5" id="lFO-wr-nyq"/>
+                        <constraint firstItem="Ebh-fl-0if" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="top" id="vcV-LC-QP5"/>
+                        <constraint firstItem="Ebh-fl-0if" firstAttribute="leading" secondItem="yFK-f5-u0C" secondAttribute="trailing" constant="5" id="wJ7-91-T02"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxn-na-rDy" userLabel="Document View">

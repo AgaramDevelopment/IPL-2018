@@ -83,28 +83,19 @@
     self.rootVideoView.hidden = YES;
     self.avPlayerViewController = [AVPlayerViewController new];
     selectedVideo = 0;
-//    self.avPlayer.volume = 0.2;
     
     
     if (isFromHome) {
         self.avPlayerViewController.showsPlaybackControls = YES;
-        [self.customView setHidden:YES];
-        [self.ballsColView setHidden:YES];
+        [playerIcons setHidden:YES];
         [self playHomeVideos:HomeVideoStr];
     }
     else
     {
-//        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(animationOpen)];
-//        [_videoView addGestureRecognizer:tap];
-//        [_videoView setUserInteractionEnabled:YES];
-        
         self.avPlayerViewController.showsPlaybackControls = NO;
-        [self.customView setHidden:NO];
-        [self.ballsColView setHidden:NO];
+        [playerIcons setHidden:NO];
         [self loadVideoPathsForPlayer:PlayerCode andValue:VideoValue type:Type inningsCount:Innings];
     }
-    
-    
     
 }
 
@@ -470,8 +461,6 @@
         self.myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(setUpProgressView:) userInfo:nil repeats:YES];
         playerIconsHidden = NO;
         [self performSelector:@selector(animationOpen) withObject:nil afterDelay:5.0];
-        
-        
         
         
         

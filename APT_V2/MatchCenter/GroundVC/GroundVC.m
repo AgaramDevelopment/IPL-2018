@@ -1589,7 +1589,20 @@
     
     if ([sender tag] == 0) // Competitions
     {
-        dropVC.array = appDel.ArrayCompetition;
+//        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        NSMutableArray* arr = [NSMutableArray new];
+        [arr addObjectsFromArray:appDel.ArrayCompetition];
+        NSDictionary* temp = @{
+                               @"CompetitionCode": @"",
+                               @"CompetitionName": @"All",
+                               @"Groundcode": @"",
+                               @"Ground": @"All"
+                               };
+        [arr insertObject:temp atIndex:0];
+        
+        dropVC.array = arr;
+
         dropVC.key = @"CompetitionName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60, CGRectGetWidth(competitionView.frame), 300)];
         
@@ -1621,6 +1634,14 @@
             }
         }
         
+        NSDictionary* temp = @{
+                               @"CompetitionCode": @"",
+                               @"CompetitionName": @"All",
+                               @"GroundCode": @"",
+                               @"GroundName": @"All"
+                               };
+        [arr insertObject:temp atIndex:0];
+
         dropVC.array = arr;
         dropVC.key = @"GroundName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
@@ -1657,9 +1678,12 @@
         competitionCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
+        if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
+
         [[NSUserDefaults standardUserDefaults] setValue:competitionCodeTF.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         
         teamCodeTF.text = @"Team Name";
         
@@ -1669,9 +1693,12 @@
         teamCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
+        if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
+
         [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        }
 //        groundLbl.text = @"";
         
     }

@@ -23,6 +23,7 @@
     BOOL isNext,isBack;
     
     VideoPlayerViewController *videoPlayerVC;
+    NSMutableArray* backButtonNames;
 }
 
 @end
@@ -37,7 +38,7 @@
 
 @synthesize lblNoDoc,protocolUpload;
 
-@synthesize pdfView,docWebview;
+@synthesize pdfView,docWebview,btnStackView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +49,7 @@
     [docCollectionView registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     selctedValues = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
     [self videoGalleryWebservice];
+    backButtonNames = [NSMutableArray new];
     
 }
 
@@ -177,6 +179,28 @@
     
 }
 
+-(void)BackTapped
+{
+    NSLog(@"BackTapped");
+}
+
+-(void)updateRootButtons
+{
+    if (isNext) {
+        
+        UIButton* but1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, btnStackView.frame.size.height)];
+        [but1 setTitle:backButtonNames.lastObject forState:UIControlStateNormal];
+        [but1 addTarget:self action:@selector(BackTapped) forControlEvents:UIControlEventTouchUpInside];
+        [btnStackView addArrangedSubview:but1];
+    }
+    else
+    {
+        [btnStackView removeArrangedSubview:btnStackView.arrangedSubviews.lastObject];
+    }
+    
+
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     isNext = YES;
@@ -184,6 +208,13 @@
     if (![[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"videoFolderName"] isEqualToString:@""]) {
         NSString* fileName = [[docResultArray objectAtIndex:indexPath.item] valueForKey:@"videoFolderName"];
         [self addAndRemoveInputs:fileName];
+        
+        VideoGalleryCell* cell = [collectionView cellForItemAtIndexPath:indexPath];
+        
+        [backButtonNames addObject:cell.lblfileName.text];
+        isNext = YES;
+
+        [self updateRootButtons];
         
     }
     else{
