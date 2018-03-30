@@ -7,6 +7,10 @@
 //
 
 #import "PopOverVC.h"
+#import "Config.h"
+#import "PopOverVCCell.h"
+#import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PopOverVC ()
 
@@ -26,6 +30,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (IS_IPAD ? 50 : 40);
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    PopOverVCCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"headerCell"];
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PopOverVCCell" owner:self options:nil];
+    
+    // 1. Dequeue the custom header cell
+    headerCell = arr[0];
+//    headerCell.notificationCountLbl.layer.cornerRadius = 5;
+    // 3. And return
+    return headerCell;
+}
+
 #pragma mark - UITableView Delegate Methods
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.listArray.count;
@@ -33,12 +59,30 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
+    cell.imageView.image = [UIImage imageNamed:@"bowler_defalut"];
     cell.textLabel.text = [self.listArray objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = @"29w 6d 19h ago";
+    NSLog(@"DD%@", cell.detailTextLabel.text);
+    return cell;
+    */
+    
+    PopOverVCCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PopOverVCCell" owner:self options:nil];
+    
+    // 1. Dequeue the custom header cell
+    cell = arr[1];
+        //Images
+//    [self.team1ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"ATLogo"]]] placeholderImage:[UIImage imageNamed:@"no-image"]]; //team_logo_csk
+    [cell.notificationImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"player_andr"]];
+    cell.notificationTitleLbl.text = [self.listArray objectAtIndex:indexPath.row];
+    cell.notificationDescrLbl.text = @"29w 6d 19h ago";
+    // 3. And return
     return cell;
 }
 
@@ -46,6 +90,15 @@
 {
    
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (IS_IPAD) {
+        return 70;
+    } else {
+        return 60;
+    }
+}
+
 
 /*
 #pragma mark - Navigation

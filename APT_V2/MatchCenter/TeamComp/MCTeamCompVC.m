@@ -147,12 +147,13 @@
     UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
     CGSize size;
     if (IS_IPAD) {
-        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
+        size = CGSizeMake(300, array.count > 5 ? 200 : array.count*45);
     } else {
-        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
+        size = CGSizeMake(250, array.count > 5 ? 200 : array.count*45);
     }
+    
     [popOver setPopoverContentSize:size];
-    [popOver setBackgroundColor:[UIColor whiteColor]];
+    [popOver setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
     [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 

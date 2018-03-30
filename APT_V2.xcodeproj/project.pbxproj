@@ -36,6 +36,8 @@
 		04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F8F2037F44400C22717 /* FoodDiaryCell.xib */; };
 		04534F9520383F0C00C22717 /* FoodDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F9320383F0C00C22717 /* FoodDescriptionCell.m */; };
 		04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */; };
+		04A6B3E2206E144700293AFD /* PopOverVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6B3E0206E144700293AFD /* PopOverVCCell.m */; };
+		04A6B3E3206E144700293AFD /* PopOverVCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A6B3E1206E144700293AFD /* PopOverVCCell.xib */; };
 		04B27F17202D784600ECB699 /* illnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F15202D784600ECB699 /* illnessVC.m */; };
 		04B27F18202D784600ECB699 /* illnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F16202D784600ECB699 /* illnessVC.xib */; };
 		04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */; };
@@ -393,6 +395,10 @@
 		04534F9220383F0C00C22717 /* FoodDescriptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDescriptionCell.h; sourceTree = "<group>"; };
 		04534F9320383F0C00C22717 /* FoodDescriptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDescriptionCell.m; sourceTree = "<group>"; };
 		04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDescriptionCell.xib; sourceTree = "<group>"; };
+		04A6B3DF206E144600293AFD /* PopOverVCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopOverVCCell.h; sourceTree = "<group>"; };
+		04A6B3E0206E144700293AFD /* PopOverVCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopOverVCCell.m; sourceTree = "<group>"; };
+		04A6B3E1206E144700293AFD /* PopOverVCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopOverVCCell.xib; sourceTree = "<group>"; };
+		04A6B3E4206E315D00293AFD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		04B27F14202D784600ECB699 /* illnessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessVC.h; sourceTree = "<group>"; };
 		04B27F15202D784600ECB699 /* illnessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessVC.m; sourceTree = "<group>"; };
 		04B27F16202D784600ECB699 /* illnessVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessVC.xib; sourceTree = "<group>"; };
@@ -917,6 +923,9 @@
 				042381CA204173F900212684 /* PopOverVC.h */,
 				042381CB204173F900212684 /* PopOverVC.m */,
 				042381C9204173F800212684 /* PopOverVC.xib */,
+				04A6B3DF206E144600293AFD /* PopOverVCCell.h */,
+				04A6B3E0206E144700293AFD /* PopOverVCCell.m */,
+				04A6B3E1206E144700293AFD /* PopOverVCCell.xib */,
 			);
 			path = NutritionVC;
 			sourceTree = "<group>";
@@ -1813,6 +1822,7 @@
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04A6B3E4206E315D00293AFD /* QuartzCore.framework */,
 				A341C632E084798C93714773 /* Pods_APT_V2.framework */,
 			);
 			name = Frameworks;
@@ -2590,6 +2600,7 @@
 				043828D22031DD8300B32899 /* TeamMembersVC.xib in Resources */,
 				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
 				18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */,
+				04A6B3E3206E144700293AFD /* PopOverVCCell.xib in Resources */,
 				18887D16206CE67A00166CE3 /* blackCircle.png in Resources */,
 				CEA42110203161A900B2DAB5 /* VideoPlayerUploadVC.xib in Resources */,
 				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
@@ -2952,6 +2963,7 @@
 				18887D12206CE67A00166CE3 /* FFGuestsTableViewCell.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
 				043828D32031DD8300B32899 /* TeamMembersVC.m in Sources */,
+				04A6B3E2206E144700293AFD /* PopOverVCCell.m in Sources */,
 				18BBECD620297DB100BAAFAA /* ResultCell.m in Sources */,
 				18887CEF206CE67A00166CE3 /* FFMonthCell.m in Sources */,
 				CEA42109203161A900B2DAB5 /* VideoGalleryCell.m in Sources */,
