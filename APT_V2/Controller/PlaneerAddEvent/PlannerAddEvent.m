@@ -86,6 +86,7 @@
 //@property (nonatomic,strong) IBOutlet UIView * participantAddView;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * addeventTblheight;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblheight;
 
 
 @property (nonatomic,strong) NSMutableArray * participantsArray;
@@ -379,6 +380,10 @@
     isStartTime=NO;
     [self DisplayTime];
 }
+-(IBAction)didClickcloseDate:(id)sender
+{
+    [self.view_datepicker setHidden:YES];
+}
 -(IBAction)showSelecteddate:(id)sender{
     
     if(isDate==YES)
@@ -457,6 +462,8 @@
         isteam =NO;
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
+        
+        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -499,6 +506,7 @@
         isteam =NO;
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
+        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -512,11 +520,9 @@
         self.popviewTbl.hidden=NO;
         
         
-        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-235;
+        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-200;
         self.popviewWidth.constant =self.particiTypeView.frame.size.width;
         self.popviewXposition.constant = self.mainParticipantTypeView.frame.origin.x+5;
-        
-        
         
         self.commonArray =[[NSMutableArray alloc]init];
         
@@ -543,6 +549,7 @@
         isteam =NO;
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
+        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden=YES;
@@ -918,6 +925,9 @@
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
     
     self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+    
+    self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+    
 
     self.particiLbl.text =@"Select";
     self.particiTypeLbl.text =@"Select";
@@ -1183,6 +1193,7 @@
                 [self.participantTbl reloadData];
                 
                 self.addeventTblheight.constant =self.participantTbl.contentSize.height;
+                self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
                 
                 self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
                 
@@ -1327,7 +1338,8 @@
                 {
                     [self altermsg:@"Delete successfully"];
                     PlannerVC  * objPlannerlist=[[PlannerVC alloc]init];
-                    objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"Planner"];
+                    objPlannerlist = [[PlannerVC alloc] initWithNibName:@"PlannerVC" bundle:nil];
+                   // objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlannerVC"];
                     [self.navigationController pushViewController:objPlannerlist animated:YES];
 
                     
@@ -1395,7 +1407,7 @@
     {
         static NSString *CellIdentifier = @"AddParticipant";
         
-        AddParticipantCell * objCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        AddParticipantCell * objCell = [tableView dequeueReusableCellWithIdentifier:nil];
         
         if (objCell == nil)
         {
@@ -1406,6 +1418,8 @@
         objCell.participationTypeLbl.text =[[self.addParticipantArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         objCell.participantLbl.text =[[self.addParticipantArray valueForKey:@"Participantname"] objectAtIndex:indexPath.row];
         objCell.availableLbl.text= [[self.addParticipantArray valueForKey:@"IsAvailable"] objectAtIndex:indexPath.row];
+        
+        
         
         [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1422,13 +1436,23 @@
         if (cell == nil) {
             cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
         }
+    
         
         selectParticipantCode =[[self.commonArray valueForKey:@"Participantcode"] objectAtIndex:indexPath.row];
         // Check if the cell is currently selected (marked)
         NSString *text = [[self.commonArray valueForKey:@"Participantname"] objectAtIndex:[indexPath row]];
         cell.isSelected = [[selectedMarks  valueForKey:@"Participantcode" ]containsObject:selectParticipantCode] ? YES : NO;
         cell.textLabel.text = text;
-        cell.contentView.backgroundColor = [UIColor lightGrayColor];
+        //cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+        cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
+        cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.numberOfLines = 2;
+        
+        
+        //cell.contentView.backgroundColor = [UIColor lightGrayColor];
         
         return cell;
 
@@ -1478,7 +1502,16 @@
 
        // }
         
+        
         //cell.backgroundColor = [UIColor clearColor];
+        
+       // cell.contentView.backgroundColor = [UIColor colorWithRed:28.0/255.0 green:26.0/255.0 blue:68.0/255.0 alpha:1.0];
+        cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
+        cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.numberOfLines = 2;
+        
         return cell;
     }
     return nil;
@@ -1544,7 +1577,7 @@
         
         self.multselectTbl.hidden =NO;
         
-       // isaddPartcipant=YES;
+        //isaddPartcipant=NO;
     }
     
     
