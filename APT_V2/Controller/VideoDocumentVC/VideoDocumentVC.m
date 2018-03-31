@@ -40,6 +40,8 @@
 
 @synthesize pdfView,docWebview,btnStackView;
 
+@synthesize lblFilePath;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -86,7 +88,7 @@
         
     }
     isNext = !isNext;
-    
+    lblFilePath.text = selctedValues;
     [self videoGalleryWebservice];
     
 }

@@ -404,6 +404,70 @@
     }];
 }
 
+-(void)uploadSaveAPI:(NSString *)filePath
+{
+    /*
+     FILEUPLOADSAVEAMAZON
+     
+     clientCode;
+     fileName;
+     teamCode;
+     fileDate;
+     sharedUserID
+     keyWords;
+     filePath;
+     Createdby;
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    NSString *URLString =  URL_FOR_RESOURCE(@"FILEUPLOADSAVEAMAZON");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    selectedTeamCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"CAPTeamcode"];
+    
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString * createdby = [AppCommon GetUsercode];
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+    if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"teamCode"];
+    if(txtVideoDate.hasText)   [dic    setObject:txtVideoDate.text     forKey:@"fileDate"];
+    if(selectedUserArray.count) [dic setObject:[selectedUserArray valueForKey:@"sharedUser"] forKey:@"sharedUserID"];
+    if(txtKeyword.hasText)   [dic    setObject:txtKeyword.text     forKey:@"keyWords"];
+    if(filePath)   [dic    setObject:filePath  forKey:@"filePath"];
+    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
+
+    
+    NSLog(@"USED PARAMS %@ ",dic);
+    
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [AppCommon hideLoading];
+            });
+        }
+        
+        
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        
+    }];
+
+}
+
 -(void)newUploadAPI
 {
     /*
@@ -417,30 +481,32 @@
     if(![COMMON isInternetReachable])
         return;
     
-//    if (imgData.length == 0) {
-//        [AppCommon showAlertWithMessage:@"Please Select Video to upload"];
-//        return;
-//
-//    }
-//    else if (!selectedUserArray.count) {
-//        [AppCommon showAlertWithMessage:@"Please select atleast one user to share"];
-//        return;
-//    }
-//    else if (!txtVideoDate.hasText)
-//    {
-//        [AppCommon showAlertWithMessage:@"Please select Date"];
-//        return;
-//    }
-//    else if (!txtKeyword.hasText)
-//    {
-//        [AppCommon showAlertWithMessage:@"Please Enter Description or Keywords"];
-//        return;
-//    }
+    if (imgData.length == 0) {
+        [AppCommon showAlertWithMessage:@"Please Select Video to upload"];
+        return;
+
+    }
+    else if (!selectedUserArray.count) {
+        [AppCommon showAlertWithMessage:@"Please select atleast one user to share"];
+        return;
+    }
+    else if (!txtVideoDate.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please select Date"];
+        return;
+    }
+    else if (!txtKeyword.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please Enter Description or Keywords"];
+        return;
+    }
     
     
     
     [AppCommon showLoading];
-    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@",@"testFile1.mov"];
+    
+    
+    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@",[[videofileURL lastPathComponent]lowercaseString]];
     NSString *URLString =  URL_FOR_RESOURCE(str);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -461,29 +527,43 @@
     
     [manager POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-//        NSError* formDataError;
-//        [formData appendPartWithFileURL:videofileURL name:@"image" error:&formDataError];
+        NSError* formDataError;
+        [formData appendPartWithFileURL:videofileURL name:@"fileName" error:&formDataError];
 //        NSLog(@"DATA FORMED %d ",formData);
 //        NSLog(@"ERROR %@",formDataError.description);
         
-        NSData* data = [NSData dataWithContentsOfURL:videofileURL];
+//        NSData* data = [NSData dataWithContentsOfURL:videofileURL];
+//        [formData appendPartWithFileURL:videofileURL name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"" error:&formDataError];
+//        [formData appendPartWithFileData:data name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"application/octet-stream"];
         
-        [formData appendPartWithFileData:data name:@"image" fileName:@"test" mimeType:@"application/octet-stream"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSError* error;
         NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
-        [AppCommon hideLoading];
         
-        NSLog(@"Success: %@", dict);
+        /*
+         sample response
+         
+         FilePath = "https://s3.ap-south-1.amazonaws.com/agaram-sports/IPL2018/CAPSULES/CSK/Shared Files/TestedByGopalakrishnan5441.mp4";
+         message = Success;
+         
+         */
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[dict valueForKey:@"message"] isEqualToString:@"Success"]) {
+            [self uploadSaveAPI:dict[@"FilePath"]];
+            
+            NSLog(@"Success: %@", dict);
+//            [AppCommon showAlertWithMessage:dict];
             
             // Update the UI
-            [AppCommon hideLoading];
-        });
+            [self actionCloseUpload:nil];
+
+        }
         
+        
+        [AppCommon hideLoading];
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [AppCommon hideLoading];
@@ -663,9 +743,10 @@
     if([info[UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
         NSString* str = info[@"UIImagePickerControllerImageURL"];
-        
+        videofileURL = (NSURL *)[info valueForKey:UIImagePickerControllerImageURL];
         imgDatas = [[NSData alloc] initWithContentsOfFile:str];
         imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
+        selectedImageView.image = info[UIImagePickerControllerOriginalImage];
         
     }
     else
@@ -680,6 +761,9 @@
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
         image = info[UIImagePickerControllerOriginalImage];
+        
+//        videofileURL = [videofileURL URLByDeletingPathExtension];
+//        videofileURL = [videofileURL URLByAppendingPathExtension:@"mp4"];
     }
     
     
