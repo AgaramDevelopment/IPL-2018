@@ -43,6 +43,7 @@
     NSURL* videofileURL;
 
     CustomNavigation * objCustomNavigation;
+    NSMutableArray *notificationArray;
 }
 
 @end
@@ -75,7 +76,7 @@
     
     titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
     
-//    [self getNotificationsPostService];
+    [self getNotificationsPostService];
     [self FetchvideouploadWebservice];
     [txtVideoDate setInputView:datePickerView];
 
@@ -97,6 +98,7 @@
     
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden =NO;
+    objCustomNavigation.notificationView.hidden = NO;
     //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -136,8 +138,6 @@
 
 -(IBAction)didClickNotificationBtn:(id)sender
 {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"Notification-1", @"Notification-2", @"Notification-3", @"Notification-4", @"Notification-5", nil];
-    NSLog(@"array:%@", array);
     /*
      PopOverVC *popOverObj = [[PopOverVC alloc] init];
      popOverObj.listArray = array;
@@ -155,7 +155,7 @@
      */
     
     PopOverVC *contentVC = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
-    contentVC.listArray = array;
+    contentVC.listArray = notificationArray;
     contentVC.modalPresentationStyle = UIModalPresentationPopover; // 13
     UIPopoverPresentationController *popPC = contentVC.popoverPresentationController; // 14
     contentVC.popoverPresentationController.sourceRect = [sender bounds]; // 15
@@ -604,12 +604,12 @@
      {
      "Clientcode" : "CLI0000002",
      "Notificationtype" : "",
-     "Usercode" : "USM0000028"
+     "ParticipantCode" : "AMR0000026"
      }
 
      */
     NSString *ClientCode = [AppCommon GetClientCode];
-    NSString *usercode = [AppCommon GetUsercode];
+    NSString *userRefcode = [AppCommon GetuserReference];
     
     
     if(![COMMON isInternetReachable])
@@ -628,7 +628,7 @@
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
-    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
     
     [dic    setObject:@""     forKey:@"Notificationtype"];
     NSLog(@"parameters : %@",dic);
@@ -636,10 +636,15 @@
         NSLog(@"response ; %@",responseObject);
         
         if(responseObject >0)
-            {
-            uploadDropDownArray = [responseObject valueForKey:@"lstVideoUploadUser"];
-            
-            }
+        {
+            notificationArray = [NSMutableArray new];
+            notificationArray = responseObject;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *count = [NSString stringWithFormat:@"%ld", notificationArray.count];
+            objCustomNavigation.notificationCountLbl.text = count;
+        });
+        }
         
         
         [AppCommon hideLoading];

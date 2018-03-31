@@ -47,7 +47,8 @@
     
     // 1. Dequeue the custom header cell
     headerCell = arr[0];
-//    headerCell.notificationCountLbl.layer.cornerRadius = 5;
+    NSString *count = [NSString stringWithFormat:@"%ld", self.listArray.count];
+    headerCell.notificationCountLbl.text = count;
     // 3. And return
     return headerCell;
 }
@@ -79,9 +80,9 @@
     cell = arr[1];
         //Images
 //    [self.team1ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"ATLogo"]]] placeholderImage:[UIImage imageNamed:@"no-image"]]; //team_logo_csk
-    [cell.notificationImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"player_andr"]];
-    cell.notificationTitleLbl.text = [self.listArray objectAtIndex:indexPath.row];
-    cell.notificationDescrLbl.text = @"29w 6d 19h ago";
+    [cell.notificationImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [self.listArray valueForKey:@"UserPhoto"]]] placeholderImage:[UIImage imageNamed:@"player_andr"]];
+    cell.notificationTitleLbl.text = [[self.listArray valueForKey:@"Description"]objectAtIndex:indexPath.row];
+    cell.notificationDescrLbl.text = [[self.listArray valueForKey:@"Date"]objectAtIndex:indexPath.row];
     // 3. And return
     return cell;
 }

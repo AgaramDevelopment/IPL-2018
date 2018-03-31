@@ -23,6 +23,7 @@
                 <outlet property="menu_btn" destination="kJ1-fH-dIY" id="dO2-hO-RRb"/>
                 <outlet property="notificationBtn" destination="pd0-1G-EPo" id="N39-Xa-Cvw"/>
                 <outlet property="notificationCountLbl" destination="bys-dr-wCy" id="urE-e8-2og"/>
+                <outlet property="notificationView" destination="TRd-FZ-F44" id="ss0-Rl-kxL"/>
                 <outlet property="view" destination="tBS-kI-ybY" id="SRR-Dy-yns"/>
             </connections>
         </placeholder>
@@ -60,7 +61,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRd-FZ-F44">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRd-FZ-F44">
                             <rect key="frame" x="320" y="5" width="50" height="35"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1G-EPo">
