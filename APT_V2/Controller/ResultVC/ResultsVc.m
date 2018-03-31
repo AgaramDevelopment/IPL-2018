@@ -164,7 +164,12 @@
     {
         dropVC.array = VenuesArray;
         dropVC.key = @"GROUND";
+    if (IS_IPAD) {
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v3.frame), CGRectGetMaxY(self.v3.frame)+self.v3.frame.size.height+20, CGRectGetWidth(self.v3.frame), 300)];
+    } else {
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v3.frame)-30, CGRectGetMaxY(self.v3.frame)+self.v3.frame.size.height+20, CGRectGetWidth(self.v3.frame)+40, 300)];
+    }
+    
     }
     
     
@@ -386,7 +391,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:nil];
         }
-        
+    
         cell.textLabel.text = [[self.listCompArray valueForKey:@"COMPETITIONNAME"] objectAtIndex:indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

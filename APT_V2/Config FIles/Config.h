@@ -334,3 +334,4 @@
 
 #define TeamCompoKey                               @"APT_TEAMCOMPOSITION"
 
+#define GetNotifications                               @"APT_GETNOTIFICATIONS"

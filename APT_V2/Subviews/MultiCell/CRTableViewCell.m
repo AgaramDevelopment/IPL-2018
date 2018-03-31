@@ -60,6 +60,7 @@
     imageView.frame = imageViewRect; // Center the imageView
     
     UIBezierPath *unselectedCircle = [UIBezierPath bezierPathWithOvalInRect:unselectedCircleRect]; // Unselected circle centered
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     /* Unselected circle */
