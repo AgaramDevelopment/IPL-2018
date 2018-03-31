@@ -21,6 +21,7 @@
                 <outlet property="docCollectionView" destination="dm3-Xv-sE8" id="j9z-BN-UpH"/>
                 <outlet property="docView" destination="Hvt-9e-C3r" id="CZ5-2e-iNN"/>
                 <outlet property="docWebview" destination="Awi-MJ-8zb" id="npt-Ax-U0V"/>
+                <outlet property="lblFilePath" destination="wPq-QL-wnL" id="Jzv-yn-Jgz"/>
                 <outlet property="lblNoDoc" destination="fko-j7-3Q7" id="4Pk-so-UGq"/>
                 <outlet property="pdfView" destination="rdy-1t-AJV" id="jAW-CN-soU"/>
                 <outlet property="view" destination="ugL-xw-aje" id="Yiz-rl-lHJ"/>
@@ -40,7 +41,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Documents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkz-6e-hQj">
-                            <rect key="frame" x="5" y="0.0" width="87.5" height="30"/>
+                            <rect key="frame" x="5" y="0.0" width="101" height="30"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -76,18 +77,32 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XD-Er-GRF" userLabel="View dropdown search">
                     <rect key="frame" x="0.0" y="60" width="375" height="35"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mju-2s-oaE">
-                            <rect key="frame" x="18" y="2" width="81" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mju-2s-oaE">
+                            <rect key="frame" x="10" y="2" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="LH2-ef-sGd"/>
+                            </constraints>
                             <state key="normal" title="Back"/>
                             <connections>
                                 <action selector="actionBack:" destination="-1" eventType="touchUpInside" id="Mb6-We-jJ1"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPq-QL-wnL">
+                            <rect key="frame" x="70" y="2" width="295" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="wPq-QL-wnL" firstAttribute="bottom" secondItem="Mju-2s-oaE" secondAttribute="bottom" id="5g9-Qo-6zY"/>
                         <constraint firstAttribute="height" constant="35" id="FUq-o9-dke"/>
+                        <constraint firstItem="Mju-2s-oaE" firstAttribute="top" secondItem="9XD-Er-GRF" secondAttribute="top" constant="2" id="MSK-YI-3uV"/>
+                        <constraint firstAttribute="bottom" secondItem="Mju-2s-oaE" secondAttribute="bottom" constant="3" id="mK1-dj-2QQ"/>
+                        <constraint firstAttribute="trailing" secondItem="wPq-QL-wnL" secondAttribute="trailing" constant="10" id="oXl-hc-4JI"/>
+                        <constraint firstItem="wPq-QL-wnL" firstAttribute="leading" secondItem="Mju-2s-oaE" secondAttribute="trailing" constant="10" id="pna-3J-AZf"/>
+                        <constraint firstItem="wPq-QL-wnL" firstAttribute="top" secondItem="Mju-2s-oaE" secondAttribute="top" id="qNz-Z6-KUE"/>
+                        <constraint firstItem="Mju-2s-oaE" firstAttribute="leading" secondItem="9XD-Er-GRF" secondAttribute="leading" constant="10" id="qio-2d-vk2"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvt-9e-C3r" userLabel="Document View">

@@ -34,7 +34,7 @@
 
 @synthesize lblNoDoc,protocolUpload;
 
-@synthesize pdfView,docWebview;
+@synthesize pdfView,docWebview,lblFilePath;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +80,7 @@
         selctedValues = [selctedValues stringByDeletingLastPathComponent];
     }
     isNext = !isNext;
-    
+    lblFilePath.text = selctedValues;
     [self videoGalleryWebservice];
 
 }
@@ -159,14 +159,28 @@
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
-    if (![[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"folderName"] isEqualToString:@""]) {
+    
+    NSString* str = [[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"folderName"] lowercaseString];
+    
+    
+    if (![str isEqualToString:@""] && [[str pathExtension] isEqualToString:@""]) {
+
         [cell.imgView setImage:[UIImage imageNamed:@"folderBlue-icon"]];
         cell.lblfileName.text = [[docResultArray objectAtIndex:indexPath.item] valueForKey:@"folderName"];
     }
     else{
-        [cell.imgView setImage:[UIImage imageNamed:@"pdf"]];
+        
+        NSString* document = [[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"documentName"] lastPathComponent];
 
-        cell.lblfileName.text = [[[docResultArray objectAtIndex:indexPath.item] valueForKey:@"documentName"] lastPathComponent];
+        if ([[document pathExtension]isEqualToString:@"pdf"]) {
+            [cell.imgView setImage:[UIImage imageNamed:@"pdf"]];
+        }
+        else
+        {
+            [cell.imgView setImage:[UIImage imageNamed:@"no-image"]];
+        }
+
+        cell.lblfileName.text = document;
 
     }
 

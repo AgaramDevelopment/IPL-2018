@@ -99,6 +99,15 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setUpProgressView:) object:nil];
+    [self.myTimer invalidate];
+    self.myTimer = nil;
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -1609,7 +1609,29 @@
     }
     else if ([sender tag] == 1) // Teams
     {
-        dropVC.array = [COMMON getCorrespondingTeamName:competitionCodeTF.text];
+//        dropVC.array = [COMMON getCorrespondingTeamName:competitionCodeTF.text];
+        
+            NSPredicate* predicate = [NSPredicate predicateWithFormat:@"CompetitionCode != %@",@""];
+        
+        NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:predicate];
+
+        NSMutableArray* resultedArray = [NSMutableArray new];
+        for (NSDictionary* dict in temparray) {
+            if (![[resultedArray valueForKey:@"Teamcode"] containsObject:[dict valueForKey:@"Teamcode"]]) {
+                [resultedArray addObject:dict];
+            }
+        }
+
+//        NSMutableArray* arr = [NSMutableArray new];
+//        [arr addObjectsFromArray:appDel.ArrayCompetition];
+        NSDictionary* temp = @{
+                               @"TeamCode": @"",
+                               @"TeamName": @"All"
+                               };
+        [resultedArray insertObject:temp atIndex:0];
+        
+        dropVC.array = resultedArray;
+
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60, CGRectGetWidth(teamView.frame), 300)];
         
@@ -1634,13 +1656,13 @@
             }
         }
         
-        NSDictionary* temp = @{
-                               @"CompetitionCode": @"",
-                               @"CompetitionName": @"All",
-                               @"GroundCode": @"",
-                               @"GroundName": @"All"
-                               };
-        [arr insertObject:temp atIndex:0];
+//        NSDictionary* temp = @{
+//                               @"CompetitionCode": @"",
+//                               @"CompetitionName": @"All",
+//                               @"GroundCode": @"",
+//                               @"GroundName": @"All"
+//                               };
+//        [arr insertObject:temp atIndex:0];
 
         dropVC.array = arr;
         dropVC.key = @"GroundName";
@@ -1683,6 +1705,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:competitionCodeTF.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+            
         }
         
         teamCodeTF.text = @"Team Name";
@@ -1698,6 +1721,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+            
         }
 //        groundLbl.text = @"";
         
