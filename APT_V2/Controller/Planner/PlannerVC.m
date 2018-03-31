@@ -120,6 +120,7 @@
     userreference = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:calendarView.frame];
+    
     [viewCalendarMonth setCollectionDidSelectDelegate:self];
     viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:calendarView.frame];
     [viewCalendarWeek setCollectionDidSelectDelegate:self];
@@ -287,17 +288,22 @@
             [AppCommon hideLoading];
             [self.eventTbl reloadData];
             
-            NSDate *now = [NSDate date];
-            NSDate *startDate = [now dateByAddingTimeInterval:-30*24*60*60];
+            NSDate *now = [NSDate date]; //2018-03-31 09:22:11 +0000
+
+            NSDate *startDate = [now dateByAddingTimeInterval:-30*24*60*60];//2018-03-01 09:22:11 +0000
+
             NSDateFormatter* df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"MM-dd-YYYY hh:mm:ss a"];
-            NSString *startDateStr = [df stringFromDate:startDate];
+            NSString *startDateStr = [df stringFromDate:startDate];//03-01-2018 02:52:11 PM
+
             
             
-            NSDate *enddate = [now dateByAddingTimeInterval:30*24*60*60];
+            NSDate *enddate = [now dateByAddingTimeInterval:30*24*60*60]; //2018-04-30 09:22:11 +0000
+
             NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
             [dfs setDateFormat:@"MM-dd-YYYY hh:mm:ss a"];
-            NSString * endDateStr = [dfs stringFromDate:enddate];
+            NSString * endDateStr = [dfs stringFromDate:enddate];//04-30-2018 02:52:11 PM
+
             
             NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
             
@@ -326,7 +332,8 @@
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         manager.requestSerializer = requestSerializer;
-    startDate = @"12-31-2017 12:14:01 PM";
+    
+    //startDate = @"01-03-2018 12:14:01 PM";
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(startDate)   [dic    setObject:startDate     forKey:@"start"];
         if(endDate)   [dic    setObject:endDate     forKey:@"end"];
@@ -941,5 +948,7 @@
         NSLog(@"Both dates are same");
 
 }
+
+///yes
 
 @end
