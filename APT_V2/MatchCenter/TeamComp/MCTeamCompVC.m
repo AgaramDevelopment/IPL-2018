@@ -14,9 +14,8 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
-#import "PopOverVC.h"
 
-@interface MCTeamCompVC () <selectedDropDown,  UIPopoverPresentationControllerDelegate>
+@interface MCTeamCompVC () <selectedDropDown>
 {
 //    NSString *BatsmenCount;
 //    NSString *BowlerCount;
@@ -127,9 +126,6 @@
     
     
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //Notification Method
-    [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,68 +133,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)didClickNotificationBtn:(id)sender
-{
-    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"Notification-1", @"Notification-2", @"Notification-3", @"Notification-4", @"Notification-5", nil];
-    NSLog(@"array:%@", array);
-    /*
-    PopOverVC *popOverObj = [[PopOverVC alloc] init];
-    popOverObj.listArray = array;
-    UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
-    CGSize size;
-    if (IS_IPAD) {
-        size = CGSizeMake(300, array.count > 5 ? 200 : array.count*45);
-    } else {
-        size = CGSizeMake(250, array.count > 5 ? 200 : array.count*45);
-    }
-    
-    [popOver setPopoverContentSize:size];
-    [popOver setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
-    [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-     */
-    
-    PopOverVC *contentVC = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
-    contentVC.listArray = array;
-    contentVC.modalPresentationStyle = UIModalPresentationPopover; // 13
-    UIPopoverPresentationController *popPC = contentVC.popoverPresentationController; // 14
-    contentVC.popoverPresentationController.sourceRect = [sender bounds]; // 15
-    contentVC.popoverPresentationController.sourceView = sender; // 16
-    popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
-    popPC.delegate = self; //18
-    [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
-    [self presentViewController:contentVC animated:YES completion:nil]; // 19
-    
-}
-
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
-    return UIModalPresentationNone; // 20
-}
-
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
-    
-        // return YES if the Popover should be dismissed
-        // return NO if the Popover should not be dismissed
-    return YES;
-}
-
-/*
-- (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style {
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
-    return navController; // 21
-}
-
-# pragma mark - Popover Presentation Controller Delegate
-
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
-    
-        // called when a Popover is dismissed
-}
-
-- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view {
-    
-        // called when the Popover changes position
-}
-*/
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
