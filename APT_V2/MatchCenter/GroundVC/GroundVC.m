@@ -86,6 +86,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
     
     fromOver = @"0";
     toOver = @"5";
