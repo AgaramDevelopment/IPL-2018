@@ -27,7 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
+    
+        // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
+    
     [self setInningsBySelection:@"1"];
     
     [self loadContainerView:@"1"];
@@ -43,6 +46,12 @@
 //    [btView loadTableFreez];
 
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
     for (UIView *subView in view.subviews) {
         if (![subView isKindOfClass:[previousView class]]) {

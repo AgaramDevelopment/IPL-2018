@@ -79,8 +79,7 @@
     
     [self.Innings1 setTitle:appDel.TeamA forState:UIControlStateNormal];
     [self.Innings2 setTitle:appDel.TeamB forState:UIControlStateNormal];
-    
-    [self customnavigationmethod];
+
     matchstatus = @"MSC215";
     
     objWebservice = [[WebService alloc]init];
@@ -92,10 +91,12 @@
     
     
     [self MatchTypeService];
-    
-    
-    
     //[self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -86,11 +86,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
     
     fromOver = @"0";
     toOver = @"5";
 
-    [self customnavigationmethod];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
     titleArray = @[@"Innings1",@"Innings2"];
     
@@ -153,6 +154,12 @@
     
     
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     UIBezierPath *path = [UIBezierPath new];

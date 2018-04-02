@@ -62,28 +62,26 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRd-FZ-F44">
-                            <rect key="frame" x="320" y="5" width="50" height="35"/>
+                            <rect key="frame" x="330" y="7.5" width="40" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-1G-EPo">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
                                     <state key="normal" image="notification-icon1"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bys-dr-wCy">
-                                    <rect key="frame" x="25" y="0.0" width="25" height="25"/>
+                                    <rect key="frame" x="20" y="0.0" width="20" height="20"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="25" id="YLT-xm-2ZM"/>
-                                        <constraint firstAttribute="height" constant="25" id="v2m-Cv-U5S"/>
+                                        <constraint firstAttribute="width" constant="20" id="YLT-xm-2ZM">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="25"/>
+                                        </constraint>
+                                        <constraint firstAttribute="height" constant="20" id="v2m-Cv-U5S">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="25"/>
+                                        </constraint>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <real key="value" value="12.5"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                     </variation>
@@ -91,13 +89,17 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="3kZ-ym-JU8"/>
+                                <constraint firstAttribute="width" constant="40" id="3kZ-ym-JU8">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                </constraint>
                                 <constraint firstItem="pd0-1G-EPo" firstAttribute="top" secondItem="TRd-FZ-F44" secondAttribute="top" id="5Wv-aA-uVB"/>
                                 <constraint firstAttribute="bottom" secondItem="pd0-1G-EPo" secondAttribute="bottom" id="7Ua-Zt-Czv"/>
                                 <constraint firstItem="pd0-1G-EPo" firstAttribute="leading" secondItem="TRd-FZ-F44" secondAttribute="leading" id="AQI-zj-G70"/>
                                 <constraint firstItem="bys-dr-wCy" firstAttribute="top" secondItem="TRd-FZ-F44" secondAttribute="top" id="E9A-A2-Qkh"/>
                                 <constraint firstAttribute="trailing" secondItem="bys-dr-wCy" secondAttribute="trailing" id="Y41-tK-uQ2"/>
-                                <constraint firstAttribute="height" constant="35" id="hjx-Ti-AuC"/>
+                                <constraint firstAttribute="height" constant="30" id="hjx-Ti-AuC">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                </constraint>
                                 <constraint firstAttribute="trailing" secondItem="pd0-1G-EPo" secondAttribute="trailing" id="te7-Bj-za7"/>
                             </constraints>
                         </view>

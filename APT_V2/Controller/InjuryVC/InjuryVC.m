@@ -109,7 +109,6 @@ typedef enum {
     
     objWebservice = [WebService new];
     _MainArray = [NSMutableArray new];
-    [self customnavigationmethod];
     [self setBorderwidthMethod];
     
     
@@ -149,6 +148,11 @@ typedef enum {
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(NSArray *)getInjurySite

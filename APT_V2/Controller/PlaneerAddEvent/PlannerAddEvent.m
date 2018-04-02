@@ -16,7 +16,6 @@
 #import "CRTableViewCell.h"
 //#import "HomeVC.h"
 
-
 @interface PlannerAddEvent ()
 {
     BOOL isEventType;
@@ -130,7 +129,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     [self setBorderwithView];
     
     self.popviewTbl.hidden=YES;
@@ -143,10 +141,24 @@
     if(_isEdit == YES)
     {
         
-        self.updateBtn.hidden=NO;
-        self.deleteBtn.hidden =NO;
-        self.saveBtn.hidden =YES;
+        
+        if([_isNotification isEqualToString:@"yes"])
+        {
+            self.updateBtn.hidden=YES;
+            self.deleteBtn.hidden =YES;
+            self.saveBtn.hidden =YES;
+            
+            [self editFetchWebservice:self.eventType :@"0" :@"false"];
+            
+        }
+        else
+        {
+            self.updateBtn.hidden=NO;
+            self.deleteBtn.hidden =NO;
+            self.saveBtn.hidden =YES;
+            
         [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"id"] :@"0" :@"false"];
+        }
     }
     else
     {
@@ -159,8 +171,11 @@
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -192,6 +207,11 @@
     [self.navi_View addSubview:objCustomNavigation.view];
     //    objCustomNavigation.tittle_lbl.text=@"";
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 -(void)setBorderwithView
 {

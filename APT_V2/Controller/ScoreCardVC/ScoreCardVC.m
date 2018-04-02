@@ -345,15 +345,12 @@
     self.Summaryarray = [NSArray arrayWithObjects:@"BattingKPI",@"BowlingKPI",@"Fielding Summary",@"Session Summary", nil];
     
     selectedIndex = -1;
-    [self customnavigationmethod];
     
     isList = YES;
     isBowl = NO;
     isPoP = NO;
     objWebservice = [[WebService alloc]init];
-    
-    
-    
+
     self.rootVideoView.hidden = YES;
     
     isOnes = YES;
@@ -363,9 +360,6 @@
     isSixes = YES;
     isWkt = YES;
     isDotBall = YES;
-    
-    
-    
     
         UIInterpolatingMotionEffect *verticalMotionEffect =
         [[UIInterpolatingMotionEffect alloc]
@@ -578,6 +572,12 @@
     
     
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 - (void)toggle:(id)sender {
     /**
      *  For demo purposes this view controller either adds a parallaxView with a custom view

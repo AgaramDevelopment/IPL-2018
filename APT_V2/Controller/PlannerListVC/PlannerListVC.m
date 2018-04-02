@@ -39,7 +39,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     self.addBtn.layer.cornerRadius = 20;
     self.addBtn.layer.masksToBounds = YES;
     self.objWebservice =[[WebService alloc]init];
@@ -62,6 +61,11 @@
 //
 //
 //}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {

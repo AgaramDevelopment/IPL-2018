@@ -44,7 +44,6 @@
     videoArrayValues = @[@"RUNS", @"WKT",@"OVERS", @"FOURS", @"SIXES", @"WIDE", @"NOBALL"];
     selectedVideo = 0;
 
-    [self customnavigationmethod];
     inningsArray = [NSMutableArray new];
     inningsCountArray = [NSMutableArray new];
     
@@ -61,9 +60,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self inningsWebService];
     });
-    
-    
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];

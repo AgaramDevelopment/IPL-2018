@@ -22,7 +22,6 @@
     illnessArray = [NSMutableArray new];
     
     self.illnessTableView.tableFooterView = [UIView new];
-    [self customnavigationmethod];
     
 }
 
@@ -31,6 +30,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {

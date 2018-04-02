@@ -56,7 +56,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
     // For initial API call no need any below values
     groundCode = @"";
     team1InnsNum = @"" ;
@@ -71,8 +72,13 @@
     self.team1Win.text = team1Win;
     
     self.Poptable.hidden = YES;
-    [self customnavigationmethod];
+    
     [self headToHeadPageLoadGetService];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
