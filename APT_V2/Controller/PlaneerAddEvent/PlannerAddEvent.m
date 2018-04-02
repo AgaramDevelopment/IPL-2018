@@ -16,7 +16,6 @@
 #import "CRTableViewCell.h"
 //#import "HomeVC.h"
 
-
 @interface PlannerAddEvent ()
 {
     BOOL isEventType;
@@ -142,10 +141,24 @@
     if(_isEdit == YES)
     {
         
-        self.updateBtn.hidden=NO;
-        self.deleteBtn.hidden =NO;
-        self.saveBtn.hidden =YES;
+        
+        if([_isNotification isEqualToString:@"yes"])
+        {
+            self.updateBtn.hidden=YES;
+            self.deleteBtn.hidden =YES;
+            self.saveBtn.hidden =YES;
+            
+            [self editFetchWebservice:self.eventType :@"0" :@"false"];
+            
+        }
+        else
+        {
+            self.updateBtn.hidden=NO;
+            self.deleteBtn.hidden =NO;
+            self.saveBtn.hidden =YES;
+            
         [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"id"] :@"0" :@"false"];
+        }
     }
     else
     {

@@ -118,10 +118,13 @@
     } else if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"Event"]) {
         
         PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-        objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+        //objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+        
+        objaddEvent = (PlannerAddEvent *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"AddEvent"];
         objaddEvent.isEdit =YES;
+        objaddEvent.isNotification = @"yes";
         objaddEvent.eventType = [[self.listArray objectAtIndex:indexPath.row] valueForKey:@"Type"];
-        [self.navigationController pushViewController:objaddEvent animated:YES];
+        [appDel.frontNavigationController pushViewController:objaddEvent animated:YES];
     
     }
 }

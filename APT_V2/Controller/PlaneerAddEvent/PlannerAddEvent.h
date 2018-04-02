@@ -32,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @property (strong, nonatomic) NSString *eventType;
+@property (strong, nonatomic) NSString *isNotification;
 
 @end
