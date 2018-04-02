@@ -106,15 +106,35 @@
 }
 
 -(void)customnavigationmethod
+//{
+//    CustomNavigation * objCustomNavigation;
+//
+//    objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+//    [objCustomNavigation.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor];
+//    [objCustomNavigation.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor];
+//    [objCustomNavigation.view.heightAnchor constraintEqualToAnchor:self.headerView.heightAnchor];
+//    [objCustomNavigation.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
+//    [objCustomNavigation.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+//
+//    [self.headerView addSubview:objCustomNavigation.view];
+//    objCustomNavigation.tittle_lbl.text=@"Overview";
+//    objCustomNavigation.btn_back.hidden = YES;
+//    objCustomNavigation.home_btn.hidden = YES;
+//    objCustomNavigation.menu_btn.hidden =NO;
+//
+//
+//    SWRevealViewController *revealController = [self revealViewController];
+//    [revealController panGestureRecognizer];
+//    [revealController tapGestureRecognizer];
+//
+//
+//    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+//
+//}
 {
     CustomNavigation * objCustomNavigation;
     
     objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
-    [objCustomNavigation.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor];
-    [objCustomNavigation.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor];
-    [objCustomNavigation.view.heightAnchor constraintEqualToAnchor:self.headerView.heightAnchor];
-    [objCustomNavigation.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
-    [objCustomNavigation.view setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"Overview";
@@ -129,7 +149,7 @@
     
     
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
