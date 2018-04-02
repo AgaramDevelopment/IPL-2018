@@ -27,6 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+        // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
+    
     [self setInningsBySelection:@"1"];
     
     [self loadContainerView:@"1"];

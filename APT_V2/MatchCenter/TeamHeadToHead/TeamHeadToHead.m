@@ -56,7 +56,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    // Hide navigationController
+    self.navigationController.navigationBarHidden = YES;
     // For initial API call no need any below values
     groundCode = @"";
     team1InnsNum = @"" ;
