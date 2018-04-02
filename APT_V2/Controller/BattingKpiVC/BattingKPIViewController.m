@@ -50,7 +50,6 @@
 
     videoArrayValues = @[@"RUNS", @"BALLS",@"ONES", @"TWOS", @"THREES", @"FOURS", @"SIXES"];
 
-    [self customnavigationmethod];
     inningsArray = [NSMutableArray new];
     sessionArray = [NSMutableArray new];
     daysArray = [NSMutableArray new];
@@ -75,6 +74,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -104,7 +104,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 
 //    blueLayer = [[CALayer alloc] init];
 //    blueLayer.frame = CGRectMake(100, 100, 100, 100);
@@ -160,6 +160,11 @@
      */
     
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event

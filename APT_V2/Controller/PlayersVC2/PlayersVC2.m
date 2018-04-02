@@ -263,8 +263,6 @@
         }
     }
     
-    [self customnavigationmethod];
-    
     [self.team1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0 ];
 }
@@ -274,6 +272,12 @@
     [super viewWillAppear:animated];
     [self.GridTbl reloadData];
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];

@@ -71,8 +71,13 @@
     self.team1Win.text = team1Win;
     
     self.Poptable.hidden = YES;
-    [self customnavigationmethod];
+    
     [self headToHeadPageLoadGetService];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

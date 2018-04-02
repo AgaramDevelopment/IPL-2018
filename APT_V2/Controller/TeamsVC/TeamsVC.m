@@ -29,7 +29,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self customnavigationmethod];
     [self TeamsWebservice];
 }
 
@@ -41,6 +40,10 @@
     [revealController.tapGestureRecognizer setEnabled:YES];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {

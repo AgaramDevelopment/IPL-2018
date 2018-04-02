@@ -27,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
 //    [self setInningsBySelection:@"1"];
 //
 //    [self loadContainerView:@"1"];
@@ -43,8 +42,11 @@
 //    [btView loadTableFreez];
     
     [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-    
+}
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{

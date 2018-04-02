@@ -37,7 +37,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
 
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
@@ -64,8 +63,11 @@
     
     [self StandingsWebservice];
     
-    
+}
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -54,7 +54,6 @@
     
     self.BowlerBtn.layer.cornerRadius = 5;
     self.BowlerBtn.clipsToBounds = YES;
-    [self customnavigationmethod];
     
     [self addRefreshControl];
 
@@ -71,6 +70,11 @@
     
     [self TeamsWebservice];
 
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)addRefreshControl

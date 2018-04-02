@@ -43,8 +43,6 @@
 {
     [super viewDidLoad];
     
-   
-    [self customnavigationmethod];
     //[self chartWebservice];
     
     self.DailyBtn.layer.cornerRadius = 5;
@@ -70,6 +68,11 @@
     
     [self.DailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
