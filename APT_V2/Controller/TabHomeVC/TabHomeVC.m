@@ -160,6 +160,8 @@
     
     PopOverVC *contentVC = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
     contentVC.listArray = notificationArray;
+//    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"Notification-1", @"Notification-2", @"Notification-3", @"Notification-4", @"Notification-5", @"Notification-6", nil];
+//    contentVC.listArray = array;
     contentVC.modalPresentationStyle = UIModalPresentationPopover; // 13
     UIPopoverPresentationController *popPC = contentVC.popoverPresentationController; // 14
     contentVC.popoverPresentationController.sourceRect = [sender bounds]; // 15
@@ -182,7 +184,7 @@
     return YES;
 }
 
-/*
+
  - (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style {
  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
  return navController; // 21
@@ -199,7 +201,7 @@
  
  // called when the Popover changes position
  }
- */
+ 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -681,15 +683,15 @@
 {
     /*
     API URL    :   http://192.168.0.154:8029/AGAPTService.svc/APT_GETNOTIFICATIONS
-    METHOD     :   POST
+     METHOD     :   POST
     PARAMETER  :   {Clientcode}/{Notificationtype}/{Usercode}
     */
     /*
      {
      "Clientcode" : "CLI0000002",
-     "Notificationtype" : "",
-     "ParticipantCode" : "AMR0000026"
+     "ParticipantCode" : "AMR0000031"
      }
+
 
      */
     NSString *ClientCode = [AppCommon GetClientCode];
@@ -714,7 +716,9 @@
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
     if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
     
-    [dic    setObject:@""     forKey:@"Notificationtype"];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
+    if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
+    
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
@@ -722,11 +726,12 @@
         if(responseObject >0)
         {
             notificationArray = [NSMutableArray new];
-            notificationArray = responseObject;
+            notificationArray = [responseObject valueForKey:@"NotificationsList"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *count = [NSString stringWithFormat:@"%ld", notificationArray.count];
-            objCustomNavigation.notificationCountLbl.text = count;
+//            NSString *count = [NSString stringWithFormat:@"%ld", notificationArray.count];
+            
+            objCustomNavigation.notificationCountLbl.text = [self checkNSNumber:[responseObject valueForKey:@"count"]];
         });
         }
         
@@ -979,6 +984,23 @@
 //    [arrimg removeAllObjects];
 //    [arrimg addObject:url];
     
+}
+
+
+- (NSString *)checkNSNumber:(id)unknownTypeParameter {
+    
+    NSString *str;
+    if([unknownTypeParameter isKindOfClass:[NSNumber class]])
+        {
+        
+        NSNumber *vv = unknownTypeParameter;
+        str = [vv stringValue];
+        }
+    else
+        {
+        str = unknownTypeParameter;
+        }
+    return str;
 }
 
 

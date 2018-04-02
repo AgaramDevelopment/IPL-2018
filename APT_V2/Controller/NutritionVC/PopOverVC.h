@@ -11,5 +11,6 @@
 @interface PopOverVC : UIViewController
 
 @property (nonatomic, strong)NSMutableArray *listArray;
+@property (strong, nonatomic) IBOutlet UITableView *popOverTableView;
 
 @end
