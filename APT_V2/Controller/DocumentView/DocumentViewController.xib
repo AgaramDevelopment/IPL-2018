@@ -161,8 +161,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <webView contentMode="scaleToFill" scalesPageToFit="YES" paginationMode="topToBottom" pageLength="1" translatesAutoresizingMaskIntoConstraints="NO" id="Awi-MJ-8zb">
-                        <rect key="frame" x="0.0" y="70" width="375" height="547"/>
+                    <webView contentMode="scaleAspectFit" scalesPageToFit="YES" paginationMode="topToBottom" paginationBreakingMode="column" pageLength="1" translatesAutoresizingMaskIntoConstraints="NO" id="Awi-MJ-8zb">
+                        <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <connections>
                             <outlet property="delegate" destination="-1" id="oUu-F7-6MW"/>
@@ -180,7 +180,7 @@
                 <constraints>
                     <constraint firstItem="Awi-MJ-8zb" firstAttribute="top" secondItem="2Xy-Rj-TtA" secondAttribute="top" constant="50" id="ItU-0V-xN1"/>
                     <constraint firstItem="2Xy-Rj-TtA" firstAttribute="trailing" secondItem="KIu-8x-lV3" secondAttribute="trailing" constant="20" id="hkA-X8-XIJ"/>
-                    <constraint firstItem="2Xy-Rj-TtA" firstAttribute="bottom" secondItem="Awi-MJ-8zb" secondAttribute="bottom" constant="50" id="jhm-jP-fkL"/>
+                    <constraint firstItem="2Xy-Rj-TtA" firstAttribute="bottom" secondItem="Awi-MJ-8zb" secondAttribute="bottom" id="jhm-jP-fkL"/>
                     <constraint firstItem="Awi-MJ-8zb" firstAttribute="top" secondItem="KIu-8x-lV3" secondAttribute="bottom" constant="10" id="lSC-89-yeC"/>
                     <constraint firstItem="Awi-MJ-8zb" firstAttribute="leading" secondItem="2Xy-Rj-TtA" secondAttribute="leading" id="wb1-eE-ALo"/>
                     <constraint firstItem="Awi-MJ-8zb" firstAttribute="trailing" secondItem="2Xy-Rj-TtA" secondAttribute="trailing" id="xEL-gl-vqN"/>

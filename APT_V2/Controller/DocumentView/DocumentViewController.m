@@ -410,11 +410,32 @@
     
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:videoURL];
     [docWebview loadRequest:requestObj];
+    
+//    NSURL *pdfUrl = [NSURL fileURLWithPath:strPDFFilePath];
+    CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((CFURLRef)videoURL);
+    size_t pageCount = CGPDFDocumentGetNumberOfPages(document);
+    
+    NSLog(@"Total no of page %@ ",pageCount);
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     //    [COMMON RemoveLoadingIcon];
     NSLog(@"webViewDidFinishLoad");
+    NSString* js =
+    @"var meta = document.createElement('meta'); " \
+    "meta.setAttribute( 'name', 'viewport' ); " \
+    "meta.setAttribute( 'content', 'width = device-width, initial-scale = 1.0,minimum-scale=1.0,maximum-scale=10.0 user-scalable = yes' ); " \
+    "document.getElementsByTagName('head')[0].appendChild(meta)";
+    [webView stringByEvaluatingJavaScriptFromString: js];
+    
+    CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((CFURLRef)webView.request.URL);
+//    size_t pageCount = CGPDFDocumentGetPage(document, 1);
+    size_t pageCount = CGPDFDocumentGetNumberOfPages(document);
+
+    NSLog(@"Total no of page %@ ",pageCount);
+
+
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

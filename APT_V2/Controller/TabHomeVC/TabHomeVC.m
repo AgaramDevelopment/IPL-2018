@@ -41,7 +41,7 @@
     UIImage* thumbNailImage;
     UIDocumentPickerViewController* docPicker;
     NSURL* videofileURL;
-
+    NSString* mimeType;
     CustomNavigation * objCustomNavigation;
     NSMutableArray *notificationArray;
 }
@@ -473,7 +473,7 @@
     }];
 }
 
--(void)uploadSaveAPI:(NSString *)filePath
+-(void)uploadSaveAPI:(NSDictionary *)fileInfo
 {
     /*
      FILEUPLOADSAVEAMAZON
@@ -509,7 +509,9 @@
     if(txtVideoDate.hasText)   [dic    setObject:txtVideoDate.text     forKey:@"fileDate"];
     if(selectedUserArray.count) [dic setObject:[selectedUserArray valueForKey:@"sharedUser"] forKey:@"sharedUserID"];
     if(txtKeyword.hasText)   [dic    setObject:txtKeyword.text     forKey:@"keyWords"];
-    if(filePath)   [dic    setObject:filePath  forKey:@"filePath"];
+    if(fileInfo)   [dic    setObject:fileInfo[@"FilePath"]  forKey:@"filePath"];
+    if(fileInfo)   [dic    setObject:fileInfo[@"FileType"]  forKey:@"fileType"];
+
     if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
 
     
@@ -535,6 +537,38 @@
         
     }];
 
+}
+
+-(void)saveImageToServer
+{
+    // COnvert Image to NSData
+    NSData *dataImage = UIImageJPEGRepresentation([UIImage imageNamed:@"yourImage"], 1.0f);
+    
+    // set your URL Where to Upload Image
+    NSString *urlString = @"Your URL HERE";
+    
+    // set your Image Name
+    NSString *filename = @"YourImageFileName";
+    
+    // Create 'POST' MutableRequest with Data and Other Image Attachment.
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    NSMutableData *postbody = [NSMutableData data];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@.jpg\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[NSData dataWithData:dataImage]];
+    [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody:postbody];
+    
+    // Get Response of Your Request
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *responseString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response  %@",responseString);
 }
 
 -(void)newUploadAPI
@@ -574,15 +608,20 @@
     
     [AppCommon showLoading];
     
+//    NSString* fileName_teamName = [NSString stringWithFormat:@"%@_%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"],[[videofileURL lastPathComponent]lowercaseString]];
     
-    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@",[[videofileURL lastPathComponent]lowercaseString]];
+    NSString* teamName = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
+    NSString* fileName = [[videofileURL lastPathComponent]lowercaseString];
+
+    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@&teamName=%@",fileName,teamName];
     NSString *URLString =  URL_FOR_RESOURCE(str);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
 //    reqSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/octet-stream"];
-    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
-    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Accept"];
+//    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+    [reqSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
     manager.requestSerializer = reqSerializer;
 
@@ -590,20 +629,30 @@
     serializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     manager.responseSerializer = serializer;
     
-    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
-    
     [AppCommon showLoading];
+    
+    /*
+     let request = NSMutableURLRequest()
+     request.url = url
+     request.HTTPMethod = "POST"
+     request.setValue(postLength, forHTTPHeaderField:"Content-Length")
+     request.setValue("application/json", forHTTPHeaderField:"Accept")
+     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+     request.postBody = postData
+     
+     */
     
     [manager POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         NSError* formDataError;
-        [formData appendPartWithFileURL:videofileURL name:@"fileName" error:&formDataError];
+//        [formData appendPartWithFileURL:videofileURL name:@"fileName" error:&formDataError];
 //        NSLog(@"DATA FORMED %d ",formData);
 //        NSLog(@"ERROR %@",formDataError.description);
         
-//        NSData* data = [NSData dataWithContentsOfURL:videofileURL];
+        NSData* data = [NSData dataWithContentsOfURL:videofileURL];
 //        [formData appendPartWithFileURL:videofileURL name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"" error:&formDataError];
-//        [formData appendPartWithFileData:data name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"application/octet-stream"];
+        
+        [formData appendPartWithFileData:data name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:mimeType];
         
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -620,7 +669,7 @@
          */
         
         if ([[dict valueForKey:@"message"] isEqualToString:@"Success"]) {
-            [self uploadSaveAPI:dict[@"FilePath"]];
+            [self uploadSaveAPI:dict];
             
             NSLog(@"Success: %@", dict);
 //            [AppCommon showAlertWithMessage:dict];
@@ -847,8 +896,6 @@
 
 -(UIImage *)generateThumbImage : (NSURL *)filepath
 {
-//    NSURL *url = [NSURL fileURLWithPath:filepath];
-    
     AVAsset *asset = [AVAsset assetWithURL:filepath];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;
@@ -880,7 +927,8 @@
         imgDatas = [[NSData alloc] initWithContentsOfFile:str];
         imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
         selectedImageView.image = info[UIImagePickerControllerOriginalImage];
-        
+        mimeType = [NSString stringWithFormat:@"image/%@",[[videofileURL pathExtension]lowercaseString]];
+
     }
     else
     {
@@ -894,6 +942,8 @@
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
         image = info[UIImagePickerControllerOriginalImage];
+        mimeType = [NSString stringWithFormat:@"video/%@",[[videofileURL pathExtension]lowercaseString]];
+
         
 //        videofileURL = [videofileURL URLByDeletingPathExtension];
 //        videofileURL = [videofileURL URLByAppendingPathExtension:@"mp4"];
@@ -977,5 +1027,9 @@
     
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

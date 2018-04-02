@@ -450,6 +450,8 @@
     //    NSURL*url=[[NSURL alloc]initWithString:str_file];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:videoURL];
     [docWebview loadRequest:requestObj];
+    [docWebview stringByEvaluatingJavaScriptFromString:@"document. body.style.zoom = 5.0;"];
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
