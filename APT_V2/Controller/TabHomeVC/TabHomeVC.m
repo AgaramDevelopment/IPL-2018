@@ -1036,9 +1036,27 @@
     
 }
 
+
+- (NSString *)checkNSNumber:(id)unknownTypeParameter {
+    
+    NSString *str;
+    if([unknownTypeParameter isKindOfClass:[NSNumber class]])
+        {
+        
+        NSNumber *vv = unknownTypeParameter;
+        str = [vv stringValue];
+        }
+    else
+        {
+        str = unknownTypeParameter;
+        }
+    return str;
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+
+
 @end
