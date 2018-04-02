@@ -461,12 +461,12 @@
         self.popviewWidth.constant =self.eventTypeView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
-        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
+//        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventTypeArray.count>i;i++)
         {
@@ -503,12 +503,12 @@
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventStatusArray.count>i;i++)
         {
@@ -546,12 +546,12 @@
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
-        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
+//        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListparticipantTypeArray.count>i;i++)
         {
@@ -627,14 +627,14 @@
         //self.popviewWidth.constant =self.particiView.frame.size.width;
         self.comPopview.hidden =NO;
         self.commonArray =[[NSMutableArray alloc]init];
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"Participantcode"];
-        [mutableDict setObject:@"Select" forKey:@"Participantname"];
-        [mutableDict setObject:@"" forKey:@"Participanttype"];
-        
-        
-        [self.commonArray addObject:mutableDict];
-        
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"Participantcode"];
+//        [mutableDict setObject:@"Select" forKey:@"Participantname"];
+//        [mutableDict setObject:@"" forKey:@"Participanttype"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
+    
         for(int i=0; self.participantsArray.count>i;i++)
         {
             NSMutableDictionary * objDic =[self.participantsArray objectAtIndex:i];
@@ -1438,7 +1438,6 @@
         objCell.participationTypeLbl.text =[[self.addParticipantArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         objCell.participantLbl.text =[[self.addParticipantArray valueForKey:@"Participantname"] objectAtIndex:indexPath.row];
         objCell.availableLbl.text= [[self.addParticipantArray valueForKey:@"IsAvailable"] objectAtIndex:indexPath.row];
-        
         
         
         [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
