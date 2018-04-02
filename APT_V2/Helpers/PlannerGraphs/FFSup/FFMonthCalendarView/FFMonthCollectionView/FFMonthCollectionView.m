@@ -82,12 +82,14 @@
     [arrayDates removeAllObjects];
     
     NSDateComponents *compDateManeger = [NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]];
-    compDateManeger.month += (section-1);
+    //compDateManeger.month += (section-1);
     NSDate *dateFirstDayOfMonth = [NSDate dateWithYear:compDateManeger.year month:compDateManeger.month day:1];
+   
     [arrayWithFirstDay replaceObjectAtIndex:section withObject:dateFirstDayOfMonth];
     NSDateComponents *componentsFirstDayOfMonth = [NSDate componentsOfDate:dateFirstDayOfMonth];
     
     NSLog(@"Weekday:%li", (long)componentsFirstDayOfMonth.weekday);
+    
     
     long lastDayMonth = [dateFirstDayOfMonth numberOfDaysInMonthCount];
     long numOfCellsInCollection = [dateFirstDayOfMonth numberOfWeekInMonthCount]*7;
@@ -107,6 +109,8 @@
     
     return [arrayDates count];
 }
+
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     

@@ -295,6 +295,7 @@
             NSDate *now = [NSDate date]; //2018-03-31 09:22:11 +0000
 
             NSDate *startDate = [now dateByAddingTimeInterval:-30*24*60*60];//2018-03-01 09:22:11 +0000
+            
 
             NSDateFormatter* df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"MM-dd-YYYY hh:mm:ss a"];
@@ -614,7 +615,7 @@
 - (void)updateLabelWithMonthAndYear {
     
     NSDateComponents *comp = [NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]];
-    NSString *string = boolYearViewIsShowing ? [NSString stringWithFormat:@"%li", (long)comp.year] : [NSString stringWithFormat:@"%@ %li", [arrayMonthName objectAtIndex:comp.month-1], (long)comp.year];
+    NSString *string = boolYearViewIsShowing ? [NSString stringWithFormat:@"%li", (long)comp.year] : [NSString stringWithFormat:@"%@ %li", [arrayMonthName objectAtIndex:comp.month], (long)comp.year];
     //[self.nameOfMonth setText:string];
     
     self.nameOfMonth.text = [NSString stringWithFormat:@"%@ %ld",[arrayMonthName objectAtIndex:comp.month-1],(long)comp.year];
