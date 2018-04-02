@@ -84,8 +84,6 @@ int headdingCount = 0;
     self.matchHeadding = appDel.matchHeaderDetails;
     self.isTest = appDel.isTest;
     
-    
-    [self customnavigationmethod];
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     _tblView.hidden = true;
@@ -109,16 +107,17 @@ int headdingCount = 0;
         self.odiInnsView.layer.shadowOpacity = 0.5;
         
     }
-    
     [self setTabView];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {

@@ -130,7 +130,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     [self setBorderwithView];
     
     self.popviewTbl.hidden=YES;
@@ -159,8 +158,11 @@
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

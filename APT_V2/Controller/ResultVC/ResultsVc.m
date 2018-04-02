@@ -41,8 +41,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self customnavigationmethod];
-    
     self.ShawdowView.clipsToBounds = NO;
     self.ShawdowView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.ShawdowView.layer.shadowOffset = CGSizeMake(0,5);
@@ -52,7 +50,11 @@
     competitionLbl.text = [AppCommon getCurrentCompetitionName];
     [self ResultsWebservice];
     self.popTbl.hidden = YES;
-    
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -25,9 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self customnavigationmethod];
-    // Do any additional setup after loading the view from its nib.
+        // Do any additional setup after loading the view from its nib.
     
     clientCode = [AppCommon GetClientCode];
     userRefCode = [AppCommon GetuserReference];
@@ -39,6 +37,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

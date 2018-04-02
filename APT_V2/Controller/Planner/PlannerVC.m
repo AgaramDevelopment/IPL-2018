@@ -107,8 +107,6 @@
     [super viewDidLoad];
 
     self.nameOfMonth.text = @"";
-    [self customnavigationmethod];
-    
     self.eventTbl.hidden =YES;
     
     self.objWebservice =[[WebService alloc]init];
@@ -129,6 +127,12 @@
     loadedCalendrType = 0;
     arrayButtons = @[self.MONTH, self.WEEK, self.DAY];
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

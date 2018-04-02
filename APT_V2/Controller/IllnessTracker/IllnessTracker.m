@@ -65,8 +65,6 @@
     dropDownTblView.dataSource = self;
     dropDownTblView.delegate = self;
     
-    //Navigation View
-    [self customnavigationmethod];
     [self allViewSetBorderMethod];
     
     clientCode = [AppCommon GetClientCode];
@@ -103,6 +101,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 /*

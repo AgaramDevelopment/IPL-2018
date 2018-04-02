@@ -69,7 +69,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     objWebservice = [[WebService alloc]init];
 
     
@@ -104,6 +103,11 @@
     
     [self TeamWebservice];
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

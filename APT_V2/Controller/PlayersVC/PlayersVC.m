@@ -260,8 +260,6 @@
         }
     }
     
-    [self customnavigationmethod];
-    
     [self.team1Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -270,6 +268,12 @@
     [super viewWillAppear:animated];
     [self.GridTbl reloadData];
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];

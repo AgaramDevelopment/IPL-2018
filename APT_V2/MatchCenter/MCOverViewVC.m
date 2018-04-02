@@ -49,7 +49,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     
 //    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
 //    NSString *plyRolecode = @"ROL0000002";
@@ -84,15 +83,10 @@
 //    self.prevBtn.hidden = YES;
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     competitionlbl.text = @"";
-    
-    
-    
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
     lblCompetetion.text = [AppCommon getCurrentCompetitionName];
     lblTeamName.text = [AppCommon getCurrentTeamName];
     
@@ -103,6 +97,11 @@
     [self OverviewWebservice];
 
 
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
