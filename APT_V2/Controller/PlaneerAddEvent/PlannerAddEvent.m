@@ -195,6 +195,11 @@
     //    objCustomNavigation.tittle_lbl.text=@"";
     
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 -(void)setBorderwithView
 {
     self.eventnameView.layer.borderWidth=0.5;
