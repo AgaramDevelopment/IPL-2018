@@ -250,7 +250,13 @@
         //Video Player
 //        NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
 //        NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
-        
+    
+    NSString *escapedString = [sampleURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    NSLog(@"escapedString: %@", escapedString);
+//    let updatedUrl = originalUrl.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+    sampleURL = [sampleURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSLog(@"URLQueryAllowedCharacterSet %@",sampleURL);
+
         
         NSURL *videoURL = [NSURL URLWithString:[sampleURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
         

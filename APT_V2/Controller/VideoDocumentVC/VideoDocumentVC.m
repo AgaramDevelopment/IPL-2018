@@ -395,10 +395,16 @@
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
-    NSDictionary* dict = @{@"TeamName":selctedValues};
+    NSDictionary* dict = @{@"TeamName":selctedValues,
+                           @"ClientCode":[AppCommon GetClientCode],
+                           @"UserCode":[AppCommon GetUsercode]
+                           };
+    
+//    "ClientCode":"CLI0000002",
+//    "UserCode":"USM0000028"
     
     
-    NSLog(@"DOC parameters : %@",selctedValues);
+    NSLog(@"DOC parameters : %@",dict);
     [manager POST:URLString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
@@ -450,6 +456,8 @@
     //    NSURL*url=[[NSURL alloc]initWithString:str_file];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:videoURL];
     [docWebview loadRequest:requestObj];
+    [docWebview stringByEvaluatingJavaScriptFromString:@"document. body.style.zoom = 5.0;"];
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
