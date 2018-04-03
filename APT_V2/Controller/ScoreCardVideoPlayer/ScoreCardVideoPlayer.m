@@ -424,7 +424,9 @@
     //    self.avPlayer = NULL;
     
     //    _rootVideoView.hidden = YES;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
     
 }
 

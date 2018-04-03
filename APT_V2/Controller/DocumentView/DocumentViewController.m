@@ -39,15 +39,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    docResultArray = [NSMutableArray new];
-    CommonArray = [NSMutableArray new];
     
-    self.backBtn.hidden =YES;
-    
-    [docCollectionView registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-    selctedValues = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
-    [self videoGalleryWebservice];
-    
+    if (self.isNotificationPDF) {
+        
+        [self loadWebView:self.filePath];
+        [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{
+        }];
+    } else {
+        docResultArray = [NSMutableArray new];
+        CommonArray = [NSMutableArray new];
+        
+        self.backBtn.hidden =YES;
+        
+        [docCollectionView registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+        selctedValues = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
+        [self videoGalleryWebservice];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -449,6 +456,7 @@
 - (IBAction)closePDFDoc:(id)sender {
     
     [pdfView dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)actionUpload:(id)sender {
     [protocolUpload openDocumentUploadView];
