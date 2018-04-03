@@ -64,19 +64,19 @@
 -(IBAction)didClickSubmitBtn:(id)sender
 {
     NSString *password = [AppCommon GetPassword];
-    if ([self.oldPasswordTF.text isEqualToString:@""]) {
+    if ([oldPasswordTF getText].length == 0) {
         [AppCommon showAlertWithMessage:@"Please Enter Old Password"];
-    } else if (![self.oldPasswordTF.text isEqualToString:password]) {
+    } else if (![oldPasswordTF.text isEqualToString:password]) {
         [AppCommon showAlertWithMessage:@"Please Enter Correct Old Password"];
-    } else if ([self.newwPasswordTF.text isEqualToString:@""]) {
+    } else if ([newwPasswordTF getText].length == 0) {
         [AppCommon showAlertWithMessage:@"Please Enter New Password"];
-    } else if (self.newwPasswordTF.text.length < 7) {
+    } else if ([newwPasswordTF getText].length < 7) {
         [AppCommon showAlertWithMessage:@"New Password should be min 8 digits"];
-    } else if ([self.newwPasswordTF.text isEqualToString:self.oldPasswordTF.text]) {
+    } else if ([newwPasswordTF.text isEqualToString:oldPasswordTF.text]) {
         [AppCommon showAlertWithMessage:@"New Password should be different from old Password"];
-    } else if ([self.confirmNewPasswordTF.text isEqualToString:@""]) {
+    } else if ([confirmNewPasswordTF getText].length == 0) {
         [AppCommon showAlertWithMessage:@"Please Enter Confirm Password"];
-    } else if (![self.newwPasswordTF.text isEqualToString:self.confirmNewPasswordTF.text]) {
+    } else if (![newwPasswordTF.text isEqualToString:confirmNewPasswordTF.text]) {
         [AppCommon showAlertWithMessage:@"Please Enter Correct Confirm Password"];
     } else {
         /*
@@ -108,8 +108,8 @@
         if(userCode)   [dic    setObject:userCode     forKey:@"Createdby"];
         if(userName)   [dic    setObject:userName     forKey:@"LoginID"];
         
-        [dic    setObject:self.oldPasswordTF.text  forKey:@"OldPassword"];
-        [dic    setObject:self.newwPasswordTF.text  forKey:@"NewPassword"];
+        [dic    setObject:oldPasswordTF.text  forKey:@"OldPassword"];
+        [dic    setObject:newwPasswordTF.text  forKey:@"NewPassword"];
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
@@ -121,9 +121,9 @@
                     NSString *password = [key valueForKey:@"OldPassword"];
                     [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
                 }
-                self.oldPasswordTF.text = @"";
-                self.newwPasswordTF.text = @"";
-                self.confirmNewPasswordTF.text = @"";
+                oldPasswordTF.text = @"";
+                newwPasswordTF.text = @"";
+                confirmNewPasswordTF.text = @"";
             
             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
@@ -145,6 +145,20 @@
             [AppCommon hideLoading];
         }];
     }
+}
+
+
+    // press return to hide keyboard
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    
+    if(textField == oldPasswordTF){
+        [newwPasswordTF becomeFirstResponder];
+    }else if(textField == newwPasswordTF){
+        [confirmNewPasswordTF becomeFirstResponder];
+    }else if(textField == confirmNewPasswordTF){
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 
 @end

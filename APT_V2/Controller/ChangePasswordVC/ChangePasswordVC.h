@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomTextField.h"
 
-@interface ChangePasswordVC : UIViewController
-@property (strong, nonatomic) IBOutlet UITextField *oldPasswordTF;
-@property (strong, nonatomic) IBOutlet UITextField *newwPasswordTF;
-@property (strong, nonatomic) IBOutlet UITextField *confirmNewPasswordTF;
+@interface ChangePasswordVC : UIViewController<UITextFieldDelegate> {
+
+    IBOutlet CustomTextField *oldPasswordTF;
+    IBOutlet CustomTextField *newwPasswordTF;
+    IBOutlet CustomTextField *confirmNewPasswordTF;
+}
+
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @end
