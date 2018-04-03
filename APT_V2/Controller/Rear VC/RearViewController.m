@@ -18,6 +18,7 @@
 #import "ReportsVC.h"
 #import "TeamMembersVC.h"
 #import "PlannerVC.h"
+#import "ChangePasswordVC.h"
 
 @interface RearViewController ()
 {
@@ -43,12 +44,12 @@
     if([rolecode isEqualToString:plyRolecode])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Match Center",@"Planner",@"Logout"];
+        arrItems = @[@"Home",@"Match Center",@"Planner",@"Change Password",@"Logout"];
     }
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Logout"];
+       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -153,6 +154,12 @@
     {
         
         newFrontController = [PlannerVC new];
+        
+    }
+    else if(indexPath.row == 3)
+    {
+        
+        newFrontController = [ChangePasswordVC new];
         
     }
     else if (indexPath.row == arrItems.count -1)
