@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UILabel *lblFilePath;
 
-
+@property (nonatomic,assign) BOOL isNotificationPDF;
+@property (nonatomic,assign) NSString *filePath;
 
 @end

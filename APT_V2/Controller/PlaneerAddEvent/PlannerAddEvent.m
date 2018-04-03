@@ -461,12 +461,12 @@
         self.popviewWidth.constant =self.eventTypeView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
-        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
+//        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventTypeArray.count>i;i++)
         {
@@ -503,12 +503,12 @@
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventStatusArray.count>i;i++)
         {
@@ -546,12 +546,12 @@
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
-        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
+//        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListparticipantTypeArray.count>i;i++)
         {
@@ -627,14 +627,14 @@
         //self.popviewWidth.constant =self.particiView.frame.size.width;
         self.comPopview.hidden =NO;
         self.commonArray =[[NSMutableArray alloc]init];
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"Participantcode"];
-        [mutableDict setObject:@"Select" forKey:@"Participantname"];
-        [mutableDict setObject:@"" forKey:@"Participanttype"];
-        
-        
-        [self.commonArray addObject:mutableDict];
-        
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"Participantcode"];
+//        [mutableDict setObject:@"Select" forKey:@"Participantname"];
+//        [mutableDict setObject:@"" forKey:@"Participanttype"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
+    
         for(int i=0; self.participantsArray.count>i;i++)
         {
             NSMutableDictionary * objDic =[self.participantsArray objectAtIndex:i];
@@ -861,7 +861,7 @@
 //                {
 //                    for(int j=0;j<self.addParticipantArray.count;j++)
 //                    {
-//                        NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
+//         NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
 //                    
 //                        if([ppcode1 isEqualToString:ppcode])
 //                        {
@@ -1440,7 +1440,6 @@
         objCell.availableLbl.text= [[self.addParticipantArray valueForKey:@"IsAvailable"] objectAtIndex:indexPath.row];
         
         
-        
         [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -1467,7 +1466,19 @@
         
         cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
         cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        if(IS_IPHONE_DEVICE)
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        }else
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        
+        
+//        cell.imageView.layer.masksToBounds=YES;
+//        cell.imageView.layer.borderWidth=2.0;
+//        cell.imageView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+        
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.numberOfLines = 2;
         

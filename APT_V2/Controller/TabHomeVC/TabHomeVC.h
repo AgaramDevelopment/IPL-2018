@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblList;
 @property (weak, nonatomic) IBOutlet UIButton *btnClose;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
+@property (strong, nonatomic) NSString *notificationsCount;
 
 - (IBAction)actionDatePickerChange:(id)sender;
 

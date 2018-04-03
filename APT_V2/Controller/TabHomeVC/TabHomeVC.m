@@ -114,6 +114,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    
+    [self getNotificationsPostService];
     if (!appDel.MainArray.count) {
         [COMMON getIPLteams];
     }
@@ -137,7 +139,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
+
 }
 
 -(IBAction)didClickNotificationBtn:(id)sender
@@ -170,7 +172,7 @@
     popPC.delegate = self; //18
     [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
     [self presentViewController:contentVC animated:YES completion:nil]; // 19
-    
+//    [appDel.frontNavigationController presentViewController:contentVC animated:YES completion:nil];
 }
 
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
@@ -847,7 +849,7 @@
     /*
     API URL    :   http://192.168.0.154:8029/AGAPTService.svc/APT_GETNOTIFICATIONS
      METHOD     :   POST
-    PARAMETER  :   {Clientcode}/{Notificationtype}/{Usercode}
+    PARAMETER  :   {Clientcode}/{ParticipantCode}
     */
     /*
      {
@@ -873,12 +875,8 @@
     
     manager.requestSerializer = requestSerializer;
     
-    
-    
+
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
-    if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
-    
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
     if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
     

@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong)NSMutableArray *listArray;
 @property (strong, nonatomic) IBOutlet UITableView *popOverTableView;
+@property (strong, nonatomic) NSString *notificationsCount;
 
 @end

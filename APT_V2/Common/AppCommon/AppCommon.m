@@ -210,6 +210,12 @@ AppCommon *sharedCommon = nil;
     return userreference;
 }
 
++(NSString *)GetPassword
+{
+    NSString *password =  [[NSUserDefaults standardUserDefaults]stringForKey:@"Password"];
+    return password;
+}
+
 +(BOOL)isCoach
 {
    //  ROL0000002 player code

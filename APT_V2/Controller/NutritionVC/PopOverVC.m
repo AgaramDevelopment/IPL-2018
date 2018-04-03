@@ -13,6 +13,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Header.h"
 #import "PlannerAddEvent.h"
+#import "DocumentViewController.h"
+#import "TabHomeVC.h"
 
 @interface PopOverVC ()
 
@@ -50,6 +52,7 @@
     // 1. Dequeue the custom header cell
     headerCell = arr[0];
     NSString *count = [NSString stringWithFormat:@"%ld", self.listArray.count];
+//    headerCell.notificationCountLbl.text = notificationsCount;
     headerCell.notificationCountLbl.text = count;
     // 3. And return
     return headerCell;
@@ -76,7 +79,7 @@
         // 3. And return
     return cell;
     */
-    
+  
     PopOverVCCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell"];
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PopOverVCCell" owner:self options:nil];
     
@@ -94,9 +97,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
     if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"video"]) {
-        
+    
         NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
 //        NSString* fileName = @"https://s3.ap-south-1.amazonaws.com/agaram-sports/IPL2018/CAPSULES/CSK/Shared Files/4/2/2018folk.mov";
         ScoreCardVideoPlayer *videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
@@ -104,10 +108,17 @@
         videoPlayerVC.isFromHome = YES;
         videoPlayerVC.HomeVideoStr = fileName;
         NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
-        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
-        
+//        [self presentViewController:videoPlayerVC animated:YES completion:nil]; // 19
+    [appDel.frontNavigationController pushViewController:videoPlayerVC animated:YES];
+//        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    
     } else if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"file"]) {
         
+        DocumentViewController *documentObj = [DocumentViewController new];
+        documentObj.isNotificationPDF = YES;
+        documentObj.filePath = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
+        [appDel.frontNavigationController presentViewController:documentObj animated:YES completion:nil];
+//        [self.navigationController pushViewController:documentObj animated:YES];
 //        NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
 //            //        pdfView
 //        [self loadWebView:fileName];
@@ -127,6 +138,13 @@
         [appDel.frontNavigationController pushViewController:objaddEvent animated:YES];
     
     }
+    
+    NSString *notificationCode = [[self.listArray objectAtIndex:indexPath.row] valueForKey:@"NotificationCode"];
+    if (![notificationCode isEqualToString:@""]) {
+            //Read Notification for UPDATENOTIFICATIONS
+        [self updateNotificationsPostService:notificationCode];
+    }
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -137,6 +155,70 @@
     }
 }
 
+
+-(void)updateNotificationsPostService:(NSString *)notificationCode
+{
+    /*
+     API URL    :   http://192.168.0.154:8029/AGAPTService.svc/APT_UPDATENOTIFICATIONS
+     METHOD     :   POST
+     PARAMETER  :   {Clientcode}/{NotificationCode}/{ParticipantCode}
+     */
+    
+    NSString *ClientCode = [AppCommon GetClientCode];
+    NSString *userRefcode = [AppCommon GetuserReference];
+    
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    NSString *URLString =  URL_FOR_RESOURCE(UpdateNotifications);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
+    if(userRefcode)   [dic    setObject:userRefcode     forKey:@"ParticipantCode"];
+    
+    
+    [dic setObject:notificationCode forKey:@"NotificationCode"];
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        if ([[responseObject valueForKey:@"Success"] isEqualToString:@"Success"]) {
+            
+        }
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+}
+
+- (NSString *)checkNSNumber:(id)unknownTypeParameter {
+    
+    NSString *str;
+    if([unknownTypeParameter isKindOfClass:[NSNumber class]])
+        {
+        
+        NSNumber *vv = unknownTypeParameter;
+        str = [vv stringValue];
+        }
+    else
+        {
+        str = unknownTypeParameter;
+        }
+    return str;
+}
 
 /*
 #pragma mark - Navigation
