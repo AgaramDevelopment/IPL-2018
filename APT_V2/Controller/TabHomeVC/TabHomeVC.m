@@ -616,12 +616,12 @@
     
     [AppCommon showLoading];
     
-//    NSString* fileName_teamName = [NSString stringWithFormat:@"%@_%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"],[[videofileURL lastPathComponent]lowercaseString]];
+    NSString* fileName_teamName = [NSString stringWithFormat:@"%@___%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"],[[videofileURL lastPathComponent]lowercaseString]];
     
-    NSString* teamName = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
-    NSString* fileName = [[videofileURL lastPathComponent]lowercaseString];
+//    NSString* teamName = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
+//    NSString* fileName = [[videofileURL lastPathComponent]lowercaseString];
 
-    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@&teamName=%@",fileName,teamName];
+    NSString* str = [NSString stringWithFormat:@"UploadFile?fileName=%@",fileName_teamName];
     NSString *URLString =  URL_FOR_RESOURCE(str);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
