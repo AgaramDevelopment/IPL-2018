@@ -353,6 +353,7 @@
     [self createBarChart];
 }
 
+
 - (void)groundGetService {
     /*
      API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/
@@ -378,7 +379,6 @@
 
     
     [AppCommon showLoading];
-    
     
     
     
@@ -1624,7 +1624,7 @@
 
         NSMutableArray* resultedArray = [NSMutableArray new];
         for (NSDictionary* dict in temparray) {
-            if (![[resultedArray valueForKey:@"Teamcode"] containsObject:[dict valueForKey:@"Teamcode"]]) {
+            if (![[resultedArray valueForKey:@"TeamCode"] containsObject:[dict valueForKey:@"TeamCode"]]) {
                 [resultedArray addObject:dict];
             }
         }

@@ -347,7 +347,7 @@
     }
     else // Gallery
     {
-        if ([[sender currentTitle]isEqualToString:@"Upload From Gallery"]) {
+        if ([[sender currentTitle]isEqualToString:@"Gallery"]) {
             
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             
@@ -538,7 +538,7 @@
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed");
+        NSLog(@"failed in uploadSaveAPI");
         [COMMON webServiceFailureError:error];
         
     }];
@@ -577,13 +577,133 @@
     NSLog(@"Response  %@",responseString);
 }
 
--(void)newUploadAPI
+-(void)uploadStream
 {
     /*
+     AFHTTPClient *client= [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:@"http://192.168.2.121:85"]];
+     
+     UIImage *image = [UIImage imageNamed:@"test.jpg"];
+     NSData *data = UIImageJPEGRepresentation(image, 0.2);
+     NSInputStream *stream = [[[NSInputStream alloc]initWithData:data] retain];
+     NSDictionary *parameters = nil;
+     
+     NSMutableURLRequest *myRequest = [client requestWithMethod:@"POST" path:@"/uploadservice/service1.svc/Upload" parameters:nil];
+     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:myRequest];
+     
+     [
+     operation
+     setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+     NSLog(@"success: %@", operation.responseString);
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+     NSLog(@"error: %@", operation.error);
+     }
+     ];
+     
+     operation.inputStream = stream; //Thats where you put your stream!
+     
+     [[[NSOperationQueue alloc] init] addOperation:operation];
+     */
+    
+}
+
+-(void)fileUploadAsBase64
+{
+    /*
+     MOBILE_FILEUPLOADSAVEAMAZON
+     
+     teamname
+     filename
+     fileinfo
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    if (imgData.length == 0) {
+        [AppCommon showAlertWithMessage:@"Please Select Video to upload"];
+        return;
+        
+    }
+    else if (!selectedUserArray.count) {
+        [AppCommon showAlertWithMessage:@"Please select atleast one user to share"];
+        return;
+    }
+    else if (!txtVideoDate.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please select Date"];
+        return;
+    }
+    else if (!txtKeyword.hasText)
+    {
+        [AppCommon showAlertWithMessage:@"Please Enter Description or Keywords"];
+        return;
+    }
+    
+    
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_FILEUPLOADSAVEAMAZON");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+
+
+    NSString* teamName = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
+    NSString* fileName = [[videofileURL lastPathComponent]lowercaseString];
+
+    NSDictionary* dict = @{@"teamname":teamName,
+                           @"filename":fileName,
+                           @"fileinfo":imgData};
+    
+    [AppCommon showLoading];
+    
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+
+    [manager POST:URLString parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+       
+        [formData appendPartWithFileURL:filePath name:@"fileinfo" error:nil];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+//        NSError* error;
+//        NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+        NSLog(@"Success: %@", responseObject);
+        
+        if ([[responseObject valueForKey:@"message"] isEqualToString:@"Success"]) {
+
+            NSDictionary* dict = responseObject;
+            [self uploadSaveAPI:dict];
+
+            [self actionCloseUpload:nil];
+        }
+        [AppCommon hideLoading];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AppCommon hideLoading];
+        //        [self resetImageData];
+        NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
+        [COMMON webServiceFailureError:error];
+    }];
+
+    
+    
+}
+
+-(void)newUploadAPI
+{
+    
+    
+    /*
+     
      API URL : /UploadFile?fileName={fileName}
      MIME type : application/octet-stream
      
      */
+    
     NSString *ClientCode = [AppCommon GetClientCode];
     NSString * createdby = [AppCommon GetUsercode];
     
@@ -610,8 +730,6 @@
         return;
     }
     
-    
-    
     [AppCommon showLoading];
     
     NSString* fileName_teamName = [NSString stringWithFormat:@"%@___%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"],[[videofileURL lastPathComponent]lowercaseString]];
@@ -623,69 +741,56 @@
     NSString *URLString =  URL_FOR_RESOURCE(str);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
-//    reqSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/octet-stream"];
+//    AFHTTPRequestSerializer* reqSerializer = [AFHTTPRequestSerializer serializer];
 //    [reqSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
-    [reqSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
-    manager.requestSerializer = reqSerializer;
+//    AFHTTPRequestOperation* operation1 = [AFHTTPRequestOperation new];
+//    NSData* data = [NSData dataWithContentsOfURL:videofileURL];
+//    NSInputStream *stream = [[NSInputStream alloc]initWithData:data];
+//
+//    operation1.inputStream = stream;
+//    [manager.operationQueue addOperation:operation1];
+//    manager.requestSerializer = reqSerializer;
 
-    AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
-    serializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-    manager.responseSerializer = serializer;
+//    AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
+//    serializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+
     
     [AppCommon showLoading];
     
-    /*
-     let request = NSMutableURLRequest()
-     request.url = url
-     request.HTTPMethod = "POST"
-     request.setValue(postLength, forHTTPHeaderField:"Content-Length")
-     request.setValue("application/json", forHTTPHeaderField:"Accept")
-     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-     request.postBody = postData
-     
-     */
     
     [manager POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         NSError* formDataError;
 //        [formData appendPartWithFileURL:videofileURL name:@"fileName" error:&formDataError];
+        
 //        NSLog(@"DATA FORMED %d ",formData);
 //        NSLog(@"ERROR %@",formDataError.description);
         
         NSData* data = [NSData dataWithContentsOfURL:videofileURL];
-//        [formData appendPartWithFileURL:videofileURL name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"" error:&formDataError];
+//        [formData appendPartWithFileURL:videofileURL name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:@"video/quicktime" error:&formDataError];
         
-        [formData appendPartWithFileData:data name:@"fileName" fileName:[[videofileURL lastPathComponent]lowercaseString] mimeType:mimeType];
+        [formData appendPartWithFileData:data name:@"fileName" fileName:fileName_teamName mimeType:@"video/quicktime"];
         
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSError* error;
-        NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+//        NSError* error;
+//        NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
         
-        /*
-         sample response
-         
-         FilePath = "https://s3.ap-south-1.amazonaws.com/agaram-sports/IPL2018/CAPSULES/CSK/Shared Files/TestedByGopalakrishnan5441.mp4";
-         message = Success;
-         
-         */
-        
-        if ([[dict valueForKey:@"message"] isEqualToString:@"Success"]) {
-            [self uploadSaveAPI:dict];
-            
-            NSLog(@"Success: %@", dict);
-//            [AppCommon showAlertWithMessage:dict];
-            
-            // Update the UI
-            [self actionCloseUpload:nil];
+        NSLog(@"Success: %@", responseObject);
 
+        if ([[responseObject valueForKey:@"message"] isEqualToString:@"Success"]) {
+            
+            [self uploadSaveAPI:responseObject];
+            
+            [self actionCloseUpload:nil];
         }
-        
-        
         [AppCommon hideLoading];
 
         
@@ -695,13 +800,14 @@
         NSLog(@"SEND MESSAGE ERROR %@ ",error.description);
         [COMMON webServiceFailureError:error];
     }];
+    
 
 }
 
 - (IBAction)actionUpload:(id)sender {
     
-    [self newUploadAPI];
-
+//    [self newUploadAPI];
+    [self fileUploadAsBase64];
 }
 
 - (IBAction)actionDropDown:(id)sender {
@@ -724,6 +830,14 @@
 -(void)openVideoUploadViewInTabHomeVC
 {
     NSLog(@"openVideoUploadViewInTabHomeVC called");
+    
+    imgData = nil;
+    selectedImageView.image = [UIImage imageNamed:@"Video-Icon-crop"];
+    lblShareUser.text = @"Share to user";
+    [selectedUserArray removeAllObjects];
+    txtVideoDate.text =@"";
+    txtKeyword.text = @"";
+    
     [viewUpload setFrame:self.view.frame];
     [self.view addSubview:viewUpload];
 }
@@ -951,8 +1065,8 @@
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
         image = info[UIImagePickerControllerOriginalImage];
-        mimeType = [NSString stringWithFormat:@"video/%@",[[videofileURL pathExtension]lowercaseString]];
-
+//        mimeType = [NSString stringWithFormat:@"video/%@",[[videofileURL pathExtension]lowercaseString]];
+        mimeType = @"video/quicktime";
         
 //        videofileURL = [videofileURL URLByDeletingPathExtension];
 //        videofileURL = [videofileURL URLByAppendingPathExtension:@"mp4"];
@@ -1006,8 +1120,10 @@
 - (void)showDocumentPickerInMode:(UIDocumentPickerMode)mode
 {
     
-    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"com.adobe.pdf"] inMode:UIDocumentPickerModeImport];
+//    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"com.adobe.pdf"] inMode:UIDocumentPickerModeImport];
     
+    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.image", @"public.audio", @"public.movie", @"public.text", @"public.item",@"public.content", @"public.source-code"] inMode:UIDocumentPickerModeImport];
+
     picker.delegate = self;
     
     picker.modalPresentationStyle = UIModalPresentationPopover;
@@ -1029,6 +1145,10 @@
   didPickDocumentAtURL:(NSURL *)url
 {
     NSLog(@"selected file URL %@",url);
+    videofileURL = url;
+    imgData = [[NSData alloc] initWithContentsOfURL:url];
+    selectedImageView.image = [self generateThumbImage:url];
+
 //    PDFUrl= url;
 //    UploadType=@"PDF";
 //    [arrimg removeAllObjects];
