@@ -29,7 +29,8 @@
 #define kMarkImageSize              CGSizeMake(30.0, 30.0)
 #define kMarkBase                   CGPointMake(9.0, 13.5)
 #define kMarkDrawPoint              CGPointMake(20.0, 9.5)
-#define kShadowColor                [UIColor colorWithWhite:.0 alpha:0.7]
+//#define kShadowColor                [UIColor colorWithWhite:.0 alpha:0.7]
+#define kShadowColor                [UIColor colorWithWhite:1.0 alpha:1.0]
 #define kMarkShadowColor            [UIColor colorWithWhite:.0 alpha:0.3]
 #define kBlueColor                  0x236ed8
 #define kGreenColor                 0x179714
@@ -58,6 +59,8 @@
     CGRect imageViewRect = CGRectMake(self.frame.size.width-73, rect.size.height/2 - kCircleLeftMargin - 3, kMarkCell/2, kMarkCell/2);
     
     imageView.frame = imageViewRect; // Center the imageView
+    //imageView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+    //imageView.layer.borderWidth= 1.0;
     
     UIBezierPath *unselectedCircle = [UIBezierPath bezierPathWithOvalInRect:unselectedCircleRect]; // Unselected circle centered
     
@@ -143,6 +146,7 @@
         CGContextClip(ctx);
         CGContextAddEllipseInRect(ctx, kCircleOverlayRect);
         CGContextSetFillColorWithColor(ctx, colorWithRGBHex(kMarkColor).CGColor);
+       
         CGContextDrawPath(ctx, kCGPathFill);
     }
     CGContextRestoreGState(ctx);

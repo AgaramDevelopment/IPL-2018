@@ -861,7 +861,7 @@
 //                {
 //                    for(int j=0;j<self.addParticipantArray.count;j++)
 //                    {
-//                        NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
+//         NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
 //                    
 //                        if([ppcode1 isEqualToString:ppcode])
 //                        {
@@ -1466,7 +1466,19 @@
         
         cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
         cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        if(IS_IPHONE_DEVICE)
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        }else
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        
+        
+//        cell.imageView.layer.masksToBounds=YES;
+//        cell.imageView.layer.borderWidth=2.0;
+//        cell.imageView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+        
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.numberOfLines = 2;
         
