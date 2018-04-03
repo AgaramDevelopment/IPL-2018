@@ -334,6 +334,9 @@
 
 #define TeamCompoKey                               @"APT_TEAMCOMPOSITION"
 
-#define GetNotifications                               @"APT_GETNOTIFICATIONS"
+#define GetNotifications              @"APT_GETNOTIFICATIONS"
 
-#define UpdateNotifications                               @"APT_UPDATENOTIFICATIONS"
+#define UpdateNotifications           @"APT_UPDATENOTIFICATIONS"
+
+#define ChangePassword                @"INSERTRESETPWDDETAILS"
+

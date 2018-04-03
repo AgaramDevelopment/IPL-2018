@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ChangePasswordVC : UIViewController
+@property (strong, nonatomic) IBOutlet UITextField *oldPasswordTF;
+@property (strong, nonatomic) IBOutlet UITextField *newwPasswordTF;
+@property (strong, nonatomic) IBOutlet UITextField *confirmNewPasswordTF;
+@property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @end

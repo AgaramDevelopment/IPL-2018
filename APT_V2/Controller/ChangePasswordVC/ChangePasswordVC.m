@@ -21,14 +21,130 @@
     // Do any additional setup after loading the view from its nib.
 }
 
--(IBAction)didClickCancelBtn:(id)sender
-{
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    UIView* view= self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    isBackEnable = NO;
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        objCustomNavigation.home_btn.hidden = YES;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        
+            //[objCustomNavigation.home_btn addTarget:self action:@selector(didClickSummaryBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+        {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    [self.navi_View addSubview:objCustomNavigation.view];
+        //    objCustomNavigation.tittle_lbl.text=@"";
+}
+
 
 -(IBAction)didClickSubmitBtn:(id)sender
 {
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    NSString *password = [AppCommon GetPassword];
+    if ([self.oldPasswordTF.text isEqualToString:@""]) {
+        [AppCommon showAlertWithMessage:@"Please Enter Old Password"];
+    } else if (![self.oldPasswordTF.text isEqualToString:password]) {
+        [AppCommon showAlertWithMessage:@"Please Enter Correct Old Password"];
+    } else if ([self.newwPasswordTF.text isEqualToString:@""]) {
+        [AppCommon showAlertWithMessage:@"Please Enter New Password"];
+    } else if (self.newwPasswordTF.text.length < 7) {
+        [AppCommon showAlertWithMessage:@"New Password should be min 8 digits"];
+    } else if ([self.newwPasswordTF.text isEqualToString:self.oldPasswordTF.text]) {
+        [AppCommon showAlertWithMessage:@"New Password should be different from old Password"];
+    } else if ([self.confirmNewPasswordTF.text isEqualToString:@""]) {
+        [AppCommon showAlertWithMessage:@"Please Enter Confirm Password"];
+    } else if (![self.newwPasswordTF.text isEqualToString:self.confirmNewPasswordTF.text]) {
+        [AppCommon showAlertWithMessage:@"Please Enter Correct Confirm Password"];
+    } else {
+        /*
+         API URL    :   http://192.168.0.154:8029/AGAPTService.svc/INSERTRESETPWDDETAILS
+         METHOD     :   POST
+         PARAMETER  :   {Clientcode}/{Createdby}/{LoginID}/{NewPassword}/{OldPassword}
+         */
+        
+        NSString *clientCode = [AppCommon GetClientCode];
+        NSString *userCode = [AppCommon GetUsercode];
+        NSString *userName = [AppCommon GetUserName];
+        
+        
+        if(![COMMON isInternetReachable])
+            return;
+        
+        [AppCommon showLoading];
+        NSString *URLString =  URL_FOR_RESOURCE(ChangePassword);
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        
+        if(clientCode)   [dic    setObject:clientCode     forKey:@"Clientcode"];
+        if(userCode)   [dic    setObject:userCode     forKey:@"Createdby"];
+        if(userName)   [dic    setObject:userName     forKey:@"LoginID"];
+        
+        [dic    setObject:self.oldPasswordTF.text  forKey:@"OldPassword"];
+        [dic    setObject:self.newwPasswordTF.text  forKey:@"NewPassword"];
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if([[responseObject valueForKey:@"Status"] integerValue] == 1)
+            {
+                NSMutableArray *passwordArray = [responseObject valueForKey:@"lstResetPasswordDetails"];
+                for (id key in passwordArray) {
+                    NSString *password = [key valueForKey:@"OldPassword"];
+                    [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
+                }
+                self.oldPasswordTF.text = @"";
+                self.newwPasswordTF.text = @"";
+                self.confirmNewPasswordTF.text = @"";
+            
+            NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+            [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+
+            UIViewController* newFrontController= [LoginVC new];
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+            [navigationController setNavigationBarHidden:YES];
+            appDel.frontNavigationController = navigationController;
+            [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
+            [AppCommon showAlertWithMessage:@"Password Changed Successfully"];
+//                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
+            [AppCommon hideLoading];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError:error];
+            [AppCommon hideLoading];
+        }];
+    }
 }
 
 @end

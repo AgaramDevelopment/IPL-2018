@@ -32,6 +32,7 @@
 +(NSString *) GetuserReference;
 +(NSString *)GetUserRoleName;
 +(NSString *)GetUserRoleCode;
++(NSString *)GetPassword;
 
 
 +(NSString *)getFileType:(NSString *)filePath;
