@@ -102,6 +102,7 @@
     
     NSArray* temp = [COMMON getCorrespondingTeamName:competitionName];
     teamCodeTF.text = [[temp firstObject] valueForKey:@"TeamName"];
+    teamCode = [[temp firstObject] valueForKey:@"TeamCode"];
     NSString* groundName = [NSString stringWithFormat:@"%@, %@", [[temp firstObject] valueForKey:@"GroundName"], [[temp firstObject] valueForKey:@"City"]];
     
     groundLbl.text = groundName;
@@ -382,7 +383,7 @@
     
     
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@",Ground, competitionCode, groundCode];
+    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",Ground, competitionCode, groundCode,teamCode];
     
     NSString* main_URL = URL_FOR_RESOURCE(API_URL);
     
