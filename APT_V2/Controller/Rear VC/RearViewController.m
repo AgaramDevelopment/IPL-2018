@@ -34,23 +34,37 @@
     [super viewDidLoad];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    arrItems = [NSMutableArray new];
     
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
     
-    if([rolecode isEqualToString:plyRolecode])
-    {
-        arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Match Center",@"Planner",@"Change Password",@"Logout"];
+    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString* kXIP = @"TEA0000011";
+    
+    if ([loginedTeamCode isEqualToString:kXIP]) {
+        
+        arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Planner",@"Change Password",@"Logout"];
+
     }
-    else
-    {
-        arrItems = [NSArray new];
-       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
+    else {
+        arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Change Password",@"Logout"];
     }
+    
+    
+    
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        arrItems = [NSArray new];
+//        arrItems = @[@"Home",@"Match Center",@"Planner",@"Change Password",@"Logout"];
+//    }
+//    else
+//    {
+//        arrItems = [NSArray new];
+//       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
+//    }
+    
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
 }
@@ -115,30 +129,9 @@
     // Grab a handle to the reveal controller, as if you'd do with a navigtion controller via self.navigationController.
     SWRevealViewController *revealController = appDel.revealViewController;
     UIViewController* newFrontController;
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     
     
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
-//
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        if(indexPath.row == 0)
-//        {
-//            newFrontController = [TabHomeVC new];
-//        }
-//    }
-//    else
-//    {
-//        if(indexPath.row == 0)
-//        {
-////            newFrontController = [TeamsVC new];
-//            TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-//            objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
-//            objPlayersVC.teamname = [AppCommon getCurrentTeamName];
-//            newFrontController = objPlayersVC;
-//
-//        }
-//    }
     
     if(indexPath.row == 0)
     {
@@ -150,13 +143,13 @@
 
         newFrontController = [MatchCenterTBC new];
         
-    }else if(indexPath.row == 2)
+    }else if([cell.textLabel.text isEqualToString:@"Planner"])
     {
         
         newFrontController = [PlannerVC new];
         
     }
-    else if(indexPath.row == 3)
+    else if([cell.textLabel.text isEqualToString:@"Change Password"])
     {
         
         newFrontController = [ChangePasswordVC new];

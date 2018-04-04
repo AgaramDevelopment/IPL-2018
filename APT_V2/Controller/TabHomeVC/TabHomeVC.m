@@ -102,18 +102,29 @@
     
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden =NO;
-    objCustomNavigation.notificationView.hidden = NO;
     //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //Notification Method
+    
+    
+    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString* kXIP = @"TEA0000011";
+
+    [objCustomNavigation.notificationView setHidden:![loginedTeamCode isEqualToString:kXIP]];
+
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString* kXIP = @"TEA0000011";
+    
+    [objCustomNavigation.notificationView setHidden:![loginedTeamCode isEqualToString:kXIP]];
+
     
     [self getNotificationsPostService];
     if (!appDel.MainArray.count) {
@@ -171,8 +182,8 @@
     popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
     popPC.delegate = self; //18
     [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
-    [self presentViewController:contentVC animated:YES completion:nil]; // 19
-//    [appDel.frontNavigationController presentViewController:contentVC animated:YES completion:nil];
+//    [self presentViewController:contentVC animated:YES completion:nil]; // 19
+    [appDel.frontNavigationController presentViewController:contentVC animated:YES completion:nil];
 }
 
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
@@ -528,18 +539,13 @@
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
-        if(responseObject >0)
-        {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [AppCommon hideLoading];
             });
-        }
         
-        
-        
-        [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [AppCommon hideLoading];
         NSLog(@"failed in uploadSaveAPI");
         [COMMON webServiceFailureError:error];
         
@@ -644,7 +650,6 @@
     
     
     
-    [AppCommon showLoading];
     
     NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_FILEUPLOADSAVEAMAZON");
     
@@ -681,7 +686,12 @@
 
             [self actionCloseUpload:nil];
         }
-        [AppCommon hideLoading];
+        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [AppCommon hideLoading];
+//        });
+        
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

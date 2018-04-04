@@ -36,5 +36,6 @@
 
 @property (nonatomic,assign) BOOL isNotificationPDF;
 @property (nonatomic,assign) NSString *filePath;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpload;
 
 @end

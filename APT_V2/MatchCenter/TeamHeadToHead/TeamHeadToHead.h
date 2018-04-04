@@ -95,6 +95,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *spell1Inn;
 @property (nonatomic, strong) IBOutlet UIButton *spell2Inn;
 @property (nonatomic, strong) IBOutlet UIButton *spell3Inn;
+@property (weak, nonatomic) IBOutlet UIButton *btnInnsAll;
 
 //Team-1 Properties
 
@@ -159,5 +160,11 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *boundariesPercentT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingSRT2PV;
 @property (strong, nonatomic) IBOutlet UIProgressView *bowlingAvgT2PV;
+
+@property (weak, nonatomic) IBOutlet UIView *viewTeamWin;
+@property (weak, nonatomic) IBOutlet UIView *viewTeamOvers;
+@property (weak, nonatomic) IBOutlet UIButton *btnAllOvers;
+@property (weak, nonatomic) IBOutlet UIButton *btnAllWinTeams;
+
 
 @end

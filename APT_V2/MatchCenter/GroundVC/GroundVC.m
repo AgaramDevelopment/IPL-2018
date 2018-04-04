@@ -356,6 +356,7 @@
 
 
 - (void)groundGetService {
+    
     /*
      API URL    :   http://192.168.0.151:8044/AGAPTService.svc/APT_GROUND/
      METHOD     :   GET
@@ -382,11 +383,11 @@
     [AppCommon showLoading];
     
     
-    
     NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@",Ground, competitionCode, groundCode,teamCode];
     
     NSString* main_URL = URL_FOR_RESOURCE(API_URL);
     
+    NSLog(@"Ground_URL %@",main_URL);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -431,6 +432,7 @@
         }
             self.battingFirstMatchWonLbl.text = firstWon;
             self.battingFirstMatchLostLbl.text = firstLoss;
+            self.lbl1stBattingTot.text = firstTotal;
     }
         
         markers2 = [NSMutableArray new];
@@ -456,9 +458,9 @@
         }
         
  
-        
-        self.battingSecondMatchWonLbl.text = secondWon;
-        self.battingSecondMatchLostLbl.text = secondLoss;
+            self.battingSecondMatchWonLbl.text = secondWon;
+            self.battingSecondMatchLostLbl.text = secondLoss;
+            self.lbl2ndBattingTot.text = secondTotal;
         }
             //Re-load Table View
         
@@ -1063,6 +1065,8 @@
     }
     return nil;
 }
+
+
 -(UIColor *)pieChartView:(PieChartView *)pieChartView colorForSliceAtIndex:(NSUInteger)index
 {
     UIColor * color;
@@ -1602,9 +1606,9 @@
         NSMutableArray* arr = [NSMutableArray new];
         [arr addObjectsFromArray:appDel.ArrayCompetition];
         NSDictionary* temp = @{
-                               @"CompetitionCode": @"",
+                               @"CompetitionCode": @"none",
                                @"CompetitionName": @"All",
-                               @"Groundcode": @"",
+                               @"Groundcode": @"none",
                                @"Ground": @"All"
                                };
         [arr insertObject:temp atIndex:0];
@@ -1612,7 +1616,7 @@
         dropVC.array = arr;
 
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60, CGRectGetWidth(competitionView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame), CGRectGetWidth(competitionView.frame), 300)];
         
     }
     else if ([sender tag] == 1) // Teams
@@ -1633,7 +1637,7 @@
 //        NSMutableArray* arr = [NSMutableArray new];
 //        [arr addObjectsFromArray:appDel.ArrayCompetition];
         NSDictionary* temp = @{
-                               @"TeamCode": @"",
+                               @"TeamCode": @"none",
                                @"TeamName": @"All"
                                };
         [resultedArray insertObject:temp atIndex:0];
@@ -1641,7 +1645,7 @@
         dropVC.array = resultedArray;
 
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60, CGRectGetWidth(teamView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame), CGRectGetWidth(teamView.frame), 300)];
         
     }
     else if ([sender tag] == 2) { // X Axis value
@@ -1674,7 +1678,7 @@
 
         dropVC.array = arr;
         dropVC.key = @"GroundName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame), CGRectGetWidth(groundView.frame), 300)];
         
     }
 //    else if ([sender tag] == 3) // Y Axis value
@@ -1706,12 +1710,12 @@
         NSLog(@"%@",array[Index.row]);
         NSLog(@"selected value %@",key);
         competitionCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        competitionCode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
         
         if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
 
         [[NSUserDefaults standardUserDefaults] setValue:competitionCodeTF.text forKey:@"SelectedCompetitionName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
             
         }
@@ -1722,12 +1726,12 @@
     else if([key isEqualToString:@"TeamName"])
     {
         teamCodeTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        teamCode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         if (![[[array objectAtIndex:Index.row] valueForKey:key] isEqualToString:@"All"]) {
 
         [[NSUserDefaults standardUserDefaults] setValue:teamCodeTF.text forKey:@"SelectedTeamName"];
-        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamCode forKey:@"SelectedTeamCode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
             
         }
