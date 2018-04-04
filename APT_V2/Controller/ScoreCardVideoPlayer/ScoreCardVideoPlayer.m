@@ -426,7 +426,9 @@
     //    _rootVideoView.hidden = YES;
 //    [self.navigationController popViewControllerAnimated:YES];
 //    [self dismissViewControllerAnimated:YES completion:nil];
-    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateNotificationCount" object:nil];
+    }];
     
 }
 
