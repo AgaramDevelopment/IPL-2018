@@ -60,7 +60,12 @@
 
 #pragma mark - UITableView Delegate Methods
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.listArray.count;
+    if (self.listArray.count) {
+        return self.listArray.count;
+    } else {
+        self.noNotificationLabel.hidden = NO;
+    }
+    return nil;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +92,7 @@
     cell = arr[1];
         //Images
 //    [self.team1ImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [key valueForKey:@"ATLogo"]]] placeholderImage:[UIImage imageNamed:@"no-image"]]; //team_logo_csk
-    [cell.notificationImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [self.listArray valueForKey:@"UserPhoto"]]] placeholderImage:[UIImage imageNamed:@"player_andr"]];
+    [cell.notificationImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", [self.listArray valueForKey:@"UserPhoto"]]] placeholderImage:[UIImage imageNamed:@"Default_userimage"]];
     cell.notificationTitleLbl.text = [[self.listArray valueForKey:@"Description"]objectAtIndex:indexPath.row];
     cell.notificationDescrLbl.text = [[self.listArray objectAtIndex:indexPath.row] valueForKey:@"Date"];
     // 3. And return
