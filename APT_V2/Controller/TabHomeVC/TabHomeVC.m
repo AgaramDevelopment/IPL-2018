@@ -75,9 +75,13 @@
     
     titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
     
-    [self getNotificationsPostService];
+//    [self getNotificationsPostService];
     [self FetchvideouploadWebservice];
     [txtVideoDate setInputView:datePickerView];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
 
 }
 
@@ -115,6 +119,13 @@
     [objCustomNavigation.notificationView setHidden:![loginedTeamCode isEqualToString:kXIP]];
 
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)updateNotificationCount
+{
+    NSLog(@"updateNotificationCount method called");
+    [self getNotificationsPostService];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
