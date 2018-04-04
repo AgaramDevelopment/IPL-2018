@@ -23,7 +23,6 @@
 #import "VideoDocumentVC.h"
 #import "PlannerAddEvent.h"
 
-
 @interface SchResStandVC ()<openUploadDelegate,openUploadDocumentDelegate>
 {
     VideoGalleryVC *objVideo;
@@ -337,13 +336,68 @@
         
         ScheduleCell* cell = [self.eventsCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         
-        
+        //Practice_Icon
         cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
         
         cell.eventTypelbl.text = [[self.commonArray valueForKey:@"EventTypeDesc"] objectAtIndex:indexPath.row];
+        NSArray *arr = [cell.eventTypelbl.text componentsSeparatedByString:@""];
         
        unichar firstChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:0];
-        cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+       unichar secondChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:1];
+        unichar thirdChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:2];
+        unichar fourthChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:3];
+        //cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+        
+        if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"M"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Match_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PR"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Practice_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PH"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Physio_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAV"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Travel_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAI"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Training_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"TE"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Team_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"C"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Competition_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"O"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Others_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"F"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Fitness_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"N"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Net_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"ST"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Strength_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"SE"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Season_Icon"];
+        }
+
+        
         
         NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
         NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
