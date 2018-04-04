@@ -9,9 +9,15 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopOverVC">
             <connections>
+                <outlet property="noNotificationLabel" destination="MS8-T1-us9" id="gOK-se-Hr5"/>
                 <outlet property="popOverTableView" destination="wFe-24-Z9k" id="xyQ-U6-plZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,13 +35,29 @@
                         <outlet property="delegate" destination="-1" id="eu3-fT-faf"/>
                     </connections>
                 </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Notifications Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-T1-us9">
+                    <rect key="frame" x="0.0" y="318.5" width="375" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Iei-kB-OjD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="MS8-T1-us9" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="FFK-eQ-Kee"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="wFe-24-Z9k" secondAttribute="bottom" id="OSp-bl-XRQ"/>
+                <constraint firstItem="MS8-T1-us9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="R2Z-pM-ciK"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="wFe-24-Z9k" secondAttribute="trailing" id="WOg-9m-fjq"/>
+                <constraint firstItem="MS8-T1-us9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ZfD-J2-QDS"/>
                 <constraint firstItem="wFe-24-Z9k" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="lNO-7o-wgi"/>
                 <constraint firstItem="wFe-24-Z9k" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="oh6-fb-6fq"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="MS8-T1-us9" secondAttribute="trailing" id="vGn-o3-0Bu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
