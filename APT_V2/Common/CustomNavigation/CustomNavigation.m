@@ -26,9 +26,9 @@
     
     self.notificationCountLbl.layer.masksToBounds = YES;
     if (IS_IPAD) {
-        self.notificationCountLbl.layer.cornerRadius = 12.5;
+        self.notificationCountLbl.layer.cornerRadius = self.notificationCountLbl.frame.size.width/2;
     } else {
-        self.notificationCountLbl.layer.cornerRadius = 10;
+        self.notificationCountLbl.layer.cornerRadius = self.notificationCountLbl.frame.size.width/2;
     }
 }
 
