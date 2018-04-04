@@ -98,7 +98,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
     if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"video"]) {
     
         NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
@@ -109,8 +108,13 @@
         videoPlayerVC.HomeVideoStr = fileName;
         NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
 //        [self presentViewController:videoPlayerVC animated:YES completion:nil]; // 19
-    [appDel.frontNavigationController pushViewController:videoPlayerVC animated:YES];
-//        [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+        
+        [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:^{
+//            [appDel.frontNavigationController pushViewController:videoPlayerVC animated:YES];
+            [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+
+        }];
+
     
     } else if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"file"]) {
         

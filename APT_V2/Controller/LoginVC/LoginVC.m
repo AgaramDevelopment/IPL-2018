@@ -300,6 +300,7 @@
         
         [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"SelectedTeamName"];
         [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"loginedTeamCode"];
         [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"loginedTeamName"];
 
         [[NSUserDefaults standardUserDefaults] synchronize];

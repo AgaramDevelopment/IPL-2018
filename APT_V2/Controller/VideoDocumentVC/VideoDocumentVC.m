@@ -40,7 +40,7 @@
 
 @synthesize pdfView,docWebview,btnStackView;
 
-@synthesize lblFilePath;
+@synthesize lblFilePath,btnUpload;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +52,12 @@
     selctedValues = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
     [self videoGalleryWebservice];
     backButtonNames = [NSMutableArray new];
+    
+    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString* kXIP = @"TEA0000011";
+    
+    [btnUpload setHidden:![loginedTeamCode isEqualToString:kXIP]];
+
     
 }
 
@@ -109,13 +115,13 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat width = collectionView.frame.size.width;
-    //    CGFloat height = collectionView.frame.size.height;
+    CGFloat height = 130;
     
     if(IS_IPHONE5) {
         
         width = width/3;
     }
-    else if(!IS_IPAD && !IS_IPHONE5) {
+    else if(IS_IPHONE_DEVICE && !IS_IPHONE5) {
         
         width = width/4;
     }
@@ -125,7 +131,6 @@
     }
     
     return CGSizeMake(width-10, width);
-    
     
 }
 

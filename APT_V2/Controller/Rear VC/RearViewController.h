@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RearViewController : UIViewController
-@property (strong, nonatomic) NSArray* arrItems;
+@property (strong, nonatomic) NSMutableArray* arrItems;
 
 
 

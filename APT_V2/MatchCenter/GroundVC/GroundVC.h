@@ -81,4 +81,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *Titlecollview;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *overBlockbtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl2ndBattingTot;
+@property (weak, nonatomic) IBOutlet UILabel *lbl1stBattingTot;
+
 @end

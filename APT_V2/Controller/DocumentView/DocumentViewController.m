@@ -32,13 +32,20 @@
 
 @synthesize tblDropDown,lblTeam,lblVenue;
 
-@synthesize lblNoDoc,protocolUpload;
+@synthesize lblNoDoc,protocolUpload,btnUpload;
 
 @synthesize pdfView,docWebview,lblFilePath;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString* kXIP = @"TEA0000011";
+    
+    [btnUpload setHidden:![loginedTeamCode isEqualToString:kXIP]];
+
+    
     
     if (self.isNotificationPDF) {
         

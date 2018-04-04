@@ -53,6 +53,10 @@
 
 @synthesize spell1Inn,spell2Inn,spell3Inn;
 
+@synthesize viewTeamOvers,viewTeamWin,btnInnsAll;
+
+@synthesize btnAllOvers,btnAllWinTeams;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -70,9 +74,13 @@
     team1TF.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedTeamName"];
     NSString *team1Win = [NSString stringWithFormat:@"%@ Win", team1TF.text];
     self.team1Win.text = team1Win;
-    
+    groundTF.text = @"All";
     self.Poptable.hidden = YES;
     
+    [btnInnsAll setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+    [btnAllWinTeams setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+    [btnAllOvers setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+
     [self headToHeadPageLoadGetService];
 }
 
@@ -1027,7 +1035,6 @@
 
 //        }
 
-//        groundTF.text = @"";
     }
     [self headToHeadResultsPostService];
 }
@@ -1037,90 +1044,178 @@
     UIImage* check = [UIImage imageNamed:@"check"];
     UIImage* uncheck = [UIImage imageNamed:@"uncheck"];
     
-    if ([sender tag] == 0) // 1st Innings
+    if ([[sender currentImage] isEqual:check]) {
+        return;
+    }
+    
+    
+    if ([sender tag] == 7) // ALL innings
+    {
+        if ([[btnInnsAll currentImage] isEqual:uncheck]) {
+            [btnInnsAll setImage:check forState:UIControlStateNormal];
+            [firstInn setImage:uncheck forState:UIControlStateNormal];
+            [secondInn setImage:uncheck forState:UIControlStateNormal];
+            
+            team1InnsNum = @"";
+            team2InnsNum = @"";
+            
+        }
+        
+    }
+    else if ([sender tag] == 0) // 1st Innings
     {
         if ([[firstInn currentImage] isEqual:uncheck]) {
             [firstInn setImage:check forState:UIControlStateNormal];
             [secondInn setImage:uncheck forState:UIControlStateNormal];
-            
+            [btnInnsAll setImage:uncheck forState:UIControlStateNormal];
+
             team1InnsNum = @"1";
             team2InnsNum = @"1";
             
-            [self headToHeadResultsPostService];
         }
     }
-        else if ([sender tag] == 1) // 2nd Innings
-        {
-            if ([[secondInn currentImage] isEqual:uncheck]) {
-                [secondInn setImage:check forState:UIControlStateNormal];
-                [firstInn setImage:uncheck forState:UIControlStateNormal];
-                
-                team1InnsNum = @"2";
-                team2InnsNum = @"2";
-                [self headToHeadResultsPostService];
-            }
+    else if ([sender tag] == 1) // 2nd Innings
+    {
+        if ([[secondInn currentImage] isEqual:uncheck]) {
+            [secondInn setImage:check forState:UIControlStateNormal];
+            [firstInn setImage:uncheck forState:UIControlStateNormal];
+            [btnInnsAll setImage:uncheck forState:UIControlStateNormal];
+
+            team1InnsNum = @"2";
+            team2InnsNum = @"2";
         }
-        else if ([sender tag] == 2) // 1st Team Win
-        {
-            if ([[team1win currentImage] isEqual:uncheck]) {
-                [team2win setImage:uncheck forState:UIControlStateNormal];
-                [team1win setImage:check forState:UIControlStateNormal];
-                
-                tossWonTeamCode = team1Code;
-                
-                [self headToHeadResultsPostService];
-            }
+    }
+    else if ([sender tag] == 8) // ALL Team Win
+    {
+        
+        
+        if ([[btnAllWinTeams currentImage] isEqual:uncheck]) {
+            [btnAllWinTeams setImage:check forState:UIControlStateNormal];
+            [team2win setImage:uncheck forState:UIControlStateNormal];
+            [team1win setImage:uncheck forState:UIControlStateNormal];
+            
+            tossWonTeamCode = @"";
+            
+            //                [self headToHeadResultsPostService];
         }
-        else if ([sender tag] == 3) // 2nd Team Win
-        {
-            if ([[team2win currentImage] isEqual:uncheck]) {
-                [team2win setImage:check forState:UIControlStateNormal];
-                [team1win setImage:uncheck forState:UIControlStateNormal];
-                
-                tossWonTeamCode = team2Code;
-                
-                [self headToHeadResultsPostService];
-            }
+    }
+
+    else if ([sender tag] == 2) // 1st Team Win
+    {
+        
+        
+        if ([[team1win currentImage] isEqual:uncheck]) {
+            [team2win setImage:uncheck forState:UIControlStateNormal];
+            [team1win setImage:check forState:UIControlStateNormal];
+            [btnAllWinTeams setImage:uncheck forState:UIControlStateNormal];
+
+            tossWonTeamCode = team1Code;
+            
         }
-        else if ([sender tag] == 4) // 1-6 overs
-        {
-            if ([[spell1Inn currentImage] isEqual:uncheck]) {
-                [spell1Inn setImage:check forState:UIControlStateNormal];
-                [spell2Inn setImage:uncheck forState:UIControlStateNormal];
-                [spell3Inn setImage:uncheck forState:UIControlStateNormal];
-                
-                fromOver = @"0";
-                toOver = @"5";
-                
-                [self headToHeadResultsPostService];
-            }
+    }
+    else if ([sender tag] == 3) // 2nd Team Win
+    {
+        
+        if ([[team2win currentImage] isEqual:uncheck]) {
+            [team2win setImage:check forState:UIControlStateNormal];
+            [team1win setImage:uncheck forState:UIControlStateNormal];
+            [btnAllWinTeams setImage:uncheck forState:UIControlStateNormal];
+
+            tossWonTeamCode = team2Code;
+            
         }
-        else if ([sender tag] == 5) // 7-15 overs
-        {
-            if ([[spell2Inn currentImage] isEqual:uncheck]) {
-                [spell2Inn setImage:check forState:UIControlStateNormal];
-                [spell1Inn setImage:uncheck forState:UIControlStateNormal];
-                [spell3Inn setImage:uncheck forState:UIControlStateNormal];
-                
-                fromOver = @"6";
-                toOver = @"14";
-                
-                [self headToHeadResultsPostService];
-            }
+    }
+    else if ([sender tag] == 9) // ALL overs
+    {
+        if ([[spell1Inn currentImage] isEqual:uncheck]) {
+            [btnAllOvers setImage:check forState:UIControlStateNormal];
+            [spell1Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell2Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell3Inn setImage:uncheck forState:UIControlStateNormal];
+            
+            fromOver = @"";
+            toOver = @"";
+            
         }
-        else if ([sender tag] == 6) // 16-20 overs
-        {
-            if ([[spell3Inn currentImage] isEqual:uncheck]) {
-                [spell3Inn setImage:check forState:UIControlStateNormal];
-                [spell1Inn setImage:uncheck forState:UIControlStateNormal];
-                [spell2Inn setImage:uncheck forState:UIControlStateNormal];
-                
-                fromOver = @"15";
-                toOver = @"19";
-                
-                [self headToHeadResultsPostService];
-            }
+    }
+
+    else if ([sender tag] == 4) // 1-6 overs
+    {
+        if ([[spell1Inn currentImage] isEqual:uncheck]) {
+            [spell1Inn setImage:check forState:UIControlStateNormal];
+            [spell2Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell3Inn setImage:uncheck forState:UIControlStateNormal];
+            [btnAllOvers setImage:uncheck forState:UIControlStateNormal];
+
+            
+            fromOver = @"0";
+            toOver = @"5";
+            
         }
+    }
+    else if ([sender tag] == 5) // 7-15 overs
+    {
+        
+        if ([[spell2Inn currentImage] isEqual:uncheck]) {
+            [spell2Inn setImage:check forState:UIControlStateNormal];
+            [spell1Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell3Inn setImage:uncheck forState:UIControlStateNormal];
+            [btnAllOvers setImage:uncheck forState:UIControlStateNormal];
+
+            
+            fromOver = @"6";
+            toOver = @"14";
+            
+        }
+    }
+    else if ([sender tag] == 6) // 16-20 overs
+    {
+        
+        if ([[spell3Inn currentImage] isEqual:uncheck]) {
+            [spell3Inn setImage:check forState:UIControlStateNormal];
+            [spell1Inn setImage:uncheck forState:UIControlStateNormal];
+            [spell2Inn setImage:uncheck forState:UIControlStateNormal];
+            [btnAllOvers setImage:uncheck forState:UIControlStateNormal];
+
+            
+            fromOver = @"15";
+            toOver = @"19";
+            
+        }
+    }
+    
+    
+//    if ([[firstInn currentImage] isEqual:uncheck] && [[secondInn currentImage] isEqual:uncheck] && [[btnInnsAll currentImage] isEqual:uncheck]) {
+//
+//        viewTeamWin.userInteractionEnabled = NO;
+//        viewTeamWin.alpha = 0.5;
+//    }
+//    else
+//    {
+//        viewTeamWin.userInteractionEnabled = YES;
+//        viewTeamWin.alpha = 1.0;
+//
+//    }
+//
+//
+//    if ([[team1win currentImage] isEqual:uncheck] && [[team2win currentImage] isEqual:uncheck]) {
+//
+//        viewTeamOvers.userInteractionEnabled = NO;
+//        viewTeamOvers.alpha = 0.5;
+//    }
+//    else
+//    {
+//        viewTeamOvers.userInteractionEnabled = YES;
+//        viewTeamOvers.alpha = 1.0;
+//    }
+    
+    
+    if ([[sender currentImage] isEqual:check]) {
+        [self headToHeadResultsPostService];
+        
+    }
+    
+
 }
 
 @end
