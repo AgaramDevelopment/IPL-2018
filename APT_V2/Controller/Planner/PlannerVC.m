@@ -913,6 +913,8 @@
         
         else
         {
+            if([AppCommon isCoach])
+            {
             PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
             objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
@@ -923,6 +925,7 @@
             objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
 
             [self.navigationController pushViewController:objaddEvent animated:YES];
+            }
             
 //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
 //            objaddEvent.selectDateStr =selectdate;

@@ -86,6 +86,7 @@
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * addeventTblheight;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblheight;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * mainParticipantViewheight;
 
 
 @property (nonatomic,strong) NSMutableArray * participantsArray;
@@ -110,6 +111,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * updateBtn;
 
 @property (nonatomic,strong) IBOutlet UIButton * deleteBtn;
+@property (nonatomic,strong) IBOutlet UIButton * AddParticipantBtn;
 
 @property (nonatomic,strong) IBOutlet UIButton * saveBtn;
 
@@ -144,18 +146,42 @@
         
         if([_isNotification isEqualToString:@"yes"])
         {
-            self.updateBtn.hidden=YES;
-            self.deleteBtn.hidden =YES;
-            self.saveBtn.hidden =YES;
+            if([AppCommon isCoach])
+            {
+                self.updateBtn.hidden=NO;
+                self.deleteBtn.hidden =NO;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =NO;
+            }
+            else
+            {
+                
+                self.updateBtn.hidden=YES;
+                self.deleteBtn.hidden =YES;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =YES;
+            }
+            
             
             [self editFetchWebservice:self.eventType :@"0" :@"false"];
             
         }
         else
         {
-            self.updateBtn.hidden=NO;
-            self.deleteBtn.hidden =NO;
-            self.saveBtn.hidden =YES;
+            if([AppCommon isCoach])
+            {
+                self.updateBtn.hidden=NO;
+                self.deleteBtn.hidden =NO;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =NO;
+            }
+            else
+            {
+                self.updateBtn.hidden=YES;
+                self.deleteBtn.hidden =YES;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =YES;
+            }
             
         [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"id"] :@"0" :@"false"];
         }
@@ -483,7 +509,7 @@
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
         
-        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+       // self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -526,7 +552,7 @@
         isteam =NO;
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
-        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+        //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -569,7 +595,7 @@
         isteam =NO;
         isaddPartcipant=NO;
         [self.popviewTbl reloadData];
-        self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+        //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden=YES;
@@ -700,12 +726,44 @@
 -(IBAction)didClickClearAllBtn:(id)sender
 {
     [selectedMarks removeAllObjects];
+    int a = selectedMarks.count;
+    if(a == 0)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = @"";
+    }
+    if(a == 1)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = [NSString stringWithFormat:@"%d item selected", a];
+    }
+    else
+    {
+        self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
+    }
     [self.multselectTbl reloadData];
 }
 -(IBAction)didClickSelectAll:(id)sender
 {
     selectedMarks=[[NSMutableArray alloc]init];
     selectedMarks =self.commonArray;
+    
+    int a = selectedMarks.count;
+    if(a == 0)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = @"";
+    }
+    if(a == 1)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = [NSString stringWithFormat:@"%d item selected", a];
+    }
+    else
+    {
+        self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
+    }
+    
     [self.multselectTbl reloadData];
 }
 -(IBAction)didClickUpdateBtnAction:(id)sender
@@ -944,9 +1002,10 @@
 
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
     
-    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+    self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
     
-    self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+    //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     
 
     self.particiLbl.text =@"Select";
@@ -1213,9 +1272,10 @@
                 [self.participantTbl reloadData];
                 
                 self.addeventTblheight.constant =self.participantTbl.contentSize.height;
-                self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+                //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
                 
-                self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+                self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+                self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
                 
             }
             
@@ -1438,9 +1498,13 @@
         objCell.participationTypeLbl.text =[[self.addParticipantArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         objCell.participantLbl.text =[[self.addParticipantArray valueForKey:@"Participantname"] objectAtIndex:indexPath.row];
         objCell.availableLbl.text= [[self.addParticipantArray valueForKey:@"IsAvailable"] objectAtIndex:indexPath.row];
+        if([AppCommon isCoach])
+        {
+            [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
         
         
-        [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         
         
         
@@ -1626,7 +1690,8 @@
     
     [self.participantTbl reloadData];
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
-    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+    self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
 }
 -(IBAction)didClickBackBtn:(id)sender
 {

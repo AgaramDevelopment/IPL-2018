@@ -22,6 +22,7 @@
 @property (strong,nonatomic) id<openUploadDataSource> Delegate;
 @property (strong, nonatomic) IBOutlet UICollectionView *scheduleCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *resultCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *eventsCollectionView;
 
 @property (strong, nonatomic) IBOutlet ScheduleCell *objSchedule;
 @property (strong, nonatomic) IBOutlet ResultCell *objResult;

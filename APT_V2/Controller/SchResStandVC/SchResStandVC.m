@@ -21,6 +21,7 @@
 #import "ResultsVc.h"
 #import "DocumentViewController.h"
 #import "VideoDocumentVC.h"
+#import "PlannerAddEvent.h"
 
 
 @interface SchResStandVC ()<openUploadDelegate,openUploadDocumentDelegate>
@@ -41,6 +42,13 @@
 @property (strong, nonatomic)  NSMutableArray *commonArray;
 @property (strong, nonatomic)  NSMutableArray *commonArray2;
 
+@property (nonatomic,strong) NSMutableArray * AllEventListArray;
+@property (nonatomic,strong) NSMutableArray * AllEventDetailListArray;
+@property (nonatomic,strong) NSMutableArray * ParticipantsTypeArray;
+@property (nonatomic,strong) NSMutableArray * PlayerTeamArray;
+@property (nonatomic,strong) NSMutableArray * EventStatusArray;
+@property (nonatomic,strong) NSMutableArray * EventTypeArray;
+
 @end
 
 @implementation SchResStandVC
@@ -56,7 +64,7 @@
     
     //[self customnavigationmethod];
     
-    //[self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    [self.eventsCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
@@ -151,11 +159,14 @@
                 NSMutableArray *scheduleArray = [responseObject valueForKey:@"EventDetails"];
                 NSMutableArray *resultArray = [responseObject valueForKey:@"ResultsValues"];
                 
+                self.commonArray = [[NSMutableArray alloc]init];
+                self.commonArray2 = [[NSMutableArray alloc]init];
+                
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
                 
                 
-                //[self.scheduleCollectionView reloadData];
+                [self.eventsCollectionView reloadData];
                 [self.resultCollectionView reloadData];
             }
             
@@ -208,6 +219,10 @@
     {
         return objarray.count;
     }
+    else if(collectionView==self.eventsCollectionView)
+    {
+        return self.commonArray.count;
+    }
     else
     {
         return self.commonArray2.count;
@@ -227,7 +242,8 @@
     }
     else if(IS_IPAD)
     {
-        width = width/3;
+       width = width/3;
+    
     }
     
     return CGSizeMake(width-20, height-20);
@@ -316,7 +332,51 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    if(collectionView==self.eventsCollectionView)
+    {
+        
+        ScheduleCell* cell = [self.eventsCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        
+        cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
+        
+        cell.eventTypelbl.text = [[self.commonArray valueForKey:@"EventTypeDesc"] objectAtIndex:indexPath.row];
+        
+       unichar firstChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:0];
+        cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+        
+        NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
+        NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
+        cell.venuelbl.text = [[self.commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
+        
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        NSDate *date  = [dateFormatter dateFromString:starttime];
+        // Convert to new Date Format
+        [dateFormatter setDateFormat:@"hh:mm a"];
+        NSString *newtime1 = [dateFormatter stringFromDate:date];
+        
+        NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+        [dateFormatter2 setDateFormat:@"HH:mm:ss"];
+        NSDate *date2  = [dateFormatter2 dateFromString:endtime];
+        // Convert to new Date Format
+        [dateFormatter2 setDateFormat:@"hh:mm a"];
+        NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
+        
+        cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
+        
+        
+        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
+        return cell;
+    }
     if(collectionView==self.scheduleCollectionView)
     {
         
@@ -538,7 +598,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if(collectionView == self.resultCollectionView)
+    if(collectionView == self.eventsCollectionView)
+    {
+        PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+        //objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+        
+        objaddEvent = (PlannerAddEvent *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"AddEvent"];
+        objaddEvent.isEdit =YES;
+        objaddEvent.isNotification = @"yes";
+        objaddEvent.eventType = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"EventCode"];
+        objaddEvent.ListeventTypeArray = self.EventTypeArray;
+        objaddEvent.ListeventStatusArray =self.EventStatusArray;
+        objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
+        [appDel.frontNavigationController pushViewController:objaddEvent animated:YES];
+    }
+    else if(collectionView == self.resultCollectionView)
     {
         displayMatchCode = [[self.commonArray2 valueForKey:@"MATCHCODE"] objectAtIndex:indexPath.row];
         NSMutableArray *scoreArray = [[NSMutableArray alloc]init];
@@ -684,6 +758,14 @@
                         [objarray addObject:dic];
                         
                         
+                       NSString * usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+                        
+                       NSString * cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+                        
+                        NSString *userref = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+                        
+                        [self EventTypeWebservice :usercode:cliendcode:userref];
+                        
                     }
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -726,6 +808,81 @@
     
     [Delegate openVideoUploadViewInTabHomeVC];
 
+}
+
+
+-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",PlannerEventKey]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(usercode)   [dic    setObject:usercode     forKey:@"CreatedBy"];
+        if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
+        if(userreference)   [dic    setObject:userreference     forKey:@"Userreferencecode"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                NSLog(@"%@",responseObject);
+                self.AllEventListArray = [[NSMutableArray alloc]init];
+                
+                NSMutableArray * objAlleventArray= [responseObject valueForKey:@"ListEventTypeDetails"];
+                
+                
+                NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+                [mutableDict setObject:@"" forKey:@"EventTypeColor"];
+                [mutableDict setObject:@"" forKey:@"EventTypeCode"];
+                [mutableDict setObject:@"All EVENT" forKey:@"EventTypename"];
+                
+                [self.AllEventListArray addObject:mutableDict];
+                for(int i=0; objAlleventArray.count>i;i++)
+                {
+                    NSMutableDictionary * objDic =[objAlleventArray objectAtIndex:i];
+                    [self.AllEventListArray addObject:objDic];
+                }
+                
+                self.ParticipantsTypeArray =[[NSMutableArray alloc]init];
+                self.ParticipantsTypeArray=[responseObject valueForKey:@"ListParticipantsTypeDetails"];
+                
+                self.PlayerTeamArray =[[NSMutableArray alloc]init];
+                self.PlayerTeamArray =[responseObject valueForKey:@"ListPlayerTeamDetails"];
+                
+                self.EventTypeArray  =[[NSMutableArray alloc]init];
+                self.EventTypeArray =[responseObject valueForKey:@"ListEventTypeDetails"];
+                
+                self.EventStatusArray =[[NSMutableArray alloc]init];
+                self.EventStatusArray =[responseObject valueForKey:@"ListEventStatusDetails"];
+                
+                
+            }
+            
+            
+            
+            [AppCommon hideLoading];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [COMMON webServiceFailureError:error];
+        }];
+    }
+    
 }
 
 @end

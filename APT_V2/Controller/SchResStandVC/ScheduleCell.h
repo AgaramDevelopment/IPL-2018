@@ -11,6 +11,8 @@
 @interface ScheduleCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIView *shadowview;
 @property (strong, nonatomic) IBOutlet UILabel *eventNamelbl;
+@property (strong, nonatomic) IBOutlet UILabel *eventTypelbl;
+@property (strong, nonatomic) IBOutlet UILabel *eventTypeLetterlbl;
 @property (strong, nonatomic) IBOutlet UILabel *timelbl;
 @property (strong, nonatomic) IBOutlet UILabel *venuelbl;
 
