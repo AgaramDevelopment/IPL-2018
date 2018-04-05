@@ -14,6 +14,7 @@
 #import "WebService.h"
 #import "ResultsVc.h"
 #import "TabbarVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MCOverViewVC ()
 {
@@ -225,38 +226,38 @@
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
         NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];
 
-        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.team1Img.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.team1Img.image = image;
-            }
-            else
-            {
-                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-        
+//        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.team1Img.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.team1Img.image = image;
+//            }
+//            else
+//            {
+//                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
 //        NSString * photourl2 = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:0]];
         NSString * photourl2 = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"BTPhoto"] objectAtIndex:indexPath.row]];
 
-        [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.team2Img.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.team2Img.image = image;
-            }
-            else
-            {
-                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-        
+//        [self downloadImageWithURL:[NSURL URLWithString:photourl2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.team2Img.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.team2Img.image = image;
+//            }
+//            else
+//            {
+//                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:photourl2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
         
@@ -367,20 +368,20 @@
             
                 NSString * photourl = [NSString stringWithFormat:@"%@",[[teamDetailsArray valueForKey:@"TeamPhotoLink"] objectAtIndex:0]];
 
-            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    self.TeamImgView.image = image;
-                    
-                    // cache the image for use later (when scrolling up)
-                    self.TeamImgView.image = image;
-                }
-                else
-                {
-                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
-                }
-            }];
-            
+//            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                    // change the image in the cell
+//                    self.TeamImgView.image = image;
+//
+//                    // cache the image for use later (when scrolling up)
+//                    self.TeamImgView.image = image;
+//                }
+//                else
+//                {
+//                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
+//                }
+//            }];
+            [self.TeamImgView sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             recentMatchesArray = [[NSMutableArray alloc]init];
             recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
@@ -447,21 +448,21 @@
             
             NSString * photourl = @"";
             
-            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    self.TeamImgView.image = image;
-                    
-                    // cache the image for use later (when scrolling up)
-                    self.TeamImgView.image = image;
-                }
-                else
-                {
-                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
-                }
-            }];
+//            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                    // change the image in the cell
+//                    self.TeamImgView.image = image;
+//
+//                    // cache the image for use later (when scrolling up)
+//                    self.TeamImgView.image = image;
+//                }
+//                else
+//                {
+//                    self.TeamImgView.image = [UIImage imageNamed:@"no-image"];
+//                }
+//            }];
             
-            
+            [self.TeamImgView sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             self.moreBtn.hidden = YES;
             
@@ -770,19 +771,19 @@
             self.NodataView.hidden = YES;
             NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
             
-            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    self.Player1Img.image = image;
-                    
-                    // cache the image for use later (when scrolling up)
-                }
-                else
-                {
-                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-                }
-            }];
-            
+//            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                    // change the image in the cell
+//                    self.Player1Img.image = image;
+//
+//                    // cache the image for use later (when scrolling up)
+//                }
+//                else
+//                {
+//                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+//                }
+//            }];
+            [self.Player1Img sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
             self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
@@ -819,19 +820,19 @@
             
             NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
             
-            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    self.Player1Img.image = image;
-                    
-                    // cache the image for use later (when scrolling up)
-                }
-                else
-                {
-                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-                }
-            }];
-            
+//            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                    // change the image in the cell
+//                    self.Player1Img.image = image;
+//
+//                    // cache the image for use later (when scrolling up)
+//                }
+//                else
+//                {
+//                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+//                }
+//            }];
+            [self.Player1Img sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
             self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];
@@ -863,19 +864,19 @@
             self.NodataView.hidden = YES;
             NSString * photourl = [NSString stringWithFormat:@"%@",[[ReqArray valueForKey:@"PlayerPhotoLink"] objectAtIndex:0]];
             
-            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    self.Player1Img.image = image;
-                    
-                    // cache the image for use later (when scrolling up)
-                }
-                else
-                {
-                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
-                }
-            }];
-            
+//            [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                if (succeeded) {
+//                    // change the image in the cell
+//                    self.Player1Img.image = image;
+//                    
+//                    // cache the image for use later (when scrolling up)
+//                }
+//                else
+//                {
+//                    self.Player1Img.image = [UIImage imageNamed:@"no-image"];
+//                }
+//            }];
+            [self.Player1Img sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
             self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];

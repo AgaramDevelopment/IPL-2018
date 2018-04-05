@@ -867,20 +867,21 @@
         
 //        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:ATPhoto ]placeholderImage:[UIImage imageNamed:@"csk_lgo"]];
         
-        [self downloadImageWithURL:[NSURL URLWithString:ATPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.team1Img.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.team1Img.image = image;
-            }
-            else
-            {
-                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-
+//        [self downloadImageWithURL:[NSURL URLWithString:ATPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.team1Img.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.team1Img.image = image;
+//            }
+//            else
+//            {
+//                cell.team1Img.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:ATPhoto] placeholderImage:[UIImage imageNamed:@"no-image"]];
+        
         cell.Teamname1lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATName"]];
         
         NSString *team1RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"ATMaxInnsWckts"]]];
@@ -903,20 +904,21 @@
         
         cell.Teamname2lbl.text = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTName"]];
         
-        [self downloadImageWithURL:[NSURL URLWithString:BTPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.team2Img.image = image;
-
-                // cache the image for use later (when scrolling up)
-                cell.team2Img.image = image;
-            }
-            else
-            {
-                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-
+//        [self downloadImageWithURL:[NSURL URLWithString:BTPhoto] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.team2Img.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.team2Img.image = image;
+//            }
+//            else
+//            {
+//                cell.team2Img.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:BTPhoto] placeholderImage:[UIImage imageNamed:@"no-image"]];
+        
         NSString *team2RunsWickets = [NSString stringWithFormat:@"%@/%@", [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsTotal"]], [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"BTMaxInnsWckts"]]];
         cell.runs2lbl.text = team2RunsWickets;
         

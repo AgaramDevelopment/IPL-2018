@@ -15,6 +15,7 @@
 #import "ScoreCardVC.h"
 #import "TabbarVC.h"
 #import "Header.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ResultsVc () <selectedDropDown>
 {
@@ -218,21 +219,21 @@
     return nil;
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if ( !error )
-                               {
-                                   UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
-                               } else{
-                                   completionBlock(NO,nil);
-                               }
-                           }];
-}
+//- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+//{
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                               if ( !error )
+//                               {
+//                                   UIImage *image = [[UIImage alloc] initWithData:data];
+//                                   completionBlock(YES,image);
+//                               } else{
+//                                   completionBlock(NO,nil);
+//                               }
+//                           }];
+//}
 
 
 
@@ -286,7 +287,8 @@
         
         NSString * imgStr2 = ([firstobj  valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[firstobj  valueForKey:@"TeamBLogo"];
         //                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
-        
+    
+       /*
         [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -300,8 +302,7 @@
                 cell.team1Img.image = [UIImage imageNamed:@"no-image"];
             }
         }];
-        
-        
+    
         [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -315,8 +316,9 @@
                 cell.team2Img.image = [UIImage imageNamed:@"no-image"];
             }
         }];
-        
-
+    */
+    [cell.team1Img sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+    [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         
         if(![[firstobj valueForKey:@"FIRSTINNINGSSCORE"] isEqual:[NSNull null]])

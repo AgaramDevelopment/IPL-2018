@@ -22,6 +22,7 @@
 #import "DocumentViewController.h"
 #import "VideoDocumentVC.h"
 #import "PlannerAddEvent.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SchResStandVC ()<openUploadDelegate,openUploadDocumentDelegate>
 {
@@ -454,35 +455,35 @@
                 NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
 //                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
         
-                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-                    if (succeeded) {
-                        // change the image in the cell
-                        cell.teamAlogo.image = image;
+//                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                    if (succeeded) {
+//                        // change the image in the cell
+//                        cell.teamAlogo.image = image;
+//
+//                        // cache the image for use later (when scrolling up)
+//                        cell.teamAlogo.image = image;
+//                    }
+//                    else
+//                    {
+//                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//                    }
+//                }];
+                [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-                        // cache the image for use later (when scrolling up)
-                        cell.teamAlogo.image = image;
-                    }
-                    else
-                    {
-                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-                    }
-                }];
-        
-        
-                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-                    if (succeeded) {
-                        // change the image in the cell
-                        cell.teamBlogo.image = image;
-        
-                        // cache the image for use later (when scrolling up)
-                        cell.teamBlogo.image = image;
-                    }
-                    else
-                    {
-                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-                    }
-                }];
-        
+//                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                    if (succeeded) {
+//                        // change the image in the cell
+//                        cell.teamBlogo.image = image;
+//
+//                        // cache the image for use later (when scrolling up)
+//                        cell.teamBlogo.image = image;
+//                    }
+//                    else
+//                    {
+//                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//                    }
+//                }];
+                [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         //        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
         //
@@ -599,35 +600,35 @@
         NSString * imgStr2 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"];
 //        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
         
-        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.teamAlogo.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.teamAlogo.image = image;
-            }
-            else
-            {
-                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
+//        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamAlogo.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.teamAlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-        
-        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.teamBlogo.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.teamBlogo.image = image;
-            }
-            else
-            {
-                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-        
+//        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamBlogo.image = image;
+//                
+//                // cache the image for use later (when scrolling up)
+//                cell.teamBlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
 //        cell.contentView.layer.cornerRadius = 2.0f;
 //        cell.contentView.layer.borderWidth = 1.0f;

@@ -14,6 +14,7 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MCTeamCompVC () <selectedDropDown>
 {
@@ -1866,19 +1867,20 @@
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.BowlersArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
         
-        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.PlayerImg.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.PlayerImg.image = image;
-            }
-            else
-            {
-                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
+//        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.PlayerImg.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.PlayerImg.image = image;
+//            }
+//            else
+//            {
+//                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.PlayerImg sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
@@ -1920,19 +1922,20 @@
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.BatsmenArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
         
-        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.PlayerImg.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.PlayerImg.image = image;
-            }
-            else
-            {
-                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
+//        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.PlayerImg.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.PlayerImg.image = image;
+//            }
+//            else
+//            {
+//                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.PlayerImg sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
@@ -1979,19 +1982,21 @@
         
         NSString * photourl = [NSString stringWithFormat:@"%@",[[self.AllrounderArray valueForKey:@"PlayerPhoto"]objectAtIndex:indexPath.row]];
         
-        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.PlayerImg.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.PlayerImg.image = image;
-            }
-            else
-            {
-                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
+//        [self downloadImageWithURL:[NSURL URLWithString:photourl] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.PlayerImg.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.PlayerImg.image = image;
+//            }
+//            else
+//            {
+//                cell.PlayerImg.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.PlayerImg sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
+
         
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
