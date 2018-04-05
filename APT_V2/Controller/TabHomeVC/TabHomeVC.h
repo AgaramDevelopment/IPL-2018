@@ -11,7 +11,15 @@
 #import "VideoDocumentVC.h"
 #import "SchResStandVC.h"
 
+@protocol SharedNotificationDelegate <NSObject>
+
+-(void)PassedValue:(NSMutableArray *)array;
+
+@end
+
 @interface TabHomeVC : UIViewController <openUploadDataSource>
+
+@property (strong, nonatomic)id<SharedNotificationDelegate> protocol;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *Titlecollview;
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
@@ -42,5 +50,7 @@
 @property (strong, nonatomic) NSString *notificationsCount;
 
 - (IBAction)actionDatePickerChange:(id)sender;
+-(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+
 
 @end

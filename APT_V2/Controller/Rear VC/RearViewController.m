@@ -185,7 +185,9 @@
         arrItems=[NSArray new];
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-        
+//        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateNotificationCount) object:nil];
+//        TabHomeVC
+
         UIViewController* newFrontController= [LoginVC new];
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];

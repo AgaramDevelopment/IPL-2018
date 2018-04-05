@@ -44,6 +44,8 @@
     NSString* mimeType;
     CustomNavigation * objCustomNavigation;
     NSMutableArray *notificationArray;
+    NSTimer* myTimer;
+    BOOL success;
 }
 
 @end
@@ -58,7 +60,7 @@
 
 @synthesize selectedImageView,datePickerView;
 
-@synthesize datePicker,btnGallery;
+@synthesize datePicker,btnGallery,protocol;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,6 +84,8 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
+    
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
 
 }
 
@@ -878,7 +882,6 @@
      "ParticipantCode" : "AMR0000031"
      }
 
-
      */
     NSString *ClientCode = [AppCommon GetClientCode];
     NSString *userRefcode = [AppCommon GetuserReference];
@@ -887,7 +890,7 @@
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     NSString *URLString =  URL_FOR_RESOURCE(GetNotifications);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -911,10 +914,30 @@
             notificationArray = [responseObject valueForKey:@"NotificationsList"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-//            NSString *count = [NSString stringWithFormat:@"%ld", notificationArray.count];
-            
             objCustomNavigation.notificationCountLbl.text = [self checkNSNumber:[responseObject valueForKey:@"count"]];
+            NSNumber* number = [NSNumber numberWithInt:[objCustomNavigation.notificationCountLbl.text intValue]];
+            [[NSUserDefaults standardUserDefaults] setValue:number forKey:@"badgeCount"];
+
+            if(notificationArray.count > 0){
+                
+                NSMutableArray* oldCount = [[NSUserDefaults standardUserDefaults] arrayForKey:@"NotificationArray"];
+                if (notificationArray.count > oldCount.count || (notificationArray.count == 1 && oldCount.count == 0)) {
+                    
+                    [appDel scheduleLocalNotifications:notificationArray];
+                    [[NSUserDefaults standardUserDefaults] setValue:notificationArray forKey:@"NotificationArray"];
+
+                }
+                
+            }
+            else
+            {
+                NSLog(@"NO NEW DATA");
+                [[NSUserDefaults standardUserDefaults] setValue:notificationArray forKey:@"NotificationArray"];
+
+            }
+            
         });
+            
         }
         
         
@@ -923,10 +946,36 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
-        [AppCommon hideLoading];
+//        [AppCommon hideLoading];
         
     }];
 }
+
+-(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    
+    
+    
+    if (success) {
+
+        if (notificationArray.count) {
+            completionHandler(UIBackgroundFetchResultNoData);
+
+            NSLog(@"No new data found.");
+        }
+        else{
+
+            completionHandler(UIBackgroundFetchResultNewData);
+
+            NSLog(@"New data was fetched.");
+        }
+    }
+    else{
+        completionHandler(UIBackgroundFetchResultFailed);
+
+        NSLog(@"Failed to fetch new data.");
+    }
+}
+
 
 -(void)FetchvideouploadWebservice
 {
@@ -1191,6 +1240,7 @@
         }
     return str;
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

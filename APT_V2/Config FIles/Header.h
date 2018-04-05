@@ -94,5 +94,9 @@
 #import "TabHomeCell.h"
 #import "TabHomeVC.h"
 
+#import "DocumentViewController.h"
+#import "VideoDocumentVC.h"
+#import "PlannerAddEvent.h"
+
 #endif /* Header_h */
 

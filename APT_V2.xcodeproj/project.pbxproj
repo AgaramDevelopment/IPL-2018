@@ -214,6 +214,7 @@
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
 		CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741920248BF100F10917 /* LaunchScreen.storyboard */; };
 		CE3E741E20248BF100F10917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E741D20248BF100F10917 /* main.m */; };
+		CE5B3E17207605160027BD4A /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B3E16207605160027BD4A /* UserNotifications.framework */; };
 		CE6C16102045205400672253 /* ScoreCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C160F2045205400672253 /* ScoreCardVC.m */; };
 		CE6C16142045207400672253 /* ScoreCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16132045207400672253 /* ScoreCardCell.m */; };
 		CE6C16182045209900672253 /* ScorecardBowlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16172045209800672253 /* ScorecardBowlCell.m */; };
@@ -705,6 +706,7 @@
 		CE3E741A20248BF100F10917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE3E741C20248BF100F10917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3E741D20248BF100F10917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE5B3E16207605160027BD4A /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		CE65A43F206E1D7D001F0FEA /* APT Cricket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "APT Cricket.entitlements"; sourceTree = "<group>"; };
 		CE6C160E2045205400672253 /* ScoreCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardVC.h; sourceTree = "<group>"; };
 		CE6C160F2045205400672253 /* ScoreCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardVC.m; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5B3E17207605160027BD4A /* UserNotifications.framework in Frameworks */,
 				DA12ABDAE57C81EC118D504C /* Pods_APT_V2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1843,6 +1846,7 @@
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE5B3E16207605160027BD4A /* UserNotifications.framework */,
 				04A6B3E4206E315D00293AFD /* QuartzCore.framework */,
 				A341C632E084798C93714773 /* Pods_APT_V2.framework */,
 			);
@@ -2584,6 +2588,9 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
