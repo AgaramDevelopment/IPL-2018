@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "TeamMembersVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface TeamsVC ()
 {
@@ -119,21 +120,21 @@
     
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
-{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if ( !error )
-                               {
-                                   UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
-                               } else{
-                                   completionBlock(NO,nil);
-                               }
-                           }];
-}
+//- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+//{
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                               if ( !error )
+//                               {
+//                                   UIImage *image = [[UIImage alloc] initWithData:data];
+//                                   completionBlock(YES,image);
+//                               } else{
+//                                   completionBlock(NO,nil);
+//                               }
+//                           }];
+//}
 
 
 
@@ -164,16 +165,16 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString * imgStr1 = [[self.teamslist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
 
-    [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            cell.teamLogo.image = image;
-
-            // cache the image for use later (when scrolling up)
-            cell.teamLogo.image = image;
-        }
-    }];
-    
+//    [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//        if (succeeded) {
+//            // change the image in the cell
+//            cell.teamLogo.image = image;
+//
+//            // cache the image for use later (when scrolling up)
+//            cell.teamLogo.image = image;
+//        }
+//    }];
+    [cell.teamLogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
     cell.cellview.layer.shadowOffset = CGSizeMake(1, 0);
     cell.cellview.layer.shadowColor = [[UIColor blackColor] CGColor];
     cell.cellview.layer.shadowRadius = 5;

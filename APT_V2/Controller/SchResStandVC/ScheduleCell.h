@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *eventTypeLetterlbl;
 @property (strong, nonatomic) IBOutlet UILabel *timelbl;
 @property (strong, nonatomic) IBOutlet UILabel *venuelbl;
+@property (strong, nonatomic) IBOutlet UIImageView *ImgEvent;
 
 @end

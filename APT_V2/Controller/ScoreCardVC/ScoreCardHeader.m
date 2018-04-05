@@ -7,6 +7,7 @@
 //
 
 #import "ScoreCardHeader.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ScoreCardHeader ()
 
@@ -54,34 +55,35 @@
     NSString * imgStr2 = ([[self.matchDetailsArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"]==[NSNull null])?@"":[[self.matchDetailsArray objectAtIndex:0] valueForKey:@"BowlingTeamlogo"];
     NSString *teamBString = [NSString stringWithFormat:@"%@",imgStr2];
     
-    [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            self.teamAlogo.image = image;
-            
-            // cache the image for use later (when scrolling up)
-            self.teamAlogo.image = image;
-        }
-        else
-        {
-            self.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-        }
-    }];
+//    [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//        if (succeeded) {
+//            // change the image in the cell
+//            self.teamAlogo.image = image;
+//
+//            // cache the image for use later (when scrolling up)
+//            self.teamAlogo.image = image;
+//        }
+//        else
+//        {
+//            self.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//        }
+//    }];
+    [self.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
     
-    
-    [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            // change the image in the cell
-            self.teamBlogo.image = image;
-            
-            // cache the image for use later (when scrolling up)
-            self.teamBlogo.image = image;
-        }
-        else
-        {
-            self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        }
-    }];
+//    [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//        if (succeeded) {
+//            // change the image in the cell
+//            self.teamBlogo.image = image;
+//
+//            // cache the image for use later (when scrolling up)
+//            self.teamBlogo.image = image;
+//        }
+//        else
+//        {
+//            self.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//        }
+//    }];
+   [self.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
    }
     
 }

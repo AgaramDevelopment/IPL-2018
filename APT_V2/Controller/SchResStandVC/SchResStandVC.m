@@ -22,7 +22,7 @@
 #import "DocumentViewController.h"
 #import "VideoDocumentVC.h"
 #import "PlannerAddEvent.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SchResStandVC ()<openUploadDelegate,openUploadDocumentDelegate>
 {
@@ -68,7 +68,7 @@
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
-    
+    self.Nodatalbl.hidden = YES;
     self.scroll.contentSize =  self.commonView.frame.size;
     
 //    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
@@ -164,6 +164,15 @@
                 
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
+                
+                if(self.commonArray.count>0)
+                {
+                    self.Nodatalbl.hidden = YES;
+                }
+                else
+                {
+                    self.Nodatalbl.hidden = NO;
+                }
                 
                 
                 [self.eventsCollectionView reloadData];
@@ -337,13 +346,68 @@
         
         ScheduleCell* cell = [self.eventsCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         
-        
+        //Practice_Icon
         cell.eventNamelbl.text = [[self.commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
         
         cell.eventTypelbl.text = [[self.commonArray valueForKey:@"EventTypeDesc"] objectAtIndex:indexPath.row];
+        NSArray *arr = [cell.eventTypelbl.text componentsSeparatedByString:@""];
         
        unichar firstChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:0];
-        cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+       unichar secondChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:1];
+        unichar thirdChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:2];
+        unichar fourthChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:3];
+        //cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+        
+        if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"M"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Match_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PR"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Practice_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PH"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Physio_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAV"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Travel_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAI"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Training_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"TE"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Team_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"C"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Competition_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"O"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Others_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"F"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Fitness_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"N"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Net_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"ST"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Strength_Icon"];
+        }
+        else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"SE"])
+        {
+            cell.ImgEvent.image = [UIImage imageNamed:@"Season_Icon"];
+        }
+
+        
         
         NSString *starttime = [[self.commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
         NSString *endtime = [[self.commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
@@ -400,35 +464,35 @@
                 NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
 //                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
         
-                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-                    if (succeeded) {
-                        // change the image in the cell
-                        cell.teamAlogo.image = image;
+//                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                    if (succeeded) {
+//                        // change the image in the cell
+//                        cell.teamAlogo.image = image;
+//
+//                        // cache the image for use later (when scrolling up)
+//                        cell.teamAlogo.image = image;
+//                    }
+//                    else
+//                    {
+//                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//                    }
+//                }];
+                [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-                        // cache the image for use later (when scrolling up)
-                        cell.teamAlogo.image = image;
-                    }
-                    else
-                    {
-                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-                    }
-                }];
-        
-        
-                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-                    if (succeeded) {
-                        // change the image in the cell
-                        cell.teamBlogo.image = image;
-        
-                        // cache the image for use later (when scrolling up)
-                        cell.teamBlogo.image = image;
-                    }
-                    else
-                    {
-                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-                    }
-                }];
-        
+//                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//                    if (succeeded) {
+//                        // change the image in the cell
+//                        cell.teamBlogo.image = image;
+//
+//                        // cache the image for use later (when scrolling up)
+//                        cell.teamBlogo.image = image;
+//                    }
+//                    else
+//                    {
+//                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//                    }
+//                }];
+                [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
         //        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
         //
@@ -545,35 +609,35 @@
         NSString * imgStr2 = ([[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[self.commonArray2 objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"];
 //        NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
         
-        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.teamAlogo.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.teamAlogo.image = image;
-            }
-            else
-            {
-                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
+//        [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamAlogo.image = image;
+//
+//                // cache the image for use later (when scrolling up)
+//                cell.teamAlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-        
-        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.teamBlogo.image = image;
-                
-                // cache the image for use later (when scrolling up)
-                cell.teamBlogo.image = image;
-            }
-            else
-            {
-                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-            }
-        }];
-        
+//        [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
+//            if (succeeded) {
+//                // change the image in the cell
+//                cell.teamBlogo.image = image;
+//                
+//                // cache the image for use later (when scrolling up)
+//                cell.teamBlogo.image = image;
+//            }
+//            else
+//            {
+//                cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+//            }
+//        }];
+        [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
 //        cell.contentView.layer.cornerRadius = 2.0f;
 //        cell.contentView.layer.borderWidth = 1.0f;
