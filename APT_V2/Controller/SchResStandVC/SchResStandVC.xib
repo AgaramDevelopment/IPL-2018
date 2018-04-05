@@ -18,6 +18,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SchResStandVC">
             <connections>
                 <outlet property="MoreBtn" destination="POl-lM-n5v" id="Ndf-BR-yCl"/>
+                <outlet property="Nodatalbl" destination="YLA-eO-f1J" id="9V8-3T-uXC"/>
                 <outlet property="commonView" destination="Lno-E5-Jbz" id="CW6-4o-g1S"/>
                 <outlet property="documentView" destination="rCt-ai-XAQ" id="ZQt-pM-6r0"/>
                 <outlet property="eventsCollectionView" destination="RgW-Ef-v3q" id="XRZ-tL-tcA"/>
@@ -78,13 +79,25 @@
                                                 <outlet property="delegate" destination="-1" id="MLK-9v-qRZ"/>
                                             </connections>
                                         </collectionView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Events for Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLA-eO-f1J" userLabel="No Documents Found">
+                                            <rect key="frame" x="117" y="79" width="130" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="66o-26-UCV"/>
+                                                <constraint firstAttribute="width" constant="130" id="B6b-CX-oGu"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                            <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="RgW-Ef-v3q" firstAttribute="top" secondItem="7Bn-UK-Teh" secondAttribute="top" id="HxK-2l-hUW"/>
+                                        <constraint firstItem="YLA-eO-f1J" firstAttribute="centerY" secondItem="7Bn-UK-Teh" secondAttribute="centerY" id="JUK-Qy-CLu"/>
                                         <constraint firstItem="RgW-Ef-v3q" firstAttribute="leading" secondItem="7Bn-UK-Teh" secondAttribute="leading" id="LI5-K6-aZF"/>
                                         <constraint firstAttribute="height" constant="175" id="Que-v0-WJI"/>
                                         <constraint firstAttribute="trailing" secondItem="RgW-Ef-v3q" secondAttribute="trailing" id="icz-Ln-Y17"/>
+                                        <constraint firstItem="YLA-eO-f1J" firstAttribute="centerX" secondItem="7Bn-UK-Teh" secondAttribute="centerX" id="mED-vF-GZY"/>
                                         <constraint firstAttribute="bottom" secondItem="RgW-Ef-v3q" secondAttribute="bottom" id="uNA-5C-A58"/>
                                     </constraints>
                                 </view>

@@ -67,7 +67,7 @@
     [self.resultCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     [self.scheduleCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
-    
+    self.Nodatalbl.hidden = YES;
     self.scroll.contentSize =  self.commonView.frame.size;
     
 //    objVideo = [[VideoGalleryVC alloc] initWithNibName:@"VideoGalleryVC" bundle:nil];
@@ -163,6 +163,15 @@
                 
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
+                
+                if(self.commonArray.count>0)
+                {
+                    self.Nodatalbl.hidden = YES;
+                }
+                else
+                {
+                    self.Nodatalbl.hidden = NO;
+                }
                 
                 
                 [self.eventsCollectionView reloadData];

@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIView *standingsView;
 
 @property (strong, nonatomic) IBOutlet UIButton *MoreBtn;
+@property (strong, nonatomic) IBOutlet UILabel *Nodatalbl;
 
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
