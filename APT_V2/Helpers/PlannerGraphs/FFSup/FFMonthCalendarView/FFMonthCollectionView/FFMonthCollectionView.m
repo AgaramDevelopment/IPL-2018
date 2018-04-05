@@ -130,10 +130,35 @@
     
         NSDate *date = (NSDate *)obj;
         NSDateComponents *components = [NSDate componentsOfDate:date];
-        
+        [cell.EventNamelbl setText:@""];
         [cell setArrayEvents:[dictEvents objectForKey:date]];
+        
         [cell.labelDay setText:[NSString stringWithFormat:@"%li", (long)[components day]]];
-//        cell.backgroundColor = [UIColor greenColor];
+        //FFEvent *event = [arEvents objectAtIndex:0];
+        //[cell.EventNamelbl setText:event.stringCustomerName];
+        
+//         NSMutableArray *arEvents = [[NSMutableArray alloc]init];
+//         arEvents = [dictEvents objectForKey:date];
+//
+//                NSMutableArray *arr = [[NSMutableArray alloc]init];
+//                FFEvent *event = [FFEvent new];
+//                for(int i=0;i<arEvents.count;i++)
+//                {
+//                    FFEvent *event = [FFEvent new];
+//                    event = [arEvents objectAtIndex:i];
+//                    [arr addObject:event.stringCustomerName];
+//                }
+//
+//                if(arr.count>0)
+//                {
+//                    NSString *names = [arr componentsJoinedByString:@"/"];
+//                    [cell.EventNamelbl setText:[NSString stringWithFormat:@"%@", names]];
+//                }
+//                else
+//                {
+//                    [cell.EventNamelbl setText:@""];
+//                }
+        //        cell.backgroundColor = [UIColor greenColor];
         NSLog(@"day %li", (long)[components day]);
 
         if ([NSDate isTheSameDateTheCompA:components compB:[NSDate componentsOfCurrentDate]]) {
