@@ -82,7 +82,9 @@
         
         dropDownTblView.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:dropDownTblView];
-        [dropDownTblView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dropDownTblView reloadData];
+        });
     } else {
         [self resetDropDownTeamstatus];
     }

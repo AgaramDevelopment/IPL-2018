@@ -215,7 +215,9 @@ BOOL runSortingKey;
     self.tableWidth.constant = self.overallView.frame.size.width;
     self.tableXposition.constant = self.overallView.frame.origin.x;
     self.tableYposition.constant = self.overallView.frame.origin.y;
-        [self.PoplistTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.PoplistTable reloadData];
+        });
     }
 }
 
@@ -239,7 +241,9 @@ BOOL runSortingKey;
         self.tableWidth.constant = self.runsView.frame.size.width;
         self.tableXposition.constant = self.runsView.frame.origin.x;
         self.tableYposition.constant = self.runsView.frame.origin.y;
-        [self.PoplistTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.PoplistTable reloadData];
+        });
     }
 }
 
@@ -263,7 +267,9 @@ BOOL runSortingKey;
         self.tableWidth.constant = self.CompetitionView.frame.size.width;
         self.tableXposition.constant = self.CompetitionView.frame.origin.x;
         self.tableYposition.constant = self.CompetitionView.frame.origin.y;
-        [self.PoplistTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.PoplistTable reloadData];
+        });
     }
 
 }
@@ -288,7 +294,9 @@ BOOL runSortingKey;
         self.tableWidth.constant = self.teamView.frame.size.width;
         self.tableXposition.constant = self.teamView.frame.origin.x;
         self.tableYposition.constant = self.teamView.frame.origin.y;
-        [self.PoplistTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.PoplistTable reloadData];
+        });
     }
     
 }
@@ -732,8 +740,10 @@ BOOL runSortingKey;
                         NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
                         [self.ChartXAxisValuesArray addObject:value];
                         }
-                    [self barchartloadValues];
-                    [self.resultCollectionView reloadData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self barchartloadValues];
+                        [self.resultCollectionView reloadData];
+                    });
                 }
                 
                 
@@ -781,9 +791,10 @@ BOOL runSortingKey;
         runSortingKey = !runSortingKey;
         self.TableValuesArray = [[NSMutableArray alloc]init];
         [self.TableValuesArray addObjectsFromArray:sortedArray];
-        [self.resultCollectionView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.resultCollectionView reloadData];
+        });
     }
-    
 }
 
 - (IBAction)actionDropDowns:(id)sender {

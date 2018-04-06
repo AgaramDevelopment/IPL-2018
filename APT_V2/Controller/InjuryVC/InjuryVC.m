@@ -256,10 +256,10 @@ typedef enum {
     isLocation = NO;
     isSite = NO;
     isType = NO;
-
-    [self.pop_Tbl reloadData];
-    [self showAnimate];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.pop_Tbl reloadData];
+        [self showAnimate];
+    });
 }
 
 -(IBAction)didClickLocationPopBtn:(id)sender
@@ -279,9 +279,10 @@ typedef enum {
 
     self.commonArray =[[NSMutableArray alloc]init];
 //    _commonArray = [_MainArray valueForKey:@"Training"];
-    [self.pop_Tbl reloadData];
-    [self showAnimate];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.pop_Tbl reloadData];
+        [self showAnimate];
+    });
 }
 
 -(IBAction)didClicksitePopBtn:(id)sender
@@ -335,10 +336,10 @@ typedef enum {
     
     self.commonArray =[[NSMutableArray alloc]init];
     _commonArray = [_MainArray valueForKey:@"InjuryType"];
-
-    [self.pop_Tbl reloadData];
-    [self showAnimate];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.pop_Tbl reloadData];
+        [self showAnimate];
+    });
 }
 -(IBAction)didClickCasuseBtn:(id)sender
 {
@@ -356,10 +357,11 @@ typedef enum {
     isSite = NO;
     self.commonArray =[[NSMutableArray alloc]init];
     _commonArray = [_MainArray valueForKey:@"InjuryCause"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.pop_Tbl reloadData];
+        [self showAnimate];
 
-    [self.pop_Tbl reloadData];
-    [self showAnimate];
-
+    });
 }
 
 -(IBAction)didClickDelayBtn:(id)sender

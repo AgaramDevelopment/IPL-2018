@@ -313,8 +313,9 @@
     self.tableXposition.constant = self.dateView.frame.origin.x+5;
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = @[@"1",@"2",@"3"];
-    [self.Poptable reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.Poptable reloadData];
+    });
 }
 
 - (IBAction)barValueBtnAction:(id)sender
@@ -330,8 +331,9 @@
     
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = self.testArray;
-    [self.Poptable reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.Poptable reloadData];
+    });
 }
 
 - (IBAction)LineValueBtnAction:(id)sender
@@ -344,7 +346,9 @@
     self.tableXposition.constant = self.lineView.frame.origin.x+5;
     self.commonArray = [[NSMutableArray alloc]init];
     self.commonArray = self.testArray;
-    [self.Poptable reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.Poptable reloadData];
+    });
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

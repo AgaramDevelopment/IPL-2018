@@ -633,9 +633,10 @@
 
     }
     
-    [self.battingFstPie reloadData];
-    [self.battingSecPie reloadData];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.battingFstPie reloadData];
+        [self.battingSecPie reloadData];
+    });
 }
 
 

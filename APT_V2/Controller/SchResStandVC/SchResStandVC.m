@@ -174,9 +174,10 @@
                     self.Nodatalbl.hidden = NO;
                 }
                 
-                
-                [self.eventsCollectionView reloadData];
-                [self.resultCollectionView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.eventsCollectionView reloadData];
+                    [self.resultCollectionView reloadData];
+                });
             }
             
             [AppCommon hideLoading];
@@ -835,8 +836,6 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.scheduleCollectionView reloadData];
                     });
-                    
-                    
                 }
             }
             

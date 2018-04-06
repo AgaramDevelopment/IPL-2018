@@ -619,10 +619,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.ListTbl reloadData];
         });
-        
-        
     }
-    
 }
 
 -(void)setFilterResults
@@ -666,8 +663,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.ListTbl reloadData];
         });
-        
-    
     }
 }
 

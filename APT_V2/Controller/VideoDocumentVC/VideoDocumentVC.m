@@ -375,9 +375,9 @@
     {
         
     }
-    
-    [tblDropDown reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [tblDropDown reloadData];
+    });
 }
 
 -(IBAction)closeView:(id)sender
@@ -429,7 +429,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.docCollectionView reloadData];
-                
             });
         }
         

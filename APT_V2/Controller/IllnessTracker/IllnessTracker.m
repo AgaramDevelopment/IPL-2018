@@ -341,7 +341,9 @@
         
         dropDownTblView.backgroundColor=[UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
         [self.view addSubview:dropDownTblView];
-        [dropDownTblView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dropDownTblView reloadData];
+        });
     } else {
         [self resetDropDownIllnesstatus];
     }
@@ -369,7 +371,9 @@
         
         dropDownTblView.backgroundColor=[UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
         [self.view addSubview:dropDownTblView];
-        [dropDownTblView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dropDownTblView reloadData];
+        });
     } else {
         [self resetDropDownIllnesstatus];
     }
@@ -395,7 +399,9 @@
         
         dropDownTblView.backgroundColor=[UIColor colorWithRed:(13/255.0f) green:(43/255.0f) blue:(129/255.0f) alpha:1.0f];
         [self.view addSubview:dropDownTblView];
-        [dropDownTblView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dropDownTblView reloadData];
+        });
     } else {
         [self resetDropDownIllnesstatus];
     }

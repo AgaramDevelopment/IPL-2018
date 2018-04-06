@@ -607,10 +607,10 @@ int headdingCount = 0;
     
     [self.tblView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    [self.tblView reloadData];
-    
-    [self.tblView endUpdates];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tblView reloadData];
+        [self.tblView endUpdates];
+    });
 }
 
 //Load fieding type sub players
@@ -1005,12 +1005,11 @@ int headdingCount = 0;
         innsFour = dic1;
     }
     
-    
-    [self generatePostionForTblView];
-    
-    _tblView.hidden = false;
-    [_tblView reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self generatePostionForTblView];
+        _tblView.hidden = false;
+        [_tblView reloadData];
+    });
 }
 
 -(void) generatePostionForTblView {
@@ -1265,9 +1264,9 @@ int headdingCount = 0;
     [_videoView addSubview:self.avPlayerViewController.view];
 
     [self.avPlayer play];
-    
-    [self.ballsColView reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.ballsColView reloadData];
+    });
 }
 
 -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo
@@ -1307,8 +1306,9 @@ int headdingCount = 0;
             if(videoURLArray.count >0){
                  selectedVideo = 0;
                 self.rootVideoView.hidden = NO;
-                [self.ballsColView reloadData];
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.ballsColView reloadData];
+                });
                 
                 NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
                 NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
