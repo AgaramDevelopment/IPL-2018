@@ -48,9 +48,23 @@
         arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Change Password",@"Logout"];
     }
     
-
-    [self.RearTableView reloadData];
-    self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    
+    
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        arrItems = [NSArray new];
+//        arrItems = @[@"Home",@"Match Center",@"Planner",@"Change Password",@"Logout"];
+//    }
+//    else
+//    {
+//        arrItems = [NSArray new];
+//       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
+//    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.RearTableView reloadData];
+        self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    });
 }
 
 

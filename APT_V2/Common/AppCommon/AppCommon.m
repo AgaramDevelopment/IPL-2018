@@ -434,7 +434,7 @@ AppCommon *sharedCommon = nil;
 
 +(void)newVersionUpdateAlert
 {
-    NSString* msg = [NSString stringWithFormat:@"New Verion %@ was released.Do you want the updates?",[AppCommon getAppVersion]];
+    NSString* msg = [NSString stringWithFormat:@"New Verion was released.Do you want the updates?"];
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"Later" style:UIAlertActionStyleCancel handler:nil];

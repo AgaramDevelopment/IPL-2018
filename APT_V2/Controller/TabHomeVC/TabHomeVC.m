@@ -84,7 +84,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
     
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
+    myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
 
 }
 
@@ -859,10 +859,13 @@
     
     if ([from isEqualToString:@"video"]) {
         lblUploadHeaderName.text = @"Videos";
+        txtVideoDate.placeholder = @"Video Date";
+
     }
     else
     {
         lblUploadHeaderName.text = @"Documents";
+        txtVideoDate.placeholder = @"Document Date";
     }
     
     imgData = nil;

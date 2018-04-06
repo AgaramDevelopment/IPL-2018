@@ -132,6 +132,10 @@
     if(_teamTF.hasText)  [dic    setObject:teamCode forKey:@"teamcode"];
     if(username)   [dic    setObject:username     forKey:@"username"];
     if(password)   [dic    setObject:password     forKey:@"password"];
+       [dic    setObject:[AppCommon getAppVersion]     forKey:@"version"];
+        [dic    setObject:@"ios"     forKey:@"platform"];
+
+    NSLog(@"API URL : %@",URLString);
 
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -204,8 +208,13 @@
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
             
-            NSString * string =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-
+//            NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+//            NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+//            if (!isLatestVersion) {
+//                NSLog(@"canUpdate TRUE ");
+//                [AppCommon newVersionUpdateAlert];
+//            }
+            
         }
         else{
             [AppCommon showAlertWithMessage:@"Invalid Login"];

@@ -30,7 +30,7 @@
 
 @synthesize AllrounderBtn,WktKeeperBtn;
 
-@synthesize navView;
+@synthesize navView,filterContainerView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

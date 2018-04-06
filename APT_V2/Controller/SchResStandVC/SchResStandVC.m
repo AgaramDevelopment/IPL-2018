@@ -183,8 +183,11 @@
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
         if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
         if(playerCode)   [dic    setObject:playerCode     forKey:@"PlayerCode"];
-        
-        
+        [dic    setObject:[AppCommon getAppVersion]     forKey:@"version"];
+        [dic    setObject:@"ios"     forKey:@"platform"];
+
+        NSLog(@"ScheduleKey URL : %@",URLString);
+
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
@@ -200,9 +203,22 @@
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
                 
-                [self.eventsCollectionView reloadData];
-                [self.resultCollectionView reloadData];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.eventsCollectionView reloadData];
+                    [self.resultCollectionView reloadData];
+                });
+                
+                NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+                NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+                if (!isLatestVersion) {
+                    NSLog(@"canUpdate TRUE ");
+                    [AppCommon newVersionUpdateAlert];
+                }
+
             }
+            
+            
             
             [AppCommon hideLoading];
             [self FixturesWebservice];

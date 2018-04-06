@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *BowlerBtn;
 @property (weak, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoData;
+@property (weak, nonatomic) IBOutlet UIView *filterContainerView;
 
 
 @end
