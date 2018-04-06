@@ -1569,14 +1569,14 @@
     [view.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [view.layer setShadowRadius:2.0F];
     [view.layer setShadowOpacity:0.3F];
-    
+
     UILabel *label = [[UILabel alloc] init];
     [label setFont:[UIFont systemFontOfSize:12]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setText:[NSString stringWithFormat:@"%@", value]];
     [label setFrame:CGRectMake(0, 0, 100, 30)];
     [view addSubview:label];
-    
+
     [view setFrame:label.frame];
     return view;
 }

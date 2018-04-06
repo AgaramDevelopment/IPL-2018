@@ -148,7 +148,7 @@
 #pragma mark Draw Shape Layer
 - (void)createYAxisLine{
     float minY = 0.0;
-    float maxY = 0.0;
+    float maxY = 36.0;
     
     for (BarChartDataRenderer *barData in self.barDataArray) {
         
@@ -169,7 +169,7 @@
         }
     }
     
-    int gridYCount = 5;
+    int gridYCount = 6;
     
     float step = (maxY - minY) / gridYCount;
     
@@ -238,7 +238,7 @@
         NSAttributedString *attrString = [LegendView getAttributedString:text withFont:self.textFont];
         CGSize size = [attrString boundingRectWithSize:CGSizeMake(WIDTH(self) - LEGEND_VIEW, MAXFLOAT) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         
-        [self drawLineForGridWithStartPoint:startPoint endPoint:endPoint text:text textFrame:CGRectMake(x + size.width/2, HEIGHT(self.graphView) - (size.height + INNER_PADDING), size.width, size.height) drawGrid:drawGrid];
+        [self drawLineForGridWithStartPoint:startPoint endPoint:endPoint text:text textFrame:CGRectMake(20+x + size.width/2, HEIGHT(self.graphView) - (size.height + INNER_PADDING), size.width, size.height) drawGrid:drawGrid];
     }
 }
 
@@ -269,6 +269,21 @@
             [shapeLayer setShadowColor:[[UIColor clearColor] CGColor]];
             [shapeLayer setShadowOpacity:0.0f];
             [shapeLayer setValue:[barData.yAxisArray objectAtIndex:i] forKey:@"data"];
+            
+            
+            int value = [[barData.yAxisArray objectAtIndex:i] intValue] *stepY;
+            
+            CATextLayer *textLayer = [[CATextLayer alloc] init];
+            [textLayer setFont:(__bridge CFTypeRef _Nullable)self.textFont];
+            [textLayer setFontSize:self.textFontSize];
+            [textLayer setFrame:CGRectMake(startPoint.x-30, HEIGHT(self.graphView)-value-30, 30, 30)];
+            [textLayer setString:[barData.yAxisArray objectAtIndex:i]];
+            [textLayer setAlignmentMode:kCAAlignmentLeft];
+            [textLayer setForegroundColor:[UIColor blackColor].CGColor];
+            [textLayer setShouldRasterize:YES];
+            [textLayer setRasterizationScale:[[UIScreen mainScreen] scale]];
+            [textLayer setContentsScale:[[UIScreen mainScreen] scale]];
+            [self.graphView.layer addSublayer:textLayer];
             
             [CATransaction begin];
             
@@ -301,11 +316,13 @@
 #pragma mark Draw Grid Lines
 - (void)drawLineForGridWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint text:(NSString *)text textFrame:(CGRect)frame drawGrid:(BOOL)draw{
     if (draw) {
+        
         CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
         [shapeLayer setPath:[[self drawPathWithStartPoint:startPoint endPoint:endPoint] CGPath]];
         [shapeLayer setStrokeColor:self.gridLineColor.CGColor];
         [shapeLayer setLineWidth:self.gridLineWidth];
         [self.graphView.layer addSublayer:shapeLayer];
+
     }
     
     CATextLayer *textLayer = [[CATextLayer alloc] init];
@@ -313,7 +330,7 @@
     [textLayer setFontSize:self.textFontSize];
     [textLayer setFrame:frame];
     [textLayer setString:text];
-    [textLayer setAlignmentMode:kCAAlignmentCenter];
+    [textLayer setAlignmentMode:kCAAlignmentRight];
     [textLayer setForegroundColor:self.textColor.CGColor];
     [textLayer setShouldRasterize:YES];
     [textLayer setRasterizationScale:[[UIScreen mainScreen] scale]];
