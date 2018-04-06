@@ -91,7 +91,7 @@
 
 -(IBAction)didClickSubmitBtnAction:(id)sender
 {
-    
+
     [self validation];
     
     //    objpalyer.selectPlayerimg = [[NSUserDefaults standardUserDefaults]stringForKey:@"PhotoPath"];
@@ -175,6 +175,8 @@
                 [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"CAPTeamcode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             //}
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.userTxt.text forKey:@"UserID"];//LogID
 
                 VC = [TabHomeVC new];
                 [COMMON getIPLteams];

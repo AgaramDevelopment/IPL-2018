@@ -39,24 +39,24 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return (IS_IPAD ? 50 : 40);
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return (IS_IPAD ? 50 : 40);
+//}
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    PopOverVCCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"headerCell"];
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PopOverVCCell" owner:self options:nil];
-    
-    // 1. Dequeue the custom header cell
-    headerCell = arr[0];
-    NSString *count = [NSString stringWithFormat:@"%ld", self.listArray.count];
-//    headerCell.notificationCountLbl.text = notificationsCount;
-    headerCell.notificationCountLbl.text = count;
-    // 3. And return
-    return headerCell;
-}
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    PopOverVCCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"headerCell"];
+//    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PopOverVCCell" owner:self options:nil];
+//
+//    // 1. Dequeue the custom header cell
+//    headerCell = arr[0];
+//    NSString *count = [NSString stringWithFormat:@"%ld", self.listArray.count];
+////    headerCell.notificationCountLbl.text = notificationsCount;
+//    headerCell.notificationCountLbl.text = count;
+//    // 3. And return
+//    return headerCell;
+//}
 
 #pragma mark - UITableView Delegate Methods
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -52,11 +52,8 @@
     selctedValues = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
     [self videoGalleryWebservice];
     backButtonNames = [NSMutableArray new];
-    
-    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
-    NSString* kXIP = @"TEA0000011";
-    
-    [btnUpload setHidden:![loginedTeamCode isEqualToString:kXIP]];
+        
+    [btnUpload setHidden:![AppCommon isKXIP]];
 
     
 }

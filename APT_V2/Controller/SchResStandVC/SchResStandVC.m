@@ -54,12 +54,14 @@
 @implementation SchResStandVC
 @synthesize documentView;
 
+@synthesize eventViewHeight,eventCollectionHeight,ScrollcontentHeight;
+
 @synthesize Delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self ScheduleWebservice];
-    
+
     // Do any additional setup after loading the view from its nib.
     
     //[self customnavigationmethod];
@@ -90,6 +92,39 @@
 //    [self.standingsView addSubview:objStands.view];
     [self changeFormat];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([AppCommon isKXIP]) {
+        
+        [self.Nodatalbl setHidden:NO];
+        eventViewHeight.constant = 30;
+        eventCollectionHeight.constant = 175;
+        self.eventsCollectionView.delegate = self;
+        self.eventsCollectionView.dataSource = self;
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1310);
+//        ScrollcontentHeight.constant = 1290;
+    }
+    else
+    {
+        self.eventsCollectionView.delegate = nil;
+        self.eventsCollectionView.dataSource = nil;
+
+        [self.Nodatalbl setHidden:YES];
+        eventViewHeight.constant = 0;
+        eventCollectionHeight.constant = 0;
+//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1105);
+//        ScrollcontentHeight.constant = 1085;
+
+    }
+    
+    [self.view updateConstraintsIfNeeded];
+    
+    
+
 }
 
 -(void)changeFormat
@@ -165,16 +200,6 @@
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
                 
-                if(self.commonArray.count>0)
-                {
-                    self.Nodatalbl.hidden = YES;
-                }
-                else
-                {
-                    self.Nodatalbl.hidden = NO;
-                }
-                
-                
                 [self.eventsCollectionView reloadData];
                 [self.resultCollectionView reloadData];
             }
@@ -230,6 +255,8 @@
     }
     else if(collectionView==self.eventsCollectionView)
     {
+        
+        self.Nodatalbl.hidden = self.commonArray.count;
         return self.commonArray.count;
     }
     else
@@ -863,14 +890,14 @@
 {
     NSLog(@"openVideoUploadView called");
 
-    [Delegate openVideoUploadViewInTabHomeVC];
+    [Delegate openVideoUploadViewInTabHomeVC:@"video"];
 }
 
 -(void)openDocumentUploadView
 {
     NSLog(@"openVideoUploadView called");
     
-    [Delegate openVideoUploadViewInTabHomeVC];
+    [Delegate openVideoUploadViewInTabHomeVC:@"document"];
 
 }
 

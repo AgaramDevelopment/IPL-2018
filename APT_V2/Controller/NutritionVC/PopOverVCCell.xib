@@ -27,42 +27,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1A-D9-VMy">
-                        <rect key="frame" x="160" y="0.0" width="0.0" height="39.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i24-ZW-UmF">
-                        <rect key="frame" x="0.0" y="0.0" width="157" height="37.5"/>
-                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
-                        </variation>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHW-oO-LCU">
-                        <rect key="frame" x="163" y="10" width="30" height="19.5"/>
-                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgu-tf-HDz">
+                        <rect key="frame" x="92" y="0.0" width="135" height="39.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i24-ZW-UmF">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="39"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHW-oO-LCU">
+                                <rect key="frame" x="105" y="5" width="30" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="V0U-uO-Ajm"/>
+                                    <constraint firstAttribute="width" constant="30" id="kLG-ii-3sC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
+                                </variation>
+                            </label>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Z58-WB-ytO">
-                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                            </constraint>
+                            <constraint firstItem="i24-ZW-UmF" firstAttribute="top" secondItem="Vgu-tf-HDz" secondAttribute="top" id="26A-y1-rPZ"/>
+                            <constraint firstAttribute="bottom" secondItem="i24-ZW-UmF" secondAttribute="bottom" id="Gnb-iz-khd"/>
+                            <constraint firstAttribute="trailing" secondItem="jHW-oO-LCU" secondAttribute="trailing" id="L2J-rh-FFb"/>
+                            <constraint firstItem="i24-ZW-UmF" firstAttribute="leading" secondItem="Vgu-tf-HDz" secondAttribute="leading" id="YIB-6a-szV"/>
+                            <constraint firstAttribute="width" constant="135" id="cor-b1-UbV"/>
+                            <constraint firstItem="jHW-oO-LCU" firstAttribute="centerY" secondItem="Vgu-tf-HDz" secondAttribute="centerY" id="xAB-gi-8UF"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                        </userDefinedRuntimeAttributes>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
-                        </variation>
-                    </label>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMX-Yp-S4E">
                         <rect key="frame" x="0.0" y="37.5" width="320" height="2"/>
                         <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,25 +76,13 @@
                 </subviews>
                 <color key="backgroundColor" red="0.14117647058823529" green="0.20392156862745098" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="lMX-Yp-S4E" firstAttribute="top" secondItem="i24-ZW-UmF" secondAttribute="bottom" id="0Yk-mu-JAQ"/>
-                    <constraint firstItem="jHW-oO-LCU" firstAttribute="leading" secondItem="r1A-D9-VMy" secondAttribute="trailing" constant="3" id="C87-Eu-eT8"/>
-                    <constraint firstItem="r1A-D9-VMy" firstAttribute="leading" secondItem="i24-ZW-UmF" secondAttribute="trailing" constant="3" id="JrT-S4-v47"/>
-                    <constraint firstItem="i24-ZW-UmF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="MIs-et-qdi"/>
-                    <constraint firstItem="r1A-D9-VMy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="MVl-xj-04N"/>
-                    <constraint firstItem="jHW-oO-LCU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="X7Y-kL-YJx"/>
-                    <constraint firstItem="i24-ZW-UmF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dR6-gg-90g"/>
-                    <constraint firstAttribute="bottom" secondItem="jHW-oO-LCU" secondAttribute="bottom" constant="10" id="dpY-aY-MO3">
-                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
-                    </constraint>
+                    <constraint firstItem="Vgu-tf-HDz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NgL-Z1-MKr"/>
+                    <constraint firstItem="Vgu-tf-HDz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RwJ-GM-DKM"/>
+                    <constraint firstItem="Vgu-tf-HDz" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bdx-IZ-Uii"/>
                     <constraint firstAttribute="bottom" secondItem="lMX-Yp-S4E" secondAttribute="bottom" id="dxz-Oc-GiF"/>
-                    <constraint firstItem="jHW-oO-LCU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eid-ee-zR2">
-                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
-                    </constraint>
-                    <constraint firstItem="r1A-D9-VMy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="lG3-s7-quB"/>
-                    <constraint firstAttribute="bottom" secondItem="r1A-D9-VMy" secondAttribute="bottom" id="m5R-fm-UXh"/>
                     <constraint firstAttribute="trailing" secondItem="lMX-Yp-S4E" secondAttribute="trailing" id="n1S-d0-NhO"/>
                     <constraint firstItem="lMX-Yp-S4E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nYi-p5-wGr"/>
-                    <constraint firstItem="r1A-D9-VMy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="q6W-tz-inU"/>
+                    <constraint firstAttribute="bottom" secondItem="Vgu-tf-HDz" secondAttribute="bottom" id="xFh-Bw-hks"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

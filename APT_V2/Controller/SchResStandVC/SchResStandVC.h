@@ -12,7 +12,7 @@
 
 @protocol openUploadDataSource <NSObject>
 
--(void)openVideoUploadViewInTabHomeVC;
+-(void)openVideoUploadViewInTabHomeVC:(NSString *)from;
 
 @end
 
@@ -39,5 +39,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 @property (weak, nonatomic) IBOutlet UIView *documentView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventCollectionHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ScrollcontentHeight;
 
 @end

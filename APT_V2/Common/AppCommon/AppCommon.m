@@ -216,6 +216,13 @@ AppCommon *sharedCommon = nil;
     return password;
 }
 
++(BOOL)isKXIP
+{
+    NSString* KXIP_Clientcode = @"CLI0000003";
+    
+    return [KXIP_Clientcode isEqualToString: [AppCommon GetClientCode]];
+}
+
 +(BOOL)isCoach
 {
    //  ROL0000002 player code
@@ -410,6 +417,38 @@ AppCommon *sharedCommon = nil;
     NSLog(@"output is : %@", Identifier);
 
     return Identifier;
+}
+
++(NSString *)getAppVersion
+{
+    
+    
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+//    NSString *productName = [info objectForKey:@"CFBundleName"];
+    NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
+
+    return AppVersion;
+    
+}
+
++(void)newVersionUpdateAlert
+{
+    NSString* msg = [NSString stringWithFormat:@"New Verion %@ was released.Do you want the updates?",[AppCommon getAppVersion]];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"Later" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Update Now" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-cricket/id1356455542?ls=1&mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        
+    }];
+    
+    [alert addAction:actionYes];
+    [alert addAction:actionNo];
+    [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
+
 }
 @end
 

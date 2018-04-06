@@ -57,6 +57,10 @@
 +(void)getTeamAndPlayerCode;
 +(NSString *)checkNull:(NSString *)_value;
 -(NSArray *)getCorrespondingTeamName:(NSString *)competetionName;
++(BOOL)isKXIP;
+
++(NSString *)getAppVersion;
++(void)newVersionUpdateAlert;
 
 @end
 

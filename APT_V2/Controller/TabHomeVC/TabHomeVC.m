@@ -62,6 +62,8 @@
 
 @synthesize datePicker,btnGallery,protocol;
 
+@synthesize lblUploadHeaderName;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -77,12 +79,9 @@
     
     titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
     
-//    [self getNotificationsPostService];
     [self FetchvideouploadWebservice];
     [txtVideoDate setInputView:datePickerView];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
     
     myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
@@ -117,10 +116,7 @@
     //Notification Method
     
     
-    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
-    NSString* kXIP = @"TEA0000011";
-
-    [objCustomNavigation.notificationView setHidden:![loginedTeamCode isEqualToString:kXIP]];
+    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
 
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -135,10 +131,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
-    NSString* kXIP = @"TEA0000011";
-    
-    [objCustomNavigation.notificationView setHidden:![loginedTeamCode isEqualToString:kXIP]];
+    [AppCommon getAppVersion];
+        
+    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
 
     
     [self getNotificationsPostService];
@@ -165,7 +160,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-
+    
 }
 
 -(IBAction)didClickNotificationBtn:(id)sender
@@ -854,9 +849,17 @@
     [viewUpload removeFromSuperview];
 }
 
--(void)openVideoUploadViewInTabHomeVC
+-(void)openVideoUploadViewInTabHomeVC:(NSString *)from
 {
     NSLog(@"openVideoUploadViewInTabHomeVC called");
+    
+    if ([from isEqualToString:@"video"]) {
+        lblUploadHeaderName.text = @"Videos";
+    }
+    else
+    {
+        lblUploadHeaderName.text = @"Documents";
+    }
     
     imgData = nil;
     selectedImageView.image = [UIImage imageNamed:@"Video-Icon-crop"];
@@ -890,7 +893,6 @@
     if(![COMMON isInternetReachable])
         return;
     
-//    [AppCommon showLoading];
     NSString *URLString =  URL_FOR_RESOURCE(GetNotifications);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -941,19 +943,15 @@
         }
         
         
-        [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed");
-        [COMMON webServiceFailureError:error];
-//        [AppCommon hideLoading];
+        NSLog(@"failed %@",error.description);
+//        [COMMON webServiceFailureError:error];
         
     }];
 }
 
 -(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    
-    
     
     if (success) {
 

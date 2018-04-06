@@ -19,8 +19,11 @@
             <connections>
                 <outlet property="MoreBtn" destination="POl-lM-n5v" id="Ndf-BR-yCl"/>
                 <outlet property="Nodatalbl" destination="YLA-eO-f1J" id="9V8-3T-uXC"/>
+                <outlet property="ScrollcontentHeight" destination="JZS-rv-iuJ" id="3OK-Dv-byl"/>
                 <outlet property="commonView" destination="Lno-E5-Jbz" id="CW6-4o-g1S"/>
                 <outlet property="documentView" destination="rCt-ai-XAQ" id="ZQt-pM-6r0"/>
+                <outlet property="eventCollectionHeight" destination="Que-v0-WJI" id="gXp-bT-ajp"/>
+                <outlet property="eventViewHeight" destination="hhz-XR-CjF" id="omL-ej-Vqb"/>
                 <outlet property="eventsCollectionView" destination="RgW-Ef-v3q" id="XRZ-tL-tcA"/>
                 <outlet property="resultCollectionView" destination="RAQ-ix-iEM" id="oKh-I3-2vg"/>
                 <outlet property="resultView" destination="Spk-sB-6vo" id="J7I-1T-5Y9"/>
@@ -35,7 +38,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="1310"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Mo-c0-6C2">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Mo-c0-6C2">
                     <rect key="frame" x="0.0" y="20" width="375" height="1290"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lno-E5-Jbz">
@@ -231,6 +234,7 @@
                                 <constraint firstAttribute="trailing" secondItem="rCt-ai-XAQ" secondAttribute="trailing" constant="5" id="SKl-Di-h7s"/>
                                 <constraint firstItem="PzK-93-hVw" firstAttribute="top" secondItem="Spk-sB-6vo" secondAttribute="bottom" constant="5" id="TbQ-6s-Zwa"/>
                                 <constraint firstItem="vQ0-RB-pze" firstAttribute="top" secondItem="5m5-b0-pkJ" secondAttribute="bottom" constant="5" id="UcS-2b-kPS"/>
+                                <constraint firstItem="luD-uz-8Zs" firstAttribute="top" secondItem="7Bn-UK-Teh" secondAttribute="bottom" constant="5" id="XUr-zA-KIs"/>
                                 <constraint firstItem="Spk-sB-6vo" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="Z8V-Qz-ohn"/>
                                 <constraint firstItem="PUk-1T-KTM" firstAttribute="top" secondItem="Lno-E5-Jbz" secondAttribute="top" id="bAY-mT-NsE"/>
                                 <constraint firstAttribute="trailing" secondItem="luD-uz-8Zs" secondAttribute="trailing" constant="5" id="bzt-v8-xJN"/>
@@ -239,7 +243,6 @@
                                 <constraint firstItem="luD-uz-8Zs" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="ipM-Kg-QYf"/>
                                 <constraint firstItem="vQ0-RB-pze" firstAttribute="leading" secondItem="Lno-E5-Jbz" secondAttribute="leading" constant="5" id="lJy-DA-spb"/>
                                 <constraint firstAttribute="trailing" secondItem="PUk-1T-KTM" secondAttribute="trailing" constant="5" id="oww-hf-Kqi"/>
-                                <constraint firstItem="luD-uz-8Zs" firstAttribute="top" secondItem="Lno-E5-Jbz" secondAttribute="top" constant="215" id="ubM-mJ-Jx6"/>
                                 <constraint firstAttribute="trailing" secondItem="PzK-93-hVw" secondAttribute="trailing" constant="5" id="v5M-QY-yPe"/>
                                 <constraint firstAttribute="trailing" secondItem="vQ0-RB-pze" secondAttribute="trailing" constant="5" id="vVX-b5-Wbp"/>
                                 <constraint firstAttribute="trailing" secondItem="Spk-sB-6vo" secondAttribute="trailing" constant="5" id="x56-zh-ppg"/>

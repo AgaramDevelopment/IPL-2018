@@ -87,8 +87,8 @@
         
         NSString *clientCode = [AppCommon GetClientCode];
         NSString *userCode = [AppCommon GetUsercode];
-        NSString *userName = [AppCommon GetUserName];
-        
+//        NSString *userName = [AppCommon GetUserName];
+        NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
         
         if(![COMMON isInternetReachable])
             return;

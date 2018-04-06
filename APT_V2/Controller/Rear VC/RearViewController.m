@@ -40,11 +40,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    NSString *loginedTeamCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
-    NSString* kXIP = @"TEA0000011";
-    
-    if ([loginedTeamCode isEqualToString:kXIP]) {
-        
+    if ([AppCommon isKXIP]) {
         arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Planner",@"Change Password",@"Logout"];
 
     }
@@ -52,19 +48,7 @@
         arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Change Password",@"Logout"];
     }
     
-    
-    
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        arrItems = [NSArray new];
-//        arrItems = @[@"Home",@"Match Center",@"Planner",@"Change Password",@"Logout"];
-//    }
-//    else
-//    {
-//        arrItems = [NSArray new];
-//       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
-//    }
-    
+
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
 }

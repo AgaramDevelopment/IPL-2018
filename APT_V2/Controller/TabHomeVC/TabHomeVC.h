@@ -51,6 +51,7 @@
 
 - (IBAction)actionDatePickerChange:(id)sender;
 -(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+@property (weak, nonatomic) IBOutlet UILabel *lblUploadHeaderName;
 
 
 @end

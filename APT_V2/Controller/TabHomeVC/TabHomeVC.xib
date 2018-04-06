@@ -23,6 +23,7 @@
                 <outlet property="datePicker" destination="fuT-fL-H0e" id="EXS-ee-IRY"/>
                 <outlet property="datePickerView" destination="Gcz-G7-n2T" id="b5N-yP-bQo"/>
                 <outlet property="lblShareUser" destination="7fh-pp-Kw9" id="1l8-8m-1ej"/>
+                <outlet property="lblUploadHeaderName" destination="QuB-US-yQ5" id="bOZ-XO-eBg"/>
                 <outlet property="navi_View" destination="AWu-7z-XF7" id="Krk-jO-xJV"/>
                 <outlet property="selectedImageView" destination="k4p-7Z-x2e" id="sxy-ar-a5U"/>
                 <outlet property="swipeView" destination="tch-SB-y9r" id="1Pr-07-OpQ"/>
@@ -101,34 +102,17 @@
                             <rect key="frame" x="5" y="5" width="310" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuB-US-yQ5">
-                                    <rect key="frame" x="5" y="3" width="147.5" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="NWO-vx-HMI"/>
-                                    </constraints>
+                                    <rect key="frame" x="127" y="7.5" width="57" height="21"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9a-jU-cfH">
-                                    <rect key="frame" x="157.5" y="3" width="147.5" height="30"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="Eqm-fj-PQK"/>
-                                    </constraints>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
                             </subviews>
                             <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="9a8-Ld-A6Y"/>
-                                <constraint firstItem="g9a-jU-cfH" firstAttribute="top" secondItem="hH1-ax-dIz" secondAttribute="top" constant="3" id="TgM-bK-Wm1"/>
-                                <constraint firstItem="g9a-jU-cfH" firstAttribute="width" secondItem="QuB-US-yQ5" secondAttribute="width" id="crr-qh-0fZ"/>
-                                <constraint firstItem="g9a-jU-cfH" firstAttribute="leading" secondItem="QuB-US-yQ5" secondAttribute="trailing" constant="5" id="dRI-KS-Eho"/>
-                                <constraint firstAttribute="trailing" secondItem="g9a-jU-cfH" secondAttribute="trailing" constant="5" id="kPf-cE-6NZ"/>
-                                <constraint firstItem="QuB-US-yQ5" firstAttribute="top" secondItem="hH1-ax-dIz" secondAttribute="top" constant="3" id="lt0-B5-wYj"/>
-                                <constraint firstItem="QuB-US-yQ5" firstAttribute="leading" secondItem="hH1-ax-dIz" secondAttribute="leading" constant="5" id="o0y-cM-69C"/>
+                                <constraint firstItem="QuB-US-yQ5" firstAttribute="centerY" secondItem="hH1-ax-dIz" secondAttribute="centerY" id="BIE-UT-MeR"/>
+                                <constraint firstItem="QuB-US-yQ5" firstAttribute="centerX" secondItem="hH1-ax-dIz" secondAttribute="centerX" id="R87-pH-tbb"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4PE-8j-9RY">
@@ -343,7 +327,9 @@
                         <constraint firstItem="hH1-ax-dIz" firstAttribute="top" secondItem="Ltb-rD-nji" secondAttribute="top" constant="5" id="Nr4-ju-qfT"/>
                         <constraint firstAttribute="trailing" secondItem="hH1-ax-dIz" secondAttribute="trailing" constant="5" id="Upn-Wn-l0E"/>
                         <constraint firstItem="hH1-ax-dIz" firstAttribute="leading" secondItem="Ltb-rD-nji" secondAttribute="leading" constant="5" id="bNE-v2-Z9L"/>
-                        <constraint firstAttribute="width" constant="320" id="cW7-uO-7NB"/>
+                        <constraint firstAttribute="width" constant="320" id="cW7-uO-7NB">
+                            <variation key="heightClass=regular-widthClass=regular" constant="420"/>
+                        </constraint>
                         <constraint firstAttribute="bottom" secondItem="4PE-8j-9RY" secondAttribute="bottom" constant="5" id="dfL-aK-1Yj"/>
                         <constraint firstItem="4PE-8j-9RY" firstAttribute="leading" secondItem="Ltb-rD-nji" secondAttribute="leading" constant="5" id="es6-80-v8H"/>
                         <constraint firstAttribute="height" constant="320" id="o9n-QG-1uv"/>
@@ -355,7 +341,7 @@
                         <constraint firstAttribute="height" constant="35" id="73v-pW-8fZ"/>
                         <constraint firstAttribute="width" constant="35" id="hxl-fR-E9C"/>
                     </constraints>
-                    <state key="normal" image="Cancelbtn"/>
+                    <state key="normal" image="close"/>
                     <connections>
                         <action selector="actionCloseUpload:" destination="-1" eventType="touchUpInside" id="Ue2-mW-Agc"/>
                     </connections>
@@ -425,8 +411,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Cancelbtn" width="42" height="42"/>
         <image name="Video-Icon-crop" width="315" height="236"/>
+        <image name="close" width="128" height="128"/>
         <image name="down-arrow" width="21" height="21"/>
     </resources>
 </document>
