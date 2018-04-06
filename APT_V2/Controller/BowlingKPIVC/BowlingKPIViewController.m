@@ -514,9 +514,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblBowling reloadData];
     });
-    
-    
 }
+
 -(void)daysAction1:(id)sender1
 {
     UIButton* sender = (UIButton *)sender1;
@@ -550,7 +549,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblBowling reloadData];
     });
-    
 }
 
 -(void)selectFirstDayInFirstInnings:(id)sender
@@ -579,7 +577,6 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblBowling reloadData];
-        
     });
     
 }
@@ -609,7 +606,6 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblBowling reloadData];
-        
     });
 }
 
@@ -917,8 +913,9 @@
     
     [self.avPlayer play];
     
-    [self.ballsColView reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.ballsColView reloadData];
+    });
 }
 
 -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo
@@ -970,8 +967,6 @@
                     [self.ballsColView reloadData];
                 });
                 
-                
-                
                 NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
                 NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];
                 
@@ -1017,7 +1012,9 @@
     if((selectedVideo+1)<videoURLArray.count){
         selectedVideo = selectedVideo +1;
         
-        [self.ballsColView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.ballsColView reloadData];
+        });
         
         NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
         NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];

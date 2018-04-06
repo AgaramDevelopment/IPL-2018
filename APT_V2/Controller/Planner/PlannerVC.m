@@ -290,7 +290,9 @@
             }
             
             [AppCommon hideLoading];
-            [self.eventTbl reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.eventTbl reloadData];
+            });
             
             NSDate *now = [NSDate date]; //2018-03-31 09:22:11 +0000
 

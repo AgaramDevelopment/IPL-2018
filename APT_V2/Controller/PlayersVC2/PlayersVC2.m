@@ -842,9 +842,11 @@
         }
     }
     
-    
-    [self.GridTbl reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.GridTbl reloadData];
+    });
 }
+
 - (IBAction)Team2Action:(id)sender {
     
     [self clearBtnSubView:self.team1Btn];
@@ -961,8 +963,9 @@
             }
         }
     }
-    
-    [self.GridTbl reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.GridTbl reloadData];
+    });
 }
 
 -(UIView *) getLineView : (UIButton *) btn{

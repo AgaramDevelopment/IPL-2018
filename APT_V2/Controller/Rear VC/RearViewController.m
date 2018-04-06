@@ -153,8 +153,9 @@
     appDel.frontNavigationController = navigationController;
     [revealController pushFrontViewController:navigationController animated:YES];
     PreviouslySelectedIndex = indexPath;
-    [_RearTableView reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_RearTableView reloadData];
+    });
 }
 
 

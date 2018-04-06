@@ -195,7 +195,9 @@
         
         self.tableWidth.constant = self.viewCompetetion.frame.size.width;
         self.tableXposition.constant = self.viewCompetetion.frame.origin.x;
-        [self.PoplistTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.PoplistTable reloadData];
+        });
     }
 }
 
@@ -397,9 +399,9 @@
             DetailsArray = [responseObject valueForKey:@"TeamResult"];
             
             self.standingsCollectionView.hidden = NO;
-            
-            [self.standingsCollectionView reloadData];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.standingsCollectionView reloadData];
+            });
         }
         [AppCommon hideLoading];
         

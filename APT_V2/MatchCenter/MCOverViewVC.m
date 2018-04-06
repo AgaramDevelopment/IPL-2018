@@ -426,8 +426,9 @@
             
             FieldersArray = [[NSMutableArray alloc]init];
             FieldersArray = [responseObject valueForKey:@"FieldOV"];
-            
-            [self.resultCollectionView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.resultCollectionView reloadData];
+            });
             
             [self.nextBtn setTag:0];
             self.nextBtn.hidden = NO;
@@ -498,7 +499,9 @@
             FieldersArray = [[NSMutableArray alloc]init];
             
             recentMatchesArray =[[NSMutableArray alloc]init];
-            [self.resultCollectionView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.resultCollectionView reloadData];
+            });
             
 //            [self.nextBtn setTag:0];
 //            self.prevBtn.hidden = NO;
