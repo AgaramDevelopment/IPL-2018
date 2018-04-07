@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="backBtn" destination="Mju-2s-oaE" id="MUD-M7-UAG"/>
                 <outlet property="btnUpload" destination="gWW-YY-btf" id="SDJ-Pk-15B"/>
+                <outlet property="collectionTop" destination="zhI-FV-nT6" id="F6k-vA-FLT"/>
                 <outlet property="docCollectionView" destination="dm3-Xv-sE8" id="j9z-BN-UpH"/>
                 <outlet property="docView" destination="Hvt-9e-C3r" id="CZ5-2e-iNN"/>
                 <outlet property="docWebview" destination="Awi-MJ-8zb" id="npt-Ax-U0V"/>
@@ -107,10 +108,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvt-9e-C3r" userLabel="Document View">
-                    <rect key="frame" x="0.0" y="105" width="375" height="562"/>
+                    <rect key="frame" x="0.0" y="95" width="375" height="572"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-Xv-sE8">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qqt-Ru-TSb">
                                 <size key="itemSize" width="50" height="50"/>
@@ -124,7 +125,7 @@
                             </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Documents Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fko-j7-3Q7" userLabel="No Documents Found">
-                            <rect key="frame" x="118" y="272.5" width="139" height="17"/>
+                            <rect key="frame" x="118" y="277.5" width="139" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -152,7 +153,7 @@
                 <constraint firstItem="vVw-qb-jGU" firstAttribute="trailing" secondItem="9XD-Er-GRF" secondAttribute="trailing" id="oa6-e1-R69"/>
                 <constraint firstItem="Hvt-9e-C3r" firstAttribute="leading" secondItem="vVw-qb-jGU" secondAttribute="leading" id="sUc-MY-R4S"/>
                 <constraint firstItem="9XD-Er-GRF" firstAttribute="top" secondItem="Db7-zu-fgf" secondAttribute="bottom" constant="10" id="t5b-wr-ncd"/>
-                <constraint firstItem="Hvt-9e-C3r" firstAttribute="top" secondItem="9XD-Er-GRF" secondAttribute="bottom" constant="10" id="utR-a0-xKE"/>
+                <constraint firstItem="Hvt-9e-C3r" firstAttribute="top" secondItem="9XD-Er-GRF" secondAttribute="bottom" id="utR-a0-xKE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vVw-qb-jGU"/>
             <point key="canvasLocation" x="-174" y="430"/>

@@ -259,10 +259,10 @@
 //        }];
         [cell.team2Img sd_setImageWithURL:[NSURL URLWithString:photourl2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
         
         cell.layer.shadowOffset = CGSizeZero;
-        cell.layer.shadowRadius = 5.0f;
+        cell.layer.shadowRadius = 1.0f;
         cell.layer.shadowOpacity = 0.5f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;

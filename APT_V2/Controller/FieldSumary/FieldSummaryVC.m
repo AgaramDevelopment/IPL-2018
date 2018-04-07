@@ -39,6 +39,8 @@
     int misFieldCount;
     int runOutMissCount;
     int throwaatStumpsCount;
+    int selectedTab;
+
 }
 @end
 
@@ -69,7 +71,6 @@ int dropCatchEndPostion = -1;
 int positivesEndPostion = -1;
 int negativeEndPostion = -1;
 
-int selectedTab = 1;
 int selectedVideo = 0;
 //NSString *matchCode = @"IMSC023D017C2AA4FC420171114191400995";
 NSString *matchResult = @"MSC125";
@@ -80,10 +81,14 @@ int headdingCount = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    selectedTab = 1;
     self.matchcode = appDel.Currentmatchcode;
     self.matchHeadding = appDel.matchHeaderDetails;
     self.isTest = appDel.isTest;
     
+    [self.odiInn1Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
+    [self.odiInn2Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     _tblView.hidden = true;
@@ -222,11 +227,14 @@ int headdingCount = 0;
 }
 
 -(UIView *) getLineView : (UIButton *) btn{
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, btn.frame.size.height-5, btn.frame.size.width, 5)];
-    lineView.backgroundColor =[UIColor colorWithRed:16.0f/255.0f
-                                              green:45.0f/255.0f
-                                               blue:125.0f/255.0f
+
+    CGFloat Xvalue = (btn.frame.size.width/4);
+
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
+
+    lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
+                                              green:176.0f/255.0f
+                                               blue:240.0f/255.0f
                                               alpha:1.0f];
     lineView.tag = 1234;
     return lineView;
@@ -305,10 +313,6 @@ int headdingCount = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
     
     if(  indexPath.row == dropCatchStartPostion ){ // Drop Catch headding
         FieldSummaryHeading *cell = [tableView dequeueReusableCellWithIdentifier:@"fs_headding"];

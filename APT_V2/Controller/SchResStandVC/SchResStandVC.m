@@ -211,7 +211,7 @@
                 
                 BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
                 
-                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again 
+                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
                     
                     NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
                     NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
@@ -298,6 +298,13 @@
     if(!IS_IPAD && !IS_IPHONE5)
     {
         width = width/2;
+        
+        if(collectionView == self.scheduleCollectionView)
+        {
+//            appDel.window.bounds.size.width > 224
+            
+        }
+        
     }
     else if(IS_IPAD)
     {

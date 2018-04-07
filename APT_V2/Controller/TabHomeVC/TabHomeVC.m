@@ -294,7 +294,8 @@
          else if(index == 1)
         {
             if ([AppCommon isCoach]) {
-                objPlayersVC.view.frame = CGRectMake(0, -65, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+65);
+                CGFloat Yposition = objPlayersVC.filterContainerView.frame.origin.y;
+                objPlayersVC.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
                 [view addSubview:objPlayersVC.view];
             }
             else

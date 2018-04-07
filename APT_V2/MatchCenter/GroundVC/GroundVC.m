@@ -829,20 +829,19 @@
         CGFloat width = collectionView.frame.size.width;
         CGFloat height = collectionView.frame.size.height;
         
-        if(!IS_IPHONE5)
+        if(IS_IPAD)
         {
             width = width/2;
         }
         
         return CGSizeMake(width, height);
     }
-
     
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(5, 10, 10, 10);
     
 }
 

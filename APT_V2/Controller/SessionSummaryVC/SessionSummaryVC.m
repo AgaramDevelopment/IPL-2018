@@ -43,7 +43,7 @@
     
     NSMutableArray *pacearrS3;
     NSMutableArray *spinarrS3;
-    int selectedTab ;
+    int selectedTab;
     
 }
 
@@ -59,19 +59,6 @@
     // Do any additional setup after loading the view.
     
     selectedTab =1;
-    if(_isTest){
-        self.TESTview.clipsToBounds = NO;
-        self.TESTview.layer.shadowColor = [[UIColor blackColor] CGColor];
-        self.TESTview.layer.shadowOffset = CGSizeMake(0,5);
-        self.TESTview.layer.shadowOpacity = 0.5;
-        
-    }else{
-        self.ODIview.clipsToBounds = NO;
-        self.ODIview.layer.shadowColor = [[UIColor blackColor] CGColor];
-        self.ODIview.layer.shadowOffset = CGSizeMake(0,5);
-        self.ODIview.layer.shadowOpacity = 0.5;
-        
-    }
     
     self.matchcode = appDel.Currentmatchcode;
     self.matchHeadding = appDel.matchHeaderDetails;
@@ -91,7 +78,23 @@
     
     
     [self MatchTypeService];
-    //[self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    if(_isTest){
+        self.TESTview.clipsToBounds = NO;
+        self.TESTview.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.TESTview.layer.shadowOffset = CGSizeMake(0,5);
+        self.TESTview.layer.shadowOpacity = 0.5;
+        
+    }else{
+        self.ODIview.clipsToBounds = NO;
+        self.ODIview.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.ODIview.layer.shadowOffset = CGSizeMake(0,5);
+        self.ODIview.layer.shadowOpacity = 0.5;
+        
+    }
+    [self setTabView];
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -570,7 +573,8 @@
     
     [self setSessionsBySelection:@"1"];
     commonArray = [[NSMutableArray alloc]init];
-    commonArray = Session1array;
+//    commonArray = Session1array;
+    [commonArray addObjectsFromArray:Session1array];
     
     //Pace
     self.OversPacelbl.text = [[pacearrS1 valueForKey:@"PaceOvers"] objectAtIndex:0];
@@ -690,7 +694,9 @@
     
     [self setSessionsBySelection:@"2"];
     commonArray = [[NSMutableArray alloc]init];
-    commonArray = Session2array;
+//    commonArray = Session2array;
+    [commonArray addObjectsFromArray:Session2array];
+
     
     //Pace
     self.OversPacelbl.text = [[pacearrS2 valueForKey:@"PaceOvers"] objectAtIndex:0];
@@ -809,8 +815,9 @@
     
     [self setSessionsBySelection:@"3"];
     commonArray = [[NSMutableArray alloc]init];
-    commonArray = Session3array;
-    
+//    commonArray = Session3array;
+    [commonArray addObjectsFromArray:Session3array];
+
     
     //Pace
     self.OversPacelbl.text = [[pacearrS3 valueForKey:@"PaceOvers"] objectAtIndex:0];
@@ -1001,11 +1008,13 @@
 }
 
 -(UIView *) getLineView : (UIButton *) btn{
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, btn.frame.size.height-5, btn.frame.size.width, 5)];
-    lineView.backgroundColor =[UIColor colorWithRed:16.0f/255.0f
-                                              green:45.0f/255.0f
-                                               blue:125.0f/255.0f
+//    [btn setBackgroundColor:[UIColor redColor]];
+    CGFloat Xvalue = (btn.frame.size.width/4);
+
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
+    lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
+                                              green:176.0f/255.0f
+                                               blue:240.0f/255.0f
                                               alpha:1.0f];
     lineView.tag = 1234;
     return lineView;
@@ -1124,9 +1133,9 @@
         
         return cell;
     }
-    if(tableView == self.partnrshpTbl)
+    else  if(tableView == self.partnrshpTbl)
     {
-        static NSString *MyIdentifier = @"mycell";
+        static NSString *MyIdentifier = @"SessionPartCell";
         
         SessionPartCell *cell = [self.partnrshpTbl dequeueReusableCellWithIdentifier:MyIdentifier];
         

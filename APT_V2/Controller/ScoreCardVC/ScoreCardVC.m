@@ -2543,7 +2543,9 @@
 
 -(void) setInningsButtonSelect : (UIButton*) innsBtn{
     // innsBtn.layer.cornerRadius = 25;
-    UIColor *extrasBrushBG = [self colorWithHexString : @"#2CA7DB"];
+//    UIColor *extrasBrushBG = [self colorWithHexString : @"#2CA7DB"];
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#0066cc"];
+
     
     innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
     

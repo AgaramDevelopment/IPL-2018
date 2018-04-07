@@ -40,7 +40,7 @@
 
 @synthesize pdfView,docWebview,btnStackView;
 
-@synthesize lblFilePath,btnUpload;
+@synthesize lblFilePath,btnUpload,collectionTop;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,7 +120,7 @@
     }
     else if(IS_IPHONE_DEVICE && !IS_IPHONE5) {
         
-        width = width/4;
+        width = width/3;
     }
     else if(IS_IPAD) {
         
@@ -417,10 +417,13 @@
             if ([[selctedValues lastPathComponent] isEqualToString:str])
             {
                 self.backBtn.hidden =YES;
+                self.collectionTop.constant = -40;
             }
             else
             {
                 self.backBtn.hidden =NO;
+                self.collectionTop.constant = 0;
+
             }
             docResultArray = responseObject;
             

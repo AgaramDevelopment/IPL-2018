@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="backBtn" destination="yFK-f5-u0C" id="gDr-8H-52C"/>
                 <outlet property="btnUpload" destination="wlZ-gZ-rGX" id="y2k-Os-xh9"/>
+                <outlet property="collectionTop" destination="ZPr-sL-Fcs" id="Jgu-sw-YRw"/>
                 <outlet property="docCollectionView" destination="hCj-Os-r4f" id="Szf-xa-Q0p"/>
                 <outlet property="docView" destination="sxn-na-rDy" id="AQ1-RY-N8S"/>
                 <outlet property="docWebview" destination="Rzd-5s-gdM" id="Skz-KH-Hm5"/>
@@ -75,7 +76,7 @@
                     <rect key="frame" x="0.0" y="60" width="375" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-f5-u0C">
-                            <rect key="frame" x="10" y="2" width="80" height="30"/>
+                            <rect key="frame" x="10" y="0.0" width="80" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="E6I-Y4-bJI"/>
                             </constraints>
@@ -85,7 +86,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RF3-Ho-mLl">
-                            <rect key="frame" x="100" y="2" width="265" height="30"/>
+                            <rect key="frame" x="100" y="0.0" width="265" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -95,18 +96,18 @@
                         <constraint firstItem="RF3-Ho-mLl" firstAttribute="top" secondItem="yFK-f5-u0C" secondAttribute="top" id="51b-Ps-D1K"/>
                         <constraint firstItem="RF3-Ho-mLl" firstAttribute="bottom" secondItem="yFK-f5-u0C" secondAttribute="bottom" id="7rD-FN-hlX"/>
                         <constraint firstItem="yFK-f5-u0C" firstAttribute="leading" secondItem="hMQ-Cy-alo" secondAttribute="leading" constant="10" id="FdA-vd-agj"/>
-                        <constraint firstItem="yFK-f5-u0C" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="top" constant="2" id="Id4-kL-bex"/>
+                        <constraint firstItem="yFK-f5-u0C" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="top" id="Id4-kL-bex"/>
                         <constraint firstItem="RF3-Ho-mLl" firstAttribute="leading" secondItem="yFK-f5-u0C" secondAttribute="trailing" constant="10" id="OBc-9s-o3h"/>
-                        <constraint firstAttribute="bottom" secondItem="yFK-f5-u0C" secondAttribute="bottom" constant="3" id="ads-Nw-aEL"/>
+                        <constraint firstAttribute="bottom" secondItem="yFK-f5-u0C" secondAttribute="bottom" id="ads-Nw-aEL"/>
                         <constraint firstAttribute="height" constant="35" id="iWa-ys-Lze"/>
                         <constraint firstAttribute="trailing" secondItem="RF3-Ho-mLl" secondAttribute="trailing" constant="10" id="pjv-Dx-hAD"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxn-na-rDy" userLabel="Document View">
-                    <rect key="frame" x="0.0" y="105" width="375" height="562"/>
+                    <rect key="frame" x="0.0" y="95" width="375" height="572"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hCj-Os-r4f">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="75K-4q-rhc">
                                 <size key="itemSize" width="50" height="50"/>
@@ -120,7 +121,7 @@
                             </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5v-5j-HZ9" userLabel="No Documents Found">
-                            <rect key="frame" x="140" y="272.5" width="95.5" height="17"/>
+                            <rect key="frame" x="140" y="277.5" width="95.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -143,7 +144,7 @@
                 <constraint firstItem="hMQ-Cy-alo" firstAttribute="leading" secondItem="amT-7g-JcD" secondAttribute="leading" id="2Rl-J2-D0C"/>
                 <constraint firstItem="amT-7g-JcD" firstAttribute="trailing" secondItem="Iek-PX-8pE" secondAttribute="trailing" id="4IK-vZ-qQV"/>
                 <constraint firstItem="Iek-PX-8pE" firstAttribute="top" secondItem="amT-7g-JcD" secondAttribute="top" id="G45-0L-aGU"/>
-                <constraint firstItem="sxn-na-rDy" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="bottom" constant="10" id="JMu-M3-6Ew"/>
+                <constraint firstItem="sxn-na-rDy" firstAttribute="top" secondItem="hMQ-Cy-alo" secondAttribute="bottom" id="JMu-M3-6Ew"/>
                 <constraint firstItem="sxn-na-rDy" firstAttribute="leading" secondItem="amT-7g-JcD" secondAttribute="leading" id="Rpf-5r-hGU"/>
                 <constraint firstItem="amT-7g-JcD" firstAttribute="trailing" secondItem="sxn-na-rDy" secondAttribute="trailing" id="ckr-1J-lA5"/>
                 <constraint firstItem="sxn-na-rDy" firstAttribute="bottom" secondItem="amT-7g-JcD" secondAttribute="bottom" id="di8-Yn-HYJ"/>

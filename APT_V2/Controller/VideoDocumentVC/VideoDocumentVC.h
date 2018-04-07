@@ -36,5 +36,6 @@
 @property (weak, nonatomic) IBOutlet UIStackView *btnStackView;
 @property (weak, nonatomic) IBOutlet UILabel *lblFilePath;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpload;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionTop;
 
 @end
