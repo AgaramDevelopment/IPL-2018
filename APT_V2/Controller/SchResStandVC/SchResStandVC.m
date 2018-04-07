@@ -209,12 +209,19 @@
                     [self.resultCollectionView reloadData];
                 });
                 
-                NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
-                NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-                if (!isLatestVersion) {
-                    NSLog(@"canUpdate TRUE ");
-                    [AppCommon newVersionUpdateAlert];
+                BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
+                
+                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again 
+                    
+                    NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+                    NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+                    if (!isLatestVersion) {
+                        NSLog(@"canUpdate TRUE ");
+                        [AppCommon newVersionUpdateAlert];
+                    }
+
                 }
+                
 
             }
             
