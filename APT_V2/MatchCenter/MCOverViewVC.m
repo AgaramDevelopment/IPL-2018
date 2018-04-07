@@ -213,10 +213,14 @@
         NSString * team2Score = [NSString stringWithFormat:@"%@/%@",[[recentMatchesArray valueForKey:@"BTMaxInnsTotal"] objectAtIndex:indexPath.row],[[recentMatchesArray valueForKey:@"BTMaxInnsWckts"] objectAtIndex:indexPath.row]];
         cell.runs2lbl.text = team2Score;
         
-        cell.TeamOvers1lbl.text = [[recentMatchesArray valueForKey:@"ATOvers"] objectAtIndex:indexPath.row];
-        cell.TeamOver2lbl.text = [[recentMatchesArray valueForKey:@"BTOvers"] objectAtIndex:indexPath.row];
-        cell.runrate1lbl.text = [[recentMatchesArray valueForKey:@"ATRR"] objectAtIndex:indexPath.row];
-        cell.runrate2lbl.text = [[recentMatchesArray valueForKey:@"BTRR"] objectAtIndex:indexPath.row];
+        NSString *ATOvers = [NSString stringWithFormat:@"%@ Overs", [[recentMatchesArray valueForKey:@"ATOvers"] objectAtIndex:indexPath.row]];
+        cell.TeamOvers1lbl.text = ATOvers;
+         NSString *BTOvers = [NSString stringWithFormat:@"%@ Overs", [[recentMatchesArray valueForKey:@"BTOvers"] objectAtIndex:indexPath.row]];
+        cell.TeamOver2lbl.text = BTOvers;
+        NSString *ATRR = [NSString stringWithFormat:@"%@ RR", [[recentMatchesArray valueForKey:@"ATRR"] objectAtIndex:indexPath.row]];
+        cell.runrate1lbl.text = ATRR;
+        NSString *BTRR = [NSString stringWithFormat:@"%@ RR", [[recentMatchesArray valueForKey:@"BTRR"] objectAtIndex:indexPath.row]];
+        cell.runrate2lbl.text = BTRR;
         
         NSString *matchdate = [[recentMatchesArray valueForKey:@"ATMatchDate"] objectAtIndex:indexPath.row];
         NSArray *arr = [matchdate componentsSeparatedByString:@" "];
@@ -346,7 +350,7 @@
     NSString *compCode = [AppCommon getCurrentCompetitionCode];
     NSString *temCode = [AppCommon getCurrentTeamCode];
     objWebservice = [[WebService alloc]init];
-    
+    NSLog(@"OverviewKey:%@", OverviewKey);
     
     [objWebservice Overview:OverviewKey :compCode : temCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
