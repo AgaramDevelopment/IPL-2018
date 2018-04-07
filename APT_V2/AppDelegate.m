@@ -45,7 +45,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLater"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     // Override point for customization after application launch.
     storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -177,6 +179,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLater"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 -(void)SynenableanddisbleMethod
