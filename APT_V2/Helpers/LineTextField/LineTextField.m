@@ -42,6 +42,16 @@
     return self;
 }
 
+-(NSString *)getText
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *trimmed = [self.text stringByTrimmingCharactersInSet:whitespace];
+    
+    self.text = [trimmed stringByReplacingOccurrencesOfString:@" "  withString:@""];
+    
+    return self.text;
+}
+
 -(void)setup
 {
     UIImageView* view = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height/3, self.frame.size.height/3, self.frame.size.height/3)];
