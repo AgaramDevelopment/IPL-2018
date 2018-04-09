@@ -332,9 +332,9 @@
     {
         
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [tblDropDown reloadData];
-    });
+    
+    [tblDropDown reloadData];
+    
 }
 
 -(IBAction)closeView:(id)sender

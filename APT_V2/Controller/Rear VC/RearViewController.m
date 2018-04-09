@@ -61,10 +61,9 @@
 //       arrItems = @[@"My Team",@"Cricket Center",@"Planner",@"Change Password",@"Logout"];
 //    }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.RearTableView reloadData];
-        self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
-    });
+    [self.RearTableView reloadData];
+    self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    
 }
 
 
@@ -168,9 +167,9 @@
     appDel.frontNavigationController = navigationController;
     [revealController pushFrontViewController:navigationController animated:YES];
     PreviouslySelectedIndex = indexPath;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_RearTableView reloadData];
-    });
+    
+    [_RearTableView reloadData];
+    
 }
 
 

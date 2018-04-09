@@ -353,10 +353,10 @@
                 
                 self.PlayerRoleArray = [[NSMutableArray alloc]init];
                 self.PlayerRoleArray = [responseObject valueForKey:@"lstPlayerRoles"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.playesTable reloadData];
-                    [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-                });
+            
+                [self.playesTable reloadData];
+                [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            
             }
             
             [AppCommon hideLoading];
@@ -383,9 +383,9 @@
     
     self.CommonArray = [[NSMutableArray alloc]init];
     self.CommonArray = self.PlayersArray;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.playesTable reloadData];
-    });
+    
+    [self.playesTable reloadData];
+    
 }
 
 - (IBAction)BatsmanBtnAction:(id)sender
@@ -401,9 +401,9 @@
             [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.playesTable reloadData];
-    });
+    
+    [self.playesTable reloadData];
+    
 }
 
 - (IBAction)WktKeeperBtnAction:(id)sender
@@ -420,9 +420,9 @@
         }
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.playesTable reloadData];
-    });
+    
+    [self.playesTable reloadData];
+    
 }
 
 - (IBAction)AllrounderBtnAction:(id)sender
@@ -437,9 +437,9 @@
             [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-         [self.playesTable reloadData];
-    });
+    
+    [self.playesTable reloadData];
+    
 }
 
 - (IBAction)BowlerBtnAction:(id)sender
@@ -455,9 +455,9 @@
             [self.CommonArray addObject:[self.PlayersArray objectAtIndex:i]];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.playesTable reloadData];
-    });
+    
+    [self.playesTable reloadData];
+    
 }
 
 -(void) setInningsBySelection: (NSString*) innsNo{

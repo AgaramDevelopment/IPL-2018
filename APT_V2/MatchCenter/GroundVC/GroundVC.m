@@ -978,10 +978,10 @@
             [self innings2ButtonTapped:nil];
         }
         selectedIndex = indexPath;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [collectionView reloadData];
-            [self loadGraphdata];
-        });
+    
+        [collectionView reloadData];
+        [self loadGraphdata];
+        
     }
     else
     {

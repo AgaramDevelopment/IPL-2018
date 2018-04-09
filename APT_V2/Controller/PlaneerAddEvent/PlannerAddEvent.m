@@ -507,9 +507,8 @@
         isParticipantType=NO;
         isteam =NO;
         isaddPartcipant=NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.popviewTbl reloadData];
-        });
+    
+        [self.popviewTbl reloadData];
         
        // self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
@@ -553,9 +552,9 @@
         isParticipantType=NO;
         isteam =NO;
         isaddPartcipant=NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.popviewTbl reloadData];
-        });
+    
+        [self.popviewTbl reloadData];
+    
         //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
@@ -598,9 +597,9 @@
         isParticipantType=YES;
         isteam =NO;
         isaddPartcipant=NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.popviewTbl reloadData];
-        });
+    
+        [self.popviewTbl reloadData];
+    
         //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
@@ -641,9 +640,9 @@
         isParticipantType=NO;
         isteam =YES;
         isaddPartcipant=NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.popviewTbl reloadData];
-        });
+    
+        [self.popviewTbl reloadData];
+    
     }
     else{
         self.popviewTbl.hidden=YES;
@@ -700,9 +699,9 @@
         isParticipantType=NO;
         isaddPartcipant=NO;
         isteam =NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.multselectTbl reloadData];
-        });
+    
+        [self.multselectTbl reloadData];
+    
 //    }
 //    else{
 //        self.comPopview.hidden=YES;
@@ -729,9 +728,9 @@
     cell.isSelected = [selectedMarks containsObject:selectParticipantCode] ? YES : NO;
     
    // self.addParticipantArray = selectedMarks;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.multselectTbl reloadData];
-    });
+    
+    [self.multselectTbl reloadData];
+    
 }
 
 -(IBAction)didClickClearAllBtn:(id)sender
@@ -752,9 +751,9 @@
     {
         self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.multselectTbl reloadData];
-    });
+    
+    [self.multselectTbl reloadData];
+    
 }
 -(IBAction)didClickSelectAll:(id)sender
 {
@@ -776,9 +775,9 @@
     {
         self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.multselectTbl reloadData];
-    });
+    
+    [self.multselectTbl reloadData];
+    
 }
 -(IBAction)didClickUpdateBtnAction:(id)sender
 {
@@ -1011,9 +1010,8 @@
         
         //[self.addParticipantArray addObject:mutableDict];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.participantTbl reloadData];
-    });
+    
+    [self.participantTbl reloadData];
 
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
     
@@ -1283,9 +1281,8 @@
                 isParticipantType=NO;
                 isaddPartcipant=YES;
                 isteam =NO;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.participantTbl reloadData];
-                });
+            
+                [self.participantTbl reloadData];
                 
                 self.addeventTblheight.constant =self.participantTbl.contentSize.height;
                 //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
@@ -1704,9 +1701,8 @@
     
     [self.addParticipantArray removeObjectAtIndex:indexPath.row];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.participantTbl reloadData];
-    });
+    
+    [self.participantTbl reloadData];
     
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
     self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);

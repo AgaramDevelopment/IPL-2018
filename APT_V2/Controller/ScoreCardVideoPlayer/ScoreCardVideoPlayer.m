@@ -450,9 +450,9 @@
 //    [avQplayer advanceToNextItem];
     
     [self playAndPause:@""];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.ballsColView reloadData];
-    });
+    
+    [self.ballsColView reloadData];
+    
 }
 
 

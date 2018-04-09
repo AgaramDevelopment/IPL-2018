@@ -86,8 +86,8 @@ int headdingCount = 0;
     self.matchHeadding = appDel.matchHeaderDetails;
     self.isTest = appDel.isTest;
     
-    [self.odiInn1Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
-    [self.odiInn2Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+    [self.odiInn1Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+    [self.odiInn2Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
 
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -280,8 +280,8 @@ int headdingCount = 0;
         _odiInnsView.hidden = false;
         _testInnsView.hidden = true;
         
-        [self.odiInn1Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
-        [self.odiInn2Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+        [self.odiInn1Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
+        [self.odiInn2Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
         
         [self clearBtnSubView:_odiInn1Btn];
         [self clearBtnSubView:_odiInn2Btn];
@@ -611,10 +611,9 @@ int headdingCount = 0;
     
     [self.tblView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tblView reloadData];
-        [self.tblView endUpdates];
-    });
+    [self.tblView reloadData];
+    [self.tblView endUpdates];
+    
 }
 
 //Load fieding type sub players
@@ -818,48 +817,111 @@ int headdingCount = 0;
     if(caught.count > 0){
         
         [positiveTypeDict setObject:caught forKey:@"Caught"];
-         caughtCount = caught.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<caught.count;i++)
+        {
+            int value = [[[caught valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        
+         caughtCount = totalCount;
     }
 
     if(chaseStop.count > 0){
         [positiveTypeDict setObject:chaseStop forKey:@"ChaseStop"];
-         chaseStopCount = chaseStop.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<chaseStop.count;i++)
+        {
+            int value = [[[chaseStop valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+         chaseStopCount = totalCount;
     }
     
     if(directHit.count > 0){
         [positiveTypeDict setObject:directHit forKey:@"DirectHit"];
-        directHitCount = directHit.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<directHit.count;i++)
+        {
+            int value = [[[directHit valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        
+        directHitCount = totalCount;
     }
     
     if(diveStop.count > 0){
         [positiveTypeDict setObject:diveStop forKey:@"DiveStop"];
-        diveStopCount = diveStop.count;
+        int totalCount = 0;
+        for( int i=0;i<diveStop.count;i++)
+        {
+            int value = [[[diveStop valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        diveStopCount = totalCount;
     }
     
     if(goodThrow.count > 0){
         [positiveTypeDict setObject:goodThrow forKey:@"GoodThrow"];
-        goodThrowCount = goodThrow.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<goodThrow.count;i++)
+        {
+            int value = [[[goodThrow valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        goodThrowCount = totalCount;
     }
     
     if(pickThrow.count > 0){
         [positiveTypeDict setObject:pickThrow forKey:@"PickThrow"];
-        pickThrowCount = pickThrow.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<pickThrow.count;i++)
+        {
+            int value = [[[pickThrow valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        pickThrowCount = totalCount;
     }
     
     if(relayThrow.count > 0){
         [positiveTypeDict setObject:relayThrow forKey:@"RelayThrow"];
         
-        relayThrowCount = relayThrow.count;
+        int totalCount = 0;
+        for( int i=0;i<relayThrow.count;i++)
+        {
+            int value = [[[relayThrow valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        
+        relayThrowCount = totalCount;
     }
     
     if(slideStop.count > 0){
         [positiveTypeDict setObject:slideStop forKey:@"SlideStop"];
-         slideStopCount = slideStop.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<slideStop.count;i++)
+        {
+            int value = [[[slideStop valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+         slideStopCount = totalCount;
     }
     
     if(wellKept.count > 0){
         [positiveTypeDict setObject:wellKept forKey:@"WellKept"];
-         wellKeptCount = wellKept.count;
+        int totalCount = 0;
+        for( int i=0;i<wellKept.count;i++)
+        {
+            int value = [[[wellKept valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+         wellKeptCount = totalCount;
     }
     
     
@@ -962,33 +1024,73 @@ int headdingCount = 0;
     if(catchDrop.count > 0){
         
         [negativeTypeDict setObject:catchDrop forKey:@"CatchDrop"];
-        catchDropCount = catchDrop.count;
+        int totalCount = 0;
+        for( int i=0;i<catchDrop.count;i++)
+        {
+            int value = [[[catchDrop valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        catchDropCount = totalCount;
     }
     
     if(diveMiss.count > 0){
         [negativeTypeDict setObject:diveMiss forKey:@"DiveMiss"];
         
-        diveMissCount = diveMiss.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<diveMiss.count;i++)
+        {
+            int value = [[[diveMiss valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        diveMissCount = totalCount;
     }
     
     if(fumble.count > 0){
         [negativeTypeDict setObject:fumble forKey:@"Fumble"];
-        fumbleCount = fumble.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<fumble.count;i++)
+        {
+            int value = [[[fumble valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        fumbleCount = totalCount;
     }
     
     if(misField.count > 0){
         [negativeTypeDict setObject:misField forKey:@"MisField"];
-        misFieldCount = misField.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<misField.count;i++)
+        {
+            int value = [[[misField valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        misFieldCount =totalCount;
     }
     
     if(runOutMiss.count > 0){
         [negativeTypeDict setObject:runOutMiss forKey:@"RunOutMiss"];
-         runOutMissCount = runOutMiss.count;
+        
+        int totalCount = 0;
+        for( int i=0;i<runOutMiss.count;i++)
+        {
+            int value = [[[runOutMiss valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+         runOutMissCount = totalCount;
     }
     
     if(throwaatStumps.count > 0){
         [negativeTypeDict setObject:throwaatStumps forKey:@"ThrowaatStumps"];
-        throwaatStumpsCount = throwaatStumps.count;
+        int totalCount = 0;
+        for( int i=0;i<throwaatStumps.count;i++)
+        {
+            int value = [[[throwaatStumps valueForKey:@"count"] objectAtIndex:i] intValue];
+            totalCount=totalCount+value;
+        }
+        throwaatStumpsCount = totalCount;
     }
     
    
@@ -1009,11 +1111,10 @@ int headdingCount = 0;
         innsFour = dic1;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self generatePostionForTblView];
-        _tblView.hidden = false;
-        [_tblView reloadData];
-    });
+    [self generatePostionForTblView];
+    _tblView.hidden = false;
+    [_tblView reloadData];
+   
 }
 
 -(void) generatePostionForTblView {
@@ -1268,9 +1369,9 @@ int headdingCount = 0;
     [_videoView addSubview:self.avPlayerViewController.view];
 
     [self.avPlayer play];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.ballsColView reloadData];
-    });
+    
+    [self.ballsColView reloadData];
+    
 }
 
 -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo
@@ -1310,9 +1411,8 @@ int headdingCount = 0;
             if(videoURLArray.count >0){
                  selectedVideo = 0;
                 self.rootVideoView.hidden = NO;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.ballsColView reloadData];
-                });
+                
+                [self.ballsColView reloadData];
                 
                 NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
                 NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];

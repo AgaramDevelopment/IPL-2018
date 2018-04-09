@@ -842,9 +842,8 @@
         }
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
         [self.GridTbl reloadData];
-    });
+    
 }
 
 - (IBAction)Team2Action:(id)sender {
@@ -963,9 +962,9 @@
             }
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.GridTbl reloadData];
-    });
+    
+    [self.GridTbl reloadData];
+    
 }
 
 -(UIView *) getLineView : (UIButton *) btn{

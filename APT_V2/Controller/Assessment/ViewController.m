@@ -295,9 +295,9 @@
         [self.objContenArray addObject:tempDict];
 
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
+    
         [tblAssesments reloadData];
-    });
+   
 }
 
 -(NSMutableDictionary *)getTestAttributesForScreenID:(NSDictionary *)infoDictionary

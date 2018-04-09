@@ -101,9 +101,9 @@
             {
                 self.teamslist = [[NSMutableArray alloc]init];
                 self.teamslist = responseObject;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.teamsTable reloadData];
-                });
+            
+                [self.teamsTable reloadData];
+               
             }
             
             [AppCommon hideLoading];

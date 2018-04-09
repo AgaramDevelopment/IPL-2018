@@ -324,9 +324,7 @@
             //            commonArray = [[NSMutableArray alloc]init];
             //            commonArray = day1Sessionarray;
         
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.dayTbl reloadData];
-            });
+            [self.dayTbl reloadData];
         
             CGFloat height = MIN(self.view.bounds.size.height, self.dayTbl.contentSize.height);
             self.TblHeight.constant = height;
@@ -347,9 +345,8 @@
             }
             
             [self.session1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.partnrshpTbl reloadData];
-            });
+        
+            [self.partnrshpTbl reloadData];
         
             CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
             self.partnrTblHeight.constant = height1;
@@ -528,10 +525,9 @@
             
             //            commonArray = [[NSMutableArray alloc]init];
             //            commonArray = day1Sessionarray;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.dayTbl reloadData];
-            });
-            
+        
+            [self.dayTbl reloadData];
+        
             CGFloat height = MIN(self.view.bounds.size.height, self.dayTbl.contentSize.height);
             self.TblHeight.constant = height;
             [self.view layoutIfNeeded];
@@ -549,9 +545,8 @@
             }
             
             [self.session1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.partnrshpTbl reloadData];
-            });
+        
+            [self.partnrshpTbl reloadData];
         
             CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
             self.partnrTblHeight.constant = height1;
@@ -680,10 +675,8 @@
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-         [self.partnrshpTbl reloadData];
-    });
-   
+    [self.partnrshpTbl reloadData];
+    
     CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
@@ -801,9 +794,7 @@
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.partnrshpTbl reloadData];
-    });
+    [self.partnrshpTbl reloadData];
     
     CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
     self.partnrTblHeight.constant = height1;
@@ -922,9 +913,7 @@
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.partnrshpTbl reloadData];
-    });
+    [self.partnrshpTbl reloadData];
     
     CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
     self.partnrTblHeight.constant = height1;
