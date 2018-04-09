@@ -202,12 +202,9 @@
                 
                 self.commonArray = scheduleArray;
                 self.commonArray2 = resultArray;
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.eventsCollectionView reloadData];
-                    [self.resultCollectionView reloadData];
-                });
+            
+                [self.eventsCollectionView reloadData];
+                [self.resultCollectionView reloadData];
                 
                 BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
                 

@@ -225,9 +225,9 @@ NSMutableArray *bowlMonths;
         
         self.tableWidth.constant = self.barView.frame.size.width;
         self.tableXposition.constant = self.barView.frame.origin.x;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -249,9 +249,9 @@ NSMutableArray *bowlMonths;
         self.PoplistTable.hidden = NO;
         self.tableWidth.constant = self.lineView.frame.size.width;
         self.tableXposition.constant = self.lineView.frame.origin.x;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+       
     }
 }
 
@@ -278,9 +278,9 @@ NSMutableArray *bowlMonths;
         self.tableWidth.constant = self.competView.frame.size.width;
         self.tableXposition.constant = self.competView.frame.origin.x;
         self.tableYposition.constant = self.competView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -307,9 +307,9 @@ NSMutableArray *bowlMonths;
         self.tableWidth.constant = self.teamView.frame.size.width;
         self.tableXposition.constant = self.teamView.frame.origin.x;
         self.tableYposition.constant = self.teamView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 

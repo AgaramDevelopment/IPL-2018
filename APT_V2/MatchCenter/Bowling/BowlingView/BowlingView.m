@@ -227,9 +227,9 @@ BOOL wicketSortingKey;
         self.tableWidth.constant = self.overallView.frame.size.width;
         self.tableXposition.constant = self.overallView.frame.origin.x;
         self.tableYposition.constant = self.overallView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -253,9 +253,9 @@ BOOL wicketSortingKey;
         self.tableWidth.constant = self.runsView.frame.size.width;
         self.tableXposition.constant = self.runsView.frame.origin.x;
         self.tableYposition.constant = self.runsView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -279,9 +279,9 @@ BOOL wicketSortingKey;
         self.tableWidth.constant = self.teamView.frame.size.width;
         self.tableXposition.constant = self.teamView.frame.origin.x;
         self.tableYposition.constant = self.filterView.frame.origin.y+self.teamView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -305,9 +305,9 @@ BOOL wicketSortingKey;
         self.tableWidth.constant = self.CompetitionView.frame.size.width;
         self.tableXposition.constant = self.CompetitionView.frame.origin.x;
         self.tableYposition.constant = self.filterView.frame.origin.y+self.CompetitionView.frame.origin.y;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.PoplistTable reloadData];
-        });
+        
+        [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -844,9 +844,9 @@ BOOL wicketSortingKey;
         wicketSortingKey = !wicketSortingKey;
         self.TableValuesArray = [[NSMutableArray alloc]init];
         [self.TableValuesArray addObjectsFromArray:sortedArray];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.resultCollectionView reloadData];
-        });
+        
+        [self.resultCollectionView reloadData];
+        
     }
 }
 

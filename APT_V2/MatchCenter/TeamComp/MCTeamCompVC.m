@@ -2092,12 +2092,11 @@
                 }
                 
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.BowlerCollectionView reloadData];
-                [self.BatsmenCollectionView reloadData];
-                [self.AllrounderCollectionView reloadData];
-            });
-            
+        
+            [self.BowlerCollectionView reloadData];
+            [self.BatsmenCollectionView reloadData];
+            [self.AllrounderCollectionView reloadData];
+        
             self.TeamPlayersArray1 = [[NSMutableArray alloc]init];
             self.TeamPlayersArray2 = [[NSMutableArray alloc]init];
             self.TeamPlayersArray3 = [[NSMutableArray alloc]init];
@@ -2219,9 +2218,8 @@
                 
             }
         
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.teamCompCollectionView reloadData];
-            });
+            [self.teamCompCollectionView reloadData];
+        
         }
         [AppCommon hideLoading];
         
@@ -2243,9 +2241,9 @@
     
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     arr = appDel.ArrayCompetition;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.PopTableView reloadData];
-    });
+    
+    [self.PopTableView reloadData];
+   
 }
 
 - (IBAction)onClickTeamBtn:(id)sender
@@ -2258,9 +2256,9 @@
     
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     arr = appDel.ArrayTeam;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.PopTableView reloadData];
-    });
+    
+    [self.PopTableView reloadData];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
