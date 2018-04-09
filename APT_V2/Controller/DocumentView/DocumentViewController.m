@@ -42,8 +42,6 @@
         
     [btnUpload setHidden:![AppCommon isKXIP]];
 
-    
-    
     if (self.isNotificationPDF) {
         
         [self loadWebView:self.filePath];
@@ -359,12 +357,19 @@
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
-    NSDictionary* dict = @{@"TeamName":selctedValues};
+//    NSDictionary* dict = @{@"TeamName":selctedValues};
+    
+    NSDictionary* dict = @{
+                           @"TeamName":selctedValues,
+                           @"ClientCode":[AppCommon GetClientCode],
+                           @"UserCode":[AppCommon GetUsercode]
+                           };
+
     
     
+    NSLog(@"URLString %@",URLString);
+    NSLog(@"DOC parameters : %@",dict);
     
-    
-    NSLog(@"DOC parameters : %@",selctedValues);
     [manager POST:URLString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
@@ -395,6 +400,10 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
+        
+        isNext = NO;
+        [self addAndRemoveInputs:@""];
+
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
         

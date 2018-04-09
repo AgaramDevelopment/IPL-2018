@@ -11,6 +11,7 @@
 @protocol openUploadDelegate <NSObject>
 
 -(void)openVideoUploadView;
+-(void)updateVideoCollectionCount:(NSDictionary *)info;
 
 @end
 

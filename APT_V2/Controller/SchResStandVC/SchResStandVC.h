@@ -42,5 +42,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventCollectionHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ScrollcontentHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoViewHeight;
 
 @end

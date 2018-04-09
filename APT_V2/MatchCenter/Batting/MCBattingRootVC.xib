@@ -20,8 +20,11 @@
                 <outlet property="battingBtn" destination="owv-RJ-B3Y" id="0v9-0s-UYx"/>
                 <outlet property="containerView" destination="4Uw-dq-aFj" id="SY8-rR-97r"/>
                 <outlet property="headderView" destination="B0M-Ed-2d1" id="7Uc-Qx-HeZ"/>
+                <outlet property="lblSelectedTab" destination="LDk-e7-x5O" id="L1w-vc-aG1"/>
                 <outlet property="overBlockBtn" destination="ukr-26-2ye" id="hQm-9M-FRg"/>
                 <outlet property="overViewBtn" destination="up8-Jm-kHA" id="fWb-IT-ZkP"/>
+                <outlet property="selctedTabLeading" destination="Gg0-1e-cuO" id="dJ2-9t-i7v"/>
+                <outlet property="selectedTabWidth" destination="Kdl-2Y-89J" id="Lxx-r9-rgS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,37 +44,42 @@
                     <rect key="frame" x="0.0" y="60" width="320" height="508"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqe-Iu-8Mg" userLabel="button View">
-                            <rect key="frame" x="5" y="5" width="310" height="35"/>
+                            <rect key="frame" x="5" y="5" width="310" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owv-RJ-B3Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="103.5" height="35"/>
-                                    <color key="backgroundColor" red="0.79992043970000004" green="0.80005568270000005" blue="0.79990267749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="NyQ-dy-WKY"/>
-                                    </constraints>
-                                    <state key="normal" title="Batting"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="103.5" height="37"/>
+                                    <state key="normal" title="Batting">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="onClickBatting:" destination="-1" eventType="touchUpInside" id="08s-hK-pon"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="up8-Jm-kHA">
-                                    <rect key="frame" x="103.5" y="0.0" width="103" height="35"/>
-                                    <color key="backgroundColor" red="0.79992043970000004" green="0.80005568270000005" blue="0.79990267749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDk-e7-x5O">
+                                    <rect key="frame" x="0.0" y="36" width="100" height="4"/>
+                                    <color key="backgroundColor" red="0.1450980392" green="0.69019607839999997" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="pyP-VV-9Sw"/>
+                                        <constraint firstAttribute="height" constant="4" id="JYe-DB-fuh"/>
+                                        <constraint firstAttribute="width" constant="100" id="Kdl-2Y-89J"/>
                                     </constraints>
-                                    <state key="normal" title="Overview"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="up8-Jm-kHA">
+                                    <rect key="frame" x="103.5" y="0.0" width="103" height="37"/>
+                                    <state key="normal" title="Overview">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="onClickOverView:" destination="-1" eventType="touchUpInside" id="7GG-hL-iDu"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukr-26-2ye">
-                                    <rect key="frame" x="206.5" y="0.0" width="103.5" height="35"/>
-                                    <color key="backgroundColor" red="0.79992043970000004" green="0.80005568270000005" blue="0.79990267749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="FFn-KV-FMr"/>
-                                    </constraints>
-                                    <state key="normal" title="Over Block"/>
+                                    <rect key="frame" x="206.5" y="0.0" width="103.5" height="37"/>
+                                    <state key="normal" title="Over Block">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                     <connections>
                                         <action selector="onClickOverBlock:" destination="-1" eventType="touchUpInside" id="qDR-d7-yXs"/>
                                     </connections>
@@ -79,20 +87,25 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="up8-Jm-kHA" secondAttribute="bottom" constant="3" id="0a7-kz-7sh"/>
+                                <constraint firstAttribute="bottom" secondItem="LDk-e7-x5O" secondAttribute="bottom" id="8zy-CU-MBw"/>
                                 <constraint firstAttribute="trailing" secondItem="ukr-26-2ye" secondAttribute="trailing" id="BSM-fc-2IO"/>
+                                <constraint firstAttribute="bottom" secondItem="ukr-26-2ye" secondAttribute="bottom" constant="3" id="G2F-fT-4nb"/>
                                 <constraint firstItem="owv-RJ-B3Y" firstAttribute="leading" secondItem="Qqe-Iu-8Mg" secondAttribute="leading" id="G6b-z2-dw2"/>
+                                <constraint firstItem="LDk-e7-x5O" firstAttribute="leading" secondItem="Qqe-Iu-8Mg" secondAttribute="leading" id="Gg0-1e-cuO"/>
                                 <constraint firstItem="owv-RJ-B3Y" firstAttribute="top" secondItem="Qqe-Iu-8Mg" secondAttribute="top" id="V5l-qu-hcI"/>
                                 <constraint firstItem="up8-Jm-kHA" firstAttribute="leading" secondItem="owv-RJ-B3Y" secondAttribute="trailing" id="XGM-kX-vmR"/>
                                 <constraint firstItem="ukr-26-2ye" firstAttribute="width" secondItem="owv-RJ-B3Y" secondAttribute="width" id="YQp-AC-K7T"/>
+                                <constraint firstAttribute="bottom" secondItem="owv-RJ-B3Y" secondAttribute="bottom" constant="3" id="bo9-bI-cX8"/>
                                 <constraint firstItem="up8-Jm-kHA" firstAttribute="width" secondItem="owv-RJ-B3Y" secondAttribute="width" id="gxh-87-43j"/>
                                 <constraint firstItem="up8-Jm-kHA" firstAttribute="top" secondItem="Qqe-Iu-8Mg" secondAttribute="top" id="mzc-8d-dlI"/>
                                 <constraint firstItem="ukr-26-2ye" firstAttribute="top" secondItem="Qqe-Iu-8Mg" secondAttribute="top" id="ws9-7v-8o9"/>
-                                <constraint firstAttribute="height" constant="35" id="yqT-8c-QVZ"/>
+                                <constraint firstAttribute="height" constant="40" id="yqT-8c-QVZ"/>
                                 <constraint firstItem="ukr-26-2ye" firstAttribute="leading" secondItem="up8-Jm-kHA" secondAttribute="trailing" id="zIo-bK-YS5"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Uw-dq-aFj">
-                            <rect key="frame" x="0.0" y="40" width="320" height="468"/>
+                            <rect key="frame" x="0.0" y="45" width="320" height="463"/>
                             <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>

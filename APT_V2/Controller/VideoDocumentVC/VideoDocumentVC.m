@@ -24,6 +24,8 @@
     
     VideoPlayerViewController *videoPlayerVC;
     NSMutableArray* backButtonNames;
+    NSInteger LineCount;
+    CGFloat VideoCollectionHeight;
 }
 
 @end
@@ -104,14 +106,13 @@
     
     [lblNoDoc setHidden:docResultArray.count];
     
+    
     return docResultArray.count;
 }
 
-#pragma mar - UICollectionViewFlowDelegateLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CGFloat width = collectionView.frame.size.width;
+-(CGSize)collectionSize
+{
+    CGFloat width = self.docCollectionView.frame.size.width;
     CGFloat height = 130;
     
     if(IS_IPHONE5) {
@@ -126,8 +127,40 @@
         
         width = width/5;
     }
-    
+
     return CGSizeMake(width-10, width);
+
+}
+
+
+#pragma mar - UICollectionViewFlowDelegateLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CGFloat width = collectionView.frame.size.width;
+    CGFloat height = 130;
+
+    if(IS_IPHONE5) {
+
+        width = width/3;
+        LineCount = 3;
+    }
+    else if(IS_IPHONE_DEVICE && !IS_IPHONE5) {
+
+        width = width/3;
+        LineCount = 3;
+
+    }
+    else if(IS_IPAD) {
+
+        width = width/5;
+        LineCount = 5;
+
+    }
+    VideoCollectionHeight = width;
+    return CGSizeMake(width-10, width);
+    
+//    return [self collectionSize];
     
 }
 
@@ -413,6 +446,14 @@
         if(responseObject >0)
         {
             
+
+            docResultArray = responseObject;
+            /*
+             no.of.lines = arraycount + space
+             */
+//            CGFloat Xwidth = [self collectionSize].width;
+//            CGFloat space = 10;
+            
             NSString* str = [[NSUserDefaults standardUserDefaults] stringForKey:@"loginedUserTeam"];
             if ([[selctedValues lastPathComponent] isEqualToString:str])
             {
@@ -423,9 +464,20 @@
             {
                 self.backBtn.hidden =NO;
                 self.collectionTop.constant = 0;
-
+                
             }
-            docResultArray = responseObject;
+            
+
+            NSString* first = [self isGreaterThanOneLine];
+            NSNumber* second = [NSNumber numberWithFloat:VideoCollectionHeight];
+            NSString* third = (self.backBtn.isHidden ? @"1" : @"0");
+
+            
+            NSDictionary* dict = @{@"iSGreaterThanOneLine":first,
+                                   @"Height":second,
+                                   @"BackVisible":third
+                                   };
+            [protocolUpload updateVideoCollectionCount:dict];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.docCollectionView reloadData];
@@ -442,6 +494,31 @@
         [AppCommon hideLoading];
         
     }];
+}
+
+
+-(NSString *)isGreaterThanOneLine
+{
+    NSString* resultedCount = @"0";
+    
+    if(IS_IPHONE_DEVICE && docResultArray.count > 2) {
+        
+        resultedCount = @"1";
+        
+    }
+    else if(IS_IPAD && docResultArray.count > 4) {
+        
+        resultedCount = @"1";
+
+    }
+    else {
+        resultedCount = @"0";
+
+    }
+    
+    NSLog(@"TOTAL NO OF LINE %@ ",resultedCount);
+    return resultedCount;
+
 }
 
 - (IBAction)actionBack:(id)sender {

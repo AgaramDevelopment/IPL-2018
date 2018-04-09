@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LineTextField : UITextField //<UITextFieldDelegate>
+@interface LineTextField : UITextField
 
 
 @property (nonatomic,strong) NSString* selectedCode;
 @property (nonatomic,weak) UIButton* button;
+-(NSString *)getText;
+
 -(void)setup;
 
 @end

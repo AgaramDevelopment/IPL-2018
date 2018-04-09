@@ -24,6 +24,7 @@
 @end
 
 @implementation MCBowlingRootVC
+@synthesize lblSelectedTab,selectedTabWidth,selectedTabLeading;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,9 +32,19 @@
         // Hide navigationController
     self.navigationController.navigationBarHidden = YES;
     
-    [self setInningsBySelection:@"1"];
+//    [self setInningsBySelection:@"1"];
     
-    [self loadContainerView:@"1"];
+//    selectedTabLeading.constant = [_battingBtn frame].origin.x +[_battingBtn frame].size.width/4;
+//    selectedTabWidth.constant = [_battingBtn frame].size.width/2;
+//
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.lblSelectedTab layoutIfNeeded];
+//    }];
+//
+//
+//    [self loadContainerView:@"1"];
+    
+    [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
 //    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
 //
 //
@@ -45,6 +56,19 @@
 //    [btView loadChart];
 //    [btView loadTableFreez];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    selectedTabLeading.constant = [self.battingBtn frame].origin.x +[self.battingBtn frame].size.width/4;
+    selectedTabWidth.constant = [self.battingBtn frame].size.width/2;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -222,19 +246,48 @@
 }
 - (IBAction)onClickBatting:(id)sender {
     
-    [self setInningsBySelection:@"1"];
+    selectedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
+    
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+
+//    [self setInningsBySelection:@"1"];
     
     [self loadContainerView : @"1"];
     
 }
 - (IBAction)onClickOverView:(id)sender {
-    [self setInningsBySelection:@"2"];
+    
+    selectedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
+    
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+
+//    [self setInningsBySelection:@"2"];
     [self loadContainerView : @"2"];
 
 }
 
 - (IBAction)onClickOverBlock:(id)sender {
-    [self setInningsBySelection:@"3"];
+    
+    selectedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
+    
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+
+//    [self setInningsBySelection:@"3"];
     [self loadContainerView : @"3"];
 
 }

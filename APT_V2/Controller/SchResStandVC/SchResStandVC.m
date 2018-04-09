@@ -52,9 +52,11 @@
 @end
 
 @implementation SchResStandVC
-@synthesize documentView;
+
+@synthesize documentView,videoViewHeight;
 
 @synthesize eventViewHeight,eventCollectionHeight,ScrollcontentHeight;
+
 
 @synthesize Delegate;
 - (void)viewDidLoad {
@@ -280,6 +282,15 @@
     {
         
         self.Nodatalbl.hidden = self.commonArray.count;
+        if(!self.Nodatalbl.isHidden)
+        {
+            self.eventCollectionHeight.constant = 50;
+        }
+        else
+        {
+            self.eventCollectionHeight.constant = 175;
+        }
+        
         return self.commonArray.count;
     }
     else
@@ -988,10 +999,7 @@
                 self.EventStatusArray =[[NSMutableArray alloc]init];
                 self.EventStatusArray =[responseObject valueForKey:@"ListEventStatusDetails"];
                 
-                
             }
-            
-            
             
             [AppCommon hideLoading];
             
@@ -1003,6 +1011,22 @@
     }
     
 }
+
+-(void)updateVideoCollectionCount:(NSDictionary *)info
+{
+    NSLog(@"updateVideoCollectionCount %@",info);
+    
+//    if(Value)
+//    {
+//        videoViewHeight.constant = 300;
+//
+//    }
+//    else
+//    {
+//        videoViewHeight.constant = 300;
+//    }
+}
+
 
 @end
 

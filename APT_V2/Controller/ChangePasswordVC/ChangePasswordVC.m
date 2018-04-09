@@ -26,6 +26,12 @@
     [self customnavigationmethod];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    [oldPasswordTF.setup]
+}
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
