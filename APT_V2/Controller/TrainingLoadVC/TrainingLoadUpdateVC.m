@@ -133,10 +133,10 @@
     
     self.DropdownDataArray = [[NSMutableArray alloc]init];
     self.DropdownDataArray = self.ActivityDataArray;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showAnimate];
-        [self.popViewtable reloadData];
-    });
+    
+    [self showAnimate];
+    [self.popViewtable reloadData];
+   
 }
 
 - (IBAction)RpeAction:(id)sender {
@@ -149,10 +149,10 @@
     self.poptableyposition.constant = self.RpeFilterview.frame.origin.y;
     self.DropdownDataArray = [[NSMutableArray alloc]init];
     self.DropdownDataArray = self.RpeDataArray;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showAnimate];
-        [self.popViewtable reloadData];
-    });
+    
+    [self showAnimate];
+    [self.popViewtable reloadData];
+    
 }
 
 - (IBAction)AddSessionAction:(id)sender {
@@ -195,10 +195,9 @@
     {
         [sessionArray addObject:dic];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.SessionTable reloadData];
-    });
     
+    [self.SessionTable reloadData];
+   
     if(sessionArray.count >0)
     {
         self.markers = [[NSMutableArray alloc]init];
@@ -208,10 +207,9 @@
         }
     
         [self samplePieChart];
-        dispatch_async(dispatch_get_main_queue(), ^{
-             [pieChartView reloadData];
-        });
-        
+    
+        [pieChartView reloadData];
+    
         int total=0;
         for(int i=0;i<self.markers.count;i++)
         {
@@ -476,11 +474,9 @@
             
             self.RpeDataArray = [[NSMutableArray alloc]init];
             self.RpeDataArray = [responseObject valueForKey:@"Rpes"];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.popViewtable reloadData];
-            });
-            
+        
+            [self.popViewtable reloadData];
+        
             [self setValuesUpdate];
         }
         [AppCommon hideLoading];
@@ -519,9 +515,8 @@ if([_isToday isEqualToString:@"yes"])
         
         [sessionArray addObject:dic];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.SessionTable reloadData];
-    });
+    
+    [self.SessionTable reloadData];
     
     if(sessionArray.count >0)
     {
@@ -531,10 +526,9 @@ if([_isToday isEqualToString:@"yes"])
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
         [self samplePieChart];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [pieChartView reloadData];
-        });
-        
+    
+        [pieChartView reloadData];
+    
         int total=0;
         for(int i=0;i<self.markers.count;i++)
         {
@@ -571,9 +565,8 @@ if([_isToday isEqualToString:@"yes"])
             
             [sessionArray addObject:dic];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.SessionTable reloadData];
-        });
+    
+        [self.SessionTable reloadData];
         
         if(sessionArray.count >0)
         {
@@ -583,10 +576,9 @@ if([_isToday isEqualToString:@"yes"])
                 [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
             }
             [self samplePieChart];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [pieChartView reloadData];
-            });
-            
+        
+            [pieChartView reloadData];
+        
             int total=0;
             for(int i=0;i<self.markers.count;i++)
             {

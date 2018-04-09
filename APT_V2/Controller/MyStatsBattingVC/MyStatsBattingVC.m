@@ -2885,9 +2885,8 @@
 
                 recentMatchesArray = [[NSMutableArray alloc] init];
                 recentMatchesArray = battingRecentMatchesArray;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.batttingTableView reloadData];
-                });
+                
+                [self.batttingTableView reloadData];
            
             }else{
                 
@@ -2909,9 +2908,8 @@
                 
                 recentMatchesArray = [[NSMutableArray alloc] init];
                 recentMatchesArray = bowlingRecentMatchesArray;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.batttingTableView reloadData];
-                });
+                
+                [self.batttingTableView reloadData];
                 
             }else{
                 
@@ -3020,9 +3018,9 @@
     isSixes = NO;
     isWkt = NO;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+    
+    [self.batttingTableView reloadData];
+    
 }
 
 -(IBAction)didClicktwosBatting:(id)sender
@@ -3034,9 +3032,8 @@
     isSixes = NO;
     isWkt = NO;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+    
+    [self.batttingTableView reloadData];
     
 }
 
@@ -3049,9 +3046,8 @@
     isSixes = NO;
     isWkt = NO;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+    
+    [self.batttingTableView reloadData];
     
 }
 
@@ -3064,9 +3060,8 @@
     isSixes = NO;
     isWkt = NO;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+    
+    [self.batttingTableView reloadData];
     
 }
 
@@ -3079,10 +3074,9 @@
     isSixes = YES;
     isWkt = NO;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
     
+    [self.batttingTableView reloadData];
+   
 }
 
 -(IBAction)didClickdotsBatting:(id)sender
@@ -3094,10 +3088,9 @@
     isSixes = NO;
     isWkt = NO;
     isDotBall = YES;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
     
+    [self.batttingTableView reloadData];
+   
 }
 
 -(IBAction)didClickwicketBatting:(id)sender
@@ -3109,9 +3102,8 @@
     isSixes = NO;
     isWkt = YES;
     isDotBall = NO;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+    
+    [self.batttingTableView reloadData];
     
 }
 
@@ -3126,9 +3118,8 @@
     isSixes = YES;
     isWkt = YES;
     isDotBall = YES;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.batttingTableView reloadData];
-    });
+
+    [self.batttingTableView reloadData];
     
 }
 

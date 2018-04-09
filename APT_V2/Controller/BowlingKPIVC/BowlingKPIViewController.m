@@ -913,9 +913,8 @@
     
     [self.avPlayer play];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.ballsColView reloadData];
-    });
+    [self.ballsColView reloadData];
+    
 }
 
 -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo
@@ -1012,9 +1011,7 @@
     if((selectedVideo+1)<videoURLArray.count){
         selectedVideo = selectedVideo +1;
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.ballsColView reloadData];
-        });
+        [self.ballsColView reloadData];
         
         NSMutableDictionary *playerVdo =  [videoURLArray objectAtIndex:selectedVideo];
         NSString *url = [playerVdo valueForKey:@"VIDEOFILE"];

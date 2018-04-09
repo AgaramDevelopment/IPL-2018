@@ -507,10 +507,8 @@
                  
              }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [pieChartView2 reloadData];
-            });
-            
+            [pieChartView2 reloadData];
+           
             }
            
             if(self.yesterdayLoadArray.count>0)
@@ -640,9 +638,8 @@
                 [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
                 
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [pieChartView1 reloadData];
-            });
+            
+            [pieChartView1 reloadData];
             
             }
         }

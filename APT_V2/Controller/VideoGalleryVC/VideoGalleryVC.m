@@ -216,12 +216,11 @@
                 [self.CommonArray addObject:[self.objCatoryArray objectAtIndex:i]];
             }
         
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.objVideoFilterArray =  self.objSecondGalleryArray;
+            self.objVideoFilterArray =  self.objSecondGalleryArray;
                 
-                [self.videoCollectionview1 reloadData];
-                [self.videoCollectionview2 reloadData];
-            });
+            [self.videoCollectionview1 reloadData];
+            [self.videoCollectionview2 reloadData];
+        
         }
         
         [AppCommon hideLoading];
@@ -597,16 +596,16 @@
         // Update the UI
         if (_searchResult.count == 0) {
             self.objVideoFilterArray = [self.searchResult copy];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.videoCollectionview2 reloadData];
-            });
+            
+            [self.videoCollectionview2 reloadData];
+            
         } else {
             
             self.objVideoFilterArray =[[NSMutableArray alloc]init];
             self.objVideoFilterArray = [self.searchResult copy];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.videoCollectionview2 reloadData];
-            });
+            
+            [self.videoCollectionview2 reloadData];
+            
         }
     });
     
@@ -634,9 +633,9 @@
     {
         self.objVideoFilterArray = [[NSMutableArray alloc]init];
         self.objVideoFilterArray =  self.objSecondGalleryArray;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.videoCollectionview2 reloadData];
-        });
+    
+        [self.videoCollectionview2 reloadData];
+    
     }
     
     //[self filterContentForSearchText:searchString];
@@ -743,9 +742,9 @@
             [self.objVideoFilterArray addObject:objDic];
         }
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.videoCollectionview2 reloadData];
-    });
+    
+    [self.videoCollectionview2 reloadData];
+    
 }
 
 - (IBAction)ClearTextAction:(id)sender
@@ -756,9 +755,9 @@
     
     self.objVideoFilterArray = [[NSMutableArray alloc]init];
     self.objVideoFilterArray =  self.objSecondGalleryArray;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.videoCollectionview2 reloadData];
-    });
+    
+    [self.videoCollectionview2 reloadData];
+    
 }
 
 
@@ -887,9 +886,9 @@
 //        NSLog(@"DropDown loaded");
 //
 //    }];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [tbl_list reloadData];
-    });
+    
+    [tbl_list reloadData];
+    
 }
 
 
@@ -989,9 +988,8 @@
         {
             self.objFirstGalleryArray =[[NSMutableArray alloc]init];
             self.objFirstGalleryArray =responseObject;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.videoCollectionview2 reloadData];
-            });
+        
+            [self.videoCollectionview2 reloadData];
         }
         
         [AppCommon hideLoading];

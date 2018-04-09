@@ -2214,9 +2214,9 @@
     
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     arr = appDel.ArrayCompetition;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.PopTableView reloadData];
-    });
+    
+    [self.PopTableView reloadData];
+   
 }
 
 - (IBAction)onClickTeamBtn:(id)sender
@@ -2229,9 +2229,9 @@
     
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     arr = appDel.ArrayTeam;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.PopTableView reloadData];
-    });
+    
+    [self.PopTableView reloadData];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

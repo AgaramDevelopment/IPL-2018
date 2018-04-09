@@ -202,13 +202,13 @@
     self.popTblXposition.constant = -310;
     if(isModule== NO)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    
             self.popTbl.hidden = NO;
             self.commonArray = [[NSMutableArray alloc]init];
             self.commonArray = self.ModuleArray;
             [self.popTbl reloadData];
             isModule = YES;
-        });
+    
     }
     else
     {
@@ -229,13 +229,13 @@
 
     if(isPlayer== NO)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    
             self.popTbl.hidden = NO;
             self.commonArray = [[NSMutableArray alloc]init];
             self.commonArray = self.objPlayerArray;
             [self.popTbl reloadData];
             isPlayer = YES;
-        });
+    
     }
     else
     {
@@ -255,13 +255,13 @@
 
     if(isCategory== NO)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    
             self.popTbl.hidden = NO;
             self.commonArray = [[NSMutableArray alloc]init];
             self.commonArray = self.objCategoryArray;
             [self.popTbl reloadData];
             isCategory = YES;
-        });
+    
     }
     else
     {
@@ -281,13 +281,13 @@
 
     if(isShare== NO)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    
             self.popTbl.hidden = NO;
             self.commonArray = [[NSMutableArray alloc]init];
             self.commonArray = self.sharetouserArray;
             [self.popTbl reloadData];
             isShare = YES;
-        });
+    
     }
     else
     {
@@ -910,9 +910,8 @@
         
     }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [popTbl reloadData];
-    });
+    [popTbl reloadData];
+   
 }
 
 -(NSArray *)getCorrespoingPlayerForthisTeamCode:(NSString* )teamcode

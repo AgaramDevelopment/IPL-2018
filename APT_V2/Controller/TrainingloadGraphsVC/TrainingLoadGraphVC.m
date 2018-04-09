@@ -297,9 +297,9 @@
         {
             self.filterListNameArray = [[NSMutableArray alloc]init];
             self.filterListNameArray = [responseObject valueForKey:@"ActivityTypes"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.PoplistTable reloadData];
-            });
+        
+            [self.PoplistTable reloadData];
+            
         }
         [AppCommon hideLoading];
         

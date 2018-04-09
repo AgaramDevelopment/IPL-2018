@@ -154,9 +154,9 @@
                 
                 self.EventStatusArray =[[NSMutableArray alloc]init];
                 self.EventStatusArray =[responseObject valueForKey:@"ListEventStatusDetails"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.PlannerListTbl reloadData];
-                });
+            
+                [self.PlannerListTbl reloadData];
+                
             }
             
             

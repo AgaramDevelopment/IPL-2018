@@ -495,9 +495,9 @@
                 [supplementsMoreArray addObject:@""];
             }
             NSLog(@"sample:%@", breakfastMoreArray);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.nutritionCollectionView reloadData];
-            });
+            
+            [self.nutritionCollectionView reloadData];
+            
         }
         
         [AppCommon hideLoading];

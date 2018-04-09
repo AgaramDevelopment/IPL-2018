@@ -316,9 +316,9 @@
 - (void)swipeViewDidScroll:(SwipeView *)swipeView
 {
     selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.Titlecollview reloadData];
-    });
+    
+    [self.Titlecollview reloadData];
+   
 }
 
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
@@ -838,10 +838,10 @@
 - (IBAction)actionDropDown:(id)sender {
     
     if (tblList.isHidden) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [tblList setHidden:NO];
-            [tblList reloadData];
-        });
+        
+        [tblList setHidden:NO];
+        [tblList reloadData];
+        
     }
     else{
         [tblList setHidden:YES];
@@ -1084,9 +1084,8 @@
         else{
             [selectedUserArray addObject:temp];
         }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [tableView reloadData];
-    });
+    
+    [tableView reloadData];
     
     lblShareUser.text = [[selectedUserArray valueForKey:@"sharedUserName"]componentsJoinedByString:@","];
 
