@@ -339,6 +339,73 @@
     
     self.headerUIView.hidden = YES;
     self.headerUIViewTestmatch.hidden = YES;
+    
+    //Assign Values to Batting Properties
+    if (IS_IPAD) {
+        self.battingLabel.text = @"Batting";
+        self.battingRunsLbl.text = @"Runs";
+        self.ballsLbl.text = @"Balls";
+        self.foursLbl.text = @"4's";
+        self.sixsLbl.text = @"6's";
+        self.strikeRateLbl.text = @"S/R";
+        self.battingDotBallsLbl.text = @"Dot Balls";
+        
+        self.stickyBattingLabel.text = @"Batting";
+        self.stickyBattingRunsLbl.text = @"Runs";
+        self.stickyBallsLbl.text = @"Balls";
+        self.stickyFoursLbl.text = @"4's";
+        self.stickySixsLbl.text = @"6's";
+        self.stickyStrikeRateLbl.text = @"S/R";
+        self.stickyBattingDotBallsLbl.text = @"Dot Balls";
+    } else {
+        self.battingLabel.text = @"Batting";
+        self.battingRunsLbl.text = @"R";
+        self.ballsLbl.text = @"B";
+        self.foursLbl.text = @"4's";
+        self.sixsLbl.text = @"6's";
+        self.strikeRateLbl.text = @"SR";
+        self.battingDotBallsLbl.text = @"DB";
+        
+        self.stickyBattingLabel.text = @"Batting";
+        self.stickyBattingRunsLbl.text = @"R";
+        self.stickyBallsLbl.text = @"B";
+        self.stickyFoursLbl.text = @"4's";
+        self.stickySixsLbl.text = @"6's";
+        self.stickyStrikeRateLbl.text = @"SR";
+        self.stickyBattingDotBallsLbl.text = @"DB";
+    }
+    
+    //Assign Values to Bowling Properties
+    if (IS_IPAD) {
+        self.bowlingLbl.text = @"Bowling";
+        self.oversLbl.text = @"Overs";
+        self.bowlingRunsLbl.text = @"Runs";
+        self.wicketsLbl.text = @"Wkts";
+        self.economyLbl.text = @"Econ";
+        self.bowlingDotBallsLbl.text = @"Dot Balls";
+        
+        self.stickyBowlingLbl.text = @"Bowling";
+        self.stickyOversLbl.text = @"Overs";
+        self.stickyBowlingRunsLbl.text = @"Runs";
+        self.stickyWicketsLbl.text = @"Wkts";
+        self.stickyEconomyLbl.text = @"Econ";
+        self.stickyBowlingDotBallsLbl.text = @"Dot Balls";
+    } else {
+        self.bowlingLbl.text = @"Bowling";
+        self.oversLbl.text = @"O";
+        self.bowlingRunsLbl.text = @"R";
+        self.wicketsLbl.text = @"W";
+        self.economyLbl.text = @"E";
+        self.bowlingDotBallsLbl.text = @"DB";
+        
+        self.stickyBowlingLbl.text = @"Bowling";
+        self.stickyOversLbl.text = @"O";
+        self.stickyBowlingRunsLbl.text = @"R";
+        self.stickyWicketsLbl.text = @"W";
+        self.stickyEconomyLbl.text = @"E";
+        self.stickyBowlingDotBallsLbl.text = @"DB";
+    }
+    
     titleArray = [NSArray arrayWithObjects:@"National Team",@"Age",@"Date of Birth",@"Weight",@"height",@"Role",@"Batting Style",@"Bowling Style", nil];
     valuesArray = [NSArray arrayWithObjects:@"India",@"28",@"5 Nvember 1988",@"69kg",@"1.75 m",@"Batsman",@"Right Handed Bat",@"Right-arm Medium", nil];
     
