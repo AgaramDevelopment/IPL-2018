@@ -3037,7 +3037,7 @@
                                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAQ-Ad-wKv">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAQ-Ad-wKv">
                                                         <rect key="frame" x="189.5" y="0.0" width="568.5" height="45"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                         <nil key="highlightedColor"/>
@@ -3085,7 +3085,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paP-AH-LPa">
-                                        <rect key="frame" x="0.0" y="968" width="768" height="159"/>
+                                        <rect key="frame" x="0.0" y="968" width="768" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-t7-glP">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="41"/>
@@ -3114,7 +3114,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFf-E6-CMd">
-                                                <rect key="frame" x="0.0" y="41" width="768" height="118"/>
+                                                <rect key="frame" x="10" y="41" width="748" height="79"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -3126,16 +3126,20 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="DFf-E6-CMd" secondAttribute="bottom" id="04Y-PA-owt"/>
                                             <constraint firstItem="DFf-E6-CMd" firstAttribute="top" secondItem="GLr-t7-glP" secondAttribute="bottom" id="1zp-Q4-fyP"/>
-                                            <constraint firstItem="DFf-E6-CMd" firstAttribute="leading" secondItem="paP-AH-LPa" secondAttribute="leading" id="7VP-yB-790"/>
-                                            <constraint firstAttribute="trailing" secondItem="DFf-E6-CMd" secondAttribute="trailing" id="7rA-8X-6Rf"/>
-                                            <constraint firstAttribute="height" constant="159" id="Yea-fp-h1t"/>
+                                            <constraint firstItem="DFf-E6-CMd" firstAttribute="leading" secondItem="paP-AH-LPa" secondAttribute="leading" constant="5" id="7VP-yB-790">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
+                                            <constraint firstAttribute="trailing" secondItem="DFf-E6-CMd" secondAttribute="trailing" constant="5" id="7rA-8X-6Rf">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="120" id="Yea-fp-h1t"/>
                                             <constraint firstItem="GLr-t7-glP" firstAttribute="leading" secondItem="paP-AH-LPa" secondAttribute="leading" id="bOI-5q-fYb"/>
                                             <constraint firstAttribute="trailing" secondItem="GLr-t7-glP" secondAttribute="trailing" id="gBG-0z-UPi"/>
                                             <constraint firstItem="GLr-t7-glP" firstAttribute="top" secondItem="paP-AH-LPa" secondAttribute="top" id="ndp-bF-zly"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXJ-HZ-5bq">
-                                        <rect key="frame" x="0.0" y="1127" width="768" height="41"/>
+                                        <rect key="frame" x="0.0" y="1088" width="768" height="41"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaH-Ze-gOY">
                                                 <rect key="frame" x="10" y="0.0" width="216.5" height="41"/>
@@ -3224,14 +3228,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57P-ZB-ZOL" userLabel="Gray View3">
-                                        <rect key="frame" x="0.0" y="1168" width="768" height="10"/>
+                                        <rect key="frame" x="0.0" y="1129" width="768" height="10"/>
                                         <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="g2K-Vv-xfB"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="302" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z5X-Mn-KDc">
-                                        <rect key="frame" x="0.0" y="1178" width="768" height="400"/>
+                                        <rect key="frame" x="0.0" y="1139" width="768" height="400"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="400" id="5ld-VP-lin"/>
