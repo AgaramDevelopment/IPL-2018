@@ -50,6 +50,8 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * TblHeight;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * partnrTblHeight;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * ScrollHeight;
+
 @end
 
 @implementation SessionSummaryVC
@@ -78,7 +80,7 @@
     
     
     [self MatchTypeService];
-    [self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+    //[self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     if(_isTest){
         self.TESTview.clipsToBounds = NO;
@@ -136,6 +138,14 @@
     
 }
 
+
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"] || [_value isEqualToString:@""]) {
+        _value=@"0";
+    }
+    return _value;
+}
 -(void)MatchTypeService
 {
     [AppCommon showLoading];
@@ -165,6 +175,8 @@
                 [self.session3 setTitle:@"16-20 Ov"  forState:UIControlStateNormal];
                 [self.Innings1 sendActionsForControlEvents:UIControlEventTouchUpInside];
             }
+            
+            //[self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
           
             [AppCommon hideLoading];
         }
@@ -572,50 +584,50 @@
     [commonArray addObjectsFromArray:Session1array];
     
     //Pace
-    self.OversPacelbl.text = [[pacearrS1 valueForKey:@"PaceOvers"] objectAtIndex:0];
-    NSString *v1 =[[pacearrS1 valueForKey:@"PaceOversWidth"] objectAtIndex:0];
+    self.OversPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceOvers"] objectAtIndex:0]];
+    NSString *v1 =[self checkNull:[[pacearrS1 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
     NSArray* foo = [v1 componentsSeparatedByString: @"%"];
     NSString* firstBit = [foo objectAtIndex: 0];
     float x = [firstBit floatValue];
     self.OvrPrgPace.progress = 1-(x/100);
     
-    self.RunsPacelbl.text = [[pacearrS1 valueForKey:@"PaceRuns"] objectAtIndex:0];
-    NSString *v2 =[[pacearrS1 valueForKey:@"PaceRunsWidth"] objectAtIndex:0];
+    self.RunsPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceRuns"] objectAtIndex:0]];
+    NSString *v2 = [self checkNull:[[pacearrS1 valueForKey:@"PaceRunsWidth"] objectAtIndex:0]];
     NSArray* foo1 = [v2 componentsSeparatedByString: @"%"];
     NSString* firstBit1 = [foo1 objectAtIndex: 0];
     float x1 = [firstBit1 floatValue];
     self.RunsPrgPace.progress = 1-(x1/100);
     
-    self.WktsPacelbl.text = [[pacearrS1 valueForKey:@"PaceWkts"] objectAtIndex:0];
-    NSString *v3 =[[pacearrS1 valueForKey:@"PaceWktsWidth"] objectAtIndex:0];
+    self.WktsPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceWkts"] objectAtIndex:0]];
+    NSString *v3 = [self checkNull:[[pacearrS1 valueForKey:@"PaceWktsWidth"] objectAtIndex:0]];
     NSArray* foo2 = [v3 componentsSeparatedByString: @"%"];
     NSString* firstBit2 = [foo2 objectAtIndex: 0];
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS1 valueForKey:@"PaceDots"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS1 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceDots"] objectAtIndex:0]];
+    NSString *v4 = [self checkNull:[[pacearrS1 valueForKey:@"PaceDotsWidth"] objectAtIndex:0]];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
     self.MdnsPrgPace.progress = 1-(x3/100);
     
-    self.StrPacelbl.text = [[pacearrS1 valueForKey:@"PaceSR"] objectAtIndex:0];
-    NSString *v5 =[[pacearrS1 valueForKey:@"PaceSRWidth"] objectAtIndex:0];
+    self.StrPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceSR"] objectAtIndex:0]];
+    NSString *v5 = [self checkNull:[[pacearrS1 valueForKey:@"PaceSRWidth"] objectAtIndex:0]];
     NSArray* foo4 = [v5 componentsSeparatedByString: @"%"];
     NSString* firstBit4 = [foo4 objectAtIndex: 0];
     float x4 = [firstBit4 floatValue];
     self.StrPrgPace.progress = 1-(x4/100);
     
-    self.AvgPacelbl.text = [[pacearrS1 valueForKey:@"PaceAvg"] objectAtIndex:0];
-    NSString *v6 =[[pacearrS1 valueForKey:@"PaceAvgWidth"] objectAtIndex:0];
+    self.AvgPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceAvg"] objectAtIndex:0]];
+    NSString *v6 = [self checkNull:[[pacearrS1 valueForKey:@"PaceAvgWidth"] objectAtIndex:0]];
     NSArray* foo5 = [v6 componentsSeparatedByString: @"%"];
     NSString* firstBit5 = [foo5 objectAtIndex: 0];
     float x5 = [firstBit5 floatValue];
     self.AvgPrgPace.progress = 1-(x5/100);
     
-    self.EconPacelbl.text = [[pacearrS1 valueForKey:@"PaceEcon"] objectAtIndex:0];
-    NSString *v7 =[[pacearrS1 valueForKey:@"PaceEconWidth"] objectAtIndex:0];
+    self.EconPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceEcon"] objectAtIndex:0]];
+    NSString *v7 = [self checkNull:[[pacearrS1 valueForKey:@"PaceEconWidth"] objectAtIndex:0]];
     NSArray* foo6 = [v7 componentsSeparatedByString: @"%"];
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
@@ -625,51 +637,51 @@
     
     
     //spin
-    self.OversSpinlbl.text = [[spinarrS1 valueForKey:@"SpinOvers"] objectAtIndex:0];
-    NSString *vv1 =[[spinarrS1 valueForKey:@"SpinOversWidth"] objectAtIndex:0];
+    self.OversSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinOvers"] objectAtIndex:0]];
+    NSString *vv1 = [self checkNull:[[spinarrS1 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
     NSArray* fooo = [vv1 componentsSeparatedByString: @"%"];
     NSString* first = [fooo objectAtIndex: 0];
     float y = [first floatValue];
     self.OvrPrgSpin.progress = y/100;
     
-    self.RunsSpinlbl.text = [[spinarrS1 valueForKey:@"SpinRuns"] objectAtIndex:0];
-    NSString *vv2 =[[spinarrS1 valueForKey:@"SpinRunsWidth"] objectAtIndex:0];
+    self.RunsSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinRuns"] objectAtIndex:0]];
+    NSString *vv2 = [self checkNull:[[spinarrS1 valueForKey:@"SpinRunsWidth"] objectAtIndex:0]];
     NSArray* fooo2 = [vv2 componentsSeparatedByString: @"%"];
     NSString* first2 = [fooo2 objectAtIndex: 0];
     float y1 = [first2 floatValue];
     self.RunsPrgSpin.progress = y1/100;
     
-    self.WktsSpinlbl.text = [[spinarrS1 valueForKey:@"SpinWkts"] objectAtIndex:0];
-    NSString *vv3 =[[spinarrS1 valueForKey:@"SpinWktsWidth"] objectAtIndex:0];
+    self.WktsSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinWkts"] objectAtIndex:0]];
+    NSString *vv3 = [self checkNull:[[spinarrS1 valueForKey:@"SpinWktsWidth"] objectAtIndex:0]];
     NSArray* fooo3 = [vv3 componentsSeparatedByString: @"%"];
     NSString* first3 = [fooo3 objectAtIndex: 0];
     float y2 = [first3 floatValue];
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS1 valueForKey:@"SpinDots"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS1 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinDots"] objectAtIndex:0]];
+    NSString *vv4 = [self checkNull:[[spinarrS1 valueForKey:@"SpinDotsWidth"] objectAtIndex:0]];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
     self.MdnsPrgSpin.progress = y3/100;
     
-    self.StrSpinlbl.text = [[spinarrS1 valueForKey:@"SpinSR"] objectAtIndex:0];
-    NSString *vv5 =[[spinarrS1 valueForKey:@"SpinSRWidth"] objectAtIndex:0];
+    self.StrSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinSR"] objectAtIndex:0]];
+    NSString *vv5 = [self checkNull:[[spinarrS1 valueForKey:@"SpinSRWidth"] objectAtIndex:0]];
     NSArray* fooo5 = [vv5 componentsSeparatedByString: @"%"];
     NSString* first5 = [fooo5 objectAtIndex: 0];
     float y4 = [first5 floatValue];
     self.StrPrgSpin.progress = y4/100;
     
-    self.AvgSpinlbl.text = [[spinarrS1 valueForKey:@"SpinAvg"] objectAtIndex:0];
-    NSString *vv6 =[[spinarrS1 valueForKey:@"SpinAvgWidth"] objectAtIndex:0];
+    self.AvgSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinAvg"] objectAtIndex:0]];
+    NSString *vv6 = [self checkNull:[[spinarrS1 valueForKey:@"SpinAvgWidth"] objectAtIndex:0]];
     NSArray* fooo6 = [vv6 componentsSeparatedByString: @"%"];
     NSString* first6 = [fooo6 objectAtIndex: 0];
     float y5 = [first6 floatValue];
     self.AvgPrgSpin.progress = y5/100;
     
-    self.EconSpinlbl.text = [[spinarrS1 valueForKey:@"SpinEcon"] objectAtIndex:0];
-    NSString *vv7 =[[spinarrS1 valueForKey:@"SpinEconWidth"] objectAtIndex:0];
+    self.EconSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinEcon"] objectAtIndex:0]];
+    NSString *vv7 = [self checkNull:[[spinarrS1 valueForKey:@"SpinEconWidth"] objectAtIndex:0]];
     NSArray* fooo7 = [vv7 componentsSeparatedByString: @"%"];
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
@@ -680,6 +692,8 @@
     CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
     
 }
 -(IBAction)Session2Action:(id)sender
@@ -692,51 +706,51 @@
 
     
     //Pace
-    self.OversPacelbl.text = [[pacearrS2 valueForKey:@"PaceOvers"] objectAtIndex:0];
-    NSString *v1 =[[pacearrS2 valueForKey:@"PaceOversWidth"] objectAtIndex:0];
+    self.OversPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceOvers"] objectAtIndex:0]];
+    NSString *v1 = [self checkNull:[[pacearrS2 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
     NSArray* foo = [v1 componentsSeparatedByString: @"%"];
     NSString* firstBit = [foo objectAtIndex: 0];
     float x = [firstBit floatValue];
     self.OvrPrgPace.progress = 1-(x/100);
     
-    self.RunsPacelbl.text = [[pacearrS2 valueForKey:@"PaceRuns"] objectAtIndex:0];
-    NSString *v2 =[[pacearrS2 valueForKey:@"PaceRunsWidth"] objectAtIndex:0];
+    self.RunsPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceRuns"] objectAtIndex:0]];
+    NSString *v2 =[self checkNull:[[pacearrS2 valueForKey:@"PaceRunsWidth"] objectAtIndex:0]];
     NSArray* foo1 = [v2 componentsSeparatedByString: @"%"];
     NSString* firstBit1 = [foo1 objectAtIndex: 0];
     float x1 = [firstBit1 floatValue];
     self.RunsPrgPace.progress = 1-(x1/100);
     
-    self.WktsPacelbl.text = [[pacearrS2 valueForKey:@"PaceWkts"] objectAtIndex:0];
-    NSString *v3 =[[pacearrS2 valueForKey:@"PaceWktsWidth"] objectAtIndex:0];
+    self.WktsPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceWkts"] objectAtIndex:0]];
+    NSString *v3 = [self checkNull:[[pacearrS2 valueForKey:@"PaceWktsWidth"] objectAtIndex:0]];
     NSArray* foo2 = [v3 componentsSeparatedByString: @"%"];
     NSString* firstBit2 = [foo2 objectAtIndex: 0];
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS2 valueForKey:@"PaceDots"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS2 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceDots"] objectAtIndex:0]];
+    NSString *v4 = [self checkNull:[[pacearrS2 valueForKey:@"PaceDotsWidth"] objectAtIndex:0]];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
     self.MdnsPrgPace.progress = 1-(x3/100);
     
     
-    self.StrPacelbl.text = [[pacearrS2 valueForKey:@"PaceSR"] objectAtIndex:0];
-    NSString *v5 =[[pacearrS2 valueForKey:@"PaceSRWidth"] objectAtIndex:0];
+    self.StrPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceSR"] objectAtIndex:0]];
+    NSString *v5 = [self checkNull:[[pacearrS2 valueForKey:@"PaceSRWidth"] objectAtIndex:0]];
     NSArray* foo4 = [v5 componentsSeparatedByString: @"%"];
     NSString* firstBit4 = [foo4 objectAtIndex: 0];
     float x4 = [firstBit4 floatValue];
     self.StrPrgPace.progress = 1-(x4/100);
     
-    self.AvgPacelbl.text = [[pacearrS2 valueForKey:@"PaceAvg"] objectAtIndex:0];
-    NSString *v6 =[[pacearrS2 valueForKey:@"PaceAvgWidth"] objectAtIndex:0];
+    self.AvgPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceAvg"] objectAtIndex:0]];
+    NSString *v6 = [self checkNull:[[pacearrS2 valueForKey:@"PaceAvgWidth"] objectAtIndex:0]];
     NSArray* foo5 = [v6 componentsSeparatedByString: @"%"];
     NSString* firstBit5 = [foo5 objectAtIndex: 0];
     float x5 = [firstBit5 floatValue];
     self.AvgPrgPace.progress = 1-(x5/100);
     
-    self.EconPacelbl.text = [[pacearrS2 valueForKey:@"PaceEcon"] objectAtIndex:0];
-    NSString *v7 =[[pacearrS2 valueForKey:@"PaceEconWidth"] objectAtIndex:0];
+    self.EconPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceEcon"] objectAtIndex:0]];
+    NSString *v7 = [self checkNull:[[pacearrS2 valueForKey:@"PaceEconWidth"] objectAtIndex:0]];
     NSArray* foo6 = [v7 componentsSeparatedByString: @"%"];
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
@@ -744,51 +758,51 @@
     
     
     //spin
-    self.OversSpinlbl.text = [[spinarrS2 valueForKey:@"SpinOvers"] objectAtIndex:0];
-    NSString *vv1 =[[spinarrS2 valueForKey:@"SpinOversWidth"] objectAtIndex:0];
+    self.OversSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinOvers"] objectAtIndex:0]];
+    NSString *vv1 = [self checkNull:[[spinarrS2 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
     NSArray* fooo = [vv1 componentsSeparatedByString: @"%"];
     NSString* first = [fooo objectAtIndex: 0];
     float y = [first floatValue];
     self.OvrPrgSpin.progress = y/100;
     
-    self.RunsSpinlbl.text = [[spinarrS2 valueForKey:@"SpinRuns"] objectAtIndex:0];
-    NSString *vv2 =[[spinarrS2 valueForKey:@"SpinRunsWidth"] objectAtIndex:0];
+    self.RunsSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinRuns"] objectAtIndex:0]];
+    NSString *vv2 = [self checkNull:[[spinarrS2 valueForKey:@"SpinRunsWidth"] objectAtIndex:0]];
     NSArray* fooo2 = [vv2 componentsSeparatedByString: @"%"];
     NSString* first2 = [fooo2 objectAtIndex: 0];
     float y1 = [first2 floatValue];
     self.RunsPrgSpin.progress = y1/100;
     
-    self.WktsSpinlbl.text = [[spinarrS2 valueForKey:@"SpinWkts"] objectAtIndex:0];
-    NSString *vv3 =[[spinarrS2 valueForKey:@"SpinWktsWidth"] objectAtIndex:0];
+    self.WktsSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinWkts"] objectAtIndex:0]];
+    NSString *vv3 = [self checkNull:[[spinarrS2 valueForKey:@"SpinWktsWidth"] objectAtIndex:0]];
     NSArray* fooo3 = [vv3 componentsSeparatedByString: @"%"];
     NSString* first3 = [fooo3 objectAtIndex: 0];
     float y2 = [first3 floatValue];
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS2 valueForKey:@"SpinDots"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS2 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinDots"] objectAtIndex:0]];
+    NSString *vv4 = [self checkNull:[[spinarrS2 valueForKey:@"SpinDotsWidth"] objectAtIndex:0]];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
     self.MdnsPrgSpin.progress = y3/100;
     
-    self.StrSpinlbl.text = [[spinarrS2 valueForKey:@"SpinSR"] objectAtIndex:0];
-    NSString *vv5 =[[spinarrS2 valueForKey:@"SpinSRWidth"] objectAtIndex:0];
+    self.StrSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinSR"] objectAtIndex:0]];
+    NSString *vv5 = [self checkNull:[[spinarrS2 valueForKey:@"SpinSRWidth"] objectAtIndex:0]];
     NSArray* fooo5 = [vv5 componentsSeparatedByString: @"%"];
     NSString* first5 = [fooo5 objectAtIndex: 0];
     float y4 = [first5 floatValue];
     self.StrPrgSpin.progress = y4/100;
     
-    self.AvgSpinlbl.text = [[spinarrS2 valueForKey:@"SpinAvg"] objectAtIndex:0];
-    NSString *vv6 =[[spinarrS2 valueForKey:@"SpinAvgWidth"] objectAtIndex:0];
+    self.AvgSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinAvg"] objectAtIndex:0]];
+    NSString *vv6 = [self checkNull:[[spinarrS2 valueForKey:@"SpinAvgWidth"] objectAtIndex:0]];
     NSArray* fooo6 = [vv6 componentsSeparatedByString: @"%"];
     NSString* first6 = [fooo6 objectAtIndex: 0];
     float y5 = [first6 floatValue];
     self.AvgPrgSpin.progress = y5/100;
     
-    self.EconSpinlbl.text = [[spinarrS2 valueForKey:@"SpinEcon"] objectAtIndex:0];
-    NSString *vv7 =[[spinarrS2 valueForKey:@"SpinEconWidth"] objectAtIndex:0];
+    self.EconSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinEcon"] objectAtIndex:0]];
+    NSString *vv7 = [self checkNull:[[spinarrS2 valueForKey:@"SpinEconWidth"] objectAtIndex:0]];
     NSArray* fooo7 = [vv7 componentsSeparatedByString: @"%"];
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
@@ -800,6 +814,7 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
 }
 -(IBAction)Session3Action:(id)sender
 {
@@ -811,50 +826,50 @@
 
     
     //Pace
-    self.OversPacelbl.text = [[pacearrS3 valueForKey:@"PaceOvers"] objectAtIndex:0];
-    NSString *v1 =[[pacearrS3 valueForKey:@"PaceOversWidth"] objectAtIndex:0];
+    self.OversPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceOvers"] objectAtIndex:0]];
+    NSString *v1 = [self checkNull:[[pacearrS3 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
     NSArray* foo = [v1 componentsSeparatedByString: @"%"];
     NSString* firstBit = [foo objectAtIndex: 0];
     float x = [firstBit floatValue];
     self.OvrPrgPace.progress = 1-(x/100);
     
-    self.RunsPacelbl.text = [[pacearrS3 valueForKey:@"PaceRuns"] objectAtIndex:0];
-    NSString *v2 =[[pacearrS3 valueForKey:@"PaceRunsWidth"] objectAtIndex:0];
+    self.RunsPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceRuns"] objectAtIndex:0]];
+    NSString *v2 = [self checkNull:[[pacearrS3 valueForKey:@"PaceRunsWidth"] objectAtIndex:0]];
     NSArray* foo1 = [v2 componentsSeparatedByString: @"%"];
     NSString* firstBit1 = [foo1 objectAtIndex: 0];
     float x1 = [firstBit1 floatValue];
     self.RunsPrgPace.progress = 1-(x1/100);
     
-    self.WktsPacelbl.text = [[pacearrS3 valueForKey:@"PaceWkts"] objectAtIndex:0];
-    NSString *v3 =[[pacearrS3 valueForKey:@"PaceWktsWidth"] objectAtIndex:0];
+    self.WktsPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceWkts"] objectAtIndex:0]];
+    NSString *v3 = [self checkNull:[[pacearrS3 valueForKey:@"PaceWktsWidth"] objectAtIndex:0]];
     NSArray* foo2 = [v3 componentsSeparatedByString: @"%"];
     NSString* firstBit2 = [foo2 objectAtIndex: 0];
     float x2 = [firstBit2 floatValue];
     self.WktsPrgPace.progress = 1-(x2/100);
     
-    self.MdnsPacelbl.text = [[pacearrS3 valueForKey:@"PaceDots"] objectAtIndex:0];
-    NSString *v4 =[[pacearrS3 valueForKey:@"PaceDotsWidth"] objectAtIndex:0];
+    self.MdnsPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceDots"] objectAtIndex:0]];
+    NSString *v4 = [self checkNull:[[pacearrS3 valueForKey:@"PaceDotsWidth"] objectAtIndex:0]];
     NSArray* foo3 = [v4 componentsSeparatedByString: @"%"];
     NSString* firstBit3 = [foo3 objectAtIndex: 0];
     float x3 = [firstBit3 floatValue];
     self.MdnsPrgPace.progress = 1-(x3/100);
     
-    self.StrPacelbl.text = [[pacearrS3 valueForKey:@"PaceSR"] objectAtIndex:0];
-    NSString *v5 =[[pacearrS3 valueForKey:@"PaceSRWidth"] objectAtIndex:0];
+    self.StrPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceSR"] objectAtIndex:0]];
+    NSString *v5 = [self checkNull:[[pacearrS3 valueForKey:@"PaceSRWidth"] objectAtIndex:0]];
     NSArray* foo4 = [v5 componentsSeparatedByString: @"%"];
     NSString* firstBit4 = [foo4 objectAtIndex: 0];
     float x4 = [firstBit4 floatValue];
     self.StrPrgPace.progress = 1-(x4/100);
     
-    self.AvgPacelbl.text = [[pacearrS3 valueForKey:@"PaceAvg"] objectAtIndex:0];
-    NSString *v6 =[[pacearrS3 valueForKey:@"PaceAvgWidth"] objectAtIndex:0];
+    self.AvgPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceAvg"] objectAtIndex:0]];
+    NSString *v6 = [self checkNull:[[pacearrS3 valueForKey:@"PaceAvgWidth"] objectAtIndex:0]];
     NSArray* foo5 = [v6 componentsSeparatedByString: @"%"];
     NSString* firstBit5 = [foo5 objectAtIndex: 0];
     float x5 = [firstBit5 floatValue];
     self.AvgPrgPace.progress = 1-(x5/100);
     
-    self.EconPacelbl.text = [[pacearrS3 valueForKey:@"PaceEcon"] objectAtIndex:0];
-    NSString *v7 =[[pacearrS3 valueForKey:@"PaceEconWidth"] objectAtIndex:0];
+    self.EconPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceEcon"] objectAtIndex:0]];
+    NSString *v7 = [self checkNull:[[pacearrS3 valueForKey:@"PaceEconWidth"] objectAtIndex:0]];
     NSArray* foo6 = [v7 componentsSeparatedByString: @"%"];
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
@@ -863,51 +878,51 @@
     
     
     //spin
-    self.OversSpinlbl.text = [[spinarrS3 valueForKey:@"SpinOvers"] objectAtIndex:0];
-    NSString *vv1 =[[spinarrS3 valueForKey:@"SpinOversWidth"] objectAtIndex:0];
+    self.OversSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinOvers"] objectAtIndex:0]];
+    NSString *vv1 = [self checkNull:[[spinarrS3 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
     NSArray* fooo = [vv1 componentsSeparatedByString: @"%"];
     NSString* first = [fooo objectAtIndex: 0];
     float y = [first floatValue];
     self.OvrPrgSpin.progress = y/100;
     
-    self.RunsSpinlbl.text = [[spinarrS3 valueForKey:@"SpinRuns"] objectAtIndex:0];
-    NSString *vv2 =[[spinarrS3 valueForKey:@"SpinRunsWidth"] objectAtIndex:0];
+    self.RunsSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinRuns"] objectAtIndex:0]];
+    NSString *vv2 = [self checkNull:[[spinarrS3 valueForKey:@"SpinRunsWidth"] objectAtIndex:0]];
     NSArray* fooo2 = [vv2 componentsSeparatedByString: @"%"];
     NSString* first2 = [fooo2 objectAtIndex: 0];
     float y1 = [first2 floatValue];
     self.RunsPrgSpin.progress = y1/100;
     
-    self.WktsSpinlbl.text = [[spinarrS3 valueForKey:@"SpinWkts"] objectAtIndex:0];
-    NSString *vv3 =[[spinarrS3 valueForKey:@"SpinWktsWidth"] objectAtIndex:0];
+    self.WktsSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinWkts"] objectAtIndex:0]];
+    NSString *vv3 = [self checkNull:[[spinarrS3 valueForKey:@"SpinWktsWidth"] objectAtIndex:0]];
     NSArray* fooo3 = [vv3 componentsSeparatedByString: @"%"];
     NSString* first3 = [fooo3 objectAtIndex: 0];
     float y2 = [first3 floatValue];
     self.WktsPrgSpin.progress = y2/100;
     
     
-    self.MdnsSpinlbl.text = [[spinarrS3 valueForKey:@"SpinDots"] objectAtIndex:0];
-    NSString *vv4 =[[spinarrS3 valueForKey:@"SpinDotsWidth"] objectAtIndex:0];
+    self.MdnsSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinDots"] objectAtIndex:0]];
+    NSString *vv4 = [self checkNull:[[spinarrS3 valueForKey:@"SpinDotsWidth"] objectAtIndex:0]];
     NSArray* fooo4 = [vv4 componentsSeparatedByString: @"%"];
     NSString* first4 = [fooo4 objectAtIndex: 0];
     float y3 = [first4 floatValue];
     self.MdnsPrgSpin.progress = y3/100;
     
-    self.StrSpinlbl.text = [[spinarrS3 valueForKey:@"SpinSR"] objectAtIndex:0];
-    NSString *vv5 =[[spinarrS3 valueForKey:@"SpinSRWidth"] objectAtIndex:0];
+    self.StrSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinSR"] objectAtIndex:0]];
+    NSString *vv5 = [self checkNull:[[spinarrS3 valueForKey:@"SpinSRWidth"] objectAtIndex:0]];
     NSArray* fooo5 = [vv5 componentsSeparatedByString: @"%"];
     NSString* first5 = [fooo5 objectAtIndex: 0];
     float y4 = [first5 floatValue];
     self.StrPrgSpin.progress = y4/100;
     
-    self.AvgSpinlbl.text = [[spinarrS3 valueForKey:@"SpinAvg"] objectAtIndex:0];
-    NSString *vv6 =[[spinarrS3 valueForKey:@"SpinAvgWidth"] objectAtIndex:0];
+    self.AvgSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinAvg"] objectAtIndex:0]];
+    NSString *vv6 = [self checkNull:[[spinarrS3 valueForKey:@"SpinAvgWidth"] objectAtIndex:0]];
     NSArray* fooo6 = [vv6 componentsSeparatedByString: @"%"];
     NSString* first6 = [fooo6 objectAtIndex: 0];
     float y5 = [first6 floatValue];
     self.AvgPrgSpin.progress = y5/100;
     
-    self.EconSpinlbl.text = [[spinarrS3 valueForKey:@"SpinEcon"] objectAtIndex:0];
-    NSString *vv7 =[[spinarrS3 valueForKey:@"SpinEconWidth"] objectAtIndex:0];
+    self.EconSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinEcon"] objectAtIndex:0]];
+    NSString *vv7 = [self checkNull:[[spinarrS3 valueForKey:@"SpinEconWidth"] objectAtIndex:0]];
     NSArray* fooo7 = [vv7 componentsSeparatedByString: @"%"];
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
@@ -919,12 +934,14 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
 }
 
 
 -(IBAction)Innings1Action:(id)sender
 {
     //[self setInningsBySelection:@"1"];
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
     selectedTab =1;
     [self setTabView];
     day1Sessionarray = [[NSMutableArray alloc]init];
@@ -939,6 +956,8 @@
 -(IBAction)Innings2Action:(id)sender
 {
     //[self setInningsBySelection:@"2"];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
     
     selectedTab =2;
     [self setTabView];
@@ -1022,6 +1041,8 @@
 -(IBAction)day1Action:(id)sender
 {
     //[self setDayBySelection:@"1"];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
     selectedTab =1;
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
@@ -1036,6 +1057,7 @@
 -(IBAction)day2Action:(id)sender
 {
     [self setDayBySelection:@"2"];
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
     dayno= @"2";
@@ -1112,19 +1134,19 @@
         // cell = self.objCell;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.Sessionlbl.text = [[day1Sessionarray valueForKey:@"SessionNo"] objectAtIndex:indexPath.row];
-        cell.batlbl.text = [[day1Sessionarray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
-        cell.overslbl.text = [[day1Sessionarray valueForKey:@"Overs"] objectAtIndex:indexPath.row];
-        cell.runslbl.text = [[day1Sessionarray valueForKey:@"Runs"] objectAtIndex:indexPath.row];
-        cell.runratelbl.text = [[day1Sessionarray valueForKey:@"RR"] objectAtIndex:indexPath.row];
-        cell.wicketslbl.text = [[day1Sessionarray valueForKey:@"Wkts"] objectAtIndex:indexPath.row];
-        cell.dotballslbl.text = [[day1Sessionarray valueForKey:@"Dots"] objectAtIndex:indexPath.row];
+        cell.Sessionlbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"SessionNo"] objectAtIndex:indexPath.row]];
+        cell.batlbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"TeamName"] objectAtIndex:indexPath.row]];
+        cell.overslbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"Overs"] objectAtIndex:indexPath.row]];
+        cell.runslbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"Runs"] objectAtIndex:indexPath.row]];
+        cell.runratelbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"RR"] objectAtIndex:indexPath.row]];
+        cell.wicketslbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"Wkts"] objectAtIndex:indexPath.row]];
+        cell.dotballslbl.text = [self checkNull:[[day1Sessionarray valueForKey:@"Dots"] objectAtIndex:indexPath.row]];
         
         return cell;
     }
     else  if(tableView == self.partnrshpTbl)
     {
-        static NSString *MyIdentifier = @"SessionPartCell";
+        static NSString *MyIdentifier = @"mycell";
         
         SessionPartCell *cell = [self.partnrshpTbl dequeueReusableCellWithIdentifier:MyIdentifier];
         
@@ -1138,20 +1160,20 @@
         // cell = self.objCell;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSString *plyAname = [[commonArray valueForKey:@"PlayerAName"] objectAtIndex:indexPath.row];
-        NSString *plyAruns = [[commonArray valueForKey:@"PlayerARuns"] objectAtIndex:indexPath.row];
-        NSString *plyAballs = [[commonArray valueForKey:@"PlayerABalls"] objectAtIndex:indexPath.row];
+        NSString *plyAname = [self checkNull:[[commonArray valueForKey:@"PlayerAName"] objectAtIndex:indexPath.row]];
+        NSString *plyAruns = [self checkNull:[[commonArray valueForKey:@"PlayerARuns"] objectAtIndex:indexPath.row]];
+        NSString *plyAballs = [self checkNull:[[commonArray valueForKey:@"PlayerABalls"] objectAtIndex:indexPath.row]];
         
-        NSString *plyBname = [[commonArray valueForKey:@"PlayerBName"] objectAtIndex:indexPath.row];
-        NSString *plyBruns = [[commonArray valueForKey:@"PlayerBRuns"] objectAtIndex:indexPath.row];
-        NSString *plyBballs = [[commonArray valueForKey:@"PlayerBBalls"] objectAtIndex:indexPath.row];
+        NSString *plyBname = [self checkNull:[[commonArray valueForKey:@"PlayerBName"] objectAtIndex:indexPath.row]];
+        NSString *plyBruns = [self checkNull:[[commonArray valueForKey:@"PlayerBRuns"] objectAtIndex:indexPath.row]];
+        NSString *plyBballs = [self checkNull:[[commonArray valueForKey:@"PlayerBBalls"] objectAtIndex:indexPath.row]];
         
         cell.playerA.text = [NSString stringWithFormat:@"%@ %@(%@)",plyAname,plyAruns,plyAballs];
         cell.playerB.text = [NSString stringWithFormat:@"%@ %@(%@)",plyBname,plyBruns,plyBballs];
-        cell.runs.text = [[commonArray valueForKey:@"PartneshipRuns"] objectAtIndex:indexPath.row];
+        cell.runs.text = [self checkNull:[[commonArray valueForKey:@"PartneshipRuns"] objectAtIndex:indexPath.row]];
         
-        NSString *v1 =[[commonArray valueForKey:@"PartneshipA"] objectAtIndex:indexPath.row];
-        NSString *v2 =[[commonArray valueForKey:@"PartneshipB"] objectAtIndex:indexPath.row];
+        NSString *v1 = [self checkNull:[[commonArray valueForKey:@"PartneshipA"] objectAtIndex:indexPath.row]];
+        NSString *v2 = [self checkNull:[[commonArray valueForKey:@"PartneshipB"] objectAtIndex:indexPath.row]];
         
         NSArray* foo = [v1 componentsSeparatedByString: @"%"];
         NSString* firstBit = [foo objectAtIndex: 0];
@@ -1298,9 +1320,6 @@
         [self setDayButtonSelect:self.day5];
     }
     
-    
-    
-    
 }
 
 
@@ -1319,9 +1338,6 @@
     [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
-
-
-
 
 -(IBAction)BackBtn:(id)sender
 {

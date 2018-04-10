@@ -589,6 +589,12 @@
         SeekBarSlider.value = 0;
         UIImage *play = [UIImage imageNamed:@"play"];
         [self.playAndPauseBtn setImage:play forState:UIControlStateNormal];
+        
+        //Automatically Play Next Video upto end of Video List
+        if (selectedVideo < videoURLArray.count-1) {
+            [self playNextVideo:++selectedVideo];
+            [self.ballsColView reloadData];
+        }
     }
 }
 
