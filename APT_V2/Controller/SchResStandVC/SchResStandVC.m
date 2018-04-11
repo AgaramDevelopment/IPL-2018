@@ -123,7 +123,8 @@
 
     }
     
-    [self.view updateConstraintsIfNeeded];
+    [self.eventsCollectionView layoutIfNeeded];
+    [self.eventsCollectionView updateConstraintsIfNeeded];
     
     
 

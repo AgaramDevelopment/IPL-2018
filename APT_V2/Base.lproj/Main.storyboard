@@ -1033,9 +1033,13 @@
                                                                     <constraint firstItem="hX0-XI-0H6" firstAttribute="top" secondItem="yZW-FW-Cgo" secondAttribute="top" id="34c-AW-KKj"/>
                                                                     <constraint firstAttribute="bottom" secondItem="hX0-XI-0H6" secondAttribute="bottom" id="44B-PS-Wym"/>
                                                                     <constraint firstAttribute="trailing" secondItem="hX0-XI-0H6" secondAttribute="trailing" id="5GM-e3-0aB"/>
-                                                                    <constraint firstAttribute="width" constant="50" id="Qsr-vU-oQX"/>
+                                                                    <constraint firstAttribute="width" constant="50" id="Qsr-vU-oQX">
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                    </constraint>
                                                                     <constraint firstItem="hX0-XI-0H6" firstAttribute="leading" secondItem="yZW-FW-Cgo" secondAttribute="leading" id="ZK5-0M-sKM"/>
-                                                                    <constraint firstAttribute="height" constant="50" id="q3r-mB-9dF"/>
+                                                                    <constraint firstAttribute="height" constant="50" id="q3r-mB-9dF">
+                                                                        <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </view>
                                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYA-v0-JCJ" customClass="TappabbleView">
@@ -1180,7 +1184,9 @@
                                                         <rect key="frame" x="604" y="15" width="136" height="31"/>
                                                         <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="132" id="xob-Ks-uQE"/>
+                                                            <constraint firstAttribute="width" constant="132" id="xob-Ks-uQE">
+                                                                <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                                            </constraint>
                                                         </constraints>
                                                         <connections>
                                                             <action selector="volume:" destination="GXH-Ya-OM7" eventType="valueChanged" id="EkB-w3-XP5"/>
@@ -1189,10 +1195,14 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="Cpb-Sb-avf" firstAttribute="leading" secondItem="ckt-Rj-8ze" secondAttribute="leading" constant="30" id="0NX-f7-Xjf"/>
+                                                    <constraint firstItem="Cpb-Sb-avf" firstAttribute="leading" secondItem="ckt-Rj-8ze" secondAttribute="leading" constant="30" id="0NX-f7-Xjf">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                    </constraint>
                                                     <constraint firstItem="M9O-x8-Qei" firstAttribute="leading" secondItem="ckt-Rj-8ze" secondAttribute="leading" id="7kF-jn-BMH"/>
                                                     <constraint firstAttribute="trailing" secondItem="M9O-x8-Qei" secondAttribute="trailing" id="CLL-UL-Ma2"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Snf-Nf-bPf" secondAttribute="trailing" constant="30" id="Vbd-BW-30h"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Snf-Nf-bPf" secondAttribute="trailing" constant="30" id="Vbd-BW-30h">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="bottom" secondItem="Cpb-Sb-avf" secondAttribute="bottom" constant="5" id="cfn-Bx-0k3"/>
                                                     <constraint firstAttribute="bottom" secondItem="Snf-Nf-bPf" secondAttribute="bottom" constant="15" id="gYL-uI-dK6"/>
                                                     <constraint firstAttribute="height" constant="60" id="jQP-SY-CPy"/>
