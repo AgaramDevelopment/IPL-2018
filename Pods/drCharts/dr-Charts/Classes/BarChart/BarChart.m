@@ -12,10 +12,12 @@
 
 @interface BarChartDataRenderer : NSObject
 
+
 @property (nonatomic, strong) NSMutableArray *yAxisArray;
 @property (nonatomic, strong) UIColor *barColor;
 @property (nonatomic, strong) NSString *graphName;
 @property (nonatomic) CGFloat barWidth;
+
 
 @end
 
@@ -28,6 +30,8 @@
     
     CAShapeLayer *touchedLayer;
     CAShapeLayer *dataShapeLayer;
+
+    
 }
 
 @property (nonatomic, strong) LegendView *legendView;
@@ -147,37 +151,65 @@
 
 #pragma mark Draw Shape Layer
 - (void)createYAxisLine{
-    float minY = 0.0;
-    float maxY = 36.0;
+    
+    BarChartDataRenderer *barData;
+    barData = [self.barDataArray objectAtIndex:0];
+    NSMutableArray *values = barData.yAxisArray;
+    NSNumber *l = [values objectAtIndex:0];
+    for (int i = 1; i < values.count; i++) {
+        l = ([[values objectAtIndex:i]floatValue] > [l floatValue] ? [values objectAtIndex:i]:l);
+    }
+    NSLog(@"Largest = %@\n",l);
+   // _minY = 0;
+    int roundedUp = ceil([l floatValue]);
+    
+    
+    
+    BarChartDataRenderer *barData1;
+    barData1 = [self.barDataArray objectAtIndex:1];
+    NSMutableArray *values1 = barData1.yAxisArray;
+    NSNumber *ll = [values1 objectAtIndex:0];
+    for (int i = 1; i < values1.count; i++) {
+        ll = ([[values1 objectAtIndex:i]floatValue] > [ll floatValue] ? [values1 objectAtIndex:i]:ll);
+    }
+    NSLog(@"Largest = %@\n",l);
+   // _minY = 0;
+    int roundedUp1 = ceil([ll floatValue]);
+    
+    _minY = 0;
+    _maxY = MAX(roundedUp, roundedUp1);
+    
     
     for (BarChartDataRenderer *barData in self.barDataArray) {
         
         NSMutableArray *values = barData.yAxisArray;
+        
+     
         
         for (int j = 0; j < [values count]; j++) {
             if ([[values objectAtIndex:j] isKindOfClass:[NSNull class]]) {
                 continue;
             }
             
-            if ([[values objectAtIndex:j] floatValue] > maxY) {
-                maxY = [[values objectAtIndex:j] floatValue];
+            if ([[values objectAtIndex:j] floatValue] > _maxY) {
+                _maxY = [[values objectAtIndex:j] floatValue];
             }
             
-            if ([[values objectAtIndex:j] floatValue] < minY) {
-                minY = [[values objectAtIndex:j] floatValue];
+            if ([[values objectAtIndex:j] floatValue] < _minY) {
+                _minY = [[values objectAtIndex:j] floatValue];
             }
         }
     }
     
-    int gridYCount = 6;
+    int gridYCount = 8;
     
-    float step = (maxY - minY) / gridYCount;
+    float step = (_maxY - _minY) / gridYCount;
     
-    stepY = (HEIGHT(self.graphView) - (OFFSET_Y * 2)) / (maxY - minY);
+    stepY = (HEIGHT(self.graphView) - (OFFSET_Y * 2)) / (_maxY - _minY);
     
     for (int i = 0; i <= gridYCount; i++) {
         int y = (i * step) * stepY;
-        float value = i * step + minY;
+        float value = i * step + _minY;
         
         CGPoint startPoint = CGPointMake(OFFSET_X, HEIGHT(self.graphView) - (y + OFFSET_Y));
         CGPoint endPoint = CGPointMake(WIDTH(self.graphView) - OFFSET_X, HEIGHT(self.graphView) - (y + OFFSET_Y));

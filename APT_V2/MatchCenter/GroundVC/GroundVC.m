@@ -1486,6 +1486,7 @@
         [_barChartMultipleView drawBarGraph];
         [_barChartMultipleView setLegendViewType:@"fff"];
         
+        
 //        [_barChartMultipleView removeFromSuperview];
         [self.barchart addSubview:_barChartMultipleView];
     }

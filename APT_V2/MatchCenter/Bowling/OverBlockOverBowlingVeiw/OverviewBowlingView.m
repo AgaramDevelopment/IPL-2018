@@ -336,6 +336,7 @@ NSMutableArray *bowlMonths;
     
     Barvalue = @"RUNS";
     linevalue = @"RUNS";
+    
     bowlMonths = [[NSMutableArray alloc]init];
 
        bowlMonths = @[
@@ -343,6 +344,7 @@ NSMutableArray *bowlMonths;
                    @"Match4", @"Match5"
                    ];
     
+    runslbl.text = @"RUNS";
     [self ChartsWebservice];
     
 //    [self chartPP1];
