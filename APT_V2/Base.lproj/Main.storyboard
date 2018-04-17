@@ -49,7 +49,7 @@
         <scene sceneID="Mj5-0Y-fU3">
             <objects>
                 <tabBarController storyboardIdentifier="TabbarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uNz-1R-Gci" customClass="TabbarVC" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nw0-o2-spK">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="fill" id="nw0-o2-spK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4877,7 +4877,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC8-R4-0RE">
-                                                            <rect key="frame" x="359" y="0.0" width="30" height="15"/>
+                                                            <rect key="frame" x="359" y="10" width="30" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="1R0-39-qx4"/>
                                                             </constraints>
@@ -4974,13 +4974,13 @@
                                                         <constraint firstItem="M1J-dh-diF" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="DMf-Du-omB"/>
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="leading" secondItem="cC8-R4-0RE" secondAttribute="trailing" id="Dvy-QW-jnc"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="leading" secondItem="936-DN-18N" secondAttribute="trailing" id="Emq-6X-SgT"/>
-                                                        <constraint firstAttribute="bottom" secondItem="cC8-R4-0RE" secondAttribute="bottom" constant="28.5" id="Izh-s6-oiD"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="width" secondItem="936-DN-18N" secondAttribute="width" id="K6w-XI-6dw"/>
-                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" id="PKr-gk-eZi"/>
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Spm-9W-1eu"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Wv4-BQ-Iom"/>
                                                         <constraint firstItem="M1J-dh-diF" firstAttribute="leading" secondItem="vuM-o1-AwE" secondAttribute="trailing" id="YDA-1M-j3m"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="leading" secondItem="Lht-Pv-7T4" secondAttribute="leading" id="ZaA-Dv-F1d"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="EEz-4d-Vuu" secondAttribute="top" id="ggF-8I-4cu"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="height" secondItem="EEz-4d-Vuu" secondAttribute="height" id="iLf-Rs-c3r"/>
                                                         <constraint firstAttribute="trailing" secondItem="M1J-dh-diF" secondAttribute="trailing" id="iQC-vx-PFd"/>
                                                         <constraint firstItem="cC8-R4-0RE" firstAttribute="leading" secondItem="EEz-4d-Vuu" secondAttribute="trailing" id="tRh-Yt-kqt"/>
                                                     </constraints>

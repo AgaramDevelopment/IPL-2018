@@ -55,7 +55,7 @@
 
 @synthesize viewTeamOvers,viewTeamWin,btnInnsAll;
 
-@synthesize btnAllOvers,btnAllWinTeams;
+@synthesize btnAllOvers,btnAllWinTeams,viewTeamWidth;
 
 - (void)viewDidLoad
 {
@@ -82,6 +82,11 @@
     [btnAllOvers setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
 
     [self headToHeadPageLoadGetService];
+    
+    if (IS_IPHONE4 || IS_IPHONE5) {
+        viewTeamWidth.constant = 50;
+        [self.view layoutIfNeeded];
+    }
 }
 
 - (void)viewWillLayoutSubviews {

@@ -154,12 +154,23 @@
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InE-Qt-CXn">
+                                <rect key="frame" x="174.5" y="0.0" width="165.5" height="8"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="InE-Qt-CXn" firstAttribute="leading" secondItem="Ei3-tw-AxA" secondAttribute="leading" id="0ea-Ak-w3x"/>
                             <constraint firstItem="FAH-hq-a3q" firstAttribute="leading" secondItem="Ei3-tw-AxA" secondAttribute="trailing" constant="4" id="0qQ-VZ-x8a">
                                 <variation key="heightClass=regular-widthClass=regular" constant="8"/>
                             </constraint>
+                            <constraint firstAttribute="trailing" secondItem="InE-Qt-CXn" secondAttribute="trailing" constant="10" id="3cp-mU-9Qu"/>
                             <constraint firstItem="zdh-zZ-Wj2" firstAttribute="trailing" secondItem="r6O-fv-IIf" secondAttribute="trailing" id="6Uh-bP-ylP"/>
                             <constraint firstItem="zdh-zZ-Wj2" firstAttribute="leading" secondItem="r6O-fv-IIf" secondAttribute="leading" id="6dJ-tw-vZL"/>
                             <constraint firstItem="Ael-d9-AAr" firstAttribute="top" secondItem="enF-zW-Ibz" secondAttribute="bottom" constant="5" id="7ED-ny-HOb"/>
@@ -177,6 +188,7 @@
                             <constraint firstItem="4qm-kr-gRK" firstAttribute="leading" secondItem="FAH-hq-a3q" secondAttribute="leading" id="IKR-li-feM"/>
                             <constraint firstItem="Ei3-tw-AxA" firstAttribute="centerX" secondItem="X7g-BO-Dc4" secondAttribute="centerX" id="KI7-xl-vQf"/>
                             <constraint firstItem="RR0-92-DtG" firstAttribute="top" secondItem="Ei3-tw-AxA" secondAttribute="top" id="LEp-OX-ZcD"/>
+                            <constraint firstItem="InE-Qt-CXn" firstAttribute="top" secondItem="X7g-BO-Dc4" secondAttribute="top" id="Lng-IK-qOx"/>
                             <constraint firstItem="h2A-xK-3dq" firstAttribute="leading" secondItem="LJB-GF-3Mq" secondAttribute="leading" id="Rqo-i4-ehK"/>
                             <constraint firstAttribute="trailing" secondItem="wuW-dB-onQ" secondAttribute="trailing" id="Sve-rR-5Rm"/>
                             <constraint firstItem="wuW-dB-onQ" firstAttribute="top" secondItem="h2A-xK-3dq" secondAttribute="bottom" constant="1" id="Tel-0o-lS8"/>
@@ -190,6 +202,7 @@
                             <constraint firstItem="Ei3-tw-AxA" firstAttribute="centerY" secondItem="X7g-BO-Dc4" secondAttribute="centerY" id="dMW-Tf-UcJ"/>
                             <constraint firstItem="wuW-dB-onQ" firstAttribute="top" secondItem="Ei3-tw-AxA" secondAttribute="bottom" constant="5" id="f7v-bA-Efs"/>
                             <constraint firstItem="zdh-zZ-Wj2" firstAttribute="top" secondItem="r6O-fv-IIf" secondAttribute="bottom" constant="11" id="gWY-Zh-NOI"/>
+                            <constraint firstItem="LJB-GF-3Mq" firstAttribute="top" secondItem="InE-Qt-CXn" secondAttribute="bottom" id="jnz-ts-tQw"/>
                             <constraint firstItem="FAH-hq-a3q" firstAttribute="top" secondItem="Ei3-tw-AxA" secondAttribute="top" id="mYy-yS-jmt"/>
                             <constraint firstItem="h2A-xK-3dq" firstAttribute="width" secondItem="LJB-GF-3Mq" secondAttribute="width" id="ogb-8c-xFb"/>
                             <constraint firstItem="4qm-kr-gRK" firstAttribute="top" secondItem="FAH-hq-a3q" secondAttribute="bottom" constant="10" id="qgy-VY-vkV"/>
@@ -218,11 +231,12 @@
             <viewLayoutGuide key="safeArea" id="NIL-Pn-RZC"/>
             <size key="customSize" width="491" height="110"/>
             <connections>
-                <outlet property="Datelbl" destination="wuW-dB-onQ" id="dFq-pe-6b6"/>
+                <outlet property="Datelbl" destination="InE-Qt-CXn" id="qzN-8j-yNk"/>
                 <outlet property="TeamOver2lbl" destination="4qm-kr-gRK" id="Nmo-JR-kBq"/>
                 <outlet property="TeamOvers1lbl" destination="r6O-fv-IIf" id="bpd-jY-twa"/>
                 <outlet property="Teamname1lbl" destination="Ael-d9-AAr" id="POQ-f4-Cz4"/>
                 <outlet property="Teamname2lbl" destination="h2A-xK-3dq" id="i8V-gB-PRL"/>
+                <outlet property="lblOwnStats" destination="wuW-dB-onQ" id="2Jw-OU-gwk"/>
                 <outlet property="runrate1lbl" destination="zdh-zZ-Wj2" id="jMx-fj-Ipo"/>
                 <outlet property="runrate2lbl" destination="fXh-rM-p4v" id="c1f-5S-oyL"/>
                 <outlet property="runs1lbl" destination="RR0-92-DtG" id="pLU-SX-ISG"/>

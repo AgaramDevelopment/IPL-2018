@@ -223,9 +223,9 @@
         cell.runrate2lbl.text = BTRR;
         
         NSString *matchdate = [[recentMatchesArray valueForKey:@"ATMatchDate"] objectAtIndex:indexPath.row];
-        NSArray *arr = [matchdate componentsSeparatedByString:@" "];
+//        NSArray *arr = [matchdate componentsSeparatedByString:@" "];
         cell.Datelbl.text = matchdate;
-        
+        cell.lblOwnStats.text = @"Own by 74 Runs";
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
         NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];

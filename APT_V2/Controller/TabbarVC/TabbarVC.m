@@ -167,7 +167,11 @@
     
     self.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     tabBar.tintColor = [UIColor colorWithRed:(80/255.0f) green:(177/255.0f) blue:(215/255.0f) alpha:1.0f];
-    [tabBar setUnselectedItemTintColor:[UIColor whiteColor]];
+    if (@available(iOS 10.0, *)) {
+        [tabBar setUnselectedItemTintColor:[UIColor whiteColor]];
+    } else {
+        // Fallback on earlier versions
+    }
     
 //    [tabBar setselectedItemTintColor:[UIColor colorWithRed:(37/255.0f) green:(176/255.0f) blue:(240/255.0f) alpha:1.0f]];
 //
