@@ -28,7 +28,7 @@
 @end
 
 @implementation RearViewController
-@synthesize arrItems;
+@synthesize arrItems,lblVersion;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +48,7 @@
         arrItems = @[@"Home",([AppCommon isCoach] ? @"Cricket Center" : @"Match Center"),@"Change Password",@"Logout"];
     }
     
-    
+    lblVersion.text = [NSString stringWithFormat:@"Version %@",[AppCommon getAppVersion]];
     
 //    if([rolecode isEqualToString:plyRolecode])
 //    {

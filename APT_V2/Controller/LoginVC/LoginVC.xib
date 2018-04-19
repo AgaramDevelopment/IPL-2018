@@ -13,11 +13,15 @@
         <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
+        <array key="Montserrat-Thin.otf">
+            <string>Montserrat-Thin</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC">
             <connections>
                 <outlet property="commonview" destination="tpc-nu-YBa" id="g99-BV-exv"/>
+                <outlet property="lblVersion" destination="Um3-TU-Cqb" id="pHT-XD-5tN"/>
                 <outlet property="passwordTxt" destination="WJG-YQ-Hpk" id="Pjq-ok-GXI"/>
                 <outlet property="passwordview" destination="pHB-9H-9GG" id="hMe-ce-vDX"/>
                 <outlet property="securityImage" destination="oog-SD-dqC" id="8Ye-wg-qv0"/>
@@ -274,15 +278,29 @@
                         <constraint firstItem="pkm-xo-tmo" firstAttribute="top" secondItem="swW-xL-sAl" secondAttribute="top" id="q71-jR-zrU"/>
                     </constraints>
                 </scrollView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competetion Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um3-TU-Cqb">
+                    <rect key="frame" x="131" y="633.5" width="112" height="13.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="112" id="MGo-eT-3Zt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="11"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="13"/>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.054901960780000002" green="0.16862745100000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="trailing" secondItem="2u4-Yi-0eh" secondAttribute="trailing" id="1Mv-mt-9Om"/>
+                <constraint firstItem="Um3-TU-Cqb" firstAttribute="centerX" secondItem="dnz-e3-FeI" secondAttribute="centerX" id="3ri-Qs-2A0"/>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="bottom" secondItem="2u4-Yi-0eh" secondAttribute="bottom" id="9bB-sq-eOu"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="top" secondItem="dnz-e3-FeI" secondAttribute="top" id="KIA-IN-VV4"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="bottom" secondItem="2u4-Yi-0eh" secondAttribute="bottom" id="Pj6-6F-6gz"/>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="leading" secondItem="2u4-Yi-0eh" secondAttribute="leading" id="Y0y-cg-aqA"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="trailing" secondItem="2u4-Yi-0eh" secondAttribute="trailing" id="cfa-gi-XOq"/>
+                <constraint firstItem="2u4-Yi-0eh" firstAttribute="bottom" secondItem="Um3-TU-Cqb" secondAttribute="bottom" constant="20" id="dlK-Mb-Oaq"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="leading" secondItem="2u4-Yi-0eh" secondAttribute="leading" id="r9L-6d-whp"/>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="top" secondItem="dnz-e3-FeI" secondAttribute="top" id="yCG-y3-Jf0"/>
             </constraints>

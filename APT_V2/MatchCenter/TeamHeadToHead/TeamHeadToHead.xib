@@ -169,10 +169,10 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIs-sU-JYd">
                                             <rect key="frame" x="5" y="5" width="97" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.0" green="0.1243694499" blue="0.37490215900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fE-Xq-nCK">
@@ -283,7 +283,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pX-pj-lCZ">
                                             <rect key="frame" x="202" y="5" width="129.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
@@ -313,7 +313,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competetion Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-Fr-fae">
                                             <rect key="frame" x="5" y="5" width="112" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
@@ -433,7 +433,7 @@
                                                 <constraint firstAttribute="width" constant="30" id="Mfw-9T-ewC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
-                                            <color key="textColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
@@ -442,7 +442,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ground Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MC4-ex-0wu">
                                             <rect key="frame" x="202" y="5" width="80" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
@@ -3515,7 +3515,9 @@
                                                         <constraint firstAttribute="trailing" secondItem="tuD-iJ-2U2" secondAttribute="trailing" id="BI0-Wg-cJW"/>
                                                         <constraint firstItem="T4F-CU-yRj" firstAttribute="width" secondItem="mvZ-4S-xeI" secondAttribute="width" id="C4H-mE-2Ed"/>
                                                         <constraint firstItem="iLX-Xl-Ovm" firstAttribute="width" secondItem="CSn-6e-vTi" secondAttribute="width" id="Crj-Au-MoI"/>
-                                                        <constraint firstItem="IrM-An-yRI" firstAttribute="leading" secondItem="wuq-QL-Kph" secondAttribute="trailing" constant="5" id="DgE-XK-2KO"/>
+                                                        <constraint firstItem="IrM-An-yRI" firstAttribute="leading" secondItem="wuq-QL-Kph" secondAttribute="trailing" constant="5" id="DgE-XK-2KO">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                        </constraint>
                                                         <constraint firstItem="tuD-iJ-2U2" firstAttribute="top" secondItem="RgG-tw-YMd" secondAttribute="bottom" constant="10" id="Dx0-om-l9O"/>
                                                         <constraint firstItem="go5-3F-3Wh" firstAttribute="width" secondItem="YiP-gv-0ie" secondAttribute="width" id="Ecy-78-9o2"/>
                                                         <constraint firstItem="idl-qa-BbJ" firstAttribute="width" secondItem="zUX-0F-ws9" secondAttribute="width" id="GgR-zJ-us8"/>
@@ -3561,7 +3563,9 @@
                                                         <constraint firstAttribute="trailing" secondItem="RgG-tw-YMd" secondAttribute="trailing" id="cxy-F4-obh"/>
                                                         <constraint firstItem="iLX-Xl-Ovm" firstAttribute="leading" secondItem="CSn-6e-vTi" secondAttribute="leading" id="d1W-cd-FFB"/>
                                                         <constraint firstItem="Los-gX-l8V" firstAttribute="leading" secondItem="WPH-6Q-4BR" secondAttribute="leading" id="dSc-0A-tQD"/>
-                                                        <constraint firstItem="3Lp-O6-e4C" firstAttribute="leading" secondItem="IrM-An-yRI" secondAttribute="trailing" constant="5" id="dyZ-Np-mFR"/>
+                                                        <constraint firstItem="3Lp-O6-e4C" firstAttribute="leading" secondItem="IrM-An-yRI" secondAttribute="trailing" constant="5" id="dyZ-Np-mFR">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                        </constraint>
                                                         <constraint firstItem="IrM-An-yRI" firstAttribute="leading" secondItem="DSg-fX-agz" secondAttribute="trailing" constant="50" id="fWQ-wf-5Fx"/>
                                                         <constraint firstItem="SxD-Xc-ByK" firstAttribute="width" secondItem="LbB-BT-tud" secondAttribute="width" id="fYE-eO-5zj"/>
                                                         <constraint firstAttribute="trailing" secondItem="A8z-DQ-fCF" secondAttribute="trailing" id="gWi-Kh-Mux"/>

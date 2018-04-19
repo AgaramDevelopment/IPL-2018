@@ -201,7 +201,6 @@
     if(collectionView == self.resultCollectionView){
         
         
-        
         MCOverViewResultCVC* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"mcResultCVC" forIndexPath:indexPath];
         
         cell.Teamname1lbl.text = [[recentMatchesArray valueForKey:@"ATName"] objectAtIndex:indexPath.row];
@@ -225,7 +224,11 @@
         NSString *matchdate = [[recentMatchesArray valueForKey:@"ATMatchDate"] objectAtIndex:indexPath.row];
 //        NSArray *arr = [matchdate componentsSeparatedByString:@" "];
         cell.Datelbl.text = matchdate;
-        cell.lblOwnStats.text = @"Own by 74 Runs";
+        
+//        MatchResult
+        if ([[[recentMatchesArray objectAtIndex:indexPath.row] allKeys] containsObject:@"MatchResult"]) {
+            cell.lblOwnStats.text = [[recentMatchesArray valueForKey:@"MatchResult"] objectAtIndex:indexPath.row];
+        }
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
         NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];
@@ -437,7 +440,6 @@
             self.nextBtn.hidden = NO;
             self.prevBtn.hidden = YES;
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
            
         }
         else{

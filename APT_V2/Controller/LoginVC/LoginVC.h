@@ -13,4 +13,5 @@
 
 @property (nonatomic,strong)IBOutlet UIImageView *securityImage;
 @property (weak, nonatomic) IBOutlet UIView *teamview;
+@property (weak, nonatomic) IBOutlet UILabel *lblVersion;
 @end

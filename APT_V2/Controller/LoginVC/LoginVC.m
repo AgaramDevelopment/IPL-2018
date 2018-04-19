@@ -46,7 +46,7 @@
 
 @implementation LoginVC
 
-@synthesize teamview;
+@synthesize teamview,lblVersion;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,6 +61,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    lblVersion.text = [NSString stringWithFormat:@"Version %@",[AppCommon getAppVersion]];
+
     if(!IS_IPHONE_DEVICE)
     {
 //        self.commonViewHeight.constant =self.view.frame.size.height/2;

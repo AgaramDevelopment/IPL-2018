@@ -143,14 +143,8 @@
         [dic setObject:@"All" forKey:@"TeamName"];
         [dic setObject:@"" forKey:@"TeamCode"];
         [teamArray insertObject:dic atIndex:0];
-        //[teamArray addObject:dic];
         
-//        for(int i=0;i<appDel.ArrayTeam.count;i++)
-//        {
-//            [teamArray addObject:[appDel.ArrayTeam objectAtIndex:i]];
-//        }
-        
-        dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
+        dropVC.array = teamArray;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v2.frame), CGRectGetMaxY(self.v2.frame)+self.v2.frame.size.height+20, CGRectGetWidth(self.v2.frame), 300)];
         
@@ -165,6 +159,11 @@
     }
     else if ([sender tag] == 2)  //venue
     {
+        
+//        NSMutableArray *teamArray = [[NSMutableArray alloc]init];
+//        [teamArray addObjectsFromArray:[COMMON getCorrespondingTeamName:competitionLbl.text]];
+        
+
         dropVC.array = VenuesArray;
         dropVC.key = @"GROUND";
     if (IS_IPAD) {
@@ -523,6 +522,7 @@
                 Teamcode = @"";
                 
                 
+                
                 NSArray* temparray = [responseObject valueForKey:@"lstFixturesOppoTeam"];
               NSMutableArray *FilterVenuesArray = [NSMutableArray new];
                 VenuesArray = [NSMutableArray new];
@@ -532,19 +532,18 @@
                     }
                 }
                 
-                
-                
-//                for(int i=0;i<FilterVenuesArray.count;i++)
-//                {
-//                    NSString *str= [[FilterVenuesArray valueForKey:@"GROUND"] objectAtIndex:i];
-//                    [VenuesArray addObject:str];
-//                }
-                
+//                NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+//                [dic setObject:@"" forKey:@"ASSOCIATIONTEAMCATEGORY"];
+//                [dic setObject:@"" forKey:@"ASSOCIATIONTEAMNAME"];
+//                [dic setObject:@"" forKey:@"COMPETITIONNAME"];
+//                [dic setObject:@"All" forKey:@"GROUND"];
+//                [dic setObject:@"" forKey:@"TEAMCODE"];
+//                [VenuesArray insertObject:dic atIndex:0];
+
+//                self.venueLbl.text = @"All";
+//                Teamcode = @"";
                 
                 [self setFilterResults];
-                
-                
-                //self.resultArr = [responseObject valueForKey:@"lstFixturesGridValues"];
                 
             }
             
@@ -561,6 +560,13 @@
     }
     
 }
+
+//-(void)filterAction
+//{
+//    if (competitionLbl.text == ) { // only competetion
+//        <#statements#>
+//    }
+//}
 
 
 -(IBAction)didClickBackBtn:(id)sender
@@ -598,12 +604,49 @@
     else
     {
         self.venueLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
-       // Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        self.resultArr = [[NSMutableArray alloc]init];
         
+            NSMutableArray *loadedVenuesArray = [[NSMutableArray alloc]init];
+            loadedVenuesArray = SelectedResultsArray;
+            
+            for(int i=0;i<loadedVenuesArray.count;i++)
+            {
+                NSString *selectedVenue = self.venueLbl.text;
+                NSString *currentVenue = [[loadedVenuesArray valueForKey:@"Ground"] objectAtIndex:i];
+                
+                if( [selectedVenue isEqualToString:currentVenue])
+                {
+                    [self.resultArr addObject:[loadedVenuesArray objectAtIndex:i]];
+                }
+            }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.ListTbl reloadData];
+        });
+
+    }
+}
+
+-(void)VenueFilter
+{
+    
+//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
+//    NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
+
+    
+    
+    self.resultArr = [[NSMutableArray alloc]init];
+
+    if([Teamcode isEqualToString:@""])
+    {
+        self.resultArr = self.TotalMatchesArr;
+    }
+    else
+    {
         NSMutableArray *loadedVenuesArray = [[NSMutableArray alloc]init];
         loadedVenuesArray = SelectedResultsArray;
         
-        self.resultArr = [[NSMutableArray alloc]init];
         for(int i=0;i<loadedVenuesArray.count;i++)
         {
             NSString *selectedVenue = self.venueLbl.text;
@@ -615,23 +658,21 @@
             }
             
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.ListTbl reloadData];
-        });
+
     }
+
 }
 
 -(void)setFilterResults
 {
     
+    self.resultArr = [[NSMutableArray alloc]init];
+
     if(![competitionLbl.text isEqualToString:@""] || ![self.teamLbl.text isEqualToString:@""] )
     {
         
         if([Teamcode isEqualToString:@""])
         {
-            self.teamLbl.text =@"All";
-            self.resultArr = [[NSMutableArray alloc]init];
             self.resultArr = self.TotalMatchesArr;
         }
         else
@@ -639,20 +680,19 @@
             NSMutableArray *ReqTeamArray = [[NSMutableArray alloc]init];
             ReqTeamArray = self.TotalMatchesArr;
         
-            self.resultArr = [[NSMutableArray alloc]init];
             for( int i=0;i<ReqTeamArray.count;i++)
             {
                 NSString *selectedTeamCodeA = [[ReqTeamArray valueForKey:@"TeamACode"] objectAtIndex:i];
                 NSString *selectedTeamCodeB = [[ReqTeamArray valueForKey:@"TeamBCode"] objectAtIndex:i];
                 NSString *GlobalteamCode = [AppCommon getCurrentTeamCode];
-                if([Teamcode isEqualToString:selectedTeamCodeA])
+                if([Teamcode isEqualToString:selectedTeamCodeA] || [Teamcode isEqualToString:selectedTeamCodeB])
                 {
                     [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
                 }
-                else if([Teamcode isEqualToString:selectedTeamCodeB])
-                {
-                    [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
-                }
+//                else if([Teamcode isEqualToString:selectedTeamCodeB])
+//                {
+//                    [self.resultArr addObject:[ReqTeamArray objectAtIndex:i]];
+//                }
             }
             
             
