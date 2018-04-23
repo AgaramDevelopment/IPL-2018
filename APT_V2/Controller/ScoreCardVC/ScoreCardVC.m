@@ -1831,8 +1831,8 @@
     self.extraslbl.text = [ExtrasArray2 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray2 objectAtIndex:2];
     
-    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
-    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
     
     [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
     [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
@@ -1965,8 +1965,8 @@
     self.extraslbl.text = [ExtrasArray3 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray3 objectAtIndex:2];
     
-    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
-    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:1];
     
     [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
     [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
@@ -2099,8 +2099,8 @@
     self.extraslbl.text = [ExtrasArray4 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray4 objectAtIndex:2];
     
-    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
-    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:1];
     
     [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
     [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
@@ -2238,8 +2238,8 @@
     self.extraslbl.text = [ExtrasArray2 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray2 objectAtIndex:2];
     
-    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
-    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
     
     [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
     [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
