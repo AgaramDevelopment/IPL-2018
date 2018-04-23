@@ -485,7 +485,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="1436"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2H-ZE-80P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1470"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1440"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAX-cg-fmv">
                                                     <rect key="frame" x="5" y="0.0" width="365" height="300"/>
@@ -3606,7 +3606,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="WAX-cg-fmv" secondAttribute="trailing" constant="5" id="FqO-WN-bYD"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="OSu-re-hlc"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="top" secondItem="C2H-ZE-80P" secondAttribute="top" id="TB6-T8-KZh"/>
-                                                <constraint firstAttribute="height" constant="1470" id="USA-Ku-p1u"/>
+                                                <constraint firstAttribute="height" constant="1440" id="USA-Ku-p1u">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="1470"/>
+                                                </constraint>
                                                 <constraint firstItem="mjp-js-gyG" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="ebS-CK-08W"/>
                                                 <constraint firstItem="WPH-6Q-4BR" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="yiM-80-1G9"/>
                                                 <constraint firstAttribute="trailing" secondItem="mjp-js-gyG" secondAttribute="trailing" constant="5" id="zMh-ZM-PX0"/>
