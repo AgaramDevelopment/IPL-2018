@@ -1997,7 +1997,7 @@
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-G5-NRa">
                                                 <rect key="frame" x="768" y="170" width="0.0" height="30"/>
-                                                <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="MNT-w8-T9h"/>
                                                 </constraints>
@@ -3012,14 +3012,11 @@
                                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                                         </variation>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-aN-8i1">
-                                                        <rect key="frame" x="0.0" y="20" width="200" height="20"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-aN-8i1">
+                                                        <rect key="frame" x="0.0" y="20" width="120" height="20"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxH-FQ-EYC" userLabel="btnLB">
-                                                                <rect key="frame" x="0.0" y="0.0" width="98.5" height="20"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="98.5" id="UZh-rO-XHa"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                 <state key="normal" title="20 Overs">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3029,10 +3026,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6V-wg-evh" userLabel="btnWD">
-                                                                <rect key="frame" x="101.5" y="0.0" width="98.5" height="20"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="98.5" id="Ug7-K9-kWE"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="60" y="0.0" width="60" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                 <state key="normal" title="20 Overs">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3042,8 +3036,9 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <color key="backgroundColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="200" id="0pc-0b-o4k"/>
+                                                            <constraint firstAttribute="width" constant="120" id="0pc-0b-o4k"/>
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-JR-uth">
