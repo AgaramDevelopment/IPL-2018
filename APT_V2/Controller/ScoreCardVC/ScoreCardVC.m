@@ -1603,6 +1603,7 @@
 //
 //    NSLog(@"%f",scrollOffset);
 //}
+
 -(IBAction)Inn1Action:(id)sender
 {
     
@@ -1696,9 +1697,9 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
-    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
 //    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray1 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray1 valueForKey:@"PlayerName"] objectAtIndex:0];
@@ -1834,8 +1835,8 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
 
 //    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray2 objectAtIndex:0];
@@ -1968,8 +1969,8 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
 
 //    self.wktsOverslbl.text = [ExtrasArray3 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray3 objectAtIndex:0];
@@ -2102,8 +2103,8 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
 
 //    self.wktsOverslbl.text = [ExtrasArray4 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray4 objectAtIndex:0];
@@ -2182,8 +2183,8 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
 
 //    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray1 objectAtIndex:0];
@@ -2241,8 +2242,8 @@
     NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
     NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
     
-    [btnAllWkts setTitle:wkts forState:UIControlStateNormal];
-    [btnAllOvers setTitle:Overs forState:UIControlStateNormal];
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
 
 //    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
     

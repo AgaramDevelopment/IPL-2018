@@ -15,7 +15,7 @@ class CustomCollectionStandings: UICollectionViewLayout {
     
     
     
-    let numberOfColumns = 11
+    let numberOfColumns = 9
     var shouldPinFirstColumn = true
     var shouldPinFirstRow = true
     
@@ -173,7 +173,7 @@ extension CustomCollectionStandings {
             text = "Content"
         }
         
-        let size: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
+//        let size: CGSize = text.size(withAttributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
         //        let width: CGFloat = size.width + 16
         let width: CGFloat = columnIndex == 0 ? 100 : 100
         
@@ -197,7 +197,7 @@ extension CustomCollectionStandings {
         //        }
         
         
-        return CGSize(width: width, height: 50)
+        return CGSize(width: 85, height: 50)
     }
     
 }

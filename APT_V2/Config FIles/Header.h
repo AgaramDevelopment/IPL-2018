@@ -14,6 +14,7 @@
 #define notavail [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(23/255.0f) alpha:1.0f];
 #define rehab [UIColor colorWithRed:(255/255.0f) green:(190/255.0f) blue:(65/255.0f) alpha:1.0f];
 
+#define NSLog(...)
 
 #import "AppDelegate.h"
 #import "Config.h"

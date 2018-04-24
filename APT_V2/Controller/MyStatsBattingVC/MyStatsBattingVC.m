@@ -2647,6 +2647,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
+        [self myStatsBowlingPostMethodWebService];
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
         

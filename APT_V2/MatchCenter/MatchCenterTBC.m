@@ -177,7 +177,7 @@
     headtoheadController.tabBarItem.selectedImage = [[UIImage imageNamed:@"H2HBlue"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     headtoheadController.tabBarItem.image = [[UIImage imageNamed:@"H2H_White"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     
-    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController,fifthViewController,headtoheadController, nil];
+    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController,fifthViewController,headtoheadController,sixthViewController, nil];
 //    self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthViewController,bowlingViewController, nil];
 
     

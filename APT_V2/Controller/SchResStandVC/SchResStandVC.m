@@ -39,9 +39,8 @@
     
 }
 
-@property (strong, nonatomic)  NSMutableArray *commonArray;
-@property (strong, nonatomic)  NSMutableArray *commonArray2;
-
+@property (strong,nonatomic) NSMutableArray *commonArray;
+@property (strong,nonatomic) NSMutableArray *commonArray2;
 @property (nonatomic,strong) NSMutableArray * AllEventListArray;
 @property (nonatomic,strong) NSMutableArray * AllEventDetailListArray;
 @property (nonatomic,strong) NSMutableArray * ParticipantsTypeArray;
