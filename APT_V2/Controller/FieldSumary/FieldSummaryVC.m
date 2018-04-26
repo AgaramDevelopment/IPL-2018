@@ -112,6 +112,11 @@ int headdingCount = 0;
         self.odiInnsView.layer.shadowOpacity = 0.5;
         
     }
+    
+    lastIndex = NULL;
+    selectedIndex = -1;
+    selectedTab = 1;
+
     [self setTabView];
 }
 
@@ -180,8 +185,6 @@ int headdingCount = 0;
         [self setDataDictInTableView:innsOne];
     }
     
-    
-    
 }
 - (IBAction)onClickSecInns:(id)sender {
     
@@ -232,6 +235,10 @@ int headdingCount = 0;
 
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
 
+    [UIView animateWithDuration:0.3 animations:^{
+        [lineView layoutIfNeeded];
+    }];
+
     lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
                                               green:176.0f/255.0f
                                                blue:240.0f/255.0f
@@ -263,15 +270,27 @@ int headdingCount = 0;
         [self clearBtnSubView:_testInn4Btn];
 
         if(selectedTab ==  1){
-            [_testInn1Btn addSubview: [self getLineView:_testInn1Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn1Btn addSubview: [self getLineView:_testInn1Btn]];
+            });
+
         }else if(selectedTab ==  2){
-            [_testInn2Btn addSubview: [self getLineView:_testInn2Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn2Btn addSubview: [self getLineView:_testInn2Btn]];
+            });
+
 
         }else if(selectedTab ==  3){
-            [_testInn3Btn addSubview: [self getLineView:_testInn3Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn3Btn addSubview: [self getLineView:_testInn3Btn]];
+            });
+
 
         }else if(selectedTab ==  4){
-            [_testInn4Btn addSubview: [self getLineView:_testInn4Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn4Btn addSubview: [self getLineView:_testInn4Btn]];
+            });
+
 
         }
         
@@ -287,10 +306,16 @@ int headdingCount = 0;
         [self clearBtnSubView:_odiInn2Btn];
         
         if(selectedTab ==  1){
-            [_odiInn1Btn addSubview: [self getLineView:_odiInn1Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_odiInn1Btn addSubview: [self getLineView:_odiInn1Btn]];
+            });
+
 
         }else if(selectedTab ==  2){
-            [_odiInn2Btn addSubview: [self getLineView:_odiInn2Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_odiInn2Btn addSubview: [self getLineView:_odiInn2Btn]];
+            });
+
 
         }
         
