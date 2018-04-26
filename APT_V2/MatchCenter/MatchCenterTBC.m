@@ -17,6 +17,7 @@
 #import "TeamHeadToHead.h"
 #import "TeamOverviewVC.h"
 #import "Config.h"
+#import "HomeScreenStandingsVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -145,7 +146,8 @@
     
     
     //Standings
-    StandingVC *sixthViewController = [[StandingVC alloc]init];
+//    StandingVC *sixthViewController = [[StandingVC alloc]init];
+    HomeScreenStandingsVC* sixthViewController = [HomeScreenStandingsVC new];
     
 //    if(IS_IPHONE_DEVICE)
 //    {
