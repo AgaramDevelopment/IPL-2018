@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2a4-KK-7LK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2a4-KK-7LK">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
@@ -3009,12 +3013,12 @@
                                                         </variation>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-aN-8i1">
-                                                        <rect key="frame" x="0.0" y="20" width="120" height="20"/>
+                                                        <rect key="frame" x="0.0" y="20" width="130" height="20"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxH-FQ-EYC" userLabel="btnLB">
-                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
-                                                                <state key="normal" title="20 Overs">
+                                                                <state key="normal">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
@@ -3022,9 +3026,9 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6V-wg-evh" userLabel="btnWD">
-                                                                <rect key="frame" x="60" y="0.0" width="60" height="20"/>
+                                                                <rect key="frame" x="65" y="0.0" width="65" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
-                                                                <state key="normal" title="20 Overs">
+                                                                <state key="normal">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
@@ -3034,7 +3038,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="120" id="0pc-0b-o4k"/>
+                                                            <constraint firstAttribute="width" constant="130" id="0pc-0b-o4k"/>
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-JR-uth">
@@ -3043,7 +3047,7 @@
                                                             <action selector="actionTotal:" destination="EaG-58-Zdd" eventType="touchUpInside" id="KSv-e1-vFC"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8I-sj-1Ub">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8I-sj-1Ub">
                                                         <rect key="frame" x="0.0" y="20" width="758" height="20"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                         <nil key="highlightedColor"/>
@@ -4377,7 +4381,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiE-8x-4mW">
-                                <rect key="frame" x="0.0" y="70" width="768" height="1300"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="1473"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-d2-nmm">
                                         <rect key="frame" x="10" y="10" width="748" height="40"/>
@@ -5922,12 +5926,12 @@
                                     <constraint firstItem="WyI-b6-XbD" firstAttribute="top" secondItem="2xf-pz-acz" secondAttribute="bottom" constant="5" id="T7T-eE-9eC"/>
                                     <constraint firstItem="mxh-lZ-bq7" firstAttribute="top" secondItem="e2x-Y8-Oa1" secondAttribute="bottom" constant="5" id="TPt-rS-Euf"/>
                                     <constraint firstAttribute="trailing" secondItem="Rex-GC-aUl" secondAttribute="trailing" constant="10" id="V5r-Pq-fHF"/>
-                                    <constraint firstAttribute="height" constant="1300" id="Vdz-Zt-q9U"/>
                                     <constraint firstAttribute="trailing" secondItem="e2x-Y8-Oa1" secondAttribute="trailing" constant="10" id="W3l-5S-IZ5"/>
+                                    <constraint firstAttribute="height" constant="1473" id="XjF-Xd-10w"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="leading" secondItem="eiE-8x-4mW" secondAttribute="leading" constant="10" id="aSo-bn-aK7"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="centerX" secondItem="eiE-8x-4mW" secondAttribute="centerX" id="dIA-ZC-9W3"/>
                                     <constraint firstItem="Rex-GC-aUl" firstAttribute="top" secondItem="eiE-8x-4mW" secondAttribute="top" constant="10" id="gt5-a9-axu"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rex-GC-aUl" secondAttribute="bottom" constant="1380" id="i4G-CE-zHe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rex-GC-aUl" secondAttribute="bottom" constant="1423" id="i4G-CE-zHe"/>
                                     <constraint firstAttribute="trailing" secondItem="mxh-lZ-bq7" secondAttribute="trailing" constant="10" id="oX3-P2-YQI"/>
                                     <constraint firstAttribute="trailing" secondItem="WyI-b6-XbD" secondAttribute="trailing" constant="10" id="qRY-hN-0Ta"/>
                                     <constraint firstItem="tOh-d2-nmm" firstAttribute="top" secondItem="eiE-8x-4mW" secondAttribute="top" constant="10" id="s62-Jy-NSR"/>
@@ -5972,6 +5976,7 @@
                         <outlet property="RunsPrgPace" destination="czV-nB-ykq" id="R0y-3W-d4u"/>
                         <outlet property="RunsPrgSpin" destination="yOK-ue-E55" id="YkO-YU-2rR"/>
                         <outlet property="RunsSpinlbl" destination="NmB-pP-LCr" id="qU9-0P-r6Z"/>
+                        <outlet property="ScrollHeight" destination="XjF-Xd-10w" id="5QM-cw-eeH"/>
                         <outlet property="SessionsView" destination="vyO-MR-TiY" id="Tan-PB-0Gf"/>
                         <outlet property="StrPacelbl" destination="e1v-OU-Vfp" id="Pwe-wN-NdG"/>
                         <outlet property="StrPrgPace" destination="XUv-GR-XCj" id="L5d-HU-0Bi"/>
@@ -5999,7 +6004,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUf-zr-4O0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4144" y="-447"/>
+            <point key="canvasLocation" x="4143.75" y="-447.07031249999994"/>
         </scene>
         <!--Planner ListVC-->
         <scene sceneID="bv2-xr-OYm">
