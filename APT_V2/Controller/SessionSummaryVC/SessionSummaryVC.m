@@ -96,6 +96,12 @@
         
     }
     [self setTabView];
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
 
 }
 
@@ -237,9 +243,20 @@
             [self.view layoutIfNeeded];
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+
+            
             [self.view updateConstraintsIfNeeded];
             NSLog(@"%@", day1Sessionarray);
             
+            
+            
+
             [AppCommon hideLoading];
         }
         
@@ -299,7 +316,17 @@
             [self.view layoutIfNeeded];
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+
+            
             [self.view updateConstraintsIfNeeded];
+            
+            
             
             NSLog(@"%@", day1Sessionarray);
            [AppCommon hideLoading];
@@ -376,6 +403,13 @@
             
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
             [self.view updateConstraintsIfNeeded];
            [AppCommon hideLoading];
         }
@@ -443,6 +477,13 @@
             
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
             [self.view updateConstraintsIfNeeded];
             
             
@@ -512,6 +553,13 @@
             [self.view layoutIfNeeded];
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
             [self.view updateConstraintsIfNeeded];
             
             NSLog(@"%@", day1Sessionarray);
@@ -589,6 +637,13 @@
             [self.view layoutIfNeeded];
             
             self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
             [self.view updateConstraintsIfNeeded];
             
            [AppCommon hideLoading];
@@ -721,6 +776,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
     
 }
@@ -843,6 +904,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)Session3Action:(id)sender
@@ -964,6 +1031,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
 }
 
@@ -987,6 +1060,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)Innings2Action:(id)sender
@@ -1010,6 +1089,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
 }
 
@@ -1106,6 +1191,12 @@
     [self.view layoutIfNeeded];
     
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
     
     
@@ -1126,6 +1217,12 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
     [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)day3Action:(id)sender
