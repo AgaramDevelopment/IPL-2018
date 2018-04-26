@@ -81,6 +81,8 @@ int headdingCount = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    lastIndex = NULL;
+    selectedIndex = -1;
     selectedTab = 1;
     self.matchcode = appDel.Currentmatchcode;
     self.matchHeadding = appDel.matchHeaderDetails;
@@ -113,12 +115,19 @@ int headdingCount = 0;
         
     }
     
-    lastIndex = NULL;
-    selectedIndex = -1;
-    selectedTab = 1;
 
     [self setTabView];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    innsOne = nil;
+    innsTwo = nil;
+    innsThree = nil;
+    innsFour = nil;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
