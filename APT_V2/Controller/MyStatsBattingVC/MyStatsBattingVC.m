@@ -357,6 +357,15 @@
                     NSMutableArray *sepArray = [[NSMutableArray alloc]init];
 //                    sepArray= [[self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"]objectAtIndex:indexPath.row];
                         sepArray= [self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"];
+                    //Remove Sub-layers on Wagon Image
+                    [cell.WagonImgiPad.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+                    [cell.onesBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.twoBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.threeBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.fourBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.sixBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.dotBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                    
                     if(![sepArray isEqual:[NSNull null]])
                         {
                         
@@ -644,6 +653,13 @@
                                 //}
                             }
                         }
+                    } else {
+                        [cell.onesBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.twoBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.threeBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.fourBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.sixBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.dotBtniPad setTitle:@"0" forState:UIControlStateNormal];
                     }
                 
                     //pitch map
@@ -894,6 +910,16 @@
                     NSMutableArray *sepArray = [[NSMutableArray alloc]init];
                         //                    sepArray= [[self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"]objectAtIndex:indexPath.row];
                     sepArray= [self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"];
+                    
+                        //Remove Sub-layers on Wagon Image
+                    [cell.WagonImgiPhone.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+                    [cell.onesBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.twoBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.threeBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.fourBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.sixBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    [cell.dotBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                    
                     if(![sepArray isEqual:[NSNull null]])
                         {
                         
@@ -1185,6 +1211,13 @@
                                 //}
                             }
                         }
+                    } else {
+                        [cell.onesBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.twoBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.threeBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.fourBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.sixBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.dotBtniPhone setTitle:@"0" forState:UIControlStateNormal];
                     }
                 
                     //pitch map
@@ -1520,6 +1553,16 @@
                         NSMutableArray *sepArray = [[NSMutableArray alloc]init];
                             //                    sepArray= [[self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"]objectAtIndex:indexPath.row];
                         sepArray= [self.wagonWheelDrawData valueForKey:@"BowlingSpiderWagonWheelValues"];
+                        
+                            //Remove Sub-layers on Wagon Image
+                        [cell.WagonImgiPad.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+                        [cell.onesBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.twoBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.threeBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.fourBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.sixBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.dotBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                        
                         if(![sepArray isEqual:[NSNull null]])
                             {
                             
@@ -1811,6 +1854,13 @@
                                     //}
                                 }
                             }
+                        } else {
+                            [cell.onesBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.twoBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.threeBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.fourBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.sixBtniPad setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.dotBtniPad setTitle:@"0" forState:UIControlStateNormal];
                         }
                     
                         //pitch map
@@ -2060,6 +2110,16 @@
                         NSMutableArray *sepArray = [[NSMutableArray alloc]init];
                             //                    sepArray= [[self.wagonWheelDrawData valueForKey:@"BattingSpiderWagonWheelValues"]objectAtIndex:indexPath.row];
                         sepArray= [self.wagonWheelDrawData valueForKey:@"BowlingSpiderWagonWheelValues"];
+                        
+                            //Remove Sub-layers on Wagon Image
+                        [cell.WagonImgiPhone.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+                        [cell.onesBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.twoBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.threeBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.fourBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.sixBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        [cell.dotBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                        
                         if(![sepArray isEqual:[NSNull null]])
                             {
                             
@@ -2357,6 +2417,13 @@
                                     //}
                                 }
                             }
+                        } else {
+                            [cell.onesBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.twoBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.threeBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.fourBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.sixBtniPhone setTitle:@"0" forState:UIControlStateNormal];
+                            [cell.dotBtniPhone setTitle:@"0" forState:UIControlStateNormal];
                         }
                     
                         //pitch map
@@ -3212,9 +3279,7 @@
         [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self.batttingTableView endUpdates];
-        
-        
-//        [self.batttingTableView reloadData];
+//       [self.batttingTableView reloadData];
     }
     
 }
