@@ -4370,7 +4370,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GG1-OR-6Pd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hPR-p6-Wcx">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcb-4z-EMR">
@@ -4381,7 +4381,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiE-8x-4mW">
-                                <rect key="frame" x="0.0" y="70" width="768" height="1473"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="1310"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-d2-nmm">
                                         <rect key="frame" x="10" y="10" width="748" height="40"/>
@@ -5927,7 +5927,6 @@
                                     <constraint firstItem="mxh-lZ-bq7" firstAttribute="top" secondItem="e2x-Y8-Oa1" secondAttribute="bottom" constant="5" id="TPt-rS-Euf"/>
                                     <constraint firstAttribute="trailing" secondItem="Rex-GC-aUl" secondAttribute="trailing" constant="10" id="V5r-Pq-fHF"/>
                                     <constraint firstAttribute="trailing" secondItem="e2x-Y8-Oa1" secondAttribute="trailing" constant="10" id="W3l-5S-IZ5"/>
-                                    <constraint firstAttribute="height" constant="1473" id="XjF-Xd-10w"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="leading" secondItem="eiE-8x-4mW" secondAttribute="leading" constant="10" id="aSo-bn-aK7"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="centerX" secondItem="eiE-8x-4mW" secondAttribute="centerX" id="dIA-ZC-9W3"/>
                                     <constraint firstItem="Rex-GC-aUl" firstAttribute="top" secondItem="eiE-8x-4mW" secondAttribute="top" constant="10" id="gt5-a9-axu"/>
@@ -5941,6 +5940,7 @@
                         <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eiE-8x-4mW" firstAttribute="leading" secondItem="hPR-p6-Wcx" secondAttribute="leading" id="CyY-Td-OXj"/>
+                            <constraint firstAttribute="bottom" secondItem="eiE-8x-4mW" secondAttribute="bottom" constant="20" id="Hpo-IS-jfj"/>
                             <constraint firstAttribute="trailing" secondItem="eiE-8x-4mW" secondAttribute="trailing" id="RhR-cs-UGg"/>
                             <constraint firstItem="QJa-rP-9RC" firstAttribute="trailing" secondItem="gcb-4z-EMR" secondAttribute="trailing" id="TOC-Ce-1sy"/>
                             <constraint firstItem="gcb-4z-EMR" firstAttribute="top" secondItem="hPR-p6-Wcx" secondAttribute="top" id="UZd-2z-JzQ"/>
@@ -5951,7 +5951,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Sessions" id="2LO-4j-szF"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="768" height="1600"/>
+                    <size key="freeformSize" width="768" height="1400"/>
                     <connections>
                         <outlet property="AvgPacelbl" destination="GN5-TN-Hy3" id="ttp-fU-dph"/>
                         <outlet property="AvgPrgPace" destination="NNd-jM-hje" id="3Qc-x2-TlZ"/>
@@ -5976,7 +5976,6 @@
                         <outlet property="RunsPrgPace" destination="czV-nB-ykq" id="R0y-3W-d4u"/>
                         <outlet property="RunsPrgSpin" destination="yOK-ue-E55" id="YkO-YU-2rR"/>
                         <outlet property="RunsSpinlbl" destination="NmB-pP-LCr" id="qU9-0P-r6Z"/>
-                        <outlet property="ScrollHeight" destination="XjF-Xd-10w" id="5QM-cw-eeH"/>
                         <outlet property="SessionsView" destination="vyO-MR-TiY" id="Tan-PB-0Gf"/>
                         <outlet property="StrPacelbl" destination="e1v-OU-Vfp" id="Pwe-wN-NdG"/>
                         <outlet property="StrPrgPace" destination="XUv-GR-XCj" id="L5d-HU-0Bi"/>
@@ -5997,6 +5996,7 @@
                         <outlet property="navi_View" destination="gcb-4z-EMR" id="O0L-uZ-Wnn"/>
                         <outlet property="partnrTblHeight" destination="dAB-Zi-SjS" id="W8H-z2-S3m"/>
                         <outlet property="partnrshpTbl" destination="WyI-b6-XbD" id="vw9-yj-f3J"/>
+                        <outlet property="scrollView" destination="eiE-8x-4mW" id="X5p-xc-iMo"/>
                         <outlet property="session1" destination="Bhb-M4-daX" id="Zil-CN-vOd"/>
                         <outlet property="session2" destination="yua-6W-E5T" id="iub-Ih-MsT"/>
                         <outlet property="session3" destination="xcn-8F-VJX" id="nTr-vg-bRA"/>
