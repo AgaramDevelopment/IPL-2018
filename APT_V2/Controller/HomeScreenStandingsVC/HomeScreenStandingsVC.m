@@ -74,17 +74,26 @@
     HomeScreenStandingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"HomeScreenStandingsCell" owner:self options:nil];
     cell = arr[0];
-    cell.backgroundColor = [UIColor clearColor];
 
     cell.rankLbl.text = [self getStringValue:@"Rank" andIndex:indexPath];
     cell.teamLbl.text = [self getStringValue:@"TeamName" andIndex:indexPath];
     cell.playedLbl.text = [self getStringValue:@"Played" andIndex:indexPath];
     cell.wonLbl.text = [self getStringValue:@"Won" andIndex:indexPath];
     cell.lostLbl.text = [self getStringValue:@"Lost" andIndex:indexPath];
-    cell.tiedLbl.text = [self getStringValue:@"Tied" andIndex:indexPath];
+//    cell.tiedLbl.text = [self getStringValue:@"Tied" andIndex:indexPath];
     cell.NRLbl.text = [self getStringValue:@"NoResults" andIndex:indexPath];
     cell.pointsLbl.text = [self getStringValue:@"Points" andIndex:indexPath];
     cell.nrrLbl.text = [self getStringValue:@"NETRUNRESULT" andIndex:indexPath];
+    
+    if (indexPath.row >= 0 && indexPath.row <= 3) {
+        
+        cell.backgroundColor = [UIColor yellowColor];
+    }
+    else
+    {
+        cell.backgroundColor = [UIColor clearColor];
+
+    }
 
     
     return cell;
