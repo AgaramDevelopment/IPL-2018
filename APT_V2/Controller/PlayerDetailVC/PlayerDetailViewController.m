@@ -27,7 +27,7 @@
 @implementation PlayerDetailViewController
 @synthesize scrollView,contentView,tblDateDropDown;
 
-@synthesize spiderChartView;
+@synthesize spiderChartView,selectedPlayerArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

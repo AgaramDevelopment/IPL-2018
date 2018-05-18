@@ -943,8 +943,10 @@
             {
                 NSLog(@"NO NEW DATA");
                 [[NSUserDefaults standardUserDefaults] setValue:notificationArray forKey:@"NotificationArray"];
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[UIApplication sharedApplication]applicationIconBadgeNumber]+1];
 
             }
+            [[UIApplication sharedApplication] setApplicationIconBadgeNumber:number];
             
         });
             
