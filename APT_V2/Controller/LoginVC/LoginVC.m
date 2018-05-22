@@ -146,6 +146,16 @@
         
         if([[responseObject valueForKey:@"Status"] isEqualToString:@"PSUCCESS"] && [responseObject valueForKey:@"Status"] != NULL)
         {
+            NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+            NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+//            isLatestVersion = 0;
+            if (!isLatestVersion) {
+                NSLog(@"canUpdate TRUE ");
+                [AppCommon hideLoading];
+                [AppCommon newVersionUpdateAlert];
+                return;
+            }
+
             NSDictionary * objRole =[responseObject valueForKey:@"Roles"];
             
             NSString * objRoleCode =[[objRole valueForKey:@"Rolecode"] objectAtIndex:0];
@@ -188,35 +198,10 @@
                 VC = [TabHomeVC new];
                 [COMMON getIPLteams];
             
-//            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
-//            {
-//                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
-//                if (!playerTeamCode) {
-//                    [AppCommon showAlertWithMessage:@"Player code missing"];
-//                    return;
-//                }
-//
-//                [[NSUserDefaults standardUserDefaults] setObject:playerTeamCode forKey:@"SelectedTeamCode"];
-//                VC = [TabHomeVC new];
-//            }
-//            else
-//            {
-//               TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-//                objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
-//                objPlayersVC.teamname = self.teamTF.text;
-//                VC = objPlayersVC;
-//
-//            }
             
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
             
-//            NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
-//            NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-//            if (!isLatestVersion) {
-//                NSLog(@"canUpdate TRUE ");
-//                [AppCommon newVersionUpdateAlert];
-//            }
             
         }
         else{

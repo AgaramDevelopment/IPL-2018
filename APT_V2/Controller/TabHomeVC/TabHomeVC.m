@@ -928,7 +928,7 @@
             NSNumber* number = [NSNumber numberWithInt:[objCustomNavigation.notificationCountLbl.text intValue]];
             [[NSUserDefaults standardUserDefaults] setValue:number forKey:@"badgeCount"];
 
-            if(notificationArray.count > 0){
+            if(notificationArray.count > 0  && ![AppCommon isCoach]){
                 
                 NSMutableArray* oldCount = [[NSUserDefaults standardUserDefaults] arrayForKey:@"NotificationArray"];
                 if (notificationArray.count > oldCount.count || (notificationArray.count == 1 && oldCount.count == 0)) {

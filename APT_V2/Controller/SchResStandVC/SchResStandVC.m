@@ -203,19 +203,31 @@
                 [self.eventsCollectionView reloadData];
                 [self.resultCollectionView reloadData];
                 
-                BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
                 
-                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
-                    
                     NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
                     NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-                    if (!isLatestVersion) {
-                        NSLog(@"canUpdate TRUE ");
-                        [AppCommon newVersionUpdateAlert];
-                    }
-
-                }
                 
+//                    isLatestVersion = 0;
+                    if (!isLatestVersion) {
+                        
+                        NSLog(@"canUpdate TRUE ");
+                        [AppCommon hideLoading];
+                        [AppCommon newVersionUpdateAlert];
+                        
+                        BOOL isLogin = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
+                        
+                        UIViewController* newFrontController= [LoginVC new];
+                        
+                        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+                        [navigationController setNavigationBarHidden:YES];
+                        appDel.frontNavigationController = navigationController;
+                        [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
+                        
+                        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+                        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+
+                        return ;
+                    }
 
             }
             

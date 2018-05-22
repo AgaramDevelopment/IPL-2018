@@ -434,26 +434,29 @@ AppCommon *sharedCommon = nil;
 
 +(void)newVersionUpdateAlert
 {
-    NSString* msg = [NSString stringWithFormat:@"New Verion was released.Do you want the updates?"];
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"Later" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLater"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    }];
+    NSString* Title = [NSString stringWithFormat:@"%@ %@ is no longer supported",APP_NAME,[AppCommon getAppVersion]];
+    NSString* msg = [NSString stringWithFormat:@"Use the App Store to get the latest version to experience the latest improvements"];
     
-    UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Update Now" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:Title message:msg preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"Later" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLater"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//    }];
+    
+    UIAlertAction* actionUpdate = [UIAlertAction actionWithTitle:@"Update Now" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-cricket/id1356455542?ls=1&mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
         
     }];
     
-    [alert addAction:actionYes];
-    [alert addAction:actionNo];
+    [alert addAction:actionUpdate];
+    //    [alert addAction:actionNo];
     [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
-
+    
 }
 @end
 
